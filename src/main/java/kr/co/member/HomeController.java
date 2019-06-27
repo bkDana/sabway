@@ -1,4 +1,4 @@
-package sub.way.member;
+package kr.co.member;
 
 import java.text.DateFormat;
 import java.util.Date;

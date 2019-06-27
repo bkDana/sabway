@@ -21,8 +21,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="sub.way.member" />
-	<context:component-scan base-package="sub.way.order" />
+	<context:component-scan base-package="kr.co.member" />
+	<context:component-scan base-package="kr.co.order" />
 	
 	
 </beans:beans>
