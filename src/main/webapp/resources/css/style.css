@@ -1,0 +1,13 @@
+
+
+/* main color */
+/*
+	#ffce32	: 노랑
+	#009223 : 초록
+
+*/
+#header .main-header{background-color: #292929; height: 50px; color: white; line-height: 50px;}
+.sub-header{background-color: #009223; height: 50px; color: white;}
+.sub-header ul li{float: left; display: inline-block; list-style: none; width: 100px; height: 50px; line-height: 50px;}
+	
+footer{background-color: #292929; color: #666; height: 100px;}
