@@ -1,4 +1,4 @@
-package sub.way.member;
+package kr.co.subway;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
