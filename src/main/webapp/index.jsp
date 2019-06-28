@@ -4,15 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ㅎㅇ</title>
+<title>여긴 안돼</title>
 </head>
 <body>
-	<a href="/promotionSelect.do">test</a>
-	<img src="/resources/img/img_recipe_b01.jpg" onclick="location.href='/admin.do';" style="cursor:pointer;"><br>
-	<img src="/resources/img/img_recipe_b02.jpg"><br>
-	<img src="/resources/img/img_recipe_b03.jpg"><br>
-	<img src="/resources/img/img_recipe_b04.jpg"><br>
-	<img src="/resources/img/img_recipe_b05.jpg"><br>
-	<img src="/resources/img/img_recipe_b06.jpg"><br>
+	<jsp:forward page="/main.do"></jsp:forward>
 </body>
 </html>

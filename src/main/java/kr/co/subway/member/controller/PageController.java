@@ -1,4 +1,4 @@
-package kr.co.subway;
+package kr.co.subway.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,5 +10,10 @@ public class PageController {
 	public String movePage() {
 		return "admin/index";
 	}
-
+	
+	@RequestMapping("/main.do")
+	public String moveMain() {
+		return "main";
+	}
+	
 }

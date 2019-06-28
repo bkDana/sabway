@@ -6,7 +6,8 @@
 	#009223 : 초록
 
 */
-#header .main-header{background-color: #292929; height: 50px; color: white; line-height: 50px;}
+#header .admin-header{background-color: #292929; height: 50px; color: white; line-height: 50px;}
+#header .main-header{background-color: #009223; height: 5px; color: white; line-height: 50px;}
 .sub-header{background-color: #009223; height: 50px; color: white;}
 .sub-header ul li{float: left; display: inline-block; list-style: none; width: 100px; height: 50px; line-height: 50px;}
 	
