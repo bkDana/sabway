@@ -1,14 +1,14 @@
-package kr.co.subway.order;
+package kr.co.subway.managerOrder;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class OrderController {
+public class ManagerOrderController {
 	
-	@RequestMapping("/orderList.do")
+	@RequestMapping("/managerOrder/orderList.do")
 	public String orderList() {
-		return "admin/orderList";
+		return "admin/managerOrder/orderList";
 	}
 
 }
