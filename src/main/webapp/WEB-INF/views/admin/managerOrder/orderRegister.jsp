@@ -9,8 +9,7 @@
 	<%-- LEFT MENU --%>
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		
-		<br>재고관리 > 발주서 작성
+		<div class="sub-menu">※ 재고관리 > 발주서 작성</div>
 	</div>
 </section>
 
