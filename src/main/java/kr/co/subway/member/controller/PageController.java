@@ -10,10 +10,10 @@ public class PageController {
 	public String movePage() {
 		return "admin/index";
 	}
-
+	
 	@RequestMapping("/main.do")
 	public String moveMain() {
 		return "main";
 	}
-
+	
 }

@@ -4,8 +4,12 @@
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 
 <%-- Content --%>
-<section id="content-wrapper">
+
+<section id="content-wrapper" class="clearfix">
+	<%-- LEFT MENU --%>
+	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
+		
 		여기는 재고관리 페이지
 	</div>
 </section>

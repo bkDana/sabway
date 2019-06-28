@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,14 +9,14 @@
 
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="/resources/css/reset.css"> <!-- 태그 초기화 css(민주) -->
-<link rel="stylesheet" type="text/css" href="/resources/css/layout.css"> <!-- 레이아웃 css(민주) -->
-<link rel="stylesheet" type="text/css" href="/resources/css/content.css"> <!-- 컨텐츠 css(민주) -->
+<link rel="stylesheet" type="text/css" href="/resources/css/manager-layout.css"> <!-- 레이아웃 css(민주) -->
+<link rel="stylesheet" type="text/css" href="/resources/css/manager-content.css"> <!-- 컨텐츠 css(민주) -->
 
 <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
 
 <!-- script -->
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
-<script type="text/javascript" src="/resources/js/nav.js"></script><!-- nav.js -->
+<!--<script type="text/javascript" src="/resources/js/nav.js"></script> nav.js -->
 
 <title>관리자 페이지</title>
 </head>
@@ -58,11 +59,12 @@
 							</div>
 						</li>
 						<li class="gnb04">
-							<a href="/managerOrder/orderList.do">발주관리</a>
+							<a href="/managerOrder/orderList.do">재고관리</a>
 							<div class="gnb-2dep">
 								<ul>
+									<li><a href="#">발주서 작성</a></li>
 									<li><a href="/managerOrder/orderList.do">발주 리스트</a></li>
-									
+									<li><a href="#">재고 현황</a></li>
 								</ul>
 							</div>
 						</li>
