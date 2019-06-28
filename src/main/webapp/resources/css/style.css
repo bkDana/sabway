@@ -10,5 +10,8 @@
 #header .main-header{background-color: #009223; height: 5px; color: white; line-height: 50px;}
 .sub-header{background-color: #009223; height: 50px; color: white;}
 .sub-header ul li{float: left; display: inline-block; list-style: none; width: 100px; height: 50px; line-height: 50px;}
+
+
+.left-menu{background-color: #e8e8e8; width: 200px; float: left; height: 1000px;}
 	
 footer{background-color: #292929; color: #666; height: 100px;}

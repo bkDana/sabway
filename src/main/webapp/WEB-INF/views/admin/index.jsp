@@ -5,7 +5,9 @@
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 
 <%-- Content --%>
-<section id="content-wrapper">
+<section id="content-wrapper" class="clearfix">
+	<%-- LEFT MENU --%>
+	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
 	
 	어드민 인덱스 페이지 입니다...
