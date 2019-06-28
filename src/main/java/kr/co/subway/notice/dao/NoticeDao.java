@@ -17,4 +17,8 @@ public class NoticeDao {
 	public List noticeSelectAll(){
 		return sqlSession.selectList("noticeSelectAll");
 	}
+	
+	public int noticeInsert(Notice n){
+		return sqlSession.insert("noticeInsert", n);
+	}
 }
