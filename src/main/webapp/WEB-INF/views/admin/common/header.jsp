@@ -22,7 +22,7 @@
 <body>
 	<header id="header">
 		<div class="admin-header">
-			OO점 관리자 페이지
+			<a href="/admin.do">OO점 관리자 페이지</a>
 		</div>
 		<div id="headerInnerWrap">
 			<!-- 헤더 상단 -->
@@ -58,10 +58,10 @@
 							</div>
 						</li>
 						<li class="gnb04">
-							<a href="/orderList.do">발주관리</a>
+							<a href="/managerOrder/orderList.do">발주관리</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="/orderList.do">발주 리스트</a></li>
+									<li><a href="/managerOrder/orderList.do">발주 리스트</a></li>
 									
 								</ul>
 							</div>
