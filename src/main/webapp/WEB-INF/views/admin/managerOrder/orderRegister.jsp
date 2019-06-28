@@ -10,6 +10,17 @@
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
 		<div class="sub-menu">※ 재고관리 > 발주서 작성</div>
+		<div class="">
+			<table class="comm-tbl">
+				<tr>
+					<th>날짜</th><td></td>
+				</tr>
+				<tr>
+					<th>지점명</th><td></td>
+				</tr>
+			</table>
+		
+		</div>
 	</div>
 </section>
 

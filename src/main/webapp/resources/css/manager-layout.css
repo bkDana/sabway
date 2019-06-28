@@ -18,7 +18,7 @@ body { background-color:#fff; }
 #wrap {overflow:hidden; width:100%; min-width:1200px; position:relative; } /* min-width 홈페이지 컨텐츠 가로값에 맞게 변경 */
 
 /* ****************** 공통클래스 ********************** */
-.area{ max-width:1200px; margin:0px auto; float: left;} /* width 홈페이지 컨텐츠 가로값에 맞게 변경 */
+.area{ max-width:1200px; margin:0px 100px; float: left;} /* width 홈페이지 컨텐츠 가로값에 맞게 변경 */
 .area-box{max-width:1590px; margin:0px auto; }
 .clearfix{*zoom:1;}
 .clearfix:after{clear:both; display:block; content:"";}
