@@ -60,7 +60,7 @@
 							<div class="gnb-2dep">
 								<ul>
 									<li><a href="#">이벤트/프로모션</a></li>
-									<li><a href="#">뉴스/공지사항</a></li>
+									<li><a href="/notice.do">뉴스/공지사항</a></li>
 									<li><a href="#">TV광고</a></li>
 								</ul>
 							</div>
