@@ -20,9 +20,10 @@
 		border:1px solid black;
 	}
 </style>
-<body>
+<%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp"/>
-	<form action="selectPromotion.do" method="get">
+<body>
+	<form action="/selectPromotion.do" method="get">
 		<div>
 			<table name="table" style="border:1px solid black; text-align:center;">
 				<tr>
@@ -43,7 +44,7 @@
 						</td>	
 						<td>
 							<!-- 선택한 promotion으로 DB update -->
-							<select name="promotion">
+							<select name="promotion"><!-- 상품 할인 유/무 & 할인율 선택 -->
 								<option value=1.0>적용안함</option>
 								<option value=0.9>10% 할인</option>
 								<option value=0.8>20% 할인</option>
@@ -56,6 +57,7 @@
 			<input type="submit" value="적용">
 		</div>
 	</form>
-<jsp:include page="/WEB-INF/views/admin/common/footer.jsp"/>
 </body>
+<%-- Footer --%>
+<jsp:include page="/WEB-INF/views/admin/common/footer.jsp"/>
 </html>
