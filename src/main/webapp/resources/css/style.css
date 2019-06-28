@@ -17,4 +17,6 @@
 .left-menu > ul > li > a:hover{color:#009223;}
 .left-menu > ul > li > a.on{color: #009223;}
 
+.sub-menu{padding:50px;font-size: 15px;}
+
 footer{background-color: #292929; color: #666; height: 100px;}

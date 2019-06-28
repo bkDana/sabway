@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="managerOrder">
+	<select id="selectList" resultType="kr.co.subway.managerOrder.vo.ManagerOrderVO">
+  		select 
+	  		m_order_idx as mOrderIdx,
+	  		m_order_manager_idx as mOrderManagerIdx,
+	  		m_order_title as mOrderTitle,
+	  		m_order_del_date as mOrderDelDate,
+	  		m_order_state as mOrderState,
+	  		TO_CHAR(m_order_date,'YYYY-MM-DD HH24:mm:ss') as mOrderDate
+  		from 
+  			m_order_tbl
+  	</select>
+</mapper>
