@@ -17,8 +17,8 @@
 			<table class="comm-tbl">
 			<colgroup>
 				<col width="15%">
-				<col width="/">
-				<col width="30%">
+				<col width="65%">
+				<col width="20%">
 			</colgroup>
 			 	<c:forEach items="${noticeList }" var="notice" varStatus="status">
 			 		<c:if test="${status.count eq noticeNo }">

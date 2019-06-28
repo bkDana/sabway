@@ -30,7 +30,6 @@ public class NoticeController {
 	public ModelAndView noticeSelectAll() {
 		ArrayList<Notice> noticeList = noticeService.noticeSelectAll();
 		ModelAndView mav = new ModelAndView();
-		System.out.println(noticeList.get(0).getNoticeNo());
 		if (!noticeList.isEmpty()) {
 			mav.addObject("noticeList", noticeList); // view에서 사용할 객체 추가
 			mav.setViewName("notice/notice");

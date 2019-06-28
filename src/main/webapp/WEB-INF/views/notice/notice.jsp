@@ -13,12 +13,14 @@
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
+		<h1 class="comm-content-tit">공지사항</h1>
 		<div class="common-tbl-box">
+			
 			<table class="comm-tbl">
 			<colgroup>
 				<col width="15%">
 				<col width="/">
-				<col width="30%">
+				<col width="15%">
 			</colgroup>
 				<tr>
 					<th>번호</th>
@@ -39,7 +41,7 @@
 			
 			<c:if test="${sessionScope.member.memberId eq 'admin' }">
 				<div class="common-tbl-btn-group">
-					<button class="btn-style2 insert-notice">글쓰기</button>
+					<button class="btn-style2 insert-notice">공지사항 작성하기</button>
 				</div>
 			</c:if>
 		</div>
