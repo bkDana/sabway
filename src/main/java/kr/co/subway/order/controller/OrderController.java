@@ -1,4 +1,4 @@
-package kr.co.subway.order;
+package kr.co.subway.order.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
