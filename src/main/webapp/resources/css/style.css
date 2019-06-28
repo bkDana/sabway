@@ -1,14 +1,25 @@
-
-
 /* main color */
 /*
 	#ffce32	: 노랑
 	#009223 : 초록
-
 */
-#header .admin-header{background-color: #292929; height: 50px; color: white; line-height: 50px;}
+
+#header .admin-header{background-color: #292929; height: 50px; line-height: 50px; padding-left: 50px;}
+#header .admin-header a{color: white; font-size: 14px;}
+
+
 #header .main-header{background-color: #009223; height: 5px; color: white; line-height: 50px;}
 .sub-header{background-color: #009223; height: 50px; color: white;}
 .sub-header ul li{float: left; display: inline-block; list-style: none; width: 100px; height: 50px; line-height: 50px;}
-	
+
+
+.left-menu{background-color: #e8e8e8; width: 180px; float: left; height: 1000px;}
+.left-menu > ul{text-align:left;}
+.left-menu > ul > li{position:relative; display:inline-block; min-width:180px;}
+.left-menu > ul > li > a{position:relative; z-index:100; display:block; height:50px; line-height:70px; text-align:center; color:#333; font-size:15px;}
+.left-menu > ul > li > a:hover{color:#009223;}
+.left-menu > ul > li > a.on{color: #009223;}
+
+.sub-menu{padding:50px;font-size: 15px;}
+
 footer{background-color: #292929; color: #666; height: 100px;}
