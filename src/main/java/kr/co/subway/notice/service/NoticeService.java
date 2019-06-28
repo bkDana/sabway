@@ -18,4 +18,5 @@ public class NoticeService {
 	public ArrayList<Notice> noticeSelectAll(){
 		return (ArrayList<Notice>)noticeDao.noticeSelectAll();
 	}
+	
 }

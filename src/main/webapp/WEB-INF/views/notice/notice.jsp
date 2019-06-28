@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<script type="text/javascript" src="/resources/js/notice.js"></script><!-- nav.js -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
 <style>
 	.move-one-notice:hover{
 		cursor: pointer;
@@ -27,7 +28,8 @@
 				
 			<c:forEach items="${noticeList}" var="notice">
 				<tr>
-					<td>${notice.noticeNo }</td>
+					<td>${notice.noticeCategory }</td>
+					<td style="display:none;">${notice.noticeNo }</td>
 					<td class="move-one-notice">${notice.noticeTitle }</td>
 					<td>${notice.noticeDate }</td>
 				</tr>

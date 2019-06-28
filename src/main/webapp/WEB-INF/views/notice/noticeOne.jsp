@@ -2,7 +2,14 @@
     pageEncoding="UTF-8"%>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
+<style>
+	.move-pn-notice:hover,.move-all-notice:hover{
+		cursor: pointer;
+		color: #009223;
+	}
+</style>
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
@@ -13,27 +20,63 @@
 				<col width="/">
 				<col width="30%">
 			</colgroup>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성일</th>
-				</tr>
-				
-			<c:forEach items="${noticeList}" var="notice">
-				<tr>
-					<td>${notice.noticeNo }</td>
-					<td class="move-one-notice">${notice.noticeTitle }</td>
-					<td>${notice.noticeDate }</td>
-				</tr>
-			</c:forEach>
-			
+			 	<c:forEach items="${noticeList }" var="notice" varStatus="status">
+			 		<c:if test="${status.count eq noticeNo }">
+						<tr>
+							<th style="display:none;">${notice.noticeNo }</th>
+							<th>${notice.noticeCategory }</th>
+							<th>${notice.noticeTitle }</th>
+							<th>${notice.noticeDate }</th>
+						</tr>
+						<c:if test="${notice.filepath != null }">
+							<c:forTokens items="${notice.filepath}" delims="," var="item">
+								<tr>
+									<td colspan="3">
+										<img src="/resources/upload/${item}">
+									</td>
+								</tr>
+							</c:forTokens>
+						</c:if>
+						<tr>
+							<td colspan="3">${notice.noticeContent }</td>
+						</tr>
+					</c:if>
+				</c:forEach>
 			</table>
-			
-			<c:if test="${sessionScope.member.memberId eq 'admin' }">
+
 				<div class="common-tbl-btn-group">
-					<button>글쓰기</button>
+					<button class="move-all-notice">목록으로</button>
+					<c:if test="${sessionScope.member.memberId eq 'admin' }">
+						<button>수정하기</button>
+					</c:if>
 				</div>
-			</c:if>
+			
+			<br><br>
+			<table class="comm-tbl">
+			<colgroup>
+				<col width="15%">
+				<col width="/">
+				<col width="15%">
+			</colgroup>
+			 	<c:forEach items="${noticeList }" var="notice" varStatus="status">
+					<c:if test="${status.count eq noticeNo-1 }">
+						<tr>
+							<td style="display:none;">${status.count }</td>
+							<td colspan="2" class="move-pn-notice">
+								△이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${notice.noticeTitle }
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${status.count eq noticeNo+1 }">
+						<tr>
+							<td style="display:none;">${status.count }</td>
+							<td colspan="2" class="move-pn-notice">
+								▽다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${notice.noticeTitle }
+							</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</table>
 		</div>
 	</div>
 </section>
