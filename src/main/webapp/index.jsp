@@ -7,6 +7,7 @@
 <title>ㅎㅇ</title>
 </head>
 <body>
+	<a href="/promotionSelect.do">test</a>
 	<img src="/resources/img/img_recipe_b01.jpg" onclick="location.href='/admin.do';" style="cursor:pointer;"><br>
 	<img src="/resources/img/img_recipe_b02.jpg"><br>
 	<img src="/resources/img/img_recipe_b03.jpg"><br>
