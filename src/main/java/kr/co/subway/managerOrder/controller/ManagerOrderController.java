@@ -11,5 +11,15 @@ public class ManagerOrderController {
 	public String orderList() {
 		return "admin/managerOrder/orderList";
 	}
+	
+	@RequestMapping("/managerOrder/orderRegister.do")
+	public String orderRegister() {
+		return "admin/managerOrder/orderRegister";
+	}
+	
+	@RequestMapping("/managerOrder/stockList.do")
+	public String stockList() {
+		return "admin/managerOrder/stockList";
+	}
 
 }

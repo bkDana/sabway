@@ -59,14 +59,7 @@
 							</div>
 						</li>
 						<li class="gnb04">
-							<a href="/managerOrder/orderList.do">재고관리</a>
-							<div class="gnb-2dep">
-								<ul>
-									<li><a href="#">발주서 작성</a></li>
-									<li><a href="/managerOrder/orderList.do">발주 리스트</a></li>
-									<li><a href="#">재고 현황</a></li>
-								</ul>
-							</div>
+							<a href="/managerOrder/orderRegister.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){%>on<%}%>">재고관리</a>
 						</li>
 						<li class="gnb05">
 							<a href="#">주문관리</a>
@@ -84,6 +77,9 @@
 									<li><a href="#">이벤트</a></li>
 								</ul>
 							</div>
+						</li>
+						<li class="gnb07">
+							<a href="#">매출통계</a>
 						</li>
 					</ul>
 				</nav>

@@ -154,12 +154,16 @@ body { background-color:#fff; }
 #gnb > ul > li{position:relative; display:inline-block; min-width:180px;}
 #gnb > ul > li > a{position:relative; z-index:100; display:block; height:70px; line-height:70px; text-align:center; color:#fff; font-size:20px; font-weight:500;}
 #gnb > ul > li > a:hover{color: #ffce32;}
+#gnb > ul > li > a.on{color: #ffce32;}
+
 
 /* GNB :: 2차 전체메뉴 */
+
 #gnb > ul > li .gnb-2dep{display:none; position:absolute; top0:70px; left:0; z-index:99; width:100%; height:200px; text-align:center;}
 #gnb > ul > li .gnb-2dep ul{padding:15px 0;}
 #gnb > ul > li .gnb-2dep ul li{position:relative; padding:10px;}
 #gnb > ul > li .gnb-2dep ul li a{display:block; text-align:center; font-size:16px; color:#333; font-weight:500;}
+
 
 /* ****************** 서브비주얼 ********************** */
 #subVisual{width:100%; height:200px; background:url(/img/sub_visual09.jpg) no-repeat center top;}
