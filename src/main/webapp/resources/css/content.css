@@ -55,7 +55,7 @@
 .common-tbl-btn-group.join-btn-group{display:inline-block; text-align:right; padding-top:0; width:auto; max-width:20%; vertical-align:middle;}
 .common-tbl-btn-group > button{width:130px; height:50px; border-radius:5px; font-size:17px; color:#fff; margin:0 10px;}
 .common-tbl-btn-group > button.btn-style1{background-color:rgba(254,67,30);}
-.common-tbl-btn-group > button.btn-style2{background-color:#444;}
+.common-tbl-btn-group > button.btn-style2{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style3{background-color:#888;}
 .common-tbl-btn-group > button.small{width:100px; height:35px; font-size:15px;}
 .comm-tbl .file-del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#888; color:#fff; margin-left:5px;}

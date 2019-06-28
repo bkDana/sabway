@@ -7,7 +7,7 @@
 <style>
 	.move-one-notice:hover{
 		cursor: pointer;
-		color: #009223;
+		color: #ffce32;
 	}
 </style>
 <%-- Content --%>
@@ -39,7 +39,7 @@
 			
 			<c:if test="${sessionScope.member.memberId eq 'admin' }">
 				<div class="common-tbl-btn-group">
-					<button>글쓰기</button>
+					<button class="btn-style2 insert-notice">글쓰기</button>
 				</div>
 			</c:if>
 		</div>

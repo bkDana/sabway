@@ -16,4 +16,7 @@ $(document).ready(function(){
 	$(".move-all-notice").click(function(){
 		location.href="/notice.do";
 	});
+	$(".insert-notice").click(function(){
+		location.href="/moveNoticeInsert.do";
+	});
 });

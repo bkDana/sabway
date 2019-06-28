@@ -7,7 +7,7 @@
 <style>
 	.move-pn-notice:hover,.move-all-notice:hover{
 		cursor: pointer;
-		color: #009223;
+		color: #ffce32;
 	}
 </style>
 <%-- Content --%>
@@ -45,7 +45,7 @@
 			</table>
 
 				<div class="common-tbl-btn-group">
-					<button class="move-all-notice">목록으로</button>
+					<button class="btn-style2 small move-all-notice">목록으로</button>
 					<c:if test="${sessionScope.member.memberId eq 'admin' }">
 						<button>수정하기</button>
 					</c:if>
@@ -56,7 +56,6 @@
 			<colgroup>
 				<col width="15%">
 				<col width="/">
-				<col width="15%">
 			</colgroup>
 			 	<c:forEach items="${noticeList }" var="notice" varStatus="status">
 					<c:if test="${status.count eq noticeNo-1 }">

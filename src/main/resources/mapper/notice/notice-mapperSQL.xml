@@ -5,4 +5,7 @@
 		select notice_no as noticeNo, notice_category as noticeCategory, notice_title as noticeTitle, 
 		notice_content as noticeContent, filename, filepath, notice_date as noticeDate from notice
 	</select>
+	<insert id="noticeInsert" parameterType="notice">
+		insert into notice values(seq_notice_no.nextval,#{noticeCategory},#{noticeTitle}, #{noticeContent}, #{filename},#{filepath},sysdate)
+	</insert>
 </mapper>
