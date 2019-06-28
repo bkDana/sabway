@@ -26,7 +26,7 @@
 		</div>
 		<div id="headerInnerWrap">
 			<!-- 로고 -->
-			<h1 class="header-logo"><a href="/"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a></h1>
+			<div class="header-logo"><a href="/"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a></div>
 			<!-- 헤더 상단 -->
 			<div id="headerInner" class="clearfix">
 				<!-- 주메뉴 -->

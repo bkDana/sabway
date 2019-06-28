@@ -16,14 +16,13 @@
 
 <!-- script -->
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
-<!--<script type="text/javascript" src="/resources/js/nav.js"></script> nav.js -->
 
 <title>관리자 페이지</title>
 </head>
 <body>
 	<header id="header">
 		<div class="admin-header">
-			<a href="/admin.do">OO점 관리자 페이지</a>
+			<a href="/admin.do">당산점 관리자 페이지</a>
 		</div>
 		<div id="headerInnerWrap">
 			<!-- 헤더 상단 -->
