@@ -9,5 +9,11 @@ $(document).ready(function(){
 		var noticeNo = $(this).prev().text();
 		location.href="/noticeOne.do?noticeNo="+noticeNo;
 	});
-	
+	$(".move-pn-notice").click(function(){
+		var noticeNo = $(this).prev().text();
+		location.href="/noticeOne.do?noticeNo="+noticeNo;
+	});
+	$(".move-all-notice").click(function(){
+		location.href="/notice.do";
+	});
 });
