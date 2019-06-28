@@ -2,13 +2,7 @@
     pageEncoding="UTF-8"%>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<script type="text/javascript" src="/resources/js/notice.js"></script><!-- nav.js -->
-<style>
-	.move-one-notice:hover{
-		cursor: pointer;
-		color: #009223;
-	}
-</style>
+
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
