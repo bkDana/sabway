@@ -19,4 +19,13 @@ public class ApplyService {
 		List<Apply> list = applyDao.applyList();
 		return (ArrayList<Apply>)list;
 	}
+	public int applyManagerUpdate(String applyName,int applyStatus){
+		int result = 0;
+		if(applyStatus==1) {
+			result = applyDao.applyManagerUpdate(applyName);
+		}else if(applyStatus==2) {
+			result = applyDao.rejectManagerUpdate(applyName);
+		}
+		return result;
+	}
 }

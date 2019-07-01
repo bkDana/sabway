@@ -10,7 +10,14 @@ import org.springframework.stereotype.Repository;
 public class ApplyDAO {
 	@Autowired
 	SqlSession sqlsession;
+	
 	public List applyList() {
 		return sqlsession.selectList("apply.applyList");
+	}
+	public int applyManagerUpdate(String applyName) {
+		return sqlsession.update("apply.applyManagerUpdate",applyName);
+	}
+	public int rejectManagerUpdate(String applyName) {
+		return sqlsession.update("apply.rejectManagerUpdate",applyName);
 	}
 }
