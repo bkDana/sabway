@@ -3,9 +3,24 @@
 <mapper namespace="notice">
     <select id="noticeSelectAll" resultType="notice">
 		select notice_no as noticeNo, notice_category as noticeCategory, notice_title as noticeTitle, 
-		notice_content as noticeContent, filename, filepath, notice_date as noticeDate from notice
+		notice_content as noticeContent, filename, filepath, notice_date as noticeDate from notice order by notice_no desc
 	</select>
 	<insert id="noticeInsert" parameterType="notice">
 		insert into notice values(seq_notice_no.nextval,#{noticeCategory},#{noticeTitle}, #{noticeContent}, #{filename},#{filepath},sysdate)
 	</insert>
+	<update id="noticeUpdate" parameterType="notice">
+		update notice set notice_category=#{noticeCategory},notice_title=#{noticeTitle},notice_content=#{noticeContent},filename=#{filename},filepath=#{filepath},notice_date=sysdate where notice_no=#{noticeNo}
+	</update>
+	<delete id="noticeDelete" parameterType="_int">
+		delete from notice where notice_no=#{noticeNo}
+	</delete>
+	<select id="totalCount" resultType="_int">
+		select count(*) cnt from notice	
+	</select>
+	<select id="noticeSelectPaging" parameterType="pb" resultType="notice">
+		select notice_no as noticeNo, notice_category as noticeCategory, notice_title as noticeTitle, 
+		notice_content as noticeContent, filename, filepath, notice_date as noticeDate from 
+		(select rownum as rnum, m.* from (select * from notice order by notice_date desc) m)
+		where rnum between #{start} and #{end}
+	</select>
 </mapper>

@@ -21,8 +21,7 @@
 					<td>
 						<select name="noticeCategory">
 							<option value="공지사항">공지사항</option>
-							<option value="리뷰">리뷰</option>
-							<option value="신고하기">신고하기</option>
+							<option value="이벤트">이벤트</option>
 						</select>
 					</td>
 					<td>제목</td>

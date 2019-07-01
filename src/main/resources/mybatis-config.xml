@@ -3,6 +3,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="kr.co.subway.notice.vo.Notice" alias="notice"/>
+		<typeAlias type="kr.co.subway.notice.vo.PageBound" alias="pb"/>
 	</typeAliases>
-	
 </configuration>
