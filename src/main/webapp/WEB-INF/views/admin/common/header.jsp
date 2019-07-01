@@ -55,7 +55,7 @@
 							</div>
 						</li>
 						<li class="gnb03">
-							<a href="#">메뉴관리</a>
+							<a href="/goMenuReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("menuManage")){%>on<%}%>">메뉴관리</a>
 							<div class="gnb-2dep">
 								<ul>
 									<li><a href="#">메뉴 리스트</a></li>
