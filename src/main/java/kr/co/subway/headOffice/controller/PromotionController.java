@@ -1,15 +1,28 @@
 package kr.co.subway.headOffice.controller;
 
+import java.util.ArrayList;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+
+import kr.co.subway.headOffice.service.ApplyService;
+import kr.co.subway.headOffice.vo.Apply;
 import net.sf.json.JSONObject;
 
 @Controller
 public class PromotionController {
+	@Resource(name="applyService")
+	ApplyService applyService;
+	
 	@RequestMapping(value="/promotionSelect.do")
 	public String promotion() {
 		return "headOffice/SelectPromotion";
@@ -24,28 +37,32 @@ public class PromotionController {
 	}
 	
 	@RequestMapping(value="/managerApply.do")
-	public String managerApply() {
-		return "headOffice/managerApply";
+	public ModelAndView applyList(HttpServletRequest request) {
+		ArrayList<Apply> list = (ArrayList<Apply>) applyService.applyList();
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list",list);
+			mav.setViewName("headOffice/managerApply");
+		}
+		return mav;
 	}
 	@ResponseBody
 	@RequestMapping(value="/apply.do",produces="text/html;charset=utf-8")
-	public String apply(@RequestParam String name) {
-		// DB 변경 로직 추가 해야됨
+	public String applyManager(@RequestParam String applyName, @RequestParam int applyStatus) {
 		JSONObject obj = new JSONObject();
-		if(name!=null) {
-			obj.put("result", 0);
+		if(applyName!=null) {
+			if(applyStatus == 1) {
+				applyStatus = 1;
+				applyService.applyManagerUpdate(applyName,applyStatus);
+				obj.put("result", 0);
+			}else if(applyStatus==2) {			
+				applyStatus = 2;
+				applyService.applyManagerUpdate(applyName,applyStatus);
+				obj.put("result", 0);
+			}
 		}else {
 			obj.put("result", 1);
 		}
 		return new Gson().toJson(obj);
-	}
-	@ResponseBody
-	@RequestMapping(value="/reject.do",produces="text/html;charset=utf-8")
-	public String reject(@RequestParam int status) {
-		JSONObject obj = new JSONObject();
-		if(status==2) {
-			obj.put("result", 2);
-		}
-		return new Gson().toJson(obj);
-	}
+	}	
 }
