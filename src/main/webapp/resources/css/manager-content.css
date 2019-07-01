@@ -35,10 +35,11 @@
 .comm-tbl .none{padding:40px 0; font-size:16px;}
 .comm-tbl.type2{width:100%; max-width:none;}
 .comm-tbl.type2 th, .comm-tbl.type2 td{padding:10px;}
-.comm-tbl.type2 tr:first-child td{border-top:1px solid #ddd;}
+.comm-tbl.type2 tr:first-child td{border-top:1px solid #009223;}
 .comm-tbl.type2 th{text-align:center; font-size:16px; border-top:2px solid rgba(254,67,30);}
 .comm-tbl.type2 td{color:#2b2b2b; font-size:14px; text-align:center;}
-.comm-tbl.type2 tr:hover td{background-color:rgba(254,67,30,0.05);}
+/*.comm-tbl.type2 tr:hover td{background-color:#009223;}*/
+
 /* 주문 */
 .comm-tbl.order-tbl th{font-size:16px; background:#f8f8f8;}
 .comm-tbl.order-tbl input[type='text'], .comm-tbl.order-tbl input[type='password'], .comm-tbl.order-tbl input[type='file'],
@@ -59,7 +60,8 @@
 .common-tbl-btn-group > button.btn-style3{background-color:#888;}
 .common-tbl-btn-group > button.small{width:100px; height:35px; font-size:15px;}
 .comm-tbl .file-del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#888; color:#fff; margin-left:5px;}
-
+.comm-tbl .add-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#747474; color:#fff; margin-left:5px;}
+.comm-tbl .del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#d90f0f; color:#fff; margin-left:5px;}
 /* 봉사활동 신청 List */
 .volun-tit{max-width:385px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; text-align:left;}
 .volun-tit a{color:#2b2b2b;}
