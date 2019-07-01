@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ManagerOrderVO {
 	private int rnum;
 	private int mOrderIdx;
-	private int mOrderManagerIdx;
+	private int mOrderManagerId;
 	private String mOrderTitle;
 	private Date mOrderDelDate;
 	private int mOrderState;
@@ -15,12 +15,12 @@ public class ManagerOrderVO {
 		super();
 	}
 	
-	public ManagerOrderVO(int rnum, int mOrderIdx, int mOrderManagerIdx, String mOrderTitle, Date mOrderDelDate,
+	public ManagerOrderVO(int rnum, int mOrderIdx, int mOrderManagerId, String mOrderTitle, Date mOrderDelDate,
 			int mOrderState, String mOrderDate) {
 		super();
 		this.rnum = rnum;
 		this.mOrderIdx = mOrderIdx;
-		this.mOrderManagerIdx = mOrderManagerIdx;
+		this.mOrderManagerId = mOrderManagerId;
 		this.mOrderTitle = mOrderTitle;
 		this.mOrderDelDate = mOrderDelDate;
 		this.mOrderState = mOrderState;
@@ -39,11 +39,11 @@ public class ManagerOrderVO {
 	public void setmOrderIdx(int mOrderIdx) {
 		this.mOrderIdx = mOrderIdx;
 	}
-	public int getmOrderManagerIdx() {
-		return mOrderManagerIdx;
+	public int getmOrderManagerId() {
+		return mOrderManagerId;
 	}
-	public void setmOrderManagerIdx(int mOrderManagerIdx) {
-		this.mOrderManagerIdx = mOrderManagerIdx;
+	public void setmOrderManagerId(int mOrderManagerId) {
+		this.mOrderManagerId = mOrderManagerId;
 	}
 	public String getmOrderTitle() {
 		return mOrderTitle;

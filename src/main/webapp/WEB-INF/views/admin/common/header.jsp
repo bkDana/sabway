@@ -17,6 +17,11 @@
 <!-- script -->
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
 
+<!-- Datapicker 달력 -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="/resources/js/common.js"></script>
+
 <title>관리자 페이지</title>
 </head>
 <body>
@@ -50,7 +55,7 @@
 							</div>
 						</li>
 						<li class="gnb03">
-							<a href="#">메뉴관리</a>
+							<a href="/goMenuReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("menuManage")){%>on<%}%>">메뉴관리</a>
 							<div class="gnb-2dep">
 								<ul>
 									<li><a href="#">메뉴 리스트</a></li>

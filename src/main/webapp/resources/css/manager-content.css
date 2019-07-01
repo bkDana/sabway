@@ -26,7 +26,7 @@
 .comm-tbl{width:100%; max-width:800px; margin:0 auto; background-color:#fff;}
 .comm-tbl th, .comm-tbl td{border:1px solid #ddd; padding:15px; text-align:left; font-weight:normal; line-height:20px;}
 .comm-tbl tr:first-child th, .comm-tbl tr:first-child td{border-top:2px solid #009223;}
-.comm-tbl th{font-size:17px; line-height:20px; font-weight:500;}
+.comm-tbl th{font-size:15px; line-height:20px; font-weight:500;}
 .comm-tbl input[type='text'], .comm-tbl input[type='password'], .comm-tbl input[type='file'],
 .comm-tbl select, .comm-tbl textarea{padding:7px; border:1px solid #ddd; border-radius:4px; width:90%;}
 .comm-tbl input[type='text'].short, .comm-tbl input[type='password'].short, .comm-tbl input[type='file'].short{width:30%;}
