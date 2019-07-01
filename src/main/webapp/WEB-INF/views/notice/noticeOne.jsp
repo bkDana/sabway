@@ -32,7 +32,7 @@
 							<c:forTokens items="${notice.filepath}" delims="," var="item">
 								<tr>
 									<td colspan="3">
-										<img src="/resources/upload/${item}">
+										<img width="100%" src="/resources/upload/${item}">
 									</td>
 								</tr>
 							</c:forTokens>
