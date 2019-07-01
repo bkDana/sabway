@@ -11,33 +11,46 @@
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
 		<div class="sub-menu">※ 재고관리 > 발주 리스트</div>
-		<table border="1">
+		<table class="comm-tbl type2">
+			<colgroup>
+				<col width="5%">
+				<col width="50%">
+				<col width="35%">
+				<col width="20%">
+			</colgroup>
 			<tr>
-				<th>NO</th><th>물품</th><th>발주일</th><th>상태</th>
-			</tr>
-			<tr>
-				<td>1</td><td>~~~~</td><td>2019-06-28</td><td>도착</td>
-			</tr>
-			<tr>
-				<td>2</td><td>~~~~</td><td>2019-06-28</td><td>도착</td>
-			</tr>
-			<tr>
-				<td>3</td><td>~~~~</td><td>2019-06-28</td><td>도착</td>
-			</tr>
-			<tr>
-				<td>4</td><td>~~~~</td><td>2019-06-28</td><td>도착</td>
-			</tr>
-			<tr>
-				<td>5</td><td>~~~~</td><td>2019-06-28</td><td>도착</td>
+				<th>NO</th><th>상품</th><th>등록일</th><th>상태</th>
 			</tr>
 			<c:forEach items="${list.orderList }" var="order">
 				<tr>
-					<td>?</td><td>${order.mOrderTitle }</td><td>${order.mOrderDate }</td><td>${order.mOrderState }</td>
+					<td>${order.rnum }</td><td>${order.mOrderTitle }</td><td>${order.mOrderDate }</td>
+					<td>
+						<c:if test="${order.mOrderState eq 0}">접수완료</c:if>
+						<c:if test="${order.mOrderState eq 1}">출고완료</c:if>
+						<c:if test="${order.mOrderState eq 2}">도착</c:if>
+						<c:if test="${order.mOrderState eq 3}">취소</c:if>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
+		
+		<!-- paging -->
+		<div class="paging">
+			${list.pageNavi }	
+		</div>
 	</div>
 </section>
+
+<form action="/managerOrder/orderList.do" method="post" name="movePage">
+	<input type="hidden" name="reqPage">
+</form>
+
+<script>
+	function list(p){
+		$('input[name=reqPage]').val(p);
+		movePage.submit();
+	}
+</script>
 
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
