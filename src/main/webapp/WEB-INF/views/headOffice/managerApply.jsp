@@ -18,12 +18,12 @@
 				<th>신청자</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
 			</tr>
 			<%-- <c:forEach items="" var=""> --%>
-			<c:if test="status==0">
+			<c:if test="${sessionScope.apply.status eq 0 }">
 				<tr>
-					<td>신청자</td>
-					<td>연락처</td>
-					<td>지역</td>
-					<td>2019-06-28</td>
+					<td>${sessionScope.apply.applyName }</td>
+					<td>${sessionScope.apply.phone }</td>
+					<td>${sessionScope.apply.area }</td>
+					<td>${sessionScope.apply.regDate }</td>
 					<!-- 신청 승인여부에 따라 정보 전달 : 0(default),1(승인),2(거절) -->
 					<td>
 						<!-- 조건절(이름), 승인여부 변경 정보 받아오고 처리해야됨 -->
@@ -47,12 +47,12 @@
 				<th>신청자2</th><th>연락처2</th><th>지역2</th><th>신청일2</th>
 			</tr>
 			<%-- <c:forEach items="" var=""> --%>
-			<c:if test="status!=0">
+			<c:if test="${sessionScope.apply.status eq 1 || sessionScope.apply.status eq 2 }">
 				<tr>
-					<td>신청자2</td>
-					<td>연락처2</td>
-					<td>지역2</td>
-					<td>2019-06-28</td>
+					<td>${sessionScope.apply.applyName }</td>
+					<td>${sessionScope.apply.phone }</td>
+					<td>${sessionScope.apply.area }</td>
+					<td>${sessionScope.apply.regDate }</td>
 				</tr>
 			</c:if>
 			<%-- </c:forEach> --%>

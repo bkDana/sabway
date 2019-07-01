@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="apply">
+	<select id="applyList" parameterType="apply">
+		select 
+		apply_no as applyNo
+		,apply_name as applyName
+		,apply_phone as applyPhone
+		,apply_email as applyEmail
+		,apply_area as appltArea
+		,apply_title as applyTitle
+		,apply_content as applyContent
+		,apply_filaname as applyFilename
+		,apply_filepath as applyFilepath
+		,apply_status as applyStatus
+		,apply_date as applyDate
+	</select>
+</mapper>
