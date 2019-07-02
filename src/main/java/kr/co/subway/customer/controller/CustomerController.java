@@ -38,25 +38,31 @@ public class CustomerController {
          HttpSession session = request.getSession();
          if(c!=null) {
             session.setAttribute("customer", c);
-         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
          Calendar cal = Calendar.getInstance();
+         Calendar cal2 = Calendar.getInstance();
             System.out.println("오늘날짜 : " +sdf.format(cal.getTime()));
             System.out.println("마지막로그인날짜 : "+ c.getLastLogDate());
-//            if() {  // 마지막 로그인날짜 + 30일 < 현재날짜
-//               // 휴면계정
-//               // vo.setState(0) // 1:정상, 0:휴면, 2:탈퇴
-//               // customerService.회원정보업데이트(vo);
-//               // request.setAttribute("stateVal", "0");
-//               return "customer/loginFailed";
-//            }else {
-//               //customerService.updateLastLog(c);// 마지막로깅용 메소드 호출
-//            }
-//            
-            
-            customerService.updateLastLog(c);// 마지막로깅용 메소드 호출
+            cal2.setTime(c.getLastLogDate());
+            cal2.add(Calendar.MONTH, 1);
+            System.out.println("마지막로그인+30일 : "+sdf.format(cal2.getTime()));
+            int result = cal.compareTo(cal2);
+            System.out.println(result);
+            if(result == 1) {  // 마지막 로그인날짜 + 30일 < 현재날짜
+               // 휴면계정
+                // 1:정상, 0:휴면, 2:탈퇴 , 3:로그인실패
+               customerService.updateState(c);
+               System.out.println("변경된 상태 : "+ c.getCustomerState());
+               request.setAttribute("stateVal", "0");
+               customerService.updateLastLog(c);
+               return "customer/loginFailed";
+            }else{
+               customerService.updateLastLog(c);// 마지막로깅용 메소드 호출
+            }
+            customerService.updateLastLog(c);
             return "customer/loginSuccess";
          }else {
-            request.setAttribute("stateVal", "0");
+            request.setAttribute("stateVal", "3");
             return "customer/loginFailed";
          }
          
