@@ -30,6 +30,7 @@
 .comm-tbl input[type='text'], .comm-tbl input[type='password'], .comm-tbl input[type='file'],
 .comm-tbl select, .comm-tbl textarea{padding:7px; border:1px solid #ddd; border-radius:4px; width:90%;}
 .comm-tbl input[type='text'].short, .comm-tbl input[type='password'].short, .comm-tbl input[type='file'].short{width:30%;}
+.comm-tbl input[type='text'].short2, .comm-tbl input[type='password'].short2, .comm-tbl input[type='file'].short2{width:15%;}
 .comm-tbl select.middle{width:40%;}
 .comm-tbl select.short{width:25%;}
 .comm-tbl .comment{padding-top:5px; font-size:12px; color:#888;}

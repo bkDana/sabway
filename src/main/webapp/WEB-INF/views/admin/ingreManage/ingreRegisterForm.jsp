@@ -11,7 +11,7 @@
 	<div class="area">
 		<div class="sub-menu">※ 메뉴관리 > 메뉴등록</div>
 		
-			<form action="/menuRegister.do" method="post">
+			<form action="/ingreRegister.do" method="post">
 				<table class="comm-tbl">
 					<colgroup>
 						<col width="20%">
@@ -69,7 +69,7 @@
 					<tr>
 						<th>이미지 등록</th>
 						<td>
-							<input type="file" name="filename">
+							<input type="file" name="filepath">
 						</td>
 					</tr>
 					<tr>
@@ -84,7 +84,7 @@
 					<tr>
 						<th>할인률</th>
 						<td>
-							<input type="text" name="ingreDis">
+							<input type="text" name="ingreDis" class="short2" value="0" style="text-align:right;"> %
 						</td>
 					</tr>
 				</table>
@@ -96,7 +96,11 @@
 		</div>
 	
 </section>
-
+<!-- <script>
+	$(document).ready(function(){
+		if($())
+	});
+</script> -->
 
 
 <%-- Footer --%>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ingre">
+  <!-- 메뉴 등록 -->
+  <insert id="ingreReg" parameterType="ingre">
+  	insert into ingredients values (seq_ingre_idx.nextval, #{ingreLabel}, #{ingreType}, #{ingreCost15}, #{ingreCost30}, #{ingreDiscntRate}, 
+  	#{ingreKcal}, 0, #{ingreActive}, #{ingreUnit}, #{ingreDescription}, 
+  	<choose>
+		  <when test="ingreFilepath != null">
+		  	 #{ingreFilepath},
+		  </when>
+		  <otherwise>
+		  	null,
+		  </otherwise>
+	  </choose>
+  	sysdate)
+  </insert>
+</mapper>
