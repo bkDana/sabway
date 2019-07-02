@@ -21,4 +21,19 @@
 	<update id="rejectManagerUpdate" parameterType="string">
 		update apply set apply_status = 2 where apply_name = #{applyName}
 	</update>
+	<select id="applyView" parameterType="_int" resultType="apply">
+		select apply_no as applyNo
+		,apply_name as applyName
+		,apply_phone as applyPhone
+		,apply_email as applyEmail
+		,apply_area as applyArea
+		,apply_title as applyTitle
+		,apply_content as applyContent
+		,apply_filename as applyFilename
+		,apply_filepath as applyFilepath
+		,apply_status as applyStatus
+		,apply_date as applyDate
+		from apply
+		where apply_no = #{applyNo}
+	</select>
 </mapper>
