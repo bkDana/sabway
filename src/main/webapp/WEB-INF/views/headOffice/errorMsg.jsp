@@ -9,7 +9,8 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert(${msg});
+		String msg = ${msg};
+		alert(msg);
 	</script>
 </body>
 </html>
