@@ -16,7 +16,7 @@
 		<ul>
 			<li><a href="/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("ingreRegisterForm.jsp")){%>on<%}%>">메뉴 등록</a></li>
 			<li><a href="#" class="<%if(request.getRequestURL().toString().split("/")[7].equals("#")){%>on<%}%>">메뉴 관리</a></li>
-			<li><a href="#" class="<%if(request.getRequestURL().toString().split("/")[7].equals("#")){%>on<%}%>">이벤트 / 할인</a></li>
+			<li><a href="/promotionSelect.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("#")){%>on<%}%>">이벤트 / 할인</a></li>
 		</ul>
 	<%}%>
 	
