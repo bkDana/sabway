@@ -14,13 +14,36 @@
 	<delete id="noticeDelete" parameterType="_int">
 		delete from notice where notice_no=#{noticeNo}
 	</delete>
-	<select id="totalCount" resultType="_int">
+	<select id="noticeTotalCount" resultType="_int">
 		select count(*) cnt from notice	
 	</select>
 	<select id="noticeSelectPaging" parameterType="pb" resultType="notice">
 		select notice_no as noticeNo, notice_category as noticeCategory, notice_title as noticeTitle, 
 		notice_content as noticeContent, filename, filepath, notice_date as noticeDate from 
 		(select rownum as rnum, m.* from (select * from notice order by notice_date desc) m)
+		where rnum between #{start} and #{end}
+	</select>
+	<!-- 아래부터 QNA관련 쿼리 -->
+	<select id="qnaSelectAll" resultType="qna">
+		select qna_no as qnaNo, qna_category as qnaCategory, qna_writer as qnaWriter, qna_title as qnaTitle, 
+		qna_content as qnaContent, filename, filepath, qna_date as qnaDate from qna order by qna_no desc
+	</select>
+	<insert id="qnaInsert" parameterType="qna">
+		insert into qna values(seq_qna_no.nextval,#{qnaCategory},#{qnaWriter},#{qnaTitle}, #{qnaContent}, #{filename},#{filepath},sysdate)
+	</insert>
+	<update id="qnaUpdate" parameterType="qna">
+		update qna set qna_category=#{qnaCategory},qna_title=#{qnaTitle},qna_content=#{qnaContent},filename=#{filename},filepath=#{filepath},qna_date=sysdate where qna_no=#{qnaNo}
+	</update>
+	<delete id="qnaDelete" parameterType="_int">
+		delete from qna where qna_no=#{qnaNo}
+	</delete>
+	<select id="qnaTotalCount" resultType="_int">
+		select count(*) cnt from qna	
+	</select>
+	<select id="qnaSelectPaging" parameterType="pb" resultType="qna">
+		select qna_no as qnaNo, qna_category as qnaCategory, qna_writer as qnaWriter, qna_title as qnaTitle, 
+		qna_content as qnaContent, filename, filepath, qna_date as qnaDate from 
+		(select rownum as rnum, m.* from (select * from qna order by qna_date desc) m)
 		where rnum between #{start} and #{end}
 	</select>
 </mapper>

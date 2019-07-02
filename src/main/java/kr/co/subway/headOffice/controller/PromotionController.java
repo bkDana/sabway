@@ -3,10 +3,13 @@ package kr.co.subway.headOffice.controller;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ExtendedModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,11 +55,11 @@ public class PromotionController {
 		JSONObject obj = new JSONObject();
 		if(applyName!=null) {
 			if(applyStatus == 1) {
-				applyStatus = 1;
+				//거절(status 1일 때)
 				applyService.applyManagerUpdate(applyName,applyStatus);
 				obj.put("result", 0);
-			}else if(applyStatus==2) {			
-				applyStatus = 2;
+			}else if(applyStatus==2) {
+				//거절(status 2일 때)
 				applyService.applyManagerUpdate(applyName,applyStatus);
 				obj.put("result", 0);
 			}
@@ -65,4 +68,12 @@ public class PromotionController {
 		}
 		return new Gson().toJson(obj);
 	}	
+	@RequestMapping(value="/applyView.do")
+	public String applyView(@RequestParam int applyNo,Model model) {
+		Apply ap = applyService.applyView(applyNo);
+		if(ap != null) {
+			model.addAttribute("ap",ap);
+		}
+		return "headOffice/applyView";
+	}
 }

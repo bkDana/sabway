@@ -7,7 +7,7 @@
 	<select id="selectList" parameterType="kr.co.subway.common.SearchVO" resultType="kr.co.subway.managerOrder.vo.ManagerOrderVO">
   		select 
   			rnum,
-  			m_order_idx as mOrderIdx,
+  			m_order_no as mOrderNo,
 	  		m_order_manager_id as mOrderManagerId,
 	  		m_order_title as mOrderTitle,
 	  		m_order_del_date as mOrderDelDate,
@@ -20,5 +20,35 @@
   			 ) 
   		where 
   			rnum between #{start} and #{end}
+  	</select>
+  	<insert id="addOrder" parameterType="kr.co.subway.managerOrder.vo.ManagerOrderVO">
+  		insert into m_order_tbl values(#{mOrderNo},#{mOrderManagerId},#{mOrderTitle},#{mOrderDelDate},0,sysdate)
+  	</insert>
+  	<insert id="addItem" parameterType="kr.co.subway.managerOrder.vo.ManagerItemVO">
+  		insert into m_item_tbl values(m_item_seq.nextval,#{mOrderNo},#{itemIdx},#{mItemName},#{mItemAmount})
+  	</insert>
+  	<select id="selectOrder" parameterType="string" resultType="kr.co.subway.managerOrder.vo.ManagerOrderVO">
+  		select 
+  			m_order_no as mOrderNo,
+	  		m_order_manager_id as mOrderManagerId,
+	  		m_order_title as mOrderTitle,
+	  		TO_CHAR(m_order_del_date,'YYYY-MM-DD') as mOrderDelDate,
+	  		m_order_state as mOrderState,
+	  		TO_CHAR(m_order_date,'YYYY-MM-DD HH24:mi:ss') as mOrderDate
+	  	from 
+	  		m_order_tbl
+  		where 
+  			m_order_no = #{no}
+  	</select>
+  	<select id="selectItem" parameterType="string" resultType="kr.co.subway.managerOrder.vo.ManagerItemVO">
+  		select 
+  			m_item_idx as mItemIdx,
+	  		item_idx as itemIdx,
+	  		m_item_name as mItemName,
+	  		m_item_amount as mItemAmount
+	  	from 
+	  		m_item_tbl
+  		where 
+  			m_order_no = #{no}
   	</select>
 </mapper>
