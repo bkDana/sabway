@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="customer">
+
+    <select id="selectOneCustomer" parameterType="customer" resultType="customer">
+       select customer_no as customerNo,
+          customer_id as customerId,
+          customer_pw as customerPw,
+          customer_name as customerName,
+          phone as phone,
+          birthday as birthday,
+          email as email,
+          gender as gender,
+          customer_state as customerState,
+          reg_date as regDate,
+          lastLog_date as lastLogDate
+          from customer where customer_id=#{customerId} and customer_pw=#{customerPw}
+    </select>
+    <select id="selectOneId" parameterType="string" resultType="customer">
+       select customer_no as customerNo,
+          customer_id as customerId,
+          customer_pw as customerPw,
+          customer_name as customerName,
+          customer_nickname as customerNick,
+          phone as phone,
+          birthday as birthday,
+          email as email,
+          gender as gender,
+          customer_state as customerState,
+          reg_date as regDate,
+          lastLog_date as lastLogDate
+          from customer where customer_id=#{customerId}  AND ROWNUM = 1
+    </select>
+   	<select id="selectOneNick" parameterType="string" resultType="customer">
+       	select customer_no as customerNo,
+          customer_id as customerId,
+          customer_pw as customerPw,
+          customer_name as customerName,
+          customer_nickname as customerNick,
+          phone as phone,
+          birthday as birthday,
+          email as email,
+          gender as gender,
+          customer_state as customerState,
+          reg_date as regDate,
+          lastLog_date as lastLogDate
+          from customer where customer_nickname=#{customerNick} AND ROWNUM = 1
+    </select>
+   	<select id="selectOneEmail" parameterType="string" resultType="customer">
+       	select customer_no as customerNo,
+          customer_id as customerId,
+          customer_pw as customerPw,
+          customer_name as customerName,
+          customer_nickname as customerNick,
+          phone as phone,
+          birthday as birthday,
+          email as email,
+          gender as gender,
+          customer_state as customerState,
+          reg_date as regDate,
+          lastLog_date as lastLogDate
+          from customer where email=#{email} AND ROWNUM = 1
+    </select>
+    <insert id="insertCustomer" parameterType="customer">
+       INSERT INTO CUSTOMER VALUES(SEQ_customer_no.NEXTVAL,#{customerId},#{customerPw},#{customerName},#{customerNick},#{phone},#{birthday},#{email},#{gender},#{customerState},SYSDATE,null)
+    </insert>
+    <update id="updateCustomer" parameterType="customer">
+       update customer set  lastlog_date=sysdate where customer_id=#{customerId}
+    </update>
+</mapper>
