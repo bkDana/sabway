@@ -20,21 +20,23 @@
 	  		m_order_title as mOrderTitle,
 	  		m_order_del_date as mOrderDelDate,
 	  		m_order_state as mOrderState,
-	  		TO_CHAR(m_order_date,'YYYY-MM-DD HH24:mi:ss') as mOrderDate
+	  		TO_CHAR(m_order_date,'YYYY-MM-DD HH24:mi:ss') as mOrderDate,
+	  		mgr_name as mgrName
 	  	from ( select 
 	  				rownum rnum,
 	  				mo.* 
-	  			from (select * from m_order_tbl 
+	  			from (select * from m_order_tbl, manager 
+	  			where m_order_tbl.m_order_manager_id = manager.mgr_id
 	  			<choose>
 		  			<when test="mgrId.equals('admin')">
 		  				
 		  			</when>
 		  			<otherwise>
-		  				where m_order_manager_id = #{mgrId}
+		  				and m_order_manager_id = #{mgrId}
 		  			</otherwise>
 		  		</choose>
 	  			order by 6 desc) mo
-  			 ) 
+  			 )
   		where 
   			rnum between #{start} and #{end}
   	</select>
@@ -67,5 +69,19 @@
 	  		m_item_tbl
   		where 
   			m_order_no = #{no}
+  	</select>
+  	<select id="selectType" resultType="string">
+  		select distinct ingre_type from ingredients
+  	</select>
+  	<select id="selectIngre" parameterType="string" resultType="ingre">
+  		select
+  			ingre_idx as ingreIdx,
+  			ingre_label as ingreLabel,
+  			ingre_unit as ingreUnit
+  		from 
+  			ingredients
+  		where 
+  			ingre_type = #{type}
+  		order by 1
   	</select>
 </mapper>

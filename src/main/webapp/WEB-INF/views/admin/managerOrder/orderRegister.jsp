@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 
@@ -12,7 +13,12 @@
 		<div class="sub-menu">※ 재고관리 > 발주서 작성</div>
 
 		<form action="/managerOrder/addOrder.do" method="post" onsubmit="return submit_chk();">
-			<input type="text" name="mOrderManagerId" value="dangsan">
+			<c:if test="${not empty sessionScope.customer }">
+			<input type="text" name="mOrderManagerId" value="${sessionScope.customer.customerId }">
+			</c:if>
+			<c:if test="${empty sessionScope.customer }">
+			<input type="text" name="mOrderManagerId" value="jy">
+			</c:if>
 			<table class="comm-tbl">
 				<colgroup>
 					<col width="20%">
@@ -21,16 +27,11 @@
 				<tr>
 					<td>날짜</td><td><input type="text" name="mOrderDelDate" class="datepicker" readonly></td>
 				</tr>
-				<!-- 
-				<tr>
-					<td>지점명</td><td><input type="text" name="" value="당산점"></td>
-				</tr>
-				 -->
 				<tr>
 					<td>물품 선택</td>
 					<td>
-						<select class="middle"><option>-- 1차분류 --</option></select>&nbsp;
-						<select class="middle" id="item"><option value="">-- 물품 --</option><option value="23">로티세리</option><option value="10">에그마요</option></select>
+						<select class="middle" id="itemType"><option>-- 1차분류 --</option></select>&nbsp;
+						<select class="middle" id="item"><option value="">-- 물품 --</option><option value="23">로티세리(box)</option><option value="10">에그마요(kg)</option></select>
 						<button type="button" class="add-btn" onclick="add();">추가</button>
 					</td>
 				</tr>
@@ -60,6 +61,50 @@
 </section>
 
 <script>
+
+/* 1차분류 세팅*/
+$.ajax({
+	url : '/getType.do',
+	success : function(data){
+		console.log(data);
+		for(var i=0;i<data.length;i++){
+			$('#itemType').append('<option value='+data[i]+'>'+data[i]+'</option>');
+		}
+		
+		
+	},
+	error : function(){
+		
+	}
+});
+
+
+/* 물품 리스트 */
+$('#itemType').change(function(){
+	var type = $('#itemType option:selected').val();
+	
+	$.ajax({
+		url : '/getIngre.do',
+		data : {type:type},
+		success : function(data){
+			//console.log(data);
+			$('#item').empty();
+			$('#item').append('<option value="">-- 물품 --</option>');
+			for(var i=0;i<data.length;i++){
+				var unit = data[i].ingreUnit;
+				if(unit==null || unit==''){
+					unit = '등록안됨';
+				}
+				$('#item').append('<option value="'+data[i].ingreIdx+'">'+data[i].ingreLabel+'('+unit+')</option>');
+			}
+		},
+		error : function(){
+			
+		}
+	});
+	
+});
+
 /* 물품 추가하기 */
 function add(){
 //$('.add-btn').click(function(){

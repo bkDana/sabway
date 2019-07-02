@@ -11,6 +11,7 @@ public class ManagerOrderVO {
 	private int mOrderState;
 	private String mOrderDate;
 	private ArrayList<ManagerItemVO> itemList ;
+	private String mgrName;
 	
 	public ManagerOrderVO() {
 		super();
@@ -87,6 +88,15 @@ public class ManagerOrderVO {
 	public void setItemList(ArrayList<ManagerItemVO> itemList) {
 		this.itemList = itemList;
 	}
+
+	public String getMgrName() {
+		return mgrName;
+	}
+
+	public void setMgrName(String mgrName) {
+		this.mgrName = mgrName;
+	}
+	
 	
 	
 	
