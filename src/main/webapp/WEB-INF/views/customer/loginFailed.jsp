@@ -11,16 +11,17 @@
    <input type="hidden" id="stateVal" value="${stateVal}">
    <script>
       var stateVal = $("#stateVal").val();
-      alert(stateVal);
       if(stateVal == 0){ //휴면계정
          if(confirm("계정이 휴면상태입니다. 휴면상태를 해제하시겠습니까?????????????")){
             alert("해제됐습니다.");
+            location.href="/";
          }else{
             alert("취소");
+            location.href="/";
          }
-      }else if(stateVal == 2){// 탈퇴계정
+//       }else if(stateVal == 2){// 탈퇴계정
          
-      }else{
+      }else if(stateVal == 3){
          alert("로그인 실패했습니다ㅠㅠㅠㅠㅠㅠ");
          location.href="/";
       }

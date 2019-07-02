@@ -59,4 +59,9 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerdao.updateLastLog(c);
 	}
 
+	@Override
+	public int updateState(Customer c) {
+		return customerdao.updateState(c);
+	}
+
 }

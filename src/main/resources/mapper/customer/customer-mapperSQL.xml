@@ -67,4 +67,7 @@
     <update id="updateCustomer" parameterType="customer">
        update customer set  lastlog_date=sysdate where customer_id=#{customerId}
     </update>
+        <update id="updateState" parameterType="customer">
+       update customer set  customer_state=1 where customer_id=#{customerId}
+    </update>
 </mapper>

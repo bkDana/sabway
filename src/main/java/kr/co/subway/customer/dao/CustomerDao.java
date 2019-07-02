@@ -11,4 +11,5 @@ public interface CustomerDao {
 	public Customer selectOneEmail (String email);			//이메일 중복체크
 	public int insertCustomerEnroll(Customer vo);			//회원가입
 	public int updateLastLog(Customer c);					//마지막로깅
+	public int updateState(Customer c);						//상태변경
 }

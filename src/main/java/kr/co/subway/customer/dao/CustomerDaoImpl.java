@@ -41,5 +41,9 @@ public class CustomerDaoImpl implements CustomerDao{
 	public int updateLastLog(Customer c) {
 		return sqlsession.update("customer.updateCustomer",c);
 	}
+	@Override
+	public int updateState(Customer c) {
+		return sqlsession.update("customer.updateState",c);
+	}
 	
 }
