@@ -17,14 +17,14 @@ public class MgrController {
 	@RequestMapping(value="//mgrEnroll.do")
 	public String mgrEnroll() {
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
-		if(mg.getMgrName().equals(mgrName)) {
-			mg.setMgrId(mgrId+1);
-			mg.setMgrName(mgrName+1);
-		}
-		int result = mgrservice.enrollMgr(mg);
-		System.out.println(mgrId);
-		System.out.println(mgrName);
-		
+//		if(mg.getMgrName().equals(mgrName)) {
+//			mg.setMgrId(mgrId+1);
+//			mg.setMgrName(mgrName+1);
+//		}
+//		int result = mgrservice.enrollMgr(mg);
+//		System.out.println(mgrId);
+//		System.out.println(mgrName);
+//		
 		return "redirect:/admin.do";
 	}
 }
