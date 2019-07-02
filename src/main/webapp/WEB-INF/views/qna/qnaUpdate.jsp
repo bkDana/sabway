@@ -14,7 +14,7 @@
 <section id="content-wrapper">
 	<div class="area">
 		<div class="common-tbl-box">
-			<form action="/noticeUpdate.do" method="post" enctype="multipart/form-data">
+			<form action="/qnaUpdate.do" method="post" enctype="multipart/form-data">
 				<table class="comm-tbl">
 					<colgroup>
 						<col width="15%">
@@ -22,41 +22,41 @@
 						<col width="15%">
 						<col width="/">
 					</colgroup>
-					<c:forEach items="${noticeList }" var="notice" varStatus="status">
-			 			<c:if test="${notice.noticeNo eq noticeNo }">
+					<c:forEach items="${qnaList }" var="qna" varStatus="status">
+			 			<c:if test="${qna.qnaNo eq qnaNo }">
 							<tr>
 								<td>카테고리</td>
 								<td>
-									<select name="noticeCategory">
-										<option value="공지사항">공지사항</option>
-										<option value="이밴트">이벤트</option>
+									<select name="qnaCategory">
+										<option value="Q&A">Q&A</option>
+										<option value="신고">신고</option>
 									</select>
 								</td>
 								<td>제목</td>
 								<td>
-									<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
-									<input type="text" name="noticeTitle" value="${notice.noticeTitle }">
+									<input type="hidden" name="qnaNo" value="${qna.qnaNo }">
+									<input type="text" name="qnaTitle" value="${qna.qnaTitle }">
 								</td>
 							</tr>
 							<tr>
 								<td>내용</td>
 								<td colspan="3">
-									<textarea rows="20" name="noticeContent">${notice.noticeContent }</textarea>
+									<textarea rows="20" name="qnaContent">${qna.qnaContent }</textarea>
 								</td>
 							</tr>
 							<tr>
 								<td>파일 업로드</td>
-								<td colspan="3">
-									<c:if test="${empty notice.filename }">
+								<td colspan="3" class="common-tbl-btn-group">
+									<c:if test="${empty qna.filename }">
 										<input type="file" name="fileName">
 									</c:if>
-									<c:if test="${not empty notice.filename}">
-										<input type="file" name="fileName"><br>
-										<input type="text" name="filename" value="${notice.filename }" readonly="readonly">
-										<input type="hidden" name="filepath" value="${notice.filepath }">
+									<c:if test="${not empty qna.filename}">
+										<input type="file" name="fileName">
+										<input type="text" name="filename" value="${qna.filename }" readonly="readonly">
+										<input type="hidden" name="filepath" value="${qna.filepath }">
 										<button type="button" id="fileDelete">기존 파일삭제</button>
 									</c:if>
-									<input type="hidden" id="fileStatus" name="fileStatus" value="0">
+										<input type="hidden" id="fileStatus" name="fileStatus" value="0">
 								</td>
 								
 							</tr>
