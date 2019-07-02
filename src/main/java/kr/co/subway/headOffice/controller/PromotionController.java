@@ -71,16 +71,9 @@ public class PromotionController {
 	@RequestMapping(value="/applyView.do")
 	public String applyView(@RequestParam int applyNo,Model model) {
 		Apply ap = applyService.applyView(applyNo);
-		String view = "";
-		try {
-			if(ap != null) {
-				model.addAttribute("ap",ap);
-				view = "headOffice/applyView";
-			}
-		}catch(NullPointerException ne) {
-			model.addAttribute("msg","applyView 메소드 에러발생.");
-			view = "headOffice/errorMsg";
+		if(ap != null) {
+			model.addAttribute("ap",ap);
 		}
-		return view;
+		return "headOffice/applyView";
 	}
 }
