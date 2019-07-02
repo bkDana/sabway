@@ -8,7 +8,7 @@
 <section id="content-wrapper">
 	<div class="area">
 		<div class="common-tbl-box">
-		<form action="/noticeInsert.do" method="post" enctype="multipart/form-data">
+		<form action="/qnaInsert.do" method="post" enctype="multipart/form-data">
 			<table class="comm-tbl">
 				<colgroup>
 					<col width="15%">
@@ -19,20 +19,26 @@
 				<tr>
 					<td>카테고리</td>
 					<td>
-						<select name="noticeCategory">
-							<option value="공지사항">공지사항</option>
-							<option value="이벤트">이벤트</option>
+						<select name="qnaCategory">
+							<option value="Q&A">Q&A</option>
+							<option value="신고">신고</option>
 						</select>
 					</td>
-					<td>제목</td>
+					<td>작성자</td>
 					<td>
-						<input type="text" name="noticeTitle">
+						<input type="text" name="qnaWriter"><%--원래는 value 세션으로 받아서 처리 --%>
+					</td>
+				</tr>
+				<tr>
+					<td>제목</td>
+					<td colspan="3">
+						<input type="text" name="qnaTitle">
 					</td>
 				</tr>
 				<tr>
 					<td>내용</td>
 					<td colspan="3">
-						<textarea rows="20" name="noticeContent"></textarea>
+						<textarea rows="20" name="qnaContent"></textarea>
 					</td>
 				</tr>
 				<tr>

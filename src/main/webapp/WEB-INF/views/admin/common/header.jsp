@@ -55,10 +55,10 @@
 							</div>
 						</li>
 						<li class="gnb03">
-							<a href="/goMenuReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("menuManage")){%>on<%}%>">메뉴관리</a>
+							<a href="/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")){%>on<%}%>">재료관리</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="#">메뉴 리스트</a></li>
+									<li><a href="#">재료 리스트</a></li>
 								</ul>
 							</div>
 						</li>
