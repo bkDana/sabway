@@ -42,7 +42,15 @@ public class IngreManageController {
 	//재료 리스트 가져오기
 	@RequestMapping("/ingreList.do")
 	public ModelAndView ingreList(@RequestParam String reqPage, ModelAndView mav, String searchType, String searchVal) {
-		IngrePageNaviData ip = ingreService.ingreList(Integer.parseInt(reqPage),searchType,searchVal);
+		//System.out.println(searchType);
+		//System.out.println(searchVal);
+		int reqPage1;
+		try {
+			reqPage1 = Integer.parseInt(reqPage);
+		}catch (Exception e) {
+			reqPage1=1;
+		}
+		IngrePageNaviData ip = ingreService.ingreList(reqPage1,searchType,searchVal);
 		ArrayList<IngreVo> list = ip.getIngreList();
 		String pageNavi = ip.getPageNavi();
 		if(!list.isEmpty()) {

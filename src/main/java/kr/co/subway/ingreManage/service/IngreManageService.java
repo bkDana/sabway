@@ -26,16 +26,18 @@ public class IngreManageService {
 	public IngrePageNaviData ingreList(int reqPage, String searchType, String searchVal) {
 		int numPerPage = 10;
 		int totalCount = ingreDao.ingreTotalCount(searchType, searchVal);
+		System.out.println("totalCount: "+totalCount);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
 		PageBound pb = new PageBound(start, end);
 		ArrayList<IngreVo> ingreList = (ArrayList<IngreVo>)ingreDao.ingreSelectAll(pb,searchType, searchVal);
+		System.out.println(ingreList.size());
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
-		if(reqPage != 1) {
-			pageNavi += "<a class='paging-arrow prev-arrow' href='/ingreList.do?reqPage="+(pageNo-1)+"&searchType="+searchType+"&searchVal="+searchVal+"'>"+pageNo+"'>이전</a>";
+		if(pageNo != 1) {
+			pageNavi += "<a class='paging-arrow prev-arrow' href='/ingreList.do?reqPage="+(pageNo-1)+"&searchType="+searchType+"&searchVal="+searchVal+"'"+pageNo+"'>이전</a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
@@ -46,8 +48,8 @@ public class IngreManageService {
 			}
 			pageNo++;
 		}
-		if(reqPage < totalPage) {
-			pageNavi +="<a class='paging-arrow next-arrow' href='/ingreList.do?reqPage="+pageNo+"&searchType="+searchType+"&searchVal="+searchVal+"'>"+pageNo+"'>다음</a>";
+		if(pageNo < totalPage) {
+			pageNavi +="<a class='paging-arrow next-arrow' href='/ingreList.do?reqPage="+pageNo+"&searchType="+searchType+"&searchVal="+searchVal+"'"+pageNo+"'>다음</a>";
 		}
 		
 		return new IngrePageNaviData(ingreList, pageNavi);

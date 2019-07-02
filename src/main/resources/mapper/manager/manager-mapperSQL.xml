@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mgr">
+	<insert id="enrollMgr" parameterType="mgr">
+		insert into manager values(seq_mgr_no.nextval,#{mgrId}, #{mgrPw}, #{mgrName}, #{mgrTel}, #{mgrPost}, #{mgrAddr}, #{mgrLevel}, default, sysdate)
+	</insert>
+	<select id="mgrList" resultType="mgr">
+		select mgr_no as mgrNo
+		,mgr_id as mgrId
+		,mgr_pw as mgrPw
+		,mgr_name as mgrName
+		,mgr_tel as mgrTel
+		,mgr_post as mgrPost
+		,mgr_addr as mgrAddr
+		,mgr_level as mgrLevel
+		,mgr_status as mgrStatus
+		,mgr_enroll_date as mgrEnrollDate
+		from manager
+	</select>
+</mapper>

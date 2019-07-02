@@ -47,14 +47,15 @@
 		
 		<!-- 검색박스 -->
 		<div class="board-search-box">
-			<form action="/ingreList.do?reqPage=1" method="post" name="search">
+			<form action="/ingreList.do" method="post" name="search">
 				<select name="searchType" id="searchType" data-type="${searchType }">
+					<option value="">==1번째선택==</option>
 					<option value="ingreType">재료 카테고리</option>
 					<option value="ingreDiscntRate">할인여부</option>
 					<option value="ingreActive">활성화 여부</option>
 				</select>
 				<select name="searchVal" id="searchVal" data-val="${searchVal }">
-					<option value=""></option>
+					<option value="">==두번째 선택==</option>
 				</select>
 				<button type="submit" class="bbs-search-btn" title="검색"><img src="/resources/img/search_icon.png" style="width:30px;"></button>
 			</form>

@@ -35,7 +35,7 @@ public class IngreManageDao {
 	public List ingreSelectAll(PageBound pb, String searchType, String searchVal) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", Integer.toString(pb.getStart()));
-		map.put("end", Integer.toString(pb.getStart()));
+		map.put("end", Integer.toString(pb.getEnd()));
 		map.put("searchType", searchType);
 		map.put("searchVal", searchVal);
 		return sqlSession.selectList("ingre.ingreSelectAll",map);

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.subway.common.SearchVO;
 import kr.co.subway.managerOrder.dao.ManagerOrderDao;
+import kr.co.subway.managerOrder.vo.ManagerItemVO;
 import kr.co.subway.managerOrder.vo.ManagerOrderListVO;
 import kr.co.subway.managerOrder.vo.ManagerOrderVO;
 
@@ -51,5 +52,19 @@ public class ManagerOrderService {
 
 		ManagerOrderListVO list = new ManagerOrderListVO(orderList, pageNavi);
 		return list;
+	}
+
+	public int addOrder(ManagerOrderVO managerOrderVO) {
+		
+		int result = dao.addOrder(managerOrderVO);
+		int result2 = dao.addItem(managerOrderVO.getItemList());
+		System.out.println("등록된 물품 개수 :"+result2);
+		return result;
+	}
+
+	public ManagerOrderVO selectOrder(String no) {
+		ManagerOrderVO order = dao.selectOrder(no);
+		order.setItemList((ArrayList<ManagerItemVO>)(dao.selectItem(no)));
+		return order;
 	}
 }
