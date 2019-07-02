@@ -44,6 +44,7 @@
 					<button class="btn-style2 insert-notice">공지사항 작성하기</button>
 				</div>
 			</c:if>
+			<div class="paging">${pageNavi }</div>
 		</div>
 	</div>
 </section>

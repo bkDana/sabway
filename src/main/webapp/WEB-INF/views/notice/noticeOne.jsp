@@ -21,7 +21,7 @@
 				<col width="20%">
 			</colgroup>
 			 	<c:forEach items="${noticeList }" var="notice" varStatus="status">
-			 		<c:if test="${status.count eq noticeNo }">
+			 		<c:if test="${notice.noticeNo eq noticeNo }">
 						<tr>
 							<th style="display:none;">${notice.noticeNo }</th>
 							<th>${notice.noticeCategory }</th>
@@ -46,8 +46,10 @@
 
 				<div class="common-tbl-btn-group">
 					<button class="btn-style2 small move-all-notice">목록으로</button>
+					<button class="btn-style2 small move-delete-notice">삭제하기</button>
 					<c:if test="${sessionScope.member.memberId eq 'admin' }">
-						<button>수정하기</button>
+						<button class="btn-style2 small move-update-notice">수정하기</button>
+						<button class="btn-style2 small move-delete-notice">삭제하기</button>
 					</c:if>
 				</div>
 			
@@ -58,17 +60,17 @@
 				<col width="/">
 			</colgroup>
 			 	<c:forEach items="${noticeList }" var="notice" varStatus="status">
-					<c:if test="${status.count eq noticeNo-1 }">
+					<c:if test="${notice.noticeNo eq noticeNo+1 }">
 						<tr>
-							<td style="display:none;">${status.count }</td>
+							<td style="display:none;">${notice.noticeNo }</td>
 							<td colspan="2" class="move-pn-notice">
 								△이전글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${notice.noticeTitle }
 							</td>
 						</tr>
 					</c:if>
-					<c:if test="${status.count eq noticeNo+1 }">
+					<c:if test="${notice.noticeNo eq noticeNo-1 }">
 						<tr>
-							<td style="display:none;">${status.count }</td>
+							<td style="display:none;">${notice.noticeNo }</td>
 							<td colspan="2" class="move-pn-notice">
 								▽다음글&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${notice.noticeTitle }
 							</td>

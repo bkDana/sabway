@@ -19,4 +19,15 @@ $(document).ready(function(){
 	$(".insert-notice").click(function(){
 		location.href="/moveNoticeInsert.do";
 	});
+	$(".move-update-notice").click(function(){
+		var noticeNo = $('th').eq(0).text();
+		location.href="/moveNoticeUpdate.do?noticeNo="+noticeNo;
+	});
+	$(".update-notice").click(function(){
+		location.href="/noticeUpdate.do";
+	});
+	$(".move-delete-notice").click(function(){
+		var noticeNo = $('th').eq(0).text();
+		location.href="/noticeDelete.do?noticeNo="+noticeNo;
+	});
 });
