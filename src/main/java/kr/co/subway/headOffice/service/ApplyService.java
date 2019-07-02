@@ -28,4 +28,8 @@ public class ApplyService {
 		}
 		return result;
 	}
+	public Apply applyView(int applyNo) {
+		Apply ap = applyDao.applyView(applyNo);
+		return ap;
+	}
 }

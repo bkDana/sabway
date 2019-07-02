@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.subway.headOffice.vo.Apply;
+
 @Repository("applyDao")
 public class ApplyDAO {
 	@Autowired
@@ -19,5 +21,8 @@ public class ApplyDAO {
 	}
 	public int rejectManagerUpdate(String applyName) {
 		return sqlsession.update("apply.rejectManagerUpdate",applyName);
+	}
+	public Apply applyView(int applyNo) {
+		return sqlsession.selectOne("apply.applyView",applyNo);
 	}
 }
