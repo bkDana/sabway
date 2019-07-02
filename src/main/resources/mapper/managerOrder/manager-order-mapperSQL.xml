@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="managerOrder">
-	<select id="totalCount" resultType="_int">
+	<select id="totalCount" parameterType="kr.co.subway.common.SearchVO" resultType="_int">
 		select count(*) cnt from m_order_tbl
+		<choose>
+  			<when test="mgrId.equals('admin')">
+  				
+  			</when>
+  			<otherwise>
+  				where m_order_manager_id = #{mgrId}
+  			</otherwise>
+  		</choose>
 	</select>
 	<select id="selectList" parameterType="kr.co.subway.common.SearchVO" resultType="kr.co.subway.managerOrder.vo.ManagerOrderVO">
   		select 
@@ -16,7 +24,16 @@
 	  	from ( select 
 	  				rownum rnum,
 	  				mo.* 
-	  			from (select * from m_order_tbl order by 6 desc) mo
+	  			from (select * from m_order_tbl 
+	  			<choose>
+		  			<when test="mgrId.equals('admin')">
+		  				
+		  			</when>
+		  			<otherwise>
+		  				where m_order_manager_id = #{mgrId}
+		  			</otherwise>
+		  		</choose>
+	  			order by 6 desc) mo
   			 ) 
   		where 
   			rnum between #{start} and #{end}

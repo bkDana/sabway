@@ -12,7 +12,7 @@
 		<div class="sub-menu">※ 재고관리 > 발주서 작성</div>
 
 		<form action="/managerOrder/addOrder.do" method="post" onsubmit="return submit_chk();">
-			<input type="hidden" name="mOrderManagerId" value="dangsan">
+			<input type="text" name="mOrderManagerId" value="dangsan">
 			<table class="comm-tbl">
 				<colgroup>
 					<col width="20%">

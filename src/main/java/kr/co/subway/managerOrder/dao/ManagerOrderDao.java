@@ -19,7 +19,7 @@ public class ManagerOrderDao {
 	SqlSessionTemplate sqlSession;
 	
 	public int totalCount(SearchVO search) {
-		return sqlSession.selectOne("managerOrder.totalCount");
+		return sqlSession.selectOne("managerOrder.totalCount",search);
 	}
 	
 	public List selectList(SearchVO search){

@@ -32,7 +32,8 @@ public class ManagerOrderController {
 		}catch (Exception e) {
 			reqPage = 1;
 		}
-		SearchVO search = new SearchVO(reqPage, 0,0,0);
+		String id = "admin";//TODO 여기는 나중에 session에서 id 받아와야함
+		SearchVO search = new SearchVO(reqPage, 0,0,0,id);
 		ManagerOrderListVO list = service.selectList(search);
 		model.addAttribute("list", list);
 		return "admin/managerOrder/orderList";
