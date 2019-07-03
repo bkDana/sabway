@@ -77,6 +77,9 @@ button, select {
 button, input {
 	line-height:normal;
 }
+input[readonly=readonly]{
+	background-color: #f0f0f0;
+}
 textarea {
 	resize:vertical;
 	overflow:auto;

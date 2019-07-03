@@ -25,6 +25,8 @@ public class IngreManageDao {
 
 	//재료 전체 개수 구하기
 	public int ingreTotalCount(String searchType, String searchVal) {
+		System.out.println(searchType);
+		System.out.println(searchVal);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchType", searchType);
 		map.put("searchVal", searchVal);
@@ -40,11 +42,30 @@ public class IngreManageDao {
 		map.put("searchVal", searchVal);
 		return sqlSession.selectList("ingre.ingreSelectAll",map);
 	}
-
+	
+	//활성화여부 변경시 업데이트하기
+	public int updateIngreActive(String ingreActive, String ingreIdx) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("ingreActive", ingreActive);
+		map.put("ingreIdx", ingreIdx);
+		return sqlSession.update("ingre.updateIngreActive",map);
+	}
+	
 	//재료 리스트 페이지에서 검색박스에서 재료 카테로기 선택시 하위 값 가져오기
 	public List ingreType() {
-		return sqlSession.selectOne("ingre.getIngreType");
+		return sqlSession.selectList("ingre.getIngreType");
 	}
+
+	//재료정보 가져오기
+	public IngreVo goUpdateIngre(String ingreIdx) {
+		return sqlSession.selectOne("ingre.goIngreUpdate",ingreIdx);
+	}
+	
+	//재료 삭제하기
+	public int ingreDelete(String ingreIdx) {
+		return sqlSession.delete("ingre.ingreDelete",ingreIdx);
+	}
+
 
 	
 }
