@@ -7,18 +7,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	/* 테이블 테두리 black */
+	table,th,tr,td{
+		border: 1px solid black; 
+	}
+	/* 글씨 black, 밑줄 제거 */
+	a{
+		text-decoration: none;
+		color:black;
+	}
+	/* Content 세로 설정 */
+	[name=contentTd]{
+		height:200px;
+	}
+</style>
 <body>
 	<!-- 가맹점 신청 승인 시  -->
 	<h1>가맹점 계정 등록</h1>
 	<hr>
+	<div>
 	<form action="/mgrEnroll.do" method="post">
 		<input type="hidden" name="mgrStatus" value="1"><!-- 영업상태: 준비중(Default) -->
 		<input type="hidden" name="mgrLevel" value="0"><!-- 0: 가맹점 고정 -->
-		<input type="hidden" name="applyName" value="${applyName }">
+		<input type="hidden" name="applyName" value="${applyName }"><!-- 신청자 이름 전달용 -->
 		<table>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="mgrId" value="manager"></td>
+				<td><input type="text" name="mgrId" value="manager${mgrAddr }"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
@@ -45,5 +61,6 @@
 		<button type="submit">가맹점 등록</button>
 		<button type="button"><a href="/admin.do">메인으로</a></button>
 	</form>
+	</div>
 </body>
 </html>
