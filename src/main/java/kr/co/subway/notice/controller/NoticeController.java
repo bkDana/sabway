@@ -318,4 +318,12 @@ public class NoticeController {
 		}
 		return "redirect:/qna.do?currentPage=1";
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	//리뷰 시작~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	@RequestMapping("/moveReviewInsert.do")
+	public String moveReviewInsert() {
+		return "/review/reviewInsert";
+	}
+	
 }
