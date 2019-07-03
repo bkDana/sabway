@@ -69,4 +69,15 @@ public class IngreManageService {
 		return list;
 	}
 
+	//재료정보 가져오기
+	public IngreVo goUpdateIngre(String ingreIdx) {
+		IngreVo iv = ingreDao.goUpdateIngre(ingreIdx);
+		return iv;
+	}
+	
+	//재료 삭제하기
+	public int ingreDelete(String ingreIdx) {
+		return ingreDao.ingreDelete(ingreIdx);
+	}
+
 }
