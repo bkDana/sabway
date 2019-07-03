@@ -38,6 +38,12 @@ public class ManagerOrderVO {
 		this.itemList = itemList;
 	}
 	
+	public ManagerOrderVO(String mOrderNo, int mOrderState) {
+		super();
+		this.mOrderNo = mOrderNo;
+		this.mOrderState = mOrderState;
+	}
+	
 	public int getRnum() {
 		return rnum;
 	}

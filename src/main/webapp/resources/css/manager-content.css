@@ -59,7 +59,7 @@
 .common-tbl-btn-group > button{width:130px; height:50px; border-radius:5px; font-size:17px; color:#fff; margin:0 10px;}
 .common-tbl-btn-group > button.btn-style1{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style2{background-color:#444;}
-.common-tbl-btn-group > button.btn-style3{background-color:#888;}
+.common-tbl-btn-group > button.btn-style3{background-color:#d90f0f;}
 .common-tbl-btn-group > button.small{width:100px; height:35px; font-size:15px;}
 .comm-tbl .file-del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#888; color:#fff; margin-left:5px;}
 .comm-tbl .add-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#747474; color:#fff; margin-left:5px;}
@@ -87,7 +87,7 @@
 
 /* 해당 공고에 봉사활동 신청한 사람 목록 */
 .sub-title{font-size:20px; color:#2b2b2b; font-weight:500; padding:20px 0; margin-bottom:30px; position:relative;}
-.sub-title:after{display:block; content:""; width:35px; height:3px; background:rgba(254,67,30); position:absolute; bottom:0; left:0;}
+.sub-title:after{display:block; content:""; width:35px; height:3px; background:#009223; position:absolute; bottom:0; left:0;}
 
 /* ****************** MODAL LAYERPOPUP ********************** */
 /* modal layer */

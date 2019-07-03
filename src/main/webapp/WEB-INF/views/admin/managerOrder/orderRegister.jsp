@@ -25,10 +25,10 @@
 					<col width="80%">
 				</colgroup>
 				<tr>
-					<td>날짜</td><td><input type="text" name="mOrderDelDate" class="datepicker" readonly></td>
+					<th>날짜</th><td><input type="text" name="mOrderDelDate" class="datepicker" readonly></td>
 				</tr>
 				<tr>
-					<td>물품 선택</td>
+					<th>물품 선택</th>
 					<td>
 						<select class="middle" id="itemType"><option>-- 1차분류 --</option></select>&nbsp;
 						<select class="middle" id="item"><option value="">-- 물품 --</option></select>
@@ -38,11 +38,11 @@
 			</table>
 			<br><br><br><br><br><br>
 			<h1>물품 내역</h1>
-			<table class="comm-tbl type2" id="item_tbl">
+			<table class="comm-tbl" id="item_tbl">
 				<colgroup>
-					<col width="50%">
+					<col width="60%">
 					<col width="20%">
-					<col width="40%">
+					<col width="20%">
 				</colgroup>
 				<thead>
 					<tr>
@@ -66,15 +66,13 @@
 $.ajax({
 	url : '/ingreType.do',
 	success : function(data){
-		console.log(data);
+		//console.log(data);
 		for(var i=0;i<data.length;i++){
 			$('#itemType').append('<option value='+data[i]+'>'+data[i]+'</option>');
 		}
-		
-		
 	},
 	error : function(){
-		
+		console.log('실패');
 	}
 });
 
@@ -99,7 +97,7 @@ $('#itemType').change(function(){
 			}
 		},
 		error : function(){
-			
+			console.log('실패');
 		}
 	});
 	

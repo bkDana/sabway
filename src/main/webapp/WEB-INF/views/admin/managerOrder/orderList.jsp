@@ -29,10 +29,10 @@
 				<tr onclick="location.href='/managerOrder/orderView.do?no=${order.mOrderNo}';" style="cursor:pointer;">
 					<td>${order.rnum }</td><td>${order.mgrName }</td><td>${order.mOrderTitle }</td><td>${order.mOrderDate }</td>
 					<td>
-						<c:if test="${order.mOrderState eq 0}">접수완료</c:if>
-						<c:if test="${order.mOrderState eq 1}">출고완료</c:if>
-						<c:if test="${order.mOrderState eq 2}">도착</c:if>
-						<c:if test="${order.mOrderState eq 3}">취소</c:if>
+						<c:if test="${order.mOrderState eq 0}"><span class="state-reg">접수완료</span></c:if>
+						<c:if test="${order.mOrderState eq 1}"><span class="state-out">출고완료</span></c:if>
+						<c:if test="${order.mOrderState eq 2}"><span class="state-arr">도착</span></c:if>
+						<c:if test="${order.mOrderState eq 3}"><span class="state-can">취소</span></c:if>
 					</td>
 				</tr>
 			</c:forEach>

@@ -117,7 +117,7 @@ public class ManagerOrderController {
 	public String stockList() {
 		return "admin/managerOrder/stockList";
 	}
-	/*
+/*	
 	@ResponseBody
 	@RequestMapping("/getType.do")
 	public void selectType(HttpServletResponse response) throws JsonIOException, IOException {
@@ -137,5 +137,19 @@ public class ManagerOrderController {
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}
+	
+	@ResponseBody
+	@RequestMapping("/managerOrder/updateState.do")
+	public void updateState(HttpServletResponse response, String no, String st) throws JsonIOException, IOException {
+		
+		int result = service.updateState(new ManagerOrderVO(no,Integer.parseInt(st)));
+		System.out.println(result);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(result,response.getWriter());
+	}
+	
+	
+	
 
 }
