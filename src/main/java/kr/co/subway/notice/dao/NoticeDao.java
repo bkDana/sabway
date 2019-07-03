@@ -19,6 +19,10 @@ public class NoticeDao {
 		return sqlSession.selectList("notice.noticeSelectAll");
 	}
 	
+	public Notice noticeSelectOne(int noticeNo) {
+		return sqlSession.selectOne("notice.noticeSelectOne", noticeNo);
+	}
+	
 	public int noticeInsert(Notice n){
 		return sqlSession.insert("notice.noticeInsert", n);
 	}
@@ -42,6 +46,10 @@ public class NoticeDao {
 	//여기서 부터 QNA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public List qnaSelectAll(){
 		return sqlSession.selectList("notice.qnaSelectAll");
+	}
+	
+	public Qna qnaSelectOne(int qnaNo){
+		return sqlSession.selectOne("notice.qnaSelectOne",qnaNo);
 	}
 	
 	public int qnaInsert(Qna q){

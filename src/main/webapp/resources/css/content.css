@@ -205,3 +205,37 @@
 .join-type-con > button img{width:200px; margin-top:50px;}
 .join-type-con > button p{font-size:20px; line-height:30px; color:#2d2d2d; font-weight:500; padding-top:20px;}
 .join-type-con > button:hover span{border-color:rgba(254,67,30);}
+
+/* ****************** 에디터 만들기 용 ********************** */
+.editor-container{width:100%; border:1px solid black;}
+.editor-file-upload{
+    font-size:29px;
+    position:absolute;
+    right:0px;
+    top:0px;
+    opacity:0;
+    filter: alpha(opacity=0);
+    -ms-filter: alpha(opacity=0);
+    cursor:pointer;
+}
+.editor-content{
+	height:400px;
+	border:1px solid rgba(254,67,30);
+	overflow: scroll;
+	text-align: center;
+}
+.resize-div{
+	margin: 0 auto;
+	width:200px;
+	height:160px; 
+	padding: 5px; 
+	min-width : 160px;
+	min-height : 120px;
+	border: 0px solid #c5c5c5; 
+	overflow: auto; 
+	resize: both;
+	box-sizing : border-box;
+	cursor: no-drop;
+	-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+	background-repeat: no-repeat;
+}
