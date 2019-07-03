@@ -11,7 +11,23 @@
 	<div class="area">
 		<div class="sub-menu">※ 메뉴관리 > 메뉴 리스트</div>
 		
-		<div class="common-tbl-box">
+		<div class="board-search-box">
+			<!-- 검색박스 -->
+			<form action="/ingreList.do" method="post" name="search">
+				<input type="hidden" name="reqPage" value="1">
+				<select name="searchType" id="searchType" data-type="${searchType }">
+					<option value="">-- 1차 분류 --</option>
+					<option value="ingreType">재료 카테고리</option>
+					<option value="ingreDiscntRate">할인여부</option>
+					<option value="ingreActive">활성화 여부</option>
+				</select>
+				<select name="searchVal" id="searchVal" data-val="${searchVal }">
+					<option value="">-- 2차 분류 --</option>
+				</select>
+				&nbsp;<button type="submit" class="bbs-search-btn" title="검색">검색</button>
+			</form>
+		</div>
+		<br>
 			<table class="comm-tbl type2" id="ingreList">
 				<%-- <colgroup>
 					<col width="15%">
@@ -56,38 +72,34 @@
 							</select>
 						</td>
 						<td>
-							<button class="add-btn" onclick="loction.href='/updateIngre.do?ingreIdx=${list.ingreIdx}'">수정</button>
-							<button class="del-btn" onclick="loction.href='/deleteIngre.do?ingreIdx=${list.ingreIdx}'">삭제</button>
+							<button class="add-btn" onclick="location.href='/goIngreUpdate.do?ingreIdx=${list.ingreIdx}'">수정</button>
+							<button class="del-btn" data-no="${list.ingreIdx}">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
-		</div>
+			<script>
+				
+			</script>
+		
 		
 		<div class="paging">${pageNavi }</div>
 		
-		<!-- 검색박스 -->
-		<div class="board-search-box">
-			<form action="/ingreList.do" method="post" name="search">
-				<input type="hidden" name="reqPage" value="1">
-				<select name="searchType" id="searchType" data-type="${searchType }">
-					<option value="">-- 1차 분류 --</option>
-					<option value="ingreType">재료 카테고리</option>
-					<option value="ingreDiscntRate">할인여부</option>
-					<option value="ingreActive">활성화 여부</option>
-				</select>
-				<select name="searchVal" id="searchVal" data-val="${searchVal }">
-					<option value="">-- 2차 분류 --</option>
-				</select>
-				<button type="submit" class="bbs-search-btn" title="검색"> <img src="/resources/img/search_icon.png" style="width:30px;"></button>
-			</form>
-		</div>
 	</div>
 </section>
 
-
 <script>
 $(document).ready(function(){
+	/* 재료 삭제 */
+	$(".del-btn").click(function(){
+		var del = confirm("정말로 삭제하시겠습니까?");
+		if(del){
+			location.href="/ingreDelete.do?reqPage=${reqPage}&searchType=${searchType}&searchVal=${searchVal}&ingreIdx="+$(this).data('no');
+		}else{
+			console.log("삭제안한대");
+		}
+	});
+	
 	/* 활성화/비활성화 ajax */
 	$(".ingreActive").change(function(){
 		var no = $(this).data('no');
@@ -146,6 +158,13 @@ $(document).ready(function(){
 					for(var i=0;i<data.length;i++){
 						$select.append("<option value='"+data[i]+"'>"+data[i]+"</option>");
 					}
+					/* 검색 후 검색값 설정 */
+					var searchVal = $('select[name=searchVal]').data('val');
+					$('select[name=searchVal]').children('option').each(function(){
+						if(searchVal == $(this).val()){
+							$(this).prop("selected",true);
+						}
+					});
 				},
 				error : function(){
 					console.log("안돼에에에");
