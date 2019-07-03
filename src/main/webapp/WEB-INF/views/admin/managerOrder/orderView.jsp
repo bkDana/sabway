@@ -12,7 +12,7 @@
 	<div class="area">
 		<div class="sub-menu">※ 재고관리 > 발주 리스트</div>
 
-			<table class="comm-tbl">
+			<table class="comm-tbl type2">
 				<colgroup>
 					<col width="20%">
 					<col width="80%">
@@ -27,10 +27,10 @@
 					</td>
 				</tr>
 				<tr>
-					<th>발주 등록일</th><td>${order.mOrderDate }</td>
+					<td>발주 등록일</td><td>${order.mOrderDate }</td>
 				</tr>
 				<tr>
-					<th>도착(희망?)일</th><td>${order.mOrderDelDate }</td>
+					<td>도착(희망?)일</td><td>${order.mOrderDelDate }</td>
 				</tr>
 			</table>
 			<br><br><br><br><br><br>

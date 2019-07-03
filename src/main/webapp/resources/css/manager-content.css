@@ -38,7 +38,7 @@
 .comm-tbl.type2{width:100%; max-width:none;}
 .comm-tbl.type2 th, .comm-tbl.type2 td{padding:10px;}
 .comm-tbl.type2 tr:first-child td{border-top:1px solid #009223;}
-.comm-tbl.type2 th{text-align:center; font-size:16px; border-top:2px solid rgba(254,67,30);}
+.comm-tbl.type2 th{text-align:center; font-size:16px; border-top:2px solid #009223;}
 .comm-tbl.type2 td{color:#2b2b2b; font-size:14px; text-align:center;}
 /*.comm-tbl.type2 tr:hover td{background-color:#009223;}*/
 

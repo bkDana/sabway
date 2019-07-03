@@ -78,6 +78,7 @@
 							<select name="ingreUnit" class="short">
 								<option value="box">box</option>
 								<option value="kg">kg</option>
+								<option value="통">통</option>
 							</select>
 						</td>
 					</tr>

@@ -31,7 +31,7 @@
 					<td>물품 선택</td>
 					<td>
 						<select class="middle" id="itemType"><option>-- 1차분류 --</option></select>&nbsp;
-						<select class="middle" id="item"><option value="">-- 물품 --</option><option value="23">로티세리(box)</option><option value="10">에그마요(kg)</option></select>
+						<select class="middle" id="item"><option value="">-- 물품 --</option></select>
 						<button type="button" class="add-btn" onclick="add();">추가</button>
 					</td>
 				</tr>
@@ -64,7 +64,7 @@
 
 /* 1차분류 세팅*/
 $.ajax({
-	url : '/getType.do',
+	url : '/ingreType.do',
 	success : function(data){
 		console.log(data);
 		for(var i=0;i<data.length;i++){
