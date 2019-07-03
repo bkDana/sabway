@@ -75,7 +75,7 @@ public class CustomerController {
               // 휴면계정  CustomerState [1:정상, 0:휴면, 2:탈퇴 ]
    
                
-               selectCustomerVo.setCustomerState(0); // 해당 회원 State 값 0 변경
+            selectCustomerVo.setCustomerState(0); // 해당 회원 State 값 0 변경
             customerService.updateState(selectCustomerVo); // 회원정보 수정 서비스
             
             System.out.println("변경된 상태 : "+ selectCustomerVo.getCustomerState());
