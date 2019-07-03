@@ -57,6 +57,7 @@ public class ManagerOrderDao {
 		return sqlSession.selectList("managerOrder.selectIngre",type);
 	}
 
+	/* 상태 변경 */
 	public int updateState(ManagerOrderVO mo) {
 		return sqlSession.update("managerOrder.updateState",mo);
 	}

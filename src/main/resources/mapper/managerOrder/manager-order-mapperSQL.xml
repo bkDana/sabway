@@ -3,12 +3,28 @@
 <mapper namespace="managerOrder">
 	<select id="totalCount" parameterType="search" resultType="_int">
 		select count(*) cnt from m_order_tbl
+		<trim prefix="where" prefixOverrides="AND|OR">
+			  <if test="delDay!=null and delDay!=''">
+				and m_order_del_date=#{delDay}
+			</if>
+			  <if test="state!='-1'">
+			  	and m_order_state=#{state}
+		 		</if>
+			
+		</trim>
 		<choose>
   			<when test="mgrId.equals('admin')">
+  				
   				
   			</when>
   			<otherwise>
   				where m_order_manager_id = #{mgrId}
+  				<if test="state!='-1'">
+			  		and m_order_state=#{state}
+			  	</if>
+			  	<if test="delDay!=null and delDay!=''">
+			  		and m_order_del_date=#{delDay}
+			  	</if>
   			</otherwise>
   		</choose>
 	</select>
@@ -25,8 +41,14 @@
 	  	from ( select 
 	  				rownum rnum,
 	  				mo.* 
-	  			from (select * from m_order_tbl, manager 
-	  			where m_order_tbl.m_order_manager_id = manager.mgr_id
+	  			from (select * from m_order_tbl mot, manager m
+	  			where mot.m_order_manager_id = m.mgr_id
+	  			<if test="state!='-1'">
+			  		and mot.m_order_state=#{state}
+			  	</if>
+			  	<if test="delDay!=null and delDay!=''">
+			  		and mot.m_order_del_date=#{delDay}
+			  	</if>
 	  			<choose>
 		  			<when test="mgrId.equals('admin')">
 		  				

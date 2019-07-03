@@ -10,7 +10,7 @@
 	<%-- LEFT MENU --%>
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 재고관리 > 발주 리스트</div>
+		<div class="sub-menu">※ 재고관리 > <a href="/managerOrder/orderList.do">발주 리스트</a></div>
 
 			<table class="comm-tbl">
 				<colgroup>
@@ -53,7 +53,7 @@
 				<button class="btn-style2" type="button" onclick="history.back();">뒤로가기</button>
 				<c:if test="${order.mOrderState eq 0}">
 					<button class="btn-style3" type="button" onclick="update('${order.mOrderNo}',3)">발주취소</button><!-- 가맹점 회원만 가능해야함 -->
-					<button class="btn-style1" type="button" onclick="history.back();">출고처리</button><!-- 최고관리자만 가능해야함 -->
+					<button class="btn-style1" type="button" onclick="update('${order.mOrderNo}',1);">출고처리</button><!-- 최고관리자만 가능해야함 -->
 				</c:if>
 			</div>
 	</div>

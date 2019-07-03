@@ -17,6 +17,7 @@
 			<input type="text" name="mOrderManagerId" value="${sessionScope.customer.customerId }">
 			</c:if>
 			<c:if test="${empty sessionScope.customer }">
+			(가맹점 아이디 입력하면 됨)테스트용 추후 삭제 요망->
 			<input type="text" name="mOrderManagerId" value="jy">
 			</c:if>
 			<table class="comm-tbl">
@@ -25,19 +26,18 @@
 					<col width="80%">
 				</colgroup>
 				<tr>
-					<th>날짜</th><td><input type="text" name="mOrderDelDate" class="datepicker" readonly></td>
+					<th>날짜</th><td><input type="text" name="mOrderDelDate" class="regMorder" readonly></td>
 				</tr>
 				<tr>
-					<th>물품 선택</th>
+					<th>재료 선택</th>
 					<td>
 						<select class="middle" id="itemType"><option>-- 1차분류 --</option></select>&nbsp;
-						<select class="middle" id="item"><option value="">-- 물품 --</option></select>
+						<select class="middle" id="item"><option value="">-- 재료 --</option></select>
 						<button type="button" class="add-btn" onclick="add();">추가</button>
 					</td>
 				</tr>
 			</table>
 			<br><br><br><br><br><br>
-			<h1>물품 내역</h1>
 			<table class="comm-tbl" id="item_tbl">
 				<colgroup>
 					<col width="60%">
@@ -46,7 +46,7 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th>물품명</th><th>단위별 수량</th><th>기능</th>
+						<th>재료명</th><th>단위별 수량</th><th>기능</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -77,7 +77,7 @@ $.ajax({
 });
 
 
-/* 물품 리스트 */
+/* 재료 리스트 */
 $('#itemType').change(function(){
 	var type = $('#itemType option:selected').val();
 	
@@ -87,7 +87,7 @@ $('#itemType').change(function(){
 		success : function(data){
 			//console.log(data);
 			$('#item').empty();
-			$('#item').append('<option value="">-- 물품 --</option>');
+			$('#item').append('<option value="">-- 재료 --</option>');
 			for(var i=0;i<data.length;i++){
 				var unit = data[i].ingreUnit;
 				if(unit==null || unit==''){
@@ -103,12 +103,12 @@ $('#itemType').change(function(){
 	
 });
 
-/* 물품 추가하기 */
+/* 재료 추가하기 */
 function add(){
 //$('.add-btn').click(function(){
 	var item_idx = $('#item option:selected').val();
 	if(item_idx == ''){
-		alert('추가할 물품을 선택하세요');
+		alert('추가할 재료를 선택하세요');
 		$('#item').focus();
 		return;
 	}
@@ -117,7 +117,7 @@ function add(){
 	       var $tr = $(this).children('td');
 	       var check = $tr.children('input[name^=idx]').val();
 	       if(item_idx == check){
-	    	   alert('이미 추가된 물품입니다.');
+	    	   alert('이미 추가된 재료입니다.');
 	    	   chk_num++;
 	       }
 	});
@@ -152,7 +152,7 @@ function remove(e) {
 function submit_chk(){
 	var cnt = $('#item_tbl tbody').children('tr').length;
 	if(cnt==0){
-		alert('물품을 추가하세요');
+		alert('재료를 추가하세요');
 		return false;
 	}
 	var chk_num = 0;
