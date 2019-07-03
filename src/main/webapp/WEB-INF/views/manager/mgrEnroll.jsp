@@ -14,6 +14,7 @@
 	<form action="/mgrEnroll.do" method="post">
 		<input type="hidden" name="mgrStatus" value="1"><!-- 영업상태: 준비중(Default) -->
 		<input type="hidden" name="mgrLevel" value="0"><!-- 0: 가맹점 고정 -->
+		<input type="hidden" name="applyName" value="${applyName }">
 		<table>
 			<tr>
 				<th>아이디</th>

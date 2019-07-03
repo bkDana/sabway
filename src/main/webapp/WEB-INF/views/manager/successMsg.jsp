@@ -9,7 +9,7 @@
 <body>
 	<script type="text/javascript">
 		alert("등록성공");
-		location.href="/admin.do";
+		location.href="managerApply.do";
 	</script>
 </body>
 </html>

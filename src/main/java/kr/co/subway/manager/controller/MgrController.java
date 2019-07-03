@@ -23,7 +23,7 @@ public class MgrController {
 	MgrService mgrservice;
 
 	@RequestMapping(value="/enrollMgr.do")
-	public String enrollMgr(@RequestParam String applyArea,Model model) {
+	public String enrollMgr(@RequestParam String applyArea,@RequestParam String applyName,Model model) {
 		System.out.println(applyArea);
 		String mgrTel = "";
 		String telCenter = "";
@@ -73,13 +73,15 @@ public class MgrController {
 		}else if(applyArea.equals("제주도")||applyArea.equals("제주")) {
 			mgrTel = "064-"+telCenter+"-"+telLast;
 		}		
+		model.addAttribute("applyName",applyName);
+		System.out.println(applyName);
 		model.addAttribute("mgrAddr",applyArea);
 		model.addAttribute("mgrTel",mgrTel);
 		return "manager/mgrEnroll";
 	}
 	@RequestMapping(value="/mgrEnroll.do")
-	public String mgrEnroll(Mgr mg) {
-		int result = mgrservice.enrollMgr(mg);
+	public String mgrEnroll(Mgr mg,@RequestParam String applyName) {
+		int result = mgrservice.enrollMgr(mg,applyName);
 		String view = "";
 		if(result>0) {
 			view = "manager/successMsg";

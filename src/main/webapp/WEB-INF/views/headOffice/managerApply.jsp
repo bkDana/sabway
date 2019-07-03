@@ -95,31 +95,11 @@
 	$('[name=apply]').click(function(){
 		var applyArea = $(this).parent().prev().prev().html();
 		var applyName = $(this).parent().parent().children().html();
-		var applyStatus = $('[name=applyStatus]').val();
-		if(applyStatus == 1){
-			if(confirm("승인하시겠습니까?")){
-				$.ajax({
-					url : "/apply.do",
-					type: "get",
-					data : {applyName:applyName , applyStatus:applyStatus},
-					dataType : "json",
-					success : function(data){
-						if(data.result == 0){
-							$(document).ready(function(){
-								location.href="/enrollMgr.do?applyArea="+applyArea;
-							})
-						}
-					},
-					error : function(){
-						alert("에러발생");
-					}
-				});
-			}
-		}
+		location.href="/enrollMgr.do?applyArea="+applyArea+"&applyName="+applyName;
 	});
 	//거절
 	$('[name=reject]').click(function(){
-		var applyName = $('#applyName').val();
+		var applyName = $(this).parent().parent().children().html();
 		var applyStatus = $('[name=rejectStatus]').val();
 		if(applyStatus == 2) {
 			if(confirm("거절하시겠습니까?")){

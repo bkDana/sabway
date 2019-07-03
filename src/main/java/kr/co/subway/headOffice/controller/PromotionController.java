@@ -54,15 +54,16 @@ public class PromotionController {
 	public String applyManager(@RequestParam String applyName, @RequestParam int applyStatus) {
 		JSONObject obj = new JSONObject();
 		if(applyName!=null) {
-			if(applyStatus == 1) {
-				//승인(status 1일 때)
-				applyService.applyManagerUpdate(applyName,applyStatus);
-				obj.put("result", 0);
-			}else if(applyStatus==2) {
+			if(applyStatus == 2) {
 				//거절(status 2일 때)
-				applyService.applyManagerUpdate(applyName,applyStatus);
+				applyService.rejectManagerUpdate(applyName,applyStatus);
 				obj.put("result", 0);
 			}
+//			else{
+				//승인(status 1일 때)
+//				applyService.applyManagerUpdate(applyName,applyStatus);
+//				obj.put("result", 0);
+//			}
 		}else {
 			obj.put("result", 1);
 		}
