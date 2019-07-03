@@ -55,7 +55,7 @@ public class PromotionController {
 		JSONObject obj = new JSONObject();
 		if(applyName!=null) {
 			if(applyStatus == 1) {
-				//거절(status 1일 때)
+				//승인(status 1일 때)
 				applyService.applyManagerUpdate(applyName,applyStatus);
 				obj.put("result", 0);
 			}else if(applyStatus==2) {

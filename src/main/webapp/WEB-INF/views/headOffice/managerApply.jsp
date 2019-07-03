@@ -33,11 +33,11 @@
 				<!-- 가맹점 신청(status == 0)인 경우 출력 -->
 				<c:if test="${apply.applyStatus eq 0 }">
 					<tr>
-						<td>${apply.applyName }</td>
+						<td name="applyName">${apply.applyName }</td>
 						<!-- 해달 게시글 상세보기 -->
 						<td><a href="/applyView.do?applyNo=${apply.applyNo }">${apply.applyTitle }</a></td>
 						<td>${apply.applyPhone }</td>
-						<td>${apply.applyArea }</td>
+						<td name="applyArea">${apply.applyArea }</td>
 						<td>${apply.applyDate }</td>
 						<!-- 신청 승인여부에 따라 정보 전달 : 0(default),1(승인),2(거절) -->
 						<td>
@@ -93,7 +93,8 @@
 	//승인||거절 클릭 시 name과 status를 apply.do에 전달, status 값에 따라 메소드를 따로 태움  
 	//승인
 	$('[name=apply]').click(function(){
-		var applyName = $('#applyName').val();
+		var applyArea = $(this).parent().prev().prev().html();
+		var applyName = $(this).parent().parent().children().html();
 		var applyStatus = $('[name=applyStatus]').val();
 		if(applyStatus == 1){
 			if(confirm("승인하시겠습니까?")){
@@ -104,7 +105,9 @@
 					dataType : "json",
 					success : function(data){
 						if(data.result == 0){
-							location.href="/managerApply.do";
+							$(document).ready(function(){
+								location.href="/enrollMgr.do?applyArea="+applyArea;
+							})
 						}
 					},
 					error : function(){

@@ -18,8 +18,8 @@ public class MgrService {
 		int result = mgrdao.enrollMgr(mg);
 		return result;
 	}
-	public List mgrList() {
-		List list= mgrdao.mgrList();
-		return (ArrayList<Mgr>)list;
-	}
+//	public List enrollMgr() {
+//		List list= mgrdao.enrollMgr();
+//		return (ArrayList<Mgr>)list;
+//	}
 }
