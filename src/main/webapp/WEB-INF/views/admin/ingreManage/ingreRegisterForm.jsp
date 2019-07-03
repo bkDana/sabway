@@ -12,7 +12,7 @@
 		<div class="sub-menu">※ 메뉴관리 > 메뉴등록</div>
 		
 			<form action="/ingreRegister.do" method="post">
-				<table class="comm-tbl">
+				<table class="comm-tbl type2">
 					<colgroup>
 						<col width="20%">
 						<col width="/">
@@ -85,6 +85,7 @@
 						<th>할인률</th>
 						<td>
 							<input type="text" name="ingreDis" class="short2" value="0" style="text-align:right;"> %
+							select로 바꾸기
 						</td>
 					</tr>
 				</table>
