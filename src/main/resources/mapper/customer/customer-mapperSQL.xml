@@ -16,6 +16,7 @@
           lastLog_date as lastLogDate
           from customer where customer_id=#{customerId} and customer_pw=#{customerPw}
     </select>
+    
     <select id="selectOneId" parameterType="string" resultType="customer">
        select customer_no as customerNo,
           customer_id as customerId,
@@ -31,8 +32,9 @@
           lastLog_date as lastLogDate
           from customer where customer_id=#{customerId}  AND ROWNUM = 1
     </select>
-   	<select id="selectOneNick" parameterType="string" resultType="customer">
-       	select customer_no as customerNo,
+    
+      <select id="selectOneNick" parameterType="string" resultType="customer">
+          select customer_no as customerNo,
           customer_id as customerId,
           customer_pw as customerPw,
           customer_name as customerName,
@@ -46,8 +48,9 @@
           lastLog_date as lastLogDate
           from customer where customer_nickname=#{customerNick} AND ROWNUM = 1
     </select>
-   	<select id="selectOneEmail" parameterType="string" resultType="customer">
-       	select customer_no as customerNo,
+    
+      <select id="selectOneEmail" parameterType="string" resultType="customer">
+          select customer_no as customerNo,
           customer_id as customerId,
           customer_pw as customerPw,
           customer_name as customerName,
@@ -61,13 +64,35 @@
           lastLog_date as lastLogDate
           from customer where email=#{email} AND ROWNUM = 1
     </select>
+    
     <insert id="insertCustomer" parameterType="customer">
-       INSERT INTO CUSTOMER VALUES(SEQ_customer_no.NEXTVAL,#{customerId},#{customerPw},#{customerName},#{customerNick},#{phone},#{birthday},#{email},#{gender},#{customerState},SYSDATE,null)
+       INSERT INTO CUSTOMER VALUES(
+                SEQ_customer_no.NEXTVAL
+                ,#{customerId}
+                ,#{customerPw}
+                ,#{customerName}
+                ,#{customerNick}
+                ,#{phone}
+                ,#{birthday}
+                ,#{email}
+                ,#{gender}
+                ,#{customerState}
+                ,SYSDATE
+                ,SYSDATE
+          )
     </insert>
+    
+    <!-- 마지막 로그인 시간 변경 -->
     <update id="updateCustomer" parameterType="customer">
-       update customer set  lastlog_date=sysdate where customer_id=#{customerId}
+       update customer 
+          set lastlog_date = sysdate
+       where customer_id = #{customerId}
     </update>
-        <update id="updateState" parameterType="customer">
-       update customer set  customer_state=1 where customer_id=#{customerId}
+    
+    <!-- 회원 상태값 변경 -->
+   <update id="updateState" parameterType="customer">
+       update customer
+           set customer_state = #{customerState}
+           where customer_id = #{customerId}
     </update>
 </mapper>

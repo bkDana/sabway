@@ -128,4 +128,12 @@ public class IngreVo {
 		this.ingreRegDate = ingreRegDate;
 	}
 	
+	public String getIngreActiveChange() {
+		if(ingreActive ==0) {
+			return "비활성화";
+		}else {
+			return "활성화";
+		}
+	}
+	
 }

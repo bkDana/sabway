@@ -24,6 +24,8 @@ public class IngreManageService {
 	
 	//재료 리스트 가져오기
 	public IngrePageNaviData ingreList(int reqPage, String searchType, String searchVal) {
+		System.out.println(searchType);
+		System.out.println(searchVal);
 		int numPerPage = 10;
 		int totalCount = ingreDao.ingreTotalCount(searchType, searchVal);
 		System.out.println("totalCount: "+totalCount);
@@ -55,9 +57,27 @@ public class IngreManageService {
 		return new IngrePageNaviData(ingreList, pageNavi);
 	}
 	
+	//활성화여부 변경시 업데이트하기
+	public int updateIngreActive(String ingreActive, String ingreIdx) {
+		int result = ingreDao.updateIngreActive(ingreActive,ingreIdx);
+		return result;
+	}
+	
 	//재료 리스트 페이지에서 검색박스에서 재료 카테로기 선택시 하위 값 가져오기
 	public List ingreType() {
 		List list = ingreDao.ingreType();
 		return list;
 	}
+
+	//재료정보 가져오기
+	public IngreVo goUpdateIngre(String ingreIdx) {
+		IngreVo iv = ingreDao.goUpdateIngre(ingreIdx);
+		return iv;
+	}
+	
+	//재료 삭제하기
+	public int ingreDelete(String ingreIdx) {
+		return ingreDao.ingreDelete(ingreIdx);
+	}
+
 }

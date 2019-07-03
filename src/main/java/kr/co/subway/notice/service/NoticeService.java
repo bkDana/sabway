@@ -23,6 +23,10 @@ public class NoticeService {
 		return (ArrayList<Notice>)noticeDao.noticeSelectAll();
 	}
 	
+	public Notice noticeSelectOne(int noticeNo){
+		return noticeDao.noticeSelectOne(noticeNo);
+	}
+	
 	public PageNaviData noticeSelectPaging(int currentPage){
 		int numPerPage = 5;
 		int totalCount = noticeDao.noticeTotalCount();
@@ -72,6 +76,10 @@ public class NoticeService {
 	//여기서 부터 QNA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public ArrayList<Qna> qnaSelectAll(){
 		return (ArrayList<Qna>)noticeDao.qnaSelectAll();
+	}
+	
+	public Qna qnaSelectOne(int qnaNo){
+		return noticeDao.qnaSelectOne(qnaNo);
 	}
 	
 	public PageNaviData qnaSelectPaging(int currentPage){

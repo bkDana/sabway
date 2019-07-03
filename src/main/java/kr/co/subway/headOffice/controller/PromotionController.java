@@ -54,15 +54,16 @@ public class PromotionController {
 	public String applyManager(@RequestParam String applyName, @RequestParam int applyStatus) {
 		JSONObject obj = new JSONObject();
 		if(applyName!=null) {
-			if(applyStatus == 1) {
-				//거절(status 1일 때)
-				applyService.applyManagerUpdate(applyName,applyStatus);
-				obj.put("result", 0);
-			}else if(applyStatus==2) {
+			if(applyStatus == 2) {
 				//거절(status 2일 때)
-				applyService.applyManagerUpdate(applyName,applyStatus);
+				applyService.rejectManagerUpdate(applyName,applyStatus);
 				obj.put("result", 0);
 			}
+//			else{
+				//승인(status 1일 때)
+//				applyService.applyManagerUpdate(applyName,applyStatus);
+//				obj.put("result", 0);
+//			}
 		}else {
 			obj.put("result", 1);
 		}
@@ -76,5 +77,29 @@ public class PromotionController {
 		}
 		return "headOffice/applyView";
 	}
+	
+	// 가맹신청/문의 페이지 이동
+	@RequestMapping(value="/applyPage.do")
+	public String applyPage() {
+		return "headOffice/applyWrite";
+	}
+	
+	//가맹신청/문의 등록
+	@RequestMapping(value="/insertApply.do")
+	public String insertApply(Apply applyVo) {
+		int result = applyService.insertApply(applyVo);
+		return null;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

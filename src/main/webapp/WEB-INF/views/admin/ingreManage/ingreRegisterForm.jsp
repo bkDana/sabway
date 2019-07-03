@@ -86,6 +86,7 @@
 						<th>할인률</th>
 						<td>
 							<input type="text" name="ingreDis" class="short2" value="0" style="text-align:right;"> %
+							select로 바꾸기
 						</td>
 					</tr>
 				</table>

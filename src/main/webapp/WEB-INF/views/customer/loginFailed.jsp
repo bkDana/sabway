@@ -9,12 +9,33 @@
 </head>
 <body>
    <input type="hidden" id="stateVal" value="${stateVal}">
+   <input type="hidden" id="customerId" value="${selectCustomerVo.customerId}">
    <script>
       var stateVal = $("#stateVal").val();
       if(stateVal == 0){ //휴면계정
          if(confirm("계정이 휴면상태입니다. 휴면상태를 해제하시겠습니까?????????????")){
-            alert("해제됐습니다.");
-            location.href="/";
+            
+            $.ajax({
+               
+                 url:"/oldUserToNewAjax.do",
+                 data:{
+                       'oldUserToNew' : 'Y'
+                       ,'customerId' : $("#customerId").val()
+                    },
+                 type:"post",
+                 
+                 success:function(data){
+                    if(data > 0){
+                       alert("해제됐습니다. 재 로그인 해주세요.");
+                       location.href="/index.do";
+                    }else{
+                       alert("잠시 후 다시 시도해주세요");
+                    }
+                 },
+                 error:function(){
+                    console.log("실패");
+                 }
+              });
          }else{
             alert("취소");
             location.href="/";
