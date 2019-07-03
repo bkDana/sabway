@@ -1,7 +1,11 @@
 package kr.co.subway.ingreManage.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,11 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 
 import kr.co.subway.ingreManage.service.IngreManageService;
 import kr.co.subway.ingreManage.vo.IngrePageNaviData;
 import kr.co.subway.ingreManage.vo.IngreVo;
-import net.sf.json.JSONObject;
 
 @Controller
 public class IngreManageController {
@@ -42,8 +46,8 @@ public class IngreManageController {
 	//재료 리스트 가져오기
 	@RequestMapping("/ingreList.do")
 	public ModelAndView ingreList(@RequestParam String reqPage, ModelAndView mav, String searchType, String searchVal) {
-		//System.out.println(searchType);
-		//System.out.println(searchVal);
+		System.out.println(searchType);
+		System.out.println(searchVal);
 		int reqPage1;
 		try {
 			reqPage1 = Integer.parseInt(reqPage);
@@ -65,18 +69,31 @@ public class IngreManageController {
 		return mav;
 	}
 	
+	//활성화여부 변경시 업데이트하기
+	@ResponseBody
+	@RequestMapping("/updateIngreActive.do")
+	public void updateIngreActive(HttpServletResponse response,String ingreActive,String ingreIdx) throws IOException {
+		System.out.println("활성화:"+ingreActive);
+		System.out.println("인덱스:"+ingreIdx);
+		int result = ingreService.updateIngreActive(ingreActive,ingreIdx);
+		System.out.println(result);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if(result>0) {
+			out.println("업데이트 성공");
+		}else{
+			out.println("업데이트 실패");
+		}
+	}
+	
 	//재료 리스트 페이지에서 검색박스에서 재료 카테고리 선택시 하위 값 가져오기
 	@ResponseBody
 	@RequestMapping("/ingreType.do")
-	public String ingreType() {
+	public void ingreType(HttpServletResponse response) throws JsonIOException, IOException {
 		List list = ingreService.ingreType();
-		JSONObject obj = new JSONObject();
-		if(!list.isEmpty()) {
-			obj.put("list", list);
-		}else {
-			System.out.println("ajax로 ingreType가져오기 실패(Controller)");
-		}
-		return new Gson().toJson(obj);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
 	}
 	
 	

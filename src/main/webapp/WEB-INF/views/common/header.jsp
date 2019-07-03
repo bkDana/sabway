@@ -61,7 +61,7 @@
 								<ul>
 									<li><a href="/notice.do?currentPage=1">공지사항/이벤트</a></li>
 									<li><a href="/qna.do?currentPage=1">Q&A</a></li>
-									<li><a href="#">TV광고</a></li>
+									<li><a href="/moveReviewInsert.do">리뷰</a></li>
 								</ul>
 							</div>
 						</li>

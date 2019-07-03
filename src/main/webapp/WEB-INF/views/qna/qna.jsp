@@ -13,7 +13,7 @@
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
-		<h1 class="comm-content-tit">리뷰/신고</h1>
+		<h1 class="comm-content-tit">Q&A/신고</h1>
 		<div class="common-tbl-box">
 			
 			<table class="comm-tbl">

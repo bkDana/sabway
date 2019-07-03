@@ -47,14 +47,19 @@ public class ManagerOrderDao {
 	public List selectItem(String no) {
 		return sqlSession.selectList("managerOrder.selectItem",no);
 	}
-
+/*
 	public List selectType() {
 		return sqlSession.selectList("managerOrder.selectType");
 	}
-
+*/
 	/* 메뉴관리에 있는 메뉴 가져오기 */
 	public List selectIngre(String type) {
 		return sqlSession.selectList("managerOrder.selectIngre",type);
+	}
+
+	/* 상태 변경 */
+	public int updateState(ManagerOrderVO mo) {
+		return sqlSession.update("managerOrder.updateState",mo);
 	}
 
 	

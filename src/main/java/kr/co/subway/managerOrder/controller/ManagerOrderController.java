@@ -41,6 +41,13 @@ public class ManagerOrderController {
 		}catch (Exception e) {
 			reqPage = 1;
 		}
+		int state;
+		try {
+			state = Integer.parseInt(request.getParameter("state"));
+		}catch (Exception e) {
+			state=-1;
+		}
+		
 		String id = "";
 		HttpSession session = request.getSession(false);
 		if(session.getAttribute("customer")!=null) {
@@ -48,8 +55,17 @@ public class ManagerOrderController {
 		}else {
 			id = "admin";
 		}
-		SearchVO search = new SearchVO(reqPage, 0,0,0,id);
+		String startDay = request.getParameter("startDay");
+		String endDay = request.getParameter("endDay");
+		String delDay = request.getParameter("delDay");
+
+		String searchType = request.getParameter("searchType");
+		String searchVal = request.getParameter("searchVal");
+		//SearchVO search = new SearchVO(reqPage, 0,0,0,id);
+		SearchVO search = new SearchVO(reqPage, state, 0, 0, id, startDay, endDay, delDay, searchType, searchVal);
+		
 		ManagerOrderListVO list = service.selectList(search);
+		model.addAttribute("search", search);
 		model.addAttribute("list", list);
 		return "admin/managerOrder/orderList";
 	}
@@ -89,18 +105,14 @@ public class ManagerOrderController {
 		}
 		
 		String mOrderTitle = ""; 
+		/* 타이틀 만들기 */
 		if(cnt==1) {
-			mOrderTitle = request.getParameter("name_1");
+			mOrderTitle = request.getParameter("name_1").split("\\(")[0];
 		}else {
-			mOrderTitle = request.getParameter("name_1")+" 외 "+(cnt-1)+"개";
-		}
-		int result = service.addOrder(new ManagerOrderVO(mOrderNo, mOrderManagerId, mOrderTitle, mOrderDelDate,itemList));
-		if(result>0) {
-			//System.out.println("성공?");
-		}else {
-			//System.out.println("실패");
+			mOrderTitle = (request.getParameter("name_1")).split("\\(")[0]+" 외 "+(cnt-1)+"개";
 		}
 		
+		service.addOrder(new ManagerOrderVO(mOrderNo, mOrderManagerId, mOrderTitle, mOrderDelDate,itemList));
 		return "redirect:/managerOrder/orderList.do";
 	}
 	
@@ -117,7 +129,7 @@ public class ManagerOrderController {
 	public String stockList() {
 		return "admin/managerOrder/stockList";
 	}
-	
+/*	
 	@ResponseBody
 	@RequestMapping("/getType.do")
 	public void selectType(HttpServletResponse response) throws JsonIOException, IOException {
@@ -127,7 +139,7 @@ public class ManagerOrderController {
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}
-	
+	*/
 	@ResponseBody
 	@RequestMapping("/getIngre.do")
 	public void selectIngre(HttpServletResponse response, @RequestParam String type) throws JsonIOException, IOException {
@@ -137,5 +149,18 @@ public class ManagerOrderController {
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}
+	
+	@ResponseBody
+	@RequestMapping("/managerOrder/updateState.do")
+	public void updateState(HttpServletResponse response, String no, String st) throws JsonIOException, IOException {	
+		int result = service.updateState(new ManagerOrderVO(no,Integer.parseInt(st)));
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(result,response.getWriter());
+	}
+	
+	
+	
 
 }
