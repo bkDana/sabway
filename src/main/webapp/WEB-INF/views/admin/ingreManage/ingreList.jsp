@@ -79,14 +79,7 @@
 				</c:forEach>
 			</table>
 			<script>
-				$(".del-btn").click(function(){
-					var del = confirm("정말로 삭제하시겠습니까?");
-					if(del){
-						location.href="/ingreDelete.do?reqPage=${reqPage}&searchType=${searchType}&searchVal=${searchVal}&ingreIdx="+$(this).data('no');
-					}else{
-						console.log("삭제안한대");
-					}
-				});
+				
 			</script>
 		
 		
@@ -97,6 +90,16 @@
 
 <script>
 $(document).ready(function(){
+	/* 재료 삭제 */
+	$(".del-btn").click(function(){
+		var del = confirm("정말로 삭제하시겠습니까?");
+		if(del){
+			location.href="/ingreDelete.do?reqPage=${reqPage}&searchType=${searchType}&searchVal=${searchVal}&ingreIdx="+$(this).data('no');
+		}else{
+			console.log("삭제안한대");
+		}
+	});
+	
 	/* 활성화/비활성화 ajax */
 	$(".ingreActive").change(function(){
 		var no = $(this).data('no');
