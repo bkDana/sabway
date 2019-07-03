@@ -3,6 +3,7 @@ package kr.co.subway.ingreManage.vo;
 import java.sql.Date;
 
 public class IngreVo {
+	private int rnum;
 	private int ingreIdx;			//인덱스
 	private String ingreLabel;		//재료 이름
 	private String ingreType;		//제품의 종류(메인재료, 추가토핑 등등) 카테고리
@@ -20,10 +21,12 @@ public class IngreVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public IngreVo(int ingreIdx, String ingreLabel, String ingreType, int ingreCost15, int ingreCost30,
+	
+	public IngreVo(int rnum, int ingreIdx, String ingreLabel, String ingreType, int ingreCost15, int ingreCost30,
 			int ingreDiscntRate, int ingreKcal, int ingreKcalSalad, int ingreActive, String ingreUnit,
 			String ingreDescription, String ingreFilepath, Date ingreRegDate) {
 		super();
+		this.rnum = rnum;
 		this.ingreIdx = ingreIdx;
 		this.ingreLabel = ingreLabel;
 		this.ingreType = ingreType;
@@ -37,6 +40,14 @@ public class IngreVo {
 		this.ingreDescription = ingreDescription;
 		this.ingreFilepath = ingreFilepath;
 		this.ingreRegDate = ingreRegDate;
+	}
+	
+	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getIngreIdx() {
 		return ingreIdx;

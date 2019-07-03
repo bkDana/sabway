@@ -76,4 +76,5 @@ public class PromotionController {
 		}
 		return "headOffice/applyView";
 	}
+	
 }

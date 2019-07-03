@@ -15,4 +15,66 @@
 	  </choose>
   	sysdate)
   </insert>
+  
+  <select id="getIngreType" resultType="string">
+  	select distinct ingre_type from ingredients
+  </select>
+  
+  <!-- 재료 리스트 개수 구하기 -->
+  <select id="ingreTotalCount" parameterType="map" resultType="_int">
+  	select count(*) as cnt from ingredients
+  	<if test="searchType != null and searchType != '' and searchVal != null and searchVal != '' and searchType != 'null' and searchVal != 'null'"> <!-- 검색했을 경우 -->
+  		where
+  		<if test="searchType.equals('ingre_type')">	<!-- 재료 카테고리 선택 -->
+  			ingre_type = #{searchVal}
+  		</if>
+  		<if test="searchType.equals('ingre_discnt_rate')">
+  			<if test="searchVal.equals('1')"> <!-- 할인중 -->
+  				ingre_discnt_rate > 0
+  			</if>
+  			<if test="searchVal.equals('0')"> <!-- 할인 안하는것 -->
+  				ingre_discnt_rate = 0
+  			</if>
+  		</if>
+  		<if test="searchType.equals('ingre_active')">
+  			ingre_active = #{searchVal}
+  		</if>
+  	</if>
+  </select>
+  
+  <!-- 재료 리스트 구하기 -->
+  <select id="ingreSelectAll" parameterType="map" resultType="ingre">
+  	select rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_kcal_salad as ingreKcalSalad, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepth,ingre_reg_date as ingreRegDate 
+  	from (select rownum as rnum, i.* from(select * from ingredients 
+  	<if test="searchType != null and searchType != '' and searchVal != null and searchVal != '' and searchType != 'null' and searchVal != 'null'"> <!-- 검색했을 경우 -->
+  		where
+  		<if test="searchType.equals('ingre_type')">	<!-- 재료 카테고리 선택 -->
+  			ingre_type = #{searchVal}
+  		</if>
+  		<if test="searchType.equals('ingre_discnt_rate')">
+  			<if test="searchVal.equals('1')"> <!-- 할인중 -->
+  				ingre_discnt_rate > 0
+  			</if>
+  			<if test="searchVal.equals('0')"> <!-- 할인 안하는것 -->
+  				ingre_discnt_rate = 0
+  			</if>
+  		</if>
+  		<if test="searchType.equals('ingre_active')">
+  			ingre_active = #{searchVal}
+  		</if>
+  	</if>
+  	 order by ingre_type) i) where rnum between #{start} and #{end}
+  </select>
+  
+  <!-- select * from (select rownum as rnum, b.* from (select ba.no, m.name careNm, ba.id, ba.name,ba.phone, ba.visit_date, ba.visit_time, ba.apply_date, ba.status 
+  from ((select * from book_apply where code=?"+ sql +" order by 1 desc)ba) Join member m Using(code)) b) 
+  where rnum BETWEEN ? and ? -->
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>

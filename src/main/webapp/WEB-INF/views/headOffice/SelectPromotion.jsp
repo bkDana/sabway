@@ -14,6 +14,7 @@
 	}
 	div > table {
 		width:100%;
+		text-align:center;
 	}
 	[name=table] th,[name=table] td  {
 		text-align:center;
@@ -25,7 +26,7 @@
 <body>
 	<form action="/selectPromotion.do" method="get">
 		<div>
-			<table name="table" style="border:1px solid black; text-align:center;">
+			<table name="table">
 				<tr>
 					<th>상품명</th>
 					<th>판매가</th>
@@ -34,6 +35,7 @@
 				<%-- <c:forEach items="" var=""> --%>
 					<tr>
 						<!-- Menu의 db 정보 사용 -->
+						<!-- 예시 -->
 						<td>
 							<input type="hidden" name="prdName" value="베지샐러드">
 							베지샐러드
