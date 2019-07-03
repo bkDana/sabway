@@ -12,7 +12,7 @@
 		<div class="sub-menu">※ 메뉴관리 > 메뉴등록</div>
 		
 			<form action="/ingreRegister.do" method="post">
-				<table class="comm-tbl type2">
+				<table class="comm-tbl">
 					<colgroup>
 						<col width="20%">
 						<col width="/">

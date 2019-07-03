@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -45,9 +45,10 @@ public class IngreManageController {
 	
 	//재료 리스트 가져오기
 	@RequestMapping("/ingreList.do")
-	public ModelAndView ingreList(@RequestParam String reqPage, ModelAndView mav, String searchType, String searchVal) {
+	public ModelAndView ingreList(String reqPage, String searchType, String searchVal) {
 		System.out.println(searchType);
 		System.out.println(searchVal);
+		ModelAndView mav = new ModelAndView();
 		int reqPage1;
 		try {
 			reqPage1 = Integer.parseInt(reqPage);
@@ -58,6 +59,7 @@ public class IngreManageController {
 		ArrayList<IngreVo> list = ip.getIngreList();
 		String pageNavi = ip.getPageNavi();
 		if(!list.isEmpty()) {
+			mav.addObject("reqPage",reqPage1);
 			mav.addObject("ingreList",list);
 			mav.addObject("pageNavi",pageNavi);
 			mav.addObject("searchType",searchType);
@@ -95,6 +97,42 @@ public class IngreManageController {
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}
+	
+	//재료정보 가져오기
+	@RequestMapping("/goIngreUpdate.do")
+	public ModelAndView goUpdatePage(ModelAndView mav, String ingreIdx) {
+		System.out.println(ingreIdx);
+		IngreVo iv = ingreService.goUpdateIngre(ingreIdx);
+		if(iv!=null) {
+			mav.addObject("iv",iv);
+			mav.setViewName("admin/ingreManage/ingreUpdate");
+		}else {
+			mav.setViewName("common/error");
+		}
+		return mav;
+	}
+	
+	//재료 삭제하기
+	@RequestMapping("/ingreDelete.do")
+	public String ingreDelete(String ingreIdx, String reqPage, String searchType, String searchVal, RedirectAttributes redirectAttributes) {
+		System.out.println("no:"+ingreIdx+" reqPage : "+reqPage+" searchType : "+searchType+" searchVal : "+searchVal);
+		int result = ingreService.ingreDelete(ingreIdx);
+		if(result>0) {
+			redirectAttributes.addAttribute("reqPage", reqPage);	//redirect로 값 보내기
+			redirectAttributes.addAttribute("searchType", searchType);
+			redirectAttributes.addAttribute("searchVal", searchVal);
+			return "redirect:/ingreList.do";
+		}else {
+			System.out.println("삭제 실패");
+			return "common/error";
+		}
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -56,6 +56,16 @@ public class IngreManageDao {
 		return sqlSession.selectList("ingre.getIngreType");
 	}
 
+	//재료정보 가져오기
+	public IngreVo goUpdateIngre(String ingreIdx) {
+		return sqlSession.selectOne("ingre.goIngreUpdate",ingreIdx);
+	}
+	
+	//재료 삭제하기
+	public int ingreDelete(String ingreIdx) {
+		return sqlSession.delete("ingre.ingreDelete",ingreIdx);
+	}
+
 
 	
 }
