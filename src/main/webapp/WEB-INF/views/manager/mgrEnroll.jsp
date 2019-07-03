@@ -8,40 +8,42 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>본점 관리자 등록</h1>
+	<!-- 가맹점 신청 승인 시  -->
+	<h1>가맹점 계정 등록</h1>
 	<hr>
-	<form action="enrollMgr.do" method="post">
-		<input type="hidden" name="mgrLevel" value="1">
+	<form action="/mgrEnroll.do" method="post">
+		<input type="hidden" name="mgrStatus" value="1"><!-- 영업상태: 준비중(Default) -->
+		<input type="hidden" name="mgrLevel" value="0"><!-- 0: 가맹점 고정 -->
+		<input type="hidden" name="applyName" value="${applyName }">
 		<table>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="mgrId" value="admin"></td>
+				<td><input type="text" name="mgrId" value="manager1"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="password" name="mgrPw" placeholder="비밀번호를 입력하세요."></td>
+				<!-- 비밀번호 기본값 1234 생성 후 각자 변경 -->
+				<td><input type="password" name="mgrPw" value="1234" readonly></td>
 			</tr>
 			<tr>
 				<th>이름</th>
 				<td><input type="text" name="mgrName"></td>
 			</tr>
 			<tr>
-				<th>주소</th>
-				<td><input type="text" name="mgrAddr" value="서울시 서초구 강남대로 535 프린스빌딩 15층" readonly></td>
-			</tr>
-			<tr>
 				<th>전화번호</th>
-				<td><input type="text" name="mgrTel" value="02-797-5036" readonly></td>
-			</tr>
-			<tr style="display:none;">
-				<th>구분</th>
-				<td><input type="text" name="mgrLevel" value="1">본점</td>
+				<td><input type="text" name="mgrTel" value="${mgrTel }" readonly></td>
 			</tr>
 			<tr style="display:none;">
 				<th>우편번호</th>
 				<td><input type="text" name="mgrPost" value="04537"></td>
 			</tr>
+			<tr>
+				<th>주소</th>
+				<td><input type="text" name="mgrAddr" value="${mgrAddr }" readonly></td>
+			</tr>
 		</table>
+		<button type="submit">가맹점 등록</button>
+		<button type="button"><a href="/admin.do">메인으로</a></button>
 	</form>
 </body>
 </html>

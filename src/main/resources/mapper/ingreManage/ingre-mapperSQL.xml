@@ -16,28 +16,29 @@
   	sysdate)
   </insert>
   
-  <select id="getIngreType" resultType="string">
-  	select distinct ingre_type from ingredients
-  </select>
-  
   <!-- 재료 리스트 개수 구하기 -->
   <select id="ingreTotalCount" parameterType="map" resultType="_int">
   	select count(*) as cnt from ingredients
   	<if test="searchType != null and searchType != '' and searchVal != null and searchVal != '' and searchType != 'null' and searchVal != 'null'"> <!-- 검색했을 경우 -->
-  		where
-  		<if test="searchType.equals('ingre_type')">	<!-- 재료 카테고리 선택 -->
+  		where 
+  		<if test="searchType.equals('ingreType')">	<!-- 재료 카테고리 선택 -->
   			ingre_type = #{searchVal}
   		</if>
-  		<if test="searchType.equals('ingre_discnt_rate')">
-  			<if test="searchVal.equals('1')"> <!-- 할인중 -->
+  		<if test="searchType.equals('ingreDiscntRate')">
+  			<if test='searchVal.equals("1")'> <!-- 할인중 -->
   				ingre_discnt_rate > 0
   			</if>
-  			<if test="searchVal.equals('0')"> <!-- 할인 안하는것 -->
+  			<if test='searchVal.equals("0")'> <!-- 할인 안하는것 -->
   				ingre_discnt_rate = 0
   			</if>
   		</if>
-  		<if test="searchType.equals('ingre_active')">
-  			ingre_active = #{searchVal}
+  		<if test="searchType.equals('ingreActive')">
+  			<if test='searchVal.equals("1")'> <!-- 활성화 -->
+  				ingre_active = #{searchVal}
+  			</if>
+  			<if test='searchVal.equals("0")'> <!-- 비활성화 -->
+  				ingre_active = #{searchVal}
+  			</if>
   		</if>
   	</if>
   </select>
@@ -48,31 +49,41 @@
   	from (select rownum as rnum, i.* from(select * from ingredients 
   	<if test="searchType != null and searchType != '' and searchVal != null and searchVal != '' and searchType != 'null' and searchVal != 'null'"> <!-- 검색했을 경우 -->
   		where
-  		<if test="searchType.equals('ingre_type')">	<!-- 재료 카테고리 선택 -->
+  		<if test="searchType.equals('ingreType')">	<!-- 재료 카테고리 선택 -->
   			ingre_type = #{searchVal}
   		</if>
-  		<if test="searchType.equals('ingre_discnt_rate')">
-  			<if test="searchVal.equals('1')"> <!-- 할인중 -->
+  		<if test="searchType.equals('ingreDiscntRate')">
+  			<if test='searchVal.equals("1")'> <!-- 할인중 -->
   				ingre_discnt_rate > 0
   			</if>
-  			<if test="searchVal.equals('0')"> <!-- 할인 안하는것 -->
+  			<if test='searchVal.equals("0")'> <!-- 할인 안하는것 -->
   				ingre_discnt_rate = 0
   			</if>
   		</if>
-  		<if test="searchType.equals('ingre_active')">
-  			ingre_active = #{searchVal}
+  		<if test="searchType.equals('ingreActive')">
+  			<if test='searchVal.equals("1")'> <!-- 활성화 -->
+  				ingre_active = #{searchVal}
+  			</if>
+  			<if test='searchVal.equals("0")'> <!-- 비활성화 -->
+  				ingre_active = #{searchVal}
+  			</if>
   		</if>
   	</if>
-  	 order by ingre_type) i) where rnum between #{start} and #{end}
+  	 order by ingre_reg_date desc) i) where rnum between #{start} and #{end}
   </select>
   
   <!-- select * from (select rownum as rnum, b.* from (select ba.no, m.name careNm, ba.id, ba.name,ba.phone, ba.visit_date, ba.visit_time, ba.apply_date, ba.status 
   from ((select * from book_apply where code=?"+ sql +" order by 1 desc)ba) Join member m Using(code)) b) 
   where rnum BETWEEN ? and ? -->
+  <!-- 활성화여부 변경시 업데이트하기 -->
+  <update id="updateIngreActive" parameterType="map">
+  	update ingredients set ingre_active=#{ingreActive} where ingre_idx=#{ingreIdx}
+  </update>
   
-  
-  
-  
+  <!-- 재료 리스트 페이지에서 검색박스에서 재료 카테로기 선택시 하위 값 가져오기 -->
+  <select id="getIngreType" resultType="string">
+  	select distinct ingre_type from ingredients
+  </select>
   
   
   

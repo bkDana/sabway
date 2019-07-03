@@ -68,12 +68,16 @@ public class ManagerOrderService {
 		order.setItemList((ArrayList<ManagerItemVO>)(dao.selectItem(no)));
 		return order;
 	}
-
+/*
 	public ArrayList<String> selectType() {
 		return (ArrayList<String>)dao.selectType();
 	}
-
+*/
 	public ArrayList<IngreVo> selectIngre(String type) {
 		return (ArrayList<IngreVo>)dao.selectIngre(type);
+	}
+
+	public int updateState(ManagerOrderVO mo) {
+		return dao.updateState(mo);
 	}
 }

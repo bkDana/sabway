@@ -5,12 +5,8 @@
 		select apply_no as applyNo
 		,apply_name as applyName
 		,apply_phone as applyPhone
-		,apply_email as applyEmail
 		,apply_area as applyArea
 		,apply_title as applyTitle
-		,apply_content as applyContent
-		,apply_filename as applyFilename
-		,apply_filepath as applyFilepath
 		,apply_status as applyStatus
 		,apply_date as applyDate
 		from apply

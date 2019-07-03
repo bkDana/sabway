@@ -13,7 +13,7 @@
 .paging i{vertical-align:middle; color:inherit}
 
 /* 공통 :: SEARCH BOX */
-.board-search-box{text-align:center; background-color:#f9f9f9; padding:30px 0; border:1px solid #ddd; }
+.board-search-box{text-align:center; background-color:#f8faf8; padding:30px 0; /* border:1px solid #ddd; */ }
 .board-search-box select{width:20%; max-width:150px; height:40px; border:1px solid #ccc; background-color:#fff; }
 .board-search-box .search-word{width:30%; max-width:200px; height:40px; border:1px solid #ccc; border-right:0; padding:0; text-indent:10px; color:#868686; font-size:13px; vertical-align:middle;}
 .board-search-box .search-word:focus{color:#333;}
@@ -38,9 +38,9 @@
 .comm-tbl.type2{width:100%; max-width:none;}
 .comm-tbl.type2 th, .comm-tbl.type2 td{padding:10px;}
 .comm-tbl.type2 tr:first-child td{border-top:1px solid #009223;}
-.comm-tbl.type2 th{text-align:center; font-size:16px; border-top:2px solid rgba(254,67,30);}
+.comm-tbl.type2 th{text-align:center; font-size:16px; border-top:2px solid #009223;}
 .comm-tbl.type2 td{color:#2b2b2b; font-size:14px; text-align:center;}
-/*.comm-tbl.type2 tr:hover td{background-color:#009223;}*/
+
 
 /* 주문 */
 .comm-tbl.order-tbl th{font-size:16px; background:#f8f8f8;}
@@ -59,11 +59,11 @@
 .common-tbl-btn-group > button{width:130px; height:50px; border-radius:5px; font-size:17px; color:#fff; margin:0 10px;}
 .common-tbl-btn-group > button.btn-style1{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style2{background-color:#444;}
-.common-tbl-btn-group > button.btn-style3{background-color:#888;}
+.common-tbl-btn-group > button.btn-style3{background-color:#d90f0f;}
 .common-tbl-btn-group > button.small{width:100px; height:35px; font-size:15px;}
 .comm-tbl .file-del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#888; color:#fff; margin-left:5px;}
-.comm-tbl .add-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#747474; color:#fff; margin-left:5px;}
-.comm-tbl .del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#d90f0f; color:#fff; margin-left:5px;}
+.comm-tbl .add-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#009223; color:#fff; margin-left:5px;}
+.comm-tbl .del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#747474; color:#fff; margin-left:5px;}
 /* 봉사활동 신청 List */
 .volun-tit{max-width:385px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; text-align:left;}
 .volun-tit a{color:#2b2b2b;}
@@ -87,7 +87,7 @@
 
 /* 해당 공고에 봉사활동 신청한 사람 목록 */
 .sub-title{font-size:20px; color:#2b2b2b; font-weight:500; padding:20px 0; margin-bottom:30px; position:relative;}
-.sub-title:after{display:block; content:""; width:35px; height:3px; background:rgba(254,67,30); position:absolute; bottom:0; left:0;}
+.sub-title:after{display:block; content:""; width:35px; height:3px; background:#009223; position:absolute; bottom:0; left:0;}
 
 /* ****************** MODAL LAYERPOPUP ********************** */
 /* modal layer */
