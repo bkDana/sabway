@@ -43,7 +43,7 @@ public class IngreManageDao {
 
 	//재료 리스트 페이지에서 검색박스에서 재료 카테로기 선택시 하위 값 가져오기
 	public List ingreType() {
-		return sqlSession.selectOne("ingre.getIngreType");
+		return sqlSession.selectList("ingre.getIngreType");
 	}
 
 	
