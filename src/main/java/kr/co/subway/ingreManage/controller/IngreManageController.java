@@ -1,7 +1,10 @@
 package kr.co.subway.ingreManage.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 
 import kr.co.subway.ingreManage.service.IngreManageService;
 import kr.co.subway.ingreManage.vo.IngrePageNaviData;
@@ -68,15 +72,11 @@ public class IngreManageController {
 	//재료 리스트 페이지에서 검색박스에서 재료 카테고리 선택시 하위 값 가져오기
 	@ResponseBody
 	@RequestMapping("/ingreType.do")
-	public String ingreType() {
+	public void ingreType(HttpServletResponse response) throws JsonIOException, IOException {
 		List list = ingreService.ingreType();
-		JSONObject obj = new JSONObject();
-		if(!list.isEmpty()) {
-			obj.put("list", list);
-		}else {
-			System.out.println("ajax로 ingreType가져오기 실패(Controller)");
-		}
-		return new Gson().toJson(obj);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
 	}
 	
 	

@@ -26,6 +26,7 @@
 					<th>칼로리</th>
 					<th>등록일</th>
 					<th>활성화 여부</th>
+					<th>할인 여부</th>
 					<th>수정/삭제</th>
 				</tr>
 				<c:forEach items="${ingreList}" var="list">
@@ -49,15 +50,15 @@
 		<div class="board-search-box">
 			<form action="/ingreList.do" method="post" name="search">
 				<select name="searchType" id="searchType" data-type="${searchType }">
-					<option value="">==1번째선택==</option>
+					<option value="">-- 1차 분류 --</option>
 					<option value="ingreType">재료 카테고리</option>
 					<option value="ingreDiscntRate">할인여부</option>
 					<option value="ingreActive">활성화 여부</option>
 				</select>
 				<select name="searchVal" id="searchVal" data-val="${searchVal }">
-					<option value="">==두번째 선택==</option>
+					<option value="">-- 2차 분류 --</option>
 				</select>
-				<button type="submit" class="bbs-search-btn" title="검색"><img src="/resources/img/search_icon.png" style="width:30px;"></button>
+				<button type="submit" class="bbs-search-btn" title="검색"> <img src="/resources/img/search_icon.png" style="width:30px;"></button>
 			</form>
 		</div>
 	</div>
@@ -89,16 +90,17 @@ $(document).ready(function(){
 	
 	function getVal(){
 		/* 재료 카테고리 선택했을 경우 */
-		if($("#searchType").val().equals('ingreType')){
+		if($("#searchType").val()=='ingreType'){
 			var ingreType = $("#searchType").val();
 			$.ajax({
 				url:"/ingreType.do",
 				datatype: "json",
 				success: function(data){
+					console.log(data);
 					var $select = $("#searchVal");
 					$select.find("option").remove();
-					$select.appen("<option value=''></option>");
-					for(var i=0;data.length;i++){
+					$select.append("<option value=''>-- 재료 --</option>");
+					for(var i=0;i<data.length;i++){
 						$select.append("<option value='"+data[i]+"'>"+data[i]+"</option>");
 					}
 				},
@@ -106,16 +108,18 @@ $(document).ready(function(){
 					console.log("안돼에에에");
 				}
 			});
-		}else if($("#searchType").val().equals('ingreDiscntRate')){	/* 할인률 선택했을 경우 */
+		}else if($("#searchType").val()=='ingreDiscntRate'){	/* 할인률 선택했을 경우 */
 			var $select = $("#searchVal");
 			$select.find("option").remove();
-			$select.appen("<option value='1'>할인중인 메인재료</option>");
-			$select.appen("<option value='0'>할인 안하는 메인재료....뭐라하지...</option>");
+			$select.append("<option value=''>-- 할인 여부 --</option>");
+			$select.append("<option value='1'>할인중인 메인재료</option>");
+			$select.append("<option value='0'>할인 안하는 메인재료....뭐라하지...</option>");
 		}else{
 			var $select = $("#searchVal");
 			$select.find("option").remove();
-			$select.appen("<option value='1'>활성화</option>");
-			$select.appen("<option value='0'>비활성화</option>");
+			$select.append("<option value=''>-- 활성화 여부 --</option>");
+			$select.append("<option value='1'>활성화</option>");
+			$select.append("<option value='0'>비활성화</option>");
 		}
 	}
 	
