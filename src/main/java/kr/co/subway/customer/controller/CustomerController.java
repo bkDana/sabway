@@ -27,6 +27,7 @@ public class CustomerController {
       
       String customerId = request.getParameter("customerId");
       String customerPw = request.getParameter("customerPw");
+      String oldUserToNew = request.getParameter("oldUserToNew");
       
       Customer vo = new Customer();
       vo.setCustomerId(customerId);
@@ -34,39 +35,69 @@ public class CustomerController {
       
       try {
          
-         Customer c = customerService.selectOneCustomerEnroll(vo);
+         if(oldUserToNew != null && "Y".equals(oldUserToNew)) {
+            vo.setCustomerState(1); // 해당 회원 State 값 1 변경
+            int resultCnt = customerService.updateState(vo); // 회원정보 수정 서비스
+            String result = String.valueOf(resultCnt);
+             return result;
+          }
+         
+         Customer selectCustomerVo = customerService.selectOneCustomerEnroll(vo);
+         
          HttpSession session = request.getSession();
-         if(c!=null) {
-            session.setAttribute("customer", c);
+         if(selectCustomerVo != null) {
+            session.setAttribute("customer", selectCustomerVo);
          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+         
          Calendar cal = Calendar.getInstance();
          Calendar cal2 = Calendar.getInstance();
+         
+         
             System.out.println("오늘날짜 : " +sdf.format(cal.getTime()));
-            System.out.println("마지막로그인날짜 : "+ c.getLastLogDate());
-            cal2.setTime(c.getLastLogDate());
+            System.out.println("마지막로그인날짜 : "+ selectCustomerVo.getLastLogDate());
+            
+            
+            cal2.setTime(selectCustomerVo.getLastLogDate());
             cal2.add(Calendar.MONTH, 1);
+            
+            
             System.out.println("마지막로그인+30일 : "+sdf.format(cal2.getTime()));
+            
+            
             int result = cal.compareTo(cal2);
+            
+            
             System.out.println(result);
-            if(result == 1) {  // 마지막 로그인날짜 + 30일 < 현재날짜
-               // 휴면계정
-                // 1:정상, 0:휴면, 2:탈퇴 , 3:로그인실패
-               customerService.updateState(c);
-               System.out.println("변경된 상태 : "+ c.getCustomerState());
-               request.setAttribute("stateVal", "0");
-               customerService.updateLastLog(c);
-               return "customer/loginFailed";
-            }else{
-               customerService.updateLastLog(c);// 마지막로깅용 메소드 호출
+            
+            
+            // 마지막로그인이 한달이 지났을경우 1 else -1 
+            if((oldUserToNew == null || !"Y".equals(oldUserToNew)) && result == 1) {
+              // 휴면계정  CustomerState [1:정상, 0:휴면, 2:탈퇴 ]
+   
+               
+               selectCustomerVo.setCustomerState(0); // 해당 회원 State 값 0 변경
+            customerService.updateState(selectCustomerVo); // 회원정보 수정 서비스
+            
+            System.out.println("변경된 상태 : "+ selectCustomerVo.getCustomerState());
+               
+            request.setAttribute("stateVal", "0");
+            request.setAttribute("selectCustomerVo", selectCustomerVo);
+               
+            return "customer/loginFailed";
             }
-            customerService.updateLastLog(c);
-            return "customer/loginSuccess";
+               
+           customerService.updateLastLog(selectCustomerVo); // 마지막로깅용 메소드 호출
+           return "customer/loginSuccess";
+            
          }else {
+            
+           // 회원 정보 없음
             request.setAttribute("stateVal", "3");
             return "customer/loginFailed";
          }
          
-      }catch(Exception e) {
+      } catch(Exception e) {
+        request.setAttribute("stateVal", "3");
          return "customer/loginFailed";
       }
    }
@@ -105,6 +136,27 @@ public class CustomerController {
       }
    }
    
+   //휴면계정 해제
+   @ResponseBody
+   @RequestMapping(value="/oldUserToNewAjax.do" ,produces="text/html;charset=utf-8")
+   public int oldUserToNewAjax(HttpServletRequest request) {
+      
+     String customerId = request.getParameter("customerId");
+      String oldUserToNew = request.getParameter("oldUserToNew");
+         
+      Customer vo = new Customer();
+      vo.setCustomerId(customerId);
+     
+     if(oldUserToNew != null && "Y".equals(oldUserToNew)) {
+      vo.setCustomerState(1); // 해당 회원 State 값 1 변경
+      int resultCnt = customerService.updateState(vo); // 회원정보 수정 서비스
+      
+      return resultCnt;
+     }else{
+        return 0;
+     }
+   }
+   
    //닉네임 체크
    @ResponseBody
    @RequestMapping(value="/emailCheck.do" ,produces="text/html;charset=utf-8")
@@ -136,8 +188,8 @@ public class CustomerController {
    }
    
    //회원가입 페이지 이동
-	@RequestMapping(value="/enrollPage.do")
-	public String enrollPage() {
-		return "customer/enrollPage";
-	}
+   @RequestMapping(value="/enrollPage.do")
+   public String enrollPage() {
+      return "customer/enrollPage";
+   }
 }
