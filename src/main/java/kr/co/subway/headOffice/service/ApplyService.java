@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.subway.headOffice.dao.ApplyDAO;
 import kr.co.subway.headOffice.vo.Apply;
@@ -19,6 +20,7 @@ public class ApplyService {
 		List<Apply> list = applyDao.applyList();
 		return (ArrayList<Apply>)list;
 	}
+	@Transactional
 	public int rejectManagerUpdate(String applyName,int applyStatus){
 		int result = 0;
 		if(applyStatus==2) {

@@ -24,7 +24,9 @@ public class MgrController {
 
 	@RequestMapping(value="/enrollMgr.do")
 	public String enrollMgr(@RequestParam String applyArea,@RequestParam String applyName,Model model) {
-		System.out.println(applyArea);
+		//가맹점 승인하면 applyName과 applyArea를 매개변수로 받음
+		//applyArea : 지역 정보를 알아보기 위함
+		//applyName : 가맹점 등록에 사용할 목적
 		String mgrTel = "";
 		String telCenter = "";
 		String telLast = "";
@@ -34,8 +36,10 @@ public class MgrController {
 		for(int i=0;i<ran.length;i++) {
 			ran[i] = num.nextInt(10);
 			if(i<4) {
+				//중간 4자리
 				telCenter += String.valueOf(ran[i]);
 			}else if(i>3) {
+				//마지막 4자리
 				telLast += String.valueOf(ran[i]);
 			}
 		}
@@ -74,13 +78,13 @@ public class MgrController {
 			mgrTel = "064-"+telCenter+"-"+telLast;
 		}		
 		model.addAttribute("applyName",applyName);
-		System.out.println(applyName);
 		model.addAttribute("mgrAddr",applyArea);
 		model.addAttribute("mgrTel",mgrTel);
 		return "manager/mgrEnroll";
 	}
 	@RequestMapping(value="/mgrEnroll.do")
 	public String mgrEnroll(Mgr mg,@RequestParam String applyName) {
+		//가맹점 계정을 등록하면 applyName를 받아와서 DB등록이 완료되면 status를 변경하기 위해 
 		int result = mgrservice.enrollMgr(mg,applyName);
 		String view = "";
 		if(result>0) {

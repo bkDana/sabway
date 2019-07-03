@@ -18,7 +18,7 @@
 		<table>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="mgrId" value="manager1"></td>
+				<td><input type="text" name="mgrId" value="manager"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
@@ -27,7 +27,7 @@
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="mgrName"></td>
+				<td><input type="text" name="mgrName" value="SabWay "></td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
