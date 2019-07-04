@@ -47,7 +47,7 @@ public class ApplyService {
 		//이메일
 		applyVo.setApplyEmail(applyVo.getApplyEmail()+'@'+applyVo.getApplyEmail2());
 		
-		
+		System.out.println(applyVo.getApplyEmail2());
 		return applyDao.insertApply(applyVo);
 	}
 }

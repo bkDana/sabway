@@ -8,7 +8,7 @@
 </head>
 <body>
 <script>
-		alert("게시글 작성 성공!");
+		alert("가맹점 신청 성공!");
 		location.href="/";
 	</script>
 </body>

@@ -44,7 +44,7 @@
 				<tr>
 					<td><label for="applyArea">지역</label></td>
 					<td>
-						<select name="applyArea1" id="applyArea1">
+						<select name="applyArea" id="applyArea">
 							<option value="">시/도</option>
 							<option value="서울특별시">서울특별시</option>
 							<option value="경기도">경기도</option>
@@ -82,13 +82,13 @@
 				<tr>
 					<td><label for="applyFilename">첨부파일</label></td>
 					<td>
-						<input data-maxsize="2" data-maxupload="1" id="applyFilename" name="applyFilename"type="file" />
+						<input data-maxsize="2" data-maxupload="1" id="applyFilename" name="applyfilename" type="file" />
 						<span class="file_note">※ 등록 가능 확장자 : pdf,docx,pptx,xlsx,jpg,gif,png / 최대 2MB</span>
 					</td>
 				</tr>
 				<tr style="text-align: center;">
 					<th colspan="2">
-						<button type="submit" class="btn btn-outline-primary" style="color: #f69b02;border-color: #f69b02">등록하기</button>
+						<input type="submit" value="등록하기">
 					</th>
 				</tr>
 			</table>
@@ -99,26 +99,26 @@
 <script>
 
 //이메일 작성
-$("#emailEx").change(function(){
-    if(isEmpty($("#emailEx").val())){
-         $("#applyEmail2").attr("readonly",false);
-         $("#applyEmail2").val("");
-         $("#applyEmail2").focus();
-    }else{
-         $("#applyEmail2").attr("readonly",true);
-       $("#applyEmail2").val($("#emailEx").val());
-    }
- });
+	$("#emailEx").change(function(){
+	    if(isEmpty($("#emailEx").val())){
+	         $("#applyEmail2").attr("readonly",false);
+	         $("#applyEmail2").val("");
+	         $("#applyEmail2").focus();
+	    }else{
+	         $("#applyEmail2").attr("readonly",true);
+	       $("#applyEmail2").val($("#emailEx").val());
+	    }
+	 });
  
 
 // 빈값 체크
-function isEmpty(text){
-   if(text != null && text != ""){
-      return false;
-   }else{
-      return true;
-   }
-}
+	function isEmpty(text){
+	   if(text != null && text != ""){
+	      return false;
+	   }else{
+	      return true;
+	   }
+	}
 
 
 
@@ -145,7 +145,7 @@ function isEmpty(text){
 
 //지역 selectBox
 	$(document).ready(function(){
-		$("#applyArea1").change(function(){
+		$("#applyArea").change(function(){
 		console.log($(this).val())
 			
 		 	if($(this).val() == "서울특별시"){
@@ -154,25 +154,25 @@ function isEmpty(text){
 				$("#applyArea2").append("<option value='강남구'>강남구</option>");
 				$("#applyArea2").append("<option value='강동구'>강동구</option>");
 				$("#applyArea2").append("<option value='강북구'>강북구</option>");
-				$("#applyArea2").append("<option value='강북구'>강서구</option>");
-				$("#applyArea2").append("<option value='강북구'>구로구</option>");
-				$("#applyArea2").append("<option value='강북구'>금천구</option>");
-				$("#applyArea2").append("<option value='강북구'>노원구</option>");
-				$("#applyArea2").append("<option value='강북구'>도봉구</option>");
-				$("#applyArea2").append("<option value='강북구'>동대문구</option>");
-				$("#applyArea2").append("<option value='강북구'>동작구</option>");
-				$("#applyArea2").append("<option value='강북구'>마포구</option>");
-				$("#applyArea2").append("<option value='강북구'>서초구</option>");
-				$("#applyArea2").append("<option value='강북구'>성동구</option>");
-				$("#applyArea2").append("<option value='강북구'>성북구</option>");
-				$("#applyArea2").append("<option value='강북구'>송파구</option>");
-				$("#applyArea2").append("<option value='강북구'>양천구</option>");
-				$("#applyArea2").append("<option value='강북구'>영등포구</option>");
-				$("#applyArea2").append("<option value='강북구'>용산구</option>");
-				$("#applyArea2").append("<option value='강북구'>은평구</option>");
-				$("#applyArea2").append("<option value='강북구'>종로구</option>");
-				$("#applyArea2").append("<option value='강북구'>중구</option>");
-				$("#applyArea2").append("<option value='강북구'>중랑구</option>");
+				$("#applyArea2").append("<option value='강서구'>강서구</option>");
+				$("#applyArea2").append("<option value='구로구'>구로구</option>");
+				$("#applyArea2").append("<option value='금천구'>금천구</option>");
+				$("#applyArea2").append("<option value='노원구'>노원구</option>");
+				$("#applyArea2").append("<option value='도봉구'>도봉구</option>");
+				$("#applyArea2").append("<option value='동대문구'>동대문구</option>");
+				$("#applyArea2").append("<option value='동작구'>동작구</option>");
+				$("#applyArea2").append("<option value='마포구'>마포구</option>");
+				$("#applyArea2").append("<option value='서초구'>서초구</option>");
+				$("#applyArea2").append("<option value='성동구'>성동구</option>");
+				$("#applyArea2").append("<option value='성북구'>성북구</option>");
+				$("#applyArea2").append("<option value='송파구'>송파구</option>");
+				$("#applyArea2").append("<option value='양천구'>양천구</option>");
+				$("#applyArea2").append("<option value='영등포구'>영등포구</option>");
+				$("#applyArea2").append("<option value='용산구'>용산구</option>");
+				$("#applyArea2").append("<option value='은평구'>은평구</option>");
+				$("#applyArea2").append("<option value='종로구'>종로구</option>");
+				$("#applyArea2").append("<option value='중구'>중구</option>");
+				$("#applyArea2").append("<option value='중랑구'>중랑구</option>");
 				
 				
 			}

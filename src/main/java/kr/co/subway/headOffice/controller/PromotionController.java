@@ -89,11 +89,11 @@ public class PromotionController {
 	
 	//가맹신청/문의 등록
 	@RequestMapping(value="/insertApply.do",method=RequestMethod.POST)
-	public String insertApply(HttpServletRequest request, Apply applyVo, @RequestParam MultipartFile fileTest) {
-		
+	public String insertApply(HttpServletRequest request, Apply applyVo, @RequestParam MultipartFile applyfilename) {
+		System.out.println(applyfilename);
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
 		
-		String originName = fileTest.getOriginalFilename();
+		String originName = applyfilename.getOriginalFilename();
 		
 		String onlyFileName = originName.substring(0, originName.indexOf('.'));
 		
@@ -108,9 +108,9 @@ public class PromotionController {
 		
 		int result = applyService.insertApply(applyVo);
 		
-		if(!fileTest.isEmpty()) {
+		if(!applyfilename.isEmpty()) {
 			try {
-				byte [] bytes = fileTest.getBytes();
+				byte [] bytes = applyfilename.getBytes();
 				File f = new File(fullPath);
 				FileOutputStream fos = new FileOutputStream(f);
 				BufferedOutputStream bos = new BufferedOutputStream(fos);

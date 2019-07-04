@@ -32,6 +32,8 @@
 		from apply
 		where apply_no = #{applyNo}
 	</select>
+	
+	<!--가맹점 신청  -->
 	<insert id="insertApply" parameterType="apply">
 		INSERT INTO APPLY VALUES(
 			seq_apply_no.nextval
