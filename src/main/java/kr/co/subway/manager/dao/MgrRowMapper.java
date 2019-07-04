@@ -23,6 +23,7 @@ public class MgrRowMapper implements RowMapper{
 		mgr.setMgrLevel(rs.getInt("mgr_level"));
 		mgr.setMgrStatus(rs.getInt("mgr_status"));
 		mgr.setMgrEnrollDate(rs.getDate("sysdate"));
+		mgr.setMgrAddrType(rs.getString("mgr_addr_type"));
 		return mgr;
 	}
 
