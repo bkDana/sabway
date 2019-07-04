@@ -29,7 +29,7 @@
   				ingre_discnt_rate > 0
   			</if>
   			<if test='searchVal.equals("0")'> <!-- 할인 안하는것 -->
-  				ingre_discnt_rate = 0
+  				ingre_discnt_rate = 0 and ingre_type='메인재료'
   			</if>
   		</if>
   		<if test="searchType.equals('ingreActive')">
@@ -57,7 +57,7 @@
   				ingre_discnt_rate > 0
   			</if>
   			<if test='searchVal.equals("0")'> <!-- 할인 안하는것 -->
-  				ingre_discnt_rate = 0
+  				ingre_discnt_rate = 0 and ingre_type='메인재료'
   			</if>
   		</if>
   		<if test="searchType.equals('ingreActive')">
@@ -84,10 +84,14 @@
   
   <!-- 재료정보 가져오기(1개) -->
   <select id="goIngreUpdate" parameterType="string" resultType="ingre">
-  	select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_kcal_salad as ingreKcalSalad, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepth,ingre_reg_date as ingreRegDate 
+  	select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_kcal_salad as ingreKcalSalad, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
   	from ingredients where ingre_idx=#{ingreIdx}
   </select>
   
+  <!-- 재료 수정하기 -->
+  <update id="ingreUpdate" parameterType="ingre">
+  	update ingredients set ingre_label=#{ingreLabel}, ingre_type=#{ingreType}, ingre_cost15=#{ingreCost15}, ingre_cost30=#{ingreCost30}, ingre_kcal=#{ingreKcal}, ingre_active=#{ingreActive}, ingre_unit=#{ingreUnit}, ingre_description=#{ingreDescription}, ingre_filepath=#{ingreFilepath} where ingre_idx=#{ingreIdx}
+  </update>
   <!-- 재료 삭제하기 -->
   <delete id="ingreDelete" parameterType="string">
   	delete ingredients where ingre_idx=#{ingreIdx}

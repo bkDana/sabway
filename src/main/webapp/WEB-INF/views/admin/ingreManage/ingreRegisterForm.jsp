@@ -11,7 +11,7 @@
 	<div class="area">
 		<div class="sub-menu">※ 메뉴관리 > 메뉴등록</div>
 		
-			<form action="/ingreRegister.do" method="post">
+			<form action="/ingreRegister.do" method="post" enctype="multipart/form-data">
 				<table class="comm-tbl">
 					<colgroup>
 						<col width="20%">
@@ -20,7 +20,7 @@
 					<tr>
 						<th>카테고리</th>
 						<td>
-							<select name="ingreType" id="ingreType" class="short">
+							<select name="ingreType" id="ingreType" class="short" required>
 								<option value="">== 카테고리 ==</option>
 								<option value="메인메뉴">메인메뉴</option>
 								<option value="빵">빵</option>
@@ -35,14 +35,14 @@
 					<tr>
 						<th>상품명</th>
 						<td>
-							<input type="text" name="ingreLabel" id="ingreLabel">
+							<input type="text" name="ingreLabel" id="ingreLabel" required>
 						</td>
 					</tr>
 					<tr>
 						<th>판매가격</th>
 						<td>
-							15cm : <input type="text" name="ingreCost15" id="ingreCost15" class="short"> 원 &nbsp;&nbsp;
-							30cm : <input type="text" name="ingreCost30" id="ingreCost30" class="short"> 원
+							15cm : <input type="text" name="ingreCost15" id="ingreCost15" class="short" value="0" required style="text-align:right;"> 원 &nbsp;&nbsp;
+							30cm : <input type="text" name="ingreCost30" id="ingreCost30" class="short" value="0" required style="text-align:right;"> 원
 						</td>
 					</tr>
 					<tr>
@@ -63,19 +63,19 @@
 					<tr>
 						<th>칼로리</th>
 						<td>
-							<input type="text" name="ingreKcal" class="short"> Kcal
+							<input type="text" name="ingreKcal" class="short" required style="text-align:right;"> Kcal
 						</td>
 					</tr>
 					<tr>
 						<th>이미지 등록</th>
 						<td>
-							<input type="file" name="filepath">
+							<input type="file" name="filepath" required>
 						</td>
 					</tr>
 					<tr>
 						<th>단위(unit)</th>
 						<td>
-							<select name="ingreUnit" class="short">
+							<select name="ingreUnit" class="short" required>
 								<option value="box">box</option>
 								<option value="kg">kg</option>
 								<option value="통">통</option>
@@ -92,7 +92,7 @@
 				</table>
 				<div class="common-tbl-btn-group">
 					<button type="submit" class="btn-style1">메뉴등록</button>
-					<button type="button" class="btn-style3" onclick="history.back();">취소</button>
+					<button type="button" class="btn-style2" onclick="history.back();">취소</button>
 				</div>
 			</form>
 		</div>
