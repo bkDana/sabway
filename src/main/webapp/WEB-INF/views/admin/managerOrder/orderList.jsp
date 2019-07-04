@@ -15,9 +15,9 @@
 		<div class="board-search-box order-search">
 			<form action="/managerOrder/orderList.do" method="post" name="search">
 				<input type="hidden" name="reqPage">
-				<input type="text" name="startDay" class="searchdate search-day" value="${search.startDay }" readonly> ~ <input type="text" name="endDay" class="searchdate search-day" value="${search.endDay }" readonly>
+				<input type="search" name="startDay" class="searchdate search-day" value="${search.startDay }" autocomplete="off"> ~ <input type="search" name="endDay" class="searchdate search-day" value="${search.endDay }" autocomplete="off">
 				<br><br>
-				<input type="text" name="delDay" class="datepicker search-day" value="${search.delDay }" readonly placeholder="희망배송일">
+				<input type="search" name="delDay" class="datepicker search-day" value="${search.delDay }"  placeholder="희망배송일" autocomplete="off">
 				
 				<select name="state" data-val="${search.state }">
 					<option value="">---발주상태---</option>
@@ -28,7 +28,7 @@
 				</select>
 				<br><br>
 				<select name="searchType" data-val="${search.searchType }">
-					<option value="no">지점명</option>
+					<option value="name">지점명</option>
 					<option value="">뭘해야될까?</option>
 				</select>
 				<input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word" value="${search.searchVal }">
@@ -39,22 +39,24 @@
 		<br>
 		<table class="comm-tbl type2">
 			<colgroup>
+				<col width="3%">
 				<col width="5%">
 				<col width="20%">
 				<col width="10%">
-				<col width="35%">
-				<col width="20%">
+				<col width="37%">
+				<col width="15%">
 				<col width="10%">
 			</colgroup>
 			<tr>
-				<th>번호</th><th>지점명</th><th>희망배송일</th><th>상품</th><th>등록일</th><th>상태</th>
+				<th><input type="checkbox" class="allcbox"></th><th>번호</th><th>지점명</th><th>희망배송일</th><th>상품</th><th>등록일</th><th>상태</th>
 			</tr>
 			<c:if test="${empty list.orderList }">
-				<tr><td colspan="5">등록된 발주내역이 없습니다.</td></tr>
+				<tr><td colspan="6">등록된 발주내역이 없습니다.</td></tr>
 			</c:if>
 			<c:forEach items="${list.orderList }" var="order">
-				<tr onclick="location.href='/managerOrder/orderView.do?no=${order.mOrderNo}';" style="cursor:pointer;">
-					<td>${order.rnum }</td><td>${order.mgrName }</td><td>${order.mOrderDelDate }</td><td>${order.mOrderTitle }</td><td>${order.mOrderDate }</td>
+				<tr>
+					<td><input type="checkbox" class="cbox"></td><td>${order.rnum }</td><td>${order.mgrName }</td><td>${order.mOrderDelDate }</td>
+					<td onclick="location.href='/managerOrder/orderView.do?no=${order.mOrderNo}';" style="cursor:pointer;">${order.mOrderTitle }</td><td>${order.mOrderDate }</td>
 					<td>
 						<c:if test="${order.mOrderState eq 0}"><span class="state-reg">접수완료</span></c:if>
 						<c:if test="${order.mOrderState eq 1}"><span class="state-out">출고완료</span></c:if>
@@ -64,7 +66,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		
+		※ 희망배송일 오전 8시에 출고완료 상태인 발주건은 도착으로 자동 상태변경됩니다.
 		<!-- paging -->
 		<div class="paging">
 			${list.pageNavi }	
@@ -86,10 +88,20 @@
 		}
 	});
 
+	/* 페이지 이동 */
 	function list(p){
 		$('input[name=reqPage]').val(p);
 		search.submit();
 	}
+	
+	/* 체크박스 전체 선택or해제 */
+	$('.allcbox').click(function(){
+		if($(this).is(':checked')){
+			$('.cbox').prop('checked',true);
+		}else{
+			$('.cbox').prop('checked',false);
+		}
+	});
 </script>
 
 <%-- Footer --%>
