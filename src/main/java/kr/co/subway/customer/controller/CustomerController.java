@@ -24,6 +24,7 @@ public class CustomerController {
    private CustomerService customerService;
    @RequestMapping(value="/login.do")
    public String customerLogin(HttpServletRequest request, HttpServletResponse response) {
+      HttpSession session = request.getSession();
       
       String customerId = request.getParameter("customerId");
       String customerPw = request.getParameter("customerPw");
@@ -44,9 +45,8 @@ public class CustomerController {
          
          Customer selectCustomerVo = customerService.selectOneCustomerEnroll(vo);
          
-         HttpSession session = request.getSession();
          if(selectCustomerVo != null) {
-            session.setAttribute("customer", selectCustomerVo);
+            
          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
          
          Calendar cal = Calendar.getInstance();
@@ -73,9 +73,8 @@ public class CustomerController {
             // 마지막로그인이 한달이 지났을경우 1 else -1 
             if((oldUserToNew == null || !"Y".equals(oldUserToNew)) && result == 1) {
               // 휴면계정  CustomerState [1:정상, 0:휴면, 2:탈퇴 ]
-   
                
-            selectCustomerVo.setCustomerState(0); // 해당 회원 State 값 0 변경
+               selectCustomerVo.setCustomerState(0); // 해당 회원 State 값 0 변경
             customerService.updateState(selectCustomerVo); // 회원정보 수정 서비스
             
             System.out.println("변경된 상태 : "+ selectCustomerVo.getCustomerState());
@@ -87,17 +86,20 @@ public class CustomerController {
             }
                
            customerService.updateLastLog(selectCustomerVo); // 마지막로깅용 메소드 호출
+           session.setAttribute("customer", selectCustomerVo);
            return "customer/loginSuccess";
             
          }else {
             
            // 회원 정보 없음
             request.setAttribute("stateVal", "3");
+            session.removeAttribute("customer");
             return "customer/loginFailed";
          }
          
       } catch(Exception e) {
         request.setAttribute("stateVal", "3");
+        session.removeAttribute("customer");
          return "customer/loginFailed";
       }
    }
@@ -106,6 +108,7 @@ public class CustomerController {
    @RequestMapping(value="/logout.do")
    public String customerLogout(HttpServletRequest request) {
       HttpSession session = request.getSession(false);
+      session.removeAttribute("customer");
       session.invalidate();
       return "redirect:/index.jsp";
    }
@@ -138,7 +141,7 @@ public class CustomerController {
    
    //휴면계정 해제
    @ResponseBody
-   @RequestMapping(value="/oldUserToNewAjax.do" ,produces="text/html;charset=utf-8")
+   @RequestMapping(value="/oldUserToNewAjax.do", produces = "application/json")
    public int oldUserToNewAjax(HttpServletRequest request) {
       
      String customerId = request.getParameter("customerId");
@@ -150,6 +153,7 @@ public class CustomerController {
      if(oldUserToNew != null && "Y".equals(oldUserToNew)) {
       vo.setCustomerState(1); // 해당 회원 State 값 1 변경
       int resultCnt = customerService.updateState(vo); // 회원정보 수정 서비스
+      customerService.updateLastLog(vo); // 마지막로깅용 메소드 호출
       
       return resultCnt;
      }else{

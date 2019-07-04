@@ -22,29 +22,33 @@
                        'oldUserToNew' : 'Y'
                        ,'customerId' : $("#customerId").val()
                     },
-                 type:"post",
-                 
+                 type:"get",
+                 dataType:"JSON", 
                  success:function(data){
                     if(data > 0){
                        alert("해제됐습니다. 재 로그인 해주세요.");
                        location.href="/index.do";
+                       
                     }else{
                        alert("잠시 후 다시 시도해주세요");
+                       location.href="/index.do";
                     }
                  },
                  error:function(){
                     console.log("실패");
+                    location.href="/index.do";
                  }
               });
+                 
          }else{
             alert("취소");
-            location.href="/";
+            location.href="/index.do";
          }
 //       }else if(stateVal == 2){// 탈퇴계정
          
       }else if(stateVal == 3){
          alert("로그인 실패했습니다ㅠㅠㅠㅠㅠㅠ");
-         location.href="/";
+         location.href="/index.do";
       }
       
    </script>
