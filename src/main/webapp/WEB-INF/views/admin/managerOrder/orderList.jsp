@@ -41,19 +41,20 @@
 			<colgroup>
 				<col width="5%">
 				<col width="20%">
-				<col width="45%">
+				<col width="10%">
+				<col width="35%">
 				<col width="20%">
 				<col width="10%">
 			</colgroup>
 			<tr>
-				<th>NO</th><th>지점명</th><th>상품</th><th>등록일</th><th>상태</th>
+				<th>번호</th><th>지점명</th><th>희망배송일</th><th>상품</th><th>등록일</th><th>상태</th>
 			</tr>
 			<c:if test="${empty list.orderList }">
 				<tr><td colspan="5">등록된 발주내역이 없습니다.</td></tr>
 			</c:if>
 			<c:forEach items="${list.orderList }" var="order">
 				<tr onclick="location.href='/managerOrder/orderView.do?no=${order.mOrderNo}';" style="cursor:pointer;">
-					<td>${order.rnum }</td><td>${order.mgrName }</td><td>${order.mOrderTitle }</td><td>${order.mOrderDate }</td>
+					<td>${order.rnum }</td><td>${order.mgrName }</td><td>${order.mOrderDelDate }</td><td>${order.mOrderTitle }</td><td>${order.mOrderDate }</td>
 					<td>
 						<c:if test="${order.mOrderState eq 0}"><span class="state-reg">접수완료</span></c:if>
 						<c:if test="${order.mOrderState eq 1}"><span class="state-out">출고완료</span></c:if>

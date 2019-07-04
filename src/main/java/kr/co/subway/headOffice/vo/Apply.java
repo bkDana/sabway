@@ -7,7 +7,9 @@ public class Apply {
 	private String applyName;
 	private String applyPhone;
 	private String applyEmail;
+	private String applyEmail2;
 	private String applyArea;
+	private String applyArea2;
 	private String applyTitle;
 	private String applyContent;
 	private String applyFilename;
@@ -18,15 +20,17 @@ public class Apply {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Apply(int applyNo, String applyName, String applyPhone, String applyEmail, String applyArea,
-			String applyTitle, String applyContent, String applyFilename, String applyFilepath, int applyStatus,
-			Date applyDate) {
+	public Apply(int applyNo, String applyName, String applyPhone, String applyEmail, String applyEmail2,
+			String applyArea, String applyArea2, String applyTitle, String applyContent, String applyFilename,
+			String applyFilepath, int applyStatus, Date applyDate) {
 		super();
 		this.applyNo = applyNo;
 		this.applyName = applyName;
 		this.applyPhone = applyPhone;
 		this.applyEmail = applyEmail;
+		this.applyEmail2 = applyEmail2;
 		this.applyArea = applyArea;
+		this.applyArea2 = applyArea2;
 		this.applyTitle = applyTitle;
 		this.applyContent = applyContent;
 		this.applyFilename = applyFilename;
@@ -58,11 +62,23 @@ public class Apply {
 	public void setApplyEmail(String applyEmail) {
 		this.applyEmail = applyEmail;
 	}
+	public String getApplyEmail2() {
+		return applyEmail2;
+	}
+	public void setApplyEmail2(String applyEmail2) {
+		this.applyEmail2 = applyEmail2;
+	}
 	public String getApplyArea() {
 		return applyArea;
 	}
 	public void setApplyArea(String applyArea) {
 		this.applyArea = applyArea;
+	}
+	public String getApplyArea2() {
+		return applyArea2;
+	}
+	public void setApplyArea2(String applyArea2) {
+		this.applyArea2 = applyArea2;
 	}
 	public String getApplyTitle() {
 		return applyTitle;

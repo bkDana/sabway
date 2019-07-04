@@ -1,18 +1,21 @@
 package kr.co.subway.headOffice.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -77,5 +80,65 @@ public class PromotionController {
 		}
 		return "headOffice/applyView";
 	}
+	
+	// 가맹신청/문의 페이지 이동
+	@RequestMapping(value="/applyPage.do")
+	public String applyPage() {
+		return "headOffice/applyWrite";
+	}
+	
+	//가맹신청/문의 등록
+	@RequestMapping(value="/insertApply.do",method=RequestMethod.POST)
+	public String insertApply(HttpServletRequest request, Apply applyVo, @RequestParam MultipartFile applyfilename) {
+		System.out.println(applyfilename);
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
+		
+		String originName = applyfilename.getOriginalFilename();
+		
+		String onlyFileName = originName.substring(0, originName.indexOf('.'));
+		
+		String extension = originName.substring(originName.indexOf('.'));
+		
+		String filePath = onlyFileName + "_" + "1" + extension;
+		
+		String fullPath = savePath+"/"+filePath;
+		
+		applyVo.setApplyFilename(originName);
+		applyVo.setApplyFilepath(filePath);
+		
+		int result = applyService.insertApply(applyVo);
+		
+		if(!applyfilename.isEmpty()) {
+			try {
+				byte [] bytes = applyfilename.getBytes();
+				File f = new File(fullPath);
+				FileOutputStream fos = new FileOutputStream(f);
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				bos.write(bytes);
+				bos.close();
+				System.out.println("파일업로드 성공했어!!");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(result>0) {
+			return "headOffice/insertSuccess";
+		}else {
+			return "headOffice/insertFailed";
+		}
+	}
+	
+	// 매장찾기페이지이동
+	@RequestMapping(value="/shopSearch.do")
+	public String shopSearchPage() {
+		return "map/map";
+	}
+	
+	
+	
+	
+	
+
 	
 }
