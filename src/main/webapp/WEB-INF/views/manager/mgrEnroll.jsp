@@ -26,7 +26,6 @@
 	<!-- 가맹점 신청 승인 시  -->
 	<h1>가맹점 계정 등록</h1>
 	<hr>
-	<div>
 	<form action="/mgrEnroll.do" method="post">
 		<input type="hidden" name="mgrStatus" value="1"><!-- 영업상태: 준비중(Default) -->
 		<input type="hidden" name="mgrLevel" value="0"><!-- 0: 가맹점 고정 -->
@@ -61,6 +60,5 @@
 		<button type="submit">가맹점 등록</button>
 		<button type="button"><a href="/admin.do">메인으로</a></button>
 	</form>
-	</div>
 </body>
 </html>
