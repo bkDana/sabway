@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-</head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 	/* 테이블 테두리 black */
 	table,th,tr,td{
@@ -24,19 +18,20 @@
 		height:200px;
 	}
 </style>
-<body>
+<script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
+
 <%-- Content --%>
-	<section id="content-wrapper">
-		<div class="area">
-			<!-- 가맹점 신청 승인 시  -->
-			<h1>가맹점 계정 등록</h1>
-			<hr>
+<section id="content-wrapper">
+	<div class="area">
+		<!-- 가맹점 신청 승인 시  -->
+		<div class="common-tbl-box">
+			<h1 class="comm-content-tit">신청 목록</h1>
 			<form action="/mgrEnroll.do" method="post">
 				<input type="hidden" name="mgrStatus" value="1"><!-- 영업상태: 준비중(Default) -->
 				<input type="hidden" name="mgrLevel" value="0"><!-- 0: 가맹점 고정 -->
 				<input type="hidden" name="applyName" value="${applyName }"><!-- 신청자 이름 전달용 -->
 				<input type="hidden" name="mgrAddrType" value="${mgrAddrType }"><!-- 지역 전달 -->
-				<table>
+				<table class="comm-tbl">
 					<tr>
 						<th>아이디</th>
 						<!-- 아이디 뒤에 정해놓은 지역코드 + -->
@@ -65,10 +60,14 @@
 						<td><input type="text" name="mgrAddr" value="${mgrAddr }" readonly></td>
 					</tr>
 				</table>
-				<button type="submit">가맹점 등록</button>
-				<button type="button"><a href="/admin.do">메인으로</a></button>
+				<div class="common-tbl-btn-group">
+					<button class="btn-style2" type="submit">가맹점 등록</button>
+					<button class="btn-style2" type="button"><a href="/admin.do">메인으로</a></button>
+				</div>
 			</form>
 		</div>
-	</section>
-</body>
-</html>
+	</div>
+</section>
+
+<%-- Footer --%>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
