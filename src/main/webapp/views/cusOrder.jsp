@@ -4,12 +4,18 @@
    
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+	<!-- 모든 한글로 쓰인 attribute : 실재 EL로 바꿔야함 -->
 	<h1>온라인 주문 예약</h1>
 	<br>
 	<form action="/submitCusOrder.do" method="post">
 		<input type="button" onclick="deleteAllCookies()" value="모든 쿠키삭제">
 		<hr>
+		<div class="content-wrapper" id="selectBranch">
+			<h3>지점 골라</h3>
+			<select>
+				<option></option>
+			</select>
+		</div>
 		<div class="content-wrapper" id="selectSandOrSalad">
 			<h3>샌드위치 or 샐러드</h3>
 			<label for="샌드위치"><img alt="샌드위치" src="/resources/img//sandwich/sandwich_fl04.jpg"></label>

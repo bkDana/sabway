@@ -5,6 +5,10 @@
 		select notice_no as noticeNo, notice_category as noticeCategory, notice_title as noticeTitle, 
 		notice_content as noticeContent, filename, filepath, notice_date as noticeDate from notice order by notice_no desc
 	</select>
+	<select id="noticeSelectOne" parameterType="_int" resultType="notice">
+		select notice_no as noticeNo, notice_category as noticeCategory, notice_title as noticeTitle, 
+		notice_content as noticeContent, filename, filepath, notice_date as noticeDate from notice where notice_no=#{noticeNo}
+	</select>
 	<insert id="noticeInsert" parameterType="notice">
 		insert into notice values(seq_notice_no.nextval,#{noticeCategory},#{noticeTitle}, #{noticeContent}, #{filename},#{filepath},sysdate)
 	</insert>
@@ -27,6 +31,10 @@
 	<select id="qnaSelectAll" resultType="qna">
 		select qna_no as qnaNo, qna_category as qnaCategory, qna_writer as qnaWriter, qna_title as qnaTitle, 
 		qna_content as qnaContent, filename, filepath, qna_date as qnaDate from qna order by qna_no desc
+	</select>
+	<select id="qnaSelectOne" parameterType="_int" resultType="qna">
+		select qna_no as qnaNo, qna_category as qnaCategory, qna_writer as qnaWriter, qna_title as qnaTitle, 
+		qna_content as qnaContent, filename, filepath, qna_date as qnaDate from qna where qna_no=#{qnaNo}
 	</select>
 	<insert id="qnaInsert" parameterType="qna">
 		insert into qna values(seq_qna_no.nextval,#{qnaCategory},#{qnaWriter},#{qnaTitle}, #{qnaContent}, #{filename},#{filepath},sysdate)

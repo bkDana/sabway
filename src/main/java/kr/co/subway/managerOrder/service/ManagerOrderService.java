@@ -36,14 +36,14 @@ public class ManagerOrderService {
 		String pageNavi = "";
 		int pageNo = ((reqPage-1)/totalNavi)*totalNavi+1;
 		if(pageNo != 1) {
-			pageNavi += "<a class='paging-arrow prev-arrow' href='javascript:list("+(pageNo-1)+");'><img src='/img/left_arrow.png' style='width:30px;height:30px;'></a> ";	
+			pageNavi += "<a class='paging-arrow prev-arrow' href='javascript:list("+(pageNo-1)+");'><img src='/img/left_arrow.png' style='width:30px;height:30px;'></a>";	
 		}
 		int i = 1;
 		while(!(i++>totalNavi || pageNo>totalPage)) {
 			if(reqPage == pageNo) {
-				pageNavi += "<a class='cur'>"+pageNo+"</a> ";
+				pageNavi += "<a class='cur'>"+pageNo+"</a>";
 			}else {
-				pageNavi += "<a href='javascript:list("+pageNo+");'>"+pageNo+"</a> ";
+				pageNavi += "<a href='javascript:list("+pageNo+");'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}

@@ -25,4 +25,8 @@ public class ApplyDAO {
 	public Apply applyView(int applyNo) {
 		return sqlsession.selectOne("apply.applyView",applyNo);
 	}
+	// 가맹신청/문의 등록
+	public int insertApply(Apply applyVo) {
+		return sqlsession.insert("apply.insertApply",applyVo);
+	}
 }

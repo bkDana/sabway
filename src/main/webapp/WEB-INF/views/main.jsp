@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
@@ -7,7 +8,17 @@
 <img src="/resources/img/main_event.jpg">
 <section id="content-wrapper">
 	<div class="area">
-		<a href="/index.do">로그인!!</a>
+	<c:choose>
+		<c:when test="${not empty sessionScope.customer }">
+			[${sessionScope.customer.customerName }]<br>
+			<a href="/logout.do">로그아웃</a>
+		</c:when>
+		<c:otherwise>
+			<fieldset>
+				<a href="/index.do">로그인!!</a>	
+			</fieldset>
+		</c:otherwise>
+	</c:choose>
 		<img src="/resources/img/img_recipe_b01.jpg" onclick="location.href='/admin.do';" style="cursor:pointer;"><br>
 		<img src="/resources/img/img_recipe_b02.jpg"><br>
 		<img src="/resources/img/img_recipe_b03.jpg"><br>

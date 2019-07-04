@@ -78,4 +78,28 @@ public class PromotionController {
 		return "headOffice/applyView";
 	}
 	
+	// 가맹신청/문의 페이지 이동
+	@RequestMapping(value="/applyPage.do")
+	public String applyPage() {
+		return "headOffice/applyWrite";
+	}
+	
+	//가맹신청/문의 등록
+	@RequestMapping(value="/insertApply.do")
+	public String insertApply(Apply applyVo) {
+		int result = applyService.insertApply(applyVo);
+		return null;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

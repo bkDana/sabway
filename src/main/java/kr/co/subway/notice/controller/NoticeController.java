@@ -81,6 +81,7 @@ public class NoticeController {
 			n.setFilename("");
 			n.setFilepath("");
 		}
+		
 		int result = noticeService.noticeInsert(n);
 		
 		if(result>0) {
@@ -136,7 +137,18 @@ public class NoticeController {
 			n.setFilename("");
 			n.setFilepath("");
 		}
-			
+		Notice oldN = noticeService.noticeSelectOne(n.getNoticeNo());
+		if(!n.getFilename().equals(oldN.getFilename())){
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
+			String oldPath = savePath+"/"+oldN.getFilepath();
+			File f = new File(oldPath);
+			System.out.println("삭제로직 탓니?");
+			if(f.exists()) {
+				f.delete();
+				System.out.println("삭제햇어~");
+			}
+		}
+		
 		int result = noticeService.noticeUpdate(n);
 		
 		if(result>0) {
@@ -282,7 +294,16 @@ public class NoticeController {
 			q.setFilename("");
 			q.setFilepath("");
 		}
-			
+		Qna oldQ = noticeService.qnaSelectOne(q.getQnaNo());
+		if(!q.getFilename().equals(oldQ.getFilename())){
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
+			String oldPath = savePath+"/"+oldQ.getFilepath();
+			File f = new File(oldPath);
+			if(f.exists()) {
+				f.delete();
+			}
+		}
+		
 		int result = noticeService.qnaUpdate(q);
 		
 		if(result>0) {
@@ -324,6 +345,20 @@ public class NoticeController {
 	@RequestMapping("/moveReviewInsert.do")
 	public String moveReviewInsert() {
 		return "/review/reviewInsert";
+	}
+	
+	public void deleteFile() {
+		File file = new File("C:/123.txt");
+	    
+	    if( file.exists() ){
+	        if(file.delete()){
+	            System.out.println("파일삭제 성공");
+	        }else{
+	            System.out.println("파일삭제 실패");
+	        }
+	    }else{
+	        System.out.println("파일이 존재하지 않습니다.");
+	    }
 	}
 	
 }

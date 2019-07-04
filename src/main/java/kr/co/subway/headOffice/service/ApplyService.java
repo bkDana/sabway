@@ -35,4 +35,9 @@ public class ApplyService {
 		Apply ap = applyDao.applyView(applyNo);
 		return ap;
 	}
+	// 가맹신청/문의 등록
+	public int insertApply(Apply applyVo) {
+		applyVo.setApplyStatus(0);
+		return applyDao.insertApply(applyVo);
+	}
 }
