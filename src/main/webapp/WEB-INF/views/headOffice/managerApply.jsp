@@ -39,7 +39,7 @@
 						<td>${apply.applyPhone }</td>
 						<td name="applyArea">${apply.applyArea }</td>
 						<td>${apply.applyDate }</td>
-						<!-- 신청 승인여부에 따라 정보 전달 : 0(default),1(승인),2(거절) -->
+						<!-- 신청 승인여부에 따라 정보 전달 : 0(default:신청),1(승인),2(거절) -->
 						<td>
 							<!-- 승인/거절 클릭하면 applyName(공통), applyStatus(개별) 전달 -->
 							<input type="hidden" id="applyName" value="${apply.applyName }">
