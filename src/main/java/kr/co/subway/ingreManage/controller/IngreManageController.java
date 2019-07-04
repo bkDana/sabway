@@ -102,6 +102,7 @@ public class IngreManageController {
 		}
 		IngrePageNaviData ip = ingreService.ingreList(reqPage1,searchType,searchVal);
 		ArrayList<IngreVo> list = ip.getIngreList();
+		//System.out.println("파일이름 : "+list.get(0).getIngreFilepath());
 		String pageNavi = ip.getPageNavi();
 		if(!list.isEmpty()) {
 			mav.addObject("reqPage",reqPage1);
@@ -123,7 +124,7 @@ public class IngreManageController {
 		System.out.println("활성화:"+ingreActive);
 		System.out.println("인덱스:"+ingreIdx);
 		int result = ingreService.updateIngreActive(ingreActive,ingreIdx);
-		System.out.println(result);
+		System.out.println("controller updateIngreActive() result : "+result);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if(result>0) {
@@ -146,7 +147,7 @@ public class IngreManageController {
 	//재료정보 가져오기
 	@RequestMapping("/goIngreUpdate.do")
 	public ModelAndView goUpdatePage(ModelAndView mav, String ingreIdx) {
-		System.out.println(ingreIdx);
+		System.out.println("controller goUpdatePage() idx : "+ingreIdx);
 		IngreVo iv = ingreService.goUpdateIngre(ingreIdx);
 		if(iv!=null) {
 			mav.addObject("iv",iv);
@@ -212,8 +213,15 @@ public class IngreManageController {
 	
 	//재료 삭제하기
 	@RequestMapping("/ingreDelete.do")
-	public String ingreDelete(String ingreIdx, String reqPage, String searchType, String searchVal, RedirectAttributes redirectAttributes) {
-		System.out.println("no:"+ingreIdx+" reqPage : "+reqPage+" searchType : "+searchType+" searchVal : "+searchVal);
+	public String ingreDelete(HttpServletRequest request, String ingreIdx, String reqPage, String searchType, String searchVal,String filepath, RedirectAttributes redirectAttributes) {
+		System.out.println("no:"+ingreIdx+" reqPage : "+reqPage+" searchType : "+searchType+" searchVal : "+searchVal+" filepath: "+filepath);
+		//첨부파일 있으면
+		if(!filepath.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/ingredients");///////
+			File delFile = new File(savePath+"/"+filepath);
+			System.out.println("파일 삭제됐나요? : "+delFile.delete());
+		}
+		
 		int result = ingreService.ingreDelete(ingreIdx);
 		if(result>0) {
 			redirectAttributes.addAttribute("reqPage", reqPage);	//redirect로 값 보내기
