@@ -28,9 +28,9 @@
 			        	<label for="email">E-Mail</label>
 			        </td>
 			       	<td>
-			        	<input class="inputBox" type="text" id="email" name="email"  maxlength="20">@
+			        	<input class="inputBox" type="text" id="applyEmail" name="applyEmail"  maxlength="20">@
 			               
-			            <input class="inputBox" type="text" id="email2" name="email2" maxlength="20">
+			            <input class="inputBox" type="text" id="applyEmail2" name="applyEmail2" maxlength="20">
 			               
 			            <select name="emailEx" id="emailEx" style="width:100px; height:20px">
 				            <option value="">직접입력</option>
@@ -92,13 +92,33 @@
 					</th>
 				</tr>
 			</table>
-			
 		</form>
 	</center>
 	</section>
 </body>
 <script>
 
+//이메일 작성
+$("#emailEx").change(function(){
+    if(isEmpty($("#emailEx").val())){
+         $("#applyEmail2").attr("readonly",false);
+         $("#applyEmail2").val("");
+         $("#applyEmail2").focus();
+    }else{
+         $("#applyEmail2").attr("readonly",true);
+       $("#applyEmail2").val($("#emailEx").val());
+    }
+ });
+ 
+
+// 빈값 체크
+function isEmpty(text){
+   if(text != null && text != ""){
+      return false;
+   }else{
+      return true;
+   }
+}
 
 
 

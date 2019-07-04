@@ -37,7 +37,17 @@ public class ApplyService {
 	}
 	// 가맹신청/문의 등록
 	public int insertApply(Apply applyVo) {
+		
+		//승인여부 0:기본
 		applyVo.setApplyStatus(0);
+		
+		//지역
+		applyVo.setApplyArea(applyVo.getApplyArea()+applyVo.getApplyArea2());
+		
+		//이메일
+		applyVo.setApplyEmail(applyVo.getApplyEmail()+'@'+applyVo.getApplyEmail2());
+		
+		
 		return applyDao.insertApply(applyVo);
 	}
 }
