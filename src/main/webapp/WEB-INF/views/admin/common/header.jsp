@@ -28,7 +28,13 @@
 	<header id="header">
 		<div class="admin-header">
 			<a href="/admin.do">당산점 관리자 페이지</a>
-			<a href="/loginAdmin.do" style="float:right;margin-right:60px;">로그인</a>
+			<div style="float:right;margin-right:60px;">
+				<c:if test="${not empty sessionScope.mgr.mgrId }">
+					<a href="/adminPage.do">${sessionScope.mgr.mgrName }</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="/adminLogout.do">로그아웃</a>
+				</c:if>
+			</div>
 		</div>
 		<div id="headerInnerWrap">
 			<!-- 헤더 상단 -->

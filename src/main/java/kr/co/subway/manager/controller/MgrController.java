@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 
 import org.springframework.stereotype.Controller;
@@ -64,8 +65,26 @@ public class MgrController {
 		return "admin/login";
 	}
 	
-//	@RequestMapping("/adminLogin.do")
-//	public String adminLogin(){
-//		return "";
-//	}
+	@RequestMapping("/adminLogin.do")
+	public String adminLogin(HttpServletRequest request, @RequestParam String mgrId){
+		HttpSession session = request.getSession();
+		Mgr mgr = new Mgr();
+		mgr = mgrservice.login(mgrId);
+		String view = "";
+		if(mgr != null) {
+			session.setAttribute("mgr", mgr);
+			view = "admin/index";
+		}else {
+			view = "main";
+		}
+		return view;
+	}
+
+	@RequestMapping("/adminLogout.do")
+	public String logout(HttpServletRequest request){
+		HttpSession session = request.getSession(false);
+		session.invalidate();
+		return "main";
+	}
+	
 }

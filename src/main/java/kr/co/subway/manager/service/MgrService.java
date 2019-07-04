@@ -29,4 +29,9 @@ public class MgrService {
 //		List list= mgrdao.selectMgr();
 //		return (ArrayList<Mgr>)list;
 //	}
+	
+	public Mgr login(String mgrId) {
+	Mgr mgr = mgrdao.login(mgrId);
+	return mgr;
+}
 }
