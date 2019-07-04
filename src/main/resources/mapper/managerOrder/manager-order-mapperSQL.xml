@@ -34,7 +34,7 @@
   			m_order_no as mOrderNo,
 	  		m_order_manager_id as mOrderManagerId,
 	  		m_order_title as mOrderTitle,
-	  		m_order_del_date as mOrderDelDate,
+	  		TO_CHAR(m_order_del_date,'YYYY-MM-DD') as mOrderDelDate,
 	  		m_order_state as mOrderState,
 	  		TO_CHAR(m_order_date,'YYYY-MM-DD HH24:mi:ss') as mOrderDate,
 	  		mgr_name as mgrName
