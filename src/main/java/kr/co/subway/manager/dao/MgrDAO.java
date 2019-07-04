@@ -1,7 +1,5 @@
 package kr.co.subway.manager.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +14,10 @@ public class MgrDAO {
 	public int enrollMgr(Mgr mg) {
 		return session.insert("mgr.enrollMgr",mg);
 	}
-	public List mgrList() {
-		return session.selectList("mgr.mgrList");
+//	public List selectMgr() {
+//		return session.selectList("mgr.selectMgr");
+//	}
+	public Mgr login(String mgrId) {
+		return session.selectOne("mgr.login", mgrId);
 	}
 }

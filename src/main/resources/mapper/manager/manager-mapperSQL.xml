@@ -4,7 +4,7 @@
 	<insert id="enrollMgr" parameterType="mgr">
 		insert into manager values(seq_mgr_no.nextval,#{mgrId}, #{mgrPw}, #{mgrName}, #{mgrTel}, #{mgrPost}, #{mgrAddr}, #{mgrLevel}, #{mgrStatus}, sysdate)
 	</insert>
-	<select id="mgrList" resultType="mgr">
+	<select id="selectMgr" resultType="mgr">
 		select mgr_no as mgrNo
 		,mgr_id as mgrId
 		,mgr_pw as mgrPw
@@ -16,5 +16,19 @@
 		,mgr_status as mgrStatus
 		,mgr_enroll_date as mgrEnrollDate
 		from manager
+	</select>
+	<select id="login" parameterType="string" resultType="mgr">
+		select mgr_no as mgrNo
+		,mgr_id as mgrId
+		,mgr_pw as mgrPw
+		,mgr_name as mgrName
+		,mgr_tel as mgrTel
+		,mgr_post as mgrPost
+		,mgr_addr as mgrAddr
+		,mgr_level as mgrLevel
+		,mgr_status as mgrStatus
+		,mgr_enroll_date as mgrEnrollDate
+		from manager
+		where mgr_id = #{mgrId}
 	</select>
 </mapper>

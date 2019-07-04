@@ -57,8 +57,15 @@
 						</td>
 						<td>${list.ingreLabel }</td>
 						<td>
-							15cm : ${list.ingreCost15 }원<br>
-							30cm : ${list.ingreCost30 }원
+							<c:choose>
+								<c:when test="${list.ingreCost15 eq 0}">
+									0원
+								</c:when>
+								<c:otherwise>
+									15cm : ${list.ingreCost15 }원<br>
+									30cm : ${list.ingreCost30 }원
+								</c:otherwise>
+							</c:choose>
 						</td>
 						<td>
 							15cm : ${list.ingreKcal }kcal<br>
@@ -73,7 +80,7 @@
 						</td>
 						<td>
 							<button class="add-btn" onclick="location.href='/goIngreUpdate.do?ingreIdx=${list.ingreIdx}'">수정</button>
-							<button class="del-btn" data-no="${list.ingreIdx}">삭제</button>
+							<button class="del-btn" data-no="${list.ingreIdx}" data-path="${list.ingreFilepath}">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -94,7 +101,7 @@ $(document).ready(function(){
 	$(".del-btn").click(function(){
 		var del = confirm("정말로 삭제하시겠습니까?");
 		if(del){
-			location.href="/ingreDelete.do?reqPage=${reqPage}&searchType=${searchType}&searchVal=${searchVal}&ingreIdx="+$(this).data('no');
+			location.href="/ingreDelete.do?reqPage=${reqPage}&searchType=${searchType}&searchVal=${searchVal}&ingreIdx="+$(this).data('no')+"&filepath="+$(this).data('path');
 		}else{
 			console.log("삭제안한대");
 		}

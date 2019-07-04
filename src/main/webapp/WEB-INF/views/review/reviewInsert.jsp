@@ -14,15 +14,61 @@
 		<div class="common-tbl-box">
 			<form name="write">
 			    <table id="insertTable" class="comm-tbl editor-container-navi">
+				    <colgroup>
+						<col width="15%">
+						<col width="35">
+						<col width="15%">
+						<col width="35">
+					</colgroup>
+			    	<tr>
+				        <td>
+				        	제목
+				        </td>
+				        <td>
+				        	<input type="text" name="review_title">
+				        </td>
+				        <td>
+				        	별점
+				        </td>
+				        <td>
+				        	<input type="hidden" name="review_title">
+				        	<div class="starbox">
+					        	<img class="emptystar" width="30px" height="30px" src="/resources/img/emptystar.png">
+					        	<img class="halfstar" width="30px" height="30px" src="/resources/img/halfstar.png">
+					        	<img class="fullstar" width="30px" height="30px" src="/resources/img/fullstar.png">
+				        	</div>
+				        	<div class="starbox">
+					        	<img class="emptystar" width="30px" height="30px" src="/resources/img/emptystar.png">
+					        	<img class="halfstar" width="30px" height="30px" src="/resources/img/halfstar.png">
+					        	<img class="fullstar" width="30px" height="30px" src="/resources/img/fullstar.png">
+				        	</div>
+				        	<div class="starbox">
+					        	<img class="emptystar" width="30px" height="30px" src="/resources/img/emptystar.png">
+					        	<img class="halfstar" width="30px" height="30px" src="/resources/img/halfstar.png">
+					        	<img class="fullstar" width="30px" height="30px" src="/resources/img/fullstar.png">
+				        	</div>
+				        	<div class="starbox">
+					        	<img class="emptystar" width="30px" height="30px" src="/resources/img/emptystar.png">
+					        	<img class="halfstar" width="30px" height="30px" src="/resources/img/halfstar.png">
+					        	<img class="fullstar" width="30px" height="30px" src="/resources/img/fullstar.png">
+				        	</div>
+				        	<div class="starbox">
+					        	<img class="emptystar" width="30px" height="30px" src="/resources/img/emptystar.png">
+					        	<img class="halfstar" width="30px" height="30px" src="/resources/img/halfstar.png">
+					        	<img class="fullstar" width="30px" height="30px" src="/resources/img/fullstar.png">
+				        	</div>
+				        	
+				        </td>
+				    </tr>
 			        <tr>
-				        <td colspan="2">
+				        <td colspan="4">
 				        	<div id="testContent" class="editor-content" contentEditable="true">
 				    			
 				    		</div>
 				        </td>
 				    </tr>
 				    <tr>
-			        	<td colspan="2">
+			        	<td colspan="4">
 			        		<div class="common-tbl-btn-group">
 			        			<button type="button" class="btn-style2 small" onClick='addFile(this.form)'>사진 첨부하기</button>
 			        		</div>
