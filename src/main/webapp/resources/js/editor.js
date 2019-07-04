@@ -83,5 +83,13 @@ $(document).ready(function(){
 		}
 	}
 	
-	
+	$('.starbox').click(function(){
+		var index = $('.starbox').index(this);
+		console.log(index);
+		while(i<index){
+			$('.fullstar').eq(i).css("display","block");
+			i++;
+		}
+		
+	});
 	

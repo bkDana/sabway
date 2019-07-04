@@ -32,11 +32,32 @@
 				        </td>
 				        <td>
 				        	<input type="hidden" name="review_title">
-				        	<img width="30px" height="30px" src="/resources/img/emptystar.png">
-				        	<img width="30px" height="30px" src="/resources/img/emptystar.png">
-				        	<img width="30px" height="30px" src="/resources/img/emptystar.png">
-				        	<img width="30px" height="30px" src="/resources/img/emptystar.png">
-				        	<img width="30px" height="30px" src="/resources/img/emptystar.png">
+				        	<div class="starbox">
+					        	<img class="emptystar" width="30px" height="30px" src="/resources/img/emptystar.png">
+					        	<img class="halfstar" width="30px" height="30px" src="/resources/img/halfstar.png">
+					        	<img class="fullstar" width="30px" height="30px" src="/resources/img/fullstar.png">
+				        	</div>
+				        	<div class="starbox">
+					        	<img class="emptystar" width="30px" height="30px" src="/resources/img/emptystar.png">
+					        	<img class="halfstar" width="30px" height="30px" src="/resources/img/halfstar.png">
+					        	<img class="fullstar" width="30px" height="30px" src="/resources/img/fullstar.png">
+				        	</div>
+				        	<div class="starbox">
+					        	<img class="emptystar" width="30px" height="30px" src="/resources/img/emptystar.png">
+					        	<img class="halfstar" width="30px" height="30px" src="/resources/img/halfstar.png">
+					        	<img class="fullstar" width="30px" height="30px" src="/resources/img/fullstar.png">
+				        	</div>
+				        	<div class="starbox">
+					        	<img class="emptystar" width="30px" height="30px" src="/resources/img/emptystar.png">
+					        	<img class="halfstar" width="30px" height="30px" src="/resources/img/halfstar.png">
+					        	<img class="fullstar" width="30px" height="30px" src="/resources/img/fullstar.png">
+				        	</div>
+				        	<div class="starbox">
+					        	<img class="emptystar" width="30px" height="30px" src="/resources/img/emptystar.png">
+					        	<img class="halfstar" width="30px" height="30px" src="/resources/img/halfstar.png">
+					        	<img class="fullstar" width="30px" height="30px" src="/resources/img/fullstar.png">
+				        	</div>
+				        	
 				        </td>
 				    </tr>
 			        <tr>

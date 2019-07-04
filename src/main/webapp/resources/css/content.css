@@ -235,3 +235,6 @@
 	cursor: pointer;
 	display: inline-block;
 }
+.halfstar{display: none;}
+.fullstar{display: none;}
+.starbox{float:left;}
