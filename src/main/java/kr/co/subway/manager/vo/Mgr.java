@@ -13,12 +13,13 @@ public class Mgr {
 	private int mgrLevel;
 	private int mgrStatus;
 	private Date mgrEnrollDate;
+	private String mgrAddrType;
 	public Mgr() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Mgr(int mgrNo, String mgrId, String mgrPw, String mgrName, String mgrTel, int mgrPost, String mgrAddr,
-			int mgrLevel, int mgrStatus, Date mgrEnrollDate) {
+			int mgrLevel, int mgrStatus, Date mgrEnrollDate, String mgrAddrType) {
 		super();
 		this.mgrNo = mgrNo;
 		this.mgrId = mgrId;
@@ -30,6 +31,7 @@ public class Mgr {
 		this.mgrLevel = mgrLevel;
 		this.mgrStatus = mgrStatus;
 		this.mgrEnrollDate = mgrEnrollDate;
+		this.mgrAddrType = mgrAddrType;
 	}
 	public int getMgrNo() {
 		return mgrNo;
@@ -90,6 +92,12 @@ public class Mgr {
 	}
 	public void setMgrEnrollDate(Date mgrEnrollDate) {
 		this.mgrEnrollDate = mgrEnrollDate;
+	}
+	public String getMgrAddrType() {
+		return mgrAddrType;
+	}
+	public void setMgrAddrType(String mgrAddrType) {
+		this.mgrAddrType = mgrAddrType;
 	}
 	
 }

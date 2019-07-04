@@ -61,10 +61,17 @@ public class IngreManageDao {
 		return sqlSession.selectOne("ingre.goIngreUpdate",ingreIdx);
 	}
 	
+	//재료 수정하기
+	public int ingreUpdate(IngreVo iv) {
+		return sqlSession.update("ingre.ingreUpdate",iv);
+	}
+	
 	//재료 삭제하기
 	public int ingreDelete(String ingreIdx) {
 		return sqlSession.delete("ingre.ingreDelete",ingreIdx);
 	}
+
+	
 
 
 	

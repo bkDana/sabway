@@ -28,6 +28,7 @@
 	<header id="header">
 		<div class="admin-header">
 			<a href="/admin.do">당산점 관리자 페이지</a>
+			<a href="/loginAdmin.do" style="float:right;margin-right:60px;">로그인</a>
 		</div>
 		<div id="headerInnerWrap">
 			<!-- 헤더 상단 -->
