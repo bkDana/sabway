@@ -33,13 +33,13 @@
 						</td>
 					</tr>
 					<tr>
-						<th>상품명</th>
+						<th>재료명</th>
 						<td>
 							<input type="text" name="ingreLabel" id="ingreLabel" required>
 						</td>
 					</tr>
 					<tr>
-						<th>판매가격</th>
+						<th>판매 가격</th>
 						<td>
 							15cm : <input type="text" name="ingreCost15" id="ingreCost15" class="short" value="0" required style="text-align:right;"> 원 &nbsp;&nbsp;
 							30cm : <input type="text" name="ingreCost30" id="ingreCost30" class="short" value="0" required style="text-align:right;"> 원
@@ -86,7 +86,7 @@
 						<th>할인률</th>
 						<td>
 							<input type="text" name="ingreDis" class="short2" value="0" style="text-align:right;"> %
-							select로 바꾸기
+							select로 바꾸기 얘도 있어야할까..?
 						</td>
 					</tr>
 				</table>
@@ -98,11 +98,6 @@
 		</div>
 	
 </section>
-<!-- <script>
-	$(document).ready(function(){
-		if($())
-	});
-</script> -->
 
 
 <%-- Footer --%>

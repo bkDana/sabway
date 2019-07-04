@@ -42,7 +42,7 @@ public class IngreManageController {
 	
 	//재료 등록하기
 	@RequestMapping("/ingreRegister.do")
-	public String ingreReg(HttpServletRequest request, @RequestParam MultipartFile filepath, IngreVo iv) {
+	public ModelAndView ingreReg(HttpServletRequest request, @RequestParam MultipartFile filepath, IngreVo iv, ModelAndView mav) {
 		String fullPath="";
 		if(!filepath.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/ingredients");
@@ -54,13 +54,6 @@ public class IngreManageController {
 			iv.setIngreFilepath(filePath);
 		}else {
 			iv.setIngreFilepath("");
-		}
-		
-		int result = ingreService.ingreReg(iv);
-		if(result>0) {
-			System.out.println("등록 성공");;	
-		}else {
-			System.out.println("등록 실패");;
 		}
 		
 		if(!filepath.isEmpty()) {
@@ -77,7 +70,15 @@ public class IngreManageController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:/goIngreReg.do";
+		
+		int result = ingreService.ingreReg(iv);
+		if(result>0) {
+			mav.addObject("iv",iv);
+			mav.setViewName("admin/ingreManage/ingreRegSuccess");
+		}else {
+			mav.setViewName("common.error");
+		}
+		return mav;
 	}
 	
 	public String getDate() {

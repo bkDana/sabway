@@ -34,7 +34,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>상품명</th>
+						<th>재료명</th>
 						<td>
 							<input type="text" name="ingreLabel" id="ingreLabel" value="${iv.ingreLabel}" required>
 						</td>
