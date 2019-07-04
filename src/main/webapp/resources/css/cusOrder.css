@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.content-container {
+	position: relative;
+	top: 30px;
+	width: 100%;
+	height: 100%;
+}
+.content-wrapper {
+	position: relative;
+	display: inline-block;
+	width: 75%;
+	height: 40%;
+}
+#asideBar{
+	position: absolute;
+	width: 25%;
+	height: 98.80%;
+	border-right:2px solid #2c3c57;
+	background-color: white;
+	z-index: 2;
+}
+#sticky{
+	position: sticky;/* 필수 */
+	position: -webkit-sticky;/* 필수 */
+	top: 110px; /* 필수 */
+	display: inline-block;
+	width: 100%;
+	height: 670px;
+	border-right:2px solid #2c3c57;
+	background-color: white;
+}
+#sideNav-wrapper{
+	position: absolute;
+	left: 150px;
+	width: 60%;
+	height: 100%;
+	text-align:left;
+}
+#sideNav-span{
+	font-size: 30px;
+	color: #2c3c57;
+	font-weight: bolder;
+	line-height: 45px;
+}
+#test {
+	with: 100px;
+	height:100px;
+	background-color:red;
+}	
+}

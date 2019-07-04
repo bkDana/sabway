@@ -220,7 +220,7 @@
 }
 .editor-content{
 	height:400px;
-	border:1px solid rgba(254,67,30);
+	border:1px solid #ddd;
 	overflow: scroll;
 	text-align: center;
 }
@@ -228,14 +228,13 @@
 	margin: 0 auto;
 	width:200px;
 	height:160px; 
-	padding: 5px; 
+	padding: 10px; 
 	min-width : 160px;
 	min-height : 120px;
-	border: 0px solid #c5c5c5; 
 	overflow: auto; 
-	resize: both;
-	box-sizing : border-box;
-	cursor: no-drop;
-	-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
-	background-repeat: no-repeat;
+	cursor: pointer;
+	display: inline-block;
 }
+.halfstar{display: none;}
+.fullstar{display: none;}
+.starbox{float:left;}
