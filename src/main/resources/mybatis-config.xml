@@ -6,6 +6,7 @@
 		<typeAlias type="kr.co.subway.notice.vo.PageBound" alias="pb"/>
 		<typeAlias type="kr.co.subway.notice.vo.Qna" alias="qna"/>
 		<typeAlias type="kr.co.subway.headOffice.vo.Apply" alias="apply"/>
+		<typeAlias type="kr.co.subway.headOffice.vo.Menu" alias="menu"/>
 		<typeAlias type="kr.co.subway.manager.vo.Mgr" alias="mgr"/>
 		<typeAlias type="kr.co.subway.customer.vo.Customer" alias="customer"/>
 		<typeAlias type="kr.co.subway.ingreManage.vo.IngreVo" alias="ingre"/>	<!-- 재료 Vo -->
