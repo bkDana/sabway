@@ -17,18 +17,18 @@
 			<table>
 				<tr>
 					<td><label for="applyName">이름</label></td>
-					<td><input type="text" id="applyName" name="applyName" maxlength="16" style="width:1000px"></td>
+					<td><input type="text" id="applyName" name="applyName" maxlength="16" style="width:1000px" placeholder="이름을 입력해주세요"></td>
 				</tr>
 				<tr>
 					<td><label for="applyPhone">연락처</label></td>
-					<td><input type="text" id="applyPhone" name="applyPhone" maxlength="16" style="width:1000px"></td>
+					<td><input type="text" id="applyPhone" name="applyPhone" maxlength="16" style="width:1000px"placeholder="연락 가능한 전화번호를 입력해주세요"></td>
 				</tr>
 				<tr>
 			    	<td>
 			        	<label for="email">E-Mail</label>
 			        </td>
 			       	<td>
-			        	<input class="inputBox" type="text" id="applyEmail" name="applyEmail"  maxlength="20">@
+			        	<input class="inputBox" type="text" id="applyEmail" name="applyEmail"  maxlength="20" placeholder="이메일">@
 			               
 			            <input class="inputBox" type="text" id="applyEmail2" name="applyEmail2" maxlength="20">
 			               
@@ -71,12 +71,12 @@
 				</tr>
 				<tr>
 					<td><label for="applyTitle">제목</label></td>
-					<td><input type="text" id="applyTitle" name="applyTitle" maxlength="16" style="width:1000px"></td>
+					<td><input type="text" id="applyTitle" name="applyTitle" maxlength="16" style="width:1000px" placeholder="제목을 입력해주세요"></td>
 				</tr>
 				<tr>
 					<td><label for="applyContent">내용</label></td>
 					<td>
-					<textarea name="applyContent" id="applyContent" rows="3" cols="40" style="width:1050px;overflow:visible"></textarea>
+					<textarea name="applyContent" id="applyContent" rows="3" cols="40" style="width:1000px;overflow:visible"></textarea>
 					</td>
 				</tr>
 				<tr>

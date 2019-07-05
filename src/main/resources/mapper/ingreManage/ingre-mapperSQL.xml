@@ -45,7 +45,7 @@
   
   <!-- 재료 리스트 구하기 -->
   <select id="ingreSelectAll" parameterType="map" resultType="ingre">
-  	select rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_kcal_salad as ingreKcalSalad, ingre_active as ingreActive, <!-- ingre_unit as ingreUnit,  ingre_description as ingreDescription, ingre_filepath as ingreFilepth,-->ingre_reg_date as ingreRegDate 
+  	select rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_kcal_salad as ingreKcalSalad, ingre_active as ingreActive, <!-- ingre_unit as ingreUnit,  ingre_description as ingreDescription,--> ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
   	from (select rownum as rnum, i.* from(select * from ingredients 
   	<if test="searchType != null and searchType != '' and searchVal != null and searchVal != '' and searchType != 'null' and searchVal != 'null'"> <!-- 검색했을 경우 -->
   		where

@@ -87,29 +87,35 @@ public class ManagerOrderService {
 
 	public int addStock(SearchVO search) {
 		int result = 0;
+		int chkAmount = 0;
 		/*추가해야할 재고 목록*/
 		ArrayList<StockVO> stockList = (ArrayList<StockVO>)dao.delStock(search);
 		for (StockVO stock : stockList) {
+			/*
 			System.out.println(stock.getmStockIdx());
 			System.out.println(stock.getmOrderManagerId());
 			System.out.println(stock.getmItemIdx());
 			System.out.println(stock.getmItemAmount());
+			*/
+			/* insert, update 여부 판단 */
 			StockVO chkStock = dao.findStock(stock);
 			if(chkStock == null) {
-				System.out.println("없어");
+				//System.out.println("없어");
+				result += dao.insertStock(stock);
 			}else {
-				System.out.println("있어");
+				//System.out.println("있어"+chkStock.getmStockIdx());
+				stock.setmStockIdx(chkStock.getmStockIdx());
+				result += dao.updateStock(stock);
+				
 			}
-			
+			chkAmount++;
 		}
-		/*이미 있나 없나 확인*/
 		
-		StockVO stock = new StockVO();
-		
-		/*있으면 update*/
-		//dao.updateStock(stock);
-		/*없으면 insert*/
-		//dao.insertStock(stock);
+		if(result==chkAmount) {
+			System.out.println("재고 모두 추가 완료");
+		}else {
+			System.out.println("안맞는데");
+		}
 		
 		return result;
 	}

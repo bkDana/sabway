@@ -1,190 +1,58 @@
-/**사브웨이 프로젝트 주문용 쿠키 생성, 조회, 삭제 및 기타 function
+/**수평 단계별 폼 입력 양식 js
  * 
  */
 
-/* 초기화 */
-$(document).ready(function(){
+$(document).ready(function() {
 	$('.hide').hide();
-	$('#cheese').hide();
-	$('#topping').hide();
-	$('#isOvened').hide();
-	$('#vegi').hide();
-	$('#source').hide();
-	$('#set').hide();
-	$('#moreOrder').hide();
-	$vegiArr = ['2','2','2','2','2','2','2','2'];
 });
-
-
-
-/* set cookie */
-var setCookie = function(name, value, exp) {
-	var date = new Date();
-	date.setTime(date.getTime() + exp*24*60*60*1000);
-	document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
-}
-
-/* get cookie */
-var getCookie = function(name) {
-	  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-	  return value? value[2] : null;
-}
-
-/* delete cookie */
-var deleteCookie = function(name) {
-	  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-	}
-
-/* delete all cookies */
-function deleteAllCookies() {
-    var cookies = document.cookie.split(";");
-
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-	}
-   	alert('cookies deleted');
-}  
-
-/* 클릭시 쿠키에 등록 */
-$(document).on('click','input[type=radio]',function(){
-	var name = $(this).attr('name');
-	var value = $(this).attr('value');
-	setCookie(name,value,1);
-	console.log(document.cookie);
-});
-$(document).on('click','input[type=checkbox]',function(){
-	var name = $(this).attr('name');
-	var value = $(this).attr('value');
-	setCookie(name,value,1);
-	console.log(document.cookie);
-});
+//
+///* test */
+//$('.hide').click(function(){
+//	var name = $(this).attr('name');
+//	var value = $(this).attr('value');
+//	setCookie(name,value,1);
+//	console.log(document.cookie);
+//});
+//
+///* set cookie */
+//var setCookie = function(name, value, exp) {
+//	var date = new Date();
+//	date.setTime(date.getTime() + exp*24*60*60*1000);
+//	document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+//};
+//
+///* delete cookie */
+//function deleteCookie( name ) {
+//	document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+//}
 
 /* 샌드위치나 샐러드 선택 시 */
 $('input[name=isSalad]').click(function(){
+	console.log($(this).val());
 	if($(this).val() == "샌드위치") {
 		/* 샌드위치 or 샐러드 상세 선택 메뉴 교체 */
-		if(!$('#cheese').is(':visible')) {
-			$('.content-wrapper').eq(0).after('<div class="content-wrapper" id="sandwich"></div>');	
-			$('.content-wrapper').eq(1).append(tagSandwich);
-			$('#cheese').show();
-		}else {
-			$('.content-wrapper').eq(1).remove();
-			$('.content-wrapper').eq(0).after('<div class="content-wrapper" id="sandwich"></div>');
-			$('.content-wrapper').eq(1).append(tagSandwich);
-		}
+		$('#main').empty();					// 메인재료 내용 비우고
+		$('#main').append(tagSandwich); 	// 샌드위치 관련내용
 	} else if($(this).val() == "샐러드") {
 		/* 샌드위치 or 샐러드 상세 선택 메뉴 교체 */
-		if(!$('#cheese').is(':visible')) {
-			$('.content-wrapper').eq(0).after('<div class="content-wrapper" id="salad"></div>');	
-			$('.content-wrapper').eq(1).append(tagSalad);
-			$('#cheese').show();
-		}else {
-			$('.content-wrapper').eq(1).remove();
-			$('.content-wrapper').eq(0).after('<div class="content-wrapper" id="salad"></div>');	
-			$('.content-wrapper').eq(1).append(tagSalad);
-		}
+		$('#main').empty();  				// 메인재료 내용 비우고
+		$('#main').append(tagSalad); 		// 샐러드 관련내용
 	}
 	$('.hide').hide();
-});
-
-/* 추가토핑 */
-$('input[name=cheese]').click(function() {
-	$('#topping').show();
-})
-$('#topping input[value=선택안함]').change(function() {
-	if($(this).is(":checked")) {
-		$("input[name=topping]:checkbox").each(function() {
-			$(this).prop("checked", false);
-		});
-		$(this).parent().filter($('input[name=topping]')).attr("disabled",true);
-	} else {
-		$(this).parent().filter($('input[name=topping]')).attr("disabled",false);
-	}
-	
-})
-
-/* 오븐여부 */
-$('input[name=topping]').click(function() {
-	console.log($('#topping input[name=topping]:checked').length);
-	$('#isOvened').show();
-});
-$('#topping input[name=nothingElse]').click(function() {
-	console.log($('#topping input[name=topping]:checked').length);
-	$('#isOvened').show();
 });
 
 /* 채소 */
-$('input[name=isOvened]').click(function() {
-	$('#vegi').show();
-	$('.hide').hide();
-});
 $('.vegiRef').change(function() {
 	$('.vegiRef').each(function(index,item){
 		$vegiArr[index] = $(item).val();
 	});
 	$('input[name=vegi]').val($vegiArr.join(""));
-	setCookie('vegi',$vegiArr,1);
 	console.log($('input[name=vegi]').val()); // test 
 });
 
 
-/* 소스 */
-$('input[name=vegiRef]').click(function() {
-	$('#source').show();
-});
-$('#source input[value=선택안함]').change(function() {
-	if($(this).is(":checked")) {
-		$("input[name=source]:checkbox").each(function() {
-			$(this).prop("checked", false);
-		});
-		$(this).parent().filter($('input[name=source]')).attr("disabled",true);
-	} else {
-		$(this).parent().filter($('input[name=source]')).attr("disabled",false);
-	}
-	
-});
-
-/* 세트여부 */
-$('input[name=source]').click(function() {
-	$('#set').show();
-	$('.hide').hide();
-});
-/* 세트 구분하기 및 추가주문 받기 */
-$('input[name=set]').click(function() {
-	if($(this).val()==1) {
-		 var $whichSet = $('input[name=whichSet]');
-		$('#moreOrder').hide();
-		$(this).siblings().filter($('.hide')).show();
-		if($whichSet.is(":checked")) {
-			console.log("아아");
-			$('#moreOrder').show();
-		}
-	} else {
-		$(this).siblings().filter($('.hide')).hide();
-		$('#moreOrder').show();
-	}
-	
-});
-
-tagSandwich = '<h3>빵</h3> \
-	<span>15cm</span><input type="radio" name="is15" value="1" required><span>30cm</span><input type="radio" name="is15" value="0" required><br> \
-	<label for="허니오트"><img alt="허니오트" src="/resources/img/recipe/img_recipe_b01.jpg"></label> \
-	<input type="radio" class="hide" id="허니오트" name="bread" value="허니오트"> \
-	<label for="하티"><img alt="하티" src="/resources/img/recipe/img_recipe_b02.jpg"></label> \
-	<input type="radio" class="hide" id="하티" name="bread" value="하티"> \
-	<label for="위트"><img alt="위트" src="/resources/img/recipe/img_recipe_b03.jpg"></label> \
-	<input type="radio" class="hide" id="위트" name="bread" value="위트"> \
-	<label for="파마산오레가노"><img alt="파마산오레가노" src="/resources/img/recipe/img_recipe_b04.jpg"></label> \
-	<input type="radio" class="hide" id="파마산오레가노" name="bread" value="파마산오레가노"> \
-	<label for="화이트"><img alt="화이트" src="/resources/img/recipe/img_recipe_b05.jpg"></label> \
-	<input type="radio" class="hide" id="화이트" name="bread" value="화이트"> \
-	<label for="플랫브레드"><img alt="플랫브레드" src="/resources/img/recipe/img_recipe_b06.jpg"></label> \
-	<input type="radio" class="hide" id="플랫브레드" name="bread" value="플랫브레드"> \
-<hr> \
-<h3>메인재료</h3> \
+/* 샌드위치/샐러드 주재료 태그문자열 */
+tagSandwich = '<h3>메인재료</h3> \
 	<label for="이탈리안비엠티1"><img alt="이탈리안비엠티" src="/resources/img/sandwich/sandwich_cl01.jpg"></label> \
 	<input type="radio" class="hide" id="이탈리안비엠티1" name="main" value="이탈리안비엠티"> \
 	<label for="비엠티1"><img alt="비엠티" src="/resources/img/sandwich/sandwich_cl02.jpg"></label> \
@@ -228,7 +96,21 @@ tagSandwich = '<h3>빵</h3> \
 	<label for="쉬림프1"><img alt="쉬림프" src="/resources/img/sandwich/sandwich_pm10.jpg"></label> \
 	<input type="radio" class="hide" id="쉬림프1" name="main" value="쉬림프"> \
 	<label for="쉬림프아보카도1"><img alt="쉬림프아보카도" src="/resources/img/sandwich/sandwich_pm11.jpg"></label> \
-	<input type="radio" class="hide" id="쉬림프아보카도1" name="main" value="쉬림프아보카도">';
+	<input type="radio" class="hide" id="쉬림프아보카도1" name="main" value="쉬림프아보카도"> \
+	<h3>빵</h3> \
+	<span>15cm</span><input type="radio" name="is15" value="1" required><span>30cm</span><input type="radio" name="is15" value="0" required><br> \
+	<label for="허니오트"><img alt="허니오트" src="/resources/img/recipe/img_recipe_b01.jpg"></label> \
+	<input type="radio" class="hide" id="허니오트" name="bread" value="허니오트"> \
+	<label for="하티"><img alt="하티" src="/resources/img/recipe/img_recipe_b02.jpg"></label> \
+	<input type="radio" class="hide" id="하티" name="bread" value="하티"> \
+	<label for="위트"><img alt="위트" src="/resources/img/recipe/img_recipe_b03.jpg"></label> \
+	<input type="radio" class="hide" id="위트" name="bread" value="위트"> \
+	<label for="파마산오레가노"><img alt="파마산오레가노" src="/resources/img/recipe/img_recipe_b04.jpg"></label> \
+	<input type="radio" class="hide" id="파마산오레가노" name="bread" value="파마산오레가노"> \
+	<label for="화이트"><img alt="화이트" src="/resources/img/recipe/img_recipe_b05.jpg"></label> \
+	<input type="radio" class="hide" id="화이트" name="bread" value="화이트"> \
+	<label for="플랫브레드"><img alt="플랫브레드" src="/resources/img/recipe/img_recipe_b06.jpg"></label> \
+	<input type="radio" class="hide" id="플랫브레드" name="bread" value="플랫브레드">';
 tagSalad = '<h3>메인재료</h3> \
 	<label for="이탈리안비엠티2"><img alt="이탈리안비엠티" src="/resources/img/salad/salad_cl01.jpg"></label> \
 	<input type="radio" class="hide" id="이탈리안비엠티2" name="main" value="이탈리안비엠티"> \
@@ -274,4 +156,3 @@ tagSalad = '<h3>메인재료</h3> \
 	<input type="radio" class="hide" id="쉬림프2" name="main" value="쉬림프"> \
 	<label for="쉬림프아보카도2"><img alt="쉬림프아보카도" src="/resources/img/salad/salad_pm11.jpg"></label> \
 	<input type="radio" class="hide" id="쉬림프아보카도2" name="main" value="쉬림프아보카도">';
-

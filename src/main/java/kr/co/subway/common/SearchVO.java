@@ -11,6 +11,7 @@ public class SearchVO {
 	private String delDay;
 	private String searchType;
 	private String searchVal;
+	private String orderBy;
 	
 	public SearchVO() {
 		super();
@@ -97,6 +98,12 @@ public class SearchVO {
 	}
 	public void setDelDay(String delDay) {
 		this.delDay = delDay;
+	}
+	public String getOrderBy() {
+		return orderBy;
+	}
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
 	}
 	
 	

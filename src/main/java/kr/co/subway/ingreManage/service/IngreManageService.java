@@ -34,7 +34,7 @@ public class IngreManageService {
 		int end = reqPage*numPerPage;
 		PageBound pb = new PageBound(start, end);
 		ArrayList<IngreVo> ingreList = (ArrayList<IngreVo>)ingreDao.ingreSelectAll(pb,searchType, searchVal);
-		System.out.println(ingreList.size());
+		System.out.println("ingreList() service : "+ingreList.size());
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;

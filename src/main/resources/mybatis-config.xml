@@ -15,5 +15,7 @@
 		<typeAlias type="kr.co.subway.managerOrder.vo.ManagerItemVO" alias="item"/>	<!-- 발주 물품 Vo -->
 		<typeAlias type="kr.co.subway.common.SearchVO" alias="search"/>	<!-- 검색 Vo -->
 		<typeAlias type="kr.co.subway.managerOrder.vo.StockVO" alias="stock"/>	<!-- 재고 Vo -->
+		
+		<typeAlias type="kr.co.subway.stock.vo.stockViewVO" alias="stockView"/>	<!-- 재고 Vo -->
 	</typeAliases>
 </configuration>
