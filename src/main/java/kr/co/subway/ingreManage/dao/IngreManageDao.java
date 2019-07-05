@@ -18,12 +18,12 @@ public class IngreManageDao {
 	SqlSessionTemplate sqlSession;
 	
 	
-	//재료 등록하기
+	//�옱猷� �벑濡앺븯湲�
 	public int ingreReg(IngreVo iv) {
 		return sqlSession.insert("ingre.ingreReg",iv);
 	}
 
-	//재료 전체 개수 구하기
+	//�옱猷� �쟾泥� 媛쒖닔 援ы븯湲�
 	public int ingreTotalCount(String searchType, String searchVal) {
 		System.out.println(searchType);
 		System.out.println(searchVal);
@@ -33,7 +33,7 @@ public class IngreManageDao {
 		return sqlSession.selectOne("ingre.ingreTotalCount",map);
 	}
 	
-	//재료 전체 목록 가져오기
+	//�옱猷� �쟾泥� 紐⑸줉 媛��졇�삤湲�
 	public List ingreSelectAll(PageBound pb, String searchType, String searchVal) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", Integer.toString(pb.getStart()));
@@ -43,7 +43,7 @@ public class IngreManageDao {
 		return sqlSession.selectList("ingre.ingreSelectAll",map);
 	}
 	
-	//활성화여부 변경시 업데이트하기
+	//�솢�꽦�솕�뿬遺� 蹂�寃쎌떆 �뾽�뜲�씠�듃�븯湲�
 	public int updateIngreActive(String ingreActive, String ingreIdx) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("ingreActive", ingreActive);
@@ -51,27 +51,33 @@ public class IngreManageDao {
 		return sqlSession.update("ingre.updateIngreActive",map);
 	}
 	
-	//재료 리스트 페이지에서 검색박스에서 재료 카테로기 선택시 하위 값 가져오기
+	//�옱猷� 由ъ뒪�듃 �럹�씠吏��뿉�꽌 寃��깋諛뺤뒪�뿉�꽌 �옱猷� 移댄뀒濡쒓린 �꽑�깮�떆 �븯�쐞 媛� 媛��졇�삤湲�
 	public List ingreType() {
 		return sqlSession.selectList("ingre.getIngreType");
 	}
 
-	//재료정보 가져오기
+	//�옱猷뚯젙蹂� 媛��졇�삤湲�
 	public IngreVo goUpdateIngre(String ingreIdx) {
 		return sqlSession.selectOne("ingre.goIngreUpdate",ingreIdx);
 	}
 	
-	//재료 수정하기
+	//�옱猷� �닔�젙�븯湲�
 	public int ingreUpdate(IngreVo iv) {
 		return sqlSession.update("ingre.ingreUpdate",iv);
 	}
 	
-	//재료 삭제하기
+	//�옱猷� �궘�젣�븯湲�
 	public int ingreDelete(String ingreIdx) {
 		return sqlSession.delete("ingre.ingreDelete",ingreIdx);
 	}
 
-	
+	//엑셀 다운로드 할 리스트 가져오기
+		public List ingreSelectAll(String searchType, String searchVal) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("searchType", searchType);
+			map.put("searchVal", searchVal);
+			return sqlSession.selectList("ingre.ingreListExcel",map);
+		}
 
 
 	
