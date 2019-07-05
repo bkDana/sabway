@@ -17,7 +17,7 @@
 		<if test="delDay!=null and delDay!=''">
 			and mot.m_order_del_date=#{delDay}
 		</if>
-		<if test="state!='-1'">
+		<if test="state!=0">
 			and mot.m_order_state=#{state}
 		</if>
 		<if test="searchType != null and searchType != ''">
@@ -58,7 +58,7 @@
 					<if test="delDay!=null and delDay!=''">
 						and mot.m_order_del_date=#{delDay}
 					</if>
-					<if test="state!='-1'">
+					<if test="state!=0">
 						and mot.m_order_state=#{state}
 					</if>	
 					<if test="searchType != null and searchType != ''">
@@ -74,13 +74,25 @@
 			  				and mot.m_order_manager_id = #{mgrId}
 			  			</otherwise>
 			  		</choose>
-	  			order by 6 desc) mo
+	  			order by
+	  			<choose>
+	  				<when test="orderBy!=null and orderBy!=''">
+	  					<if test="orderBy.equals('del')">4 desc</if>
+	  					<if test="orderBy.equals('new')">6 desc</if>
+	  					<if test="orderBy.equals('store')">10 asc</if>
+	  				</when>
+	  				<otherwise>
+	  					6 desc
+	  				</otherwise>
+		  		</choose>
+	  			
+	  			) mo
   			 )
   		where 
   			rnum between #{start} and #{end}
   	</select>
   	<insert id="addOrder" parameterType="mOrder">
-  		insert into m_order_tbl values(#{mOrderNo},#{mOrderManagerId},#{mOrderTitle},#{mOrderDelDate},0,sysdate)
+  		insert into m_order_tbl values(#{mOrderNo},#{mOrderManagerId},#{mOrderTitle},#{mOrderDelDate},1,sysdate)
   	</insert>
   	<insert id="addItem" parameterType="item">
   		insert into m_item_tbl values(m_item_seq.nextval,#{mOrderNo},#{itemIdx},#{mItemName},#{mItemAmount})
@@ -137,10 +149,10 @@
   		update 
   			m_order_tbl 
   		set 
-  			m_order_state=2
+  			m_order_state=3
   		where 
   			m_order_del_date = #{delDay}
-  			and m_order_state=1
+  			and m_order_state=2
   	</update>
   	<select id="delStock" parameterType="search" resultType="stock">
   		select 
@@ -151,7 +163,7 @@
   			m_order_tbl mot, m_item_tbl mit
   		where 
             mot.m_order_no = mit.m_order_no
-  			and m_order_del_date = #{delDay}
+  			and m_order_del_date <![CDATA[ < ]]>= #{delDay}
   			and m_order_state=2
   	</select>
   	<select id="findStock" parameterType="stock" resultType="stock">
@@ -164,13 +176,13 @@
   			and item_idx = #{mItemIdx}
   	</select>
   	<insert id="insertStock" parameterType="stock">
-  		insert into m_stock_tbl values(m_stock_seq.nextval,${mOrderManagerId},${mItemIdx},${mItemAmount});
+  		insert into m_stock_tbl values(m_stock_seq.nextval,#{mOrderManagerId},#{mItemIdx},#{mItemAmount})
   	</insert>
   	<update id="updateStock" parameterType="stock">
   		update 
   			m_stock_tbl 
   		set 
-  			m_item_amount=${mItemAmount}
+  			m_stock=m_stock+#{mItemAmount}
   		where 
   			m_stock_idx = #{mStockIdx}
   	</update>

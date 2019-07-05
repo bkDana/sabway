@@ -20,10 +20,10 @@
 				<tr>
 					<th>상태</th>
 					<th>
-						<c:if test="${order.mOrderState eq 0}"><span class="state-reg">접수완료</span></c:if>
-						<c:if test="${order.mOrderState eq 1}"><span class="state-out">출고완료</span></c:if>
-						<c:if test="${order.mOrderState eq 2}"><span class="state-arr">도착</span></c:if>
-						<c:if test="${order.mOrderState eq 3}"><span class="state-can">취소</span></c:if>
+						<c:if test="${order.mOrderState eq 1}"><span class="state-reg">접수완료</span></c:if>
+						<c:if test="${order.mOrderState eq 2}"><span class="state-out">출고완료</span></c:if>
+						<c:if test="${order.mOrderState eq 3}"><span class="state-arr">도착</span></c:if>
+						<c:if test="${order.mOrderState eq 4}"><span class="state-can">취소</span></c:if>
 					</th>
 				</tr>
 				<tr>
@@ -51,9 +51,9 @@
 			</table>
 			<div class="common-tbl-btn-group">
 				<button class="btn-style2" type="button" onclick="history.back();">뒤로가기</button>
-				<c:if test="${order.mOrderState eq 0}">
-					<button class="btn-style3" type="button" onclick="update('${order.mOrderNo}',3)">발주취소</button><!-- 가맹점 회원만 가능해야함 -->
-					<button class="btn-style1" type="button" onclick="update('${order.mOrderNo}',1);">출고처리</button><!-- 최고관리자만 가능해야함 -->
+				<c:if test="${order.mOrderState eq 1}">
+					<button class="btn-style3" type="button" onclick="update('${order.mOrderNo}',4)">발주취소</button><!-- 가맹점 회원만 가능해야함 -->
+					<button class="btn-style1" type="button" onclick="update('${order.mOrderNo}',2);">출고처리</button><!-- 최고관리자만 가능해야함 -->
 				</c:if>
 			</div>
 	</div>
