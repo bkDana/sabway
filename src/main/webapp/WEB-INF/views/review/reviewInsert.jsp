@@ -31,7 +31,9 @@
 				        	작성자
 				        </td>
 				        <td>
-				        	<input type="text" name="reviewWriter" value="${sessionScope.customerId }" readonly="readonly">
+				        	<input type="text" name="reviewWriter" value="테스트이름" readonly="readonly">
+				        	<input type="hidden" name="reviewGender" value="테스트성별">
+				        	<input type="hidden" name="reviewBirthday" value="테스트생일">
 				        </td>
 				    </tr>
 			    	<tr>
@@ -48,7 +50,6 @@
 				        	</span>
 				        </td>
 				        <td>
-				        	<input type="hidden" name="reviewStarItem">
 			        		<img class="star-img1" width="30px" height="30px" src="/resources/img/emptystar.png" usemap="#star1">
 						    <map name="star1">
 						        <area shape="rect" coords="0,0,15,30" onclick="changeHalf(this,1)" onmouseenter="enterHalf(this,1)" onmouseleave="leaveHalf(this,1)">
@@ -75,7 +76,7 @@
 						        <area shape="rect" coords="15,0,30,30" onclick="changeFull(this,1)" onmouseenter="enterFull(this,1)" onmouseleave="leaveFull(this,1)">
 						    </map>
 				        	<span id="starpoint1"></span>
-				        	<input type="hidden" id="reviewStarpoint1" name="reviewStarpoint1" value="0">
+				        	<input type="hidden" id="reviewStarpoint1" name="reviewStarItem" value="0">
 				        </td>
 				    </tr>
 				    <tr>
@@ -119,7 +120,7 @@
 						        <area shape="rect" coords="15,0,30,30" onclick="changeFull(this,2)" onmouseenter="enterFull(this,2)" onmouseleave="leaveFull(this,2)">
 						    </map>
 				        	<span id="starpoint2"></span>
-				        	<input type="hidden" id="reviewStarpoint2" name="reviewStarpoint2" value="0">
+				        	<input type="hidden" id="reviewStarpoint2" name="reviewStarBranch" value="0">
 				        </td>
 				    </tr>
 				    <tr>
@@ -133,6 +134,8 @@
 			        <tr>
 				        <td colspan="4">
 				        	<div id="testContent" class="editor-content" contentEditable="true"></div>
+				        	<input type="hidden" name="reviewContent" id="reviewContent">
+				        	<input type="hidden" name="filename" id="reviewFilename">
 				        </td>
 				    </tr>
 				    <tr>
@@ -145,7 +148,7 @@
 			    </table>
 			    <input type="hidden" name="rowCount" value="1">
 			    <div class="common-tbl-btn-group">
-					<button type="submit" class="btn-style2 small">리뷰 등록</button>
+					<button onclick="submitBtn();" type="button" class="btn-style2 small">리뷰 등록</button>
 				</div>
 			</form> 
 		</div>

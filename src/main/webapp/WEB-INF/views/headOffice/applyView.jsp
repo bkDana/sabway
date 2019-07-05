@@ -41,7 +41,7 @@
 			</tr>
 			<!-- 첨부파일이 없으면 hidden -->
 			<c:choose>
-				<c:when test="${ap.applyFilename }">
+				<c:when test="${not empty ap.applyFilename }">
 					<tr>
 						<th>첨부파일</th>
 						<td colspan="3">${ap.applyFilename }</td>
