@@ -5,14 +5,39 @@ $(document).ready(function(){
 		if ( event.keyCode === 8 || event.keyCode === 46) {
 	    	for(var i=0;i<rowIndex; i++){
 	    		if($("#testContent").html().indexOf("fileDiv"+i) == -1) {
-	    			$("#fileName"+i).parent().remove();
+	    			$("#fileName"+i).parent().parent().remove();
 	    		}
 	    	}
 		}
 
 	});
+	$('#hashtag').keydown(function(event){
+		if (event.keyCode === 32) {
+			var string = $(this).val();
+			var stringArr = string.split(' ');
+			var arrLength = stringArr.length;
+			
+		    	if(stringArr[arrLength-1].indexOf('#') == -1){
+		    		stringArr[arrLength-1] = '#'+stringArr[arrLength-1];
+		    	}
+			
+			string="";
+			for(var i=0;i<arrLength;i++){
+				if(i != arrLength-1){
+					string += stringArr[i]+','; 
+				}else{
+					string += stringArr[i];
+				}
+			}
+			$(this).val(string);
+		}
+	});
 });
-
+	function captureReturnKey(e){
+		if(e.keyCode ===13){
+			return false;
+		}
+	}
 	$(document).on("dragstart","#testContent",function(e){
 	    console.log("d"+e);
 	    return false;
@@ -26,39 +51,43 @@ $(document).ready(function(){
 			return;
 		}
 	    rowIndex++;
-	    var getTable = document.getElementById("insertTable");
-		var oCurrentRow = getTable.insertRow(getTable.rows.length);
-	    var oCurrentCell = oCurrentRow.insertCell(0);
-	    oCurrentCell.innerHTML = "<tr><td valign=bottom>" +
-		    "<input type='text' id='fileName" + rowIndex + "' readonly='readonly'>" +
+//	    var getTable = document.getElementById("insertTable");
+//		var oCurrentRow = getTable.insertRow(getTable.rows.length);
+//	    var oCurrentCell = oCurrentRow.insertCell(0);
+//	    oCurrentCell.innerHTML = 
+	    var inner ="<tr><td colspan='3'>" +
+		    "<input class='submit-file' type='text' id='fileName" + rowIndex + "' readonly='readonly'>" +
 			"<label for='editor-file-upload" + rowIndex + "'>" +
 			"<img width='30px' height='30px' src='/resources/img/plusimg.PNG'></label>" +
 			"<input type='file' class='editor-file-upload' id='editor-file-upload"+rowIndex+"' name='filename"+ rowIndex + "' size=25 " +
 			"onchange='onChangeImg(this,"+rowIndex+")'"
 			+"></td>" +
-			"<td width=100><input type='button' value='삭제' onClick='deleteFile(this,"+rowIndex+")' style='cursor:hand'></td></tr>";
+			"<td colspan='1'><input type='button' value='삭제' onClick='deleteFile(this,"+rowIndex+")' style='cursor:hand'></td></tr>";
+	    $('#insertTable').append(inner);
 	} 
 	
 	//첨부파일 삭제
 	function deleteFile(f,Index){
 			$("#fileDiv"+Index).remove();
-			$("#fileName"+Index).parent().remove();
+			$(f).parent().parent().remove();
 	}
 	
 	function onChangeImg(f,Index){
 		if($("#fileName"+Index).val()==""){
 			rowIndex++;
-		    var getTable = document.getElementById("insertTable");
-			var oCurrentRow = getTable.insertRow(getTable.rows.length);
-		    var oCurrentCell = oCurrentRow.insertCell(0);
-		    oCurrentCell.innerHTML = "<tr><td valign=bottom>" +
-			    "<input type='text' id='fileName" + rowIndex + "' readonly='readonly'>" +
+//		    var getTable = document.getElementById("insertTable");
+//			var oCurrentRow = getTable.insertRow(getTable.rows.length);
+//		    var oCurrentCell = oCurrentRow.insertCell(0);
+//		    oCurrentCell.innerHTML = 
+			var inner = "<tr><td colspan='3'>" +
+			    "<input class='submit-file' type='text' id='fileName" + rowIndex + "' readonly='readonly'>" +
 				"<label for='editor-file-upload" + rowIndex + "'>" +
 				"<img width='30px' height='30px' src='/resources/img/plusimg.PNG'></label>" +
 				"<input type='file' class='editor-file-upload' id='editor-file-upload"+rowIndex+"' name='filename"+ rowIndex + "' size=25 " +
 				"onchange='onChangeImg(this,"+rowIndex+")'"
 				+"></td>" +
-				"<td width=100><input type='button' value='삭제' onClick='deleteFile(this,"+rowIndex+")' style='cursor:pointer'></td></tr>";
+				"<td colspan='1'><input type='button' value='삭제' onClick='deleteFile(this,"+rowIndex+")' style='cursor:pointer'></td></tr>";
+		    $('#insertTable').append(inner);
 		}else{
 			$("#fileName"+Index).val(f.value);
 			$("#fileDiv"+Index).remove();
@@ -73,23 +102,221 @@ $(document).ready(function(){
 			reader.onload = function(e){
 				
 				innerContent += "<div id='fileDiv" + Index + "' class='resize-div' contentEditable='false'>"
-				+"<img class='resize-img' width='100%' height='100%' src='"+e.target.result+"'></div>\r\n";
+				+"<img class='resize-img' width='100%' height='100%' src='"+e.target.result+"'></div>";
 				$("#testContent").html(innerContent);
 			}
 		} else{ //파일을 뺄 경우
 			$("#fileName"+Index).val(f.value);
-			$("#fileName"+Index).parent().remove();
+			$("#fileName"+Index).parent().parent().remove();
 			$("#fileDiv"+Index).remove();
 		}
 	}
-	
-	$('.starbox').click(function(){
-		var index = $('.starbox').index(this);
-		console.log(index);
-		while(i<index){
-			$('.fullstar').eq(i).css("display","block");
-			i++;
+	var clickCheck1 = 0;
+	var clickCheck2 = 0;
+	var optionStatus1 = 0;
+	var optionStatus2 = 0;
+	function optionStatus(status){
+		if(status==1){
+			optionStatus1 = 1;
+			clickCheck1 = 0;
+		}else if(status==2){
+			optionStatus2 = 1;
+			clickCheck2 = 0;
+		}
+	}
+	function changeHalf(img, separator){
+		if(optionStatus2 == 0){
+			if(optionStatus1==0){
+				return false;
+			}else if(optionStatus1==1){
+				$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+				$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
+				$(img).parent().prev().attr("src","/resources/img/halfstar.png");
+				var index = $('area').index(img);
+				if(separator == 1){
+					$("#starpoint1").html("&nbsp;&nbsp;&nbsp;"+(index+1)/2);
+					clickCheck1 = 1;
+					$("#reviewStarpoint1").val((index+1)/2);
+				}
+				optionStatus1=0;
+			}
 		}
 		
-	});
+		if(optionStatus2==0){
+			return false;
+		}else if(optionStatus2==1){
+			$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+			$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
+			$(img).parent().prev().attr("src","/resources/img/halfstar.png");
+			var index = $('area').index(img);
+			if(separator == 2){
+				$("#starpoint2").html("&nbsp;&nbsp;&nbsp;"+(index-9)/2);
+				clickCheck2 = 1;
+				$("#reviewStarpoint2").val((index+1)/2);
+			}
+			optionStatus2=0;
+		}
+		
+		
+	}
+	function enterHalf(img, separator){
+		if(optionStatus2 == 0){
+			if(optionStatus1==0){
+				return false;
+			}else if(optionStatus1==1){
+				if(clickCheck1 == 0 && separator == 1){
+					$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+					$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
+					$(img).parent().prev().attr("src","/resources/img/halfstar.png");
+					var index = $('area').index(img);
+					$("#starpoint1").html("&nbsp;&nbsp;&nbsp;"+(index+1)/2);
+				}
+			}
+		}
+		
+		if(optionStatus2==0){
+			return false;
+		}else if(optionStatus2==1){
+			if(clickCheck2 == 0 && separator == 2){
+				$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+				$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
+				$(img).parent().prev().attr("src","/resources/img/halfstar.png");
+				var index = $('area').index(img);
+				$("#starpoint2").html("&nbsp;&nbsp;&nbsp;"+(index-9)/2);
+			}
+		}
+	}
+	function leaveHalf(img, separator){
+		if(optionStatus2 == 0){
+			if(optionStatus1==0){
+				return false;
+			}else if(optionStatus1==1){
+				if(clickCheck1 == 0 && separator == 1){
+					$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+					$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+					$(img).parent().prev().attr("src","/resources/img/emptystar.png");
+					var index = $('area').index(img);
+						$("#starpoint1").html("");
+						clickCheck1 == 0;
+				}
+			}
+		}
+		
+		if(optionStatus2==0){
+			return false;
+		}else if(optionStatus2==1){
+			if(clickCheck2 == 0 && separator == 2){
+				$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+				$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+				$(img).parent().prev().attr("src","/resources/img/emptystar.png");
+				var index = $('area').index(img);
+					$("#starpoint2").html("");
+					clickCheck2 == 0;
+			}
+		}
+	}
+	
+	function changeFull(img, separator){
+		if(optionStatus2 == 0){
+			if(optionStatus1==0){
+				return false;
+			}else if(optionStatus1==1){
+				$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+				$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
+				var index = $('area').index(img);
+				if(separator == 1){
+					$("#starpoint1").html("&nbsp;&nbsp;&nbsp;"+(index+1)/2);
+					clickCheck1 = 1;
+					$("#reviewStarpoint1").val((index+1)/2);
+				}
+				optionStatus1 = 0;
+			}
+		}
+		
+		if(optionStatus2==0){
+			return false;
+		}else if(optionStatus2==1){
+			$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+			$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
+			var index = $('area').index(img);
+			if(separator == 2){
+				$("#starpoint2").html("&nbsp;&nbsp;&nbsp;"+(index-9)/2);
+				clickCheck2 = 1;
+				$("#reviewStarpoint2").val((index+1)/2);
+			}
+			optionStatus2 = 0;
+		}
+	}
+	function enterFull(img, separator){
+		if(optionStatus2 == 0){
+			if(optionStatus1==0){
+				return false;
+			}else if(optionStatus1==1){
+				if(clickCheck1 == 0 && separator == 1){
+					$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+					$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
+					var index = $('area').index(img);
+					$("#starpoint1").html("&nbsp;&nbsp;&nbsp;"+(index+1)/2);
+				}
+			}
+		}
+		
+		if(optionStatus2==0){
+			return false;
+		}else if(optionStatus2==1){
+			if(clickCheck2 == 0 && separator == 2){
+				$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+				$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
+				var index = $('area').index(img);
+				$("#starpoint2").html("&nbsp;&nbsp;&nbsp;"+(index-9)/2);
+			}
+		}
+	}
+	function leaveFull(img, separator){
+		if(optionStatus2 == 0){
+			if(optionStatus1==0){
+				return false;
+			}else if(optionStatus1==1){
+				if(clickCheck1 == 0 && separator == 1){
+					$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+					$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+					var index = $('area').index(img);
+					$("#starpoint1").html("");
+					clickCheck1 == 0;
+				}
+			}
+		}
+		
+		if(optionStatus2==0){
+			return false;
+		}else if(optionStatus2==1){
+			if(clickCheck2 == 0 && separator == 2){
+				$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+				$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
+				var index = $('area').index(img);
+				$("#starpoint2").html("");
+				clickCheck2 == 0;
+			}
+		}
+	}
+	
+	function submitBtn(){
+		var content = $('#testContent').html();
+		$('#reviewContent').val(content);
+		var filenameText = "";
+		var count = $('.submit-file').length;
+		if(count>0){
+			for(var i=0;i<count-1;i++){
+				if(i != count-2){
+					filenameText += $('.submit-file').eq(i).val()+",";
+				}else{
+					filenameText += $('.submit-file').eq(i).val();
+				}
+			}
+				
+		}
+		$('#reviewFilename').val(filenameText);
+		console.log(filenameText);
+		console.log(content);
+	}
 	

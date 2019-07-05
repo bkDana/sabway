@@ -59,6 +59,7 @@
 .common-tbl-btn-group > button.btn-style2{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style3{background-color:#888;}
 .common-tbl-btn-group > button.small{width:100px; height:35px; font-size:15px;}
+.common-tbl-btn-group > button.supersmall{width:55px; height:30px; font-size:14px;}
 .comm-tbl .file-del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#888; color:#fff; margin-left:5px;}
 
 /* 봉사활동 신청 List */
@@ -235,6 +236,5 @@
 	cursor: pointer;
 	display: inline-block;
 }
-.halfstar{display: none;}
-.fullstar{display: none;}
-.starbox{float:left;}
+.starbox{float:left; width:30px; height:30px;}
+#starpoint{width:40px;}

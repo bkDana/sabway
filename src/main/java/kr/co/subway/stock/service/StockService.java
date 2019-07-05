@@ -16,12 +16,13 @@ public class StockService {
 	@Autowired
 	private StockDao dao;
 
+	@SuppressWarnings("unchecked")
 	public StockListVO selectList(SearchVO search) {
 		int reqPage = search.getReqPage();
 		int total = 0;
 		total = dao.totalCount(search);
 		
-		int pageNum = 20;
+		int pageNum = 24;
 		int totalPage = (total%pageNum==0)?(total/pageNum):(total/pageNum)+1;
 		search.setStart((reqPage*pageNum-pageNum)+1);
 		search.setEnd(reqPage*pageNum);

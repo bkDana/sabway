@@ -38,12 +38,15 @@
 			</form>
 		</div>
 		<br>
-		<a href="/managerOrder/test.do">수동으로 재고 추가</a>
-		<select id="order" data-val="${search.orderBy }">
-			<option value="new">최신순</option>
-			<option value="del">배송일순</option>
-			<option value="store">매장별</option>
-		</select>
+		<p>
+			※ 희망배송일 오전 8시에 출고완료 상태인 발주건은 도착으로 자동 상태변경됩니다. 
+			수동으로 변경하기-> <a href="/managerOrder/test.do">수동으로 재고 추가</a>
+			<select id="order" data-val="${search.orderBy }">
+				<option value="new">최신순</option>
+				<option value="del">배송일순</option>
+				<option value="store">매장별</option>
+			</select>
+		</p>
 		<table class="comm-tbl type2">
 			<colgroup>
 				<col width="3%">
@@ -73,7 +76,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		※ 희망배송일 오전 8시에 출고완료 상태인 발주건은 도착으로 자동 상태변경됩니다.
+		
 		<!-- paging -->
 		<div class="paging">
 			${list.pageNavi }	
