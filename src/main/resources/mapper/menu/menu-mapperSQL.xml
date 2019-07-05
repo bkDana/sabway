@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="menu">
+	<select id="menuList" resultType="menu">
+		select menu_no as menuNo 
+		,menu_name as menuName
+		,menu_base_price as menuBasePrice
+		,menu_discnt_price as menuDiscntPrice
+		,menu_discnt_rate as menuDiscntRate
+		from menu
+	</select>
+	<update id="updateMenu" parameterType="menu">
+		update menu set menu_no = #{menuNo}, menu_name = #{menuName},menu_base_price = #{menuBasePrice}, menu_discnt_price = #{menuDiscntPrice}, menu_discnt_rate = #{menuDiscntRate} where menu_no = #{menuNo}
+	</update>
+</mapper>

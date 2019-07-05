@@ -21,37 +21,60 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import kr.co.subway.headOffice.service.ApplyService;
+import kr.co.subway.headOffice.service.MenuService;
 import kr.co.subway.headOffice.vo.Apply;
+import kr.co.subway.headOffice.vo.Menu;
 import net.sf.json.JSONObject;
 
 @Controller
-public class PromotionController {
+public class HeadOfficeController {
 	@Resource(name="applyService")
-	ApplyService applyService;
+	private ApplyService applyService;
+	@Resource(name="menuService")
+	private MenuService menuservice;
 	
+	//메뉴 목록 출력 및 할인 적용 페이지 이동
 	@RequestMapping(value="/promotionSelect.do")
-	public String promotion() {
-		return "headOffice/SelectPromotion";
+	public ModelAndView promotion() {
+		ArrayList<Menu> list = (ArrayList<Menu>) menuservice.menuList();
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",list);
+		mav.setViewName("headOffice/SelectPromotion");
+		return mav;
 	}
+	//할인 및 할인율 수정
 	@RequestMapping(value="/selectPromotion.do")
-	public String selectPromotion(@RequestParam String prdName, @RequestParam int price, @RequestParam double promotion) {
-		String name="이름";
-		System.out.println(prdName+" : "+price);
-		System.out.println("할인율 : "+(int)Math.floor(100-(promotion*100))+"%");
-		System.out.println(prdName+" : "+(int)Math.floor(price*promotion)+"원");
-		return "redirect:/index.jsp";
+	public String selectPromotion(@RequestParam int menuNo, @RequestParam String menuName, @RequestParam int menuBasePrice, @RequestParam int menuDiscntPrice, @RequestParam double menuDiscntRate2) {
+		//정수로 변환
+		int menuDiscntRate = (int)Math.floor(100-(menuDiscntRate2*100));
+		//index라 0부터 오기 때문에 +1
+		Menu menu = new Menu(menuNo+1, menuName, menuBasePrice, menuDiscntPrice, menuDiscntRate);
+		int result = menuservice.updateMenu(menu);
+		System.out.println(menuName+" : "+menuBasePrice+"원");
+		System.out.println("할인율 : "+(int)Math.floor(100-(menuDiscntRate2*100))+"%");
+		System.out.println("할인후 가격 : "+(int)Math.floor(menuBasePrice*menuDiscntRate2)+"원");
+		String view = "";
+		if(result>0) {
+			view = "headOffice/SelectPromotion";
+		}else {
+			view = "redirect:/index.jsp";
+		}
+		return view;
 	}
-	
+	//가맹점 신청목록
 	@RequestMapping(value="/managerApply.do")
-	public ModelAndView applyList(HttpServletRequest request) {
+	public ModelAndView applyList() {
 		ArrayList<Apply> list = (ArrayList<Apply>) applyService.applyList();
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
 			mav.addObject("list",list);
 			mav.setViewName("headOffice/managerApply");
+		}else {
+			mav.setViewName("redirect:/");
 		}
 		return mav;
 	}
+	//가맹점 신청 거절 ajax로 처리
 	@ResponseBody
 	@RequestMapping(value="/apply.do",produces="text/html;charset=utf-8")
 	public String applyManager(@RequestParam String applyName, @RequestParam int applyStatus) {
@@ -72,6 +95,7 @@ public class PromotionController {
 		}
 		return new Gson().toJson(obj);
 	}	
+	//가맹점 신청 글 상세보기 
 	@RequestMapping(value="/applyView.do")
 	public String applyView(@RequestParam int applyNo,Model model) {
 		Apply ap = applyService.applyView(applyNo);

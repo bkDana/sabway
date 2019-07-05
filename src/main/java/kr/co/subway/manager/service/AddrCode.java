@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component("addrcode")
 public class AddrCode {
+	//지역별로 앞자리 구분
 	public String addrCode(String ranTel,String addrType) {
 		String addrCode = "";
 		if(addrType.contains("A")) {
