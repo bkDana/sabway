@@ -13,29 +13,38 @@
 		<div class="sub-menu">※ 재고관리 > 재고현황</div>
 		<div class="board-search-box order-search">
 			<form action="/managerOrder/stockList.do" method="post" name="search">
-				<select name="searchType" data-val="${search.searchType }">
+				<input type="hidden" name="reqPage" value="1">
+				<select name="searchType" data-val="${search.searchType }" data-search="${search.searchVal }">
 					<option value="name">재료명</option>
-					<option value="">뭘해야될까?</option>
+					<option value="cat">카테고리</option>
 				</select>
-				<input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word" value="${search.searchVal }">
+				<%-- <input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word" value="${search.searchVal }"> --%>
 				<button type="submit" class="bbs-search-btn" title="검색">검색</button>
 				<!-- &nbsp;<button type="button" onclick="location.href='/managerOrder/orderList.do'" class="bbs-search-btn" title="초기화">초기화</button> -->
 			</form>
 		</div>
 		<br>
-		<input type="checkbox" class="allcbox"> 전체 선택
+		<label><input type="checkbox" class="allcbox"> 전체 선택</label> : 별 기능은 없다.... 그냥 만들어야될거같아서 넣음
 		<ul class="stock-list clearfix">
+			<c:if test="${empty list.stockList }">
+				<li>검색 결과가 없습니다</li>
+			</c:if>
 			<c:forEach items="${list.stockList }" var="stock">
 			<li>
-				<input type="checkbox" class="cbox"><br>
-				<c:if test="${empty stock.ingreFilepath }">
-					<img src="/resources/img/sandwich.png" width="100px" height="100px"><br>
-				</c:if>
-				<c:if test="${not empty stock.ingreFilepath }">
-					<img src="/resources/upload/ingredients/${stock.ingreFilepath }" idth="100px" height="100px"><br>
-				</c:if>
-				<span>${stock.ingreLabel }</span><br>
-				<span>${stock.mStock } ${stock.ingreUnit }<c:if test="${empty stock.ingreUnit }">개</c:if></span><br>
+				<label>
+					<span><input type="checkbox" class="cbox"></span>
+					<%-- 
+					<c:if test="${empty stock.ingreFilepath }">
+						<img src="/resources/img/sandwich.png" width="120px" height="120px"><br>
+					</c:if>
+					<c:if test="${not empty stock.ingreFilepath }">
+						<img src="/resources/upload/ingredients/${stock.ingreFilepath }" width="120px" height="120px"><br>
+					</c:if>
+					 --%>
+					<span><img src="/resources/img/sandwich.png" width="150px" height="150px"></span>
+					<span>${stock.ingreLabel }</span>
+					<span><input type="text" class="short" value="${stock.mStock }" readonly="readonly"> ${stock.ingreUnit }<c:if test="${empty stock.ingreUnit }">개</c:if></span>
+				</label>
 			</li>
 			</c:forEach>
 		</ul>
@@ -48,18 +57,22 @@
 </section>
 <script>
 
-	var state = $('select[name=state]').data('val');
-	$('select[name=state]').children('option').each(function(){
-		if(state == $(this).val()){
+	/* 검색 타입 고정 */
+	var searchType = $('select[name=searchType]').data('val');
+	$('select[name=searchType]').children('option').each(function(){
+		if(searchType == $(this).val()){
 			$(this).prop("selected",true);
 		}
 	});
+	
+	
+	var search = $('select[name=searchType]').data('search');
+	setting(searchType,search);
+	
+	$('select[name=searchType]').change(function(){	
+		setting($(this).val());
+	});
 
-	/* 페이지 이동 */
-	function list(p){
-		$('input[name=reqPage]').val(p);
-		search.submit();
-	}
 	
 	/* 체크박스 전체 선택or해제 */
 	$('.allcbox').click(function(){
@@ -69,6 +82,44 @@
 			$('.cbox').prop('checked',false);
 		}
 	});
+	
+	function setting(value,search){
+		if(value=='cat'){
+			$('input[name=searchVal]').remove();
+			$.ajax({
+				url : '/ingreType.do',
+				success : function(data){
+					var $sel = $('<select name="searchVal">');
+					
+					for(var i=0;i<data.length;i++){
+						var chk = '';
+						if(search==data[i]){
+							chk = 'selected';
+						}
+						$sel.append('<option value='+data[i]+' '+chk+'>'+data[i]+'</option>');
+					}
+					
+					$('select[name=searchType]').after($sel);
+					$('select[name=searchType]').after(" ");
+				},
+				error : function(){
+					console.log('실패');
+				}
+			});
+			
+		}else{
+			$('select[name=searchVal]').remove();
+			$('select[name=searchType]').after(' <input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word">');
+		}
+	}
+	
+	
+	/* 페이지 이동 */
+	function list(p){
+		$('input[name=reqPage]').val(p);
+		search.submit();
+	}
 </script>
+
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />

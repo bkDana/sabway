@@ -7,15 +7,15 @@
 		from 
 			m_stock_tbl mst, ingredients i 
 		where 
-			mst.ITEM_IDX=I.INGRE_IDX 
-			
-		<!-- 
+			mst.ITEM_IDX=i.INGRE_IDX 
 		<if test="searchType!=null and searchType!=''">
 			<if test="searchType.equals('name')">
-				and LOWER(m.mgr_name) like LOWER('%'||#{searchVal}||'%')
-			</if>	
+				and LOWER(i.ingre_label) like LOWER('%'||#{searchVal}||'%')
+			</if>
+			<if test="searchType.equals('cat')">
+				and i.ingre_type = #{searchVal}
+			</if>
 		</if>
-		 -->
 		<choose>
   			<when test="mgrId.equals('admin')">
 
@@ -38,13 +38,14 @@
 	  				s.* 
 	  			from (select * from m_stock_tbl mst, ingredients i 
 						where mst.ITEM_IDX=I.INGRE_IDX 
-	  				<!-- 
-					<if test="searchType != null and searchType != ''">
+	  				<if test="searchType!=null and searchType!=''">
 						<if test="searchType.equals('name')">
-							and LOWER(m.mgr_name) like LOWER('%'||#{searchVal}||'%')
+							and LOWER(i.ingre_label) like LOWER('%'||#{searchVal}||'%')
 						</if>	
+						<if test="searchType.equals('cat')">
+							and i.ingre_type = #{searchVal}
+						</if>
 					</if>
-					 -->
 					<choose>
 			  			<when test="mgrId.equals('admin')">
 			
