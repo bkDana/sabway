@@ -167,6 +167,6 @@ var myform=new formtowizard({
 		</form>
 	</div>
 </section>
-<script src="/resources/js/cusOrder.js" type="text/javascript"></script>
+<script src="/resources/js/cusOrder.js" type="text/javascript"></script> <!-- 아래에 있어야 작동함 -->
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
