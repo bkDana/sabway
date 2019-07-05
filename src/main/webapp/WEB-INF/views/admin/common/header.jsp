@@ -44,7 +44,7 @@
 					<div id="gnbBg"></div>
 					<ul class="clearfix">
 						<li class="gnb01">
-							<a href="#">회원관리</a>
+							<a href="/allCustomerList.do">회원관리</a>
 							<div class="gnb-2dep">
 								<ul>
 									<li><a href="#">회원 리스트</a></li>

@@ -8,120 +8,97 @@
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <style>
-    .enrollPage_tb{
-        margin: 0 auto;
-    }
-    .choice{
-        text-align: center;
-        box-sizing: border-box;
-        margin: 0 auto;
-        border: 1px solid black;
-        width: 700px;
-        height: 41px;
-    }
-    .customer{
-        box-sizing: border-box;
-        border: 1px solid black;
-        float: left;
-        width: 349px;
-        height: 40px;
-    }
-    .manager{
-        box-sizing: border-box;
-        float: left;
-        border: 1px solid black;
-        width: 349px;
-        height: 40px;
-    }
 </style>
 <body>
 <%-- Header --%>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	
 	<section id="content-wrapper">
+	<div class="area">
+	<h1 class="comm-content-tit">회원가입</h1>
 		<form id="enrollForm" action="/enroll.do" method="post">
-	    	<input type="hidden" id="isChk" value="0">
-            <div class="choice">
-                <div class="customer" ><a href="/enrollPage.do">일반 회원</a></div>
-                <div class="manager"><a href="/mEnrollPage.do"></a>가맹점 회원</div>
-            </div>
-		    <table class="enrollPage_tb">
-		         <tr>
-		            <td><label for="userId">아이디</label></td>
-		            <td><input class="inputBox" type="text" id="customerId" name="customerId"  maxlength="16"><span id="idMsg"></span><button type="button" id="idChk">중복확인</button></td>
-		         </tr>
-		         <tr>
-		            <td><label for="userPw">비밀번호</label></td>
-		            <td><input class="inputBox" type="password" id="customerPw" name="customerPw"  maxlength="16"><span id="pwMsg"></span><p style="font-size: 12px; height: 20px;">※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p></td>
-		         </tr>
-		         <tr>
-		            <td><label for="userPwre">비밀번호 확인</label></td>
-		            <td><input class="inputBox" type="password" id="customerPwre" name="customerPwre"  maxlength="16"><span id="pwreMsg"></span></td>
-		         </tr>
-		         <tr>
-		            <td><label for="userName">이름</label></td>
-		            <td><input class="inputBox" type="text" id="customerName" name="customerName"  maxlength="16"><span id="nameMsg"></span></td>
-		         </tr>
-		         <tr>
-		            <td><label for="userNick">닉네임</label></td>
-		            <td><input class="inputBox" type="text" id="customerNick" name="customerNick"  maxlength="16"><span id="nickMsg"></span><button type="button" id="nickChk">중복확인</button></td>
-		         </tr>
-		         <tr>
-		            <td>
-		               <label for="email">E-Mail</label>
-		            </td>
-		            <td>
-		               <input class="inputBox" type="text" id="email" name="email"  maxlength="20">@
-		               
-		               <input class="inputBox" type="text" id="email2" name="email2" maxlength="20">
-		               
-		               <select name="emailEx" id="emailEx" style="width:100px; height:20px">
-		                    <option value="">직접입력</option>
-		                     <option value="naver.com">naver.com</option>
-		                     <option value="hanmail.net">hanmail.net</option>
-		                     <option value="gmail.com">gmail.com</option>
-		                 </select>
-		                 <button type="button" id="emailChk">중복확인안돼</button>
-		            </td>            
-		         </tr>
-		         <tr>
-		            <td><label for="phone">휴대폰</label></td>
-		            <td>
-		               <select name="phone" id="phone" style="width:70px; height:40px">
-		                    <option value="">선택</option>
-		                     <option value="010">010</option>
-		                     <option value="011">011</option>
-		                     <option value="016">016</option>
-		                     <option value="017">017</option>
-		                     <option value="019">019</option>
-		                 </select>
-		                 <span style="margin:0 5px 0 5px; color:black;" > - </span><input type="text" id="phone1" name="phone1"  maxlength="4">
-		                 <span style="margin:0 5px 0 5px; color:black;"> - </span><input type="text" id="phone2" name="phone2"  maxlength="4"> 
-		                 <span id="phoneMsg"></span>
-		              </td>
-		         </tr>
-		         <tr>
-		            <td><label for="year">생년월일</label></td>
-		            <td>
-		               <input type="text" name="birthday" id="birthday"  maxlength="6" placeholder="950810"><span id="birthdayMsg"></span>
-		            </td>
-		         </tr>
-		         <tr>
-		            <td><label for="gender">성별</label></td>
-		            <td>
-		               <select id="gender" name="gender">
-		                    <option>성별</option>
-		                    <option value="M">남자</option>
-		                      <option value="F">여자</option>
-		                 </select>
-		                  <span id="genderMsg"></span>
-		              </td>
-		         </tr>
-		         <tr>
-		            <td colspan="3" style="text-align: center;" ><button type="button" id="btnSubmit" class="btnjoin">가입하기</button></td>
-		         </tr>
-		      </table>
+			<div class="common-tbl-box">
+		    	<input type="hidden" id="isChk" value="0">
+	      
+			    <table class="comm-tbl type2">
+			         <tr>
+			            <td><label for="userId">아이디</label></td>
+			            <td><input class="inputBox" type="text" id="customerId" name="customerId"  maxlength="16"><span id="idMsg"></span><button type="button" id="idChk">중복확인</button></td>
+			         </tr>
+			         <tr>
+			            <td><label for="userPw">비밀번호</label></td>
+			            <td><input class="inputBox" type="password" id="customerPw" name="customerPw"  maxlength="16"><span id="pwMsg"></span><p style="font-size: 12px; height: 20px;">※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p></td>
+			         </tr>
+			         <tr>
+			            <td><label for="userPwre">비밀번호 확인</label></td>
+			            <td><input class="inputBox" type="password" id="customerPwre" name="customerPwre"  maxlength="16"><span id="pwreMsg"></span></td>
+			         </tr>
+			         <tr>
+			            <td><label for="userName">이름</label></td>
+			            <td><input class="inputBox" type="text" id="customerName" name="customerName"  maxlength="16"><span id="nameMsg"></span></td>
+			         </tr>
+			         <tr>
+			            <td><label for="userNick">닉네임</label></td>
+			            <td><input class="inputBox" type="text" id="customerNick" name="customerNick"  maxlength="16"><span id="nickMsg"></span><button type="button" id="nickChk">중복확인</button></td>
+			         </tr>
+			         <tr>
+			            <td>
+			               <label for="email">E-Mail</label>
+			            </td>
+			            <td>
+			               <input class="inputBox" type="text" id="email" name="email"  maxlength="20">@
+			               
+			               <input class="inputBox" type="text" id="email2" name="email2" maxlength="20">
+			               
+			               <select name="emailEx" id="emailEx" style="width:100px; height:20px">
+			                    <option value="">직접입력</option>
+			                     <option value="naver.com">naver.com</option>
+			                     <option value="hanmail.net">hanmail.net</option>
+			                     <option value="gmail.com">gmail.com</option>
+			                 </select>
+			                 <button type="button" id="emailChk">중복확인안돼</button>
+			            </td>            
+			         </tr>
+			         <tr>
+			            <td><label for="phone">휴대폰</label></td>
+			            <td>
+			               <select name="phone" id="phone" style="width:70px; height:40px">
+			                    <option value="">선택</option>
+			                     <option value="010">010</option>
+			                     <option value="011">011</option>
+			                     <option value="016">016</option>
+			                     <option value="017">017</option>
+			                     <option value="019">019</option>
+			                 </select>
+			                 <span style="margin:0 5px 0 5px; color:black;" > - </span><input type="text" id="phone1" name="phone1"  maxlength="4">
+			                 <span style="margin:0 5px 0 5px; color:black;"> - </span><input type="text" id="phone2" name="phone2"  maxlength="4"> 
+			                 <span id="phoneMsg"></span>
+			              </td>
+			         </tr>
+			         <tr>
+			            <td><label for="year">생년월일</label></td>
+			            <td>
+			               <input type="text" name="birthday" id="birthday"  maxlength="6" placeholder="950810"><span id="birthdayMsg"></span>
+			            </td>
+			         </tr>
+			         <tr>
+			            <td><label for="gender">성별</label></td>
+			            <td>
+			               <select id="gender" name="gender">
+			                    <option>성별</option>
+			                    <option value="M">남자</option>
+			                      <option value="F">여자</option>
+			                 </select>
+			                  <span id="genderMsg"></span>
+			              </td>
+			         </tr>
+			         <tr>
+			            <td colspan="3" style="text-align: center;" ><button type="button" id="btnSubmit" class="btnjoin">가입하기</button></td>
+			         </tr>
+			      </table>
+			</div>
 		</form>
+	</div>
 	</section>
 
 <%-- Footer --%>

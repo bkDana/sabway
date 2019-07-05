@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- Header --%>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<!-- Map -->
 
 <style>
 	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
@@ -279,3 +282,5 @@
 	    }
 	}
 </script>
+<%-- Footer --%>
+<jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />

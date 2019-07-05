@@ -95,4 +95,35 @@
            set customer_state = #{customerState}
            where customer_id = #{customerId}
     </update>
+    
+    <!-- 회원 리스트  -->
+    <select id="allCustomerList" resultType="customer">
+    	select 
+    	customer_no as customerNo
+    	,customer_id as customerId
+    	,customer_name as customerName
+    	,customer_nickname as customerNick
+    	,phone as phone
+    	,birthday as birthday
+    	,email as email
+    	,gender as gender
+    	,customer_state as customerState
+    	,reg_date as regDate
+    	,lastlog_date as lastLogDate
+    	from customer
+    </select>
+    
+    <!-- 회원탈퇴시키기 -->
+    <update id="adminCustomerDelete" parameterType="customer">
+    	update customer
+    		set customer_state = 2
+    		where customer_no = #{customerNo}
+    </update>
+    
+    <!-- 회원탈퇴해제시키기 -->
+    <update id="adminCustomerDeleteCancle" parameterType="customer">
+    	update customer
+    		set customer_state = 1
+    		where customer_no = #{customerNo}
+    </update>
 </mapper>

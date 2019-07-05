@@ -130,9 +130,9 @@ public class PromotionController {
 	}
 	
 	// 매장찾기페이지이동
-	@RequestMapping(value="/shopSearch.do")
+	@RequestMapping(value="/findStore.do")
 	public String shopSearchPage() {
-		return "map/map";
+		return "findStore/findStore";
 	}
 	
 	
