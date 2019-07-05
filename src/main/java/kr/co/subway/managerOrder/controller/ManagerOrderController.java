@@ -34,54 +34,34 @@ public class ManagerOrderController {
 	@Autowired
 	private ManagerOrderService service;
 	
-	
 	/* 발주 리스트 조회(검색 페이지도 동일) */
+	@SuppressWarnings("deprecation")
 	@RequestMapping("/managerOrder/orderList.do")
-	public String orderList(Model model, HttpServletRequest request) {
-		int reqPage;
-		try {
-			reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		}catch (Exception e) {
-			reqPage = 1;
-		}
-		int state;
-		try {
-			state = Integer.parseInt(request.getParameter("state"));
-		}catch (Exception e) {
-			state=-1;
-		}
-		
+	public String orderList(Model model, HttpServletRequest request, SearchVO search) {
 		String id = "";
 		HttpSession session = request.getSession(false);
 		if(session.getAttribute("customer")!=null) {
 			id = ((Customer)session.getAttribute("customer")).getCustomerId();//TODO 여기는 나중에 관리자 id로 바꿔서 받아와야함
 		}else {
-			id = "admin";
+			//id = "admin";
+			search.setMgrId("admin");
 		}
-		String startDay = request.getParameter("startDay");
-		String endDay = request.getParameter("endDay");
-		String delDay = request.getParameter("delDay");
+		if(search.getReqPage()==0) {
+			search.setReqPage(1);
+		}
 
-		String searchType = request.getParameter("searchType");
-		String searchVal = request.getParameter("searchVal");
-		
 		/* 기본 검색 기간 1개월로 설정 */
 		Date today = new Date();
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-		if(startDay == null) {
+		if(search.getStartDay() == null) {
 			Date sday = new Date();
 			sday.setMonth(sday.getMonth()-1);
-			
-			startDay = f.format(sday);
+			search.setStartDay(f.format(sday));
 		}
-		if(endDay == null) {
-			endDay = f.format(today);
+		if(search.getEndDay() == null) {
+			search.setEndDay(f.format(today));
 		}
-		
-		
-		//SearchVO search = new SearchVO(reqPage, 0,0,0,id);
-		SearchVO search = new SearchVO(reqPage, state, 0, 0, id, startDay, endDay, delDay, searchType, searchVal);
-		
+
 		ManagerOrderListVO list = service.selectList(search);
 		model.addAttribute("search", search);
 		model.addAttribute("list", list);
@@ -144,12 +124,7 @@ public class ManagerOrderController {
 		model.addAttribute("order", order);
 		return "admin/managerOrder/orderView";
 	}
-			
-			
-	@RequestMapping("/managerOrder/stockList.do")
-	public String stockList() {
-		return "admin/managerOrder/stockList";
-	}
+
 	
 	/*
 	 *보경이꺼 써서 지웠다
@@ -185,10 +160,11 @@ public class ManagerOrderController {
 		new Gson().toJson(result,response.getWriter());
 	}
 	
-	//@Scheduled(cron="1 50 16 * * *")
+	
 	//@Scheduled(cron="1 1 8 * * *")
+	//@Scheduled(cron="1 52 10 * * *")
 	@RequestMapping("/managerOrder/test.do")
-	public void deliveryEnd() {
+	public String deliveryEnd() {
 		
 		/* 오늘날짜 구해서 세팅 */
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
@@ -196,13 +172,17 @@ public class ManagerOrderController {
 		SearchVO search = new SearchVO();
 		search.setDelDay(endDay);
 		
+		/* 재고 수량 추가 */
+		int result2 = service.addStock(search);
+		System.out.println("추가된 재고 : "+result2);
+		
+		
 		/* 발주서 상태 도착으로 변경 */
 		int result = service.deliveryEnd(search);
 		System.out.println("["+endDay+"] 총 "+result+"개의 발주상태 변경");
 		
-		/* 재고 수량 추가 */
-		int result2 = service.addStock(search);
-		System.out.println("추가된 재고"+result2);
+		return "redirect:/managerOrder/orderList.do";
+
 	}
 	
 

@@ -15,11 +15,12 @@ import kr.co.subway.headOffice.vo.Apply;
 public class ApplyService {
 	@Resource(name="applyDao")
 	ApplyDAO applyDao;
-	
+	//신청 리스트
 	public List<Apply> applyList() {
 		List<Apply> list = applyDao.applyList();
 		return (ArrayList<Apply>)list;
 	}
+	//거절 누르면 상태변경
 	@Transactional
 	public int rejectManagerUpdate(String applyName,int applyStatus){
 		int result = 0;
@@ -31,6 +32,7 @@ public class ApplyService {
 //		}
 		return result;
 	}
+	//신청 글 상세보기
 	public Apply applyView(int applyNo) {
 		Apply ap = applyDao.applyView(applyNo);
 		return ap;

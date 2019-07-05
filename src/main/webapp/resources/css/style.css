@@ -13,7 +13,7 @@
 .sub-header ul li{float: left; display: inline-block; list-style: none; width: 100px; height: 50px; line-height: 50px;}
 
 
-.left-menu{background-color: #e8e8e8; width: 180px; float: left; height: 1200px;}
+.left-menu{background-color: #e8e8e8; width: 180px; float: left; height: 1400px;}
 .left-menu > ul{text-align:left;}
 .left-menu > ul > li{position:relative; display:inline-block; min-width:180px;}
 .left-menu > ul > li > a{position:relative; z-index:100; display:block; height:50px; line-height:70px; text-align:center; color:#333; font-size:15px;}
@@ -26,6 +26,16 @@
 .state-out{color:#666;}
 .state-arr{color:#009223;}
 .state-can{color:#d90f0f;}
+
+
+.stock-list{min-width: 1500px;}
+.stock-list > li{float: left;margin:20px 20px; text-align: center; width:150px;}
+.stock-list > li span{display: inline-block; width: 100%; text-align: center; margin-bottom: 5px;}
+.stock-list > li span:first-child{text-align: left;}
+.stock-list > li span:nth-child(3){height: 40px;line-height: 20px;}
+.stock-list > li span:nth-child(3), .stock-list > li span:nth-child(4){font-size: 15px;}
+.stock-list input[type='text']{padding:2px 7px; border:1px solid #ddd; border-radius:4px; width:15%;text-align: center;font-size: 17px;font-weight: bold;}
+
 
 .search-day{width:30%; max-width:200px; height:40px; border:1px solid #ccc; padding:0; text-indent:10px; color:#868686; font-size:13px; vertical-align:middle;}
 

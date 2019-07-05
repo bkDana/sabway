@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="stock">
+	<select id="totalCount" parameterType="search" resultType="_int">
+		select
+			count(*) cnt 
+		from 
+			m_stock_tbl mst, ingredients i 
+		where 
+			mst.ITEM_IDX=i.INGRE_IDX 
+		<if test="searchType!=null and searchType!=''">
+			<if test="searchType.equals('name')">
+				and LOWER(i.ingre_label) like LOWER('%'||#{searchVal}||'%')
+			</if>
+			<if test="searchType.equals('cat')">
+				and i.ingre_type = #{searchVal}
+			</if>
+		</if>
+		<choose>
+  			<when test="mgrId.equals('admin')">
+
+  			</when>
+  			<otherwise>
+  				and mst.M_ORDER_MANAGER_ID=#{mgrId}
+  			</otherwise>
+  		</choose>
+	</select>
+	<select id="selectList" parameterType="search" resultType="stockView">
+  		select 
+  			rnum,
+  			m_stock_idx as mStockIdx, 
+			m_stock as mStock,
+			ingre_label as ingreLabel, 
+			ingre_unit as ingreUnit, 
+			ingre_filepath as ingreFilepath
+	  	from ( select 
+	  				rownum rnum,
+	  				s.* 
+	  			from (select * from m_stock_tbl mst, ingredients i 
+						where mst.ITEM_IDX=I.INGRE_IDX 
+	  				<if test="searchType!=null and searchType!=''">
+						<if test="searchType.equals('name')">
+							and LOWER(i.ingre_label) like LOWER('%'||#{searchVal}||'%')
+						</if>	
+						<if test="searchType.equals('cat')">
+							and i.ingre_type = #{searchVal}
+						</if>
+					</if>
+					<choose>
+			  			<when test="mgrId.equals('admin')">
+			
+			  			</when>
+			  			<otherwise>
+			  				and mst.M_ORDER_MANAGER_ID=#{mgrId}
+			  			</otherwise>
+			  		</choose>
+	  			order by 1 desc) s
+  			 )
+  		where 
+  			rnum between #{start} and #{end}
+  	</select>
+</mapper>
