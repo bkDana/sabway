@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel='stylesheet' href="resource/css/cusOrder.css">
+
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<link rel='stylesheet' type="text/css" href="resources/css/cusOrder.css">
 <!-- 모든 한글로 쓰인 attribute : 실재 EL로 바꿔야함 -->
 <h1>온라인 주문 예약</h1>
 <br>
