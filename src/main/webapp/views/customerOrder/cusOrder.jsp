@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <script src="/resources/js/formwizard.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
-<script src="/resources/js/hor.js" type="text/javascript"></script>
+
 <!-- 모든 한글로 쓰인 attribute : 실재 EL로 바꿔야함 -->
 <script type="text/javascript">
 var myform=new formtowizard({
@@ -167,6 +167,6 @@ var myform=new formtowizard({
 		</form>
 	</div>
 </section>
-
+<script src="/resources/js/cusOrder.js" type="text/javascript"></script>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

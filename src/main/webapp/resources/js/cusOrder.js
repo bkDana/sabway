@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function() {
-	//$('.hide').hide();
+	$('.hide').hide();
 });
 //
 ///* test */
@@ -31,12 +31,12 @@ $('input[name=isSalad]').click(function(){
 	console.log($(this).val());
 	if($(this).val() == "샌드위치") {
 		/* 샌드위치 or 샐러드 상세 선택 메뉴 교체 */
-		$('#main').empty();
-		$('#main').append(tagSandwich);
+		$('#main').empty();					// 메인재료 내용 비우고
+		$('#main').append(tagSandwich); 	// 샌드위치 관련내용
 	} else if($(this).val() == "샐러드") {
 		/* 샌드위치 or 샐러드 상세 선택 메뉴 교체 */
-		$('#main').empty();
-		$('#main').append(tagSalad);
+		$('#main').empty();  				// 메인재료 내용 비우고
+		$('#main').append(tagSalad); 		// 샐러드 관련내용
 	}
 	$('.hide').hide();
 });
