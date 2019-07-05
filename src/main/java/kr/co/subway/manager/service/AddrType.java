@@ -7,7 +7,7 @@ public class AddrType {
 	public String addrType(String applyArea) {
 		String addrFirstNo = "";
 		String addrSecondNo = "";
-		//넘어오는 지역에 따라 지역번호 변경
+		//넘어오는 지역에 따라 아이디 뒤에 추가할 코드 구분
 		if(applyArea.contains("서울특별시")|applyArea.contains("서울")) {
 			addrFirstNo = "A";
 			if(applyArea.contains("강남구")) {

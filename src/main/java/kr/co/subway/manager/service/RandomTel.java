@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 
 @Component("randomtel")
 public class RandomTel {
+	//난수로 랜덤한 전화번호 생성
 	public String randomTel() {
 		String ranTel = "";
 		String telCenter = "";
 		String telLast = "";
 		Random num = new Random();
 		int[] ran = new int[8];
-		//난수로 랜덤한 전화번호 생성
 		for(int i=0;i<ran.length;i++) {
 			ran[i] = num.nextInt(10);
 			if(i<4) {

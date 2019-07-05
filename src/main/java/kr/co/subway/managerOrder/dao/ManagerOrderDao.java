@@ -11,6 +11,7 @@ import kr.co.subway.common.SearchVO;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.managerOrder.vo.ManagerItemVO;
 import kr.co.subway.managerOrder.vo.ManagerOrderVO;
+import kr.co.subway.managerOrder.vo.StockVO;
 
 
 @Repository
@@ -60,6 +61,26 @@ public class ManagerOrderDao {
 	/* 상태 변경 */
 	public int updateState(ManagerOrderVO mo) {
 		return sqlSession.update("managerOrder.updateState",mo);
+	}
+
+	public int deliveryEnd(SearchVO search) {
+		return sqlSession.update("managerOrder.deliveryEnd",search);
+	}
+
+	public List delStock(SearchVO search) {
+		return sqlSession.selectList("managerOrder.delStock",search);
+	}
+	
+	public StockVO findStock(StockVO stock) {
+		return sqlSession.selectOne("managerOrder.findStock",stock);
+	}
+	
+	public int insertStock(StockVO stock) {
+		return sqlSession.insert("managerOrder.insertStock",stock);
+	}
+	
+	public int updateStock(StockVO stock) {
+		return sqlSession.update("managerOrder.updateStock",stock);
 	}
 
 	

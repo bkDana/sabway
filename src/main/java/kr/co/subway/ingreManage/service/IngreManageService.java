@@ -34,7 +34,7 @@ public class IngreManageService {
 		int end = reqPage*numPerPage;
 		PageBound pb = new PageBound(start, end);
 		ArrayList<IngreVo> ingreList = (ArrayList<IngreVo>)ingreDao.ingreSelectAll(pb,searchType, searchVal);
-		System.out.println(ingreList.size());
+		System.out.println("ingreList() service : "+ingreList.size());
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
@@ -75,9 +75,16 @@ public class IngreManageService {
 		return iv;
 	}
 	
+	//재료 수정하기
+	public int ingreUpdate(IngreVo iv) {
+		return ingreDao.ingreUpdate(iv);
+	}
+	
 	//재료 삭제하기
 	public int ingreDelete(String ingreIdx) {
 		return ingreDao.ingreDelete(ingreIdx);
 	}
+
+	
 
 }

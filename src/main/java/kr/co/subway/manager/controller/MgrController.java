@@ -1,14 +1,8 @@
 package kr.co.subway.manager.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
-
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +24,7 @@ public class MgrController {
 	RandomTel randomtel;
 	@Resource(name="addrcode")
 	AddrCode addrcode;
-	
+	//랜덤 전화번호, 지역별 번호, 지역별 코드 설정
 	@RequestMapping(value="/enrollMgr.do")
 	public String enrollMgr(@RequestParam String applyArea,@RequestParam String applyName,Model model) {
 		//가맹점 승인하면 applyName과 applyArea를 매개변수로 받음
@@ -45,6 +39,7 @@ public class MgrController {
 		model.addAttribute("mgrTel",mgrTel);
 		return "manager/mgrEnroll";
 	}
+	//가맹점 등록
 	@RequestMapping(value="/mgrEnroll.do")
 	public String mgrEnroll(Mgr mg,@RequestParam String applyName) {
 		//가맹점 계정을 등록하면 applyName를 받아와서 DB등록이 완료되면 status를 변경하기 위해 
@@ -63,9 +58,27 @@ public class MgrController {
 	public String loginAdmin(){
 		return "admin/login";
 	}
+	//관리자 로그인
+	@RequestMapping("/adminLogin.do")
+	public String adminLogin(HttpServletRequest request, @RequestParam String mgrId){
+		HttpSession session = request.getSession();
+		Mgr mgr = new Mgr();
+		mgr = mgrservice.login(mgrId);
+		String view = "";
+		if(mgr != null) {
+			session.setAttribute("mgr", mgr);
+			view = "admin/index";
+		}else {
+			view = "main";
+		}
+		return view;
+	}
+	//관리자 로그아웃
+	@RequestMapping("/adminLogout.do")
+	public String logout(HttpServletRequest request){
+		HttpSession session = request.getSession(false);
+		session.invalidate();
+		return "main";
+	}
 	
-//	@RequestMapping("/adminLogin.do")
-//	public String adminLogin(){
-//		return "";
-//	}
 }
