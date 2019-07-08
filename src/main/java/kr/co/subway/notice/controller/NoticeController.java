@@ -21,6 +21,7 @@ import kr.co.subway.notice.service.NoticeService;
 import kr.co.subway.notice.vo.Notice;
 import kr.co.subway.notice.vo.PageNaviData;
 import kr.co.subway.notice.vo.Qna;
+import kr.co.subway.notice.vo.Review;
 
 @Controller
 public class NoticeController {
@@ -345,6 +346,46 @@ public class NoticeController {
 	@RequestMapping("/moveReviewInsert.do")
 	public String moveReviewInsert() {
 		return "/review/reviewInsert";
+	}
+	
+	@RequestMapping("reviewInsert.do")
+	public String reviewInsert(HttpServletRequest request, Review r ) {
+		String fullPath = "";
+//		if(!fileName.isEmpty()) {
+//			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
+//			String originName = fileName.getOriginalFilename();
+//			String onlyFileName = originName.substring(0, originName.indexOf('.'));
+//			String extension = originName.substring(originName.indexOf('.'));
+//			String filePath = onlyFileName+"_"+"1"+extension;
+//			fullPath = savePath+"/"+filePath;
+//			q.setFilename(originName);
+//			q.setFilepath(filePath);
+//		}else {
+//			q.setFilename("");
+//			q.setFilepath("");
+//		}
+//		int result = noticeService.qnaInsert(q);
+//		
+//		if(result>0) {
+//			System.out.println("작성 성공");
+//		}else {
+//			System.out.println("작성 실패");
+//		}
+//		if(!fileName.isEmpty()) {
+//			try {
+//				byte[] bytes = fileName.getBytes();
+//				File f = new File(fullPath);
+//				FileOutputStream fos = new FileOutputStream(f);
+//				BufferedOutputStream bos = new BufferedOutputStream(fos);
+//				bos.write(bytes);
+//				bos.close();
+//				System.out.println("파일 업로드 성공");
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+		return "/index";
 	}
 	
 	public void deleteFile() {

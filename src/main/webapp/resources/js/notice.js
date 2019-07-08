@@ -60,4 +60,5 @@ $(document).ready(function(){
 		$('#fileStatus').val('1');
 		$(this).text("삭제완료");
 	});
+	
 });
