@@ -30,7 +30,7 @@
 
   			</when>
   			<otherwise>
-  				where m_order_manager_id = #{mgrId}
+  				and mot.m_order_manager_id = #{mgrId}
   			</otherwise>
   		</choose>
 	</select>

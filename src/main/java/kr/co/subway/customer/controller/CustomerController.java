@@ -1,6 +1,9 @@
 package kr.co.subway.customer.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.subway.customer.service.CustomerService;
 import kr.co.subway.customer.vo.Customer;
@@ -44,6 +48,15 @@ public class CustomerController {
           }
          
          Customer selectCustomerVo = customerService.selectOneCustomerEnroll(vo);
+         
+         // 탈퇴계정
+         int state2 = selectCustomerVo.getCustomerState();
+         
+         if(state2 == 2) {
+        	 request.setAttribute("stateVal", "2");
+             session.removeAttribute("customer");
+             return "customer/loginFailed";
+         }
          
          if(selectCustomerVo != null) {
             
@@ -196,4 +209,71 @@ public class CustomerController {
    public String enrollPage() {
       return "customer/enrollPage";
    }
+   
+   //회원리스트
+   @RequestMapping(value="/allCustomerList.do")
+   public ModelAndView allCustomerList() {
+	   ArrayList<Customer> list = customerService.allCustomerList();
+	   ModelAndView mav = new ModelAndView();
+	   
+	   if(!list.isEmpty()) {
+		   mav.addObject("list",list);
+		   mav.setViewName("customer/allCustomerList");
+	   }else {
+		   mav.setViewName("customer/error");
+	   }
+	return mav;   
+   }
+   
+   //회원탈퇴시키기
+   @RequestMapping(value="/adminCustomerDelete.do", produces = "application/json")
+   public void adminCustomerDelete(HttpServletRequest request, HttpServletResponse response,@RequestParam int customerNo) {
+	   int result = customerService.adminCustomerDelete(customerNo);
+	   
+	   try {
+		PrintWriter out  = response.getWriter();
+		if(result>0) {
+			out.print(1);
+		}else {
+			out.print(0);
+		}
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+   }
+   
+   //회원탈퇴해제시키기
+   @RequestMapping(value="/adminCustomerDeleteCancle.do", produces = "application/json")
+   public void adminCustomerDeleteCancle(HttpServletRequest request, HttpServletResponse response,@RequestParam int customerNo) {
+	   int result = customerService.adminCustomerDeleteCancle(customerNo);
+	   
+	   try {
+		PrintWriter out  = response.getWriter();
+		if(result>0) {
+			out.print(1);
+		}else {
+			out.print(0);
+		}
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 }

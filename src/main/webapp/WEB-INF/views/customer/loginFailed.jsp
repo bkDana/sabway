@@ -44,8 +44,9 @@
             alert("취소");
             location.href="/index.do";
          }
-//       }else if(stateVal == 2){// 탈퇴계정
-         
+       }else if(stateVal == 2){ //탈퇴계정
+    	   alert("탈퇴계정입니다.");
+           location.href="/index.do";
       }else if(stateVal == 3){
          alert("로그인 실패했습니다ㅠㅠㅠㅠㅠㅠ");
          location.href="/index.do";

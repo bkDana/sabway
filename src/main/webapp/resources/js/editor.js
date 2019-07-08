@@ -315,8 +315,17 @@ $(document).ready(function(){
 			}
 				
 		}
+		
+		var matchContent = "<img [^<>]*>";
+		var newContent;
+		for(var i=0;i<count-1;i++){
+			newContent = content.match(matchContent);
+			var keyword = newContent[0]; 
+			content = content.replace(keyword,"changeIMG");
+		}
+		$('#testContent').html(content);
 		$('#reviewFilename').val(filenameText);
-		console.log(filenameText);
-		console.log(content);
+		var form = document.write;
+		form.submit();
 	}
 	

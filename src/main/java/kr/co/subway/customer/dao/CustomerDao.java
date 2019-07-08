@@ -12,4 +12,7 @@ public interface CustomerDao {
 	public int insertCustomerEnroll(Customer vo);			//회원가입
 	public int updateLastLog(Customer c);					//마지막로깅
 	public int updateState(Customer c);						//상태변경
+	public List allCustomerList();							//회원리스트
+	public int adminCustomerDelete(int customerNo);			//회원탈퇴시키기
+	public int adminCustomerDeleteCancle(int customerNo);	//회원탈퇴해제시키기
 }
