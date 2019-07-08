@@ -39,8 +39,8 @@
 					</tr>
 				</table>
 				<div class="common-tbl-btn-group">
-					<button type="button" class="btn-style1" onclick="location.href='/goIngreReg.do'" style="font-size:15px;">추가 등록하기</button>
-					<button type="button" class="btn-style2" onclick="location.href='/ingreList.do?reqPage=1'" style="font-size:15px;">메뉴 관리 페이지로</button>
+					<button type="button" class="btn-style1" onclick="location.href='/ingreManage/goIngreReg.do'" style="font-size:15px;">추가 등록하기</button>
+					<button type="button" class="btn-style2" onclick="location.href='/ingreManage/ingreList.do?reqPage=1'" style="font-size:15px;">메뉴 관리 페이지로</button>
 				</div>
 			</div>
 

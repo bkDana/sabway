@@ -11,7 +11,7 @@
 	<div class="area">
 		<div class="sub-menu">※ 메뉴관리 > 메뉴등록</div>
 		
-			<form action="/ingreRegister.do" method="post" enctype="multipart/form-data">
+			<form action="/ingreManage/ingreRegister.do" method="post" enctype="multipart/form-data">
 				<table class="comm-tbl">
 					<colgroup>
 						<col width="20%">
@@ -80,13 +80,6 @@
 								<option value="kg">kg</option>
 								<option value="통">통</option>
 							</select>
-						</td>
-					</tr>
-					<tr>
-						<th>할인률</th>
-						<td>
-							<input type="text" name="ingreDis" class="short2" value="0" style="text-align:right;"> %
-							select로 바꾸기 얘도 있어야할까..?
 						</td>
 					</tr>
 				</table>

@@ -34,17 +34,24 @@ import kr.co.subway.ingreManage.vo.IngrePageNaviData;
 import kr.co.subway.ingreManage.vo.IngreVo;
 
 @Controller
+@RequestMapping("/ingreManage")
 public class IngreManageController {
 	@Autowired
 	private IngreManageService ingreService;
 	
-	//�옱猷� �벑濡앺럹�씠吏�濡� 蹂대궡湲�
+	//매출통계테스트
+	@RequestMapping("/goSalesTest.do")
+	public String goSalesTest() {
+		return "admin/salesStatics/salesTest";
+	}
+	
+	//재료 등록페이지로
 	@RequestMapping("/goIngreReg.do")
 	public String goIngreReg() {
 		return "admin/ingreManage/ingreRegisterForm";
 	}
 	
-	//�옱猷� �벑濡앺븯湲�
+	//재료 등록하기
 	@RequestMapping("/ingreRegister.do")
 	public ModelAndView ingreReg(HttpServletRequest request, @RequestParam MultipartFile filepath, IngreVo iv, ModelAndView mav) {
 		String fullPath="";
@@ -68,7 +75,6 @@ public class IngreManageController {
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				bos.write(bytes);
 				bos.close();
-				System.out.println("�벑濡� �꽦怨�");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -92,7 +98,7 @@ public class IngreManageController {
 		return format.format(date);
 	}
 	
-	//�옱猷� 由ъ뒪�듃 媛��졇�삤湲�
+	//재료 리스트 가져오기
 	@RequestMapping("/ingreList.do")
 	public ModelAndView ingreList(String reqPage, String searchType, String searchVal) {
 		System.out.println(searchType);
@@ -106,7 +112,6 @@ public class IngreManageController {
 		}
 		IngrePageNaviData ip = ingreService.ingreList(reqPage1,searchType,searchVal);
 		ArrayList<IngreVo> list = ip.getIngreList();
-		//System.out.println("�뙆�씪�씠由� : "+list.get(0).getIngreFilepath());
 		String pageNavi = ip.getPageNavi();
 		if(!list.isEmpty()) {
 			mav.addObject("reqPage",reqPage1);
@@ -121,24 +126,24 @@ public class IngreManageController {
 		return mav;
 	}
 	
-	//�솢�꽦�솕�뿬遺� 蹂�寃쎌떆 �뾽�뜲�씠�듃�븯湲�
+	//활성화 여부 ajax로 변경
 	@ResponseBody
 	@RequestMapping("/updateIngreActive.do")
 	public void updateIngreActive(HttpServletResponse response,String ingreActive,String ingreIdx) throws IOException {
-		System.out.println("�솢�꽦�솕:"+ingreActive);
-		System.out.println("�씤�뜳�뒪:"+ingreIdx);
+		System.out.println("활성화:"+ingreActive);
+		System.out.println("번호:"+ingreIdx);
 		int result = ingreService.updateIngreActive(ingreActive,ingreIdx);
 		System.out.println("controller updateIngreActive() result : "+result);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if(result>0) {
-			out.println("�뾽�뜲�씠�듃 �꽦怨�");
+			out.println("활성화 여부 변경 성공");
 		}else{
-			out.println("�뾽�뜲�씠�듃 �떎�뙣");
+			out.println("활성화여부 변경 실패");
 		}
 	}
 	
-	//�옱猷� 由ъ뒪�듃 �럹�씠吏��뿉�꽌 寃��깋諛뺤뒪�뿉�꽌 �옱猷� 移댄뀒怨좊━ �꽑�깮�떆 �븯�쐞 媛� 媛��졇�삤湲�
+	//재료 카테고리선택시 하위 컬럼 가져오기
 	@ResponseBody
 	@RequestMapping("/ingreType.do")
 	public void ingreType(HttpServletResponse response) throws JsonIOException, IOException {
@@ -148,7 +153,7 @@ public class IngreManageController {
 		new Gson().toJson(list,response.getWriter());
 	}
 	
-	//�옱猷뚯젙蹂� 媛��졇�삤湲�
+	//재료 업데이트 페이지
 	@RequestMapping("/goIngreUpdate.do")
 	public ModelAndView goUpdatePage(ModelAndView mav, String ingreIdx) {
 		System.out.println("controller goUpdatePage() idx : "+ingreIdx);
@@ -162,11 +167,11 @@ public class IngreManageController {
 		return mav;
 	}
 	
-	//�옱猷� �닔�젙�븯湲�
+	//재료 업데이트
 	@RequestMapping("/ingreUpdate.do")
 	public String ingreUpdate(HttpServletRequest request, @RequestParam MultipartFile filepath, IngreVo iv, String oldFilepath, String deleteFile, RedirectAttributes redirectAttributes) {
 		String fullPath="";
-		//泥⑤��뙆�씪 �엳�쑝硫�
+		//파일 있으면
 		if(!filepath.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/ingredients");
 			String originName = filepath.getOriginalFilename();
@@ -175,16 +180,16 @@ public class IngreManageController {
 			String filePath = onlyFileName+"_"+getDate()+extension;
 			fullPath = savePath+"/"+filePath;
 			iv.setIngreFilepath(filePath);
-			//湲곗〈 �뙆�씪 �엳�뿀�떎硫� �궘�젣�븯湲�
+			
 			if(oldFilepath !=null) {
 				File delFile = new File(savePath+"/"+oldFilepath);
-				System.out.println("�뙆�씪 �궘�젣�릱�굹�슂? : "+delFile.delete());
-			}else {	//泥⑤��뙆�씪 �뾾�쑝硫�
+				System.out.println("파일삭제? : "+delFile.delete());
+			}else {
 				if(deleteFile == null) {
 					iv.setIngreFilepath(oldFilepath);
 				}else {
 					File delFile = new File(savePath+"/"+oldFilepath);
-					System.out.println("�뙆�씪 �궘�젣�릱�굹�슂? : "+delFile.delete());
+					System.out.println("파일 삭제? : "+delFile.delete());
 				}
 			}
 		}else {
@@ -193,9 +198,9 @@ public class IngreManageController {
 		
 		int result = ingreService.ingreUpdate(iv);
 		if(result>0) {
-			System.out.println("�닔�젙 �꽦怨�");;	
+			System.out.println("업데이트 완료");;	
 		}else {
-			System.out.println("�닔�젙 �떎�뙣");;
+			System.out.println("업데이트 실패");;
 		}
 		if(!filepath.isEmpty()) {
 			try {
@@ -205,35 +210,34 @@ public class IngreManageController {
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				bos.write(bytes);
 				bos.close();
-				System.out.println("�뙆�씪 �뾽濡쒕뱶 �꽦怨�");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		redirectAttributes.addAttribute("reqPage", "1");	//redirect濡� 媛� 蹂대궡湲�
-		return "redirect:/ingreList.do";
+		redirectAttributes.addAttribute("reqPage", "1");	//redirect로 값 보내기
+		return "redirect:/ingreManage/ingreList.do";
 	}
 	
-	//�옱猷� �궘�젣�븯湲�
+	//재료 삭제하기
 	@RequestMapping("/ingreDelete.do")
 	public String ingreDelete(HttpServletRequest request, String ingreIdx, String reqPage, String searchType, String searchVal,String filepath, RedirectAttributes redirectAttributes) {
 		System.out.println("no:"+ingreIdx+" reqPage : "+reqPage+" searchType : "+searchType+" searchVal : "+searchVal+" filepath: "+filepath);
-		//泥⑤��뙆�씪 �엳�쑝硫�
+		//파일이 있으면
 		if(!filepath.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/ingredients");///////
 			File delFile = new File(savePath+"/"+filepath);
-			System.out.println("�뙆�씪 �궘�젣�릱�굹�슂? : "+delFile.delete());
+			System.out.println("파일삭제? : "+delFile.delete());
 		}
 		
 		int result = ingreService.ingreDelete(ingreIdx);
 		if(result>0) {
-			redirectAttributes.addAttribute("reqPage", reqPage);	//redirect濡� 媛� 蹂대궡湲�
+			redirectAttributes.addAttribute("reqPage", reqPage);	//redirect로 값 보내기
 			redirectAttributes.addAttribute("searchType", searchType);
 			redirectAttributes.addAttribute("searchVal", searchVal);
-			return "redirect:/ingreList.do";
+			return "redirect:/ingreManage/ingreList.do";
 		}else {
-			System.out.println("�궘�젣 �떎�뙣");
+			System.out.println("삭제실패");
 			return "common/error";
 		}
 	}

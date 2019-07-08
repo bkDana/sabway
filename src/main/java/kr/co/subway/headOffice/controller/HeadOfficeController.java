@@ -47,15 +47,15 @@ public class HeadOfficeController {
 	public String selectPromotion(@RequestParam int menuNo, @RequestParam String menuName, @RequestParam int menuBasePrice, @RequestParam int menuDiscntPrice, @RequestParam double menuDiscntRate2) {
 		//정수로 변환
 		int menuDiscntRate = (int)Math.floor(100-(menuDiscntRate2*100));
+		System.out.println(menuName+" : "+menuBasePrice+"원");
+		System.out.println("할인율 : "+(100-(menuDiscntRate2*100))+"%");
+		System.out.println("할인후 가격 : "+menuDiscntPrice+"원");
 		//index라 0부터 오기 때문에 +1
 		Menu menu = new Menu(menuNo+1, menuName, menuBasePrice, menuDiscntPrice, menuDiscntRate);
 		int result = menuservice.updateMenu(menu);
-		System.out.println(menuName+" : "+menuBasePrice+"원");
-		System.out.println("할인율 : "+(int)Math.floor(100-(menuDiscntRate2*100))+"%");
-		System.out.println("할인후 가격 : "+(int)Math.floor(menuBasePrice*menuDiscntRate2)+"원");
 		String view = "";
 		if(result>0) {
-			view = "headOffice/SelectPromotion";
+			view = "redirect:/promotionSelect.do";
 		}else {
 			view = "redirect:/index.jsp";
 		}
