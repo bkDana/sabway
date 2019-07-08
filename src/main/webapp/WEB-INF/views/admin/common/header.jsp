@@ -27,7 +27,9 @@
 <body>
 	<header id="header">
 		<div class="admin-header">
-			<a href="/admin.do">당산점 관리자 페이지</a>
+			<c:if test="${not empty sessionScope.mgr.mgrId }">
+				<a href="/admin.do">${sessionScope.mgr.mgrName } 관리자 페이지</a>
+			</c:if>
 			<div style="float:right;margin-right:60px;">
 				<c:if test="${not empty sessionScope.mgr.mgrId }">
 					<a href="/adminPage.do">${sessionScope.mgr.mgrName }</a>
