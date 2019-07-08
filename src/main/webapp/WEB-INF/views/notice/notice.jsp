@@ -23,7 +23,7 @@
 				<col width="15%">
 			</colgroup>
 				<tr>
-					<th>번호</th>
+					<th>카테고리</th>
 					<th>제목</th>
 					<th>작성일</th>
 				</tr>

@@ -46,10 +46,10 @@
 					<div id="gnbBg"></div>
 					<ul class="clearfix">
 						<li class="gnb01">
-							<a href="#">회원관리</a>
+							<a href="/allCustomerList.do">회원관리</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="#">회원 리스트</a></li>
+									<li><a href="/allCustomerList.do">회원 리스트</a></li>
 								</ul>
 							</div>
 						</li>
@@ -64,7 +64,7 @@
 							</div>
 						</li>
 						<li class="gnb03">
-							<a href="/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")){%>on<%}%>">재료관리</a>
+							<a href="/ingreManage/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")){%>on<%}%>">재료관리</a>
 							<div class="gnb-2dep">
 								<ul>
 									<li><a href="#">재료 리스트</a></li>
@@ -92,7 +92,7 @@
 							</div>
 						</li>
 						<li class="gnb07">
-							<a href="#">매출통계</a>
+							<a href="/jqplotTest/test.jsp">매출통계</a>
 						</li>
 					</ul>
 				</nav>

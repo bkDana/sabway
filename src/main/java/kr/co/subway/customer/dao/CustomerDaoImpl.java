@@ -1,5 +1,7 @@
 package kr.co.subway.customer.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,6 +46,18 @@ public class CustomerDaoImpl implements CustomerDao{
 	@Override
 	public int updateState(Customer c) {
 		return sqlsession.update("customer.updateState",c);
+	}
+	@Override
+	public List allCustomerList() {
+		return sqlsession.selectList("customer.allCustomerList");
+	}
+	@Override
+	public int adminCustomerDelete(int customerNo) {
+		return sqlsession.update("customer.adminCustomerDelete",customerNo);
+	}
+	@Override
+	public int adminCustomerDeleteCancle(int customerNo) {
+		return sqlsession.update("customer.adminCustomerDeleteCancle",customerNo);
 	}
 	
 }

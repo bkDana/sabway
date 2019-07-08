@@ -5,8 +5,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.subway.notice.service.NoticeService;
 import kr.co.subway.notice.vo.Notice;
 import kr.co.subway.notice.vo.PageNaviData;
 import kr.co.subway.notice.vo.Qna;
+import kr.co.subway.notice.vo.Review;
 
 @Controller
 public class NoticeController {
@@ -265,6 +271,7 @@ public class NoticeController {
 	
 	@RequestMapping("/moveQnaUpdate.do")
 	public ModelAndView moveQnaUpdate(@RequestParam int qnaNo) {
+		
 		ArrayList<Qna> qnaList = noticeService.qnaSelectAll();
 		ModelAndView mav = new ModelAndView();
 		 if(!qnaList.isEmpty()) {
@@ -278,7 +285,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/qnaUpdate.do", method=RequestMethod.POST)
-	public String qnaUpdate(HttpServletRequest request, @RequestParam MultipartFile fileName, Qna q, @RequestParam String fileStatus) {
+	public String qnaUpdate(HttpServletRequest request, @RequestParam MultipartFile fileName, Qna q, @RequestParam String fileStatus) {		
 		String fullPath = "";
 		if(!fileName.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
@@ -359,6 +366,87 @@ public class NoticeController {
 	    }else{
 	        System.out.println("파일이 존재하지 않습니다.");
 	    }
+	}
+	
+	
+	@RequestMapping(value = "/reviewInsert.do", method = RequestMethod.POST)
+    public String reviewInsert(HttpServletRequest request, MultipartHttpServletRequest multi,Review r){
+
+        Enumeration enumeration = multi.getParameterNames();
+        String filenameForDB = "";
+        String filepathForDB = "";
+        while (enumeration.hasMoreElements()){
+            System.out.println("ParamName : " + enumeration.nextElement());
+        }
+        String root = multi.getSession().getServletContext().getRealPath("/");
+        String path = root+"resources/upload/review/";
+
+        String newFileName = ""; // 업로드 되는 파일명
+
+        File dir = new File(path); //파일경로 설정
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        Iterator<String> files = multi.getFileNames();
+
+        while(files.hasNext()){
+
+            String uploadFile = files.next();
+            System.out.println("uploadFile Name : " + uploadFile);
+
+            List<MultipartFile> mFile = multi.getFiles(uploadFile);
+
+            for (MultipartFile m : mFile) {
+                newFileName = "";
+                String fileName = m.getOriginalFilename();
+                System.out.println("OriginalFilename : " + fileName);
+                System.out.println(m);
+                //file upload
+                if(fileName.trim().length() > 0) {
+                    //업로드할 파일이 존재할때
+                    newFileName = System.currentTimeMillis() + "."
+                            + fileName.substring(fileName.lastIndexOf(".") + 1);
+                    try {
+        				byte[] bytes = m.getBytes();
+        				File f = new File(path + newFileName);
+        				FileOutputStream fos = new FileOutputStream(f);
+        				BufferedOutputStream bos = new BufferedOutputStream(fos);
+        				bos.write(bytes);
+        				bos.close();
+        				System.out.println("File upload complete");
+                        System.out.println(path + newFileName);
+                        filenameForDB += fileName+",";
+                        filepathForDB += newFileName+",";
+        			} catch (IOException e) {
+        				// TODO Auto-generated catch block
+        				e.printStackTrace();
+        			}
+                }
+            }
+        }
+        r.setFilename(filenameForDB);
+        r.setFilepath(filepathForDB);
+
+        int result = noticeService.reviewInsert(r);
+        
+        return "redirect:/moveReviewInsert.do";
+    }
+	@RequestMapping("/review.do")
+	public ModelAndView reviewSelectAll(@RequestParam int currentPage) {
+		PageNaviData pd = noticeService.reviewSelectPaging(currentPage);
+		ArrayList<Review> reviewList = pd.getReviewList();
+		String pageNavi = pd.getPageNavi();
+		ModelAndView mav = new ModelAndView();
+		if (!reviewList.isEmpty()) {
+			mav.addObject("reviewList", reviewList); // view에서 사용할 객체 추가
+			mav.addObject("pageNavi", pageNavi);
+			mav.setViewName("review/review");
+		} else {
+			mav.setViewName("common/error");
+		}
+
+		return mav;
 	}
 	
 }

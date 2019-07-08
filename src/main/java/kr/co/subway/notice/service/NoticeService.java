@@ -12,6 +12,7 @@ import kr.co.subway.notice.vo.Notice;
 import kr.co.subway.notice.vo.PageBound;
 import kr.co.subway.notice.vo.PageNaviData;
 import kr.co.subway.notice.vo.Qna;
+import kr.co.subway.notice.vo.Review;
 
 @Service("noticeService")
 public class NoticeService {
@@ -54,7 +55,7 @@ public class NoticeService {
 			pageNavi +="<a href='/notice.do?currentPage="+(currentPage+1)+"'>다음</a>";
 		}
 		
-		return new PageNaviData(noticeList,null, pageNavi);
+		return new PageNaviData(noticeList,null,null, pageNavi);
 	}
 	
 	@Transactional
@@ -109,7 +110,7 @@ public class NoticeService {
 			pageNavi +="<a href='/qna.do?currentPage="+(currentPage+1)+"'>다음</a>";
 		}
 		
-		return new PageNaviData(null,qnaList, pageNavi);
+		return new PageNaviData(null,qnaList,null, pageNavi);
 	}
 	
 	@Transactional
@@ -125,5 +126,40 @@ public class NoticeService {
 	@Transactional
 	public int qnaDelete(int qnaNo){
 		return noticeDao.qnaDelete(qnaNo);
+	}
+	
+	@Transactional
+	public int reviewInsert(Review r){
+		return noticeDao.reviewInsert(r);
+	}
+	
+	public PageNaviData reviewSelectPaging(int currentPage){
+		int numPerPage = 5;
+		int totalCount = noticeDao.reviewTotalCount();
+		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
+		int start = (currentPage-1)*numPerPage+1;
+		int end = currentPage*numPerPage;
+		PageBound pb = new PageBound(start, end);
+		ArrayList<Review> reviewList = (ArrayList<Review>)noticeDao.reviewSelectPaging(pb);
+		String pageNavi = "";
+		int pageNaviSize = 5;
+		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
+		if(currentPage != 1) {
+			pageNavi += "<a href='/review.do?currentPage="+(currentPage-1)+"'>이전</a>";
+		}
+		int i = 1;
+		while(!(i++>pageNaviSize || pageNo>totalPage)) {
+			if(currentPage == pageNo) {
+				pageNavi += "<span>"+pageNo+"</span>";
+			}else {
+				pageNavi += "<a href='/review.do?currentPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		if(currentPage < totalPage) {
+			pageNavi +="<a href='/review.do?currentPage="+(currentPage+1)+"'>다음</a>";
+		}
+		
+		return new PageNaviData(null,null,reviewList, pageNavi);
 	}
 }

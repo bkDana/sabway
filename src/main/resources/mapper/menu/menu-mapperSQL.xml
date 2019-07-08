@@ -10,6 +10,6 @@
 		from menu
 	</select>
 	<update id="updateMenu" parameterType="menu">
-		update menu set menu_no = #{menuNo}, menu_name = #{menuName},menu_base_price = #{menuBasePrice}, menu_discnt_price = #{menuDiscntPrice}, menu_discnt_rate = #{menuDiscntRate} where menu_no = #{menuNo}
+		update menu set menu_name = #{menuName},menu_base_price = #{menuBasePrice}, menu_discnt_price = #{menuDiscntPrice}, menu_discnt_rate = #{menuDiscntRate} where menu_no = #{menuNo}
 	</update>
 </mapper>

@@ -61,7 +61,7 @@
 								<ul>
 									<li><a href="/notice.do?currentPage=1">공지사항/이벤트</a></li>
 									<li><a href="/qna.do?currentPage=1">Q&A</a></li>
-									<li><a href="/moveReviewInsert.do">리뷰</a></li>
+									<li><a href="/review.do?currentPage=1">리뷰</a></li>
 								</ul>
 							</div>
 						</li>
@@ -72,7 +72,7 @@
 									<li><a href="#">써브웨이 역사</a></li>
 									<li><a href="#">써브웨이 약속</a></li>
 									<li><a href="#">샌드위치 아티스트 지원</a></li>
-									<li><a href="/shopSearch.do">매장찾기</a></li>
+									<li><a href="/findStore.do">매장찾기</a></li>
 								</ul>
 							</div>
 						</li>

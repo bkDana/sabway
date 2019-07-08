@@ -1,11 +1,10 @@
 package kr.co.subway.customer.service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.subway.customer.dao.CustomerDao;
 import kr.co.subway.customer.vo.Customer;
@@ -46,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService{
 //      vo.setCustomerNo(customerdao.selectMaxNum(vo).getCustomerNo());
 //      
       // 휴대폰 번호
-      vo.setPhone(vo.getPhone() + vo.getPhone1() + vo.getPhone2());
+      vo.setPhone(vo.getPhone() + "-" + vo.getPhone1() + "-" +vo.getPhone2());
       vo.setEmail(vo.getEmail() + "@" +vo.getEmail2());
       vo.setCustomerState(1);
       
@@ -63,5 +62,21 @@ public class CustomerServiceImpl implements CustomerService{
    public int updateState(Customer c) {
       return customerdao.updateState(c);
    }
+
+   //회원리스트
+   @Override
+	public ArrayList<Customer> allCustomerList() {
+		return (ArrayList<Customer>) customerdao.allCustomerList();
+	}
+   //회원탈퇴시키기
+	@Override
+	public int adminCustomerDelete(int customerNo) {
+		return customerdao.adminCustomerDelete(customerNo);
+	}
+	//회원탈퇴해제시키기
+	@Override
+	public int adminCustomerDeleteCancle(int customerNo) {
+		return customerdao.adminCustomerDeleteCancle(customerNo);
+	}
 
 }

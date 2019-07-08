@@ -60,4 +60,34 @@ $(document).ready(function(){
 		$('#fileStatus').val('1');
 		$(this).text("삭제완료");
 	});
+	///////review Part
+	$(".move-one-review").click(function(){
+		var reviewNo = $(this).prev().prev().text();
+		location.href="/reviewOne.do?reviewNo="+reviewNo;
+	});
+	$(".move-pn-qna").click(function(){
+		var qnaNo = $(this).prev().text();
+		location.href="/qnaOne.do?qnaNo="+qnaNo;
+	});
+	$(".move-all-qna").click(function(){
+		location.href="/qna.do?currentPage=1";
+	});
+	$(".insert-qna").click(function(){
+		location.href="/moveQnaInsert.do";
+	});
+	$(".move-qna-notice").click(function(){
+		var qnaNo = $('th').eq(0).text();
+		location.href="/moveQnaUpdate.do?qnaNo="+qnaNo;
+	});
+	$(".update-qna").click(function(){
+		location.href="/qnaUpdate.do";
+	});
+	$(".move-delete-qna").click(function(){
+		var qnaNo = $('th').eq(0).text();
+		location.href="/qnaDelete.do?qnaNo="+qnaNo;
+	});
+	$('#fileDelete').click(function(){
+		$('#fileStatus').val('1');
+		$(this).text("삭제완료");
+	});
 });
