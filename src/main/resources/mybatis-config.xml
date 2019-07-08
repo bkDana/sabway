@@ -17,5 +17,6 @@
 		<typeAlias type="kr.co.subway.managerOrder.vo.StockVO" alias="stock"/>	<!-- 재고 Vo -->
 		
 		<typeAlias type="kr.co.subway.stock.vo.stockViewVO" alias="stockView"/>	<!-- 재고 Vo -->
+		<typeAlias type="kr.co.subway.notice.vo.Review" alias="review"/>	<!-- 재고 Vo -->
 	</typeAliases>
 </configuration>
