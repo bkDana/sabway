@@ -16,13 +16,13 @@ public class IngreManageService {
 	@Autowired
 	private IngreManageDao ingreDao;
 	
-	//�옱猷� �벑濡앺븯湲�
+	//재료 등록
 	public int ingreReg(IngreVo iv) {
 		int result = ingreDao.ingreReg(iv);
 		return result;
 	}
 	
-	//�옱猷� 由ъ뒪�듃 媛��졇�삤湲�
+	//재료 리스트
 	public IngrePageNaviData ingreList(int reqPage, String searchType, String searchVal) {
 		System.out.println(searchType);
 		System.out.println(searchVal);
@@ -39,48 +39,48 @@ public class IngreManageService {
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo != 1) {
-			pageNavi += "<a class='paging-arrow prev-arrow' href='/ingreList.do?reqPage="+(pageNo-1)+"&searchType="+searchType+"&searchVal="+searchVal+"'"+pageNo+"'>�씠�쟾</a>";
+			pageNavi += "<a class='paging-arrow prev-arrow' href='/ingreManage/ingreList.do?reqPage="+(pageNo-1)+"&searchType="+searchType+"&searchVal="+searchVal+"'"+pageNo+"'>이전</a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
 			if(reqPage == pageNo) {
 				pageNavi += "<span class='cur'>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a href='/ingreList.do?reqPage="+pageNo+"&searchType="+searchType+"&searchVal="+searchVal+"'>"+pageNo+"</a>";
+				pageNavi += "<a href='/ingreManage/ingreList.do?reqPage="+pageNo+"&searchType="+searchType+"&searchVal="+searchVal+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		if(pageNo < totalPage) {
-			pageNavi +="<a class='paging-arrow next-arrow' href='/ingreList.do?reqPage="+pageNo+"&searchType="+searchType+"&searchVal="+searchVal+"'"+pageNo+"'>�떎�쓬</a>";
+			pageNavi +="<a class='paging-arrow next-arrow' href='/ingreManage/ingreList.do?reqPage="+pageNo+"&searchType="+searchType+"&searchVal="+searchVal+"'"+pageNo+"'>다음</a>";
 		}
 		
 		return new IngrePageNaviData(ingreList, pageNavi);
 	}
 	
-	//�솢�꽦�솕�뿬遺� 蹂�寃쎌떆 �뾽�뜲�씠�듃�븯湲�
+	//재료 활성화 업데이트
 	public int updateIngreActive(String ingreActive, String ingreIdx) {
 		int result = ingreDao.updateIngreActive(ingreActive,ingreIdx);
 		return result;
 	}
 	
-	//�옱猷� 由ъ뒪�듃 �럹�씠吏��뿉�꽌 寃��깋諛뺤뒪�뿉�꽌 �옱猷� 移댄뀒濡쒓린 �꽑�깮�떆 �븯�쐞 媛� 媛��졇�삤湲�
+	//재료 카테고리 선택시 하위 컬럼 가져오기
 	public List ingreType() {
 		List list = ingreDao.ingreType();
 		return list;
 	}
 
-	//�옱猷뚯젙蹂� 媛��졇�삤湲�
+	//재료 업데이트 페이지로
 	public IngreVo goUpdateIngre(String ingreIdx) {
 		IngreVo iv = ingreDao.goUpdateIngre(ingreIdx);
 		return iv;
 	}
 	
-	//�옱猷� �닔�젙�븯湲�
+	//재료 업데이트
 	public int ingreUpdate(IngreVo iv) {
 		return ingreDao.ingreUpdate(iv);
 	}
 	
-	//�옱猷� �궘�젣�븯湲�
+	//재료 삭제
 	public int ingreDelete(String ingreIdx) {
 		return ingreDao.ingreDelete(ingreIdx);
 	}

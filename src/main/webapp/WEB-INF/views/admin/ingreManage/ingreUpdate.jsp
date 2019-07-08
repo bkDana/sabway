@@ -11,7 +11,7 @@
 	<div class="area">
 		<div class="sub-menu">※ 메뉴관리 > 메뉴수정</div>
 		
-		<form action="/ingreUpdate.do" method="post" enctype="multipart/form-data">
+		<form action="/ingreManage/ingreUpdate.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="ingreIdx" value="${iv.ingreIdx}">
 				<table class="comm-tbl">
 					<colgroup>
@@ -75,10 +75,10 @@
 							<c:if test="${not empty iv.ingreFilepath }">
 								<span id="nowFile"><%-- ${qna.boardFilename } --%> <img src="/resources/upload/ingredients/${iv.ingreFilepath}" style="width:100px;"><button type="button" id="fileDelBtn" class="file-del-btn delFile">삭제</button>
 								<input type="hidden" name="deleteFile" ></span>
-								<span id="upload"><input type="file" name="filepath" required><p class="comment">(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p></span>
+								<span id="upload"><input type="file" name="filepath"><p class="comment">(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p></span>
 							</c:if>
 							<c:if test="${empty iv.ingreFilepath }">
-								<input type="file" name="filepath" required><p class="comment">(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p>
+								<input type="file" name="filepath"><p class="comment" >(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p>
 							</c:if>
 						</td>
 					</tr>
@@ -90,13 +90,6 @@
 								<option value="kg">kg</option>
 								<option value="통">통</option>
 							</select>
-						</td>
-					</tr>
-					<tr>
-						<th>할인률</th>
-						<td>
-							<input type="text" name="ingreDis" class="short2" value="0" style="text-align:right;"> %
-							할까 말까...
 						</td>
 					</tr>
 				</table>

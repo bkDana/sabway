@@ -13,7 +13,7 @@
 		
 		<div class="board-search-box">
 			<!-- 검색박스 -->
-			<form action="/ingreList.do" method="post" name="search" id="search">
+			<form action="/ingreManage/ingreList.do" method="post" name="search" id="search">
 				<input type="hidden" name="reqPage" value="1">
 				<select name="searchType" id="searchType" data-type="${searchType }">
 					<option value="">-- 1차 분류 --</option>
@@ -82,7 +82,7 @@
 							</select>
 						</td>
 						<td>
-							<button class="add-btn" onclick="location.href='/goIngreUpdate.do?ingreIdx=${list.ingreIdx}'">수정</button>
+							<button class="add-btn" onclick="location.href='/ingreManage/goIngreUpdate.do?ingreIdx=${list.ingreIdx}'">수정</button>
 							<button class="del-btn del" data-no="${list.ingreIdx}" data-path="${list.ingreFilepath}">삭제</button>
 						</td>
 					</tr>
@@ -112,7 +112,7 @@ $(document).ready(function(){
 	$(".del-btn.del").click(function(){
 		var del = confirm("정말로 삭제하시겠습니까?");
 		if(del){
-			location.href="/ingreDelete.do?reqPage=${reqPage}&searchType=${searchType}&searchVal=${searchVal}&ingreIdx="+$(this).data('no')+"&filepath="+$(this).data('path');
+			location.href="/ingreManage/ingreDelete.do?reqPage=${reqPage}&searchType=${searchType}&searchVal=${searchVal}&ingreIdx="+$(this).data('no')+"&filepath="+$(this).data('path');
 		}else{
 			console.log("삭제안한대");
 		}
@@ -125,7 +125,7 @@ $(document).ready(function(){
 		console.log(no);
 		console.log(ingreActive);
 		$.ajax({
-			url : "/updateIngreActive.do",
+			url : "/ingreManage/updateIngreActive.do",
 			data : {ingreActive:ingreActive,ingreIdx:no},
 			success:function(data){
 				console.log(data);
@@ -166,7 +166,7 @@ $(document).ready(function(){
 		if($("#searchType").val()=='ingreType'){
 			var ingreType = $("#searchType").val();
 			$.ajax({
-				url:"/ingreType.do",
+				url:"/ingreManage/ingreType.do",
 				datatype: "json",
 				success: function(data){
 					console.log(data);

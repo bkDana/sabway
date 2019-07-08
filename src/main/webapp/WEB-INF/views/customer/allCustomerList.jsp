@@ -80,43 +80,52 @@
 
 	//회원 탈퇴시키기
 	$('.del-btn').click(function(){
-		
-		var customerNo =
-			$(this).parent().parent().children(':eq(0)').html();
-		
-		$.ajax({
-			type:"GET",
-			url:"/adminCustomerDelete.do?customerNo="+customerNo,
-			success : function(data){
-				var result = data;
-				if(result == 1){
-					alert("변경완료");
-					location.reload();
-				}else{
-					alert("실패")
+		if(confirm("해당 회원을 탈퇴 시키겠습니까?!?!?")){
+			var customerNo =
+				$(this).parent().parent().children(':eq(0)').html();
+			
+			$.ajax({
+				type:"GET",
+				url:"/adminCustomerDelete.do?customerNo="+customerNo,
+				success : function(data){
+					var result = data;
+					if(result == 1){
+						alert("회원 탈퇴 완료");
+						location.reload();
+					}else{
+						alert("실패")
+					}
 				}
-			}
-		});
+			});
+		}else{
+			alert("취소")
+			location.href="/allCustomerList.do"
+		}
 	})
 		//회원 탈퇴 해제 시키기
 	$('.del-btn2').click(function(){
-		
-		var customerNo =
-			$(this).parent().parent().children(':eq(0)').html();
-		
-		$.ajax({
-			type:"GET",
-			url:"/adminCustomerDeleteCancle.do?customerNo="+customerNo,
-			success : function(data){
-				var result = data;
-				if(result == 1){
-					alert("회원 탈퇴 완료");
-					location.reload();
-				}else{
-					alert("실패")
+		if(confirm("해당 회원을 해제 시키겠습니까?!?!?")){
+			var customerNo =
+				$(this).parent().parent().children(':eq(0)').html();
+			
+			$.ajax({
+				type:"GET",
+				url:"/adminCustomerDeleteCancle.do?customerNo="+customerNo,
+				success : function(data){
+					var result = data;
+					if(result == 1){
+						alert("회원 해제 완료");
+						location.reload();
+					}else{
+						alert("실패")
+					}
 				}
-			}
-		});
+			});
+		}else{
+			alert("취소")
+			location.href="/allCustomerList.do"
+		}
+	
 	})
 </script>
 <%-- Footer --%>
