@@ -24,6 +24,7 @@
 							<select name="ingreType" id="ingreType" class="short" data-type="${iv.ingreType }" required>
 								<option value="">== 카테고리 ==</option>
 								<option value="메인메뉴">메인메뉴</option>
+								<option value="메인재료">메인재료</option>
 								<option value="빵">빵</option>
 								<option value="추가토핑">추가토핑</option>
 								<option value="치즈">치즈</option>
