@@ -18,12 +18,12 @@ public class IngreManageDao {
 	SqlSessionTemplate sqlSession;
 	
 	
-	//�옱猷� �벑濡앺븯湲�
+	//재료 등록페이지로
 	public int ingreReg(IngreVo iv) {
 		return sqlSession.insert("ingre.ingreReg",iv);
 	}
 
-	//�옱猷� �쟾泥� 媛쒖닔 援ы븯湲�
+	//조건에 따른 재료 개수 구하기
 	public int ingreTotalCount(String searchType, String searchVal) {
 		System.out.println(searchType);
 		System.out.println(searchVal);
@@ -33,7 +33,7 @@ public class IngreManageDao {
 		return sqlSession.selectOne("ingre.ingreTotalCount",map);
 	}
 	
-	//�옱猷� �쟾泥� 紐⑸줉 媛��졇�삤湲�
+	//재료 전체 리스트
 	public List ingreSelectAll(PageBound pb, String searchType, String searchVal) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("start", Integer.toString(pb.getStart()));
@@ -43,7 +43,7 @@ public class IngreManageDao {
 		return sqlSession.selectList("ingre.ingreSelectAll",map);
 	}
 	
-	//�솢�꽦�솕�뿬遺� 蹂�寃쎌떆 �뾽�뜲�씠�듃�븯湲�
+	//재료 활성화 여부 업데이트
 	public int updateIngreActive(String ingreActive, String ingreIdx) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("ingreActive", ingreActive);
@@ -51,22 +51,22 @@ public class IngreManageDao {
 		return sqlSession.update("ingre.updateIngreActive",map);
 	}
 	
-	//�옱猷� 由ъ뒪�듃 �럹�씠吏��뿉�꽌 寃��깋諛뺤뒪�뿉�꽌 �옱猷� 移댄뀒濡쒓린 �꽑�깮�떆 �븯�쐞 媛� 媛��졇�삤湲�
+	//재료 카테고리에 따른 컬럼 가져오기
 	public List ingreType() {
 		return sqlSession.selectList("ingre.getIngreType");
 	}
 
-	//�옱猷뚯젙蹂� 媛��졇�삤湲�
+	//재료 업데이트 페이지로
 	public IngreVo goUpdateIngre(String ingreIdx) {
 		return sqlSession.selectOne("ingre.goIngreUpdate",ingreIdx);
 	}
 	
-	//�옱猷� �닔�젙�븯湲�
+	//재료 업데이트
 	public int ingreUpdate(IngreVo iv) {
 		return sqlSession.update("ingre.ingreUpdate",iv);
 	}
 	
-	//�옱猷� �궘�젣�븯湲�
+	//재료 삭제
 	public int ingreDelete(String ingreIdx) {
 		return sqlSession.delete("ingre.ingreDelete",ingreIdx);
 	}

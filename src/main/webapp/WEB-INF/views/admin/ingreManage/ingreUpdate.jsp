@@ -11,7 +11,7 @@
 	<div class="area">
 		<div class="sub-menu">※ 메뉴관리 > 메뉴수정</div>
 		
-		<form action="/ingreUpdate.do" method="post" enctype="multipart/form-data">
+		<form action="/ingreManage/ingreUpdate.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="ingreIdx" value="${iv.ingreIdx}">
 				<table class="comm-tbl">
 					<colgroup>
@@ -90,13 +90,6 @@
 								<option value="kg">kg</option>
 								<option value="통">통</option>
 							</select>
-						</td>
-					</tr>
-					<tr>
-						<th>할인률</th>
-						<td>
-							<input type="text" name="ingreDis" class="short2" value="0" style="text-align:right;"> %
-							할까 말까...
 						</td>
 					</tr>
 				</table>
