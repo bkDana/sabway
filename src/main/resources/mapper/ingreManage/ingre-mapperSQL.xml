@@ -3,7 +3,7 @@
 <mapper namespace="ingre">
   <!-- 메뉴 등록 -->
   <insert id="ingreReg" parameterType="ingre">
-  	insert into ingredients values (seq_ingre_idx.nextval, #{ingreLabel}, #{ingreType}, #{ingreCost15}, #{ingreCost30}, 0, 
+  	insert into ingredients values (seq_ingre_idx.nextval, #{ingreLabel}, #{ingreType}, #{ingreCost15}, #{ingreCost30}, #{ingreDiscntRate}, 
   	#{ingreKcal}, 0, #{ingreActive}, #{ingreUnit}, #{ingreDescription}, 
   	<choose>
 		  <when test="ingreFilepath != null">
@@ -96,35 +96,6 @@
   <delete id="ingreDelete" parameterType="string">
   	delete ingredients where ingre_idx=#{ingreIdx}
   </delete>
-  
-  <!-- 엑셀 다운로드할 리스트 -->
-  <select id="ingreListExcel" parameterType="map" resultType="ingre">
-  	select rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_kcal_salad as ingreKcalSalad, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
-  	from (select rownum as rnum, i.* from(select * from ingredients 
-  	<if test="searchType != null and searchType != '' and searchVal != null and searchVal != '' and searchType != 'null' and searchVal != 'null'"> <!-- 검색했을 경우 -->
-  		where
-  		<if test="searchType.equals('ingreType')">	<!-- 재료 카테고리 선택 -->
-  			ingre_type = #{searchVal}
-  		</if>
-  		<if test="searchType.equals('ingreDiscntRate')">
-  			<if test='searchVal.equals("1")'> <!-- 할인중 -->
-  				ingre_discnt_rate > 0
-  			</if>
-  			<if test='searchVal.equals("0")'> <!-- 할인 안하는것 -->
-  				ingre_discnt_rate = 0 and ingre_type='메인재료'
-  			</if>
-  		</if>
-  		<if test="searchType.equals('ingreActive')">
-  			<if test='searchVal.equals("1")'> <!-- 활성화 -->
-  				ingre_active = #{searchVal}
-  			</if>
-  			<if test='searchVal.equals("0")'> <!-- 비활성화 -->
-  				ingre_active = #{searchVal}
-  			</if>
-  		</if>
-  	</if>
-  	 order by ingre_reg_date desc) i)
-  </select> 
   <!-- select * from (select rownum as rnum, b.* from (select ba.no, m.name careNm, ba.id, ba.name,ba.phone, ba.visit_date, ba.visit_time, ba.apply_date, ba.status 
   from ((select * from book_apply where code=?"+ sql +" order by 1 desc)ba) Join member m Using(code)) b) 
   where rnum BETWEEN ? and ? -->

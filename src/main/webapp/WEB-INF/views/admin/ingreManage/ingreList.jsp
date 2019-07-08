@@ -13,7 +13,7 @@
 		
 		<div class="board-search-box">
 			<!-- 검색박스 -->
-			<form action="/ingreList.do" method="post" name="search" id="search">
+			<form action="/ingreList.do" method="post" name="search">
 				<input type="hidden" name="reqPage" value="1">
 				<select name="searchType" id="searchType" data-type="${searchType }">
 					<option value="">-- 1차 분류 --</option>
@@ -28,9 +28,6 @@
 			</form>
 		</div>
 		<br>
-		<div class="comm-tbl" style="text-align:right;margin-right:0px;margin-bottom:3px;">
-			<button class="del-btn excel">엑셀 다운로드</button>
-		</div>
 			<table class="comm-tbl type2" id="ingreList">
 				<%-- <colgroup>
 					<col width="15%">
@@ -83,7 +80,7 @@
 						</td>
 						<td>
 							<button class="add-btn" onclick="location.href='/goIngreUpdate.do?ingreIdx=${list.ingreIdx}'">수정</button>
-							<button class="del-btn del" data-no="${list.ingreIdx}" data-path="${list.ingreFilepath}">삭제</button>
+							<button class="del-btn" data-no="${list.ingreIdx}" data-path="${list.ingreFilepath}">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -100,16 +97,8 @@
 
 <script>
 $(document).ready(function(){
-	/* 엑셀 다운 버튼 클릭시  */
-	$(".del-btn.excel").click(function(){
-		$('#search').attr("action","/excelDown.do");
-		$('#search').submit();
-		$('#search').attr("action","/ingreList.do");
-		
-	});
-	
 	/* 재료 삭제 */
-	$(".del-btn.del").click(function(){
+	$(".del-btn").click(function(){
 		var del = confirm("정말로 삭제하시겠습니까?");
 		if(del){
 			location.href="/ingreDelete.do?reqPage=${reqPage}&searchType=${searchType}&searchVal=${searchVal}&ingreIdx="+$(this).data('no')+"&filepath="+$(this).data('path');
