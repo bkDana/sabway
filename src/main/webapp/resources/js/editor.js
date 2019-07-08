@@ -56,7 +56,7 @@ $(document).ready(function(){
 //	    var oCurrentCell = oCurrentRow.insertCell(0);
 //	    oCurrentCell.innerHTML = 
 	    var inner ="<tr><td colspan='3'>" +
-		    "<input type='text' id='fileName" + rowIndex + "' readonly='readonly'>" +
+		    "<input class='submit-file' type='text' id='fileName" + rowIndex + "' readonly='readonly'>" +
 			"<label for='editor-file-upload" + rowIndex + "'>" +
 			"<img width='30px' height='30px' src='/resources/img/plusimg.PNG'></label>" +
 			"<input type='file' class='editor-file-upload' id='editor-file-upload"+rowIndex+"' name='filename"+ rowIndex + "' size=25 " +
@@ -80,7 +80,7 @@ $(document).ready(function(){
 //		    var oCurrentCell = oCurrentRow.insertCell(0);
 //		    oCurrentCell.innerHTML = 
 			var inner = "<tr><td colspan='3'>" +
-			    "<input type='text' id='fileName" + rowIndex + "' readonly='readonly'>" +
+			    "<input class='submit-file' type='text' id='fileName" + rowIndex + "' readonly='readonly'>" +
 				"<label for='editor-file-upload" + rowIndex + "'>" +
 				"<img width='30px' height='30px' src='/resources/img/plusimg.PNG'></label>" +
 				"<input type='file' class='editor-file-upload' id='editor-file-upload"+rowIndex+"' name='filename"+ rowIndex + "' size=25 " +
@@ -300,4 +300,23 @@ $(document).ready(function(){
 		}
 	}
 	
+	function submitBtn(){
+		var content = $('#testContent').html();
+		$('#reviewContent').val(content);
+		var filenameText = "";
+		var count = $('.submit-file').length;
+		if(count>0){
+			for(var i=0;i<count-1;i++){
+				if(i != count-2){
+					filenameText += $('.submit-file').eq(i).val()+",";
+				}else{
+					filenameText += $('.submit-file').eq(i).val();
+				}
+			}
+				
+		}
+		$('#reviewFilename').val(filenameText);
+		console.log(filenameText);
+		console.log(content);
+	}
 	
