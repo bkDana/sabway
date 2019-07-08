@@ -12,7 +12,7 @@
 <section id="content-wrapper">
 	<div class="area">
 		<div class="common-tbl-box">
-			<form action="#" name="write">
+			<form action="/reviewInsert.do" method="post" name="write" enctype="multipart/form-data">
 			    <table id="insertTable" class="comm-tbl editor-container-navi">
 				    <colgroup>
 						<col width="15%">
@@ -75,7 +75,7 @@
 						        <area shape="rect" coords="0,0,15,30" onclick="changeHalf(this,1)" onmouseenter="enterHalf(this,1)" onmouseleave="leaveHalf(this,1)">
 						        <area shape="rect" coords="15,0,30,30" onclick="changeFull(this,1)" onmouseenter="enterFull(this,1)" onmouseleave="leaveFull(this,1)">
 						    </map>
-				        	<span id="starpoint1"></span>
+				        	&nbsp;&nbsp;&nbsp;<span id="starpoint1"></span>
 				        	<input type="hidden" id="reviewStarpoint1" name="reviewStarItem" value="0">
 				        </td>
 				    </tr>
@@ -93,7 +93,6 @@
 				        	</span>
 				        </td>
 				        <td>
-				        	<input type="hidden" name="reviewStarBranch">
 			        		<img class="star-img2" width="30px" height="30px" src="/resources/img/emptystar.png" usemap="#star6">
 						    <map name="star6">
 						        <area shape="rect" coords="0,0,15,30" onclick="changeHalf(this,2)" onmouseenter="enterHalf(this,2)" onmouseleave="leaveHalf(this,2)">
@@ -119,7 +118,7 @@
 						        <area shape="rect" coords="0,0,15,30" onclick="changeHalf(this,2)" onmouseenter="enterHalf(this,2)" onmouseleave="leaveHalf(this,2)">
 						        <area shape="rect" coords="15,0,30,30" onclick="changeFull(this,2)" onmouseenter="enterFull(this,2)" onmouseleave="leaveFull(this,2)">
 						    </map>
-				        	<span id="starpoint2"></span>
+				        	&nbsp;&nbsp;&nbsp;<span id="starpoint2"></span>
 				        	<input type="hidden" id="reviewStarpoint2" name="reviewStarBranch" value="0">
 				        </td>
 				    </tr>
@@ -135,7 +134,7 @@
 				        <td colspan="4">
 				        	<div id="testContent" class="editor-content" contentEditable="true"></div>
 				        	<input type="hidden" name="reviewContent" id="reviewContent">
-				        	<input type="hidden" name="filename" id="reviewFilename">
+				        	<input type="hidden" name="filename1" id="reviewFilename">
 				        </td>
 				    </tr>
 				    <tr>

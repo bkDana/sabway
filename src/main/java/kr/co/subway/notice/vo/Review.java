@@ -9,7 +9,7 @@ public class Review {
 	private String reviewItem;
 	private String reviewStarItem;
 	private String reviewBranch;
-	private String reviewBranchStar;
+	private String reviewStarBranch;
 	private String reviewContent;
 	private String reviewHashtag;
 	private int reviewLike;
@@ -21,7 +21,7 @@ public class Review {
 		// TODO Auto-generated constructor stub
 	}
 	public Review(int reviewNo, String reviewTitle, String reviewWriter, String reviewGender, String reviewBirthday,
-			String reviewItem, String reviewStarItem, String reviewBranch, String reviewBranchStar,
+			String reviewItem, String reviewStarItem, String reviewBranch, String reviewStarBranch,
 			String reviewContent, String reviewHashtag, int reviewLike, String filename, String filepath,
 			String reviewDate) {
 		super();
@@ -33,7 +33,7 @@ public class Review {
 		this.reviewItem = reviewItem;
 		this.reviewStarItem = reviewStarItem;
 		this.reviewBranch = reviewBranch;
-		this.reviewBranchStar = reviewBranchStar;
+		this.reviewStarBranch = reviewStarBranch;
 		this.reviewContent = reviewContent;
 		this.reviewHashtag = reviewHashtag;
 		this.reviewLike = reviewLike;
@@ -89,11 +89,11 @@ public class Review {
 	public void setReviewBranch(String reviewBranch) {
 		this.reviewBranch = reviewBranch;
 	}
-	public String getReviewBranchStar() {
-		return reviewBranchStar;
+	public String getReviewStarBranch() {
+		return reviewStarBranch;
 	}
-	public void setReviewBranchStar(String reviewBranchStar) {
-		this.reviewBranchStar = reviewBranchStar;
+	public void setReviewStarBranch(String reviewStarBranch) {
+		this.reviewStarBranch = reviewStarBranch;
 	}
 	public String getReviewContent() {
 		return reviewContent;
@@ -131,5 +131,6 @@ public class Review {
 	public void setReviewDate(String reviewDate) {
 		this.reviewDate = reviewDate;
 	}
+	
 	
 }
