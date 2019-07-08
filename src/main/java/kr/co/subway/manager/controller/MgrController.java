@@ -42,7 +42,10 @@ public class MgrController {
 	//가맹점 등록
 	@RequestMapping(value="/mgrEnroll.do")
 	public String mgrEnroll(Mgr mg,@RequestParam String applyName) {
-		//가맹점 계정을 등록하면 applyName를 받아와서 DB등록이 완료되면 status를 변경하기 위해 
+		mg.setMgrId(mg.getMgrId()+mg.getMgrAddrCode());
+		//신청인(가맹점주) 이름 등록용
+		mg.setMgrBossName(applyName);
+		//그 외 가맹점 계정을 등록하면 applyName를 받아와서 DB등록이 완료되면 status를 변경하기 위해 
 		int result = mgrservice.enrollMgr(mg,applyName);
 		String view = "";
 		if(result>0) {

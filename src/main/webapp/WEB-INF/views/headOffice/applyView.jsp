@@ -37,7 +37,7 @@
 				</c:choose>
 				<tr>
 					<th>내용</th>
-					<td name="contentTd"colspan="3"><textarea>${ap.applyContent }</textarea></td>
+					<td name="contentTd"colspan="3"><textarea rows="20" style="overflow: visible;">${ap.applyContent }</textarea></td>
 				</tr>
 			</table>
 		</div>
