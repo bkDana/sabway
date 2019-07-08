@@ -66,6 +66,7 @@
 $.ajax({
 	url : '/ingreType.do',
 	success : function(data){
+		//console.log(data);
 		for(var i=0;i<data.length;i++){
 			$('#itemType').append('<option value='+data[i]+'>'+data[i]+'</option>');
 		}

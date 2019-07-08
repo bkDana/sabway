@@ -15,7 +15,6 @@ import kr.co.subway.common.SearchVO;
 import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.stock.service.StockService;
 import kr.co.subway.stock.vo.StockListVO;
-import kr.co.subway.stock.vo.stockViewVO;
 
 @Controller
 public class StockController {
@@ -37,6 +36,7 @@ public class StockController {
 		if(search.getReqPage()==0) {
 			search.setReqPage(1);
 		}
+
 
 		StockListVO list = service.selectList(search);
 		model.addAttribute("search", search);

@@ -12,7 +12,7 @@
 	<div class="area">
 		<div class="sub-menu">※ 재고관리 > 재고현황</div>
 		<div class="board-search-box order-search">
-			<form action="/managerOrder/stockList.do" method="post" name="searchform">
+			<form action="/managerOrder/stockList.do" method="post" name="search">
 				<input type="hidden" name="reqPage" value="1">
 				<select name="searchType" data-val="${search.searchType }" data-search="${search.searchVal }">
 					<option value="name">재료명</option>
@@ -33,15 +33,15 @@
 			<li>
 				<label>
 					<span><input type="checkbox" class="cbox"></span>
-					<span>
+					<%-- 
 					<c:if test="${empty stock.ingreFilepath }">
-						<img src="/resources/img/sandwich.png" width="150px" height="150px"><br>
+						<img src="/resources/img/sandwich.png" width="120px" height="120px"><br>
 					</c:if>
 					<c:if test="${not empty stock.ingreFilepath }">
-						<img src="/resources/upload/ingredients/${stock.ingreFilepath }" width="150px" height="150px"><br>
+						<img src="/resources/upload/ingredients/${stock.ingreFilepath }" width="120px" height="120px"><br>
 					</c:if>
-					</span>
-					<!-- <span><img src="/resources/img/sandwich.png" width="150px" height="150px"></span> -->
+					 --%>
+					<span><img src="/resources/img/sandwich.png" width="150px" height="150px"></span>
 					<span>${stock.ingreLabel }</span>
 					<span><input type="text" class="short" value="${stock.mStock }" readonly="readonly"> ${stock.ingreUnit }<c:if test="${empty stock.ingreUnit }">개</c:if></span>
 				</label>
@@ -116,9 +116,8 @@
 	
 	/* 페이지 이동 */
 	function list(p){
-		console.log(p);
 		$('input[name=reqPage]').val(p);
-		searchform.submit();
+		search.submit();
 	}
 </script>
 
