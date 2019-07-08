@@ -13,10 +13,10 @@
 		<div class="sub-menu">※ 재고관리 > 발주서 작성</div>
 
 		<form action="/managerOrder/addOrder.do" method="post" onsubmit="return submit_chk();">
-			<c:if test="${not empty sessionScope.customer }">
-			<input type="text" name="mOrderManagerId" value="${sessionScope.customer.customerId }">
+			<c:if test="${not empty sessionScope.mgr }">
+			<input type="text" name="mOrderManagerId" value="${sessionScope.mgr.mgrId }">
 			</c:if>
-			<c:if test="${empty sessionScope.customer }">
+			<c:if test="${empty sessionScope.mgr }">
 			(가맹점 아이디 입력하면 됨)테스트용 추후 삭제 요망->
 			<input type="text" name="mOrderManagerId" value="jy">
 			</c:if>
@@ -66,7 +66,6 @@
 $.ajax({
 	url : '/ingreType.do',
 	success : function(data){
-		//console.log(data);
 		for(var i=0;i<data.length;i++){
 			$('#itemType').append('<option value='+data[i]+'>'+data[i]+'</option>');
 		}

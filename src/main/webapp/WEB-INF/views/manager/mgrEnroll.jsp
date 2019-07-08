@@ -3,6 +3,7 @@
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style>
 	/* 테이블 테두리 black */
 	table,th,tr,td{
@@ -19,6 +20,22 @@
 	}
 </style>
 <script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
+<c:set var="addr" value="${mgrAddr }"/>
+<c:set var="subStr" value="${fn:substringAfter(addr, ' ')}"/>
+
+<c:choose>
+	<c:when test="${fn:endsWith(subStr,'구') }">
+		<c:set var="d" value="${fn:replace(subStr, '구', '')}"/>
+	</c:when>
+	<c:when test="${fn:endsWith(subStr,'군') }">
+		<c:set var="d" value="${fn:replace(subStr, '군', '')}"/>
+	</c:when>
+	<c:when test="${fn:endsWith(subStr,'시') }">
+		<c:set var="d" value="${fn:replace(subStr, '시', '')}"/>
+	</c:when>
+</c:choose>
+
+
 
 <%-- Content --%>
 <section id="content-wrapper">
@@ -44,8 +61,7 @@
 					</tr>
 					<tr>
 						<th>이름</th>
-						<c:forTokens items="${applyAddr }" delims=""></c:forTokens>
-						<td><input type="text" name="mgrName" value="SabWay "></td>
+						<td><input type="text" name="mgrName" value="SabWay ${d}점"></td>
 					</tr>
 					<tr>
 						<th>전화번호</th>

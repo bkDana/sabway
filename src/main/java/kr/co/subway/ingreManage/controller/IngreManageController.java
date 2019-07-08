@@ -8,13 +8,16 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
 import kr.co.subway.ingreManage.service.IngreManageService;
+import kr.co.subway.ingreManage.vo.ExcelDown;
 import kr.co.subway.ingreManage.vo.IngrePageNaviData;
 import kr.co.subway.ingreManage.vo.IngreVo;
 
@@ -34,13 +38,13 @@ public class IngreManageController {
 	@Autowired
 	private IngreManageService ingreService;
 	
-	//재료 등록페이지로 보내기
+	//�옱猷� �벑濡앺럹�씠吏�濡� 蹂대궡湲�
 	@RequestMapping("/goIngreReg.do")
 	public String goIngreReg() {
 		return "admin/ingreManage/ingreRegisterForm";
 	}
 	
-	//재료 등록하기
+	//�옱猷� �벑濡앺븯湲�
 	@RequestMapping("/ingreRegister.do")
 	public ModelAndView ingreReg(HttpServletRequest request, @RequestParam MultipartFile filepath, IngreVo iv, ModelAndView mav) {
 		String fullPath="";
@@ -64,7 +68,7 @@ public class IngreManageController {
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				bos.write(bytes);
 				bos.close();
-				System.out.println("등록 성공");
+				System.out.println("�벑濡� �꽦怨�");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -88,7 +92,7 @@ public class IngreManageController {
 		return format.format(date);
 	}
 	
-	//재료 리스트 가져오기
+	//�옱猷� 由ъ뒪�듃 媛��졇�삤湲�
 	@RequestMapping("/ingreList.do")
 	public ModelAndView ingreList(String reqPage, String searchType, String searchVal) {
 		System.out.println(searchType);
@@ -102,7 +106,7 @@ public class IngreManageController {
 		}
 		IngrePageNaviData ip = ingreService.ingreList(reqPage1,searchType,searchVal);
 		ArrayList<IngreVo> list = ip.getIngreList();
-		//System.out.println("파일이름 : "+list.get(0).getIngreFilepath());
+		//System.out.println("�뙆�씪�씠由� : "+list.get(0).getIngreFilepath());
 		String pageNavi = ip.getPageNavi();
 		if(!list.isEmpty()) {
 			mav.addObject("reqPage",reqPage1);
@@ -117,24 +121,24 @@ public class IngreManageController {
 		return mav;
 	}
 	
-	//활성화여부 변경시 업데이트하기
+	//�솢�꽦�솕�뿬遺� 蹂�寃쎌떆 �뾽�뜲�씠�듃�븯湲�
 	@ResponseBody
 	@RequestMapping("/updateIngreActive.do")
 	public void updateIngreActive(HttpServletResponse response,String ingreActive,String ingreIdx) throws IOException {
-		System.out.println("활성화:"+ingreActive);
-		System.out.println("인덱스:"+ingreIdx);
+		System.out.println("�솢�꽦�솕:"+ingreActive);
+		System.out.println("�씤�뜳�뒪:"+ingreIdx);
 		int result = ingreService.updateIngreActive(ingreActive,ingreIdx);
 		System.out.println("controller updateIngreActive() result : "+result);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if(result>0) {
-			out.println("업데이트 성공");
+			out.println("�뾽�뜲�씠�듃 �꽦怨�");
 		}else{
-			out.println("업데이트 실패");
+			out.println("�뾽�뜲�씠�듃 �떎�뙣");
 		}
 	}
 	
-	//재료 리스트 페이지에서 검색박스에서 재료 카테고리 선택시 하위 값 가져오기
+	//�옱猷� 由ъ뒪�듃 �럹�씠吏��뿉�꽌 寃��깋諛뺤뒪�뿉�꽌 �옱猷� 移댄뀒怨좊━ �꽑�깮�떆 �븯�쐞 媛� 媛��졇�삤湲�
 	@ResponseBody
 	@RequestMapping("/ingreType.do")
 	public void ingreType(HttpServletResponse response) throws JsonIOException, IOException {
@@ -144,7 +148,7 @@ public class IngreManageController {
 		new Gson().toJson(list,response.getWriter());
 	}
 	
-	//재료정보 가져오기
+	//�옱猷뚯젙蹂� 媛��졇�삤湲�
 	@RequestMapping("/goIngreUpdate.do")
 	public ModelAndView goUpdatePage(ModelAndView mav, String ingreIdx) {
 		System.out.println("controller goUpdatePage() idx : "+ingreIdx);
@@ -158,11 +162,11 @@ public class IngreManageController {
 		return mav;
 	}
 	
-	//재료 수정하기
+	//�옱猷� �닔�젙�븯湲�
 	@RequestMapping("/ingreUpdate.do")
 	public String ingreUpdate(HttpServletRequest request, @RequestParam MultipartFile filepath, IngreVo iv, String oldFilepath, String deleteFile, RedirectAttributes redirectAttributes) {
 		String fullPath="";
-		//첨부파일 있으면
+		//泥⑤��뙆�씪 �엳�쑝硫�
 		if(!filepath.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/ingredients");
 			String originName = filepath.getOriginalFilename();
@@ -171,16 +175,16 @@ public class IngreManageController {
 			String filePath = onlyFileName+"_"+getDate()+extension;
 			fullPath = savePath+"/"+filePath;
 			iv.setIngreFilepath(filePath);
-			//기존 파일 있었다면 삭제하기
+			//湲곗〈 �뙆�씪 �엳�뿀�떎硫� �궘�젣�븯湲�
 			if(oldFilepath !=null) {
 				File delFile = new File(savePath+"/"+oldFilepath);
-				System.out.println("파일 삭제됐나요? : "+delFile.delete());
-			}else {	//첨부파일 없으면
+				System.out.println("�뙆�씪 �궘�젣�릱�굹�슂? : "+delFile.delete());
+			}else {	//泥⑤��뙆�씪 �뾾�쑝硫�
 				if(deleteFile == null) {
 					iv.setIngreFilepath(oldFilepath);
 				}else {
 					File delFile = new File(savePath+"/"+oldFilepath);
-					System.out.println("파일 삭제됐나요? : "+delFile.delete());
+					System.out.println("�뙆�씪 �궘�젣�릱�굹�슂? : "+delFile.delete());
 				}
 			}
 		}else {
@@ -189,9 +193,9 @@ public class IngreManageController {
 		
 		int result = ingreService.ingreUpdate(iv);
 		if(result>0) {
-			System.out.println("수정 성공");;	
+			System.out.println("�닔�젙 �꽦怨�");;	
 		}else {
-			System.out.println("수정 실패");;
+			System.out.println("�닔�젙 �떎�뙣");;
 		}
 		if(!filepath.isEmpty()) {
 			try {
@@ -201,40 +205,60 @@ public class IngreManageController {
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				bos.write(bytes);
 				bos.close();
-				System.out.println("파일 업로드 성공");
+				System.out.println("�뙆�씪 �뾽濡쒕뱶 �꽦怨�");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		redirectAttributes.addAttribute("reqPage", "1");	//redirect로 값 보내기
+		redirectAttributes.addAttribute("reqPage", "1");	//redirect濡� 媛� 蹂대궡湲�
 		return "redirect:/ingreList.do";
 	}
 	
-	//재료 삭제하기
+	//�옱猷� �궘�젣�븯湲�
 	@RequestMapping("/ingreDelete.do")
 	public String ingreDelete(HttpServletRequest request, String ingreIdx, String reqPage, String searchType, String searchVal,String filepath, RedirectAttributes redirectAttributes) {
 		System.out.println("no:"+ingreIdx+" reqPage : "+reqPage+" searchType : "+searchType+" searchVal : "+searchVal+" filepath: "+filepath);
-		//첨부파일 있으면
+		//泥⑤��뙆�씪 �엳�쑝硫�
 		if(!filepath.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/ingredients");///////
 			File delFile = new File(savePath+"/"+filepath);
-			System.out.println("파일 삭제됐나요? : "+delFile.delete());
+			System.out.println("�뙆�씪 �궘�젣�릱�굹�슂? : "+delFile.delete());
 		}
 		
 		int result = ingreService.ingreDelete(ingreIdx);
 		if(result>0) {
-			redirectAttributes.addAttribute("reqPage", reqPage);	//redirect로 값 보내기
+			redirectAttributes.addAttribute("reqPage", reqPage);	//redirect濡� 媛� 蹂대궡湲�
 			redirectAttributes.addAttribute("searchType", searchType);
 			redirectAttributes.addAttribute("searchVal", searchVal);
 			return "redirect:/ingreList.do";
 		}else {
-			System.out.println("삭제 실패");
+			System.out.println("�궘�젣 �떎�뙣");
 			return "common/error";
 		}
 	}
 	
-	
+	//엑셀 다운하기
+	@ResponseBody
+	@RequestMapping("/excelDown.do")
+	public void excelDown(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, String reqPage, String searchType, String searchVal)  throws Exception, Exception{
+		System.out.println("엑셀 다운 컨트롤러");
+		List<IngreVo> list = ingreService.ingreList(searchType, searchVal);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일 HH시mm분ss초");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i).getIngreRegDate());
+		}
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("ingreList", list);
+		data.put("count", list.size());
+		data.put("date", sdf.format(new Date()));
+		
+		ExcelDown e = new ExcelDown();
+		e.download(request, response, data, "ingreInfo"+sdf2.format(new Date()), "sample.xlsx", "");
+	}
 	
 	
 	
