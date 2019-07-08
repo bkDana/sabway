@@ -75,10 +75,10 @@
 							<c:if test="${not empty iv.ingreFilepath }">
 								<span id="nowFile"><%-- ${qna.boardFilename } --%> <img src="/resources/upload/ingredients/${iv.ingreFilepath}" style="width:100px;"><button type="button" id="fileDelBtn" class="file-del-btn delFile">삭제</button>
 								<input type="hidden" name="deleteFile" ></span>
-								<span id="upload"><input type="file" name="filepath" required><p class="comment">(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p></span>
+								<span id="upload"><input type="file" name="filepath"><p class="comment">(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p></span>
 							</c:if>
 							<c:if test="${empty iv.ingreFilepath }">
-								<input type="file" name="filepath" required><p class="comment">(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p>
+								<input type="file" name="filepath"><p class="comment" >(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p>
 							</c:if>
 						</td>
 					</tr>

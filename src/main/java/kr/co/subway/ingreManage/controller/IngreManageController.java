@@ -75,7 +75,6 @@ public class IngreManageController {
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				bos.write(bytes);
 				bos.close();
-				System.out.println("�벑濡� �꽦怨�");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -127,7 +126,7 @@ public class IngreManageController {
 		return mav;
 	}
 	
-	//환경화 여부 ajax로 변경
+	//활성화 여부 ajax로 변경
 	@ResponseBody
 	@RequestMapping("/updateIngreActive.do")
 	public void updateIngreActive(HttpServletResponse response,String ingreActive,String ingreIdx) throws IOException {
@@ -184,7 +183,7 @@ public class IngreManageController {
 			
 			if(oldFilepath !=null) {
 				File delFile = new File(savePath+"/"+oldFilepath);
-				System.out.println("�뙆�씪 �궘�젣�릱�굹�슂? : "+delFile.delete());
+				System.out.println("파일삭제? : "+delFile.delete());
 			}else {
 				if(deleteFile == null) {
 					iv.setIngreFilepath(oldFilepath);
@@ -199,7 +198,7 @@ public class IngreManageController {
 		
 		int result = ingreService.ingreUpdate(iv);
 		if(result>0) {
-			System.out.println("어뱌데이트 완료");;	
+			System.out.println("업데이트 완료");;	
 		}else {
 			System.out.println("업데이트 실패");;
 		}
@@ -217,7 +216,7 @@ public class IngreManageController {
 			}
 		}
 		redirectAttributes.addAttribute("reqPage", "1");	//redirect로 값 보내기
-		return "redirect:/ingreList.do";
+		return "redirect:/ingreManage/ingreList.do";
 	}
 	
 	//재료 삭제하기
@@ -236,7 +235,7 @@ public class IngreManageController {
 			redirectAttributes.addAttribute("reqPage", reqPage);	//redirect로 값 보내기
 			redirectAttributes.addAttribute("searchType", searchType);
 			redirectAttributes.addAttribute("searchVal", searchVal);
-			return "redirect:/ingreList.do";
+			return "redirect:/ingreManage/ingreList.do";
 		}else {
 			System.out.println("삭제실패");
 			return "common/error";
