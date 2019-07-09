@@ -23,7 +23,6 @@ public class MgrService {
 	@Transactional
 	public int enrollMgr(Mgr mg,int applyNo) {
 		int result = mgrdao.enrollMgr(mg);
-		System.out.println("서비스 승인no확인:"+applyNo);
 		applydao.applyManagerUpdate(applyNo);
 		return result;
 	}

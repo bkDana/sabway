@@ -88,7 +88,7 @@
 						</th>
 						<td>
 							<label onclick="searchAddr('${mgrAddr }','${i }');">
-								<input type="text" name="mgrPost" style="width:40px" readonly><br><br>
+								<input type="text" name="mgrPost" style="width:40px" required="required"><br><br>
 								<input type="text" name="mgrAddr" readonly>
 							</label>
 						</td>
