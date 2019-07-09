@@ -11,6 +11,7 @@
 <body>
 	<script type="text/javascript">
 		alert("등록된 가맹점이 없습니다.");
+		location.href="/managerList.do";
 	</script>
 </body>
 </html>

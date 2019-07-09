@@ -35,4 +35,40 @@
 		from manager
 		where mgr_id = #{mgrId}
 	</select>
+	<update id="mgrUpdate" parameterType="mgr">
+		update manager set mgr_status = #{mgrStatus} where mgr_name = #{mgrName}
+	</update>
+	
+	<select id="searchBossName" parameterType="string" resultType="mgr">
+		select mgr_no as mgrNo
+		,mgr_id as mgrId
+		,mgr_pw as mgrPw
+		,mgr_name as mgrName
+		,mgr_tel as mgrTel
+		,mgr_post as mgrPost
+		,mgr_addr as mgrAddr
+		,mgr_level as mgrLevel
+		,mgr_status as mgrStatus
+		,mgr_enroll_date as mgrEnrollDate
+		,mgr_addr_code as mgrAddrCode
+		,mgr_boss_name as mgrBossName
+		from manager
+		where mgr_boss_name like '%'||#{text}||'%'
+	</select>
+	<select id="searchName" parameterType="string" resultType="mgr">
+		select mgr_no as mgrNo
+		,mgr_id as mgrId
+		,mgr_pw as mgrPw
+		,mgr_name as mgrName
+		,mgr_tel as mgrTel
+		,mgr_post as mgrPost
+		,mgr_addr as mgrAddr
+		,mgr_level as mgrLevel
+		,mgr_status as mgrStatus
+		,mgr_enroll_date as mgrEnrollDate
+		,mgr_addr_code as mgrAddrCode
+		,mgr_boss_name as mgrBossName
+		from manager
+		where mgr_name like '%'||#{text}||'%'
+	</select>
 </mapper>

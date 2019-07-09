@@ -17,11 +17,24 @@ public class MgrDAO {
 	public int enrollMgr(Mgr mg) {
 		return session.insert("mgr.enrollMgr",mg);
 	}
+	//가맹점 목록
 	public List<Mgr> mgrList() {
 		return session.selectList("mgr.mgrList");
 	}
 	//로그인
 	public Mgr login(String mgrId) {
 		return session.selectOne("mgr.login", mgrId);
+	}
+	//가맹점 상태변경
+	public int mgrUpdate(Mgr mgr) {
+		return session.update("mgr.mgrUpdate",mgr);
+	}
+	//검색어 검색(name)
+	public List<Mgr> searchBossName(String text){
+		return session.selectList("mgr.searchBossName",text);
+	}
+	//검색어 검색(addr)
+	public List<Mgr> searchName(String text){
+		return session.selectList("mgr.searchName",text);
 	}
 }

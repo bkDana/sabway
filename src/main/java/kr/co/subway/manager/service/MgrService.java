@@ -1,6 +1,5 @@
 package kr.co.subway.manager.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -26,6 +25,7 @@ public class MgrService {
 		applydao.applyManagerUpdate(applyNo);
 		return result;
 	}
+	//가맹점 목록
 	public List<Mgr> mgrList() {
 		List<Mgr> list= mgrdao.mgrList();
 		return list;
@@ -35,4 +35,25 @@ public class MgrService {
 		Mgr mgr = mgrdao.login(mgrId);
 		return mgr;
 	}
+	//가맹점 상태 변경(update)
+	public int mgrUpdate(Mgr mgr) {
+		int result = mgrdao.mgrUpdate(mgr);
+		return result;
+	}
+	//검색어 검색
+	public List<Mgr> searchList(String keyword, String text){
+		List<Mgr> list = null;
+		if(keyword.equals("이름")) {
+			list = mgrdao.searchBossName(text);
+		}else if(keyword.equals("지역")){
+			list = mgrdao.searchName(text);
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
+	
 }
