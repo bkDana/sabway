@@ -19,10 +19,13 @@
 		    var line2 = [11,5,2,7,6];
 		    jQuery("#chart").jqplot([line,line2], {
 		          title:"막대 그래프",
-		          seriesColors:['#FFCCE5', '#00749F'],		/* 그래프 색상 지정 */
+		          //seriesColors:['#FFCCE5', '#00749F'],		/* 그래프 색상 지정 */
 		          stackSeries : false,	/* false : 따로따로, true: 한막대에 두개범주 같이 */
 		          seriesDefaults:{
 		            renderer:jQuery.jqplot.BarRenderer,
+		            rendererOptions:{
+		            	varyBarColor:true
+		            }
 		          },
 		           axes:{
 		              xaxis:{

@@ -13,7 +13,7 @@
 .paging i{vertical-align:middle; color:inherit}
 
 /* 공통 :: SEARCH BOX */
-.board-search-box{text-align:center; background-color:#f8faf8; padding:30px 0; /* border:1px solid #ddd; */ }
+.board-search-box{text-align:center; background-color:#ebebeb; padding:30px 0;  /* border:2px solid #ddd; */  }
 .board-search-box select{width:20%; max-width:150px; height:40px; border:2px solid #ddd; background-color:#fff; }
 .board-search-box .search-word{width:30%; max-width:200px; height:40px; border:2px solid #ddd; border-right:0; padding:0; text-indent:10px; color:#868686; font-size:14px; vertical-align:middle;}
 .board-search-box .search-word:focus{color:#333;}
@@ -56,10 +56,11 @@
 
 .common-tbl-btn-group{padding-top:30px; text-align:center;}
 .common-tbl-btn-group.join-btn-group{display:inline-block; text-align:right; padding-top:0; width:auto; max-width:20%; vertical-align:middle;}
-.common-tbl-btn-group > button{width:130px; height:50px; border-radius:50px; font-size:17px; color:#fff; margin:0 10px;}
+.common-tbl-btn-group > button{width:130px; height:50px; border-radius:50px; font-size:17px; color:#fff; margin:0 10px; font-weight: bold;}
 .common-tbl-btn-group > button.btn-style1{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style2{background-color:#444;}
 .common-tbl-btn-group > button.btn-style3{background-color:#d90f0f;}
+.common-tbl-btn-group > button.btn-style4{background-color:#fff; border:2px solid #ddd; color:#999;}
 .common-tbl-btn-group > button.small{width:100px; height:35px; font-size:15px;}
 .comm-tbl .file-del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#888; color:#fff; margin-left:5px;}
 .comm-tbl .add-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#009223; color:#fff; margin-left:5px;}
