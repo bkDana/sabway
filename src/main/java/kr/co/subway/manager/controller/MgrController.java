@@ -10,6 +10,7 @@ import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.subway.manager.service.AddrCode;
 import kr.co.subway.manager.service.AddrType;
@@ -37,12 +38,14 @@ public class MgrController {
 		String ranTel = randomtel.randomTel();
 		String addrType = addrtype.addrType(applyArea);
 		String mgrTel = addrcode.addrCode(ranTel,addrType);
-		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectMgr();
+		//가맹점 정보를 가져와서 이름 체크
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
 		for(int y=0;y<list.size();y++) {
 			if(list.get(y).getMgrAddr().contains(applyArea)) {		
 				i++;
 			}
 		}
+		//이름 중복시 1호점씩 증가
 		model.addAttribute("i",i);
 		model.addAttribute("applyName",applyName);
 		model.addAttribute("mgrAddrType",addrType);
@@ -54,12 +57,10 @@ public class MgrController {
 	//가맹점 등록
 	@RequestMapping(value="/mgrEnroll.do")
 	public String mgrEnroll(Mgr mg,@RequestParam String applyName,@RequestParam int applyNo) {
-		System.out.println(mg.getMgrAddr());
-		System.out.println(mg.getMgrName());
 		mg.setMgrId(mg.getMgrId()+mg.getMgrAddrCode());
 		//신청인(가맹점주) 이름 등록용
 		mg.setMgrBossName(applyName);
-		//그 외 가맹점 계정을 등록하면 applyName를 받아와서 DB등록이 완료되면 status를 변경하기 위해 
+		//그 외 가맹점 계정을 등록하면 applyNo를 받아와서 DB등록이 완료되면 status를 변경하기 위해 
 		int result = mgrservice.enrollMgr(mg,applyNo);
 		String view = "";
 		if(result>0) {
@@ -96,6 +97,19 @@ public class MgrController {
 		HttpSession session = request.getSession(false);
 		session.invalidate();
 		return "main";
+	}
+	//가맹점 목록
+	@RequestMapping(value="/managerList.do")
+	public ModelAndView managerList() {
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list", list);
+			mav.setViewName("manager/managerList");
+		}else {
+			mav.setViewName("manager/listMag");
+		}
+		return mav;
 	}
 	
 }

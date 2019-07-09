@@ -23,12 +23,11 @@ public class MgrService {
 	@Transactional
 	public int enrollMgr(Mgr mg,int applyNo) {
 		int result = mgrdao.enrollMgr(mg);
-		System.out.println("서비스 승인no확인:"+applyNo);
 		applydao.applyManagerUpdate(applyNo);
 		return result;
 	}
-	public List<Mgr> selectMgr() {
-		List<Mgr> list= mgrdao.selectMgr();
+	public List<Mgr> mgrList() {
+		List<Mgr> list= mgrdao.mgrList();
 		return list;
 	}
 	//관리자 로그인

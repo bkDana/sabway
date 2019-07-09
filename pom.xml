@@ -15,6 +15,16 @@
       <poi.version>3.9</poi.version>   <!-- excel파일 Export -->
    </properties>
    <dependencies>
+   		<dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
       <!-- apache poi  -->
       <dependency>
          <groupId>org.apache.poi</groupId>

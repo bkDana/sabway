@@ -13,7 +13,6 @@ public class Customer {
 	private String phone2;
 	private String birthday;
 	private String email;
-	private String email2;
 	private String gender;
 	private int customerState;
 	private Date regDate;
@@ -23,7 +22,7 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 	public Customer(int customerNo, String customerId, String customerPw, String customerName, String customerNick,
-			String phone, String phone1, String phone2, String birthday, String email, String email2, String gender, int customerState,
+			String phone, String phone1, String phone2, String birthday, String email, String gender, int customerState,
 			Date regDate, Date lastLogDate) {
 		super();
 		this.customerNo = customerNo;
@@ -36,7 +35,6 @@ public class Customer {
 		this.phone2 = phone2;
 		this.birthday = birthday;
 		this.email = email;
-		this.email2 = email2;
 		this.gender = gender;
 		this.customerState = customerState;
 		this.regDate = regDate;
@@ -101,12 +99,6 @@ public class Customer {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public String getEmail2() {
-		return email2;
-	}
-	public void setEmail2(String email2) {
-		this.email2 = email2;
 	}
 	public String getGender() {
 		return gender;

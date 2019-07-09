@@ -81,7 +81,7 @@
 						<tr>
 							<td><label for="applyFilename">첨부파일</label></td>
 							<td>
-								<input data-maxsize="2" data-maxupload="1" id="applyFilename" name="applyfilename" type="file" />
+								<input data-maxsize="2" data-maxupload="1" id="applyFilename" name="applyfilename" type="file" /><br>
 								<span class="file_note">※ 등록 가능 확장자 : pdf,docx,pptx,xlsx,jpg,gif,png / 최대 2MB</span>
 							</td>
 						</tr>
