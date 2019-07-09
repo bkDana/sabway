@@ -25,7 +25,7 @@ public class ManagerOrderService {
 		int total = 0;
 		total = dao.totalCount(search);
 		
-		int pageNum = 20;
+		int pageNum = 3;
 		int totalPage = (total%pageNum==0)?(total/pageNum):(total/pageNum)+1;
 		search.setStart((reqPage*pageNum-pageNum)+1);
 		search.setEnd(reqPage*pageNum);
@@ -33,11 +33,14 @@ public class ManagerOrderService {
 		ArrayList<ManagerOrderVO> orderList = (ArrayList<ManagerOrderVO>)(dao.selectList(search));
 		
 		/* 페이지 네비 */
+		/* 기존 페이징
 		int totalNavi = 5;
 		String pageNavi = "";
 		int pageNo = ((reqPage-1)/totalNavi)*totalNavi+1;
 		if(pageNo != 1) {
-			pageNavi += "<a class='paging-arrow prev-arrow' href='javascript:list("+(pageNo-1)+");'><img src='/img/left_arrow.png' style='width:30px;height:30px;'></a>";	
+			pageNavi += "<a class='paging-arrow prev-arrow' href='javascript:list("+(reqPage-1)+");'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";	
+		}else {
+			
 		}
 		int i = 1;
 		while(!(i++>totalNavi || pageNo>totalPage)) {
@@ -49,9 +52,32 @@ public class ManagerOrderService {
 			pageNo++;
 		}
 		if(pageNo <= totalPage) {
-			pageNavi += "<a class='paging-arrow next-arrrow' href='javascript:list("+pageNo+");'><img src='/img/right_arrow.png' style='width:30px;height:30px;'></a>";
+			pageNavi += "<a class='paging-arrow next-arrrow' href='javascript:list("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
-
+		 */
+		
+		/* 새 거 */
+		int totalNavi = 3;
+		String pageNavi = "";
+		int pageNo = ((reqPage-1)/totalNavi)*totalNavi+1;
+		if(reqPage != 1) {
+			pageNavi += "<a class='paging-arrow prev-arrow' href='javascript:list("+(reqPage-1)+");'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";	
+		}
+		
+		int i = 1;
+		while(!(i++>totalNavi || pageNo>totalPage)) {
+			if(reqPage == pageNo) {
+				pageNavi += "<a class='cur'>"+pageNo+"</a>";
+			}else {
+				pageNavi += "<a href='javascript:list("+pageNo+");'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		if(reqPage!=totalPage) {
+			pageNavi += "<a class='paging-arrow next-arrrow' href='javascript:list("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
+		}
+		
+		
 		ManagerOrderListVO list = new ManagerOrderListVO(orderList, pageNavi);
 		return list;
 	}

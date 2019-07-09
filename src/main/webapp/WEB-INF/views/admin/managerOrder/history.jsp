@@ -11,7 +11,7 @@
 	<%-- LEFT MENU --%>
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 재고관리 > 재고현황</div>
+		<div class="sub-menu">※ 재고관리 > <a href="/managerOrder/stockList.do">재고현황</a></div>
 		<%-- 
 		<p>
 		
@@ -25,21 +25,23 @@
 		<table class="his-tbl">
 			<colgroup>
 				<col width="">
-				<col width="40%">
+				<col width="50%">
 			</colgroup>
 			<tr>
 				<th>내역</th><th>시간</th>
 			</tr>
 			<c:forEach items="${history }" var="history">
-				<tr>
-					<td>
-						<c:choose>
-							<c:when test="${fn:contains(history.hContent,'-') }"><span class="state-can">${history.hContent }</span> (재고조사 차감)</c:when>
-							<c:otherwise><span class="state-arr">+${history.hContent }</span></c:otherwise>
-						</c:choose>
-					</td>
-					<td>${history.hDate }</td>
-				</tr>
+				<c:if test="${history.hContent ne 0 }">
+					<tr>
+						<td>
+							<c:choose>
+								<c:when test="${fn:contains(history.hContent,'-') }"><span class="state-can">${history.hContent }</span> (재고조사 차감)</c:when>
+								<c:otherwise><span class="state-arr">+${history.hContent }</span></c:otherwise>
+							</c:choose>
+						</td>
+						<td>${history.hDate }</td>
+					</tr>
+				</c:if>
 			</c:forEach>
 		</table>
 		

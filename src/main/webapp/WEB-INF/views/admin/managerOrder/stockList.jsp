@@ -19,7 +19,7 @@
 					<option value="cat">카테고리</option>
 				</select>
 				<%-- <input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word" value="${search.searchVal }"> --%>
-				<button type="submit" class="bbs-search-btn" title="검색">검색</button>
+				<button type="submit" class="bbs-search-btn" title="검색"><img src="/resources/img/icon_search.png"></button>
 				<!-- &nbsp;<button type="button" onclick="location.href='/managerOrder/orderList.do'" class="bbs-search-btn" title="초기화">초기화</button> -->
 			</form>
 		</div>
@@ -68,6 +68,11 @@ $(function(){
 		var mItemAmount = $(this).siblings('input').val();
 		var mItemIdx = $(this).siblings('input').attr('data-pre');//기존 재고
 
+		if(Number(mItemAmount)>=Number(mItemIdx)){
+			alert('수량을 확인하세요');
+			return;
+		}
+		
 		var $my = $(this);
 		$.ajax({
 			url : '/managerOrder/modifyStock.do',
@@ -77,7 +82,7 @@ $(function(){
 					$my.siblings('input').attr('data-pre',mItemAmount);
 					alert('재고가 수정되었습니다');
 				}else{
-					alert('수정 실패');
+					alert('재고 수정에 실패했습니다. 관리자에게 문의하세요.');
 				}
 			},
 			error : function(){
@@ -141,7 +146,7 @@ $(function(){
 			
 		}else{
 			$('select[name=searchVal]').remove();
-			$('select[name=searchType]').after(' <input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word" value="'+search+'">');
+			$('select[name=searchType]').after(' <input placeholder="검색어를 입력하세요." type="search" name="searchVal" class="search-word" value="'+search+'">');
 		}
 	}
 	
