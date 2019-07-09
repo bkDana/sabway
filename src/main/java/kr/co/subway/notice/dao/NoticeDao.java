@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.subway.notice.vo.Notice;
 import kr.co.subway.notice.vo.PageBound;
 import kr.co.subway.notice.vo.Qna;
+import kr.co.subway.notice.vo.Review;
 
 @Repository("noticeDao")
 public class NoticeDao {
@@ -70,5 +71,20 @@ public class NoticeDao {
 	
 	public List qnaSelectPaging(PageBound pb){
 		return sqlSession.selectList("notice.qnaSelectPaging", pb);
+	}
+	
+	//////////////////REVIEW!!!!
+	public int reviewInsert(Review r){
+//		insert into review values(seq_review_no,#{reviewWriter},#{reviewGender},#{reviewBirthday},#{reviewItem},#{reviewStarItem},
+//				#{reviewBranch},#{reviewStarBranch},#{reviewContent},#{reviewHashtag},#{reviewLike},#{filename},#{filepath},#{reviewDate})
+		return sqlSession.insert("notice.reviewInsert", r);
+	}
+	
+	public int reviewTotalCount() {
+		return sqlSession.selectOne("notice.reviewTotalCount");
+	}
+	
+	public List reviewSelectPaging(PageBound pb){
+		return sqlSession.selectList("notice.reviewSelectPaging", pb);
 	}
 }

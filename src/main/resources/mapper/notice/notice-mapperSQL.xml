@@ -54,4 +54,19 @@
 		(select rownum as rnum, m.* from (select * from qna order by qna_date desc) m)
 		where rnum between #{start} and #{end}
 	</select>
+	<!-- 아래부터 리뷰관련 -->
+	<insert id="reviewInsert" parameterType="review">
+		insert into review values(seq_review_no.nextval,#{reviewTitle},#{reviewWriter},'남자','911220',#{reviewItem},#{reviewStarItem},#{reviewBranch},
+		#{reviewStarBranch},#{reviewContent},#{reviewHashtag},0,#{filename},#{filepath},sysdate)
+	</insert>
+	<select id="reviewTotalCount" resultType="_int">
+		select count(*) cnt from review	
+	</select>
+	<select id="reviewSelectPaging" parameterType="pb" resultType="review">
+		select review_no as reviewNo, review_title as reviewTitle, review_writer as reviewWriter, review_gender as reviewGender, review_birthday as reviewBirthday, 
+		review_item as reviewItem, review_star_item as reviewStarItem, review_branch as reviewBranch, review_star_branch as reviewStarBranch,
+		review_content as reviewContent, review_hashtag as reviewHashtag, filename, filepath, review_date as reviewDate from 
+		(select rownum as rnum, m.* from (select * from review order by review_date desc) m)
+		where rnum between #{start} and #{end}
+	</select>
 </mapper>

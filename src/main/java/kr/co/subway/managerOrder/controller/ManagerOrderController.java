@@ -21,7 +21,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
 import kr.co.subway.common.SearchVO;
-import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.managerOrder.service.ManagerOrderService;
@@ -39,17 +38,10 @@ public class ManagerOrderController {
 	@SuppressWarnings("deprecation")
 	@RequestMapping("/managerOrder/orderList.do")
 	public String orderList(Model model, HttpSession session, HttpServletRequest request, SearchVO search) {
-		//String id = "";
-		//HttpSession session = request.getSession(false);
 		if(session.getAttribute("mgr")!=null) {
-			//id = ((Mgr)session.getAttribute("mgr")).getMgrId();//TODO 여기는 나중에 관리자 id로 바꿔서 받아와야함
-			
-			System.out.println(((Mgr)session.getAttribute("mgr")).getMgrId());
-			
 			search.setMgrId(((Mgr)session.getAttribute("mgr")).getMgrId());
 		}else {
-			//id = "admin";
-			search.setMgrId("admin");
+			search.setMgrId("jy");//임시 아이디로 설정
 		}
 		if(search.getReqPage()==0) {
 			search.setReqPage(1);

@@ -49,7 +49,7 @@
 							<a href="/allCustomerList.do">회원관리</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="#">회원 리스트</a></li>
+									<li><a href="/allCustomerList.do">회원 리스트</a></li>
 								</ul>
 							</div>
 						</li>
@@ -72,7 +72,7 @@
 							</div>
 						</li>
 						<li class="gnb04">
-							<a href="/managerOrder/orderRegister.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){%>on<%}%>">재고관리</a>
+							<a href="/managerOrder/orderList.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){%>on<%}%>">재고관리</a>
 						</li>
 						<li class="gnb05">
 							<a href="#">주문관리</a>
