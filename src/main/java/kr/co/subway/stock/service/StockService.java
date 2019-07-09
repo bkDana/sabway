@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.subway.common.SearchVO;
 import kr.co.subway.managerOrder.vo.StockVO;
@@ -76,6 +77,7 @@ public class StockService {
 		return list;
 	}
 
+	@Transactional
 	public int modifyStock(StockVO stock) {
 		 int result = dao.modifyStock(stock);
 		 if(result==1) {

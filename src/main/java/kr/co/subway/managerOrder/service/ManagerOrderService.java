@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.subway.common.SearchVO;
 import kr.co.subway.ingreManage.vo.IngreVo;
@@ -13,6 +14,7 @@ import kr.co.subway.managerOrder.vo.ManagerOrderListVO;
 import kr.co.subway.managerOrder.vo.ManagerOrderVO;
 import kr.co.subway.managerOrder.vo.StockVO;
 import kr.co.subway.stock.vo.HistoryVO;
+
 
 @Service("ManagerOrderService")
 public class ManagerOrderService {
@@ -82,6 +84,7 @@ public class ManagerOrderService {
 		return list;
 	}
 
+	@Transactional
 	public int addOrder(ManagerOrderVO managerOrderVO) {
 		
 		int result = dao.addOrder(managerOrderVO);
@@ -104,14 +107,17 @@ public class ManagerOrderService {
 		return (ArrayList<IngreVo>)dao.selectIngre(type);
 	}
 
+	@Transactional
 	public int updateState(ManagerOrderVO mo) {
 		return dao.updateState(mo);
 	}
 
+	@Transactional
 	public int deliveryEnd(SearchVO search) {
 		return dao.deliveryEnd(search);
 	}
 
+	@Transactional
 	public int addStock(SearchVO search) {
 		int result = 0;
 		int chkAmount = 0;
