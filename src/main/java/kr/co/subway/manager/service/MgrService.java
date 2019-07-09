@@ -45,8 +45,8 @@ public class MgrService {
 		List<Mgr> list = null;
 		if(keyword.equals("이름")) {
 			list = mgrdao.searchBossName(text);
-		}else if(keyword.equals("지역")){
-			list = mgrdao.searchName(text);
+		}else if(keyword.equals("주소")){
+			list = mgrdao.searchAddr(text);
 		}
 		return list;
 	}

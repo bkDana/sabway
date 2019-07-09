@@ -55,7 +55,7 @@
 		from manager
 		where mgr_boss_name like '%'||#{text}||'%'
 	</select>
-	<select id="searchName" parameterType="string" resultType="mgr">
+	<select id="searchAddr" parameterType="string" resultType="mgr">
 		select mgr_no as mgrNo
 		,mgr_id as mgrId
 		,mgr_pw as mgrPw
@@ -69,6 +69,6 @@
 		,mgr_addr_code as mgrAddrCode
 		,mgr_boss_name as mgrBossName
 		from manager
-		where mgr_name like '%'||#{text}||'%'
+		where mgr_addr like '%'||#{text}||'%'
 	</select>
 </mapper>

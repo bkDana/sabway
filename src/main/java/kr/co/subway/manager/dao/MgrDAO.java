@@ -34,7 +34,7 @@ public class MgrDAO {
 		return session.selectList("mgr.searchBossName",text);
 	}
 	//검색어 검색(addr)
-	public List<Mgr> searchName(String text){
-		return session.selectList("mgr.searchName",text);
+	public List<Mgr> searchAddr(String text){
+		return session.selectList("mgr.searchAddr",text);
 	}
 }

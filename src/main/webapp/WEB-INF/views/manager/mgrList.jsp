@@ -15,7 +15,7 @@
 		text-align:center;
 	}
 	select{
-		height:35px;
+		height:36px;
 		font-size:15px;
 	}
 	.onBtn,.offBtn{
@@ -37,12 +37,26 @@
 	.offBtn{
 		background-color: #122322;
 	}
+	[name=searchBtn]{
+		background-color: gray;
+		width:50px;
+	    border: none;
+	    color:#fff;
+	    padding: 5px 0;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 15px;
+	    margin: 4px;
+	    cursor: pointer;
+	    height: 35px;
+	}
 </style>
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-	<div class="sub-menu">※ 매장관리 > 가맹점 목록</div>
+		<div class="sub-menu">※ 매장관리 > 가맹점 목록</div>
 		<table class="comm-tbl" style="max-width:1200px">
 			<colgroup>
 				<col width="5%">
@@ -92,18 +106,19 @@
 							</td>
 						</c:if>
 						<c:if test="${mgr.mgrStatus eq 3 }">
-							<td style="color:Hotpink;text-align:center;">폐업</td>
+							<td style="color:Hotpink;text-align:center;" name="mgrStatus" value="3">폐업</td>
 							<td></td>
 						</c:if>
 					</tr>
 				</c:if>
 			</c:forEach>
 		</table>
+		<br><br>
 		<div name="searchBox">
 			<select name="selectKeyword">
 				<option id="name">이름</option>
-				<option id="addr">지역</option>
-			</select>
+				<option id="addr">주소</option>
+			</select>&nbsp;
 			<input type="text">
 			<button type="button" name="searchBtn">검색</button>
 		</div>
@@ -124,7 +139,11 @@
 		$("[name=searchBtn]").click(function(){
 			var keyword = $(this).parent().children().eq(0).val();
 			var text = $(this).prev().val();
-			location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+			if(keyword == "이름"){
+				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+			}else if(keyword == "주소"){
+				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+			}
 		});
 	});
 </script>

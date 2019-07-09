@@ -114,10 +114,11 @@
 			</c:forEach>
 		</table>
 		<br><br>
+		<!-- status 별로 출력되는 것도 추가해야됨 -->
 		<div name="searchBox">
 			<select name="selectKeyword">
 				<option id="name">이름</option>
-				<option id="addr">지역</option>
+				<option id="addr">주소</option>
 			</select>&nbsp;
 			<input type="text">
 			<button type="button" name="searchBtn">검색</button>
@@ -139,7 +140,11 @@
 		$("[name=searchBtn]").click(function(){
 			var keyword = $(this).parent().children().eq(0).val();
 			var text = $(this).prev().val();
-			location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+			if(keyword == "이름"){
+				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+			}else if(keyword == "주소"){
+				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+			}
 		});
 	});
 </script>
