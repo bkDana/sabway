@@ -10,6 +10,24 @@
 <style>
 </style>
 <body>
+<style>
+	.doubleChk{
+		height: 30px;
+	    padding: 0 10px;
+	    border-radius: 5px;
+	    background-color: #747474;
+	    color: #fff;
+	    margin-left: 5px;
+	}
+	.join-btn{
+		height: 30px;
+	    padding: 0 10px;
+	    border-radius: 5px;
+	    background-color: #009223;
+	    color: #fff;
+	    margin-left: 5px;
+	}
+</style>
 <%-- Header --%>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	
@@ -23,46 +41,39 @@
 			    <table class="comm-tbl type2">
 			         <tr>
 			            <td><label for="userId">아이디</label></td>
-			            <td><input class="inputBox" type="text" id="customerId" name="customerId"  maxlength="16"><span id="idMsg"></span><button type="button" id="idChk">중복확인</button></td>
+			            <td><input class="inputBox" type="text" id="customerId" name="customerId"  maxlength="16"><button type="button" id="idChk" class="doubleChk">중복확인</button><br><span id="idMsg"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label for="userPw">비밀번호</label></td>
-			            <td><input class="inputBox" type="password" id="customerPw" name="customerPw"  maxlength="16"><span id="pwMsg"></span><p style="font-size: 12px; height: 20px;">※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p></td>
+			            <td><input class="inputBox" type="password" id="customerPw" name="customerPw"  maxlength="16"><br><span id="pwMsg"></span><p style="font-size: 12px; height: 20px;">※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p></td>
 			         </tr>
 			         <tr>
 			            <td><label for="userPwre">비밀번호 확인</label></td>
-			            <td><input class="inputBox" type="password" id="customerPwre" name="customerPwre"  maxlength="16"><span id="pwreMsg"></span></td>
+			            <td><input class="inputBox" type="password" id="customerPwre" name="customerPwre"  maxlength="16"><br><span id="pwreMsg"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label for="userName">이름</label></td>
-			            <td><input class="inputBox" type="text" id="customerName" name="customerName"  maxlength="16"><span id="nameMsg"></span></td>
+			            <td><input class="inputBox" type="text" id="customerName" name="customerName"  maxlength="16"><br><span id="nameMsg"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label for="userNick">닉네임</label></td>
-			            <td><input class="inputBox" type="text" id="customerNick" name="customerNick"  maxlength="16"><span id="nickMsg"></span><button type="button" id="nickChk">중복확인</button></td>
+			            <td><input class="inputBox" type="text" id="customerNick" name="customerNick"  maxlength="16"><button type="button" id="nickChk" class="doubleChk" >중복확인</button><br><span id="nickMsg"></span></td>
 			         </tr>
 			         <tr>
 			            <td>
 			               <label for="email">E-Mail</label>
 			            </td>
 			            <td>
-			               <input class="inputBox" type="text" id="email" name="email"  maxlength="20">@
-			               
-			               <input class="inputBox" type="text" id="email2" name="email2" maxlength="20">
-			               
-			               <select name="emailEx" id="emailEx" style="width:100px; height:20px">
-			                    <option value="">직접입력</option>
-			                     <option value="naver.com">naver.com</option>
-			                     <option value="hanmail.net">hanmail.net</option>
-			                     <option value="gmail.com">gmail.com</option>
-			                 </select>
-			                 <button type="button" id="emailChk">중복확인안돼</button>
+			               	<input class="inputBox" type="text" id="email" name="email" style="width:50%" maxlength="20">
+			               	<button type="button" class="emailBtn1" id="emailChkBtn" disabled="disabled">인증</button><br>
+			              	<span class="joinErrorMsg" id="emailMsg"></span>
+							<span id="eTxt" style="color:blue"></span>
 			            </td>            
 			         </tr>
 			         <tr>
 			            <td><label for="phone">휴대폰</label></td>
 			            <td>
-			               <select name="phone" id="phone" style="width:70px; height:40px">
+			               <select name="phone" id="phone" style="width:10%; height:35px">
 			                    <option value="">선택</option>
 			                     <option value="010">010</option>
 			                     <option value="011">011</option>
@@ -70,15 +81,15 @@
 			                     <option value="017">017</option>
 			                     <option value="019">019</option>
 			                 </select>
-			                 <span style="margin:0 5px 0 5px; color:black;" > - </span><input type="text" id="phone1" name="phone1"  maxlength="4">
-			                 <span style="margin:0 5px 0 5px; color:black;"> - </span><input type="text" id="phone2" name="phone2"  maxlength="4"> 
+			                 <span style="margin:0 5px 0 5px; color:black;" > - </span><input type="text" id="phone1" name="phone1" style="width:10%" maxlength="4">
+			                 <span style="margin:0 5px 0 5px; color:black;"> - </span><input type="text" id="phone2" name="phone2" style="width:10%" maxlength="4"><br> 
 			                 <span id="phoneMsg"></span>
 			              </td>
 			         </tr>
 			         <tr>
 			            <td><label for="year">생년월일</label></td>
 			            <td>
-			               <input type="text" name="birthday" id="birthday"  maxlength="6" placeholder="950810"><span id="birthdayMsg"></span>
+			               <input type="text" name="birthday" id="birthday"  maxlength="6" placeholder="950810"><br><span id="birthdayMsg"></span>
 			            </td>
 			         </tr>
 			         <tr>
@@ -93,7 +104,7 @@
 			              </td>
 			         </tr>
 			         <tr>
-			            <td colspan="3" style="text-align: center;" ><button type="button" id="btnSubmit" class="btnjoin">가입하기</button></td>
+			            <td colspan="3" style="text-align: center;" ><button type="button" id="btnSubmit" class="join-btn">가입하기</button></td>
 			         </tr>
 			      </table>
 			</div>
@@ -105,6 +116,20 @@
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
 </body>
 <script>
+
+// 이메일 인증
+$("#emailChkBtn").click(function(){
+	   var email = $("#email").val();
+	   console.log(email);
+	   var url="/emailAuth.do";
+	   var pop=window.open("emailAuth.jsp","emailAuth","width=400,height=300");
+	   pop.location.href=url+"?email="+email;
+	   console.log(emailcertification);
+	    if(insert[0]){
+	         $("#emailMsg").css("display","block");
+	         $("#emailMsg").html("이메일 인증 완료");
+	      }
+	})
 ///////////////////////////////중복확인
    //아이디 중복확인
    $("#idChk").click(function(){
@@ -162,33 +187,6 @@
       });
    });
    
-   //이메일 중복확인
-//         $("#emailChk").click(function(){
-//          var nick = $("#email").val();
-         
-//          if(isEmpty(email)){
-//             alert("이메일을 입력해주세요.");
-//             return;
-//          }
-         
-//          $.ajax({
-//             url:"/emailCheck.do",
-//             data:{email:email},
-//             type:"get",
-//             success:function(data){
-//                if(data==1){
-//                   alert("가입된 이메일입니다.");
-//                   $("#isChk").val("0");
-//                }else{
-//                   alert("사용가능 이메일입니다.");
-//                   $("#isChk").val("1");
-//                }
-//             },
-//             error:function(){
-//                console.log("실패");
-//             }
-//          });
-//    });
    
    // 가입하기 버튼
    $("#btnSubmit").click(function(){
@@ -272,10 +270,24 @@
          return true;
       }
    }
+   
    $(document).ready(function(){
+	  var customerName = /^[가-힣]([가-힣]{1,3})$/;
       var customerPw = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
       var birthday = /^[0-9]*$/;
       var phone = /^[0-9]*$/;
+      
+      // 이름 검사
+      $('#customerName').focusout(function(){
+        	if(!customerName.test($('#customerName').val())){
+        		 $('#nameMsg').css("color","red");
+                 $('#nameMsg').text("한글만 입력 가능합니다.");
+                 $(this).val("");
+        	}else{
+                $('#nameMsg').text(""); 
+            } 
+         });
+      
       // 비밀번호1 = 비밀번호2
         $('#customerPwre').focusout(function(){
             if($('#customerPwre').val() == $('#customerPw').val() && !($('#customerPwre').val() == "")){
@@ -331,6 +343,47 @@
             $('#birthdayMsg').text("");
          }
       });
+      //이메일 검사
+      $('#email').focusout(function(){
+          checkEmail();
+      });
    });
+ //이메일
+	function checkEmail(){
+	   var email=$("#email").val();
+	   var emailchk=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	   
+	   if (!emailchk.test(email)) {//이메일 형식 오류
+	      $("#emailMsg").html("이메일 주소가 올바르지 않습니다");
+	      $("#emailMsg").css("color", "red");
+	      $(".emailBtn1").prop("disabled", true);
+	      return;
+	   }
+	   if (emailchk.test(email)) {
+	      $.ajax({
+	         type:"post",
+	         url:"/emailCheck.do",
+	         data:{email:email},
+	         success : function(data) {
+	               if (data == 1) {//이메일 중복 없음
+	            	   
+	            	   $("#emailMsg").html("중복된 이메일입니다");
+		               $("#emailMsg").css("color", "gray");
+		               $("#isChk").val("1");
+	               }else{
+	            	   $("#emailMsg").html("사용가능한 이메일 입니다");
+		               $("#emailMsg").css("color", "green");
+		               $("#isChk").val("0");
+		               $(".emailBtn1").prop("disabled", false);
+	   
+	                  return;
+	               }
+	            },
+	            error : function () {
+	               alert("에러 발생")
+	               }
+	         })
+	      }
+	}
 </script>
 </html>
