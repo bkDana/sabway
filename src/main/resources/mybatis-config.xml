@@ -18,6 +18,8 @@
 		<typeAlias type="kr.co.subway.stock.vo.stockViewVO" alias="stockView"/>	<!-- 재고 Vo -->
 		<typeAlias type="kr.co.subway.stock.vo.HistoryVO" alias="history"/>	<!-- 재고내역 Vo -->
 		<typeAlias type="kr.co.subway.notice.vo.Review" alias="review"/>
-
+		<typeAlias type="kr.co.subway.sales.statics.vo.SalesStaticsVo" alias="salesStatics"/>	<!-- 주문내역 Vo -->
+		<typeAlias type="kr.co.subway.sales.statics.vo.SalesStaticsGrpVo" alias="graph"/>	<!-- 매출 통계 Vo -->
+		
 	</typeAliases>
 </configuration>

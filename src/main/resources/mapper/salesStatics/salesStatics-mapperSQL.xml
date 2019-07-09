@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sales">
+	<!-- 월별 지점별 매출액 -->
+	<select id="getOrder" resultType="graph">
+		select nvl(cuso_branch,'total') as cusoBranch, nvl(substr(cuso_order_date,4,2),'total') as orderMonth, sum(cuso_total_cost) as totalCost  from cusorder 
+		where cuso_order_state=2 and substr(cuso_order_date,1,2)=to_char(sysdate,'yy') 
+		group by cube (cuso_branch, substr(cuso_order_date,4,2))
+	</select>
+</mapper>

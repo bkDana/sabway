@@ -11,7 +11,7 @@ import kr.co.subway.ingreManage.vo.IngrePageNaviData;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.notice.vo.PageBound;
 
-@Service("menuManageService")
+@Service("ingreManageService")
 public class IngreManageService {
 	@Autowired
 	private IngreManageDao ingreDao;
