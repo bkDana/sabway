@@ -21,8 +21,9 @@
 </c:choose>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-	function searchAddr(mgrAddr){
+	function searchAddr(mgrAddr,index){
 		var addr = mgrAddr;
+		var i = index;
 	    new daum.Postcode({
 	        oncomplete: function(data) {
 	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
@@ -34,7 +35,7 @@
 	            }
 				    $("[name=mgrPost]").val(data.zonecode);
 	            	$("[name=mgrAddrCode]").val(data.sigunguCode);
-	            	$("[name=mgrName]").val('SabWay '+data.bname+'점');
+	            	$("[name=mgrName]").val('SabWay '+data.bname+" "+i+'호점');
 	        }
 	    }).open({
 		    popupName : 'postCodePopup',//중복 생성 방지
@@ -54,6 +55,7 @@
 				<input type="hidden" name="mgrStatus" value="1"><!-- 영업상태: 준비중(Default) -->
 				<input type="hidden" name="mgrLevel" value="0"><!-- 0: 가맹점 고정 -->
 				<input type="hidden" name="applyName" value="${applyName }"><!-- 신청자 이름 전달용 -->
+				<input type="hidden" name="applyNo" value="${applyNo }"><!-- 신청 번호 전달용 -->
 				<input type="hidden" name="mgrAddrCode">
 				<table class="comm-tbl">
 					<tr>
@@ -85,7 +87,7 @@
 							주소
 						</th>
 						<td>
-							<label onclick="searchAddr('${mgrAddr }');">
+							<label onclick="searchAddr('${mgrAddr }','${i }');">
 								<input type="text" name="mgrPost" style="width:40px" readonly><br><br>
 								<input type="text" name="mgrAddr" readonly>
 							</label>
