@@ -2,14 +2,27 @@ package kr.co.subway.customer.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Properties;
+import java.util.Random;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.builder.MapperBuilderAssistant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -26,6 +39,9 @@ public class CustomerController {
    @Autowired
    @Qualifier(value="customerService")
    private CustomerService customerService;
+
+//   private MailSendService mailsender;
+
    @RequestMapping(value="/login.do")
    public String customerLogin(HttpServletRequest request, HttpServletResponse response) {
       HttpSession session = request.getSession();
@@ -152,6 +168,19 @@ public class CustomerController {
       }
    }
    
+   //이메일 체크
+   @ResponseBody
+   @RequestMapping(value="/emailCheck.do" ,produces="text/html;charset=utf-8")
+   public String emailCheck(@RequestParam String email) {
+      Customer c = customerService.selectOneEmail(email);
+      System.out.println(c);
+      if(c!=null) {
+         return "1";
+      }else {
+         return "0";
+      }
+   }
+   
    //휴면계정 해제
    @ResponseBody
    @RequestMapping(value="/oldUserToNewAjax.do", produces = "application/json")
@@ -174,23 +203,11 @@ public class CustomerController {
      }
    }
    
-   //닉네임 체크
-   @ResponseBody
-   @RequestMapping(value="/emailCheck.do" ,produces="text/html;charset=utf-8")
-   public String emailCheck(@RequestParam String email) {
-      Customer c = customerService.selectOneEmail(email);
-      System.out.println(c);
-      if(c!=null) {
-         return "1";
-      }else {
-         return "0";
-      }
-   }
-   
    //회원가입
    @RequestMapping(value="/enroll.do")
-   public String customerEnroll(Customer vo) {
+   public String customerEnroll(Customer vo,HttpServletRequest request) {
       int result = customerService.insertCustomerEnroll(vo);
+      
       if(result>0) {
          return "customer/insertSuccess";
       }else {
@@ -265,6 +282,90 @@ public class CustomerController {
 
    }
    
+   //이메일 인증
+   @RequestMapping(value="/emailAuth.do")
+   public void emailcertification(HttpServletRequest request,HttpServletResponse response) {
+      String id = request.getParameter("email");
+      System.out.println("메일 인증");
+      String host = "smtp.googlemail.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정 
+
+         final String user = "ssuyong2@gmail.com"; 
+         final String password = "tjqmdnpdl2";       
+
+         Properties props = new Properties(); 
+         props.put("mail.smtp.host", host); 
+         props.put("mail.smtp.port", 587); 
+         props.put("mail.smtp.auth", "true");
+         props.put("mail.smtp.starttls.enable","true");
+
+     
+         Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() { 
+             protected  PasswordAuthentication getPasswordAuthentication() { 
+                return new PasswordAuthentication(user, password); 
+                } 
+             });
+          
+          try {
+             MimeMessage message = new MimeMessage(session); 
+             message.setFrom(new InternetAddress(user)); 
+             message.addRecipient(Message.RecipientType.TO,new InternetAddress(id));
+             // 메일 제목 
+             message.setSubject("Sabway"); 
+             
+          
+          Random random = new Random();
+          String num = new String();
+          for(int i =0;i<7;i++) {
+             num+=String.valueOf(random.nextInt(9)+1);
+       
+             
+          }
+          // 메일 내용 
+          message.setContent("<!DOCTYPE html>\r\n" + 
+                "<html>\r\n" + 
+                "<head>\r\n" + 
+                "<meta charset=\"UTF-8\">\r\n" + 
+                "<title>Insert title here</title>\r\n" + 
+                "</head>\r\n" + 
+                "    <style>\r\n" + 
+                "        div{\r\n" + 
+                "           \r\n" + 
+                "        }\r\n" + 
+                "    </style>\r\n" + 
+                "<body>\r\n" + 
+                "    <div style=\"padding-left: 50px;padding-top:20px; margin: 100px; width:1155px; border: 2px solid darkgray;\" >\r\n" + 
+                "        <br>\r\n" + 
+                "        <div style=\"padding-top:30px;font-weight:bold;\">\r\n" + 
+                "    <p style=\"text-align:left;\">\r\n" + 
+                "        저희 Sabway를 이용해 주셔서 감사합니다.<br><br>\r\n" + 
+                "        \r\n" + 
+                "        회원님의 본인인증 키는 <span style=\"font-size:20px;\"> "+num+" </span>입니다.<br><br>\r\n" + 
+                "        보안을 위해 이 링크는 전송된 후 2분이 지나면 만료됩니다.<br><br>\r\n" + 
+                "        감사합니다. <br>\r\n" + 
+                "       Sabway \r\n" + 
+                "    </p>\r\n" + 
+                "       </div>\r\n" + 
+                "    </div>\r\n" + 
+                "</body>\r\n" + 
+                "</html>","text/html;charset=euc-kr");  
+          // send the message 
+          Transport.send(message); 
+          System.out.println("Success Message Send"); 
+          RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/customer/emailAuth.jsp");
+          request.setAttribute("num", num);
+          try {
+         rd.forward(request, response);
+      } catch (ServletException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (IOException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+          } catch (MessagingException e) { 
+             e.printStackTrace(); 
+             } 
+       }
    
    
    
