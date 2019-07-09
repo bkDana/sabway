@@ -54,6 +54,7 @@
 				<input type="hidden" name="mgrStatus" value="1"><!-- 영업상태: 준비중(Default) -->
 				<input type="hidden" name="mgrLevel" value="0"><!-- 0: 가맹점 고정 -->
 				<input type="hidden" name="applyName" value="${applyName }"><!-- 신청자 이름 전달용 -->
+				<input type="hidden" name="applyNo" value="${applyNo }"><!-- 신청 번호 전달용 -->
 				<input type="hidden" name="mgrAddrCode">
 				<table class="comm-tbl">
 					<tr>

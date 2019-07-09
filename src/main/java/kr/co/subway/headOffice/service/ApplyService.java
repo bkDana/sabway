@@ -22,14 +22,11 @@ public class ApplyService {
 	}
 	//거절 누르면 상태변경
 	@Transactional
-	public int rejectManagerUpdate(String applyName,int applyStatus){
+	public int rejectManagerUpdate(int applyStatus,int applyNo){
 		int result = 0;
 		if(applyStatus==2) {
-			result = applyDao.rejectManagerUpdate(applyName);
+			result = applyDao.rejectManagerUpdate(applyNo);
 		}
-//		else {
-//			result = applyDao.applyManagerUpdate(applyName);
-//		}
 		return result;
 	}
 	//신청 글 상세보기

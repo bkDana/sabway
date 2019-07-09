@@ -7,19 +7,6 @@
 <title>가맹점 신청</title>
 </head>
 
-<style>
-	/* 테이블 테두리 black, 가운데정렬 */
-	table,th,tr,td{
-		border: 1px solid black; 
-		text-align: center;
-	}
-	/* 글씨 black, 밑줄 제거 */
-	a{
-		text-decoration: none;
-		color:black;
-	}
-</style>
-
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
@@ -33,6 +20,7 @@
 					<!-- 가맹점 신청(status == 0)인 경우 출력 -->
 					<c:if test="${apply.applyStatus eq 0 }">
 						<tr>
+							<td style="display:none;" name="applyNo">${apply.applyNo }</td>
 							<td name="applyName">${apply.applyName }</td>
 							<!-- 해달 게시글 상세보기 -->
 							<td><a href="/applyView.do?applyNo=${apply.applyNo }">${apply.applyTitle }</a></td>
@@ -92,20 +80,22 @@
 	//MgrService의 enrollMgr 메소드에서 ApplyDao의 applyManagerUpdate 메소드 태워서 승인(applyStatus의 값 1로 변경) 처리
 	//승인
 	$('[name=apply]').click(function(){
-		var applyArea = $(this).parent().prev().prev().html();
-		var applyName = $(this).parent().parent().children().html();
-		location.href="/enrollMgr.do?applyArea="+applyArea+"&applyName="+applyName;
+		var applyArea = $("[name=applyArea]").html();
+		var applyName = $("[name=applyName]").html();
+		var applyNo = $("[name=applyNo]").html();
+		location.href="/enrollMgr.do?applyArea="+applyArea+"&applyName="+applyName+"&applyNo="+applyNo;
 	});
 	//거절 클릭 시 /apply.do"로 applyName과 applyStatus전달
 	$('[name=reject]').click(function(){
-		var applyName = $(this).parent().parent().children().html();
+		var applyName = $("[name=applyName]").html();
 		var applyStatus = $('[name=rejectStatus]').val();
+		var applyNo = $("[name=applyNo]").html();
 		if(applyStatus == 2) {
 			if(confirm("거절하시겠습니까?")){
 				$.ajax({
 					url : "/apply.do",
 					type : "get",
-					data : {applyName:applyName , applyStatus:applyStatus},
+					data : {applyName:applyName , applyStatus:applyStatus , applyNo:applyNo},
 					dataType : "json",
 					success : function(data){
 						if(data.result == 0){
