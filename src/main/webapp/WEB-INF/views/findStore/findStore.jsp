@@ -41,7 +41,26 @@
 	#pagination {margin:10px auto;text-align: center;}
 	#pagination a {display:inline-block;margin-right:10px;}
 	#pagination .on {font-weight: bold; cursor: default;color:#777;}
-
+	
+	
+	
+	.new_store_content {
+	    background-color: #f6f6f6;
+	    padding: 96px 0 100px;
+	    margin-bottom: 95px;
+	}
+	.content {
+	    max-width: 1170px;
+	    margin: 0 auto;
+	    position: relative;
+	}
+	#content h3.h_title {
+	    font-size: 28px;
+	    color: #292929;
+	    font-weight: bold;
+	    letter-spacing: -0.05em;
+	    padding-bottom: 38px;
+	}
 </style>
 <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90ad9a818e9567f60383489b958f526a&libraries=services,clusterer,drawing"></script>
@@ -63,7 +82,26 @@
 	        <div id="pagination"></div>
 	    </div>
 	</div>
+	<div class="new_store_content">
+		<div class="content">
+			<h3 class="h_title">신규매장안내</h3>
+			<div class="new_store_slider_wrapper">
+				<div class="new_store_slider_cont">
+					
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
+
+
+
+
+
+
+
+
+
 <script>
 	// 마커를 담을 배열입니다
 	var markers = [];
