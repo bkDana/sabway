@@ -4,7 +4,7 @@
   <!-- 메뉴 등록 -->
   <insert id="ingreReg" parameterType="ingre">
   	insert into ingredients values (seq_ingre_idx.nextval, #{ingreLabel}, #{ingreType}, #{ingreCost15}, #{ingreCost30}, 0, 
-  	#{ingreKcal}, 0, #{ingreActive}, #{ingreUnit}, #{ingreDescription}, 
+  	#{ingreKcal}, #{ingreActive}, #{ingreUnit}, #{ingreDescription}, 
   	<choose>
 		  <when test="ingreFilepath != null">
 		  	 #{ingreFilepath},
@@ -19,7 +19,7 @@
   <!-- 재료 리스트 개수 구하기 -->
   <select id="ingreTotalCount" parameterType="map" resultType="_int">
   	select count(*) as cnt from ingredients
-  	<if test="searchType != null and searchType != '' and searchVal != null and searchVal != '' and searchType != 'null' and searchVal != 'null'"> <!-- 검색했을 경우 -->
+  	<if test="searchType != null and searchType != '' and searchType != 'null' and searchVal != null and searchVal != '' and searchVal != 'null'"> <!-- 검색했을 경우 -->
   		where 
   		<if test="searchType.equals('ingreType')">	<!-- 재료 카테고리 선택 -->
   			ingre_type = #{searchVal}
@@ -45,7 +45,7 @@
   
   <!-- 재료 리스트 구하기 -->
   <select id="ingreSelectAll" parameterType="map" resultType="ingre">
-  	select rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_kcal_salad as ingreKcalSalad, ingre_active as ingreActive, <!-- ingre_unit as ingreUnit,  ingre_description as ingreDescription,--> ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
+  	select rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_active as ingreActive, <!-- ingre_unit as ingreUnit,  ingre_description as ingreDescription,--> ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
   	from (select rownum as rnum, i.* from(select * from ingredients 
   	<if test="searchType != null and searchType != '' and searchVal != null and searchVal != '' and searchType != 'null' and searchVal != 'null'"> <!-- 검색했을 경우 -->
   		where
@@ -84,7 +84,7 @@
   
   <!-- 재료정보 가져오기(1개) -->
   <select id="goIngreUpdate" parameterType="string" resultType="ingre">
-  	select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_kcal_salad as ingreKcalSalad, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
+  	select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
   	from ingredients where ingre_idx=#{ingreIdx}
   </select>
   
@@ -99,7 +99,7 @@
   
   <!-- 엑셀 다운로드할 리스트 -->
   <select id="ingreListExcel" parameterType="map" resultType="ingre">
-  	select rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_kcal_salad as ingreKcalSalad, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
+  	select rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
   	from (select rownum as rnum, i.* from(select * from ingredients 
   	<if test="searchType != null and searchType != '' and searchVal != null and searchVal != '' and searchType != 'null' and searchVal != 'null'"> <!-- 검색했을 경우 -->
   		where

@@ -25,8 +25,6 @@ public class IngreManageDao {
 
 	//조건에 따른 재료 개수 구하기
 	public int ingreTotalCount(String searchType, String searchVal) {
-		System.out.println(searchType);
-		System.out.println(searchVal);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchType", searchType);
 		map.put("searchVal", searchVal);
