@@ -12,6 +12,7 @@ import kr.co.subway.managerOrder.vo.ManagerItemVO;
 import kr.co.subway.managerOrder.vo.ManagerOrderListVO;
 import kr.co.subway.managerOrder.vo.ManagerOrderVO;
 import kr.co.subway.managerOrder.vo.StockVO;
+import kr.co.subway.stock.vo.HistoryVO;
 
 @Service("ManagerOrderService")
 public class ManagerOrderService {
@@ -91,23 +92,17 @@ public class ManagerOrderService {
 		/*추가해야할 재고 목록*/
 		ArrayList<StockVO> stockList = (ArrayList<StockVO>)dao.delStock(search);
 		for (StockVO stock : stockList) {
-			/*
-			System.out.println(stock.getmStockIdx());
-			System.out.println(stock.getmOrderManagerId());
-			System.out.println(stock.getmItemIdx());
-			System.out.println(stock.getmItemAmount());
-			*/
+
 			/* insert, update 여부 판단 */
 			StockVO chkStock = dao.findStock(stock);
 			if(chkStock == null) {
-				//System.out.println("없어");
 				result += dao.insertStock(stock);
 			}else {
-				//System.out.println("있어"+chkStock.getmStockIdx());
 				stock.setmStockIdx(chkStock.getmStockIdx());
 				result += dao.updateStock(stock);
 				
 			}
+			
 			chkAmount++;
 		}
 		

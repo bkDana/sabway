@@ -65,4 +65,8 @@ public class StockService {
 		 return result;
 	}
 
+	public ArrayList<HistoryVO> stockHistory(int no) {
+		return (ArrayList<HistoryVO>)dao.stockHistory(no);
+	}
+
 }

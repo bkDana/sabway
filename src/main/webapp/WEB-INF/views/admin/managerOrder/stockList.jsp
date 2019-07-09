@@ -47,6 +47,7 @@
 						<input type="text" class="short" value="${stock.mStock }" data-idx="${stock.mStockIdx }" data-pre="${stock.mStock }" > ${stock.ingreUnit }<c:if test="${empty stock.ingreUnit }">개</c:if>
 						<button type="button" class="update-btn" >수정</button>
 					</span>
+					<span><button type="button" class="detail-btn" onclick="location.href='/managerOrder/stockHistory.do?no=${stock.mStockIdx }';">상세</button></span>
 				
 			</li>
 			</c:forEach>
@@ -59,17 +60,21 @@
 	</div>
 </section>
 <script>
+	
+$(function(){
 	/* 수량 수정 */
-	$('.update-btn').click(function(){
+	$('.update-btn').on('click',function(){
 		var mStockIdx = $(this).siblings('input').data('idx');
 		var mItemAmount = $(this).siblings('input').val();
-		var mItemIdx = $(this).siblings('input').data('pre');//기존 재고
+		var mItemIdx = $(this).siblings('input').attr('data-pre');//기존 재고
 
+		var $my = $(this);
 		$.ajax({
 			url : '/managerOrder/modifyStock.do',
 			data : {mStockIdx:mStockIdx, mItemAmount:mItemAmount, mItemIdx:mItemIdx},
 			success : function(data){
 				if(data==1){
+					$my.siblings('input').attr('data-pre',mItemAmount);
 					alert('재고가 수정되었습니다');
 				}else{
 					alert('수정 실패');
@@ -80,8 +85,10 @@
 			}
 		});
 		
+		
 	});
 
+});
 	/* 검색 타입 고정 */
 	var searchType = $('select[name=searchType]').data('val');
 	$('select[name=searchType]').children('option').each(function(){
@@ -112,7 +119,7 @@
 		if(value=='cat'){
 			$('input[name=searchVal]').remove();
 			$.ajax({
-				url : '/ingreType.do',
+				url : '/ingreManage/ingreType.do',
 				success : function(data){
 					var $sel = $('<select name="searchVal">');
 					$sel.append('<option value="">전체</option>');
