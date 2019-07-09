@@ -70,10 +70,13 @@
          $("#layerPopup").show();
          form.authnum.value="";
          return false;
+      }else{
+    	  self.close();
       }
       if(form==authNum){
          opener.$("#eTxt").text("인증완료");
          opener.$("#eTxt").css("color","blue");
+         opener.$("#eTxt").addClass("checkSuccess");
          opener.insert[0]=true;
          self.close();
       }

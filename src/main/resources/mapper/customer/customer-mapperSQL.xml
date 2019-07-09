@@ -110,7 +110,7 @@
     	,customer_state as customerState
     	,reg_date as regDate
     	,lastlog_date as lastLogDate
-    	from customer
+    	from customer order by customer_no
     </select>
     
     <!-- 회원탈퇴시키기 -->

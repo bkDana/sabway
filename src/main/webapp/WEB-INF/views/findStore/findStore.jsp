@@ -1,9 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+	.new_store_content{
+	    background-color: #f6f6f6;
+	    padding: 96px 0 100px;
+	    margin-bottom: 95px;
+	}
+	.content {
+	    max-width: 1170px;
+	    margin: 0 auto;
+	    position: relative;
+	}
+	.h_title {
+	    font-size: 28px;
+	    color: #292929;
+	    font-weight: bold;
+	    letter-spacing: -0.05em;
+	    padding-bottom: 38px;
+	}
+	.new_store_content .new_store_slider_wrapper {
+    	position: relative;
+	}
+</style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<!-- Map -->
 
+<!-- Map -->
 <section id="content-wrapper">
 
    <div class="store_search_wrapper">
@@ -35,9 +57,17 @@
       </div>
    </div>
 
-   <div class="map_wrap" style="width:100%;height:700px;">
-       <jsp:include page="/WEB-INF/views/map/map2.jsp" />
-   </div>
+	<div class="map_wrap" style="width:100%;height:700px;">
+		<jsp:include page="/WEB-INF/views/map/map2.jsp" />
+	</div>
+	<div class="new_store_content">
+		<div class="content">
+			<h3 class="h_title">신규매장안내</h3>
+			<div class="new_store_slider_wrapper">
+			
+			</div>
+		</div>
+	</div>
 </section>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
