@@ -23,6 +23,7 @@
 			</colgroup>
 			 	<c:forEach items="${qnaList }" var="qna" varStatus="status">
 			 		<c:if test="${qna.qnaNo eq qnaNo }">
+			 		<c:set var = "currentIndex" value = "${status.index}"/>
 						<tr>
 							<th style="display:none;">${qna.qnaNo }</th>
 							<th>${qna.qnaCategory }</th>
@@ -62,7 +63,7 @@
 				<col width="/">
 			</colgroup>
 			 	<c:forEach items="${qnaList }" var="qna" varStatus="status">
-					<c:if test="${qna.qnaNo eq qnaNo+1 }">
+					<c:if test="${status.index eq currentIndex-1 }">
 						<tr>
 							<td style="display:none;">${qna.qnaNo }</td>
 							<td colspan="2" class="move-pn-qna">
@@ -70,7 +71,7 @@
 							</td>
 						</tr>
 					</c:if>
-					<c:if test="${qna.qnaNo eq qnaNo-1 }">
+					<c:if test="${status.index eq currentIndex+1 }">
 						<tr>
 							<td style="display:none;">${qna.qnaNo }</td>
 							<td colspan="2" class="move-pn-qna">

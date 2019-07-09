@@ -87,4 +87,20 @@ public class NoticeDao {
 	public List reviewSelectPaging(PageBound pb){
 		return sqlSession.selectList("notice.reviewSelectPaging", pb);
 	}
+	
+	public List reviewSelectAll(){
+		return sqlSession.selectList("notice.reviewSelectAll");
+	}
+	
+	public Review reviewSelectOne(int reviewNo) {
+		return sqlSession.selectOne("notice.reviewSelectOne", reviewNo);
+	}
+	
+	public int reviewUpdate(Review r){
+		return sqlSession.update("notice.reviewUpdate", r);
+	}
+	
+	public int reviewDelete(int reviewNo){
+		return sqlSession.delete("notice.reviewDelete", reviewNo);
+	}
 }

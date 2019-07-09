@@ -1,5 +1,7 @@
 package kr.co.subway.notice.vo;
 
+import java.sql.Date;
+
 public class Review {
 	private int reviewNo;
 	private String reviewTitle;
@@ -15,7 +17,7 @@ public class Review {
 	private int reviewLike;
 	private String filename;
 	private String filepath;
-	private String reviewDate;
+	private Date reviewDate;
 	public Review() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -23,7 +25,7 @@ public class Review {
 	public Review(int reviewNo, String reviewTitle, String reviewWriter, String reviewGender, String reviewBirthday,
 			String reviewItem, String reviewStarItem, String reviewBranch, String reviewStarBranch,
 			String reviewContent, String reviewHashtag, int reviewLike, String filename, String filepath,
-			String reviewDate) {
+			Date reviewDate) {
 		super();
 		this.reviewNo = reviewNo;
 		this.reviewTitle = reviewTitle;
@@ -125,12 +127,11 @@ public class Review {
 	public void setFilepath(String filepath) {
 		this.filepath = filepath;
 	}
-	public String getReviewDate() {
+	public Date getReviewDate() {
 		return reviewDate;
 	}
-	public void setReviewDate(String reviewDate) {
+	public void setReviewDate(Date reviewDate) {
 		this.reviewDate = reviewDate;
 	}
-	
 	
 }

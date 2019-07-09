@@ -22,6 +22,7 @@
 			</colgroup>
 			 	<c:forEach items="${noticeList }" var="notice" varStatus="status">
 			 		<c:if test="${notice.noticeNo eq noticeNo }">
+			 		<c:set var = "currentIndex" value = "${status.index}"/>
 						<tr>
 							<th style="display:none;">${notice.noticeNo }</th>
 							<th>${notice.noticeCategory }</th>
@@ -60,7 +61,7 @@
 				<col width="/">
 			</colgroup>
 			 	<c:forEach items="${noticeList }" var="notice" varStatus="status">
-					<c:if test="${notice.noticeNo eq noticeNo+1 }">
+					<c:if test="${status.index eq currentIndex-1 }">
 						<tr>
 							<td style="display:none;">${notice.noticeNo }</td>
 							<td colspan="2" class="move-pn-notice">
@@ -68,7 +69,7 @@
 							</td>
 						</tr>
 					</c:if>
-					<c:if test="${notice.noticeNo eq noticeNo-1 }">
+					<c:if test="${status.index eq currentIndex+1 }">
 						<tr>
 							<td style="display:none;">${notice.noticeNo }</td>
 							<td colspan="2" class="move-pn-notice">
