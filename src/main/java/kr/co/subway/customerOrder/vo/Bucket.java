@@ -5,6 +5,7 @@ import java.sql.Date;
 
 public class Bucket {
 	private int bucIdx;
+	private int bucCusoIdx;
 	private int bucBread;
 	private int bucMain;
 	private int bucVegi;
@@ -14,7 +15,7 @@ public class Bucket {
 	private int bucSide;
 	private int bucIsSalad;
 	private int bucIsOvened;
-	private int bucIsSet;
+	private int bucSet;
 	private int bucCost;
 	private double bucDiscntRate;
 	private int bucKcal;
@@ -24,11 +25,12 @@ public class Bucket {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Bucket(int bucIdx, int bucBread, int bucMain, int bucVegi, int bucCheese, int bucSource, int bucTopping,
-			int bucSide, int bucIsSalad, int bucIsOvened, int bucIsSet, int bucCost, double bucDiscntRate, int bucKcal,
-			int bucQuantity, Date bucRegDate) {
+	public Bucket(int bucIdx, int bucCusoIdx, int bucBread, int bucMain, int bucVegi, int bucCheese, int bucSource,
+			int bucTopping, int bucSide, int bucIsSalad, int bucIsOvened, int bucSet, int bucCost, double bucDiscntRate,
+			int bucKcal, int bucQuantity, Date bucRegDate) {
 		super();
 		this.bucIdx = bucIdx;
+		this.bucCusoIdx = bucCusoIdx;
 		this.bucBread = bucBread;
 		this.bucMain = bucMain;
 		this.bucVegi = bucVegi;
@@ -38,7 +40,7 @@ public class Bucket {
 		this.bucSide = bucSide;
 		this.bucIsSalad = bucIsSalad;
 		this.bucIsOvened = bucIsOvened;
-		this.bucIsSet = bucIsSet;
+		this.bucSet = bucSet;
 		this.bucCost = bucCost;
 		this.bucDiscntRate = bucDiscntRate;
 		this.bucKcal = bucKcal;
@@ -50,6 +52,12 @@ public class Bucket {
 	}
 	public void setBucIdx(int bucIdx) {
 		this.bucIdx = bucIdx;
+	}
+	public int getBucCusoIdx() {
+		return bucCusoIdx;
+	}
+	public void setBucCusoIdx(int bucCusoIdx) {
+		this.bucCusoIdx = bucCusoIdx;
 	}
 	public int getBucBread() {
 		return bucBread;
@@ -105,11 +113,11 @@ public class Bucket {
 	public void setBucIsOvened(int bucIsOvened) {
 		this.bucIsOvened = bucIsOvened;
 	}
-	public int getBucIsSet() {
-		return bucIsSet;
+	public int getBucSet() {
+		return bucSet;
 	}
-	public void setBucIsSet(int bucIsSet) {
-		this.bucIsSet = bucIsSet;
+	public void setBucSet(int bucSet) {
+		this.bucSet = bucSet;
 	}
 	public int getBucCost() {
 		return bucCost;
@@ -143,5 +151,4 @@ public class Bucket {
 	}
 	
 	
-	
-}
+}	
