@@ -22,77 +22,169 @@
 //	document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 //}
 
-/* 초기화 */
+/* 초기화(숨김 적용, 체크박스용 배열 초기화) */
 $(document).ready(function() {
-	$('.hide').hide();
+	//$('.hide').hide();
+	
+	$toppingArr = ['0','0','0','0','0','0','0','0'];
+	$('input[name=topping]').val($toppingArr.join(""));
 	
 	$vegiArr = ['2','2','2','2','2','2','2','2'];
 	$('input[name=vegi]').val($vegiArr.join(""));
+	
+	$sourceArr = ['0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'];
+	$('input[name=source]').val($sourceArr.join(""));
+	
+	$sideArr = ['0','0','0','0','0','0','0','0','0','0'];
+	$('input[name=side]').val($sideArr.join(""));
 });
 
 /* 샌드위치나 샐러드 선택 시 */
-$('input[name=isSaladRef]').click(function(){
+$('input[name=isSalad]').click(function(){
 	if($(this).val() == "0") {
 		/* 샌드위치 or 샐러드 상세 선택 메뉴 교체 */
 		$('#main').empty();
 		$('#main').append(tagSandwich);
-		$('[name=isSalad]').val($(this).val());
 	} else if($(this).val() == "1") {
 		/* 샌드위치 or 샐러드 상세 선택 메뉴 교체 */
 		$('#main').empty();
 		$('#main').append(tagSalad);
-		$('[name=isSalad]').val($(this).val());
 	}
-	$('.hide').hide();
+	//$('.hide').hide();
 });
 
-/* 채소 */
-/* 각 야채들의 요구량을 숫자스트링으로 받아 처리, 나머지 버튼 중 하나를 누르면 '그대로'체크 비화성화 */
+/* 추가토핑 데이터 처리 */
+$('input[name=toppingRef]').eq(0).change(function() {
+	if($(this).is(":checked")) {														//if:초기 선택자가 checked이면
+		$("input[name=toppingRef]:checkbox").each(function(index,item) {				//foreach 시작
+			$(this).prop("checked", false);												//foreach 선택자들의 선택 프로퍼티 비활성화
+			$toppingArr[index] = "0"; 													//문자열로 쓸 배열 초기화
+		});																				//foreach 끝
+		$(this).prop("checked", true);													//초기 선택자의 선택 프로퍼티 활성화
+		$(this).siblings().filter($('input[name=toppingRef]')).attr("disabled",true);	//초기선택자 제외 나머지 선택 비활성화
+		$('input[name=topping]').val($toppingArr.join("")); 							//컨트롤러로 보낼 문자열 초기화
+	} else {																			//else:초기 선택자가 checked가 아니면
+		$(this).siblings().filter($('input[name=toppingRef]')).attr("disabled",false);	//초기선택자 제외 나머지 선택 활성화	
+	}
+});
+$('input[name=toppingRef]:gt(0)').change(function(){									
+	refVal = $(this).val();																//초기선택자의 value
+	console.log(refVal);//test
+	if($(this).is(":checked")) {														//if:초기 선택자가 checked이면
+		for(var index in $toppingArr) {													//forin 시작($toppingArr사용)
+			if(index == refVal) {														//	if: index == refVal
+				$toppingArr[index] = "1";												//$toppingArr[index]에 "1"
+			}
+		}																				// for-in ends
+		$('input[name=topping]').val($toppingArr.join(""));								//컨트롤러로 보낼 문자열 입력
+	} else {																			//else:초기 선택자가 checked가 아니면
+		for(var index in $toppingArr) {
+			if(index == refVal) {														//	if: index == refVal
+				$toppingArr[index] = "0";												//$toppingArr[index]에 "0"
+			}
+		}// for-in ends
+		$('input[name=topping]').val($toppingArr.join(""));								//컨트롤러로 보낼 문자열 입력
+	}
+	console.log($('input[name=topping]').val());//test
+});
+
+/* 채소 데이터 처리 */
+/* 각 야채들의 요구량을 숫자스트링으로 받아 처리, 나머지 버튼 중 하나를 누르면 '그대로'체크 해제 */
+// '그대로'눌렀을 때 default처리 필요
+$('.vegiRef').filter($('input[type=checkbox]')).change(function(){
+	if($(this).is(":checked")) {
+		for(var index in $vegiArr) {
+			$vegiArr[index] = "2"; 														//문자열용 배열 초기화
+//			var chgStr = "vegiRef[name="+(+index+1)+"]";								//The unary plus operator
+		}
+		$('input[name=vegi]').val($vegiArr.join(""));
+		console.log($('input[name=vegi]').val());										//컨트롤러로 보낼 문자열 입력
+	}
+});
 $('.vegiRef').filter($('input[type=radio]')).click(function(){
-	$('.vegiRef').filter($('input[type=checkbox]')).prop("checked",false);
+	$('.vegiRef').filter($('input[type=checkbox]')).prop("checked",false);				//'그대로'체크 해제
 	refName = $(this).attr('name');
 	for(var index in $vegiArr) {
 		if(index == refName -1) {
-			$vegiArr[index] = $(this).val();
+			$vegiArr[index] = $(this).val();											//문자열용 배열 입력
 		}
 	} // for-in ends
 	$('input[name=vegi]').val($vegiArr.join(""));
+	console.log($('input[name=vegi]').val());											//컨트롤러로 보낼 문자열 입력
 });
 
-/* 각종 메뉴 선택안할 시 */
-$('#topping input[value=선택안함]').change(function() {
-	if($(this).is(":checked")) {
-		$("input[name=topping]:checkbox").each(function() {
-			$(this).prop("checked", false);
-		});
-		$(this).prop("checked", true);
-		$(this).siblings().filter($('input[name=topping]')).attr("disabled",true);
-	} else {
-		$(this).siblings().filter($('input[name=topping]')).attr("disabled",false);
+/* 소스 데이터 처리 */
+$('input[name=sourceRef]').eq(0).change(function() {
+	if($(this).is(":checked")) {														//if:초기 선택자가 checked이면
+		$("input[name=sourceRef]:checkbox").each(function(index,item) {					//foreach 시작
+			$(this).prop("checked", false);												//foreach 선택자들의 선택 프로퍼티 비활성화
+			$sourceArr[index] = "0"; 													//문자열로 쓸 배열 초기화
+		});																				//foreach 끝
+		$(this).prop("checked", true);													//초기 선택자의 선택 프로퍼티 활성화
+		$(this).siblings().filter($('input[name=sourceRef]')).attr("disabled",true);	//초기선택자 제외 나머지 선택 비활성화
+		$('input[name=source]').val($sourceArr.join("")); 								//컨트롤러로 보낼 문자열 초기화
+		console.log($('input[name=source]').val());
+	} else {																			//else:초기 선택자가 checked가 아니면
+		$(this).siblings().filter($('input[name=sourceRef]')).attr("disabled",false);	//초기선택자 제외 나머지 선택 활성화	
 	}
 });
-$('#souce input[value=선택안함]').change(function() {
-	if($(this).is(":checked")) {
-		$("input[name=source]:checkbox").each(function() {
-			$(this).prop("checked", false);
-		});
-		$(this).prop("checked", true);
-		$(this).siblings().filter($('input[name=source]')).attr("disabled",true);
-	} else {
-		$(this).siblings().filter($('input[name=source]')).attr("disabled",false);
+$('input[name=sourceRef]:gt(0)').change(function(){									
+	refVal = $(this).val();																//초기선택자의 value
+	console.log(refVal);//test
+	if($(this).is(":checked")) {														//if:초기 선택자가 checked이면
+		for(var index in $sourceArr) {													//forin 시작($sourceArr사용)
+			if(index == refVal) {														//	if: index == refVal
+				$sourceArr[index] = "1";												//$toppingArr[index]에 "1"
+			}
+		}																				// for-in ends
+		$('input[name=source]').val($sourceArr.join(""));								//컨트롤러로 보낼 문자열 입력
+	} else {																			//else:초기 선택자가 checked가 아니면
+		for(var index in $sourceArr) {
+			if(index == refVal) {														//	if: index == refVal
+				$sourceArr[index] = "0";												//$sourceArr[index]에 "0"
+			}
+		}// for-in ends
+		$('input[name=source]').val($sourceArr.join(""));								//컨트롤러로 보낼 문자열 입력
+	}
+	console.log($('input[name=source]').val());//test
+});
+
+/* 사이드 데이터 처리 */
+$('input[name=sideRef]').eq(0).change(function() {
+	if($(this).is(":checked")) {														//if:초기 선택자가 checked이면
+		$("input[name=sideRef]:checkbox").each(function(index,item) {					//foreach 시작
+			$(this).prop("checked", false);												//foreach 선택자들의 선택 프로퍼티 비활성화
+			$sideArr[index] = "0"; 													//문자열로 쓸 배열 초기화
+		});																				//foreach 끝
+		$(this).prop("checked", true);													//초기 선택자의 선택 프로퍼티 활성화
+		$(this).siblings().filter($('input[name=sideRef]')).attr("disabled",true);	//초기선택자 제외 나머지 선택 비활성화
+		$('input[name=side]').val($sideArr.join("")); 								//컨트롤러로 보낼 문자열 초기화
+		console.log($('input[name=side]').val());
+	} else {																			//else:초기 선택자가 checked가 아니면
+		$(this).siblings().filter($('input[name=sideRef]')).attr("disabled",false);	//초기선택자 제외 나머지 선택 활성화	
 	}
 });
-$('#side input[value=선택안함]').change(function() {
-	if($(this).is(":checked")) {
-		$("input[name=side]:checkbox").each(function() {
-			$(this).prop("checked", false);
-		});
-		$(this).prop("checked", true);
-		$(this).siblings().filter($('input[name=side]')).attr("disabled",true);
-	} else {
-		$(this).siblings().filter($('input[name=side]')).attr("disabled",false);
+$('input[name=sideRef]:gt(0)').change(function(){									
+	refVal = $(this).val();																//초기선택자의 value
+	console.log(refVal);//test
+	if($(this).is(":checked")) {														//if:초기 선택자가 checked이면
+		for(var index in $sideArr) {													//forin 시작($sourceArr사용)
+			if(index == refVal) {														//	if: index == refVal
+				$sideArr[index] = "1";												//$toppingArr[index]에 "1"
+			}
+		}																				// for-in ends
+		$('input[name=side]').val($sideArr.join(""));								//컨트롤러로 보낼 문자열 입력
+	} else {																			//else:초기 선택자가 checked가 아니면
+		for(var index in $sideArr) {
+			if(index == refVal) {														//	if: index == refVal
+				$sideArr[index] = "0";												//$sourceArr[index]에 "0"
+			}
+		}// for-in ends
+		$('input[name=source]').val($sideArr.join(""));								//컨트롤러로 보낼 문자열 입력
 	}
+	console.log($('input[name=side]').val());//test
 });
+
 
 /* 샌드위치/샐러드 주재료 태그문자열 */
 tagSandwich = '<h3>메인재료</h3> \
@@ -140,6 +232,7 @@ tagSandwich = '<h3>메인재료</h3> \
 	<input type="radio" class="hide" id="쉬림프1" name="main" value="20"> \
 	<label for="쉬림프아보카도1"><img alt="쉬림프아보카도" src="/resources/img/sandwich/sandwich_pm11.jpg"></label> \
 	<input type="radio" class="hide" id="쉬림프아보카도1" name="main" value="21"> \
+	<input type="hidden" name="main" value=""> \
 	<h3>빵</h3> \
 	<span>15cm</span><input type="radio" name="is15" value="1" required><span>30cm</span><input type="radio" name="is15" value="0" required><br> \
 	<label for="허니오트"><img alt="허니오트" src="/resources/img/recipe/img_recipe_b01.jpg"></label> \
@@ -153,7 +246,8 @@ tagSandwich = '<h3>메인재료</h3> \
 	<label for="화이트"><img alt="화이트" src="/resources/img/recipe/img_recipe_b05.jpg"></label> \
 	<input type="radio" class="hide" id="화이트" name="bread" value="4"> \
 	<label for="플랫브레드"><img alt="플랫브레드" src="/resources/img/recipe/img_recipe_b06.jpg"></label> \
-	<input type="radio" class="hide" id="플랫브레드" name="bread" value="5">';
+	<input type="radio" class="hide" id="플랫브레드" name="bread" value="5"> \
+	<input type="hidden" name="bread" value="">';
 tagSalad = '<h3>메인재료</h3> \
 	<input type="hidden" name=is15 value="-1"><input type="hidden" name="bread" value="-1"> \
 	<label for="이탈리안비엠티2"><img alt="이탈리안비엠티" src="/resources/img/salad/salad_cl01.jpg"></label> \
@@ -199,4 +293,5 @@ tagSalad = '<h3>메인재료</h3> \
 	<label for="쉬림프2"><img alt="쉬림프" src="/resources/img/salad/salad_pm10.jpg"></label> \
 	<input type="radio" class="hide" id="쉬림프2" name="main" value="20"> \
 	<label for="쉬림프아보카도2"><img alt="쉬림프아보카도" src="/resources/img/salad/salad_pm11.jpg"></label> \
-	<input type="radio" class="hide" id="쉬림프아보카도2" name="main" value="21">';
+	<input type="radio" class="hide" id="쉬림프아보카도2" name="main" value="21"> \
+	<input type="hidden" name="main" value="">';

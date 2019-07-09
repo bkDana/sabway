@@ -24,10 +24,9 @@ var myform=new formtowizard({
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
 				<label for="샌드위치"><img alt="샌드위치"src="/resources/img//sandwich/sandwich_fl04.jpg"></label> 
-				<input type="radio" class="hide" id="샌드위치" name="isSaladRef" value="0"> 
+				<input type="radio" class="hide" id="샌드위치" name="isSalad" value="0"> 
 				<label for="샐러드"><img alt="샐러드" src="/resources/img/salad/salad_fl04.jpg"></label> 
-				<input type="radio" class="hide" id="샐러드" name="isSaladRef" value="1">
-				<input type="hidden" name="isSalad" value="">
+				<input type="radio" class="hide" id="샐러드" name="isSalad" value="1">
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>주 재료</legend>
@@ -48,23 +47,24 @@ var myform=new formtowizard({
 			<fieldset class="sectionwrap">
 				<legend>추가토핑</legend>
 				<label for="선택안함"><span>선택안함</span></label> 
-				<input type="checkbox" id="선택안함" name="topping" value="-1"> 
+				<input type="checkbox" id="선택안함" name="toppingRef" value="-1"> 
 				<label for="더블업"><img alt="더블업" src="/resources/img/topping/img_toppping_01.jpg"></label>
-				<input type="checkbox" class="hide" id="더블업" name="topping" value="0"> 
+				<input type="checkbox" class="hide" id="더블업" name="toppingRef" value="0"> 
 				<label for="쉬림프더블업"><img alt="쉬림프더블업" src="/resources/img/topping/img_toppping_03.jpg"></label>
-				<input type="checkbox" class="hide" id="쉬림프더블업" name="topping" value="1"> 
+				<input type="checkbox" class="hide" id="쉬림프더블업" name="toppingRef" value="1"> 
 				<label for="에그마요"><img alt="에그마요" src="/resources/img/topping/img_toppping_04.jpg"></label> 
-				<input type="checkbox" class="hide" id="에그마요" name="topping" value="2">
+				<input type="checkbox" class="hide" id="에그마요" name="toppingRef" value="2">
 				<label for="오믈렛"><img alt="오믈렛" src="/resources/img/topping/img_toppping_05.jpg"></label> 
-				<input type="checkbox" class="hide" id="오믈렛" name="topping" value="3">
+				<input type="checkbox" class="hide" id="오믈렛" name="toppingRef" value="3">
 				<label for="아보카도"><img alt="아보카도" src="/resources/img/topping/img_toppping_06.jpg"></label> 
-				<input type="checkbox" class="hide" id="아보카도" name="topping" value="4">
+				<input type="checkbox" class="hide" id="아보카도" name="toppingRef" value="4">
 				<label for="베이컨"><img alt="베이컨" src="/resources/img/topping/img_toppping_07.jpg"></label> 
-				<input type="checkbox" class="hide" id="베이컨" name="topping" value="5">
+				<input type="checkbox" class="hide" id="베이컨" name="toppingRef" value="5">
 				<label for="페퍼로니"><img alt="페퍼로니" src="/resources/img/topping/img_toppping_08.jpg"></label> 
-				<input type="checkbox" class="hide" id="페퍼로니" name="topping" value="6">
+				<input type="checkbox" class="hide" id="페퍼로니" name="toppingRef" value="6">
 				<label for="더블치즈"><img alt="더블치즈" src="/resources/img/topping/img_toppping_09.jpg"></label> 
-				<input type="checkbox" class="hide" id="더블치즈" name="topping" value="7">
+				<input type="checkbox" class="hide" id="더블치즈" name="toppingRef" value="7">
+				<input type="hidden" name="topping" value="">
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>오븐</legend>
@@ -129,70 +129,72 @@ var myform=new formtowizard({
 			<fieldset class="sectionwrap">
 				<legend>소스</legend>
 				<label for="선택안함"><span>선택안함</span></label> 
-				<input type="checkbox" id="선택안함" name="source" value="-1">
+				<input type="checkbox" id="선택안함" name="sourceRef" value="-1">
 				<label for="랜치"><img alt="랜치" src="/resources/img/recipe/img_recipe_s01.jpg"></label> 
-				<input type="checkbox" class="hide" id="랜치" name="source" value="0">
+				<input type="checkbox" class="hide" id="랜치" name="sourceRef" value="0">
 				<label for="마요"><img alt="마요" src="/resources/img/recipe/img_recipe_s02.jpg"></label> 
-				<input type="checkbox" class="hide" id="마요" name="source" value="1">
+				<input type="checkbox" class="hide" id="마요" name="sourceRef" value="1">
 				<label for="스윗어니언"><img alt="스윗어니언" src="/resources/img/recipe/img_recipe_s03.jpg"></label> 
-				<input type="checkbox" class="hide" id="스윗어니언" name="source" value="2"> 
+				<input type="checkbox" class="hide" id="스윗어니언" name="sourceRef" value="2"> 
 				<label for="허니머스타드"><img alt="허니머스타드" src="/resources/img/recipe/img_recipe_s04.jpg"></label>
-				<input type="checkbox" class="hide" id="허니머스타드" name="source" value="3"> 
+				<input type="checkbox" class="hide" id="허니머스타드" name="sourceRef" value="3"> 
 				<label for="스위트칠리"><img alt="스위트칠리" src="/resources/img/recipe/img_recipe_s05.jpg"></label>
-				<input type="checkbox" class="hide" id="스위트칠리" name="source" value="4">
+				<input type="checkbox" class="hide" id="스위트칠리" name="sourceRef" value="4">
 				<label for="핫칠리"><img alt="핫칠리" src="/resources/img/recipe/img_recipe_s06.jpg"></label> 
-				<input type="checkbox" class="hide" id="핫칠리" name="source" value="5">
+				<input type="checkbox" class="hide" id="핫칠리" name="sourceRef" value="5">
 				<label for="사우스웨스트"><img alt="사우스웨스트" src="/resources/img/recipe/img_recipe_s07.jpg"></label> 
-				<input type="checkbox" class="hide" id="사우스웨스트" name="source" value="6"> 
+				<input type="checkbox" class="hide" id="사우스웨스트" name="sourceRef" value="6"> 
 				<label for="머스타드"><img alt="머스타드" src="/resources/img/recipe/img_recipe_s08.jpg"></label> 
-				<input type="checkbox" class="hide" id="" name="source" value="7">
+				<input type="checkbox" class="hide" id="" name="sourceRef" value="7">
 				<label for="홀스래디쉬"><img alt="홀스래디쉬" src="/resources/img/recipe/img_recipe_s09.jpg"></label> 
-				<input type="checkbox" class="hide" id="홀스래디쉬" name="source" value="8"> 
+				<input type="checkbox" class="hide" id="홀스래디쉬" name="sourceRef" value="8"> 
 				<label for="사우전아일랜드"><img alt="사우전아일랜드" src="/resources/img/recipe/img_recipe_s10.jpg"></label>
-				<input type="checkbox" class="hide" id="사우전아일랜드" name="source" value="9"> 
+				<input type="checkbox" class="hide" id="사우전아일랜드" name="sourceRef" value="9"> 
 				<label for="이탈리안드레싱"><img alt="이탈리안드레싱" src="/resources/img/recipe/img_recipe_s11.jpg"></label>
-				<input type="checkbox" class="hide" id="이탈리안드레싱" name="source" value="10"> 
+				<input type="checkbox" class="hide" id="이탈리안드레싱" name="sourceRef" value="10"> 
 				<label for="올리브오일"><img alt="올리브오일" src="/resources/img/recipe/img_recipe_s12.jpg"></label>
-				<input type="checkbox" class="hide" id="올리브오일" name="source" value="11"> 
+				<input type="checkbox" class="hide" id="올리브오일" name="sourceRef" value="11"> 
 				<label for="레드와인식초"><img alt="레드와인식초" src="/resources/img/recipe/img_recipe_s13.jpg"></label>
-				<input type="checkbox" class="hide" id="레드와인식초" name="source" value="12"> 
+				<input type="checkbox" class="hide" id="레드와인식초" name="sourceRef" value="12"> 
 				<label for="스모크BBQ"><img alt="스모BBQ" src="/resources/img/recipe/img_recipe_s14.jpg"></label>
-				<input type="checkbox" class="hide" id="스모크BBQ" name="source" value="13"> 
+				<input type="checkbox" class="hide" id="스모크BBQ" name="sourceRef" value="13"> 
 				<label for="소금"><img alt="소금" src="/resources/img/recipe/img_recipe_s15.jpg"></label> 
-				<input type="checkbox" class="hide" id="소금" name="source" value="14">
+				<input type="checkbox" class="hide" id="소금" name="sourceRef" value="14">
 				<label for="후추"><img alt="후추" src="/resources/img/recipe/img_recipe_s16.jpg"></label> 
-				<input type="checkbox" class="hide" id="후추" name="source" value="15">
+				<input type="checkbox" class="hide" id="후추" name="sourceRef" value="15">
+				<input type="hidden" name="source" value="">
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>사이드메뉴</legend>
 				<label for="선택안함"><span>선택안함</span></label> 
-				<input type="checkbox" id="선택안함" name="side" value="-1">
+				<input type="checkbox" id="선택안함" name="sideRef" value="-1">
 				<label for="브로콜리체다수프수프"><img alt="브로콜리체다수프" src="/resources/img/side/img_sides_01.jpg"></label> 
-				<input type="checkbox" class="hide" id="브로콜리체다수프" name="side" value="0">
+				<input type="checkbox" class="hide" id="브로콜리체다수프" name="sideRef" value="0">
 				<label for="베이크포테이토수프"><img alt="베이크포테이토수프" src="/resources/img/side/img_sides_02.jpg"></label> 
-				<input type="checkbox" class="hide" id="베이크포테이토수프" name="side" value="1">
+				<input type="checkbox" class="hide" id="베이크포테이토수프" name="sideRef" value="1">
 				<label for="더블초코칩쿠키"><img alt="더블초코칩쿠키" src="/resources/img/side/img_sides_03.jpg"></label> 
-				<input type="checkbox" class="hide" id="더블초코칩쿠키" name="side" value="2">
+				<input type="checkbox" class="hide" id="더블초코칩쿠키" name="sideRef" value="2">
 				<label for="초코칩쿠키"><img alt="초코칩쿠키" src="/resources/img/side/img_sides_04.jpg"></label> 
-				<input type="checkbox" class="hide" id="초코칩쿠키" name="side" value="3">
+				<input type="checkbox" class="hide" id="초코칩쿠키" name="sideRef" value="3">
 				<label for="오트밀레이즌"><img alt="오트밀레이즌" src="/resources/img/side/img_sides_05.jpg"></label> 
-				<input type="checkbox" class="hide" id="오트밀레이즌" name="side" value="4">
+				<input type="checkbox" class="hide" id="오트밀레이즌" name="sideRef" value="4">
 				<label for="라즈베리치즈케익"><img alt="라즈베리치즈케익" src="/resources/img/side/img_sides_06.jpg"></label> 
-				<input type="checkbox" class="hide" id="라즈베리치즈케익" name="side" value="5">
+				<input type="checkbox" class="hide" id="라즈베리치즈케익" name="sideRef" value="5">
 				<label for="화이트초코마카다미아"><img alt="화이트초코마카다미아" src="/resources/img/side/img_sides_07.jpg"></label> 
-				<input type="checkbox" class="hide" id="화이트초코마카다미아" name="side" value="6">
+				<input type="checkbox" class="hide" id="화이트초코마카다미아" name="sideRef" value="6">
 				<label for="칩스"><img alt="칩스" src="/resources/img/side/img_sides_08.jpg"></label> 
-				<input type="checkbox" class="hide" id="칩스" name="side" value="7">
+				<input type="checkbox" class="hide" id="칩스" name="sideRef" value="7">
 				<label for="웨지포테이토"><img alt="웨지포테이토" src="/resources/img/side/img_sides_09.jpg"></label> 
-				<input type="checkbox" class="hide" id="웨지포테이토" name="side" value="8">
+				<input type="checkbox" class="hide" id="웨지포테이토" name="sideRef" value="8">
 				<label for="탄산음료"><img alt="탄산음료" src="/resources/img/side/img_drink_01.jpg"></label> 
-				<input type="checkbox" class="hide" id="탄산음료" name="side" value="9">
+				<input type="checkbox" class="hide" id="탄산음료" name="sideRef" value="9">
+				<input type="hidden" name="side" value="">
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>세트</legend>
-				<label for="단품"><span>단품</span></label><input type="radio" id="단품" name="whichSet" value="-1">
-				<label for="감자칩세트"><span>감자칩세트</span></label><input type="radio" id="감자칩세트" name="whichSet" value="0"> 
-				<label for="쿠키세트"><span>쿠키세트</span></label><input type="radio" id="쿠키세트" name="whichSet" value="1">
+				<label for="단품"><span>단품</span></label><input type="radio" id="단품" name="set" value="-1">
+				<label for="감자칩세트"><span>감자칩세트</span></label><input type="radio" id="감자칩세트" name="set" value="0"> 
+				<label for="쿠키세트"><span>쿠키세트</span></label><input type="radio" id="쿠키세트" name="set" value="1">
 			</fieldset>
 			<div id="test" style="width:100%; height:150px; background-color:red;">
 				<h3>장바구니 영역</h3>
@@ -206,6 +208,6 @@ var myform=new formtowizard({
 	</div>
 </section>
 <!-- 이 스크립트는 아래에 있어야 작동함 -->
-<script src="/resources/js/hor1.js" type="text/javascript"></script> 
+<script src="/resources/js/hor.js" type="text/javascript"></script> 
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
