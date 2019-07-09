@@ -75,10 +75,10 @@
 							<c:if test="${not empty iv.ingreFilepath }">
 								<span id="nowFile"><%-- ${qna.boardFilename } --%> <img src="/resources/upload/ingredients/${iv.ingreFilepath}" style="width:100px;"><button type="button" id="fileDelBtn" class="file-del-btn delFile">삭제</button>
 								<input type="hidden" name="deleteFile" ></span>
-								<span id="upload"><input type="file" name="filepath"><p class="comment">(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p></span>
+								<span id="upload"><input type="file" name="filepath" id="filepath1"><p class="comment">(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p></span>
 							</c:if>
 							<c:if test="${empty iv.ingreFilepath }">
-								<input type="file" name="filepath"><p class="comment" >(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p>
+								<input type="file" name="filepath" id="filepath2"><p class="comment">(※ 파일 크기는 최대 10MB까지만 가능합니다.)</p>
 							</c:if>
 						</td>
 					</tr>
@@ -94,7 +94,7 @@
 					</tr>
 				</table>
 				<div class="common-tbl-btn-group">
-					<button type="submit" class="btn-style1">재료 수정</button>
+					<button type="submit" class="btn-style1" id="submit-btn">재료 수정</button>
 					<button type="button" class="btn-style2" onclick="history.back();">취소</button>
 				</div>
 			</form>
@@ -118,6 +118,23 @@ $(document).ready(function(){
 			$('input[name=deleteFile]').val('1');
 			$('#nowFile').hide();
 			$('#upload').show();
+		}
+	});
+	
+	/* 파일 여부 체크 */
+	$("#submit-btn").click(function(){
+		if($('input[name=oldFilepath]').val()!=''){
+			var filepath1 = $("#filepath1").val();
+			if(filepath1==""){
+				$("#filepath1").focus();
+				return false;
+			}
+		}else{
+			var filepath2 = $("#filepath2").val();
+			if(filepath2==""){
+				$("#filepath2").focus();
+				return false;
+			}
 		}
 	});
 });
