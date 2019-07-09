@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.subway.common.SearchVO;
+import kr.co.subway.managerOrder.vo.StockVO;
 import kr.co.subway.stock.vo.stockViewVO;
 import kr.co.subway.stock.dao.StockDao;
+import kr.co.subway.stock.vo.HistoryVO;
 import kr.co.subway.stock.vo.StockListVO;
 
 @Service
@@ -51,6 +53,16 @@ public class StockService {
 
 		StockListVO list = new StockListVO(stockList, pageNavi);
 		return list;
+	}
+
+	public int modifyStock(StockVO stock) {
+		 int result = dao.modifyStock(stock);
+		 if(result==1) {
+			 String hContent = String.valueOf(stock.getmItemAmount() - stock.getmItemIdx());
+			 HistoryVO history = new HistoryVO(0, 0, stock.getmStockIdx(), hContent, null);
+			 result = dao.addHistory(history);
+		 }
+		 return result;
 	}
 
 }

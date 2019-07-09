@@ -34,6 +34,7 @@
 	            }
 				    $("[name=mgrPost]").val(data.zonecode);
 	            	$("[name=mgrAddrCode]").val(data.sigunguCode);
+	            	$("[name=mgrName]").val('SabWay '+data.bname+'점');
 	        }
 	    }).open({
 		    popupName : 'postCodePopup',//중복 생성 방지
@@ -53,18 +54,17 @@
 				<input type="hidden" name="mgrStatus" value="1"><!-- 영업상태: 준비중(Default) -->
 				<input type="hidden" name="mgrLevel" value="0"><!-- 0: 가맹점 고정 -->
 				<input type="hidden" name="applyName" value="${applyName }"><!-- 신청자 이름 전달용 -->
-				<input type="hidden" name="mgrAddrType" value="${mgrAddrType }"><!-- 지역 전달 -->
 				<input type="hidden" name="mgrAddrCode">
-				<table class="comm-tbl">	
+				<table class="comm-tbl">
 					<tr>
 						<th>이름</th>
 						<!-- 아이디 뒤에 정해놓은 지역코드 + -->
-						<td><input type="text" name="mgrBossName" value="${mgrBossName }"></td>
+						<td><input type="text" name="mgrBossName" value="${applyName }" readonly></td>
 					</tr>
 					<tr>
 						<th>아이디</th>
 						<!-- 아이디 뒤에 정해놓은 지역코드 + -->
-						<td><input type="text" name="mgrId" value="manager${mgrAddrType }"></td>
+						<td><input type="text" name="mgrId" value="manager" readonly></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
@@ -73,7 +73,7 @@
 					</tr>
 					<tr>
 						<th>가맹점 이름</th>
-						<td><input type="text" name="mgrName" value="SabWay ${subAddr}점"></td>
+						<td><input type="text" name="mgrName" readonly></td>
 					</tr>
 					<tr>
 						<th>전화번호</th>

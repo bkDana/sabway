@@ -8,7 +8,7 @@
 			m_stock_tbl mst, ingredients i 
 		where 
 			mst.ITEM_IDX=i.INGRE_IDX 
-		<if test="searchType!=null and searchType!=''">
+		<if test="searchType!=null and searchType!='' and searchVal!=null and searchVal!=''">
 			<if test="searchType.equals('name')">
 				and LOWER(i.ingre_label) like LOWER('%'||#{searchVal}||'%')
 			</if>
@@ -38,7 +38,7 @@
 	  				s.* 
 	  			from (select * from m_stock_tbl mst, ingredients i 
 						where mst.ITEM_IDX=I.INGRE_IDX 
-	  				<if test="searchType!=null and searchType!=''">
+	  				<if test="searchType!=null and searchType!='' and searchVal!=null and searchVal!=''">
 						<if test="searchType.equals('name')">
 							and LOWER(i.ingre_label) like LOWER('%'||#{searchVal}||'%')
 						</if>	
@@ -59,4 +59,18 @@
   		where 
   			rnum between #{start} and #{end}
   	</select>
+  	<update id="modifyStock" parameterType="stock">
+  		update
+  			m_stock_tbl
+  		set
+  			m_stock = #{mItemAmount}
+  		where
+  			m_stock_idx = #{mStockIdx}
+  			
+  	</update>
+  	<insert id="addHistory" parameterType="history">
+  		insert into
+  			stock_history_tbl
+  		values(stock_history_seq.nextval,#{hStockIdx},#{hContent},sysdate)
+  	</insert>
 </mapper>

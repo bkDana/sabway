@@ -59,7 +59,7 @@ $(document).ready(function(){
 		    "<input class='submit-file' type='text' id='fileName" + rowIndex + "' readonly='readonly'>" +
 			"<label for='editor-file-upload" + rowIndex + "'>" +
 			"<img width='30px' height='30px' src='/resources/img/plusimg.PNG'></label>" +
-			"<input type='file' class='editor-file-upload' id='editor-file-upload"+rowIndex+"' name='filename"+ rowIndex + "' size=25 " +
+			"<input type='file' class='editor-file-upload' id='editor-file-upload"+rowIndex+"' name='fileName' size=25 " +
 			"onchange='onChangeImg(this,"+rowIndex+")'"
 			+"></td>" +
 			"<td colspan='1'><input type='button' value='삭제' onClick='deleteFile(this,"+rowIndex+")' style='cursor:hand'></td></tr>";
@@ -83,7 +83,7 @@ $(document).ready(function(){
 			    "<input class='submit-file' type='text' id='fileName" + rowIndex + "' readonly='readonly'>" +
 				"<label for='editor-file-upload" + rowIndex + "'>" +
 				"<img width='30px' height='30px' src='/resources/img/plusimg.PNG'></label>" +
-				"<input type='file' class='editor-file-upload' id='editor-file-upload"+rowIndex+"' name='filename"+ rowIndex + "' size=25 " +
+				"<input type='file' class='editor-file-upload' id='editor-file-upload"+rowIndex+"' name='fileName' size=25 " +
 				"onchange='onChangeImg(this,"+rowIndex+")'"
 				+"></td>" +
 				"<td colspan='1'><input type='button' value='삭제' onClick='deleteFile(this,"+rowIndex+")' style='cursor:pointer'></td></tr>";
@@ -134,9 +134,8 @@ $(document).ready(function(){
 				$(img).parent().prev().attr("src","/resources/img/halfstar.png");
 				var index = $('area').index(img);
 				if(separator == 1){
-					$("#starpoint1").html("&nbsp;&nbsp;&nbsp;"+(index+1)/2);
+					$("#starpoint1").html((index+1)/2);
 					clickCheck1 = 1;
-					$("#reviewStarpoint1").val((index+1)/2);
 				}
 				optionStatus1=0;
 			}
@@ -150,9 +149,8 @@ $(document).ready(function(){
 			$(img).parent().prev().attr("src","/resources/img/halfstar.png");
 			var index = $('area').index(img);
 			if(separator == 2){
-				$("#starpoint2").html("&nbsp;&nbsp;&nbsp;"+(index-9)/2);
+				$("#starpoint2").html((index-9)/2);
 				clickCheck2 = 1;
-				$("#reviewStarpoint2").val((index+1)/2);
 			}
 			optionStatus2=0;
 		}
@@ -169,7 +167,7 @@ $(document).ready(function(){
 					$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
 					$(img).parent().prev().attr("src","/resources/img/halfstar.png");
 					var index = $('area').index(img);
-					$("#starpoint1").html("&nbsp;&nbsp;&nbsp;"+(index+1)/2);
+					$("#starpoint1").html((index+1)/2);
 				}
 			}
 		}
@@ -182,7 +180,7 @@ $(document).ready(function(){
 				$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
 				$(img).parent().prev().attr("src","/resources/img/halfstar.png");
 				var index = $('area').index(img);
-				$("#starpoint2").html("&nbsp;&nbsp;&nbsp;"+(index-9)/2);
+				$("#starpoint2").html((index-9)/2);
 			}
 		}
 	}
@@ -225,9 +223,8 @@ $(document).ready(function(){
 				$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
 				var index = $('area').index(img);
 				if(separator == 1){
-					$("#starpoint1").html("&nbsp;&nbsp;&nbsp;"+(index+1)/2);
+					$("#starpoint1").html((index+1)/2);
 					clickCheck1 = 1;
-					$("#reviewStarpoint1").val((index+1)/2);
 				}
 				optionStatus1 = 0;
 			}
@@ -240,9 +237,8 @@ $(document).ready(function(){
 			$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
 			var index = $('area').index(img);
 			if(separator == 2){
-				$("#starpoint2").html("&nbsp;&nbsp;&nbsp;"+(index-9)/2);
+				$("#starpoint2").html((index-9)/2);
 				clickCheck2 = 1;
-				$("#reviewStarpoint2").val((index+1)/2);
 			}
 			optionStatus2 = 0;
 		}
@@ -256,7 +252,7 @@ $(document).ready(function(){
 					$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
 					$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
 					var index = $('area').index(img);
-					$("#starpoint1").html("&nbsp;&nbsp;&nbsp;"+(index+1)/2);
+					$("#starpoint1").html((index+1)/2);
 				}
 			}
 		}
@@ -268,7 +264,7 @@ $(document).ready(function(){
 				$(img).parent().nextAll().filter('.star-img'+separator).attr("src","/resources/img/emptystar.png");
 				$(img).parent().prevAll().filter('.star-img'+separator).attr("src","/resources/img/fullstar.png");
 				var index = $('area').index(img);
-				$("#starpoint2").html("&nbsp;&nbsp;&nbsp;"+(index-9)/2);
+				$("#starpoint2").html((index-9)/2);
 			}
 		}
 	}
@@ -323,8 +319,10 @@ $(document).ready(function(){
 			var keyword = newContent[0]; 
 			content = content.replace(keyword,"changeIMG");
 		}
-		$('#testContent').html(content);
+		$('#reviewContent').val(content);
 		$('#reviewFilename').val(filenameText);
+		$('#reviewStarpoint1').val($('#starpoint1').text());
+		$('#reviewStarpoint2').val($('#starpoint2').text());
 		var form = document.write;
 		form.submit();
 	}

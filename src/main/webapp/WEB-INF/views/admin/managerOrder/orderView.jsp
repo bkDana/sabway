@@ -30,18 +30,18 @@
 					<th>발주 등록일</th><td>${order.mOrderDate }</td>
 				</tr>
 				<tr>
-					<th>도착(희망?)일</th><td>${order.mOrderDelDate }</td>
+					<th>희망 배송일</th><td>${order.mOrderDelDate }</td>
 				</tr>
 			</table>
 			<br><br><br><br><br><br>
-			<p class="sub-title">물품 내역</p>
+			<p class="sub-title">발주 내역</p>
 			<table class="comm-tbl">
 				<colgroup>
 					<col width="80%">
 					<col width="20%">
 				</colgroup>
 				<tr>
-					<th>물품명</th><th>단위별 수량</th>
+					<th>재료명</th><th>단위별 수량</th>
 				</tr>
 				<c:forEach items="${order.itemList }" var="item">
 					<tr>
@@ -52,8 +52,12 @@
 			<div class="common-tbl-btn-group">
 				<button class="btn-style2" type="button" onclick="history.back();">뒤로가기</button>
 				<c:if test="${order.mOrderState eq 1}">
-					<button class="btn-style3" type="button" onclick="update('${order.mOrderNo}',4)">발주취소</button><!-- 가맹점 회원만 가능해야함 -->
-					<button class="btn-style1" type="button" onclick="update('${order.mOrderNo}',2);">출고처리</button><!-- 최고관리자만 가능해야함 -->
+					<c:if test="${sessionScope.mgr.mgrLevel eq 0 }">
+						<button class="btn-style3" type="button" onclick="update('${order.mOrderNo}',4)">발주취소</button><!-- 가맹점 회원만 가능 -->
+					</c:if>
+					<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
+						<button class="btn-style1" type="button" onclick="update('${order.mOrderNo}',2);">출고처리</button><!-- 최고관리자만 가능 -->
+					</c:if>
 				</c:if>
 			</div>
 	</div>

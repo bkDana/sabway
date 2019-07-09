@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
 <style>
-	.move-one-notice:hover{
+	.move-one-review:hover{
 		cursor: pointer;
 		color: #ffce32;
 	}
@@ -19,26 +19,28 @@
 			<table class="comm-tbl">
 			<colgroup>
 				<col width="15%">
+				<col width="15%">
 				<col width="/">
 				<col width="15%">
 			</colgroup>
 				<tr>
-					<th>카테고리</th>
+					<th>번호</th>
+					<th>작성자</th>
 					<th>제목</th>
 					<th>작성일</th>
 				</tr>
 				
-			<c:forEach items="${noticeList}" var="notice">
+			<c:forEach items="${reviewList}" var="review">
 				<tr>
-					<td>${notice.noticeCategory }</td>
-					<td style="display:none;">${notice.noticeNo }</td>
-					<td class="move-one-notice">${notice.noticeTitle }</td>
-					<td>${notice.noticeDate }</td>
+					<td>${review.reviewNo }</td>
+					<td>${review.reviewWriter }</td>
+					<td class="move-one-review">${review.reviewTitle }</td>
+					<td>${review.reviewDate }</td>
 				</tr>
 			</c:forEach>
 			
 			</table>
-			<button class="btn-style2 insert-notice">공지사항 작성하기</button>
+			<button class="btn-style2 insert-review">리뷰 작성하기</button>
 			<%-- <c:if test="${sessionScope.customer.customerId eq 'admin' }">
 				<div class="common-tbl-btn-group">
 					<button class="btn-style2 insert-notice">공지사항 작성하기</button>
