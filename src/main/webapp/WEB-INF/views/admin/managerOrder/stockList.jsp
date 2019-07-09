@@ -19,7 +19,7 @@
 					<option value="cat">카테고리</option>
 				</select>
 				<%-- <input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word" value="${search.searchVal }"> --%>
-				<button type="submit" class="bbs-search-btn" title="검색">검색</button>
+				<button type="submit" class="bbs-search-btn" title="검색"><img src="/resources/img/icon_search.png"></button>
 				<!-- &nbsp;<button type="button" onclick="location.href='/managerOrder/orderList.do'" class="bbs-search-btn" title="초기화">초기화</button> -->
 			</form>
 		</div>
@@ -41,10 +41,14 @@
 						<img src="/resources/upload/ingredients/${stock.ingreFilepath }" width="150px" height="150px"><br>
 					</c:if>
 					</span>
-					<!-- <span><img src="/resources/img/sandwich.png" width="150px" height="150px"></span> -->
-					<span>${stock.ingreLabel }</span>
-					<span><input type="text" class="short" value="${stock.mStock }" readonly="readonly"> ${stock.ingreUnit }<c:if test="${empty stock.ingreUnit }">개</c:if></span>
 				</label>
+					<span>${stock.ingreLabel }</span>
+					<span>
+						<input type="text" class="short" value="${stock.mStock }" data-idx="${stock.mStockIdx }" data-pre="${stock.mStock }" > ${stock.ingreUnit }<c:if test="${empty stock.ingreUnit }">개</c:if>
+						<button type="button" class="update-btn" >수정</button>
+					</span>
+					<span><button type="button" class="detail-btn" onclick="location.href='/managerOrder/stockHistory.do?no=${stock.mStockIdx }';">상세</button></span>
+				
 			</li>
 			</c:forEach>
 		</ul>
@@ -56,7 +60,40 @@
 	</div>
 </section>
 <script>
+	
+$(function(){
+	/* 수량 수정 */
+	$('.update-btn').on('click',function(){
+		var mStockIdx = $(this).siblings('input').data('idx');
+		var mItemAmount = $(this).siblings('input').val();
+		var mItemIdx = $(this).siblings('input').attr('data-pre');//기존 재고
 
+		if(Number(mItemAmount)>=Number(mItemIdx)){
+			alert('수량을 확인하세요');
+			return;
+		}
+		
+		var $my = $(this);
+		$.ajax({
+			url : '/managerOrder/modifyStock.do',
+			data : {mStockIdx:mStockIdx, mItemAmount:mItemAmount, mItemIdx:mItemIdx},
+			success : function(data){
+				if(data==1){
+					$my.siblings('input').attr('data-pre',mItemAmount);
+					alert('재고가 수정되었습니다');
+				}else{
+					alert('재고 수정에 실패했습니다. 관리자에게 문의하세요.');
+				}
+			},
+			error : function(){
+				console.log('실패');
+			}
+		});
+		
+		
+	});
+
+});
 	/* 검색 타입 고정 */
 	var searchType = $('select[name=searchType]').data('val');
 	$('select[name=searchType]').children('option').each(function(){
@@ -87,10 +124,10 @@
 		if(value=='cat'){
 			$('input[name=searchVal]').remove();
 			$.ajax({
-				url : '/ingreType.do',
+				url : '/ingreManage/ingreType.do',
 				success : function(data){
 					var $sel = $('<select name="searchVal">');
-					
+					$sel.append('<option value="">전체</option>');
 					for(var i=0;i<data.length;i++){
 						var chk = '';
 						if(search==data[i]){
@@ -109,7 +146,7 @@
 			
 		}else{
 			$('select[name=searchVal]').remove();
-			$('select[name=searchType]').after(' <input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word">');
+			$('select[name=searchType]').after(' <input placeholder="검색어를 입력하세요." type="search" name="searchVal" class="search-word" value="'+search+'">');
 		}
 	}
 	

@@ -27,45 +27,58 @@
 					<option value="3">도착</option>
 					<option value="4">취소</option>
 				</select>
+				<c:if test="${sessionScope.mgr.mgrLevel eq 0 }">
+					<button type="submit" class="bbs-search-btn" title="검색"><img src="/resources/img/icon_search.png"></button>
+					<button type="button" onclick="location.href='/managerOrder/orderList.do'" class="bbs-search-btn" title="초기화">초기화</button>
+				</c:if>
 				<br><br>
-				<select name="searchType" data-val="${search.searchType }">
-					<option value="name">지점명</option>
-					<option value="">뭘해야될까?</option>
-				</select>
-				<input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word" value="${search.searchVal }">
-				<button type="submit" class="bbs-search-btn" title="검색">검색</button>
-				&nbsp;<button type="button" onclick="location.href='/managerOrder/orderList.do'" class="bbs-search-btn" title="초기화">초기화</button>
+				<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
+					<select name="searchType" data-val="${search.searchType }">
+						<option value="name">지점명</option>
+						<option value="">뭘해야될까?</option>
+					</select>
+					<input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word" value="${search.searchVal }">
+				
+					<button type="submit" class="bbs-search-btn" title="검색"><img src="/resources/img/icon_search.png"></button>
+					<button type="button" onclick="location.href='/managerOrder/orderList.do'" class="bbs-search-btn" title="초기화">초기화</button>
+				</c:if>
 			</form>
 		</div>
 		<br>
-		<p>
+		<p class="order-list-comment">
+			<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
 			※ 희망배송일 오전 8시에 출고완료 상태인 발주건은 도착으로 자동 상태변경됩니다. 
 			수동으로 변경하기-> <a href="/managerOrder/test.do">수동으로 재고 추가</a>
+			</c:if>
 			<select id="order" data-val="${search.orderBy }">
-				<option value="new">최신순</option>
+				<option value="new">최신등록순</option>
 				<option value="del">배송일순</option>
-				<option value="store">매장별</option>
+				<c:if test="${sessionScope.mgr.mgrLevel eq 1 }"><option value="store">매장별</option></c:if>
 			</select>
 		</p>
 		<table class="comm-tbl type2">
 			<colgroup>
 				<col width="3%">
 				<col width="5%">
-				<col width="20%">
+				<c:if test="${sessionScope.mgr.mgrLevel eq 1 }"><col width="20%"></c:if>
 				<col width="10%">
-				<col width="37%">
+				<col width="">
 				<col width="15%">
 				<col width="10%">
 			</colgroup>
 			<tr>
-				<th><input type="checkbox" class="allcbox"></th><th>번호</th><th>지점명</th><th>희망배송일</th><th>상품</th><th>등록일</th><th>상태</th>
+				<th><input type="checkbox" class="allcbox"></th><th>번호</th>
+				<c:if test="${sessionScope.mgr.mgrLevel eq 1 }"><th>지점명</th></c:if>
+				<th>희망배송일</th><th>상품</th><th>등록일</th><th>상태</th>
 			</tr>
 			<c:if test="${empty list.orderList }">
-				<tr><td colspan="7">등록된 발주내역이 없습니다.</td></tr>
+				<tr><td colspan="7">검색 결과가 없습니다.</td></tr>
 			</c:if>
 			<c:forEach items="${list.orderList }" var="order">
 				<tr>
-					<td><input type="checkbox" class="cbox"></td><td>${order.rnum }</td><td>${order.mgrName }</td><td>${order.mOrderDelDate }</td>
+					<td><input type="checkbox" class="cbox"></td><td>${order.rnum }</td>
+					<c:if test="${sessionScope.mgr.mgrLevel eq 1 }"><td>${order.mgrName }</td></c:if>
+					<td>${order.mOrderDelDate }</td>
 					<td onclick="location.href='/managerOrder/orderView.do?no=${order.mOrderNo}';" style="cursor:pointer;">${order.mOrderTitle }</td><td>${order.mOrderDate }</td>
 					<td>
 						<c:if test="${order.mOrderState eq 1}"><span class="state-reg">접수완료</span></c:if>

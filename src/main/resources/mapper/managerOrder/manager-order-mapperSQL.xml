@@ -9,16 +9,16 @@
 	  	where 
 	  		mot.m_order_manager_id = m.mgr_id
 	  	<if test="startDay!=null and startDay!=''">
-			and mot.m_order_date>#{startDay}
+			and mot.m_order_date > #{startDay}
 		</if>
 		<if test="endDay!=null and endDay!=''">
 			and TO_CHAR(m_order_date,'YYYY-MM-DD') <![CDATA[ < ]]>= #{endDay}
 		</if>
 		<if test="delDay!=null and delDay!=''">
-			and mot.m_order_del_date=#{delDay}
+			and mot.m_order_del_date = #{delDay}
 		</if>
 		<if test="state!=0">
-			and mot.m_order_state=#{state}
+			and mot.m_order_state = #{state}
 		</if>
 		<if test="searchType != null and searchType != ''">
 			<if test="searchType.equals('name')">
@@ -50,16 +50,16 @@
 	  			from (select * from m_order_tbl mot, manager m
 	  			where mot.m_order_manager_id = m.mgr_id
 	  				<if test="startDay!=null and startDay!=''">
-						and mot.m_order_date>#{startDay}
+						and mot.m_order_date > #{startDay}
 					</if>
 					<if test="endDay!=null and endDay!=''">
 						and TO_CHAR(m_order_date,'YYYY-MM-DD') <![CDATA[ < ]]>= #{endDay}
 					</if>
 					<if test="delDay!=null and delDay!=''">
-						and mot.m_order_del_date=#{delDay}
+						and mot.m_order_del_date = #{delDay}
 					</if>
 					<if test="state!=0">
-						and mot.m_order_state=#{state}
+						and mot.m_order_state = #{state}
 					</if>	
 					<if test="searchType != null and searchType != ''">
 						<if test="searchType.equals('name')">
@@ -141,19 +141,11 @@
   		update 
   			m_order_tbl 
   		set 
-  			m_order_state=#{mOrderState}
+  			m_order_state = #{mOrderState}
   		where 
-  			m_order_no=#{mOrderNo}
+  			m_order_no = #{mOrderNo}
   	</update>
-  	<update id="deliveryEnd" parameterType="search">
-  		update 
-  			m_order_tbl 
-  		set 
-  			m_order_state=3
-  		where 
-  			m_order_del_date = #{delDay}
-  			and m_order_state=2
-  	</update>
+  	
   	<select id="delStock" parameterType="search" resultType="stock">
   		select 
   			m_order_manager_id as mOrderManagerId,
@@ -164,7 +156,8 @@
   		where 
             mot.m_order_no = mit.m_order_no
   			and m_order_del_date <![CDATA[ < ]]>= #{delDay}
-  			and m_order_state=2
+  			<!--and m_order_del_date = #{delDay}-->
+  			and m_order_state = 2
   	</select>
   	<select id="findStock" parameterType="stock" resultType="stock">
   		select
@@ -182,8 +175,17 @@
   		update 
   			m_stock_tbl 
   		set 
-  			m_stock=m_stock+#{mItemAmount}
+  			m_stock = m_stock + #{mItemAmount}
   		where 
   			m_stock_idx = #{mStockIdx}
+  	</update>
+  	<update id="deliveryEnd" parameterType="search">
+  		update 
+  			m_order_tbl 
+  		set 
+  			m_order_state = 3
+  		where 
+  			m_order_del_date <![CDATA[ < ]]>= #{delDay}
+  			and m_order_state = 2
   	</update>
 </mapper>

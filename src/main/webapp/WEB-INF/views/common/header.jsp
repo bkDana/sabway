@@ -21,6 +21,19 @@
 <title>진짜 메인</title>
 </head>
 <body>
+	
+	<div class="banner">
+		<button type="button" class="close-btn"><img src="/resources/img/main_top_line_banner_closebtn.png" ></button>
+		<a href="#">
+			<img src="/resources/img/써브웨이_띠배너_PC_1920x140_20190531064940182.jpg" width="100%" style="min-height:93px;">
+		</a>
+	</div>
+	<script>
+		$('.close-btn').click(function(){
+			console.log('클릭');
+			$('.banner').hide();
+		});
+	</script>
 	<header id="header">
 		<div class="main-header">
 		</div>

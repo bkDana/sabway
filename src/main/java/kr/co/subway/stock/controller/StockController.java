@@ -1,43 +1,44 @@
 package kr.co.subway.stock.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 
 import kr.co.subway.common.SearchVO;
-import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.manager.vo.Mgr;
+import kr.co.subway.managerOrder.vo.StockVO;
 import kr.co.subway.stock.service.StockService;
+import kr.co.subway.stock.vo.HistoryVO;
 import kr.co.subway.stock.vo.StockListVO;
-import kr.co.subway.stock.vo.stockViewVO;
 
 @Controller
+@RequestMapping("/managerOrder")
 public class StockController {
 	
 	@Autowired
 	private StockService service;
 	
-	@RequestMapping("/managerOrder/stockList.do")
+	@RequestMapping("/stockList.do")
 	public String stockList(Model model, HttpSession session, HttpServletRequest request, SearchVO search) {
-		
-		
+
 		if(session.getAttribute("mgr")!=null) {
-			//id = ((Mgr)session.getAttribute("mgr")).getMgrId();//TODO 여기는 나중에 관리자 id로 바꿔서 받아와야함
 			search.setMgrId(((Mgr)session.getAttribute("mgr")).getMgrId());
 		}else {
-			//id = "admin";
-			search.setMgrId("jy");
+			search.setMgrId("jy");//임시 아이디로 설정
 		}
-		
-		
-		
 		
 		if(search.getReqPage()==0) {
 			search.setReqPage(1);
@@ -49,5 +50,24 @@ public class StockController {
 		
 		return "admin/managerOrder/stockList";
 	}
+	
+	@RequestMapping("/stockHistory.do")
+	public String stockHistory(@RequestParam String no, Model model) {
+		
+		ArrayList<HistoryVO> history = service.stockHistory(Integer.parseInt(no));
+		
+		model.addAttribute("history", history);
+		return "admin/managerOrder/history";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/modifyStock.do")
+	public void modifyStock(HttpServletResponse response, StockVO stock) throws JsonIOException, IOException{
+		int result = service.modifyStock(stock);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(result,response.getWriter());
+	}
+	
 
 }
