@@ -1,5 +1,8 @@
 package kr.co.subway.manager.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -18,15 +21,15 @@ public class MgrService {
 
 	//승인한 가맹점 등록
 	@Transactional
-	public int enrollMgr(Mgr mg,String applyName) {
+	public int enrollMgr(Mgr mg,int applyNo) {
 		int result = mgrdao.enrollMgr(mg);
-		applydao.applyManagerUpdate(applyName);
+		applydao.applyManagerUpdate(applyNo);
 		return result;
 	}
-//	public List selectMgr() {
-//		List list= mgrdao.selectMgr();
-//		return (ArrayList<Mgr>)list;
-//	}
+	public List<Mgr> mgrList() {
+		List<Mgr> list= mgrdao.mgrList();
+		return list;
+	}
 	//관리자 로그인
 	public Mgr login(String mgrId) {
 		Mgr mgr = mgrdao.login(mgrId);

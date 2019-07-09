@@ -46,7 +46,6 @@ public class CustomerServiceImpl implements CustomerService{
 //      
       // 휴대폰 번호
       vo.setPhone(vo.getPhone() + "-" + vo.getPhone1() + "-" +vo.getPhone2());
-      vo.setEmail(vo.getEmail() + "@" +vo.getEmail2());
       vo.setCustomerState(1);
       
       //customerdao.insertCustomer(vo);

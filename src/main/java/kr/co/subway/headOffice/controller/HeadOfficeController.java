@@ -77,19 +77,14 @@ public class HeadOfficeController {
 	//가맹점 신청 거절 ajax로 처리
 	@ResponseBody
 	@RequestMapping(value="/apply.do",produces="text/html;charset=utf-8")
-	public String applyManager(@RequestParam String applyName, @RequestParam int applyStatus) {
+	public String applyManager(@RequestParam String applyName, @RequestParam int applyStatus, @RequestParam int applyNo) {
 		JSONObject obj = new JSONObject();
 		if(applyName!=null) {
 			if(applyStatus == 2) {
 				//거절(status 2일 때)
-				applyService.rejectManagerUpdate(applyName,applyStatus);
+				applyService.rejectManagerUpdate(applyStatus,applyNo);
 				obj.put("result", 0);
 			}
-//			else{
-				//승인(status 1일 때)
-//				applyService.applyManagerUpdate(applyName,applyStatus);
-//				obj.put("result", 0);
-//			}
 		}else {
 			obj.put("result", 1);
 		}

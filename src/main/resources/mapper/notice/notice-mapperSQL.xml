@@ -69,4 +69,23 @@
 		(select rownum as rnum, m.* from (select * from review order by review_date desc) m)
 		where rnum between #{start} and #{end}
 	</select>
+	<select id="reviewSelectAll" resultType="review">
+		select review_no as reviewNo, review_title as reviewTitle, review_writer as reviewWriter, review_gender as reviewGender, review_birthday as reviewBirthday, 
+		review_item as reviewItem, review_star_item as reviewStarItem, review_branch as reviewBranch, review_star_branch as reviewStarBranch,
+		review_content as reviewContent, review_hashtag as reviewHashtag, filename, filepath, review_date as reviewDate from review order by review_no desc
+	</select>
+	<select id="reviewSelectOne" parameterType="_int" resultType="review">
+		select review_no as reviewNo, review_title as reviewTitle, review_writer as reviewWriter, review_gender as reviewGender, review_birthday as reviewBirthday, 
+		review_item as reviewItem, review_star_item as reviewStarItem, review_branch as reviewBranch, review_star_branch as reviewStarBranch,
+		review_content as reviewContent, review_hashtag as reviewHashtag, filename, filepath, review_date as reviewDate from review where review_no=#{reviewNo}
+	</select>
+	<update id="reviewUpdate" parameterType="review">
+		update review set review_no=#{reviewNo}, review_title = #{reviewTitle}, review_writer = #{reviewWriter}, review_gender = #{reviewGender}, 
+		review_birthday = #{reviewBirthday}, review_item = #{reviewItem}, review_star_item = #{reviewStarItem}, review_branch = #{reviewBranch}, 
+		review_star_branch = #{reviewStarBranch}, review_content = #{reviewContent}, review_hashtag = #{reviewHashtag}, filename=#{filename}, filepath=#{filepath}, 
+		review_date = sysdate where review_no=#{reviewNo}
+	</update>
+	<delete id="reviewDelete" parameterType="_int">
+		delete from review where review_no=#{reviewNo}
+	</delete>
 </mapper>

@@ -50,7 +50,7 @@
 				</c:forEach>
 			</table>
 			<div class="common-tbl-btn-group">
-				<button class="btn-style2" type="button" onclick="history.back();">뒤로가기</button>
+				<button class="btn-style2" type="button" onclick="history.back();">목록보기</button>
 				<c:if test="${order.mOrderState eq 1}">
 					<c:if test="${sessionScope.mgr.mgrLevel eq 0 }">
 						<button class="btn-style3" type="button" onclick="update('${order.mOrderNo}',4)">발주취소</button><!-- 가맹점 회원만 가능 -->

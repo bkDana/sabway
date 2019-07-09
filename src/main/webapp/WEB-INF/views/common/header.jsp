@@ -21,6 +21,20 @@
 <title>진짜 메인</title>
 </head>
 <body>
+	<%if(request.getRequestURL().toString().split("/")[5].equals("main.jsp")){%>
+	<div class="banner">
+		<button type="button" class="close-btn"><img src="/resources/img/main_top_line_banner_closebtn.png" ></button>
+		<a href="#">
+			<img src="/resources/img/써브웨이_띠배너_PC_1920x140_20190531064940182.jpg" width="100%" style="min-height:93px;">
+		</a>
+	</div>
+	<script>
+		$('.close-btn').click(function(){
+			console.log('클릭');
+			$('.banner').hide();
+		});
+	</script>
+	<%} %>
 	<header id="header">
 		<div class="main-header">
 		</div>
@@ -34,7 +48,7 @@
 					<div id="gnbBg"></div>
 					<ul class="clearfix">
 						<li class="gnb01">
-							<a href="#">메뉴소개</a>
+							<a href="/menu1.do">메뉴소개</a>
 							<div class="gnb-2dep">
 								<ul>
 									<li><a href="#">샌드위치</a></li>

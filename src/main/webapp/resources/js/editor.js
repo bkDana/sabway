@@ -3,7 +3,7 @@ var rowIndex = 0;
 $(document).ready(function(){
 	$('#testContent').keyup(function(event) {
 		if ( event.keyCode === 8 || event.keyCode === 46) {
-	    	for(var i=0;i<rowIndex; i++){
+	    	for(var i=1;i<rowIndex+1; i++){
 	    		if($("#testContent").html().indexOf("fileDiv"+i) == -1) {
 	    			$("#fileName"+i).parent().parent().remove();
 	    		}
@@ -90,7 +90,7 @@ $(document).ready(function(){
 		    $('#insertTable').append(inner);
 		}else{
 			$("#fileName"+Index).val(f.value);
-			$("#fileDiv"+Index).remove();
+//			$("#fileDiv"+Index).remove();
 		}
 	    
 		if(f.files.length!=0 && f.files[0]!=0){ //f.file -> 선택한 파일을 가져옴 (배열형태로) , f.files[0] -> 0번재 파일의 크기
@@ -100,10 +100,17 @@ $(document).ready(function(){
 			reader.readAsDataURL(f.files[0]);	//선택한 파일의 경로를 읽어옴
 			console.log(f.files[0]);
 			reader.onload = function(e){
+				console.log($('#fileDiv'+Index).length);
+				if($('#fileDiv'+Index).length>0){
+					$('#fileDiv'+Index).html("<img class='resize-img' width='100%' height='100%' src='"+e.target.result+"'>");
+					console.log("있는데 바뀔때"+Index);
+				}else{
+					innerContent += "<div id='fileDiv" + Index + "' class='resize-div' contentEditable='false'>"
+					+"<img class='resize-img' width='100%' height='100%' src='"+e.target.result+"'></div>";
+					$("#testContent").html(innerContent);
+					console.log("없는데 넣을때"+$('#fileDiv'+Index).length);
+				}
 				
-				innerContent += "<div id='fileDiv" + Index + "' class='resize-div' contentEditable='false'>"
-				+"<img class='resize-img' width='100%' height='100%' src='"+e.target.result+"'></div>";
-				$("#testContent").html(innerContent);
 			}
 		} else{ //파일을 뺄 경우
 			$("#fileName"+Index).val(f.value);
@@ -316,11 +323,41 @@ $(document).ready(function(){
 		var newContent;
 		for(var i=0;i<count-1;i++){
 			newContent = content.match(matchContent);
-			var keyword = newContent[0]; 
+			var keyword = newContent[0];
 			content = content.replace(keyword,"changeIMG");
 		}
 		$('#reviewContent').val(content);
 		$('#reviewFilename').val(filenameText);
+		$('#reviewStarpoint1').val($('#starpoint1').text());
+		$('#reviewStarpoint2').val($('#starpoint2').text());
+		var form = document.write;
+		form.submit();
+	}
+	function updateBtn(){
+		var content = $('#testContent').html();
+		$('#reviewContent').val(content);
+		var filenameText = "";
+		var count = $('.submit-file').length;
+		if(count>0){
+			for(var i=0;i<count;i++){
+					filenameText += $('.submit-file').eq(i).val()+",";
+			}
+				
+		}
+		
+		var matchContent = "<img [^<>]*>";
+		var newContent;
+		for(var i=0;i<count;i++){
+			newContent = content.match(matchContent);
+			if(newContent!=null){
+				var keyword = newContent[0];
+			}
+			
+			content = content.replace(keyword,"changeIMG");
+		}
+		$('#reviewContent').val(content);
+		$('#reviewFilename').val(filenameText);
+		
 		$('#reviewStarpoint1').val($('#starpoint1').text());
 		$('#reviewStarpoint2').val($('#starpoint2').text());
 		var form = document.write;

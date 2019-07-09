@@ -55,7 +55,8 @@
 				
 			</table>
 			<div class="common-tbl-btn-group">
-				<button class="btn-style2" type="submit">발주서 등록</button>
+				<button type="button" class="btn-style4" onclick="javascript:history.back();">취소</button>
+				<button type="submit" class="btn-style2">등록하기</button>
 			</div>
 		</form>
 	</div>
@@ -65,7 +66,7 @@
 
 /* 1차분류 세팅*/
 $.ajax({
-	url : '/ingreType.do',
+	url : '/ingreManage/ingreType.do',
 	success : function(data){
 		for(var i=0;i<data.length;i++){
 			$('#itemType').append('<option value='+data[i]+'>'+data[i]+'</option>');

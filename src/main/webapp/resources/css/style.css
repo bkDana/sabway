@@ -4,6 +4,12 @@
 	#009223 : 초록
 */
 
+input[type=checkbox]{width: 15px;height: 15px;}
+
+/* 헤더 위쪽 광고 배너 */
+.banner{position: relative; width: 100%; min-height: 93px; min-width: 1300px;}
+.close-btn{position:absolute; right: 330px; cursor: pointer;}
+
 #header .admin-header{background-color: #292929; height: 50px; line-height: 50px; padding-left: 50px;}
 #header .admin-header a{color: white; font-size: 14px;}
 
@@ -13,6 +19,22 @@
 .sub-header ul li{float: left; display: inline-block; list-style: none; width: 100px; height: 50px; line-height: 50px;}
 
 
+/* ****************** SUB MENU ********************** */
+.sub-img{width:100%; min-width:1300px; height:380px;}
+#subBg{display:none; width:100%; min-width:1300px; height:330px; background:#fff; z-index:99; }
+#sub{ width:100%; position:absolute; left:0; top:150px;z-index:95; border-bottom:1px solid rgba(255,255,255,0.1);}
+#sub > ul{text-align:center; }
+#sub > ul > li{position:relative; display:inline-block; min-width:100px; }
+#sub > ul > li > a{position:relative;  display:block; height:70px; line-height:70px; text-align:center; color:#fff; font-size:15px;z-index:100;}
+#sub > ul > li > a:hover{color:#ffce32; border-bottom:4px solid #ffce32;}
+
+.sub-menu-title{position:absolute;left:650px; top:270px; color:#fff; font-size:16px;  text-align: center; margin: 0 auto; min-width: 600px;}
+.sub-menu-title p:first-child{font-size:70px; font-weight:bolder;}
+.sub-menu-title p:nth-child(2){margin-top:30px;}
+.sub-menu-title p:nth-child(3){margin-top:10px;}
+
+
+/* ****************** 관리자 왼쪽 고정 메뉴 ********************** */
 .left-menu{background-color: #e8e8e8; width: 180px; float: left; height: 1400px;}
 .left-menu > ul{text-align:left;}
 .left-menu > ul > li{position:relative; display:inline-block; min-width:180px;}
@@ -27,7 +49,7 @@
 .state-arr{color:#009223;}
 .state-can{color:#d90f0f;}
 
-
+/* ****************** 재고 리스트 ********************** */
 .stock-list{min-width: 1500px;}
 .stock-list > li{float: left;margin:20px 20px; text-align: center; width:150px;}
 .stock-list > li span{display: inline-block; width: 100%; text-align: center; margin-bottom: 5px;}
@@ -37,10 +59,38 @@
 .stock-list input[type='text']{padding:2px 7px; border:1px solid #ddd; border-radius:4px; width:15%;text-align: center;font-size: 17px;font-weight: bold;}
 
 
-.search-day{width:30%; max-width:200px; height:40px; border:1px solid #ccc; padding:0; text-indent:10px; color:#868686; font-size:13px; vertical-align:middle;}
+/* ****************** 메뉴 리스트 ********************** */
+.menu-list{min-width: 1500px;}
+.menu-list > li{float: left;margin:20px 20px; width:370px; height:330px; background-color: #fff;}
+.menu-list > li span{display: inline-block; width: 100%; text-align: center; margin:5px 0;}
+.menu-list > li span:first-child{background-color: #ffc300; width: 70px; height:33px; color: #fff; line-height: 30px; font-weight: bold;font-size: 13px; margin-left: 0;}
+.menu-list > li img{width: 180px; height: 180px;}
+.menu-list > li span:nth-child(3){line-height: 20px;font-size: 22px; color: #292929; font-weight: bold;}
+.menu-list > li span:nth-child(4){font-size: 18px;color: #ffc300;font-weight: bold;}
+
+
+.search-day{width:30%; max-width:200px; height:40px; border:2px solid #ddd; padding:0; text-indent:10px; color:#868686; font-size:13px; vertical-align:middle;}
 
 
 
 .update-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#009223; color:#fff; margin-left:5px;}
+.detail-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#b4b6b5; color:#fff; margin-left:5px;}
+
+
+
+/* 정렬 검색 박스 */
+.order-list-comment{margin-bottom: 10px;}
+.order-list-comment select{width:20%; max-width:150px; height:40px; border:2px solid #ddd; background-color:#fff; }
+
+/* 목록 버튼 */
+.common-tbl-btn-group button.list-btn{width:170px; height:50px; border-radius:50px; font-size:18px; color:#fff; margin:0 10px; background-color:#009223; position: relative;}
+.common-tbl-btn-group button.list-btn:after{content:''; position:absolute; left:26px; width:20px; height:4px; background-color:#ffce32;}
+
+
+
+/* 재고 내역 테이블 */
+.his-tbl{width:100%; max-width:600px; /* margin:0 auto; */ background-color:#fff;}
+.his-tbl th, .his-tbl td{border:1px solid #ddd; padding:10px; text-align:center; font-weight:normal; line-height:15px;}
+.his-tbl tr:first-child th, .his-tbl tr:first-child td{/* border-top:2px solid #009223; */ }
 
 footer{background-color: #292929; color: #666; height: 100px;}

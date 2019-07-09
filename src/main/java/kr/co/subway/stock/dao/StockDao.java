@@ -32,4 +32,8 @@ public class StockDao {
 		return sqlSession.insert("stock.addHistory",history);
 	}
 
+	public List stockHistory(int no) {
+		return sqlSession.selectList("stock.stockHistory",no);
+	}
+
 }

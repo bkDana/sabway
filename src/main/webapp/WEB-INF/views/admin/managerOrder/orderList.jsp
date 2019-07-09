@@ -27,6 +27,10 @@
 					<option value="3">도착</option>
 					<option value="4">취소</option>
 				</select>
+				<c:if test="${sessionScope.mgr.mgrLevel eq 0 }">
+					<button type="submit" class="bbs-search-btn" title="검색"><img src="/resources/img/icon_search.png"></button>
+					<button type="button" onclick="location.href='/managerOrder/orderList.do'" class="bbs-search-btn" title="초기화">초기화</button>
+				</c:if>
 				<br><br>
 				<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
 					<select name="searchType" data-val="${search.searchType }">
@@ -34,13 +38,14 @@
 						<option value="">뭘해야될까?</option>
 					</select>
 					<input placeholder="검색어를 입력해주세요." type="search" name="searchVal" class="search-word" value="${search.searchVal }">
+				
+					<button type="submit" class="bbs-search-btn" title="검색"><img src="/resources/img/icon_search.png"></button>
+					<button type="button" onclick="location.href='/managerOrder/orderList.do'" class="bbs-search-btn" title="초기화">초기화</button>
 				</c:if>
-				<button type="submit" class="bbs-search-btn" title="검색">검색</button>
-				&nbsp;<button type="button" onclick="location.href='/managerOrder/orderList.do'" class="bbs-search-btn" title="초기화">초기화</button>
 			</form>
 		</div>
 		<br>
-		<p>
+		<p class="order-list-comment">
 			<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
 			※ 희망배송일 오전 8시에 출고완료 상태인 발주건은 도착으로 자동 상태변경됩니다. 
 			수동으로 변경하기-> <a href="/managerOrder/test.do">수동으로 재고 추가</a>
