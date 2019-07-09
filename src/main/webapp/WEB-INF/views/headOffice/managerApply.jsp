@@ -30,7 +30,6 @@
 							<!-- 신청 승인여부에 따라 정보 전달 : 0(default:신청),1(승인),2(거절) -->
 							<td>
 								<!-- 승인/거절 클릭하면 applyName(공통), applyStatus(개별) 전달 -->
-								<input type="hidden" id="applyName" value="${apply.applyName }">
 								<a href="#" name="apply">
 									승인
 									<input type="hidden" name="applyStatus" value=1>
@@ -80,16 +79,16 @@
 	//MgrService의 enrollMgr 메소드에서 ApplyDao의 applyManagerUpdate 메소드 태워서 승인(applyStatus의 값 1로 변경) 처리
 	//승인
 	$('[name=apply]').click(function(){
-		var applyArea = $("[name=applyArea]").html();
-		var applyName = $("[name=applyName]").html();
-		var applyNo = $("[name=applyNo]").html();
+		var applyArea = $(this).parent().prev().prev().html();
+		var applyName = $(this).parent().parent().children().eq(1).html();
+		var applyNo = $(this).parent().parent().children().eq(0).html();
 		location.href="/enrollMgr.do?applyArea="+applyArea+"&applyName="+applyName+"&applyNo="+applyNo;
 	});
 	//거절 클릭 시 /apply.do"로 applyName과 applyStatus전달
 	$('[name=reject]').click(function(){
-		var applyName = $("[name=applyName]").html();
-		var applyStatus = $('[name=rejectStatus]').val();
-		var applyNo = $("[name=applyNo]").html();
+		var applyName = $(this).parent().parent().children().eq(1).html();
+		var applyStatus = $(this).children().val();
+		var applyNo = $(this).parent().parent().children().eq(0).html();
 		if(applyStatus == 2) {
 			if(confirm("거절하시겠습니까?")){
 				$.ajax({

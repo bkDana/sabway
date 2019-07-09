@@ -21,8 +21,9 @@
 </c:choose>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-	function searchAddr(mgrAddr){
+	function searchAddr(mgrAddr,index){
 		var addr = mgrAddr;
+		var i = index;
 	    new daum.Postcode({
 	        oncomplete: function(data) {
 	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
@@ -34,7 +35,7 @@
 	            }
 				    $("[name=mgrPost]").val(data.zonecode);
 	            	$("[name=mgrAddrCode]").val(data.sigunguCode);
-	            	$("[name=mgrName]").val('SabWay '+data.bname+'점');
+	            	$("[name=mgrName]").val('SabWay '+data.bname+" "+i+'호점');
 	        }
 	    }).open({
 		    popupName : 'postCodePopup',//중복 생성 방지
@@ -86,8 +87,8 @@
 							주소
 						</th>
 						<td>
-							<label onclick="searchAddr('${mgrAddr }');">
-								<input type="text" name="mgrPost" style="width:40px" readonly><br><br>
+							<label onclick="searchAddr('${mgrAddr }','${i }');">
+								<input type="text" name="mgrPost" style="width:40px" required="required"><br><br>
 								<input type="text" name="mgrAddr" readonly>
 							</label>
 						</td>
