@@ -73,4 +73,17 @@
   			stock_history_tbl
   		values(stock_history_seq.nextval,#{hStockIdx},#{hContent},sysdate)
   	</insert>
+  	<select id="stockHistory" parameterType="_int" resultType="history">
+  		select
+			h_idx as hIdx,
+			h_stock_idx as hStockIdx,
+			h_content as hContent,
+			TO_CHAR(h_date,'YYYY-MM-DD HH24:mi:ss') as hDate
+		from
+			stock_history_tbl
+		where
+			h_stock_idx = #{no}
+		order by
+			h_date desc
+  	</select>
 </mapper>

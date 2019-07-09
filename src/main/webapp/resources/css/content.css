@@ -18,7 +18,7 @@
 .board-search-box select{width:20%; max-width:150px; height:40px; border:1px solid #ccc; background-color:#fff; }
 .board-search-box .search-word{width:30%; max-width:200px; height:40px; border:1px solid #ccc; border-right:0; padding:0; text-indent:10px; color:#868686; font-size:13px; vertical-align:middle;}
 .board-search-box .search-word:focus{color:#333;}
-.board-search-box .bbs-search-btn{margin:0px; border:0; min-width:40px; padding:0 5px; height:40px; margin-left:-4px; background:#333; color:#fff; cursor:pointer; vertical-align:top; font-size:14px;}
+.board-search-box .bbs-search-btn{margin:0px; border:0; min-width:40px; padding:0 5px; height:40px; margin-left:-4px; background:#fff; color:#fff; cursor:pointer; vertical-align:top; font-size:14px;}
 .board-search-box .bbs-search-btn i{line-height:40px;}
 
 
@@ -54,7 +54,7 @@
 
 .common-tbl-btn-group{padding-top:30px; text-align:center;}
 .common-tbl-btn-group.join-btn-group{display:inline-block; text-align:right; padding-top:0; width:auto; max-width:20%; vertical-align:middle;}
-.common-tbl-btn-group > button{width:130px; height:50px; border-radius:5px; font-size:17px; color:#fff; margin:0 10px;}
+.common-tbl-btn-group > button{width:130px; height:50px; border-radius:50px; font-size:17px; color:#fff; margin:0 10px;}
 .common-tbl-btn-group > button.btn-style1{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style2{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style3{background-color:#888;}

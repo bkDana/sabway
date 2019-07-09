@@ -11,11 +11,11 @@
 		,apply_date as applyDate
 		from apply
 	</select>
-	<update id="applyManagerUpdate" parameterType="string">
-		update apply set apply_status = 1 where apply_name = #{applyName}
+	<update id="applyManagerUpdate" parameterType="_int">
+		update apply set apply_status = 1 where apply_no = #{applyNo}
 	</update>
-	<update id="rejectManagerUpdate" parameterType="string">
-		update apply set apply_status = 2 where apply_name = #{applyName}
+	<update id="rejectManagerUpdate" parameterType="_int">
+		update apply set apply_status = 2 where apply_no = #{applyNo}
 	</update>
 	<select id="applyView" parameterType="_int" resultType="apply">
 		select apply_no as applyNo

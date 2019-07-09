@@ -7,17 +7,17 @@
 
 /* 공통 :: PAGING */
 .paging{width:100%; text-align:center; margin:30px 0;}
-.paging a, .paging span{display:inline-block; vertical-align:middle; width:30px; height:30px; border:1px solid #ddd; text-align:center; font-size:12px; line-height:30px; color:#868686; letter-spacing:-0.25px; margin: 2px 0; background:#fff;}
-.paging .cur{border:1px solid #4b4b4b; background-color:#4b4b4b; color:#fff;}
+.paging a, .paging span{display:inline-block; vertical-align:middle; width:30px; height:30px;  text-align:center; font-size:18px;font-weight: bold; line-height:30px; color:#868686; letter-spacing:-0.25px; margin: 2px 0; background:#fff;}
+.paging .cur{/* border:1px solid #4b4b4b; */ background-color:#fff; color:#009223;}
 .paging a.paging-arrow{line-height:28px;}
 .paging i{vertical-align:middle; color:inherit}
 
 /* 공통 :: SEARCH BOX */
 .board-search-box{text-align:center; background-color:#f8faf8; padding:30px 0; /* border:1px solid #ddd; */ }
-.board-search-box select{width:20%; max-width:150px; height:40px; border:1px solid #ccc; background-color:#fff; }
-.board-search-box .search-word{width:30%; max-width:200px; height:40px; border:1px solid #ccc; border-right:0; padding:0; text-indent:10px; color:#868686; font-size:13px; vertical-align:middle;}
+.board-search-box select{width:20%; max-width:150px; height:40px; border:2px solid #ddd; background-color:#fff; }
+.board-search-box .search-word{width:30%; max-width:200px; height:40px; border:2px solid #ddd; border-right:0; padding:0; text-indent:10px; color:#868686; font-size:14px; vertical-align:middle;}
 .board-search-box .search-word:focus{color:#333;}
-.board-search-box .bbs-search-btn{margin:0px; border:0; min-width:40px; padding:0 5px; height:40px; margin-left:-4px; background:#333; color:#fff; cursor:pointer; vertical-align:top; font-size:14px;}
+.board-search-box .bbs-search-btn{margin:0px; border:2px solid #ddd; border-left:0; min-width:40px; padding:0 5px; height:40px; margin-left:-4px; background:#fff; color:#666; cursor:pointer; vertical-align:top; font-size:14px;}
 .board-search-box .bbs-search-btn i{line-height:40px;}
 
 
@@ -25,7 +25,7 @@
 .common-tbl-box{padding:70px 50px; background-color:#f8f8f8;}
 .comm-tbl{width:100%; max-width:800px; margin:0 auto; background-color:#fff;}
 .comm-tbl th, .comm-tbl td{border:1px solid #ddd; padding:15px; text-align:left; font-weight:normal; line-height:20px;}
-.comm-tbl tr:first-child th, .comm-tbl tr:first-child td{border-top:2px solid #009223;}
+.comm-tbl tr:first-child th, .comm-tbl tr:first-child td{border-top:4px solid #009223;}
 .comm-tbl th{font-size:15px; line-height:20px; font-weight:500;}
 .comm-tbl input[type='text'], .comm-tbl input[type='password'], .comm-tbl input[type='file'],
 .comm-tbl select, .comm-tbl textarea{padding:7px; border:1px solid #ddd; border-radius:4px; width:90%;}
@@ -56,7 +56,7 @@
 
 .common-tbl-btn-group{padding-top:30px; text-align:center;}
 .common-tbl-btn-group.join-btn-group{display:inline-block; text-align:right; padding-top:0; width:auto; max-width:20%; vertical-align:middle;}
-.common-tbl-btn-group > button{width:130px; height:50px; border-radius:5px; font-size:17px; color:#fff; margin:0 10px;}
+.common-tbl-btn-group > button{width:130px; height:50px; border-radius:50px; font-size:17px; color:#fff; margin:0 10px;}
 .common-tbl-btn-group > button.btn-style1{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style2{background-color:#444;}
 .common-tbl-btn-group > button.btn-style3{background-color:#d90f0f;}

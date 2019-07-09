@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- Header --%>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <%-- Content --%>
+
 <img src="/resources/img/main_event.jpg">
 <section id="content-wrapper">
 	<div class="area">
@@ -32,7 +34,7 @@
 		</c:otherwise>
 	</c:choose>
 		<img src="/resources/img/img_recipe_b01.jpg" onclick="location.href='/admin.do';" style="cursor:pointer;"><br>
-		<img src="/resources/img/img_recipe_b02.jpg"><br>
+		<h1>온라인 주문</h1><img src="/resources/img/img_recipe_b02.jpg" onclick="location.href='/cusOrder.do';" style="cursor:pointer;"><br>
 		<img src="/resources/img/img_recipe_b03.jpg"><br>
 		<img src="/resources/img/img_recipe_b04.jpg"><br>
 		<img src="/resources/img/img_recipe_b05.jpg"><br>

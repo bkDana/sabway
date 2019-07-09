@@ -65,7 +65,7 @@
 
 /* 1차분류 세팅*/
 $.ajax({
-	url : '/ingreType.do',
+	url : '/ingreManage/ingreType.do',
 	success : function(data){
 		for(var i=0;i<data.length;i++){
 			$('#itemType').append('<option value='+data[i]+'>'+data[i]+'</option>');

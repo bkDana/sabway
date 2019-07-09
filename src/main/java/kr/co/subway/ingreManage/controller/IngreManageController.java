@@ -101,8 +101,7 @@ public class IngreManageController {
 	//재료 리스트 가져오기
 	@RequestMapping("/ingreList.do")
 	public ModelAndView ingreList(String reqPage, String searchType, String searchVal) {
-		System.out.println(searchType);
-		System.out.println(searchVal);
+		System.out.println("controller searchType : "+ searchType+ "searchVal : "+searchVal);
 		ModelAndView mav = new ModelAndView();
 		int reqPage1;
 		try {

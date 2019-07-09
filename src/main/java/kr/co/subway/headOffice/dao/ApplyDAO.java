@@ -17,12 +17,12 @@ public class ApplyDAO {
 		return sqlsession.selectList("apply.applyList");
 	}
 	//승인처리
-	public int applyManagerUpdate(String applyName) {
-		return sqlsession.update("apply.applyManagerUpdate",applyName);
+	public int applyManagerUpdate(int applyNo) {
+		return sqlsession.update("apply.applyManagerUpdate",applyNo);
 	}
 	//거절처리
-	public int rejectManagerUpdate(String applyName) {
-		return sqlsession.update("apply.rejectManagerUpdate",applyName);
+	public int rejectManagerUpdate(int applyNo) {
+		return sqlsession.update("apply.rejectManagerUpdate",applyNo);
 	}
 	//신청 글 상세보기
 	public Apply applyView(int applyNo) {

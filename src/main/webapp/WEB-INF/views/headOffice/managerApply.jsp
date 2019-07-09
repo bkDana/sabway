@@ -7,19 +7,6 @@
 <title>가맹점 신청</title>
 </head>
 
-<style>
-	/* 테이블 테두리 black, 가운데정렬 */
-	table,th,tr,td{
-		border: 1px solid black; 
-		text-align: center;
-	}
-	/* 글씨 black, 밑줄 제거 */
-	a{
-		text-decoration: none;
-		color:black;
-	}
-</style>
-
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
@@ -33,6 +20,7 @@
 					<!-- 가맹점 신청(status == 0)인 경우 출력 -->
 					<c:if test="${apply.applyStatus eq 0 }">
 						<tr>
+							<td style="display:none;" name="applyNo">${apply.applyNo }</td>
 							<td name="applyName">${apply.applyName }</td>
 							<!-- 해달 게시글 상세보기 -->
 							<td><a href="/applyView.do?applyNo=${apply.applyNo }">${apply.applyTitle }</a></td>
@@ -42,7 +30,6 @@
 							<!-- 신청 승인여부에 따라 정보 전달 : 0(default:신청),1(승인),2(거절) -->
 							<td>
 								<!-- 승인/거절 클릭하면 applyName(공통), applyStatus(개별) 전달 -->
-								<input type="hidden" id="applyName" value="${apply.applyName }">
 								<a href="#" name="apply">
 									승인
 									<input type="hidden" name="applyStatus" value=1>
@@ -93,19 +80,21 @@
 	//승인
 	$('[name=apply]').click(function(){
 		var applyArea = $(this).parent().prev().prev().html();
-		var applyName = $(this).parent().parent().children().html();
-		location.href="/enrollMgr.do?applyArea="+applyArea+"&applyName="+applyName;
+		var applyName = $(this).parent().parent().children().eq(1).html();
+		var applyNo = $(this).parent().parent().children().eq(0).html();
+		location.href="/enrollMgr.do?applyArea="+applyArea+"&applyName="+applyName+"&applyNo="+applyNo;
 	});
 	//거절 클릭 시 /apply.do"로 applyName과 applyStatus전달
 	$('[name=reject]').click(function(){
-		var applyName = $(this).parent().parent().children().html();
-		var applyStatus = $('[name=rejectStatus]').val();
+		var applyName = $(this).parent().parent().children().eq(1).html();
+		var applyStatus = $(this).children().val();
+		var applyNo = $(this).parent().parent().children().eq(0).html();
 		if(applyStatus == 2) {
 			if(confirm("거절하시겠습니까?")){
 				$.ajax({
 					url : "/apply.do",
 					type : "get",
-					data : {applyName:applyName , applyStatus:applyStatus},
+					data : {applyName:applyName , applyStatus:applyStatus , applyNo:applyNo},
 					dataType : "json",
 					success : function(data){
 						if(data.result == 0){

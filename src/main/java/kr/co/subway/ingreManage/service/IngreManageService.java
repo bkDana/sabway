@@ -24,8 +24,6 @@ public class IngreManageService {
 	
 	//재료 리스트
 	public IngrePageNaviData ingreList(int reqPage, String searchType, String searchVal) {
-		System.out.println(searchType);
-		System.out.println(searchVal);
 		int numPerPage = 10;
 		int totalCount = ingreDao.ingreTotalCount(searchType, searchVal);
 		System.out.println("totalCount: "+totalCount);
