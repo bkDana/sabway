@@ -1,5 +1,8 @@
 package kr.co.subway.manager.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -24,10 +27,10 @@ public class MgrService {
 		applydao.applyManagerUpdate(applyNo);
 		return result;
 	}
-//	public List selectMgr() {
-//		List list= mgrdao.selectMgr();
-//		return (ArrayList<Mgr>)list;
-//	}
+	public List<Mgr> selectMgr() {
+		List<Mgr> list= mgrdao.selectMgr();
+		return list;
+	}
 	//관리자 로그인
 	public Mgr login(String mgrId) {
 		Mgr mgr = mgrdao.login(mgrId);

@@ -1,9 +1,12 @@
 package kr.co.subway.manager.controller;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,12 +30,20 @@ public class MgrController {
 	//랜덤 전화번호, 지역별 번호, 지역별 코드 설정
 	@RequestMapping(value="/enrollMgr.do")
 	public String enrollMgr(@RequestParam String applyArea,@RequestParam String applyName,@RequestParam int applyNo,Model model) {
+		int i = 1;
 		//가맹점 승인하면 applyName과 applyArea를 매개변수로 받음
 		//applyArea : 지역 정보를 알아보기 위함
 		//applyName : 가맹점 등록에 사용할 목적
 		String ranTel = randomtel.randomTel();
 		String addrType = addrtype.addrType(applyArea);
 		String mgrTel = addrcode.addrCode(ranTel,addrType);
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectMgr();
+		for(int y=0;y<list.size();y++) {
+			if(list.get(y).getMgrAddr().contains(applyArea)) {		
+				i++;
+			}
+		}
+		model.addAttribute("i",i);
 		model.addAttribute("applyName",applyName);
 		model.addAttribute("mgrAddrType",addrType);
 		model.addAttribute("applyNo",applyNo);
@@ -43,6 +54,8 @@ public class MgrController {
 	//가맹점 등록
 	@RequestMapping(value="/mgrEnroll.do")
 	public String mgrEnroll(Mgr mg,@RequestParam String applyName,@RequestParam int applyNo) {
+		System.out.println(mg.getMgrAddr());
+		System.out.println(mg.getMgrName());
 		mg.setMgrId(mg.getMgrId()+mg.getMgrAddrCode());
 		//신청인(가맹점주) 이름 등록용
 		mg.setMgrBossName(applyName);
