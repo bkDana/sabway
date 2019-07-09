@@ -17,8 +17,8 @@ public class MgrDAO {
 	public int enrollMgr(Mgr mg) {
 		return session.insert("mgr.enrollMgr",mg);
 	}
-	public List<Mgr> selectMgr() {
-		return session.selectList("mgr.selectMgr");
+	public List<Mgr> mgrList() {
+		return session.selectList("mgr.mgrList");
 	}
 	//로그인
 	public Mgr login(String mgrId) {

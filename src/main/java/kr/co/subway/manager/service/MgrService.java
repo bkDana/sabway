@@ -26,8 +26,8 @@ public class MgrService {
 		applydao.applyManagerUpdate(applyNo);
 		return result;
 	}
-	public List<Mgr> selectMgr() {
-		List<Mgr> list= mgrdao.selectMgr();
+	public List<Mgr> mgrList() {
+		List<Mgr> list= mgrdao.mgrList();
 		return list;
 	}
 	//관리자 로그인
