@@ -10,6 +10,7 @@ import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.subway.manager.service.AddrCode;
 import kr.co.subway.manager.service.AddrType;
@@ -38,7 +39,7 @@ public class MgrController {
 		String addrType = addrtype.addrType(applyArea);
 		String mgrTel = addrcode.addrCode(ranTel,addrType);
 		//가맹점 정보를 가져와서 이름 체크
-		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectMgr();
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
 		for(int y=0;y<list.size();y++) {
 			if(list.get(y).getMgrAddr().contains(applyArea)) {		
 				i++;
@@ -96,6 +97,19 @@ public class MgrController {
 		HttpSession session = request.getSession(false);
 		session.invalidate();
 		return "main";
+	}
+	//가맹점 목록
+	@RequestMapping(value="/managerList.do")
+	public ModelAndView managerList() {
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list", list);
+			mav.setViewName("manager/managerList");
+		}else {
+			mav.setViewName("manager/listMag");
+		}
+		return mav;
 	}
 	
 }

@@ -25,4 +25,9 @@ public class PageController {
 		return "main";
 	}
 	
+	@RequestMapping("/menu1.do")
+	public String movemenu1() {
+		return "/menu/menu1";
+	}
+	
 }

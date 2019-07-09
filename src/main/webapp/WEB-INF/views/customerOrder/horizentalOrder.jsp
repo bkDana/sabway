@@ -145,7 +145,7 @@ var myform=new formtowizard({
 				<label for="사우스웨스트"><img alt="사우스웨스트" src="/resources/img/recipe/img_recipe_s07.jpg"></label> 
 				<input type="checkbox" class="hide" id="사우스웨스트" name="sourceRef" value="6"> 
 				<label for="머스타드"><img alt="머스타드" src="/resources/img/recipe/img_recipe_s08.jpg"></label> 
-				<input type="checkbox" class="hide" id="" name="sourceRef" value="7">
+				<input type="checkbox" class="hide" id="머스타드" name="sourceRef" value="7">
 				<label for="홀스래디쉬"><img alt="홀스래디쉬" src="/resources/img/recipe/img_recipe_s09.jpg"></label> 
 				<input type="checkbox" class="hide" id="홀스래디쉬" name="sourceRef" value="8"> 
 				<label for="사우전아일랜드"><img alt="사우전아일랜드" src="/resources/img/recipe/img_recipe_s10.jpg"></label>
@@ -168,7 +168,7 @@ var myform=new formtowizard({
 				<legend>사이드메뉴</legend>
 				<label for="선택안함"><span>선택안함</span></label> 
 				<input type="checkbox" id="선택안함" name="sideRef" value="-1">
-				<label for="브로콜리체다수프수프"><img alt="브로콜리체다수프" src="/resources/img/side/img_sides_01.jpg"></label> 
+				<label for="브로콜리체다수프"><img alt="브로콜리체다수프" src="/resources/img/side/img_sides_01.jpg"></label> 
 				<input type="checkbox" class="hide" id="브로콜리체다수프" name="sideRef" value="0">
 				<label for="베이크포테이토수프"><img alt="베이크포테이토수프" src="/resources/img/side/img_sides_02.jpg"></label> 
 				<input type="checkbox" class="hide" id="베이크포테이토수프" name="sideRef" value="1">

@@ -1,8 +1,18 @@
 package kr.co.subway.customerOrder.dao;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import kr.co.subway.customerOrder.vo.Bucket;
 
 @Repository("cusOrderDao")
 public class CusOrderDao {
+	@Autowired
+	SqlSessionTemplate sqlSession;
+
+	public int insertMember(Bucket buc) {
+		return sqlSession.insert("bucket.insertBucket",buc);
+	}
 
 }

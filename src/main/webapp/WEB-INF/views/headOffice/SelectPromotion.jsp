@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- Header --%>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
+<jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 
 <%-- Content --%>
-<section id="content-wrapper">
+<section id="content-wrapper" class="clearfix">
+	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
+		<div class="sub-menu">※ 메뉴관리 > 이벤트 / 할인</div>
 		<div class="common-tbl-box">
 			<h1 class="comm-content-tit">프로모션</h1>
-			<form action="/selectPromotion.do" method="get">
+			<form action="/selectPromotion.do" method="post">
 				<table class="comm-tbl" >
 					<tr>
 						<th>상품명</th>

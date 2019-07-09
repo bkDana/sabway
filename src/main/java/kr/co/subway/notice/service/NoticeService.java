@@ -127,7 +127,7 @@ public class NoticeService {
 	public int qnaDelete(int qnaNo){
 		return noticeDao.qnaDelete(qnaNo);
 	}
-	
+	/////////////////////////////////여기부터 리뷰임!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	@Transactional
 	public int reviewInsert(Review r){
 		return noticeDao.reviewInsert(r);
@@ -161,5 +161,23 @@ public class NoticeService {
 		}
 		
 		return new PageNaviData(null,null,reviewList, pageNavi);
+	}
+	
+	public ArrayList<Review> reviewSelectAll(){
+		return (ArrayList<Review>)noticeDao.reviewSelectAll();
+	}
+	
+	public Review reviewSelectOne(int reviewNo){
+		return noticeDao.reviewSelectOne(reviewNo);
+	}
+	
+	@Transactional
+	public int reviewUpdate(Review r){
+		return noticeDao.reviewUpdate(r);
+	}
+	
+	@Transactional
+	public int reviewDelete(int reviewNo){
+		return noticeDao.reviewDelete(reviewNo);
 	}
 }

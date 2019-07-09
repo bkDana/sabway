@@ -45,7 +45,7 @@ $(document).ready(function(){
 	$(".insert-qna").click(function(){
 		location.href="/moveQnaInsert.do";
 	});
-	$(".move-qna-notice").click(function(){
+	$(".move-update-qna").click(function(){
 		var qnaNo = $('th').eq(0).text();
 		location.href="/moveQnaUpdate.do?qnaNo="+qnaNo;
 	});
@@ -65,27 +65,28 @@ $(document).ready(function(){
 		var reviewNo = $(this).prev().prev().text();
 		location.href="/reviewOne.do?reviewNo="+reviewNo;
 	});
-	$(".move-pn-qna").click(function(){
-		var qnaNo = $(this).prev().text();
-		location.href="/qnaOne.do?qnaNo="+qnaNo;
+	$(".move-pn-review").click(function(){
+		var reviewNo = $(this).prev().text();
+		location.href="/reviewOne.do?reviewNo="+reviewNo;
 	});
-	$(".move-all-qna").click(function(){
-		location.href="/qna.do?currentPage=1";
+	$(".move-all-review").click(function(){
+		location.href="/review.do?currentPage=1";
 	});
-	$(".insert-qna").click(function(){
-		location.href="/moveQnaInsert.do";
+	$(".insert-review").click(function(){
+		location.href="/moveReviewInsert.do";
 	});
-	$(".move-qna-notice").click(function(){
-		var qnaNo = $('th').eq(0).text();
-		location.href="/moveQnaUpdate.do?qnaNo="+qnaNo;
+	$(".move-update-review").click(function(){
+		var reviewNo = $('th').eq(0).text();
+		location.href="/moveReviewUpdate.do?reviewNo="+reviewNo;
 	});
-	$(".update-qna").click(function(){
-		location.href="/qnaUpdate.do";
+	$(".update-review").click(function(){
+		location.href="/reviewUpdate.do";
 	});
-	$(".move-delete-qna").click(function(){
-		var qnaNo = $('th').eq(0).text();
-		location.href="/qnaDelete.do?qnaNo="+qnaNo;
+	$(".move-delete-review").click(function(){
+		var reviewNo = $('th').eq(0).text();
+		location.href="/reviewDelete.do?reviewNo="+reviewNo;
 	});
+	
 	$('#fileDelete').click(function(){
 		$('#fileStatus').val('1');
 		$(this).text("삭제완료");
