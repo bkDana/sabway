@@ -1,6 +1,8 @@
 package kr.co.subway.manager.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +38,17 @@ public class MgrDAO {
 	//검색어 검색(addr)
 	public List<Mgr> searchAddr(String text){
 		return session.selectList("mgr.searchAddr",text);
+	}	
+	//상태별 분류
+	public List<Mgr> selectStatus(int status){
+		return session.selectList("mgr.selectStatus",status);
+	}
+	//statusName 검색
+	public List<Mgr> searchStatusName(Mgr mgr){
+		return session.selectList("mgr.searchStatusName",mgr);
+	}	
+	//statusAddr 검색
+	public List<Mgr> searchStatusAddr(Mgr mgr){
+		return session.selectList("mgr.searchStatusAddr",mgr);
 	}
 }

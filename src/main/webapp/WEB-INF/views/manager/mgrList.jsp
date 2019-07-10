@@ -13,6 +13,7 @@
 	}
 	[name=searchBox]{
 		text-align:center;
+		margin-left: 20%;
 	}
 	select{
 		height:36px;
@@ -51,6 +52,10 @@
 	    cursor: pointer;
 	    height: 35px;
 	}
+	[name=selectBox]{
+		width:100px;
+		margin-left: 10.6%;
+	}
 </style>
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
@@ -82,7 +87,7 @@
 			</tr>
 			<c:forEach items="${list }" var="mgr" varStatus="i">
 				<c:if test="${mgr.mgrLevel != 1}">
-				<!-- 본점 제외하고 가맹점만 출력 -->
+					<!-- 본점 제외하고 가맹점만 출력 -->
 					<tr>
 						<td style="text-align:center;">${i.count }</td>
 						<td style="text-align:center;">${mgr.mgrId }</td>
@@ -114,36 +119,56 @@
 			</c:forEach>
 		</table>
 		<br><br>
-		<div name="searchBox">
+		<span name="selectBox">
+			<select name="statusGroup">
+				<option selected="selected" disabled="disabled">선택하세요</option>
+				<option id="open">영업</option>
+				<option id="prepare">준비</option>
+				<option id="close">폐업</option>
+			</select>&nbsp;
+		</span>
+		<span name="searchBox">
 			<select name="selectKeyword">
 				<option id="name">이름</option>
 				<option id="addr">주소</option>
 			</select>&nbsp;
 			<input type="text">
 			<button type="button" name="searchBtn">검색</button>
-		</div>
+		</span>
 	</div>
 </section>
 <script type="text/javascript">
 	$(document).ready(function(){
+		//상태변경(오픈)
 		$(".onBtn").click(function(){
 			var mgrStatus = $(this).val();
 			var mgrName = $(this).parent().parent().children().eq(3).html();
-			location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
+			if(confirm("변경하시겠습니까?")){
+				location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
+			}
 		});
+		//상태변경(폐점)
 		$(".offBtn").click(function(){
 			var mgrStatus = $(this).val();
 			var mgrName = $(this).parent().parent().children().eq(3).html();
-			location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
+			if(confirm("변경하시겠습니까?")){
+				location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
+			}
 		});
+		//가맹점 검색
 		$("[name=searchBtn]").click(function(){
 			var keyword = $(this).parent().children().eq(0).val();
 			var text = $(this).prev().val();
 			if(keyword == "이름"){
-				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text+"$status="+status;
 			}else if(keyword == "주소"){
-				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text+"$status="+status;
 			}
+		});
+		//상태별 분류
+		$("[name=statusGroup]").on("change",function(){
+			var keyword = $(this).val();
+			location.href="/selectStatus.do?keyword="+keyword;
 		});
 	});
 </script>

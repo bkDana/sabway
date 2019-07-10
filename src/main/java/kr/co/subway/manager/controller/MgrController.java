@@ -124,9 +124,9 @@ public class MgrController {
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
 			mav.addObject("list", list);
-			mav.setViewName("manager/mgrList");
+			mav.setViewName("manager/managerList");
 		}else {
-			mav.setViewName("manager/listMsg");
+			mav.setViewName("manager/listFail");
 		}
 		return mav;
 	}
@@ -139,7 +139,37 @@ public class MgrController {
 			mav.addObject("list", list);
 			mav.setViewName("manager/mgrList");
 		}else {
-			mav.setViewName("manager/listMsg");
+			mav.setViewName("manager/listFail");
+		}
+		return mav;
+	}
+	//상태별 분류
+	@RequestMapping(value="/selectStatus.do")
+	public ModelAndView selectStatus(@RequestParam String keyword) {
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectStatus(keyword);
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list", list);
+			mav.setViewName("manager/statusList");
+		}else {
+			mav.setViewName("manager/listFail");
+		}
+		return mav;
+	}
+	//상태별 검색
+	@RequestMapping(value="/searchStatus.do")
+	public ModelAndView searchStatus(@RequestParam String keyword, @RequestParam String text, @RequestParam int status) {
+		Mgr mgr = new Mgr();
+		mgr.setMgrAddr(text);
+		mgr.setMgrBossName(text);
+		mgr.setMgrStatus(status);
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.searchStatus(keyword,mgr);
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list", list);
+			mav.setViewName("manager/mgrList");
+		}else {
+			mav.setViewName("manager/listFail");
 		}
 		return mav;
 	}

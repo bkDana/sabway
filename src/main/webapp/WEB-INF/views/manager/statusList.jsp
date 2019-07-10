@@ -87,7 +87,8 @@
 			</tr>
 			<c:forEach items="${list }" var="mgr" varStatus="i">
 				<c:if test="${mgr.mgrLevel != 1}">
-				<!-- 본점 제외하고 가맹점만 출력 -->
+					<!-- 본점 제외하고 가맹점만 출력 -->
+					<input type="hidden" value="${mgr.mgrStatus }">
 					<tr>
 						<td style="text-align:center;">${i.count }</td>
 						<td style="text-align:center;">${mgr.mgrId }</td>
@@ -159,10 +160,25 @@
 		$("[name=searchBtn]").click(function(){
 			var keyword = $(this).parent().children().eq(0).val();
 			var text = $(this).prev().val();
-			if(keyword == "이름"){
-				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
-			}else if(keyword == "주소"){
-				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+			var status = $(this).parent().parent().children().eq(1).children().eq(1).children().eq(1).val();
+			if(status==1){
+				if(keyword == "이름"){
+					location.href="/searchStatus.do?keyword="+keyword+"&text="+text+"&status="+status;
+				}else if(keyword == "주소"){
+					location.href="/searchStatus.do?keyword="+keyword+"&text="+text+"&status="+status;
+				}
+			}else if(status==2){
+				if(keyword == "이름"){
+					location.href="/searchStatus.do?keyword="+keyword+"&text="+text+"&status="+status;
+				}else if(keyword == "주소"){
+					location.href="/searchStatus.do?keyword="+keyword+"&text="+text+"&status="+status;
+				}
+			}else if(status==3){
+				if(keyword == "이름"){
+					location.href="/searchStatus.do?keyword="+keyword+"&text="+text+"&status="+status;
+				}else if(keyword == "주소"){
+					location.href="/searchStatus.do?keyword="+keyword+"&text="+text+"&status="+status;
+				}
 			}
 		});
 		//상태별 분류
