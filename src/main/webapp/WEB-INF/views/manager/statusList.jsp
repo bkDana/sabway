@@ -122,7 +122,7 @@
 		<br><br>
 		<span name="selectBox">
 			<select name="statusGroup">
-				<option selected="selected" disabled="disabled">선택하세요</option>
+				<option selected="selected" disabled="disabled">상태 분류</option>
 				<option id="open">영업</option>
 				<option id="prepare">준비</option>
 				<option id="close">폐업</option>
