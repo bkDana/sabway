@@ -19,5 +19,4 @@ public class CusOrderService {
 		return result;
 		
 	}
-
 }

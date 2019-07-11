@@ -46,7 +46,7 @@ public class CusOrderController {
 			cusoIdx = c.getCustomerNo();
 		}
 		
-		
+		//tset code
 		Bucket buc = new Bucket(0/*bucIdx*/, cusoIdx, bread, main, vegi, cheese, source, topping, side, isSalad, isOvened, set, 
 				8000/*cost*/, 0.0/*discntRate*/, 500/*Kcal*/, 1/*quantity*/, null/*Date*/);
 		int result = cusOrderService.insertCusOrder(buc);
@@ -58,4 +58,5 @@ public class CusOrderController {
 		
 	}
 	
+
 }
