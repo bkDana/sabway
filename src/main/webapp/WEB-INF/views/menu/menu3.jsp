@@ -28,10 +28,10 @@
 				<span>쉬림프</span>
 				<span>235kcal</span>
 			</li>
-			<li>샌</li>
-			<li>드</li>
-			<li>위</li>
-			<li>치</li>
+			<li>추</li>
+			<li>가</li>
+			<li>토</li>
+			<li>핑</li>
 			<li></li>
 			<li></li>
 			<li></li>

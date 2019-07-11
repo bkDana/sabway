@@ -88,6 +88,18 @@
   	from ingredients where ingre_idx=#{ingreIdx}
   </select>
   
+  <!-- 고객주문페이지용 -->
+  <!-- 재료정보 가져오기(고객 주문 테이블에서 ingre_label로 요청) -->
+  <select id="selectOneIngre" parameterType="ingre" resultType="ingre">
+  	select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
+  	from ingredients where ingre_label=#{ingreLabel} and ingre_type = #{ingreType}
+  </select>
+  <!-- 타입별 리스트  -->
+  <select id="selectIngreList" parameterType="ingre" resultType="ingre">
+  	ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_filepath as ingreFilepath
+  	from ingredients where ingre_Type=#{ingreType}
+  </select>
+  
   <!-- 재료 수정하기 -->
   <update id="ingreUpdate" parameterType="ingre">
   	update ingredients set ingre_label=#{ingreLabel}, ingre_type=#{ingreType}, ingre_cost15=#{ingreCost15}, ingre_cost30=#{ingreCost30}, ingre_kcal=#{ingreKcal}, ingre_active=#{ingreActive}, ingre_unit=#{ingreUnit}, ingre_description=#{ingreDescription}, ingre_filepath=#{ingreFilepath} where ingre_idx=#{ingreIdx}

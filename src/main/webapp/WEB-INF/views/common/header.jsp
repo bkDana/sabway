@@ -21,7 +21,20 @@
 <title>진짜 메인</title>
 </head>
 <body>
-	<%if(request.getRequestURL().toString().split("/")[5].equals("main.jsp")){%>
+<%
+	String[] pname = request.getRequestURL().toString().split("/");
+	String p6 = "";
+	//String p7 = "";
+	if(pname.length==7){
+		p6 = pname[6];
+	}
+	/* 
+	if(pname.length==8){
+		p7 = pname[7];
+	}
+	 */
+%>
+	<%if(pname[5].equals("main.jsp")){%>
 	<div class="banner">
 		<button type="button" class="close-btn"><img src="/resources/img/main_top_line_banner_closebtn.png" ></button>
 		<a href="#">
@@ -29,8 +42,8 @@
 		</a>
 	</div>
 	<script>
+		/* 상단 배너 닫기 버튼 */
 		$('.close-btn').click(function(){
-			console.log('클릭');
 			$('.banner').hide();
 		});
 	</script>
@@ -40,7 +53,16 @@
 		</div>
 		<div id="headerInnerWrap">
 			<!-- 로고 -->
-			<div class="header-logo"><a href="/"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a></div>
+			<div class="header-logo">
+				<a href="/" class="sabway"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a>
+				<ul class="header-menu clearfix">
+					<li><a class="header-btn">매장찾기</a></li>
+					<li><a class="header-btn">가맹신청 · 문의</a></li>
+					<li><a class="header-btn">고객센터</a></li>
+					<li><a href="/admin.do" class="header-btn">관리자</a>
+					</li>
+				</ul>
+			</div>
 			<!-- 헤더 상단 -->
 			<div id="headerInner" class="clearfix">
 				<!-- 주메뉴 -->
@@ -48,12 +70,12 @@
 					<div id="gnbBg"></div>
 					<ul class="clearfix">
 						<li class="gnb01">
-							<a href="/menu1.do">메뉴소개</a>
+							<a href="/menu1.do" class="<%if(pname[5].equals("menu")){%>on<%}%>">메뉴소개</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="#">샌드위치</a></li>
-									<li><a href="#">찹샐러드</a></li>
-									<li><a href="#">추가토핑</a></li>
+									<li><a href="/menu1.do" class="<%if(p6.equals("menu1.jsp")){%>on<%}%>">샌드위치</a></li>
+									<li><a href="/menu2.do" class="<%if(p6.equals("menu2.jsp")){%>on<%}%>">찹샐러드</a></li>
+									<li><a href="/menu3.do" class="<%if(p6.equals("menu3.jsp")){%>on<%}%>">추가토핑</a></li>
 									<li><a href="#">사이드/음료</a></li>
 									<li><a href="#">단체메뉴</a></li>
 									<li><a href="#">신선한 재료 소개</a></li>
@@ -61,21 +83,21 @@
 							</div>
 						</li>
 						<li class="gnb02">
-							<a href="#">이용방법</a>
+							<a href="/cusOrder.do">온라인 주문</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="#">써브웨이 이용방법</a></li>
+									<li><a href="/cusOrder.do">주문하기</a></li>
 									<li><a href="#">단체메뉴 이용방법</a></li>
 								</ul>
 							</div>
 						</li>
 						<li class="gnb03">
-							<a href="#">새소식</a>
+							<a href="/notice.do?currentPage=1" class="<%if(pname[5].equals("notice")||pname[5].equals("qna")||pname[5].equals("review")){%>on<%}%>">새소식</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="/notice.do?currentPage=1">공지사항/이벤트</a></li>
-									<li><a href="/qna.do?currentPage=1">Q&A</a></li>
-									<li><a href="/review.do?currentPage=1">리뷰</a></li>
+									<li><a href="/notice.do?currentPage=1" class="<%if(pname[5].equals("notice")){%>on<%}%>">공지사항/이벤트</a></li>
+									<li><a href="/qna.do?currentPage=1" class="<%if(pname[5].equals("qna")){%>on<%}%>">Q&A</a></li>
+									<li><a href="/review.do?currentPage=1" class="<%if(pname[5].equals("review")){%>on<%}%>">리뷰</a></li>
 								</ul>
 							</div>
 						</li>

@@ -121,8 +121,10 @@ body { background-color:#fff; }
 
 
 #header .header-logo{display:block; text-align:center; }
-#header .header-logo a{display:block; width:200px; height:70px; text-align:center; line-height:70px;position:absolute;left:45%;top:30px;z-index:100;}
-
+#header .header-logo a.sabway{display:block; width:200px; height:70px; text-align:center; line-height:70px;position:absolute;left:45%;top:30px;z-index:100;}
+#header .header-logo ul.header-menu{position: absolute;right: 420px;top: 40px; z-index:100;}
+#header .header-logo ul.header-menu li{float: left; margin-right: 5px;}
+#header .header-logo a.header-btn{display: block;border: 1px solid #dddddd;border-radius: 50px;height: 28px; line-height: 28px;background-color: #fff;color: #666666;font-size: 13px;letter-spacing: -0.02em;padding: 0 13px; cursor: pointer;}
  
 /* header :: 부가 메뉴 */
 .header-util{position:relative; z-index:100; float:right;}
@@ -153,12 +155,14 @@ body { background-color:#fff; }
 #gnb > ul{text-align:center; }
 #gnb > ul > li{position:relative; display:inline-block; min-width:180px;}
 #gnb > ul > li > a{position:relative; z-index:100; display:block; height:70px; line-height:70px; text-align:center; color:#292929; font-size:18px; font-weight:bold;}
+#gnb > ul > li > a.on{color:#009223;}
 
 /* GNB :: 2차 전체메뉴 */
 #gnb > ul > li .gnb-2dep{display:none; position:absolute; top0:70px; left:0; z-index:99; width:100%; height:200px; text-align:center; }
 #gnb > ul > li .gnb-2dep ul{padding:15px 0; }
 #gnb > ul > li .gnb-2dep ul li{position:relative; padding:10px;}
 #gnb > ul > li .gnb-2dep ul li a{display:block; text-align:center; font-size:15px; color:#666; letter-spacing: -0.05em;}
+#gnb > ul > li .gnb-2dep ul li a.on{color:#009223; text-decoration: underline;}
 
 /* ****************** 서브비주얼 ********************** */
 #subVisual{width:100%; height:200px; background:url(/img/sub_visual09.jpg) no-repeat center top;}

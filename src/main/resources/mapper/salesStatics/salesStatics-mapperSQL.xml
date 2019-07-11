@@ -7,4 +7,11 @@
 		where cuso_order_state=2 and substr(cuso_order_date,1,2)=to_char(sysdate,'yy') 
 		group by cube (cuso_branch, substr(cuso_order_date,4,2))
 	</select>
+	
+	<!-- 전체 매출페이지에서 선택한 월의 지점별 매출 -->
+	<select id="monthTotalSales" parameterType="string" resultType="graph">
+		select cuso_branch as cusoBranch, sum(cuso_total_cost) as totalCost  from cusorder 
+		where cuso_order_state=2 and substr(cuso_order_date,1,2)=to_char(sysdate,'yy') and substr(cuso_order_date,4,2)=#{orderMonth} group by cuso_branch
+		 order by totalCost desc, cusoBranch
+	</select>
 </mapper>

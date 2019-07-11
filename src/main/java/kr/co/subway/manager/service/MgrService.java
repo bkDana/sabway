@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.subway.headOffice.dao.ApplyDAO;
 import kr.co.subway.manager.dao.MgrDAO;
 import kr.co.subway.manager.vo.Mgr;
+import kr.co.subway.manager.vo.PageNo;
 
 @Service("mgrservice")
 public class MgrService {
@@ -75,8 +76,12 @@ public class MgrService {
 		}
 		return list;
 	}
-	public List<Mgr> pageMore(){
-		List<Mgr> list = mgrdao.pageMore();
+	public List<Mgr> morePage(PageNo pn){
+		List<Mgr> list = mgrdao.morePage(pn);
+		return list;
+	}
+	public List<Mgr> pageMore(PageNo pn){
+		List<Mgr> list = mgrdao.pageMore(pn);
 		return list;
 	}
 	

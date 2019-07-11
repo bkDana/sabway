@@ -1,21 +1,34 @@
 package kr.co.subway.manager.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import kr.co.subway.manager.service.AddrCode;
 import kr.co.subway.manager.service.AddrType;
 import kr.co.subway.manager.service.MgrService;
 import kr.co.subway.manager.service.RandomTel;
 import kr.co.subway.manager.vo.Mgr;
+import kr.co.subway.manager.vo.PageNo;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class MgrController {
@@ -173,22 +186,75 @@ public class MgrController {
 		return mav;
 	}
 	@RequestMapping(value="/mgrPage.do")
-	public String page() {
-		return "manager/test";
-	}
-	@RequestMapping(value="/mgrPageMore.do")
-	public ModelAndView pageMore(@RequestParam int moreNo) {
-		int index = 10;
-		index += moreNo;
-		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.pageMore();
+	public ModelAndView page() {
+		PageNo pn = new PageNo();
+		pn.setFirstPage(1);
+		pn.setLastPage(10);
+		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.morePage(pn);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
-			for(int i=index;i>=list.size();i++) {
-				mav.addObject("list",list);
-				mav.setViewName("manager/test");
-			}
+			mav.addObject("pn",pn);
+			mav.addObject("list",list);
+			mav.setViewName("manager/test");
 		}
 		return mav;
+	}
+	@ResponseBody
+	@RequestMapping(value="/mgrPageMore.do")
+	public void pageMore(HttpServletResponse response,@RequestParam int firstPage) {
+		PageNo pn = new PageNo();
+		pn.setFirstPage(firstPage+1);
+		pn.setLastPage(firstPage+10);		
+		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.pageMore(pn);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		JsonObject obj = new JsonObject();
+		String mgrNo="";
+		String mgrId="";
+		String mgrBossName="";
+		String mgrName="";
+		String mgrAddr="";
+		String mgrEnrollDate="";
+		String mgrTel="";
+		String mgrStatus="";
+		for(int i=0;i<list.size();i++) {
+			if(i!=list.size()-1) {
+				mgrNo += list.get(i).getMgrNo()+",";
+				mgrId += list.get(i).getMgrId()+",";
+				mgrBossName += list.get(i).getMgrBossName()+",";
+				mgrName += list.get(i).getMgrName()+",";
+				mgrAddr += list.get(i).getMgrAddr()+",";
+				mgrTel += list.get(i).getMgrTel()+",";
+				mgrEnrollDate += list.get(i).getMgrEnrollDate()+",";
+				mgrStatus += list.get(i).getMgrStatus()+",";
+			}else{
+				mgrNo += list.get(i).getMgrNo();
+				mgrId += list.get(i).getMgrId();
+				mgrBossName += list.get(i).getMgrBossName();
+				mgrName += list.get(i).getMgrName();
+				mgrAddr += list.get(i).getMgrAddr();
+				mgrTel += list.get(i).getMgrTel();
+				mgrEnrollDate += list.get(i).getMgrEnrollDate();
+				mgrStatus += list.get(i).getMgrStatus();
+				
+			}
+			
+		}
+		obj.addProperty("mgrNo", mgrNo);
+		obj.addProperty("mgrId", mgrId);
+		obj.addProperty("mgrBossName", mgrBossName);
+		obj.addProperty("mgrName", mgrName);
+		obj.addProperty("mgrAddr", mgrAddr);
+		obj.addProperty("mgrTel", mgrTel);
+		obj.addProperty("mgrEnrollDate", mgrEnrollDate);
+		obj.addProperty("mgrStatus", mgrStatus);
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(new Gson().toJson(obj));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//신규가맹점 목록
