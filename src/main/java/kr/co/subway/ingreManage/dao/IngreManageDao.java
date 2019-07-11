@@ -77,6 +77,15 @@ public class IngreManageDao {
 			return sqlSession.selectList("ingre.ingreListExcel",map);
 		}
 
+	// 재료 하나 골라오기
+		public IngreVo ingreSelectOne(IngreVo ingreVo) {
+			return sqlSession.selectOne("ingre.selectOneIngre",ingreVo);
+		}
+	// 재료 타입 골라서 리스트 만들기
+		public List<IngreVo> selectIngreList(IngreVo ingreVo) {
+			return sqlSession.selectList("ingre.selectIngreList",ingreVo);
+		}
+
 
 	
 }

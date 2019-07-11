@@ -106,7 +106,7 @@ $('#itemType').change(function(){
 
 /* 재료 추가하기 */
 function add(){
-//$('.add-btn').click(function(){
+
 	var item_idx = $('#item option:selected').val();
 	if(item_idx == ''){
 		alert('추가할 재료를 선택하세요');
@@ -128,11 +128,20 @@ function add(){
 		var cnt = $('#item_tbl tbody').children('tr').length+1;
 		var add = '';
 		add += '<tr><td><input type="hidden" name="idx_'+cnt+'" value="'+item_idx+'"><input type="text" name="name_'+cnt+'" class="short" value="'+item_name+'"readonly></td>';
-		add += '<td><input type="text" name="amount_'+cnt+'" class="short"></td>';
+		add += '<td><input type="text" name="amount_'+cnt+'" class="short num"></td>';
 		add += '<td><button type="button" class="del-btn" onclick="remove(this);">삭제</button></td></tr>';
 		$('#item_tbl tbody').append(add);
 	}
-//});
+	
+	$('input[type=text].num').keyup(function(){
+		var num = $(this).val();
+		var check = /^[0-9]*$/;
+		if(!check.test(num)){
+			alert('숫자만 입력해 주세요');
+			$(this).val('');
+		}
+	});
+
 }
 
 /* 추가한 item 삭제하기 */

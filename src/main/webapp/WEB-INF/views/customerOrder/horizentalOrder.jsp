@@ -35,11 +35,11 @@ var myform=new formtowizard({
 			
 			<fieldset class="sectionwrap">
 				<legend>치즈</legend>
-				<label for="아메리칸"><img alt="아메리칸" src="/resources/img/recipe/img_recipe_c01.jpg"></label> 
-				<input type="radio" class="hide" id="아메리칸" name="cheese" value="0">
+				<label for="아메리칸치즈"><img alt="아메리칸" src="/resources/img/recipe/img_recipe_c01.jpg"></label> 
+				<input type="radio" class="hide" id="아메리칸치즈" name="cheese" value="0">
 				
-				<label for="슈레드"><img alt="슈레드" src="/resources/img/recipe/img_recipe_c02.jpg"></label> 
-				<input type="radio" class="hide" id="슈레드" name="cheese" value="1">
+				<label for="슈레드치즈"><img alt="슈레드" src="/resources/img/recipe/img_recipe_c02.jpg"></label> 
+				<input type="radio" class="hide" id="슈레드치즈" name="cheese" value="1">
 				
 				<label for="선택안함"><span>선택안함</span></label> 
 				<input type="radio" id="선택안함" name="cheese" value="-1">
@@ -47,11 +47,13 @@ var myform=new formtowizard({
 			<fieldset class="sectionwrap">
 				<legend>추가토핑</legend>
 				<label for="선택안함"><span>선택안함</span></label> 
-				<input type="checkbox" id="선택안함" name="toppingRef" value="-1"> 
+				<input type="checkbox" id="선택안함" name="toppingRef" value="-1"><br>
+				<!-- <label for="초기화"><span>초기화</span></label> 
+				<input type="checkbox" id="초기화" name="toppingReset">  -->
 				<label for="더블업"><img alt="더블업" src="/resources/img/topping/img_toppping_01.jpg"></label>
 				<input type="checkbox" class="hide" id="더블업" name="toppingRef" value="0"> 
-				<label for="쉬림프더블업"><img alt="쉬림프더블업" src="/resources/img/topping/img_toppping_03.jpg"></label>
-				<input type="checkbox" class="hide" id="쉬림프더블업" name="toppingRef" value="1"> 
+				<label for="쉬림프"><img alt="쉬림프더블업" src="/resources/img/topping/img_toppping_03.jpg"></label>
+				<input type="checkbox" class="hide" id="쉬림프" name="toppingRef" value="1"> 
 				<label for="에그마요"><img alt="에그마요" src="/resources/img/topping/img_toppping_04.jpg"></label> 
 				<input type="checkbox" class="hide" id="에그마요" name="toppingRef" value="2">
 				<label for="오믈렛"><img alt="오믈렛" src="/resources/img/topping/img_toppping_05.jpg"></label> 
@@ -130,6 +132,7 @@ var myform=new formtowizard({
 				<legend>소스</legend>
 				<label for="선택안함"><span>선택안함</span></label> 
 				<input type="checkbox" id="선택안함" name="sourceRef" value="-1">
+				<br>
 				<label for="랜치"><img alt="랜치" src="/resources/img/recipe/img_recipe_s01.jpg"></label> 
 				<input type="checkbox" class="hide" id="랜치" name="sourceRef" value="0">
 				<label for="마요"><img alt="마요" src="/resources/img/recipe/img_recipe_s02.jpg"></label> 
@@ -168,6 +171,7 @@ var myform=new formtowizard({
 				<legend>사이드메뉴</legend>
 				<label for="선택안함"><span>선택안함</span></label> 
 				<input type="checkbox" id="선택안함" name="sideRef" value="-1">
+				<br>
 				<label for="브로콜리체다수프"><img alt="브로콜리체다수프" src="/resources/img/side/img_sides_01.jpg"></label> 
 				<input type="checkbox" class="hide" id="브로콜리체다수프" name="sideRef" value="0">
 				<label for="베이크포테이토수프"><img alt="베이크포테이토수프" src="/resources/img/side/img_sides_02.jpg"></label> 
@@ -196,9 +200,24 @@ var myform=new formtowizard({
 				<label for="감자칩세트"><span>감자칩세트</span></label><input type="radio" id="감자칩세트" name="set" value="0"> 
 				<label for="쿠키세트"><span>쿠키세트</span></label><input type="radio" id="쿠키세트" name="set" value="1">
 			</fieldset>
-			<div id="test" style="width:100%; height:150px; background-color:red;">
+			<div id="test" style="width:100%; height:150px; background-color:white;">
 				<h3>장바구니 영역</h3>
-				
+				<div id="orderAjax">
+					<span id="ajaxMain"></span>&nbsp;<span id="ajaxBread"></span>&nbsp;<span id="ajaxIs15"></span>
+					&nbsp;<span id="ajaxCheese"></span>&nbsp;<span id="ajaxTopping"></span>&nbsp;<span id="ajaxIsOvened"></span>
+					&nbsp;<span id="ajaxVegi"></span>&nbsp;<span id="ajaxSource"></span>&nbsp;<span id="ajaxSide"></span>&nbsp;<span id="ajaxSet"></span>
+					<br>
+					<select class="hide">
+						<option>수량</option>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+					</select>
+				</div>
+				<div id="costWrapper"><span id="totalCost"></span><br></div>
 				<div id="btn-wrapper" style="width:400px; margin-left:400px; background-color:orange;">
 					<button type="submit">주문</button>
 					<button type="button">추가주문</button>
@@ -209,5 +228,6 @@ var myform=new formtowizard({
 </section>
 <!-- 이 스크립트는 아래에 있어야 작동함 -->
 <script src="/resources/js/hor.js" type="text/javascript"></script> 
+<script src="/resources/js/cusOrderAjax.js" type="text/javascript"></script>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

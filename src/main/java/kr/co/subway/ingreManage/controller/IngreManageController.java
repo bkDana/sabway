@@ -264,6 +264,34 @@ public class IngreManageController {
 	}
 	
 	
+	//고객 주문 페이지에 재료 일부 리스트 로드
+	@ResponseBody
+	@RequestMapping(value="/selectMainList.do")
+	public void selectMainList(HttpServletResponse response, @RequestParam String ingreId, @RequestParam String ingreType) throws JsonIOException, IOException {
+		IngreVo ingreVo = new IngreVo();
+		ingreVo.setIngreLabel(ingreId);
+		ingreVo.setIngreType(ingreType);
+		ArrayList<IngreVo> list = ingreService.selectIngreList(ingreVo);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+	}
+	
+	//고객 주문 페이지에서 재료 정보 로드하기
+	@ResponseBody
+	@RequestMapping(value="/selectOneIngre.do")
+	public void selectOneIngre(HttpServletResponse response, @RequestParam String ingreId, @RequestParam String ingreType) throws JsonIOException, IOException {
+		IngreVo ingreVo = new IngreVo();
+		ingreVo.setIngreLabel(ingreId);
+		ingreVo.setIngreType(ingreType);
+		IngreVo ingre = ingreService.selectOneIngre(ingreVo);
+		System.out.println(ingre.getIngreIdx());
+		System.out.println(ingre.getIngreLabel());
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(ingre,response.getWriter());
+	}
+	
 	
 	
 	

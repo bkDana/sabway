@@ -89,5 +89,16 @@ $(function(){
     $('.regMorder').datepicker('setDate', 'today+1');
 
     
+    /* 숫자만 입력 */
+
+	$('input[type=text].num').keyup(function(){
+		var num = $(this).val();
+		var check = /^[0-9]*$/;
+		if(!check.test(num)){
+			alert('숫자만 입력해 주세요');
+			$(this).val('');
+		}
+	});
+
 
 });

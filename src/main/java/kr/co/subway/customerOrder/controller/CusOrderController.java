@@ -38,11 +38,17 @@ public class CusOrderController {
 		System.out.println("side : " + side);
 		System.out.println("whichSet : " + set);
 		HttpSession session = request.getSession(false);
+		int cusoIdx = -1;
 		Customer c = (Customer)session.getAttribute("customer");
-		int cusoIdx = c.getCustomerNo();
-		Bucket buc = new Bucket(0/*bucIdx*/, cusoIdx, Integer.parseInt(bread), Integer.parseInt(main), Integer.parseInt(vegi), Integer.parseInt(cheese), Integer.parseInt(source),
-				Integer.parseInt(topping), Integer.parseInt(side), Integer.parseInt(isSalad), Integer.parseInt(isOvened), Integer.parseInt(set), 
-				8000/*cost*/, 0/*discntRate*/, 500/*Kcal*/, 1/*quantity*/, null/*Date*/);
+		if(c == null) { // 비회원이 주문할 때
+			session.invalidate(); 
+		} else {
+			cusoIdx = c.getCustomerNo();
+		}
+		
+		//tset code
+		Bucket buc = new Bucket(0/*bucIdx*/, cusoIdx, bread, main, vegi, cheese, source, topping, side, isSalad, isOvened, set, 
+				8000/*cost*/, 0.0/*discntRate*/, 500/*Kcal*/, 1/*quantity*/, null/*Date*/);
 		int result = cusOrderService.insertCusOrder(buc);
 		if(result>0) {
 			return "/customerOrder/bucketSuccess";
@@ -52,4 +58,5 @@ public class CusOrderController {
 		
 	}
 	
+
 }

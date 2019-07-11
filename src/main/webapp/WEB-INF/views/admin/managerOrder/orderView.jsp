@@ -34,7 +34,7 @@
 				</tr>
 			</table>
 			<br><br><br><br><br><br>
-			<p class="sub-title">발주 내역</p>
+			<p class="comm-content-tit">발주 내역</p>
 			<table class="comm-tbl">
 				<colgroup>
 					<col width="80%">
@@ -65,6 +65,17 @@
 
 <script>
 function update(no,st){
+	if(st==4){
+		if(!confirm('취소하시겠습니까?')){
+			return;
+		}
+	}
+	if(st==2){
+		if(!confirm('출고하시겠습니까?')){
+			return;
+		}
+	}
+	
 	$.ajax({
 		url : '/managerOrder/updateState.do',
 		data : {no:no,st:st},
@@ -80,6 +91,7 @@ function update(no,st){
 		}
 		
 	});
+	
 	
 }
 </script>

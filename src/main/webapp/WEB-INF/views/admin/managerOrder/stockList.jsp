@@ -44,7 +44,7 @@
 				</label>
 					<span>${stock.ingreLabel }</span>
 					<span>
-						<input type="text" class="short" value="${stock.mStock }" data-idx="${stock.mStockIdx }" data-pre="${stock.mStock }" > ${stock.ingreUnit }<c:if test="${empty stock.ingreUnit }">개</c:if>
+						<input type="text" class="short num" value="${stock.mStock }" data-idx="${stock.mStockIdx }" data-pre="${stock.mStock }" > ${stock.ingreUnit }<c:if test="${empty stock.ingreUnit }">개</c:if>
 						<button type="button" class="update-btn" >수정</button>
 					</span>
 					<span><button type="button" class="detail-btn" onclick="location.href='/managerOrder/stockHistory.do?no=${stock.mStockIdx }';">상세</button></span>

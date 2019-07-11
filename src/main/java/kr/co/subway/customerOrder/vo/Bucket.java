@@ -6,16 +6,16 @@ import java.sql.Date;
 public class Bucket {
 	private int bucIdx;
 	private int bucCusoIdx;
-	private int bucBread;
-	private int bucMain;
-	private int bucVegi;
-	private int bucCheese;
-	private int bucSource;
-	private int bucTopping;
-	private int bucSide;
-	private int bucIsSalad;
-	private int bucIsOvened;
-	private int bucSet;
+	private String bucBread;
+	private String bucMain;
+	private String bucVegi;
+	private String bucCheese;
+	private String bucSource;
+	private String bucTopping;
+	private String bucSide;
+	private String bucIsSalad;
+	private String bucIsOvened;
+	private String bucSet;
 	private int bucCost;
 	private double bucDiscntRate;
 	private int bucKcal;
@@ -25,9 +25,9 @@ public class Bucket {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Bucket(int bucIdx, int bucCusoIdx, int bucBread, int bucMain, int bucVegi, int bucCheese, int bucSource,
-			int bucTopping, int bucSide, int bucIsSalad, int bucIsOvened, int bucSet, int bucCost, double bucDiscntRate,
-			int bucKcal, int bucQuantity, Date bucRegDate) {
+	public Bucket(int bucIdx, int bucCusoIdx, String bucBread, String bucMain, String bucVegi, String bucCheese,
+			String bucSource, String bucTopping, String bucSide, String bucIsSalad, String bucIsOvened, String bucSet,
+			int bucCost, double bucDiscntRate, int bucKcal, int bucQuantity, Date bucRegDate) {
 		super();
 		this.bucIdx = bucIdx;
 		this.bucCusoIdx = bucCusoIdx;
@@ -59,64 +59,64 @@ public class Bucket {
 	public void setBucCusoIdx(int bucCusoIdx) {
 		this.bucCusoIdx = bucCusoIdx;
 	}
-	public int getBucBread() {
+	public String getBucBread() {
 		return bucBread;
 	}
-	public void setBucBread(int bucBread) {
+	public void setBucBread(String bucBread) {
 		this.bucBread = bucBread;
 	}
-	public int getBucMain() {
+	public String getBucMain() {
 		return bucMain;
 	}
-	public void setBucMain(int bucMain) {
+	public void setBucMain(String bucMain) {
 		this.bucMain = bucMain;
 	}
-	public int getBucVegi() {
+	public String getBucVegi() {
 		return bucVegi;
 	}
-	public void setBucVegi(int bucVegi) {
+	public void setBucVegi(String bucVegi) {
 		this.bucVegi = bucVegi;
 	}
-	public int getBucCheese() {
+	public String getBucCheese() {
 		return bucCheese;
 	}
-	public void setBucCheese(int bucCheese) {
+	public void setBucCheese(String bucCheese) {
 		this.bucCheese = bucCheese;
 	}
-	public int getBucSource() {
+	public String getBucSource() {
 		return bucSource;
 	}
-	public void setBucSource(int bucSource) {
+	public void setBucSource(String bucSource) {
 		this.bucSource = bucSource;
 	}
-	public int getBucTopping() {
+	public String getBucTopping() {
 		return bucTopping;
 	}
-	public void setBucTopping(int bucTopping) {
+	public void setBucTopping(String bucTopping) {
 		this.bucTopping = bucTopping;
 	}
-	public int getBucSide() {
+	public String getBucSide() {
 		return bucSide;
 	}
-	public void setBucSide(int bucSide) {
+	public void setBucSide(String bucSide) {
 		this.bucSide = bucSide;
 	}
-	public int getBucIsSalad() {
+	public String getBucIsSalad() {
 		return bucIsSalad;
 	}
-	public void setBucIsSalad(int bucIsSalad) {
+	public void setBucIsSalad(String bucIsSalad) {
 		this.bucIsSalad = bucIsSalad;
 	}
-	public int getBucIsOvened() {
+	public String getBucIsOvened() {
 		return bucIsOvened;
 	}
-	public void setBucIsOvened(int bucIsOvened) {
+	public void setBucIsOvened(String bucIsOvened) {
 		this.bucIsOvened = bucIsOvened;
 	}
-	public int getBucSet() {
+	public String getBucSet() {
 		return bucSet;
 	}
-	public void setBucSet(int bucSet) {
+	public void setBucSet(String bucSet) {
 		this.bucSet = bucSet;
 	}
 	public int getBucCost() {
@@ -149,6 +149,5 @@ public class Bucket {
 	public void setBucRegDate(Date bucRegDate) {
 		this.bucRegDate = bucRegDate;
 	}
-	
 	
 }	

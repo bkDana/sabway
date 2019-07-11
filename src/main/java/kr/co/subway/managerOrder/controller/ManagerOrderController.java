@@ -81,11 +81,7 @@ public class ManagerOrderController {
 
 		SimpleDateFormat tt = new SimpleDateFormat("yyyyMMddHHmmss");
 		String mOrderNo = mOrderManagerId+"_"+tt.format(new Date());
-		/*
-		System.out.println(mOrderNo);
-		System.out.println(mOrderDelDate);
-		System.out.println(mOrderManagerId);
-		*/
+
 		ArrayList<ManagerItemVO> itemList = new ArrayList<ManagerItemVO>();
 		int cnt = 0;
 		for(int i=1;;i++) {
@@ -93,11 +89,7 @@ public class ManagerOrderController {
 			if(idx==null || idx.equals("")) break;			
 			String name = request.getParameter("name_"+i);
 			String amount = request.getParameter("amount_"+i);
-			/*
-			System.out.println("인덱스"+idx);
-			System.out.println("상품명"+name);
-			System.out.println("수량"+amount);
-			*/
+
 			itemList.add(new ManagerItemVO(0, mOrderNo, Integer.parseInt(idx), name, Integer.parseInt(amount)));
 			cnt = i;
 		}
@@ -170,8 +162,9 @@ public class ManagerOrderController {
 		search.setDelDay(endDay);
 		
 		/* 재고 수량 추가 */
-		int result2 = service.addStock(search);
-		System.out.println("추가된 재고 : "+result2);
+		//int result2 = 
+		service.addStock(search);
+		//System.out.println("추가된 재고 : "+result2);
 		
 		
 		/* 발주서 상태 도착으로 변경 */
