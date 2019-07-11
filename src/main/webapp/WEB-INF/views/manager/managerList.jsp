@@ -81,7 +81,7 @@
 				<th style="text-align:center;">가게이름</th>
 				<th style="text-align:center;">주소</th>
 				<th style="text-align:center;">전화번호</th>
-				<th style="text-align:center;">개업일</th>
+				<th style="text-align:center;">가입일</th>
 				<th style="text-align:center;">상태</th>
 				<th style="text-align:center;">상태변경</th>
 			</tr>
@@ -118,7 +118,16 @@
 				</c:if>
 			</c:forEach>
 		</table>
-		<br><br>
+		<br>
+		<hr>
+		<%-- <c:if test="${mgr.size }"> --%>
+		<div style="text-align:center;">
+			<input type="hidden" name="moreNo" value=10>
+			<button type="button" name="more" >더보기(More)</button>
+		</div>
+		<%-- </c:if> --%>
+		<hr>
+		<br>
 		<span name="selectBox">
 			<select name="statusGroup">
 				<option selected="selected" disabled="disabled">상태 분류</option>
@@ -169,6 +178,16 @@
 		$("[name=statusGroup]").on("change",function(){
 			var keyword = $(this).val();
 			location.href="/selectStatus.do?keyword="+keyword;
+		});
+		$("[name=more]").on("click",function(){
+			var moreNo = $(this).prev().val();
+			$.ajax({
+				url:"mgrPageMore.do",
+				data:{moreNo:moreNo},
+				success:function(data){
+					
+				}
+			});
 		});
 	});
 </script>

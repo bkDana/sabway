@@ -198,7 +198,7 @@ var myform=new formtowizard({
 			</fieldset>
 			<div id="test" style="width:100%; height:150px; background-color:red;">
 				<h3>장바구니 영역</h3>
-				
+				<div id="orderAjax"></div>
 				<div id="btn-wrapper" style="width:400px; margin-left:400px; background-color:orange;">
 					<button type="submit">주문</button>
 					<button type="button">추가주문</button>

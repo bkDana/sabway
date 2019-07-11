@@ -13,7 +13,12 @@
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
+		
 		<div class="common-tbl-box">
+		<div class="like-img-box">
+			<div class="like-inner-box">1000<br><br>Likes</div>
+			<div class="like-inner-box"><img class="like-img" src="/resources/img/emptyheart.png"></div>
+		</div>
 			<table class="comm-tbl">
 			<colgroup>
 				<col width="15%">
@@ -21,6 +26,7 @@
 				<col width="15%">
 				<col width="35%">
 			</colgroup>
+			
 			 	<c:forEach items="${reviewList }" var="review" varStatus="status">
 			 		<c:if test="${review.reviewNo eq reviewNo }">
 			 		<c:set var = "currentIndex" value = "${status.index}"/>
@@ -134,7 +140,25 @@
 				}
 			}
 		}
+		$('.like-img').click(function(){
+			if($('.like-img').attr("src")=="/resources/img/emptyheart.png"){
+				$('.like-img').attr("src","/resources/img/fullheart.png");
+				$.ajax({
+					url: "/likeInsert.do", // 클라이언트가 요청을 보낼 서버의 URL 주소
+
+				    data: { likeCount: "홍길동" },                // HTTP 요청과 함께 서버로 보낼 데이터
+
+				    type: "GET",                             // HTTP 요청 방식(GET, POST)
+
+				    dataType: "json"                         // 서버에서 보내줄 데이터의 타입
+				});
+			}else{
+				$('.like-img').attr("src","/resources/img/emptyheart.png");
+			}
+			
+		});
 	});
+	
 </script>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

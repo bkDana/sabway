@@ -24,16 +24,16 @@ public class SalesStaticsController {
 	@Autowired
 	private SalesStaticsService service;
 	
-	@RequestMapping("/goChart.do")
-	public String goChart() {
-		return "admin/salesStatics/branchSales";
+	@RequestMapping("/goTotalSales.do")
+	public String goTotalSales() {
+		return "admin/salesStatics/totalSales";
 	}
 
-	//그래프 테스트
+	//전체 매출 가져오기
 	@ResponseBody
-	@RequestMapping("/getSales.do")
-	public void getSales(HttpServletResponse response) throws JsonIOException, IOException {
-		ArrayList<SalesStaticsGrpVo> list = service.getSales();
+	@RequestMapping("/totalSales.do")
+	public void totalSales(HttpServletResponse response) throws JsonIOException, IOException {
+		ArrayList<SalesStaticsGrpVo> list = service.totalSales();
 		/*Map<String,String> map = H
 		for(int i=0;i<list.size();i++) {
 			if()
@@ -45,8 +45,27 @@ public class SalesStaticsController {
 		new Gson().toJson(list,response.getWriter());
 	}
 	
+	//전체 매출페이지에서 선택한 월의 지점별 매출
+	@ResponseBody
+	@RequestMapping("/monthTotalSales.do")
+	public void monthTotalSales(String month,HttpServletResponse response) throws JsonIOException, IOException {
+		String orderMonth = month.substring(0,month.length()-1);
+		System.out.println(orderMonth);
+		ArrayList<SalesStaticsGrpVo> list = service.monthTotalSales(orderMonth);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+	}
+	
+	//지점별 매출통계 페이지로 가기
+	@RequestMapping("/goBranchSales.do")
+	public String goBranchSales() {
+		return "admin/salesStatics/branchSales";
+	}
+	
+	
 	//매출 가져오기
-	@RequestMapping("/totalSales.do")
+	/*@RequestMapping("/totalSales.do")
 	public ModelAndView totalSales(ModelAndView mav, HttpServletRequest request) {
 		ArrayList<SalesStaticsGrpVo> list = service.getSales();
 		if(!list.isEmpty()) {
@@ -56,5 +75,5 @@ public class SalesStaticsController {
 			mav.setViewName("common/error");
 		}
 		return mav;
-	}
+	}*/
 }

@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -170,6 +169,38 @@ public class MgrController {
 			mav.setViewName("manager/mgrList");
 		}else {
 			mav.setViewName("manager/listFail");
+		}
+		return mav;
+	}
+	@RequestMapping(value="/mgrPage.do")
+	public String page() {
+		return "manager/test";
+	}
+	@RequestMapping(value="/mgrPageMore.do")
+	public ModelAndView pageMore(@RequestParam int moreNo) {
+		int index = 10;
+		index += moreNo;
+		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.pageMore();
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			for(int i=index;i>=list.size();i++) {
+				mav.addObject("list",list);
+				mav.setViewName("manager/test");
+			}
+		}
+		return mav;
+	}
+	
+	//신규가맹점 목록
+	@RequestMapping(value="/findStore.do")
+	public ModelAndView newStoreList() {
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list", list);
+			mav.setViewName("findStore/findStore");
+		}else {
+			mav.setViewName("manager/listMsg");
 		}
 		return mav;
 	}
