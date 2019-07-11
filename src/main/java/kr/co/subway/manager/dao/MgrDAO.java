@@ -1,14 +1,12 @@
 package kr.co.subway.manager.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.manager.vo.Mgr;
+import kr.co.subway.manager.vo.PageNo;
 
 @Repository("mgrdao")
 public class MgrDAO {
@@ -33,9 +31,11 @@ public class MgrDAO {
 	}
 	//가맹점 상태변경
 	public int mgrUpdate(Mgr mgr) {
+		//영업으로 변경시킬때
 		if(mgr.getMgrStatus()==2) {
 			return session.update("mgr.mgrOpenUpdate",mgr);
 		}
+		//폐업
 		return session.update("mgr.mgrUpdate",mgr);
 	}
 	//검색어 검색(name)
@@ -61,5 +61,11 @@ public class MgrDAO {
 	//searchStore 검색
 	public List<Mgr> searchStore(String keyword){
 		return session.selectList("mgr.searchStore",keyword);
+	}
+	public List<Mgr> morePage(PageNo pn){
+		return session.selectList("mgr.pageMore",pn);
+	}
+	public List<Mgr> pageMore(PageNo pn){
+		return session.selectList("mgr.pageMore",pn);
 	}
 }

@@ -84,8 +84,17 @@ public class IngreManageService {
 	}
 
 	//엑셀 다운로드할  리스트 가져오기
-		public List ingreList(String searchType, String searchVal) {
-			return ingreDao.ingreSelectAll(searchType, searchVal);
-		}
+	public List ingreList(String searchType, String searchVal) {
+		return ingreDao.ingreSelectAll(searchType, searchVal);
+	}
+
+	//재료 하나 select
+	public IngreVo selectOneIngre(IngreVo ingreVo) {
+		return ingreDao.ingreSelectOne(ingreVo);
+	}
+	//재료 타입 골라 리스트
+	public ArrayList<IngreVo> selectIngreList(IngreVo ingreVo) {
+		return (ArrayList<IngreVo>)ingreDao.selectIngreList(ingreVo);
+	}
 
 }

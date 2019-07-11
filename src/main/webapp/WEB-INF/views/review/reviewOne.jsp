@@ -13,7 +13,12 @@
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
+		
 		<div class="common-tbl-box">
+		<div class="like-img-box">
+			<div class="like-inner-box"></div>
+			<div class="like-inner-box"><img class="like-img" src="/resources/img/emptyheart.png"></div>
+		</div>
 			<table class="comm-tbl">
 			<colgroup>
 				<col width="15%">
@@ -21,11 +26,12 @@
 				<col width="15%">
 				<col width="35%">
 			</colgroup>
+			
 			 	<c:forEach items="${reviewList }" var="review" varStatus="status">
 			 		<c:if test="${review.reviewNo eq reviewNo }">
 			 		<c:set var = "currentIndex" value = "${status.index}"/>
 						<tr>
-							<th style="display:none;">${review.reviewNo }</th>
+							<th id="reviewNo" style="display:none;">${review.reviewNo }</th>
 							<th>${review.reviewWriter }</th>
 							<th>${review.reviewTitle }</th>
 							<th>${review.reviewLike }</th>
@@ -134,7 +140,28 @@
 				}
 			}
 		}
+		$('.like-img').click(function(){
+			var reviewNo = $('#reviewNo').text();
+			if($('.like-img').attr("src")=="/resources/img/emptyheart.png"){
+				$('.like-img').attr("src","/resources/img/fullheart.png");
+				$.ajax({
+					url: "/likeInsert.do", // 클라이언트가 요청을 보낼 서버의 URL 주소
+
+				    data: { likeStatus: 1, reviewNo : reviewNo },                // HTTP 요청과 함께 서버로 보낼 데이터
+
+				    type: "GET",                             // HTTP 요청 방식(GET, POST)
+					success : function(data){
+						alert("데이터 왓음"+data);
+						$('.like-inner-box').eq(0).html(data.result+"<br><br>Likes");
+					}
+				});
+			}else{
+				$('.like-img').attr("src","/resources/img/emptyheart.png");
+			}
+			
+		});
 	});
+	
 </script>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

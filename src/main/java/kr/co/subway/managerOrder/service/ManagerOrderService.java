@@ -27,7 +27,7 @@ public class ManagerOrderService {
 		int total = 0;
 		total = dao.totalCount(search);
 		
-		int pageNum = 3;
+		int pageNum = 10;
 		int totalPage = (total%pageNum==0)?(total/pageNum):(total/pageNum)+1;
 		search.setStart((reqPage*pageNum-pageNum)+1);
 		search.setEnd(reqPage*pageNum);
@@ -59,7 +59,7 @@ public class ManagerOrderService {
 		 */
 		
 		/* 새 거 */
-		int totalNavi = 3;
+		int totalNavi = 10;
 		String pageNavi = "";
 		int pageNo = ((reqPage-1)/totalNavi)*totalNavi+1;
 		if(reqPage != 1) {
@@ -75,7 +75,7 @@ public class ManagerOrderService {
 			}
 			pageNo++;
 		}
-		if(reqPage!=totalPage) {
+		if(reqPage!=totalPage && totalPage!=0) {
 			pageNavi += "<a class='paging-arrow next-arrrow' href='javascript:list("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		
@@ -137,13 +137,13 @@ public class ManagerOrderService {
 			
 			chkAmount++;
 		}
-		
+		/*
 		if(result==chkAmount) {
 			System.out.println("재고 모두 추가 완료");
 		}else {
 			System.out.println("안맞는데");
 		}
-		
+		*/
 		return result;
 	}
 }

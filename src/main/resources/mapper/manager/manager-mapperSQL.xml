@@ -162,6 +162,23 @@
 		,mgr_boss_name as mgrBossName
 		,mgr_open_date as mgrOpenDate
 		from manager where mgr_addr like '%'||#{keyword}||'%'
-	
 	</select>
+	<select id="pageMore" parameterType="kr.co.subway.manager.vo.PageNo" resultType="mgr">
+	   select mgr_no as mgrNo
+	      ,mgr_id as mgrId
+	      ,mgr_pw as mgrPw
+	      ,mgr_name as mgrName
+	      ,mgr_tel as mgrTel
+	      ,mgr_post as mgrPost
+	      ,mgr_addr as mgrAddr
+	      ,mgr_level as mgrLevel
+	      ,mgr_status as mgrStatus
+	      ,mgr_enroll_date as mgrEnrollDate
+	      ,mgr_addr_code as mgrAddrCode
+	      ,mgr_boss_name as mgrBossName
+	      ,mgr_open_date as mgrOpenDate        
+	      from 
+	        (select rownum as rnum, m.* from (select * from manager order by mgr_no) m)
+	      where rnum between #{firstPage} and #{lastPage}
+   </select>
 </mapper>

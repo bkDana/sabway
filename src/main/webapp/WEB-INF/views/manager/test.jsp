@@ -3,77 +3,13 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
-<style>
-	input {
-		-webkit-box-shadow: 0 0 0 1000px white inset;
-		outline-style: none;
-		width:250px;
-		height:30px;
-		font-size:20px;
-	}
-	[name=searchBox]{
-		text-align:center;
-		margin-left: 20%;
-	}
-	select{
-		height:36px;
-		font-size:15px;
-	}
-	.onBtn,.offBtn{
-		width:50px;
-	    border: none;
-	    color:#fff;
-	    padding: 5px 0;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 15px;
-	    margin: 4px;
-	    cursor: pointer;
-	    height: 35px;
-	}
-	.onBtn{
-		background-color: #f8585b;
-	}
-	.offBtn{
-		background-color: #122322;
-	}
-	[name=searchBtn]{
-		background-color: gray;
-		width:50px;
-	    border: none;
-	    color:#fff;
-	    padding: 5px 0;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 15px;
-	    margin: 4px;
-	    cursor: pointer;
-	    height: 35px;
-	}
-	[name=selectBox]{
-		width:100px;
-		margin-left: 10.6%;
-	}
-</style>
+
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
 		<div class="sub-menu">※ 매장관리 > 가맹점 목록</div>
 		<table class="comm-tbl" style="max-width:1200px">
-			<colgroup>
-				<col width="5%">
-				<col width="10%">
-				<col width="7%">
-				<col width="14%">
-				<col width="20%">
-				<col width="10%">
-				<col width="8%">
-				<col width="6%">
-				<col width="15%">
-			</colgroup>	
 			<tr>
 				<th style="text-align:center;">번호</th>
 				<th style="text-align:center;">아이디</th>
@@ -118,32 +54,11 @@
 				</c:if>
 			</c:forEach>
 		</table>
-		<br>
-		<hr>
-		<%-- <c:if test="${mgr.size }"> --%>
-		<div style="text-align:center;">
-			<input type="hidden" name="moreNo" value=10>
-			<button type="button" name="more" >더보기(More)</button>
+		<div class="common-tbl-btn-group">
+			<input type="hidden" value=${pn.lastPage }>
+			<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
 		</div>
-		<%-- </c:if> --%>
-		<hr>
-		<br>
-		<span name="selectBox">
-			<select name="statusGroup">
-				<option selected="selected" disabled="disabled">상태 분류</option>
-				<option id="open">영업</option>
-				<option id="prepare">준비</option>
-				<option id="close">폐업</option>
-			</select>&nbsp;
-		</span>
-		<span name="searchBox">
-			<select name="selectKeyword">
-				<option id="name">이름</option>
-				<option id="addr">주소</option>
-			</select>&nbsp;
-			<input type="text">
-			<button type="button" name="searchBtn">검색</button>
-		</span>
+		<br><br>
 	</div>
 </section>
 <script type="text/javascript">
@@ -180,14 +95,38 @@
 			location.href="/selectStatus.do?keyword="+keyword;
 		});
 		$("[name=more]").on("click",function(){
-			var moreNo = $(this).prev().val();
-			$.ajax({
-				url:"mgrPageMore.do",
-				data:{moreNo:moreNo},
-				success:function(data){
-					
-				}
-			});
+			var firstPage = $(this).prev().val();	
+			var chkIdx = firstPage+10;
+			if(1 < 21){
+				$.ajax({
+					url:"/mgrPageMore.do",
+					data:{firstPage:firstPage},
+					dataType:"json",
+					success:function(data){
+						var noArr = (data.mgrNo).split(',');
+						var idArr = (data.mgrId).split(',');
+						var bossNameArr = (data.mgrBossName).split(',');
+						var nameArr = (data.mgrName).split(',');
+						var addrArr = (data.mgrAddr).split(',');
+						var telArr = (data.mgrTel).split(',');
+						var enrollDateArr = (data.mgrEnrollDate).split(',');
+						var statusArr = (data.mgrStatus).split(',');
+						for(var i=0;i<10;i++){
+							if(statusArr[i] == 1){
+								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;'>"+"준비중"+"</td><td style='text-align:center;'></td></tr>";
+							}else if(statusArr[i] == 2){
+								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;'>"+"영업중"+"</td><td style='text-align:center;'></td></tr>";
+							}else if(statusArr[i] == 3){
+								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;'>"+"폐업"+"</td><td style='text-align:center;'></td></tr>";
+							}
+								
+							$('table').append(str);
+						}
+					}
+				});
+			}else if(1 > 21){
+				$("[name=more]").attr("type",'hidden');
+			}
 		});
 	});
 </script>

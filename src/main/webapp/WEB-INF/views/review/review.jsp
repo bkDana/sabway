@@ -13,9 +13,8 @@
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
-		<h1 class="comm-content-tit">공지사항/이벤트</h1>
+		<h1 class="comm-content-tit">리뷰</h1>
 		<div class="common-tbl-box">
-			
 			<table class="comm-tbl">
 			<colgroup>
 				<col width="15%">

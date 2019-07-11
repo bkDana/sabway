@@ -103,4 +103,12 @@ public class NoticeDao {
 	public int reviewDelete(int reviewNo){
 		return sqlSession.delete("notice.reviewDelete", reviewNo);
 	}
+	
+	public int likeUpInsert(int reviewNo){
+		return sqlSession.delete("notice.likeUpInsert", reviewNo);
+	}
+	
+	public int likeDownInsert(int reviewNo){
+		return sqlSession.delete("notice.likeDownInsert", reviewNo);
+	}
 }
