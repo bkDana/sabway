@@ -102,7 +102,7 @@ public class ManagerOrderVO {
 	public void setMgrName(String mgrName) {
 		this.mgrName = mgrName;
 	}
-	
+
 	
 	
 	

@@ -27,6 +27,8 @@ input[type=checkbox]{width: 15px;height: 15px;}
 #sub > ul > li{position:relative; display:inline-block; min-width:100px; }
 #sub > ul > li > a{position:relative;  display:block; height:70px; line-height:70px; text-align:center; color:#fff; font-size:15px;z-index:100;}
 #sub > ul > li > a:hover{color:#ffce32; border-bottom:4px solid #ffce32;}
+#sub > ul > li > a.on{color:#ffce32; border-bottom:4px solid #ffce32;}
+
 
 .sub-menu-title{position:absolute;left:650px; top:270px; color:#fff; font-size:16px;  text-align: center; margin: 0 auto; min-width: 600px;}
 .sub-menu-title p:first-child{font-size:70px; font-weight:bolder;}
@@ -56,7 +58,7 @@ input[type=checkbox]{width: 15px;height: 15px;}
 .stock-list > li span:first-child{text-align: left;}
 .stock-list > li span:nth-child(3){height: 40px;line-height: 20px;}
 .stock-list > li span:nth-child(3), .stock-list > li span:nth-child(4){font-size: 15px;}
-.stock-list input[type='text']{padding:2px 7px; border:1px solid #ddd; border-radius:4px; width:15%;text-align: center;font-size: 17px;font-weight: bold;}
+.stock-list input[type='text']{padding:2px 7px; border:1px solid #ddd; border-radius:4px; width:20%;text-align: center;font-size: 17px;font-weight: bold;}
 
 
 /* ****************** 메뉴 리스트 ********************** */

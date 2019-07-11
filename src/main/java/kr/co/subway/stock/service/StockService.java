@@ -53,7 +53,7 @@ public class StockService {
 			pageNavi += "<a class='paging-arrow next-arrrow' href='javascript:list("+pageNo+");'><img src='/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		*/
-		int totalNavi = 5;
+		int totalNavi = 10;
 		String pageNavi = "";
 		int pageNo = ((reqPage-1)/totalNavi)*totalNavi+1;
 		if(reqPage != 1) {
@@ -69,7 +69,7 @@ public class StockService {
 			}
 			pageNo++;
 		}
-		if(reqPage!=totalPage) {
+		if(reqPage!=totalPage && totalPage!=0) {
 			pageNavi += "<a class='paging-arrow next-arrrow' href='javascript:list("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 
