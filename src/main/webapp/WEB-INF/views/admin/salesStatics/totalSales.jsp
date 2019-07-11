@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script>
-<!-- <script src="https://code.highcharts.com/highcharts.src.js"></script>	하이차트 사용하기 -->
-<script src="https://code.highcharts.com/highcharts.src.js"></script>	<!-- 하이차트 사용하기 -->
-<!-- <script type="text/javascript" src="/resources/js/highcharts/highcharts.js"></script> -->
+ <script src="https://code.highcharts.com/highcharts.src.js"></script>	<!-- 하이차트 사용하기 -->
 
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />

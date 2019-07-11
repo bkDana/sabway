@@ -92,7 +92,7 @@
 							</div>
 						</li>
 						<li class="gnb07">
-							<a href="/salesStatics/goChart.do">매출통계</a>
+							<a href="/salesStatics/totalSales.do">매출통계</a>
 						</li>
 					</ul>
 				</nav>
