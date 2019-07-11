@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -184,7 +183,7 @@ public class MgrController {
 		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.pageMore();
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
-			for(int i=index ;i>list.size();i++) {
+			for(int i=index;i>=list.size();i++) {
 				mav.addObject("list",list);
 				mav.setViewName("manager/test");
 			}

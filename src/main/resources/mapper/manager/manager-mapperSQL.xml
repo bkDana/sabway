@@ -129,7 +129,7 @@
 		from manager
 		where mgr_boss_name like '%'||#{mgrBossName}||'%' and mgr_status = #{mgrStatus}
 	</select>
-	<select id="searchStatusName" parameterType="_int" resultType="mgr">
+	<select id="pageMore" parameterType="_int" resultType="mgr">
 		select mgr_no as mgrNo
 		,mgr_id as mgrId
 		,mgr_pw as mgrPw
