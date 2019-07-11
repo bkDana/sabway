@@ -88,4 +88,10 @@
 	<delete id="reviewDelete" parameterType="_int">
 		delete from review where review_no=#{reviewNo}
 	</delete>
+	<update id="likeUpInsert" parameterType="_int">
+		update review set review_like = ((select review_like from review where review_no=#{reviewNo})+1) where review_no=#{reviewNo}
+	</update>
+	<update id="likeDownInsert" parameterType="_int">
+		update review set review_like = ((select review_like from review where review_no=#{reviewNo})-1) where review_no=#{reviewNo}
+	</update>
 </mapper>

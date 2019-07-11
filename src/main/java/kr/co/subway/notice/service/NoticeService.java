@@ -180,4 +180,14 @@ public class NoticeService {
 	public int reviewDelete(int reviewNo){
 		return noticeDao.reviewDelete(reviewNo);
 	}
+	
+	@Transactional
+	public int likeUpInsert(int reviewNo){
+		return noticeDao.likeUpInsert(reviewNo);
+	}
+	
+	@Transactional
+	public int likeDownInsert(int reviewNo){
+		return noticeDao.likeDownInsert(reviewNo);
+	}
 }

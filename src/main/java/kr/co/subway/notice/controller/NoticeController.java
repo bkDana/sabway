@@ -18,15 +18,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import kr.co.subway.notice.service.NoticeService;
 import kr.co.subway.notice.vo.Notice;
 import kr.co.subway.notice.vo.PageNaviData;
 import kr.co.subway.notice.vo.Qna;
 import kr.co.subway.notice.vo.Review;
+import net.sf.json.JSONObject;
 
 @Controller
 public class NoticeController {
@@ -571,5 +575,27 @@ public class NoticeController {
 			System.out.println("삭제 실패");
 		}
 		return "redirect:/review.do?currentPage=1";
+	}
+	
+	@ResponseBody
+    @RequestMapping(value="/likeInsert.do",produces="text/html;charset=utf-8")
+	public String likeInsert(@RequestParam int reviewNo, @RequestParam int likeStatus) {
+		int result = 0;
+		if (likeStatus == 1) {
+			result = noticeService.likeUpInsert(reviewNo);
+		}else {
+			result = noticeService.likeDownInsert(reviewNo);
+		}
+		Review r = noticeService.reviewSelectOne(reviewNo);
+		JSONObject obj = new JSONObject(); // json사용해서 보내기
+		if (r != null) {
+			// return "0";
+			obj.put("result", r.getReviewLike());
+		} else {
+			// return "1"; //그냥 이렇게 보내면 String로 인식하기 때문에 @ResponseBody를 써서 데이터 0,1 자체를 넘겨주는
+			// 것 @ResponseBody를 써야 아작스를 쓸수있음
+			obj.put("result", "fail");
+		}
+		return new Gson().toJson(obj);
 	}
 }
