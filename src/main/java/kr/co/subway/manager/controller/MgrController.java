@@ -173,4 +173,19 @@ public class MgrController {
 		}
 		return mav;
 	}
+	
+	//신규가맹점 목록
+	@RequestMapping(value="/findStore.do")
+	public ModelAndView newStoreList() {
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list", list);
+			mav.setViewName("findStore/findStore");
+		}else {
+			mav.setViewName("manager/listMsg");
+		}
+		return mav;
+	}
+	
 }
