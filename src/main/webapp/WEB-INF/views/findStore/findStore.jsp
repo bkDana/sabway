@@ -73,8 +73,10 @@
 									<ul class="store_list">
 										<c:forEach items="${list }" var="m">
 											<li>
-												<div class="region">서울특별시<strong>포이사거리</strong></div>
-												<div class="state coming">Coming Soon</div>
+												<div class="region">${m.mgrAddr }<strong>${m.mgrName }</strong></div>
+<%-- 												<c:if test="${m.m }"> --%>
+													<div class="state coming">Coming Soon</div>
+<%-- 												</c:if> --%>
 											</li>
 										</c:forEach>
 									</ul>
