@@ -1,13 +1,12 @@
 package kr.co.subway.manager.dao;
 
 import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.manager.vo.Mgr;
+import kr.co.subway.manager.vo.PageNo;
 
 @Repository("mgrdao")
 public class MgrDAO {
@@ -55,7 +54,10 @@ public class MgrDAO {
 	public List<Mgr> searchStatusAddr(Mgr mgr){
 		return session.selectList("mgr.searchStatusAddr",mgr);
 	}
-	public List<Mgr> pageMore(){
-		return session.selectList("mgr.pageMore");
+	public List<Mgr> morePage(PageNo pn){
+		return session.selectList("mgr.pageMore",pn);
+	}
+	public List<Mgr> pageMore(PageNo pn){
+		return session.selectList("mgr.pageMore",pn);
 	}
 }

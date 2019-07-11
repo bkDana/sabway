@@ -54,10 +54,11 @@
 				</c:if>
 			</c:forEach>
 		</table>
-		<div style="text-align:center;">
-			<input type="hidden" name="moreNo" value=10>
-			<button type="button" name="more" >더보기(More)</button>
+		<div class="common-tbl-btn-group">
+			<input type="hidden" value=${pn.lastPage }>
+			<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
 		</div>
+		<br><br>
 	</div>
 </section>
 <script type="text/javascript">
@@ -94,14 +95,38 @@
 			location.href="/selectStatus.do?keyword="+keyword;
 		});
 		$("[name=more]").on("click",function(){
-			var moreNo = $(this).prev().val();
-			$.ajax({
-				url:"mgrPageMore.do",
-				data:{moreNo:moreNo},
-				success:function(data){
-					
-				}
-			});
+			var firstPage = $(this).prev().val();	
+			var chkIdx = firstPage+10;
+			if(1 < 21){
+				$.ajax({
+					url:"/mgrPageMore.do",
+					data:{firstPage:firstPage},
+					dataType:"json",
+					success:function(data){
+						var noArr = (data.mgrNo).split(',');
+						var idArr = (data.mgrId).split(',');
+						var bossNameArr = (data.mgrBossName).split(',');
+						var nameArr = (data.mgrName).split(',');
+						var addrArr = (data.mgrAddr).split(',');
+						var telArr = (data.mgrTel).split(',');
+						var enrollDateArr = (data.mgrEnrollDate).split(',');
+						var statusArr = (data.mgrStatus).split(',');
+						for(var i=0;i<10;i++){
+							if(statusArr[i] == 1){
+								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;'>"+"준비중"+"</td><td style='text-align:center;'></td></tr>";
+							}else if(statusArr[i] == 2){
+								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;'>"+"영업중"+"</td><td style='text-align:center;'></td></tr>";
+							}else if(statusArr[i] == 3){
+								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;'>"+"폐업"+"</td><td style='text-align:center;'></td></tr>";
+							}
+								
+							$('table').append(str);
+						}
+					}
+				});
+			}else if(1 > 21){
+				$("[name=more]").attr("type",'hidden');
+			}
 		});
 	});
 </script>
