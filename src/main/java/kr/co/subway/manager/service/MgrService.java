@@ -1,8 +1,6 @@
 package kr.co.subway.manager.service;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -26,6 +24,7 @@ public class MgrService {
 		applydao.applyManagerUpdate(applyNo);
 		return result;
 	}
+	//가맹점 목록
 	public List<Mgr> mgrList() {
 		List<Mgr> list= mgrdao.mgrList();
 		return list;
@@ -34,5 +33,46 @@ public class MgrService {
 	public Mgr login(String mgrId) {
 		Mgr mgr = mgrdao.login(mgrId);
 		return mgr;
+	}
+	//가맹점 상태 변경(update)
+	@Transactional
+	public int mgrUpdate(Mgr mgr) {
+		int result = mgrdao.mgrUpdate(mgr);
+		return result;
+	}
+	//검색어 검색
+	public List<Mgr> searchList(String keyword, String text){
+		List<Mgr> list = null;
+		if(keyword.equals("이름")) {
+			list = mgrdao.searchBossName(text);
+		}else if(keyword.equals("주소")){
+			list = mgrdao.searchAddr(text);
+		}
+		return list;
+	}
+	//상태별 분류
+	public List<Mgr> selectStatus(String keyword){
+		List<Mgr> list = null;
+		if(keyword.equals("준비")) {
+			int status = 1;
+			list = mgrdao.selectStatus(status);
+		}else if(keyword.equals("영업")) {
+			int status = 2;
+			list = mgrdao.selectStatus(status);
+		}else if(keyword.equals("폐업")) {
+			int status = 3;
+			list = mgrdao.selectStatus(status);
+		}
+		return list;
+	}
+	//상태별 검색
+	public List<Mgr> searchStatus(String keyword,Mgr mgr){
+		List<Mgr> list = null;
+		if(keyword.equals("이름")) {
+			list = mgrdao.searchStatusName(mgr);
+		}else if(keyword.equals("주소")){
+			list = mgrdao.searchStatusAddr(mgr);
+		}
+		return list;
 	}
 }

@@ -107,9 +107,70 @@ public class MgrController {
 			mav.addObject("list", list);
 			mav.setViewName("manager/managerList");
 		}else {
-			mav.setViewName("manager/listMag");
+			mav.setViewName("manager/listMsg");
 		}
 		return mav;
 	}
-	
+	//가맹점 상태변경(update)
+	@RequestMapping(value="/mgrUpdate.do")
+	public String mgrUpdate(Mgr mgr) {
+		int result = mgrservice.mgrUpdate(mgr);
+		return "redirect:/listMgr.do";
+	}
+	//변경된 목록
+	@RequestMapping(value="/listMgr.do")
+	public ModelAndView listMgr() {
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list", list);
+			mav.setViewName("manager/managerList");
+		}else {
+			mav.setViewName("manager/listFail");
+		}
+		return mav;
+	}
+	//검색어 검색
+	@RequestMapping(value="/searchKeyword.do")
+	public ModelAndView searchKeyword(@RequestParam String keyword, @RequestParam String text) {
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.searchList(keyword,text);
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list", list);
+			mav.setViewName("manager/mgrList");
+		}else {
+			mav.setViewName("manager/listFail");
+		}
+		return mav;
+	}
+	//상태별 분류
+	@RequestMapping(value="/selectStatus.do")
+	public ModelAndView selectStatus(@RequestParam String keyword) {
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectStatus(keyword);
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list", list);
+			mav.setViewName("manager/statusList");
+		}else {
+			mav.setViewName("manager/listFail");
+		}
+		return mav;
+	}
+	//상태별 검색
+	@RequestMapping(value="/searchStatus.do")
+	public ModelAndView searchStatus(@RequestParam String keyword, @RequestParam String text, @RequestParam int status) {
+		Mgr mgr = new Mgr();
+		mgr.setMgrAddr(text);
+		mgr.setMgrBossName(text);
+		mgr.setMgrStatus(status);
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.searchStatus(keyword,mgr);
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list", list);
+			mav.setViewName("manager/mgrList");
+		}else {
+			mav.setViewName("manager/listFail");
+		}
+		return mav;
+	}
 }
