@@ -29,6 +29,12 @@ public class MgrService {
 		List<Mgr> list= mgrdao.mgrList();
 		return list;
 	}
+	
+	//신규가맹점 목록
+	public List<Mgr> newStoreList() {
+		List<Mgr> list= mgrdao.newStoreList();
+		return list;
+	}
 	//관리자 로그인
 	public Mgr login(String mgrId) {
 		Mgr mgr = mgrdao.login(mgrId);
@@ -49,6 +55,11 @@ public class MgrService {
 			list = mgrdao.searchAddr(text);
 		}
 		return list;
+	}
+	public List<Mgr> searchStore(String keyword){
+		List<Mgr> list = mgrdao.searchStore(keyword);
+		return list;
+		
 	}
 	//상태별 분류
 	public List<Mgr> selectStatus(String keyword){
@@ -75,4 +86,5 @@ public class MgrService {
 		}
 		return list;
 	}
+	
 }
