@@ -142,21 +142,33 @@
 		}
 		$('.like-img').click(function(){
 			var reviewNo = $('#reviewNo').text();
+			console.log(reviewNo);
 			if($('.like-img').attr("src")=="/resources/img/emptyheart.png"){
 				$('.like-img').attr("src","/resources/img/fullheart.png");
 				$.ajax({
 					url: "/likeInsert.do", // 클라이언트가 요청을 보낼 서버의 URL 주소
-
+					type: "GET",         
 				    data: { likeStatus: 1, reviewNo : reviewNo },                // HTTP 요청과 함께 서버로 보낼 데이터
-
-				    type: "GET",                             // HTTP 요청 방식(GET, POST)
+				    dataType : "json", 
 					success : function(data){
-						alert("데이터 왓음"+data);
+						console.log(data.result);
 						$('.like-inner-box').eq(0).html(data.result+"<br><br>Likes");
+						
 					}
 				});
 			}else{
 				$('.like-img').attr("src","/resources/img/emptyheart.png");
+				$.ajax({
+					url: "/likeInsert.do", // 클라이언트가 요청을 보낼 서버의 URL 주소
+					type: "GET",         
+				    data: { likeStatus: 0, reviewNo : reviewNo },                // HTTP 요청과 함께 서버로 보낼 데이터
+				    dataType : "json", 
+					success : function(data){
+						console.log(data.result);
+						$('.like-inner-box').eq(0).html(data.result+"<br><br>Likes");
+						
+					}
+				});
 			}
 			
 		});

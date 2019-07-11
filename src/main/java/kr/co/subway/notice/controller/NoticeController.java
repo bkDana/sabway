@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import kr.co.subway.notice.service.NoticeService;
 import kr.co.subway.notice.vo.Notice;
@@ -579,22 +580,25 @@ public class NoticeController {
 	
 	@ResponseBody
     @RequestMapping(value="/likeInsert.do",produces="text/html;charset=utf-8")
-	public String likeInsert(@RequestParam int reviewNo, @RequestParam int likeStatus) {
+	public String likeInsert(HttpServletResponse response , @RequestParam int reviewNo, @RequestParam int likeStatus) {
 		int result = 0;
 		if (likeStatus == 1) {
 			result = noticeService.likeUpInsert(reviewNo);
 		}else {
 			result = noticeService.likeDownInsert(reviewNo);
 		}
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
 		Review r = noticeService.reviewSelectOne(reviewNo);
-		JSONObject obj = new JSONObject(); // json사용해서 보내기
+		JsonObject obj = new JsonObject(); // json사용해서 보내기
+		System.out.println(r.getReviewLike());
 		if (r != null) {
 			// return "0";
-			obj.put("result", r.getReviewLike());
+			obj.addProperty("result", r.getReviewLike());
 		} else {
 			// return "1"; //그냥 이렇게 보내면 String로 인식하기 때문에 @ResponseBody를 써서 데이터 0,1 자체를 넘겨주는
 			// 것 @ResponseBody를 써야 아작스를 쓸수있음
-			obj.put("result", "fail");
+			obj.addProperty("result", "fail");
 		}
 		return new Gson().toJson(obj);
 	}
