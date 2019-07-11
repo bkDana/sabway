@@ -3,13 +3,13 @@ package kr.co.subway.sales.statics.vo;
 public class SalesStaticsGrpVo {
 	private String cusoBranch;		//지점명
 	private String orderMonth;		//판매일자(월)
-	private int totalCost;			//판매금액
+	private long totalCost;			//판매금액
 	private String ingredients;		//메뉴(재료)
 	public SalesStaticsGrpVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SalesStaticsGrpVo(String cusoBranch, String orderMonth, int totalCost, String ingredients) {
+	public SalesStaticsGrpVo(String cusoBranch, String orderMonth, long totalCost, String ingredients) {
 		super();
 		this.cusoBranch = cusoBranch;
 		this.orderMonth = orderMonth;
@@ -28,10 +28,10 @@ public class SalesStaticsGrpVo {
 	public void setOrderMonth(String orderMonth) {
 		this.orderMonth = orderMonth;
 	}
-	public int getTotalCost() {
+	public long getTotalCost() {
 		return totalCost;
 	}
-	public void setTotalCost(int totalCost) {
+	public void setTotalCost(long totalCost) {
 		this.totalCost = totalCost;
 	}
 	public String getIngredients() {
