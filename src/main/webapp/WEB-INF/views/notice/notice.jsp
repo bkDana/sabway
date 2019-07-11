@@ -38,14 +38,11 @@
 			</c:forEach>
 			
 			</table>
-			<div class="common-tbl-btn-group">
-				<button class="btn-style2 insert-notice">공지사항 작성하기</button>
-			</div>
-			<%-- <c:if test="${sessionScope.customer.customerId eq 'admin' }">
+			<c:if test="${sessionScope.manager.managerId eq 'admin' }">
 				<div class="common-tbl-btn-group">
 					<button class="btn-style2 insert-notice">공지사항 작성하기</button>
 				</div>
-			</c:if> --%>
+			</c:if>
 			<div class="paging">${pageNavi }</div>
 		</div>
 	</div>

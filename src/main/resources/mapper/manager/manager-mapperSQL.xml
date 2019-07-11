@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mgr">
 	<insert id="enrollMgr" parameterType="mgr">
-		insert into manager values(seq_mgr_no.nextval,#{mgrId}, #{mgrPw}, #{mgrName}, #{mgrTel}, #{mgrPost}, #{mgrAddr}, #{mgrLevel}, #{mgrStatus}, sysdate, #{mgrAddrCode}, #{mgrBossName})
+		insert into manager values(seq_mgr_no.nextval,#{mgrId}, #{mgrPw}, #{mgrName}, #{mgrTel}, #{mgrPost}, #{mgrAddr}, #{mgrLevel}, #{mgrStatus}, sysdate, #{mgrAddrCode}, #{mgrBossName}, sysdate)
 	</insert>
 	<select id="mgrList" resultType="mgr">
 		select mgr_no as mgrNo
@@ -17,6 +17,7 @@
 		,mgr_enroll_date as mgrEnrollDate
 		,mgr_addr_code as mgrAddrCode
 		,mgr_boss_name as mgrBossName
+		,mgr_open_date as mgrOpenDate
 		from manager
 	</select>
 	<select id="login" parameterType="string" resultType="mgr">
@@ -32,11 +33,15 @@
 		,mgr_enroll_date as mgrEnrollDate
 		,mgr_addr_code as mgrAddrCode
 		,mgr_boss_name as mgrBossName
+		,mgr_open_date as mgrOpenDate
 		from manager
 		where mgr_id = #{mgrId}
 	</select>
 	<update id="mgrUpdate" parameterType="mgr">
 		update manager set mgr_status = #{mgrStatus} where mgr_name = #{mgrName}
+	</update>
+	<update id="mgrOpenUpdate" parameterType="mgr">
+		update manager set mgr_status = #{mgrStatus}, mgr_open_date = sysdate where mgr_name = #{mgrName}
 	</update>
 	
 	<select id="searchBossName" parameterType="string" resultType="mgr">
@@ -52,6 +57,7 @@
 		,mgr_enroll_date as mgrEnrollDate
 		,mgr_addr_code as mgrAddrCode
 		,mgr_boss_name as mgrBossName
+		,mgr_open_date as mgrOpenDate
 		from manager
 		where mgr_boss_name like '%'||#{text}||'%'
 	</select>
@@ -68,6 +74,7 @@
 		,mgr_enroll_date as mgrEnrollDate
 		,mgr_addr_code as mgrAddrCode
 		,mgr_boss_name as mgrBossName
+		,mgr_open_date as mgrOpenDate
 		from manager
 		where mgr_addr like '%'||#{text}||'%'
 	</select>	
@@ -84,6 +91,7 @@
 		,mgr_enroll_date as mgrEnrollDate
 		,mgr_addr_code as mgrAddrCode
 		,mgr_boss_name as mgrBossName
+		,mgr_open_date as mgrOpenDate
 		from manager
 		where mgr_status = #{status}
 	</select>
@@ -100,6 +108,7 @@
 		,mgr_enroll_date as mgrEnrollDate
 		,mgr_addr_code as mgrAddrCode
 		,mgr_boss_name as mgrBossName
+		,mgr_open_date as mgrOpenDate
 		from manager
 		where mgr_addr like '%'||#{mgrAddr}||'%' and mgr_status = #{mgrStatus}
 	</select>
@@ -116,7 +125,24 @@
 		,mgr_enroll_date as mgrEnrollDate
 		,mgr_addr_code as mgrAddrCode
 		,mgr_boss_name as mgrBossName
+		,mgr_open_date as mgrOpenDate
 		from manager
 		where mgr_boss_name like '%'||#{mgrBossName}||'%' and mgr_status = #{mgrStatus}
+	</select>
+	<select id="pageMore" parameterType="_int" resultType="mgr">
+		select mgr_no as mgrNo
+		,mgr_id as mgrId
+		,mgr_pw as mgrPw
+		,mgr_name as mgrName
+		,mgr_tel as mgrTel
+		,mgr_post as mgrPost
+		,mgr_addr as mgrAddr
+		,mgr_level as mgrLevel
+		,mgr_status as mgrStatus
+		,mgr_enroll_date as mgrEnrollDate
+		,mgr_addr_code as mgrAddrCode
+		,mgr_boss_name as mgrBossName
+		,mgr_open_date as mgrOpenDate
+		from manager
 	</select>
 </mapper>

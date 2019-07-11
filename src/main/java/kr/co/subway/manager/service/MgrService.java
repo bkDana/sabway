@@ -75,4 +75,12 @@ public class MgrService {
 		}
 		return list;
 	}
+	public List<Mgr> pageMore(){
+		List<Mgr> list = mgrdao.pageMore();
+		return list;
+	}
+	
+	
+	
+	
 }
