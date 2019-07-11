@@ -81,7 +81,7 @@
 				<th style="text-align:center;">가게이름</th>
 				<th style="text-align:center;">주소</th>
 				<th style="text-align:center;">전화번호</th>
-				<th style="text-align:center;">개업일</th>
+				<th style="text-align:center;">가입일</th>
 				<th style="text-align:center;">상태</th>
 				<th style="text-align:center;">상태변경</th>
 			</tr>
