@@ -173,4 +173,27 @@ public class MgrController {
 		}
 		return mav;
 	}
+	@RequestMapping(value="/mgrPage.do")
+	public String page() {
+		return "manager/test";
+	}
+	@RequestMapping(value="/mgrPageMore.do")
+	public ModelAndView pageMore(@RequestParam int moreNo) {
+		int index = 10;
+		index += moreNo;
+		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.pageMore();
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			for(int i=index ;i>list.size();i++) {
+				mav.addObject("list",list);
+				mav.setViewName("manager/test");
+			}
+		}
+		return mav;
+	}
+	
+	
+	
+	
+	
 }

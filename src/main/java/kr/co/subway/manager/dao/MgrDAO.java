@@ -29,9 +29,11 @@ public class MgrDAO {
 	}
 	//가맹점 상태변경
 	public int mgrUpdate(Mgr mgr) {
+		//영업으로 변경시킬때
 		if(mgr.getMgrStatus()==2) {
 			return session.update("mgr.mgrOpenUpdate",mgr);
 		}
+		//폐업
 		return session.update("mgr.mgrUpdate",mgr);
 	}
 	//검색어 검색(name)
@@ -53,5 +55,8 @@ public class MgrDAO {
 	//statusAddr 검색
 	public List<Mgr> searchStatusAddr(Mgr mgr){
 		return session.selectList("mgr.searchStatusAddr",mgr);
+	}
+	public List<Mgr> pageMore(){
+		return session.selectList("mgr.pageMore");
 	}
 }
