@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- Header --%>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- Header --%>
+<jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 <script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
 <title>가맹점 신청</title>
 </head>
 
 <%-- Content --%>
-<section id="content-wrapper">
+<section id="content-wrapper" class="clearfix">
+	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="common-tbl-box">
-			<h1 class="comm-content-tit">신청 목록</h1>
+		<div class="sub-menu">※ 매장관리 > 가맹점 목록</div>
 			<table class="comm-tbl">
 				<tr>
 					<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
@@ -111,4 +111,4 @@
 </script>
 
 <%-- Footer --%>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />

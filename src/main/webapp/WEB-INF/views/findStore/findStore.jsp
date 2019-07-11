@@ -1,9 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<style>
+	.new_store_content{
+	    background-color: #f6f6f6;
+	    padding: 96px 0 100px;
+	    margin-bottom: 95px;
+	}
+	.content {
+	    max-width: 1170px;
+	    margin: 0 auto;
+	    position: relative;
+	}
+	.h_title {
+	    font-size: 28px;
+	    color: #292929;
+	    font-weight: bold;
+	    letter-spacing: -0.05em;
+	    padding-bottom: 38px;
+	}
+	.new_store_content .new_store_slider_wrapper {
+    	position: relative;
+	}
+</style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<!-- Map -->
 
+<!-- Map -->
 <section id="content-wrapper">
 
    <div class="store_search_wrapper">
@@ -35,9 +58,37 @@
       </div>
    </div>
 
-   <div class="map_wrap" style="width:100%;height:700px;">
-       <jsp:include page="/WEB-INF/views/map/map2.jsp" />
-   </div>
+	<div class="map_wrap" style="width:100%;height:700px;">
+		<jsp:include page="/WEB-INF/views/map/map2.jsp" />
+	</div>
+	<div class="new_store_content">
+		<div class="content">
+			<h3 class="h_title">신규매장안내</h3>
+			<div class="new_store_slider_wrapper">
+				<div class="new_store_slider_cont">
+					<div class="bx-wrapper" style="max-width: 100%;">
+						<div class="bx-viewport" aria-live="polite" style="width: 100%; overflow: hidden; position: relative; height: 374px;">
+							<ul class="new_store_slider" id="ui_new_franchise_list" style="width: 1215%; position: relative; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+								<li aria-hidden="false" style="float: left; list-style: none; position: relative; width: 1170px;">
+									<ul class="store_list">
+										<c:forEach items="${list }" var="m">
+											<li>
+												<div class="region">${m.mgrAddr }<strong>${m.mgrName }</strong></div>
+<%-- 												<c:if test="${m.m }"> --%>
+													<div class="state coming">Coming Soon</div>
+<%-- 												</c:if> --%>
+											</li>
+										</c:forEach>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="bx-controls bx-has-controls-direction bx-has-pager"><div class="bx-controls-direction"><a class="bx-prev disabled" href="">Prev</a><a class="bx-next disabled" href="">Next</a></div><div class="bx-pager bx-default-pager"><div class="bx-pager-item"><a href="" data-slide-index="0" class="bx-pager-link active">1</a></div></div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />

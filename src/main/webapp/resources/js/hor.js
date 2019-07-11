@@ -25,7 +25,7 @@
 /* 초기화(숨김 적용, 체크박스용 배열 초기화) */
 $(document).ready(function() {
 	//$('.hide').hide();
-	
+	//console.log($('input[name=toppingRef]:gt(0)'));
 	$toppingArr = ['0','0','0','0','0','0','0','0'];
 	$('input[name=topping]').val($toppingArr.join(""));
 	
@@ -56,18 +56,17 @@ $('input[name=isSalad]').click(function(){
 /* 추가토핑 데이터 처리 */
 $('input[name=toppingRef]').eq(0).change(function() {
 	if($(this).is(":checked")) {														//if:초기 선택자가 checked이면
-		$("input[name=toppingRef]:checkbox").each(function(index,item) {//foreach 시작
+		$("input[name=toppingRef]:gt(0)").each(function(index,item) {//foreach 시작
 			$(this).prop("checked", false);												//foreach 선택자들의 선택 프로퍼티 비활성화
 			$toppingArr[index] = "0"; 													//문자열로 쓸 배열 초기화
 		});//foreach 끝
-		$(this).prop("checked", true);													//초기 선택자의 선택 프로퍼티 활성화
-		$(this).siblings().filter($('input[name=toppingRef]')).attr("disabled",true);	//초기선택자 제외 나머지 선택 비활성화
+		$("input[name=toppingRef]:gt(0)").attr("disabled",true);						//초기선택자 제외 나머지 선택 비활성화
 		$('input[name=topping]').val($toppingArr.join("")); 							//컨트롤러로 보낼 문자열 초기화
 	} else {																			//else:초기 선택자가 checked가 아니면
 		$(this).siblings().filter($('input[name=toppingRef]')).attr("disabled",false);	//초기선택자 제외 나머지 선택 활성화	
 	}
 });
-$('input[name=toppingRef]:gt(0)').change(function(){									
+$('input[name=toppingRef]:gt(0)').change(function(){
 	refVal = $(this).val();																//초기선택자의 value
 	if($(this).is(":checked")) {														//if:초기 선택자가 checked이면
 		for(var index in $toppingArr) {//forin 시작($toppingArr사용)
@@ -76,6 +75,7 @@ $('input[name=toppingRef]:gt(0)').change(function(){
 			}
 		}// for-in ends
 		$('input[name=topping]').val($toppingArr.join(""));								//컨트롤러로 보낼 문자열 입력
+		console.log("topping : "+$('input[name=topping]').val());
 	} else {																			//else:초기 선택자가 checked가 아니면
 		for(var index in $toppingArr) {// for-in starts
 			if(index == refVal) {														//	if: index == refVal
@@ -83,6 +83,7 @@ $('input[name=toppingRef]:gt(0)').change(function(){
 			}
 		}// for-in ends
 		$('input[name=topping]').val($toppingArr.join(""));								//컨트롤러로 보낼 문자열 입력
+		console.log("topping : "+$('input[name=topping]').val());
 	}
 });
 
@@ -112,12 +113,11 @@ $('.vegiRef').filter($('input[type=radio]')).click(function(){
 /* 소스 데이터 처리 */
 $('input[name=sourceRef]').eq(0).change(function() {
 	if($(this).is(":checked")) {														//if:초기 선택자가 checked이면
-		$("input[name=sourceRef]:checkbox").each(function(index,item) {//foreach 시작
+		$("input[name=sourceRef]:gt(0)").each(function(index,item) {//foreach 시작
 			$(this).prop("checked", false);												//foreach 선택자들의 선택 프로퍼티 비활성화
 			$sourceArr[index] = "0"; 													//문자열로 쓸 배열 초기화
-		});//foreach 끝
-		$(this).prop("checked", true);													//초기 선택자의 선택 프로퍼티 활성화
-		$(this).siblings().filter($('input[name=sourceRef]')).attr("disabled",true);	//초기선택자 제외 나머지 선택 비활성화
+		});//foreach 끝												
+		$("input[name=sourceRef]:gt(0)").attr("disabled",true);							//초기선택자 제외 나머지 선택 비활성화
 		$('input[name=source]').val($sourceArr.join("")); 								//컨트롤러로 보낼 문자열 초기화
 	} else {																			//else:초기 선택자가 checked가 아니면
 		$(this).siblings().filter($('input[name=sourceRef]')).attr("disabled",false);	//초기선택자 제외 나머지 선택 활성화	
@@ -132,6 +132,7 @@ $('input[name=sourceRef]:gt(0)').change(function(){
 			}
 		}// for-in ends
 		$('input[name=source]').val($sourceArr.join(""));								//컨트롤러로 보낼 문자열 입력
+		console.log("source : "+$('input[name=source]').val());
 	} else {																			//else:초기 선택자가 checked가 아니면
 		for(var index in $sourceArr) {// for-in starts
 			if(index == refVal) {														//	if: index == refVal
@@ -139,19 +140,20 @@ $('input[name=sourceRef]:gt(0)').change(function(){
 			}
 		}// for-in ends
 		$('input[name=source]').val($sourceArr.join(""));								//컨트롤러로 보낼 문자열 입력
+		console.log("source : "+$('input[name=source]').val());
 	}
 });
 
 /* 사이드 데이터 처리 */
 $('input[name=sideRef]').eq(0).change(function() {
 	if($(this).is(":checked")) {														//if:초기 선택자가 checked이면
-		$("input[name=sideRef]:checkbox").each(function(index,item) {//foreach 시작
+		$("input[name=sideRef]:gt(0)").each(function(index,item) {//foreach 시작
 			$(this).prop("checked", false);												//foreach 선택자들의 선택 프로퍼티 비활성화
 			$sideArr[index] = "0"; 														//문자열로 쓸 배열 초기화
 		});//foreach 끝
-		$(this).prop("checked", true);													//초기 선택자의 선택 프로퍼티 활성화
-		$(this).siblings().filter($('input[name=sideRef]')).attr("disabled",true);		//초기선택자 제외 나머지 선택 비활성화
+		$("input[name=sideRef]:gt(0)").attr("disabled",true);							//초기선택자 제외 나머지 선택 비활성화
 		$('input[name=side]').val($sideArr.join("")); 									//컨트롤러로 보낼 문자열 초기화
+		console.log("side초기화 : "+$('input[name=side]').val());
 	} else {																			//else:초기 선택자가 checked가 아니면
 		$(this).siblings().filter($('input[name=sideRef]')).attr("disabled",false);		//초기선택자 제외 나머지 선택 활성화	
 	}
@@ -165,15 +167,19 @@ $('input[name=sideRef]:gt(0)').change(function(){
 			}
 		}																				//for-in ends
 		$('input[name=side]').val($sideArr.join(""));									//컨트롤러로 보낼 문자열 입력
+		console.log("side : "+$('input[name=side]').val());
 	} else {																			//else:초기 선택자가 checked가 아니면
 		for(var index in $sideArr) {// for-in starts
 			if(index == refVal) {														//	if: index == refVal
 				$sideArr[index] = "0";													//$sourceArr[index]에 "0"
 			}
 		}// for-in ends
-		$('input[name=source]').val($sideArr.join(""));									//컨트롤러로 보낼 문자열 입력
+		$('input[name=side]').val($sideArr.join(""));									//컨트롤러로 보낼 문자열 입력
+		console.log("side : "+$('input[name=side]').val());
 	}
 });
+
+
 
 
 /* 샌드위치/샐러드 주재료 태그문자열 */

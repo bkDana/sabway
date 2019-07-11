@@ -87,7 +87,7 @@
 			</tr>
 			<c:forEach items="${list }" var="mgr" varStatus="i">
 				<c:if test="${mgr.mgrLevel != 1}">
-				<!-- 본점 제외하고 가맹점만 출력 -->
+					<!-- 본점 제외하고 가맹점만 출력 -->
 					<tr>
 						<td style="text-align:center;">${i.count }</td>
 						<td style="text-align:center;">${mgr.mgrId }</td>
@@ -118,16 +118,7 @@
 				</c:if>
 			</c:forEach>
 		</table>
-		<br>
-		<hr>
-		<%-- <c:if test="${mgr.size }"> --%>
-		<div style="text-align:center;">
-			<input type="hidden" name="moreNo" value=10>
-			<button type="button" name="more" >더보기(More)</button>
-		</div>
-		<%-- </c:if> --%>
-		<hr>
-		<br>
+		<br><br>
 		<span name="selectBox">
 			<select name="statusGroup">
 				<option selected="selected" disabled="disabled">상태 분류</option>
@@ -169,25 +160,15 @@
 			var keyword = $(this).parent().children().eq(0).val();
 			var text = $(this).prev().val();
 			if(keyword == "이름"){
-				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text+"$status="+status;
 			}else if(keyword == "주소"){
-				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
+				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text+"$status="+status;
 			}
 		});
 		//상태별 분류
 		$("[name=statusGroup]").on("change",function(){
 			var keyword = $(this).val();
 			location.href="/selectStatus.do?keyword="+keyword;
-		});
-		$("[name=more]").on("click",function(){
-			var moreNo = $(this).prev().val();
-			$.ajax({
-				url:"mgrPageMore.do",
-				data:{moreNo:moreNo},
-				success:function(data){
-					
-				}
-			});
 		});
 	});
 </script>

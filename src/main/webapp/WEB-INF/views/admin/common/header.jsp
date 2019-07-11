@@ -92,7 +92,7 @@
 							</div>
 						</li>
 						<li class="gnb07">
-							<a href="/jqplotTest/test.jsp">매출통계</a>
+							<a href="/salesStatics/totalSales.do">매출통계</a>
 						</li>
 					</ul>
 				</nav>

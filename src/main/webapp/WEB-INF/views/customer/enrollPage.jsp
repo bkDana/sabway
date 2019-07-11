@@ -118,18 +118,13 @@
 <script>
 
 // 이메일 인증
-$("#emailChkBtn").click(function(){
-	   var email = $("#email").val();
-	   console.log(email);
-	   var url="/emailAuth.do";
-	   var pop=window.open("emailAuth.jsp","emailAuth","width=400,height=300");
-	   pop.location.href=url+"?email="+email;
-	   console.log(emailcertification);
-	    if(insert[0]){
-	         $("#emailMsg").css("display","block");
-	         $("#emailMsg").html("이메일 인증 완료");
-	      }
-	})
+	$("#emailChkBtn").click(function(){
+		   var email = $("#email").val();
+		   console.log(email);
+		   var url="/emailAuth.do";
+		   var pop=window.open("emailAuth.jsp","emailAuth","width=400,height=300");
+		   pop.location.href=url+"?email="+email;
+		})
 ///////////////////////////////중복확인
    //아이디 중복확인
    $("#idChk").click(function(){
@@ -150,6 +145,7 @@ $("#emailChkBtn").click(function(){
                $("#isChk").val("0");
             }else{
                alert("사용가능한 아이디입니다.");
+               $("#idChk").css("background","#009223");
                $("#isChk").val("1");
             }
          },
@@ -178,6 +174,7 @@ $("#emailChkBtn").click(function(){
                   $("#isChk").val("0");
                }else{
                   alert("사용가능한 닉네임입니다.");
+                  $("#nickChk").css("background","#009223");
                   $("#isChk").val("1");
                }
             },
@@ -190,9 +187,15 @@ $("#emailChkBtn").click(function(){
    
    // 가입하기 버튼
    $("#btnSubmit").click(function(){
-      if(isChk()){
-         $("#enrollForm").submit();
-      }
+	   if($('#eTxt').hasClass("checkSuccess")){
+		   
+		   if(isChk()){
+		         $("#enrollForm").submit();
+		   }
+	   }else{
+		   alert("인증되지 않은 이메일입니다.");
+	   }
+      
    });
    
    $("#emailEx").change(function(){
@@ -373,7 +376,6 @@ $("#emailChkBtn").click(function(){
 	               }else{
 	            	   $("#emailMsg").html("사용가능한 이메일 입니다");
 		               $("#emailMsg").css("color", "green");
-		               $("#isChk").val("0");
 		               $(".emailBtn1").prop("disabled", false);
 	   
 	                  return;
