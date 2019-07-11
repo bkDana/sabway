@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 	.new_store_content{
 	    background-color: #f6f6f6;
@@ -64,7 +65,25 @@
 		<div class="content">
 			<h3 class="h_title">신규매장안내</h3>
 			<div class="new_store_slider_wrapper">
-			
+				<div class="new_store_slider_cont">
+					<div class="bx-wrapper" style="max-width: 100%;">
+						<div class="bx-viewport" aria-live="polite" style="width: 100%; overflow: hidden; position: relative; height: 374px;">
+							<ul class="new_store_slider" id="ui_new_franchise_list" style="width: 1215%; position: relative; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+								<li aria-hidden="false" style="float: left; list-style: none; position: relative; width: 1170px;">
+									<ul class="store_list">
+										<c:forEach items="${list }" var="m">
+											<li>
+												<div class="region">서울특별시<strong>포이사거리</strong></div>
+												<div class="state coming">Coming Soon</div>
+											</li>
+										</c:forEach>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="bx-controls bx-has-controls-direction bx-has-pager"><div class="bx-controls-direction"><a class="bx-prev disabled" href="">Prev</a><a class="bx-next disabled" href="">Next</a></div><div class="bx-pager bx-default-pager"><div class="bx-pager-item"><a href="" data-slide-index="0" class="bx-pager-link active">1</a></div></div></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
