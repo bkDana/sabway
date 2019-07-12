@@ -45,6 +45,7 @@
 					<th>칼로리</th>
 					<th>등록일</th>
 					<th>활성화 여부</th>
+					<th>이미지</th>
 					<th>수정/삭제</th>
 				</tr>
 				<c:forEach items="${ingreList}" var="list">
@@ -80,6 +81,11 @@
 								<option value="1">활성화</option>
 								<option value="0">비활성화</option>
 							</select>
+						</td>
+						<td>
+							<c:if test="${not empty list.ingreFilepath }">
+								<img src="/resources/upload/ingredients/${list.ingreFilepath }" width="50px" height="50px">
+							</c:if>
 						</td>
 						<td>
 							<button class="add-btn" onclick="location.href='/ingreManage/goIngreUpdate.do?ingreIdx=${list.ingreIdx}'">수정</button>
