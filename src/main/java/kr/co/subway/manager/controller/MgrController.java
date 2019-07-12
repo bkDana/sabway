@@ -1,14 +1,16 @@
 package kr.co.subway.manager.controller;
 
+import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -265,13 +267,60 @@ public class MgrController {
 	//신규가맹점 목록
 	@RequestMapping(value="/findStore.do")
 	public ModelAndView newStoreList() {
-		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.newStoreList();
+		ArrayList<Integer> listDate = new ArrayList<Integer>();
+		for(int i=0; i<list.size(); i++){
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+			Date today = new Date();
+			if(list.get(i).getMgrOpenDate()!=null) {
+				int dateNumber = Integer.parseInt(transFormat.format(list.get(i).getMgrOpenDate()));
+				int todateNumber = Integer.parseInt(transFormat.format(today));
+				if((todateNumber-dateNumber)<30) {
+					listDate.add((i));
+				}
+			}	
+		}
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
 			mav.addObject("list", list);
+			mav.addObject("listDate", listDate);
 			mav.setViewName("findStore/findStore");
 		}else {
 			mav.setViewName("manager/listMsg");
+		}
+		return mav;
+	}
+	// 가맹점키워드검색
+	
+	@RequestMapping(value="/searchStore.do")
+	public ModelAndView searchStore(@RequestParam String keyword) {
+		ArrayList<Mgr> searchList = (ArrayList<Mgr>) mgrservice.searchStore(keyword);
+		ModelAndView mav = new ModelAndView();
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.newStoreList();
+		ArrayList<Integer> listDate = new ArrayList<Integer>();
+		for(int i=0; i<list.size(); i++){
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+			Date today = new Date();
+			if(list.get(i).getMgrOpenDate()!=null) {
+				int dateNumber = Integer.parseInt(transFormat.format(list.get(i).getMgrOpenDate()));
+				int todateNumber = Integer.parseInt(transFormat.format(today));
+				if((todateNumber-dateNumber)<30) {
+					listDate.add((i));
+				}
+			}	
+		}
+			
+		if(!searchList.isEmpty()) {
+			mav.addObject("searchList",searchList);
+			mav.addObject("list", list);
+			mav.addObject("listDate", listDate);
+			mav.setViewName("findStore/findStore");
+
+		}else {
+			mav.addObject("list", list);
+			mav.addObject("listDate", listDate);
+			mav.setViewName("findStore/findStore");
+			System.out.println("안돼");
 		}
 		return mav;
 	}

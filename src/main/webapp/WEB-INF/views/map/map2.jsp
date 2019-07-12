@@ -269,6 +269,20 @@ var naverMap = {
          naverMap.map.setZoom(15);
          // naverMap.infoWindows[index].open(naverMap.map, naverMap.markers[index]);
       }
+      
+      naver.maps.Service.geocode({
+          address: ${list.mgr.mgrAddr}
+      }, function(status, response) {
+          if (status !== naver.maps.Service.Status.OK) {
+              return alert('Something wrong!');
+          }
+
+          var result = response.result, // 검색 결과의 컨테이너
+              items = result.items; // 검색 결과의 배열
+
+        // do Something
+      });
+      
 }
 
 naverMap.init();

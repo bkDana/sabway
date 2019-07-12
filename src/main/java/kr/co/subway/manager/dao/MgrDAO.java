@@ -21,6 +21,10 @@ public class MgrDAO {
 	public List<Mgr> mgrList() {
 		return session.selectList("mgr.mgrList");
 	}
+	//신규매장 목록
+		public List<Mgr> newStoreList() {
+			return session.selectList("mgr.newStoreList");
+		}
 	//로그인
 	public Mgr login(String mgrId) {
 		return session.selectOne("mgr.login", mgrId);
@@ -53,6 +57,10 @@ public class MgrDAO {
 	//statusAddr 검색
 	public List<Mgr> searchStatusAddr(Mgr mgr){
 		return session.selectList("mgr.searchStatusAddr",mgr);
+	}
+	//searchStore 검색
+	public List<Mgr> searchStore(String keyword){
+		return session.selectList("mgr.searchStore",keyword);
 	}
 	public List<Mgr> morePage(PageNo pn){
 		return session.selectList("mgr.pageMore",pn);
