@@ -80,6 +80,7 @@ input[type=checkbox]{width: 15px;height: 15px;}
 .menu-list > li img{width: 270px; height: 189px;}
 .menu-list > li span.label{line-height: 20px;font-size: 22px; color: #292929; font-weight: bold;}
 .menu-list > li span.kcal{font-size: 18px;color: #ffc300;font-weight: bold;}
+.menu-list > li span.desc{color: #c5e698;font-size: 16px;letter-spacing: -0.05em;line-height: 24px;}
 
 
 .search-day{width:30%; max-width:200px; height:40px; border:2px solid #ddd; padding:0; text-indent:10px; color:#868686; font-size:13px; vertical-align:middle;}

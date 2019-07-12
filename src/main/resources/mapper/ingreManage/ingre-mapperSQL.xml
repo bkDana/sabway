@@ -97,7 +97,7 @@
   <!-- 타입별 리스트  -->
   <select id="selectIngreList" parameterType="ingre" resultType="ingre">
   	select 
-  		ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_filepath as ingreFilepath
+  		ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_filepath as ingreFilepath, ingre_description as ingreDescription
   	from ingredients where ingre_Type=#{ingreType}
   </select>
   

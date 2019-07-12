@@ -83,11 +83,37 @@
 					</span>
 					<span class="label">${ingre.ingreLabel }</span>
 					<span class="kcal">${ingre.ingreKcal }kcal</span>
+					<span class="label" style="display:none; color:#fff;">${ingre.ingreLabel }</span>
+					<span class="desc" style="display:none; color:#fff;">${ingre.ingreDescription }</span>
 				</li>
 			</c:forEach>
 		</ul>
 	</div>
 </section>
 
+<script>
+$('.menu-list li').mouseover(function(){
+	$(this).children().each(function(){
+		if($(this).css("display") == "none"){
+			$(this).show();
+			$(this).animate({left:"+=20"}, 2000, function(){ })
+		}else{
+			$(this).hide();
+		}
+	});
+	$(this).css('background-color','#009223');
+});
+
+$('.menu-list li').mouseout(function(){
+	$(this).children().each(function(){
+		if($(this).css("display") == "none"){
+			$(this).show();
+		}else{
+			$(this).hide();
+		}
+	});
+	$(this).css('background-color','#fff');
+});
+</script>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
