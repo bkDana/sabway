@@ -19,11 +19,12 @@ var myform=new formtowizard({
 <%-- content--%>
 <section id="content-wrapper">
 	<div class="area">
+		<a href="/myBucket.do">내 장바구니 보기</a>
 		<h1>온라인 주문 예약</h1><br>
 		<form id="feedbackform" action="/submitCusOrder.do" method="post"> 
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
-				<label for="샌드위치"><img alt="샌드위치"src="/resources/img//sandwich/sandwich_fl04.jpg"></label> 
+				<label for="샌드위치"><img alt="샌드위치"src="/resources/img/sandwich/sandwich_fl04.jpg"></label> 
 				<input type="radio" class="hide" id="샌드위치" name="isSalad" value="0"> 
 				<label for="샐러드"><img alt="샐러드" src="/resources/img/salad/salad_fl04.jpg"></label> 
 				<input type="radio" class="hide" id="샐러드" name="isSalad" value="1">
