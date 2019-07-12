@@ -46,7 +46,7 @@ public class IngreManageController {
 	}*/
 	
 	//재료 등록페이지로
-	/*@RequestMapping("/goIngreReg.do")
+	@RequestMapping("/goIngreReg.do")
 	public ModelAndView goIngreReg(ModelAndView mav) {
 		ArrayList<IngreVo> sauce = (ArrayList<IngreVo>)ingreService.getSauce();
 		if(!sauce.isEmpty()) {
@@ -57,10 +57,6 @@ public class IngreManageController {
 			mav.setViewName("common/error");
 		}
 		return mav;
-	}*/
-	@RequestMapping("/goIngreReg.do")
-	public String goIngreReg() {
-		return "admin/ingreManage/ingreRegisterForm";
 	}
 	
 	//재료 카테고리 메인재료 선택시 선택할 추천소스 가져오기
@@ -68,6 +64,7 @@ public class IngreManageController {
 	//재료 등록하기
 	@RequestMapping("/ingreRegister.do")
 	public ModelAndView ingreReg(HttpServletRequest request, @RequestParam MultipartFile filepath, IngreVo iv, ModelAndView mav) {
+		System.out.println(iv.getIngreRecomSauce());
 		String fullPath="";
 		if(!filepath.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/ingredients");

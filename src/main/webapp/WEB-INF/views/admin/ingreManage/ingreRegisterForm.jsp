@@ -38,14 +38,15 @@
 							<input type="text" name="ingreLabel" id="ingreLabel" required>
 						</td>
 					</tr>
-					<%-- <tr id="sauceTr">
+					<tr id="sauceTr">
 						<th>추천 소스</th>
 						<td>
 							<c:forEach items="${sauce}" var="sauce">
-								<label><input type="checkbox" name="ingreRecomSauce" value="${sauce.ingreLabel}"> ${sauce.ingreLabel}</label>
+								<label><input type="checkbox" class="ckRecomSauce" name="ckRecomSauce" value="${sauce.ingreLabel}"> ${sauce.ingreLabel}</label>
 							</c:forEach>
+							<input type="hidden" name="ingreRecomSauce" id="ingreRecomSauce">
 						</td>
-					</tr> --%>
+					</tr>
 					<tr>
 						<th>판매 가격</th>
 						<td>
@@ -101,7 +102,7 @@
 </section>
 
 <script>
-	/* $(document).ready(function(){
+	$(document).ready(function(){
 		$("#sauceTr").hide();
 	});
 	
@@ -110,13 +111,23 @@
 		//메인재료 선택시
 		if($("#ingreType").val()=='메인재료'){
 			$("#sauceTr").show();
-			/* $.ajax({
-				url : "ingre"
-			}) */
 		}else{
 			$("#sauceTr").hide();
 		}
-	}); */
+	});
+	
+	//추천소스 선택시
+	$("input[name=ckRecomSauce]").change(function(){
+		var values = "";
+		for(var i=0;i<$('input[name="ckRecomSauce"]:checked').length;i++){
+			if(i!= $('input[name="ckRecomSauce"]:checked').length-1){
+				values += $('input[name="ckRecomSauce"]:checked').eq(i).val() + ",";
+			}else{
+				values += $('input[name="ckRecomSauce"]:checked').eq(i).val();
+			}
+			$("#ingreRecomSauce").val(values);
+		}
+	});
 </script>
 
 
