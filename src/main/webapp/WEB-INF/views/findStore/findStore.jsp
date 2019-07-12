@@ -162,7 +162,10 @@
 	</div>
 </section>
 <script>
-	
+	function searchBtn(){
+	    naverMap.searchXy($("#keyword").val());
+	    
+	 }
 </script>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
