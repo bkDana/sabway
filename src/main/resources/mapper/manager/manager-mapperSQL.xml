@@ -181,4 +181,8 @@
 	        (select rownum as rnum, m.* from (select * from manager order by mgr_no) m)
 	      where rnum between #{firstPage} and #{lastPage}
    </select>
+   <select id="totalCount" resultType="_int">
+   		select count(*)      
+	      from manager
+   </select>
 </mapper>

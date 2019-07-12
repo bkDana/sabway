@@ -55,6 +55,7 @@
 			</c:forEach>
 		</table>
 		<div class="common-tbl-btn-group">
+			<input type="hidden" value="${total }" name="totalCount">
 			<input type="hidden" value=${pn.lastPage } name="pageName">
 			<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
 		</div>
@@ -94,19 +95,33 @@
 			var keyword = $(this).val();
 			location.href="/selectStatus.do?keyword="+keyword;
 		});
+		//더보기
 		$("[name=more]").on("click",function(){
-			var firstPage = Number($(this).prev().val());	//여기서부터 수정
-			alert(firstPage);
-			if(firstPage <= 10){
+			var total = Number($('[name=totalCount]').val());
+			var firstPage = Number($('[name=pageName]').val());	//여기서부터 수정
+			var length = firstPage+10;
+			console.log(length);
+			if(length <= total){
 				$.ajax({
 					url:"/mgrPageMore.do",
 					data:{firstPage:firstPage},
 					dataType:"json",
 					success:function(data){
-						var lastPage = data.lastPage;
-						alert("lastPage = "+lastPage);
-						var first = $('[name=pageName]').val(lastPage);
-						alert("firstPage = "+first);
+						var last = Number($('[name=pageName]').val())+10;
+						Number($('[name=pageName]').val(last));
+						for(var i=0;i<data.length;i++){
+							if(data[i].mgrStatus == 1){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:green;'>"+"준비중"+"</td><td style='text-align:center;'><button type='button'>영업중</button></td></tr>";
+							}else if(data[i].mgrStatus == 2){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:blue;'>"+"영업중"+"</td><td style='text-align:center;'><button type='button'></button></td></tr>";
+							}else if(data[i].mgrStatus == 3){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:pink;'>"+"폐업"+"</td><td style='text-align:center;'><button type='button'></button></td></tr>";
+							}
+							$('table').append(str);
+						}
+						/*
+						$('[name=pageName]').val(lastPage);
+						var first = $('[name=pageName]').val(); 
 						var noArr = (data.mgrNo).split(',');
 						var idArr = (data.mgrId).split(',');
 						var bossNameArr = (data.mgrBossName).split(',');
@@ -115,7 +130,7 @@
 						var telArr = (data.mgrTel).split(',');
 						var enrollDateArr = (data.mgrEnrollDate).split(',');
 						var statusArr = (data.mgrStatus).split(',');
-						for(var i=0;i<10;i++){
+						for(var i=0;i<data.arrSize;i++){
 							if(statusArr[i] == 1){
 								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;color:green;'>"+"준비중"+"</td><td style='text-align:center;'><button </td></tr>";
 							}else if(statusArr[i] == 2){
@@ -125,10 +140,30 @@
 							}
 							$('table').append(str);
 						}
+						*/
 					}
-				});
-			}else if(firstPage >= 21){
-				$(this).attr("style","display:none");
+				});		
+			}else{
+				$.ajax({
+					url:"/mgrPageMore.do",
+					data:{firstPage:firstPage},
+					dataType:"json",
+					success:function(data){
+						var last = Number($('[name=pageName]').val())+10;
+						Number($('[name=pageName]').val(last));
+						for(var i=0;i<data.length;i++){
+							if(data[i].mgrStatus == 1){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:green;'>"+"준비중"+"</td><td style='text-align:center;'><button type='button'>영업중</button></td></tr>";
+							}else if(data[i].mgrStatus == 2){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:blue;'>"+"영업중"+"</td><td style='text-align:center;'><button type='button'></button></td></tr>";
+							}else if(data[i].mgrStatus == 3){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:pink;'>"+"폐업"+"</td><td style='text-align:center;'><button type='button'></button></td></tr>";
+							}
+							$('table').append(str);
+						}
+					}
+				});		
+				$("[name=more]").attr("style","display:none");
 			}
 		});
 	});

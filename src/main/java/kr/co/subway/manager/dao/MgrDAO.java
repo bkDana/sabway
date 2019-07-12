@@ -62,10 +62,16 @@ public class MgrDAO {
 	public List<Mgr> searchStore(String keyword){
 		return session.selectList("mgr.searchStore",keyword);
 	}
+	//초기화면 10개 출력
 	public List<Mgr> morePage(PageNo pn){
 		return session.selectList("mgr.pageMore",pn);
 	}
+	//더보기
 	public List<Mgr> pageMore(PageNo pn){
 		return session.selectList("mgr.pageMore",pn);
+	}
+	//mgr 개수
+	public int totalCount(){
+		return session.selectOne("mgr.totalCount");
 	}
 }

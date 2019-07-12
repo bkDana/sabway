@@ -56,6 +56,9 @@
 			<div class="header-logo">
 				<a href="/" class="sabway"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a>
 				<ul class="header-menu clearfix">
+					<c:if test="${not empty sessionScope.customer}">
+					<li><a class="header-btn" href="/myBucket.do">내 주문정보</a>
+					</c:if>
 					<li><a class="header-btn">매장찾기</a></li>
 					<li><a class="header-btn">가맹신청 · 문의</a></li>
 					<li><a class="header-btn">고객센터</a></li>
@@ -70,15 +73,14 @@
 					<div id="gnbBg"></div>
 					<ul class="clearfix">
 						<li class="gnb01">
-							<a href="/menu1.do" class="<%if(pname[5].equals("menu")){%>on<%}%>">메뉴소개</a>
+							<a href="/intro/menu.do?no=1" class="<%if(pname[5].equals("menu")){%>on<%}%>">메뉴소개</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="/menu1.do" class="<%if(p6.equals("menu1.jsp")){%>on<%}%>">샌드위치</a></li>
-									<li><a href="/menu2.do" class="<%if(p6.equals("menu2.jsp")){%>on<%}%>">찹샐러드</a></li>
-									<li><a href="/menu3.do" class="<%if(p6.equals("menu3.jsp")){%>on<%}%>">추가토핑</a></li>
-									<li><a href="#">사이드/음료</a></li>
-									<li><a href="#">단체메뉴</a></li>
-									<li><a href="#">신선한 재료 소개</a></li>
+									<li><a href="/intro/menu.do?no=1" class="<c:if test='${param.no eq 1 }'>on</c:if>">샌드위치</a></li>
+									<li><a href="/intro/menu.do?no=2" class="<c:if test='${param.no eq 2 }'>on</c:if>">찹샐러드</a></li>
+									<li><a href="/intro/menu.do?no=3" class="<c:if test='${param.no eq 3 }'>on</c:if>">추가토핑</a></li>
+									<li><a href="/intro/menu.do?no=4" class="<c:if test='${param.no eq 4 }'>on</c:if>">사이드/음료</a></li>
+									<li><a href="/intro/menu.do?no=5" class="<c:if test='${param.no >= 5 }'>on</c:if>">신선한 재료</a></li>
 								</ul>
 							</div>
 						</li>
