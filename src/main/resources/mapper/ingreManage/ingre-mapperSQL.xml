@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ingre">
+	<!-- 재료등록 페이지 이동시 소스 종류 가져오기 -->
+	<select id="getSauce" resultType="ingre">
+		select ingre_label as ingreLabel from ingredients where ingre_type='소스' order by ingre_label
+	</select>
+
   <!-- 메뉴 등록 -->
   <insert id="ingreReg" parameterType="ingre">
   	insert into ingredients values (seq_ingre_idx.nextval, #{ingreLabel}, #{ingreType}, #{ingreCost15}, #{ingreCost30}, 0, 
@@ -13,7 +18,7 @@
 		  	null,
 		  </otherwise>
 	  </choose>
-  	sysdate)
+  	sysdate,null)
   </insert>
   
   <!-- 재료 리스트 개수 구하기 -->
@@ -88,11 +93,17 @@
   	from ingredients where ingre_idx=#{ingreIdx}
   </select>
   
+  
   <!-- 고객주문페이지용 -->
   <!-- 재료정보 가져오기(고객 주문 테이블에서 ingre_label로 요청) -->
   <select id="selectOneIngre" parameterType="ingre" resultType="ingre">
   	select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
   	from ingredients where ingre_label=#{ingreLabel} and ingre_type = #{ingreType}
+  </select>
+  <!-- 타입 + 인덱스로 필터링해서 하나 고르기 -->
+  <select id="selectOneMain" parameterType="ingre" resultType="ingre">
+ 	select * from (select rownum rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
+  	from ingredients where ingre_type = #{ingreType}) where rnum = #{ingreIdx}
   </select>
   <!-- 타입별 리스트  -->
   <select id="selectIngreList" parameterType="ingre" resultType="ingre">
@@ -100,6 +111,7 @@
   		ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_filepath as ingreFilepath, ingre_description as ingreDescription
   	from ingredients where ingre_Type=#{ingreType}
   </select>
+  
   
   <!-- 재료 수정하기 -->
   <update id="ingreUpdate" parameterType="ingre">
@@ -137,7 +149,8 @@
   		</if>
   	</if>
   	 order by ingre_reg_date desc) i)
-  </select> 
+  </select>
+  
   <!-- select * from (select rownum as rnum, b.* from (select ba.no, m.name careNm, ba.id, ba.name,ba.phone, ba.visit_date, ba.visit_time, ba.apply_date, ba.status 
   from ((select * from book_apply where code=?"+ sql +" order by 1 desc)ba) Join member m Using(code)) b) 
   where rnum BETWEEN ? and ? -->

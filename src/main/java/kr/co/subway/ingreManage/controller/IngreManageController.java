@@ -40,16 +40,30 @@ public class IngreManageController {
 	private IngreManageService ingreService;
 	
 	//매출통계테스트
-	@RequestMapping("/goSalesTest.do")
+	/*@RequestMapping("/goSalesTest.do")
 	public String goSalesTest() {
 		return "admin/salesStatics/salesTest";
-	}
+	}*/
 	
 	//재료 등록페이지로
+	/*@RequestMapping("/goIngreReg.do")
+	public ModelAndView goIngreReg(ModelAndView mav) {
+		ArrayList<IngreVo> sauce = (ArrayList<IngreVo>)ingreService.getSauce();
+		if(!sauce.isEmpty()) {
+			System.out.println(sauce.get(0).getIngreLabel());
+			mav.addObject("sauce",sauce);
+			mav.setViewName("admin/ingreManage/ingreRegisterForm");
+		}else {
+			mav.setViewName("common/error");
+		}
+		return mav;
+	}*/
 	@RequestMapping("/goIngreReg.do")
 	public String goIngreReg() {
 		return "admin/ingreManage/ingreRegisterForm";
 	}
+	
+	//재료 카테고리 메인재료 선택시 선택할 추천소스 가져오기
 	
 	//재료 등록하기
 	@RequestMapping("/ingreRegister.do")
