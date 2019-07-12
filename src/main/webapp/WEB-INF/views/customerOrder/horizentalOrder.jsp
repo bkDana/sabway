@@ -38,8 +38,6 @@ var myform=new formtowizard({
 						</div>
 					</c:if>
 				</c:forEach>
-				
-				
 			</fieldset>
 			
 			<fieldset class="sectionwrap">
