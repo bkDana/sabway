@@ -185,6 +185,7 @@ public class MgrController {
 		}
 		return mav;
 	}
+	//테스트 jsp
 	@RequestMapping(value="/mgrPage.do")
 	public ModelAndView page() {
 		PageNo pn = new PageNo();
@@ -199,12 +200,15 @@ public class MgrController {
 		}
 		return mav;
 	}
+	//ajax 더보기 
 	@ResponseBody
 	@RequestMapping(value="/mgrPageMore.do")
 	public void pageMore(HttpServletResponse response,@RequestParam int firstPage) {
 		PageNo pn = new PageNo();
 		pn.setFirstPage(firstPage+1);
 		pn.setLastPage(firstPage+10);		
+		System.out.println(pn.getFirstPage());
+		System.out.println(pn.getLastPage());
 		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.pageMore(pn);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
@@ -240,6 +244,7 @@ public class MgrController {
 			}
 			
 		}
+		obj.addProperty("lastPage", pn.getLastPage());
 		obj.addProperty("mgrNo", mgrNo);
 		obj.addProperty("mgrId", mgrId);
 		obj.addProperty("mgrBossName", mgrBossName);
