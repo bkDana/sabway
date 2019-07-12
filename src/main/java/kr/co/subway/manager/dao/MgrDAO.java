@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.manager.vo.Mgr;
+import kr.co.subway.manager.vo.MgrPageData;
 import kr.co.subway.manager.vo.PageNo;
 
 @Repository("mgrdao")
@@ -20,6 +21,10 @@ public class MgrDAO {
 	//가맹점 목록
 	public List<Mgr> mgrList() {
 		return session.selectList("mgr.mgrList");
+	}
+	//가맹점 목록(더보기)
+	public List<Mgr> mpdList(MgrPageData mpd) {
+		return session.selectList("mgr.mpdList",mpd);
 	}
 	//신규매장 목록
 		public List<Mgr> newStoreList() {
@@ -39,16 +44,16 @@ public class MgrDAO {
 		return session.update("mgr.mgrUpdate",mgr);
 	}
 	//검색어 검색(name)
-	public List<Mgr> searchBossName(String text){
-		return session.selectList("mgr.searchBossName",text);
+	public List<Mgr> searchBossName(MgrPageData mpd){
+		return session.selectList("mgr.searchBossName",mpd);
 	}
 	//검색어 검색(addr)
-	public List<Mgr> searchAddr(String text){
-		return session.selectList("mgr.searchAddr",text);
+	public List<Mgr> searchAddr(MgrPageData mpd){
+		return session.selectList("mgr.searchAddr",mpd);
 	}	
 	//상태별 분류
-	public List<Mgr> selectStatus(int status){
-		return session.selectList("mgr.selectStatus",status);
+	public List<Mgr> selectStatus(MgrPageData mpd){
+		return session.selectList("mgr.selectStatus",mpd);
 	}
 	//statusName 검색
 	public List<Mgr> searchStatusName(Mgr mgr){
@@ -73,5 +78,16 @@ public class MgrDAO {
 	//mgr 개수
 	public int totalCount(){
 		return session.selectOne("mgr.totalCount");
+	}
+	//더보기(keyword)
+	public List<Mgr> keywordMore(MgrPageData mpd){
+		if(mpd.getKeyword().equals("주소")) {
+			return session.selectList("mgr.addrMore",mpd);
+		}
+		return session.selectList("mgr.nameMore",mpd);
+	}
+	//더보기(status)
+	public List<Mgr> statusMore(MgrPageData mpd){
+		return session.selectList("mgr.statusMore",mpd);
 	}
 }
