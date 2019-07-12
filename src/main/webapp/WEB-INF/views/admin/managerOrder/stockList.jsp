@@ -35,10 +35,10 @@
 					<span><input type="checkbox" class="cbox"></span>
 					<span>
 					<c:if test="${empty stock.ingreFilepath }">
-						<img src="/resources/img/sandwich.png" width="150px" height="150px"><br>
+						<img src="/resources/img/sandwich.png" width="150px" height="100px"><br>
 					</c:if>
 					<c:if test="${not empty stock.ingreFilepath }">
-						<img src="/resources/upload/ingredients/${stock.ingreFilepath }" width="150px" height="150px"><br>
+						<img src="/resources/upload/ingredients/${stock.ingreFilepath }" width="150px" height="100px"><br>
 					</c:if>
 					</span>
 				</label>
