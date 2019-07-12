@@ -28,21 +28,21 @@
 				<span>쉬림프</span>
 				<span>235kcal</span>
 			</li>
-			<li>샌</li>
-			<li>드</li>
-			<li>위</li>
-			<li>치</li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<c:forEach items="${list }" var="ingre">
+				<li>
+					<span>NEW</span>
+					<span>
+						<c:if test="${empty ingre.ingreFilepath }">
+							<img src="/resources/img/sandwich.png" width="150px" height="150px"><br>
+						</c:if>
+						<c:if test="${not empty ingre.ingreFilepath }">
+							<img src="/resources/upload/ingredients/${ingre.ingreFilepath }" width="150px" height="150px"><br>
+						</c:if>
+					</span>
+					<span>${ingre.ingreLabel }</span>
+					<span>${ingre.ingreKcal }kcal</span>
+				</li>
+			</c:forEach>
 		</ul>
 	</div>
 </section>
