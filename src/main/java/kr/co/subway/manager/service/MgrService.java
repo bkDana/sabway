@@ -1,5 +1,6 @@
 package kr.co.subway.manager.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
@@ -30,12 +31,6 @@ public class MgrService {
 		List<Mgr> list= mgrdao.mgrList();
 		return list;
 	}
-	
-	//신규가맹점 목록
-	public List<Mgr> newStoreList() {
-		List<Mgr> list= mgrdao.newStoreList();
-		return list;
-	}
 	//관리자 로그인
 	public Mgr login(String mgrId) {
 		Mgr mgr = mgrdao.login(mgrId);
@@ -56,11 +51,6 @@ public class MgrService {
 			list = mgrdao.searchAddr(text);
 		}
 		return list;
-	}
-	public List<Mgr> searchStore(String keyword){
-		List<Mgr> list = mgrdao.searchStore(keyword);
-		return list;
-		
 	}
 	//상태별 분류
 	public List<Mgr> selectStatus(String keyword){
@@ -87,13 +77,25 @@ public class MgrService {
 		}
 		return list;
 	}
+	//초기화면 10개 출력
 	public List<Mgr> morePage(PageNo pn){
 		List<Mgr> list = mgrdao.morePage(pn);
 		return list;
 	}
+	//더보기
 	public List<Mgr> pageMore(PageNo pn){
 		List<Mgr> list = mgrdao.pageMore(pn);
 		return list;
 	}
+	public ArrayList<Mgr> newStoreList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	//mgr 개수
+	public int totalCount(){
+		int result = mgrdao.totalCount();
+		return result;
+	}
+	
 	
 }
