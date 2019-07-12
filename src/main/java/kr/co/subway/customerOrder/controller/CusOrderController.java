@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
 import kr.co.subway.customerOrder.vo.Bucket;
+import kr.co.subway.ingreManage.vo.IngreVo;
 
 @Controller
 public class CusOrderController {
@@ -21,8 +22,17 @@ public class CusOrderController {
 	private CusOrderService cusOrderService;
 	
 	@RequestMapping("/cusOrder.do")
-	public String loadCusOrder() {
-		return "/customerOrder/horizentalOrder";
+	public ModelAndView loadCusOrder() {
+		ArrayList<IngreVo> ingreList = cusOrderService.ingreSelectAll();
+		ModelAndView mav = new ModelAndView();
+		if (!ingreList.isEmpty()) {
+			mav.addObject("ingerList", ingreList); // view에서 사용할 객체 추가
+			mav.setViewName("customerOrder/horizentalOrder");
+		} else {
+			mav.setViewName("common/error");
+		}
+
+		return mav;
 	}
 	@RequestMapping(value="submitCusOrder.do")
 	public String submitCusOrder(HttpServletRequest request, @RequestParam String isSalad, @RequestParam String main, @RequestParam String is15, @RequestParam String bread, @RequestParam String cheese,

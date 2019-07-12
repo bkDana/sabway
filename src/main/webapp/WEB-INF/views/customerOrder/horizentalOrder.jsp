@@ -27,14 +27,20 @@ var myform=new formtowizard({
 		<form id="feedbackform" action="/submitCusOrder.do" method="post"> 
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
-				<label for="샌드위치"><img alt="샌드위치"src="/resources/img/sandwich/sandwich_fl04.jpg"></label> 
-				<input type="radio" class="hide" id="샌드위치" name="isSalad" value="0"> 
-				<label for="샐러드"><img alt="샐러드" src="/resources/img/salad/salad_fl04.jpg"></label> 
-				<input type="radio" class="hide" id="샐러드" name="isSalad" value="1">
+				<label for="sandwich"><img alt="샌드위치"src="/resources/img//sandwich/sandwich_fl04.jpg"></label> 
+				<input type="radio" class="hide" id="sandwich" name="isSalad" value="0"> 
+				<label for="salad"><img alt="샐러드" src="/resources/img/salad/salad_fl04.jpg"></label> 
+				<input type="radio" class="hide" id="salad" name="isSalad" value="1">
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>주 재료</legend>
-				<div id="main"></div>
+				<c:forEach items="${ingreList }" var="ingre">
+					<c:if test="${ingre.ingreType eq '메인재료' }">
+						<div class="main img-box">
+							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
+						</div>
+					</c:if>
+				</c:forEach>
 			</fieldset>
 			
 			<fieldset class="sectionwrap">

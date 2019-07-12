@@ -12,7 +12,11 @@ import kr.co.subway.customerOrder.vo.Bucket;
 public class CusOrderDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
-
+	
+	public List ingreSelectAll() {
+		return sqlSession.selectList("bucket.ingreSelectAll");
+	}
+			
 	public int insertMember(Bucket buc) {
 		return sqlSession.insert("bucket.insertBucket",buc);
 	}
