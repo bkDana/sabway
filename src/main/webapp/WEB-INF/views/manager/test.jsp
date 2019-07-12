@@ -55,7 +55,7 @@
 			</c:forEach>
 		</table>
 		<div class="common-tbl-btn-group">
-			<input type="hidden" value=${pn.lastPage }>
+			<input type="hidden" value=${pn.lastPage } name="pageName">
 			<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
 		</div>
 		<br><br>
@@ -95,14 +95,18 @@
 			location.href="/selectStatus.do?keyword="+keyword;
 		});
 		$("[name=more]").on("click",function(){
-			var firstPage = $(this).prev().val();	
-			var chkIdx = firstPage+10;
-			if(1 < 21){
+			var firstPage = Number($(this).prev().val());	//여기서부터 수정
+			alert(firstPage);
+			if(firstPage <= 10){
 				$.ajax({
 					url:"/mgrPageMore.do",
 					data:{firstPage:firstPage},
 					dataType:"json",
 					success:function(data){
+						var lastPage = data.lastPage;
+						alert("lastPage = "+lastPage);
+						var first = $('[name=pageName]').val(lastPage);
+						alert("firstPage = "+first);
 						var noArr = (data.mgrNo).split(',');
 						var idArr = (data.mgrId).split(',');
 						var bossNameArr = (data.mgrBossName).split(',');
@@ -113,19 +117,18 @@
 						var statusArr = (data.mgrStatus).split(',');
 						for(var i=0;i<10;i++){
 							if(statusArr[i] == 1){
-								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;'>"+"준비중"+"</td><td style='text-align:center;'></td></tr>";
+								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;color:green;'>"+"준비중"+"</td><td style='text-align:center;'><button </td></tr>";
 							}else if(statusArr[i] == 2){
-								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;'>"+"영업중"+"</td><td style='text-align:center;'></td></tr>";
+								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;color:blue;'>"+"영업중"+"</td><td style='text-align:center;'></td></tr>";
 							}else if(statusArr[i] == 3){
-								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;'>"+"폐업"+"</td><td style='text-align:center;'></td></tr>";
+								var str = "<tr><td style='text-align:center;'>"+noArr[i]+"</td><td style='text-align:center;'>"+idArr[i]+"</td><td style='text-align:center;'>"+bossNameArr[i]+"</td><td style='text-align:center;'>"+nameArr[i]+"</td><td style='text-align:center;'>"+addrArr[i]+"</td><td style='text-align:center;'>"+telArr[i]+"</td><td style='text-align:center;'>"+enrollDateArr[i]+"</td><td style='text-align:center;color:pink;'>"+"폐업"+"</td><td style='text-align:center;'></td></tr>";
 							}
-								
 							$('table').append(str);
 						}
 					}
 				});
-			}else if(1 > 21){
-				$("[name=more]").attr("type",'hidden');
+			}else if(firstPage >= 21){
+				$(this).attr("style","display:none");
 			}
 		});
 	});
