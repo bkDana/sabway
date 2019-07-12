@@ -25,4 +25,25 @@
  			default
  			)	
  	</insert>
+ 	<select id="selectAllBucket" parameterType="_int" resultType="bucket">
+ 		select
+ 			buc_bread as bucBread,
+ 			buc_main as bucMain,
+ 			buc_vegi as bucVegi,
+ 			buc_cheese as bucCheese,
+ 			buc_source as bucSource,
+ 			buc_topping as bucTopping,
+ 			buc_side as bucSide,
+ 			buc_is_salad as bucIsSalad,
+ 			buc_is_ovened as bucIsOvened,
+ 			buc_set as bucSet,
+ 			buc_cost as bucCost,
+ 			buc_discnt_rate as bucDiscntRate,
+ 			buc_kcal as bucKcal,
+ 			buc_quantity as bucQuantity,
+ 			buc_reg_date as bucRegDate
+ 		from bucket
+ 		where
+ 			buc_cuso_idx = #{cusoIdx}
+ 	</select>
 </mapper>

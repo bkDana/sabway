@@ -1,5 +1,7 @@
 package kr.co.subway.customerOrder.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
@@ -57,9 +60,19 @@ public class CusOrderController {
 	}
 	
 	@RequestMapping("/myBucket.do")
-	public String loadMyBucket() {
-		return "/customerOrder/myBucket";
+	public ModelAndView loadMyBucket(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Customer c = (Customer)session.getAttribute("customer");
+		int cusoIdx = c.getCustomerNo();
+		ArrayList<Bucket> list = cusOrderService.allBucketList(cusoIdx);
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list",list);
+			mav.setViewName("/customerOrder/myBucket");
+		} else {
+			mav.setViewName("/common/error");
+		}
+		return mav;
 	}
-	
 
 }
