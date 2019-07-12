@@ -19,6 +19,7 @@ var myform=new formtowizard({
 <%-- content--%>
 <section id="content-wrapper">
 	<div class="area">
+		<a href="/myBucket.do">내 장바구니 보기</a>
 		<h1>온라인 주문 예약</h1><br>
 		<form id="feedbackform" action="/submitCusOrder.do" method="post"> 
 			<fieldset class="sectionwrap">

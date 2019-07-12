@@ -24,7 +24,7 @@
 
 /* 초기화(숨김 적용, 체크박스용 배열 초기화) */
 $(document).ready(function() {
-	$('.hide').hide();
+//	$('.hide').hide();
 	////console.log($('input[name=toppingRef]:gt(0)'));
 	$toppingArr = ['0','0','0','0','0','0','0','0'];
 	$('input[name=topping]').val($toppingArr.join(""));
@@ -50,7 +50,7 @@ $('input[name=isSalad]').click(function(){
 		$('#main').empty();
 		$('#main').append(tagSalad);
 	}
-	$('.hide').hide();
+//	$('.hide').hide();
 });
 
 /* 추가토핑 데이터 처리 */

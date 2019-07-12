@@ -37,19 +37,19 @@ public class CusOrderController {
 	@RequestMapping(value="submitCusOrder.do")
 	public String submitCusOrder(HttpServletRequest request, @RequestParam String isSalad, @RequestParam String main, @RequestParam String is15, @RequestParam String bread, @RequestParam String cheese,
 			@RequestParam String topping, @RequestParam String isOvened, @RequestParam String vegi, @RequestParam String source, @RequestParam String side, @RequestParam String set) {
-		System.out.println("isSalad : " + isSalad);
-		System.out.println("main : " + main);
-		if(!bread.equals(null)) {
-			System.out.println("is15 :" + is15);
-			System.out.println("bread : " + bread); 
-		}
-		System.out.println("cheese : " + cheese);
-		System.out.println("topping : " + topping);
-		System.out.println("isOvened : " + isOvened);
-		System.out.println("vegi : " + vegi);
-		System.out.println("source : " + source);
-		System.out.println("side : " + side);
-		System.out.println("whichSet : " + set);
+//		System.out.println("isSalad : " + isSalad);
+//		System.out.println("main : " + main);
+//		if(!bread.equals(null)) {
+//			System.out.println("is15 :" + is15);
+//			System.out.println("bread : " + bread); 
+//		}
+//		System.out.println("cheese : " + cheese);
+//		System.out.println("topping : " + topping);
+//		System.out.println("isOvened : " + isOvened);
+//		System.out.println("vegi : " + vegi);
+//		System.out.println("source : " + source);
+//		System.out.println("side : " + side);
+//		System.out.println("whichSet : " + set);
 		HttpSession session = request.getSession(false);
 		int cusoIdx = -1;
 		Customer c = (Customer)session.getAttribute("customer");
@@ -58,7 +58,6 @@ public class CusOrderController {
 		} else {
 			cusoIdx = c.getCustomerNo();
 		}
-		
 		//tset code
 		Bucket buc = new Bucket(0/*bucIdx*/, cusoIdx, bread, main, vegi, cheese, source, topping, side, isSalad, isOvened, set, 
 				8000/*cost*/, 0.0/*discntRate*/, 500/*Kcal*/, 1/*quantity*/, null/*Date*/);
@@ -68,7 +67,11 @@ public class CusOrderController {
 		} else {
 			return "/common/error";
 		}
-		
+	}
+	
+	@RequestMapping("/myBucket.do")
+	public String loadMyBucket() {
+		return "/customerOrder/myBucket";
 	}
 	
 
