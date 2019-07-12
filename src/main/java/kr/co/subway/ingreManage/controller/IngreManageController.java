@@ -168,12 +168,23 @@ public class IngreManageController {
 	public ModelAndView goUpdatePage(ModelAndView mav, String ingreIdx) {
 		System.out.println("controller goUpdatePage() idx : "+ingreIdx);
 		IngreVo iv = ingreService.goUpdateIngre(ingreIdx);
+		ArrayList<IngreVo> sauceList = (ArrayList<IngreVo>)ingreService.getSauce();
+		//추천소스 , 를 기준으로 잘라서 보내기
+		if(iv.getIngreRecomSauce()!=null) {
+			String[] sauce = iv.getIngreRecomSauce().split(",");
+			System.out.println(sauce);
+			for(int i=0;i<sauce.length;i++) {
+				System.out.println(sauce[i]);
+			}
+			mav.addObject("sauce",sauce);
+		}		
 		if(iv!=null) {
 			mav.addObject("iv",iv);
+			mav.addObject("sauceList",sauceList);
 			mav.setViewName("admin/ingreManage/ingreUpdate");
-		}else {
+		}/*else {
 			mav.setViewName("common/error");
-		}
+		}*/
 		return mav;
 	}
 	
