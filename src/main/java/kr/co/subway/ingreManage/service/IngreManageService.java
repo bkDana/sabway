@@ -16,6 +16,11 @@ public class IngreManageService {
 	@Autowired
 	private IngreManageDao ingreDao;
 	
+	//재료 등록페이지 이동시 소스 가져오기
+	public List getSauce() {
+		return ingreDao.getSauce();
+	}
+	
 	//재료 등록
 	public int ingreReg(IngreVo iv) {
 		int result = ingreDao.ingreReg(iv);
@@ -96,5 +101,6 @@ public class IngreManageService {
 	public ArrayList<IngreVo> selectIngreList(IngreVo ingreVo) {
 		return (ArrayList<IngreVo>)ingreDao.selectIngreList(ingreVo);
 	}
+
 
 }

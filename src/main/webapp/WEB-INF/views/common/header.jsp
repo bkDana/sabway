@@ -76,12 +76,11 @@
 							<a href="/intro/menu.do?no=1" class="<%if(pname[5].equals("menu")){%>on<%}%>">메뉴소개</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="/intro/menu.do?no=1" class="<%if(p6.equals("menu1.jsp")){%>on<%}%>">샌드위치</a></li>
-									<li><a href="/intro/menu.do?no=2" class="<%if(p6.equals("menu2.jsp")){%>on<%}%>">찹샐러드</a></li>
-									<li><a href="/intro/menu.do?no=3" class="<%if(p6.equals("menu3.jsp")){%>on<%}%>">추가토핑</a></li>
-									<li><a href="/intro/menu.do?no=4">사이드/음료</a></li>
-									<li><a href="/intro/menu.do?no=5">단체메뉴</a></li>
-									<li><a href="/intro/menu.do?no=6">신선한 재료 소개</a></li>
+									<li><a href="/intro/menu.do?no=1" class="<c:if test='${param.no eq 1 }'>on</c:if>">샌드위치</a></li>
+									<li><a href="/intro/menu.do?no=2" class="<c:if test='${param.no eq 2 }'>on</c:if>">찹샐러드</a></li>
+									<li><a href="/intro/menu.do?no=3" class="<c:if test='${param.no eq 3 }'>on</c:if>">추가토핑</a></li>
+									<li><a href="/intro/menu.do?no=4" class="<c:if test='${param.no eq 4 }'>on</c:if>">사이드/음료</a></li>
+									<li><a href="/intro/menu.do?no=5" class="<c:if test='${param.no >= 5 }'>on</c:if>">신선한 재료</a></li>
 								</ul>
 							</div>
 						</li>

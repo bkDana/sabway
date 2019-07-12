@@ -118,7 +118,19 @@
 				</c:if>
 			</c:forEach>
 		</table>
-		<br><br>
+		<div class="common-tbl-btn-group" name="moreDiv">
+			<c:if test="${mgrSize+1 > mpd.lastPage && total > mpd.lastPage}">
+				<hr>
+				<input type="hidden" value="${mgrSize }" name="mgrSize">
+				<input type="hidden" value="${mpd.text }" name="text">
+				<input type="hidden" value="${mpd.keyword }" name="keyword">
+				<input type="hidden" value="${total }" name="totalCount">
+				<input type="hidden" value=${mpd.lastPage } name="pageName">
+				<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
+				<hr>
+			</c:if>
+		</div>
+		<br>
 		<span name="selectBox">
 			<select name="statusGroup">
 				<option selected="selected" disabled="disabled">상태 분류</option>
@@ -160,15 +172,70 @@
 			var keyword = $(this).parent().children().eq(0).val();
 			var text = $(this).prev().val();
 			if(keyword == "이름"){
-				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text+"$status="+status;
+				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
 			}else if(keyword == "주소"){
-				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text+"$status="+status;
+				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
 			}
 		});
 		//상태별 분류
 		$("[name=statusGroup]").on("change",function(){
 			var keyword = $(this).val();
 			location.href="/selectStatus.do?keyword="+keyword;
+		});
+		//더보기(keyword)
+		$("[name=more]").on("click",function(){
+			var mgrSize = $('[name=mgrSize]').val();
+			var text = $('[name=text]').val();
+			var keyword = $('[name=keyword]').val();
+			var total = Number($('[name=totalCount]').val());
+			var firstPage = Number($('[name=pageName]').val());
+			var length = firstPage+10;
+			console.log(text);
+			console.log(keyword);
+			console.log(firstPage);
+			console.log(length);
+			if(mgrSize+1 <= 10){
+				$.ajax({
+					url:"/mgrKeywordMore.do",
+					data:{firstPage:firstPage,keyword:keyword,text:text},
+					dataType:"json",
+					success:function(data){
+						var last = Number($('[name=pageName]').val())+10;
+						Number($('[name=pageName]').val(last));
+						for(var i=0;i<data.length;i++){
+							if(data[i].mgrStatus == 1){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:green;'>"+"준비중"+"</td><td style='text-align:center;'><button type='button' class='onBtn' name='mgrStatus' value='2'>영업</button>&nbsp;<button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
+							}else if(data[i].mgrStatus == 2){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:blue;'>"+"영업중"+"</td><td style='text-align:center;'><button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
+							}else if(data[i].mgrStatus == 3){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:pink;'>"+"폐업"+"</td><td style='text-align:center;'><button type='button'></button></td></tr>";
+							}
+							$('table').append(str);
+						}
+					}
+				});		
+			}else{
+				$.ajax({
+					url:"/mgrKeywordMore.do",
+					data:{firstPage:firstPage,keyword:keyword,text:text},
+					dataType:"json",
+					success:function(data){
+						var last = Number($('[name=pageName]').val())+10;
+						Number($('[name=pageName]').val(last));
+						for(var i=0;i<data.length;i++){
+							if(data[i].mgrStatus == 1){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:green;'>"+"준비중"+"</td><td style='text-align:center;'><button type='button' class='onBtn' name='mgrStatus' value='2'>영업</button>&nbsp;<button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
+							}else if(data[i].mgrStatus == 2){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:blue;'>"+"영업중"+"</td><td style='text-align:center;'><button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
+							}else if(data[i].mgrStatus == 3){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:pink;'>"+"폐업"+"</td><td style='text-align:center;'><button type='button'></button></td></tr>";
+							}
+							$('table').append(str);
+						}
+					}
+				});		
+				$("[name=moreDiv]").attr("style","display:none");
+			}
 		});
 	});
 </script>

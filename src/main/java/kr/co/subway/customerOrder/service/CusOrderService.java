@@ -1,6 +1,7 @@
 package kr.co.subway.customerOrder.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,10 @@ public class CusOrderService {
 		int result = cusOrderDao.insertMember(buc);
 		return result;
 		
+	}
+
+	public ArrayList<Bucket> allBucketList(int cusoIdx) {
+		List<Bucket> list = cusOrderDao.allBucketList(cusoIdx);
+		return (ArrayList<Bucket>)list;
 	}
 }

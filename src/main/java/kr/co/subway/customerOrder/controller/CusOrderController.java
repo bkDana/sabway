@@ -71,9 +71,19 @@ public class CusOrderController {
 	}
 	
 	@RequestMapping("/myBucket.do")
-	public String loadMyBucket() {
-		return "/customerOrder/myBucket";
+	public ModelAndView loadMyBucket(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Customer c = (Customer)session.getAttribute("customer");
+		int cusoIdx = c.getCustomerNo();
+		ArrayList<Bucket> list = cusOrderService.allBucketList(cusoIdx);
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list",list);
+			mav.setViewName("/customerOrder/myBucket");
+		} else {
+			mav.setViewName("/common/error");
+		}
+		return mav;
 	}
-	
 
 }

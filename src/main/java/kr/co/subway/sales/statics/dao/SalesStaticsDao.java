@@ -24,4 +24,14 @@ public class SalesStaticsDao {
 		return sqlSession.selectList("sales.monthTotalSales",orderMonth);
 	}
 
+	//지점명 가져오기
+	public List getBranch(String cusoBranch) {
+		return sqlSession.selectList("sales.getBranch",cusoBranch);
+	}
+
+	//지점 매출현황 가져오기(월, 매출액)
+	public List getBranchSales(String branchName) {
+		return sqlSession.selectList("sales.getBranchSales",branchName);
+	}
+
 }

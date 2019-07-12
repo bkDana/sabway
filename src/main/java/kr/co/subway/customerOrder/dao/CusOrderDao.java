@@ -21,4 +21,8 @@ public class CusOrderDao {
 		return sqlSession.insert("bucket.insertBucket",buc);
 	}
 
+	public List<Bucket> allBucketList(int cusoIdx) {
+		return sqlSession.selectList("bucket.selectAllBucket", cusoIdx);
+	}
+
 }

@@ -40,20 +40,31 @@ public class IngreManageController {
 	private IngreManageService ingreService;
 	
 	//매출통계테스트
-	@RequestMapping("/goSalesTest.do")
+	/*@RequestMapping("/goSalesTest.do")
 	public String goSalesTest() {
 		return "admin/salesStatics/salesTest";
-	}
+	}*/
 	
 	//재료 등록페이지로
 	@RequestMapping("/goIngreReg.do")
-	public String goIngreReg() {
-		return "admin/ingreManage/ingreRegisterForm";
+	public ModelAndView goIngreReg(ModelAndView mav) {
+		ArrayList<IngreVo> sauce = (ArrayList<IngreVo>)ingreService.getSauce();
+		if(!sauce.isEmpty()) {
+			System.out.println(sauce.get(0).getIngreLabel());
+			mav.addObject("sauce",sauce);
+			mav.setViewName("admin/ingreManage/ingreRegisterForm");
+		}else {
+			mav.setViewName("common/error");
+		}
+		return mav;
 	}
+	
+	//재료 카테고리 메인재료 선택시 선택할 추천소스 가져오기
 	
 	//재료 등록하기
 	@RequestMapping("/ingreRegister.do")
 	public ModelAndView ingreReg(HttpServletRequest request, @RequestParam MultipartFile filepath, IngreVo iv, ModelAndView mav) {
+		System.out.println(iv.getIngreRecomSauce());
 		String fullPath="";
 		if(!filepath.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/ingredients");
@@ -157,12 +168,23 @@ public class IngreManageController {
 	public ModelAndView goUpdatePage(ModelAndView mav, String ingreIdx) {
 		System.out.println("controller goUpdatePage() idx : "+ingreIdx);
 		IngreVo iv = ingreService.goUpdateIngre(ingreIdx);
+		ArrayList<IngreVo> sauceList = (ArrayList<IngreVo>)ingreService.getSauce();
+		//추천소스 , 를 기준으로 잘라서 보내기
+		if(iv.getIngreRecomSauce()!=null) {
+			String[] sauce = iv.getIngreRecomSauce().split(",");
+			System.out.println(sauce);
+			for(int i=0;i<sauce.length;i++) {
+				System.out.println(sauce[i]);
+			}
+			mav.addObject("sauce",sauce);
+		}		
 		if(iv!=null) {
 			mav.addObject("iv",iv);
+			mav.addObject("sauceList",sauceList);
 			mav.setViewName("admin/ingreManage/ingreUpdate");
-		}else {
+		}/*else {
 			mav.setViewName("common/error");
-		}
+		}*/
 		return mav;
 	}
 	
