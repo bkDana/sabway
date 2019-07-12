@@ -83,6 +83,9 @@
 							</select>
 						</td>
 						<td>
+							<c:if test="${empty list.ingreFilepath }">
+								<img src="/resources/img/sandwich.png" width="50px" height="50px"><br>
+							</c:if>
 							<c:if test="${not empty list.ingreFilepath }">
 								<img src="/resources/upload/ingredients/${list.ingreFilepath }" width="50px" height="50px">
 							</c:if>
