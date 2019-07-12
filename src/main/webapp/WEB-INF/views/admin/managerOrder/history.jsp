@@ -36,7 +36,7 @@
 						<td>
 							<c:choose>
 								<c:when test="${fn:contains(history.hContent,'-') }"><span class="state-can">${history.hContent }</span> (재고조사 차감)</c:when>
-								<c:otherwise><span class="state-arr">+${history.hContent }</span></c:otherwise>
+								<c:otherwise><span class="state-arr">+${history.hContent }</span> (발주물품 입고)</c:otherwise>
 							</c:choose>
 						</td>
 						<td>${history.hDate }</td>
