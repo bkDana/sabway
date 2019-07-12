@@ -97,11 +97,11 @@ public class MgrController {
 		Mgr mgr = new Mgr();
 		mgr = mgrservice.login(mgrId);
 		String view = "";
-		if(mgr != null) {
+		if(mgr != null && mgr.getMgrStatus() != 3) {
 			session.setAttribute("mgr", mgr);
 			view = "admin/index";
 		}else {
-			view = "main";
+			view = "manager/loginFailMsg";
 		}
 		return view;
 	}
