@@ -18,7 +18,13 @@
 		  	null,
 		  </otherwise>
 	  </choose>
-  	sysdate,null)
+  	sysdate,
+  	<if test="ingreRecomSauce != '' or ingreRecomSauce != null">
+  		#{ingreRecomSauce})
+  	</if>
+  	<if test="ingreRecomSauce == '' or ingreRecomSauce == null">
+  		null)
+  	</if>
   </insert>
   
   <!-- 재료 리스트 개수 구하기 -->
@@ -89,29 +95,9 @@
   
   <!-- 재료정보 가져오기(1개) -->
   <select id="goIngreUpdate" parameterType="string" resultType="ingre">
-  	select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
+  	select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate , ingre_recom_sauce as ingreRecomSauce
   	from ingredients where ingre_idx=#{ingreIdx}
-  </select>
-  
-  
-  <!-- 고객주문페이지용 -->
-  <!-- 재료정보 가져오기(고객 주문 테이블에서 ingre_label로 요청) -->
-  <select id="selectOneIngre" parameterType="ingre" resultType="ingre">
-  	select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
-  	from ingredients where ingre_label=#{ingreLabel} and ingre_type = #{ingreType}
-  </select>
-  <!-- 타입 + 인덱스로 필터링해서 하나 고르기 -->
-  <select id="selectOneMain" parameterType="ingre" resultType="ingre">
- 	select * from (select rownum rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
-  	from ingredients where ingre_type = #{ingreType}) where rnum = #{ingreIdx}
-  </select>
-  <!-- 타입별 리스트  -->
-  <select id="selectIngreList" parameterType="ingre" resultType="ingre">
-  	select 
-  		ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_filepath as ingreFilepath, ingre_description as ingreDescription
-  	from ingredients where ingre_Type=#{ingreType}
-  </select>
-  
+  </select>  
   
   <!-- 재료 수정하기 -->
   <update id="ingreUpdate" parameterType="ingre">
@@ -149,6 +135,27 @@
   		</if>
   	</if>
   	 order by ingre_reg_date desc) i)
+  </select>
+  
+  
+  
+  
+  <!-- 고객주문페이지용 -->
+  <!-- 재료정보 가져오기(고객 주문 테이블에서 ingre_label로 요청) -->
+  <select id="selectOneIngre" parameterType="ingre" resultType="ingre">
+  	select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
+  	from ingredients where ingre_label=#{ingreLabel} and ingre_type = #{ingreType}
+  </select>
+  <!-- 타입 + 인덱스로 필터링해서 하나 고르기 -->
+  <select id="selectOneMain" parameterType="ingre" resultType="ingre">
+ 	select * from (select rownum rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate 
+  	from ingredients where ingre_type = #{ingreType}) where rnum = #{ingreIdx}
+  </select>
+  <!-- 타입별 리스트  -->
+  <select id="selectIngreList" parameterType="ingre" resultType="ingre">
+  	select 
+  		ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_filepath as ingreFilepath, ingre_description as ingreDescription
+  	from ingredients where ingre_Type=#{ingreType}
   </select>
   
   <!-- select * from (select rownum as rnum, b.* from (select ba.no, m.name careNm, ba.id, ba.name,ba.phone, ba.visit_date, ba.visit_time, ba.apply_date, ba.status 

@@ -23,7 +23,7 @@ public class IntroMenuController {
 		if(no.equals("1")) {
 			ingre.setIngreType("메인재료");
 		}else if(no.equals("2")) {
-			ingre.setIngreType("메인재료");
+			ingre.setIngreType("샐러드");
 		}else if(no.equals("3")) {
 			ingre.setIngreType("추가토핑");
 		}else if(no.equals("4")) {
@@ -36,6 +36,8 @@ public class IntroMenuController {
 			ingre.setIngreType("치즈");
 		}else if(no.equals("8")) {
 			ingre.setIngreType("소스");
+		}else {
+			return "redirect:/";
 		}
 		
 		ArrayList<IngreVo> list = service.introMenu(ingre);

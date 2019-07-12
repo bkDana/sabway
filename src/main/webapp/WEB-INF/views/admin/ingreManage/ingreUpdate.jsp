@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 
@@ -38,6 +39,17 @@
 						<th>재료명</th>
 						<td>
 							<input type="text" name="ingreLabel" id="ingreLabel" value="${iv.ingreLabel}" required>
+						</td>
+					</tr>
+					<tr id="sauceTr">
+						<th>추천 소스</th>
+						<td>
+							<c:forEach items="${sauceList}" var="list" varStatus="i">
+								<label><input type="checkbox" class="ckRecomSauce" name="ckRecomSauce" value="${list.ingreLabel}" data-cnt="${i.count}"> ${list.ingreLabel}</label>
+							</c:forEach>
+							
+							<input type="hidden" name="ingreRecomSauce" id="ingreRecomSauce">
+							
 						</td>
 					</tr>
 					<tr>
@@ -103,11 +115,54 @@
 </section>
 <script>
 $(document).ready(function(){
+	
 	/* 카테고리 선택 셋팅 */
 	var ingreType = $('select[name=ingreType]').data('type');
 	$('select[name=ingreType]').children('option').each(function(){
 		if(ingreType == $(this).val()){
 			$(this).prop("selected",true);
+		}
+	});
+	
+	$("#sauceTr").hide();
+	//추천 소스 개수
+	/* var count = $("#ingreRecomSauce").val(); */
+	
+	/* 메인 재료일 경우 tr 보여주고 추천소스 checked로 */
+	if($("#ingreType").val()=='메인재료'){
+		$("#sauceTr").show();
+		/* $("input:checkbox[name='ckRecomSauce']").each(function(){
+			/for(var i=0;i<count;i++){
+				if($("input:checkbox[name='ckRecomSauce']").val() == ${sauce}){
+					 this.checked=true; // checked 처리
+				}
+			}
+			
+		}); */
+	}
+	
+	//재료 카테고리 변경시
+	$("#ingreType").change(function(){
+		//메인재료 선택시 추천소스 tr 보여주기
+		if($("#ingreType").val()=='메인재료'){
+			$("#sauceTr").show();
+		}else{
+			$("#sauceTr").hide();
+		}
+	});
+	
+	
+	
+	//추천소스 선택시
+	$("input[name=ckRecomSauce]").change(function(){
+		var values = "";
+		for(var i=0;i<$('input[name="ckRecomSauce"]:checked').length;i++){
+			if(i!= $('input[name="ckRecomSauce"]:checked').length-1){
+				values += $('input[name="ckRecomSauce"]:checked').eq(i).val() + ",";
+			}else{
+				values += $('input[name="ckRecomSauce"]:checked').eq(i).val();
+			}
+			$("#ingreRecomSauce").val(values);
 		}
 	});
 	

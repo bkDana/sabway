@@ -26,9 +26,10 @@ public class CusOrderController {
 		ArrayList<IngreVo> ingreList = cusOrderService.ingreSelectAll();
 		ModelAndView mav = new ModelAndView();
 		if (!ingreList.isEmpty()) {
-			mav.addObject("ingerList", ingreList); // view에서 사용할 객체 추가
+			mav.addObject("ingreList", ingreList); // view에서 사용할 객체 추가
 			mav.setViewName("customerOrder/horizentalOrder");
 		} else {
+			System.out.println("비어dltdma");
 			mav.setViewName("common/error");
 		}
 
