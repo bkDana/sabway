@@ -36,6 +36,14 @@ input[type=checkbox]{width: 15px;height: 15px;}
 .sub-menu-title p:nth-child(3){margin-top:10px;}
 
 
+/* ****************** 빵 채소 이런거.. ********************** */
+.second-menu > ul{text-align:center;}
+.second-menu > ul > li{position:relative; display:inline-block; min-width:100px;}
+.second-menu > ul > li > a{position:relative;  display:block; height:100px; line-height:100px; text-align:center; color:#666; font-size:16px;}
+.second-menu > ul > li > a:hover{color:#009223;}
+.second-menu > ul > li > a.on{color:#009223;}
+.second-menu > ul > li:after {content: '';position: absolute;left: 0;top: 42px;width: 1px;height: 15px;background-color: #dddddd;}
+
 /* ****************** 관리자 왼쪽 고정 메뉴 ********************** */
 .left-menu{background-color: #e8e8e8; width: 180px; float: left; height: 1400px;}
 .left-menu > ul{text-align:left;}
@@ -51,6 +59,9 @@ input[type=checkbox]{width: 15px;height: 15px;}
 .state-arr{color:#009223;}
 .state-can{color:#d90f0f;}
 
+
+
+.second-menu{width: 1190px; height: 100px; background-color: #fff; margin:0px 20px; position: absolute; top:490px;}
 /* ****************** 재고 리스트 ********************** */
 .stock-list{min-width: 1500px;}
 .stock-list > li{float: left;margin:20px 20px; text-align: center; width:150px;}
@@ -65,10 +76,10 @@ input[type=checkbox]{width: 15px;height: 15px;}
 .menu-list{min-width: 1500px;}
 .menu-list > li{float: left;margin:20px 20px; width:370px; height:330px; background-color: #fff;}
 .menu-list > li span{display: inline-block; width: 100%; text-align: center; margin:5px 0;}
-.menu-list > li span:first-child{background-color: #ffc300; width: 70px; height:33px; color: #fff; line-height: 30px; font-weight: bold;font-size: 13px; margin-left: 0;}
-.menu-list > li img{width: 180px; height: 180px;}
-.menu-list > li span:nth-child(3){line-height: 20px;font-size: 22px; color: #292929; font-weight: bold;}
-.menu-list > li span:nth-child(4){font-size: 18px;color: #ffc300;font-weight: bold;}
+.menu-list > li span.new{background-color: #ffc300; width: 70px; height:33px; color: #fff; line-height: 30px; font-weight: bold;font-size: 13px; margin-left: 0;}
+.menu-list > li img{width: 270px; height: 189px;}
+.menu-list > li span.label{line-height: 20px;font-size: 22px; color: #292929; font-weight: bold;}
+.menu-list > li span.kcal{font-size: 18px;color: #ffc300;font-weight: bold;}
 
 
 .search-day{width:30%; max-width:200px; height:40px; border:2px solid #ddd; padding:0; text-indent:10px; color:#868686; font-size:13px; vertical-align:middle;}
