@@ -122,8 +122,8 @@
 			<c:if test="${mgrSize+1 > mpd.lastPage && total > mpd.lastPage}">
 				<hr>
 				<input type="hidden" value="${mgrSize }" name="mgrSize">
-				<input type="hidden" value="${mpd.text }" name="text">
-				<input type="hidden" value="${mpd.keyword }" name="keyword">
+				<input type="hidden" value="${mpd.text }" name="mpdText">
+				<input type="hidden" value="${mpd.keyword }" name="mpdKeyword">
 				<input type="hidden" value="${total }" name="totalCount">
 				<input type="hidden" value=${mpd.lastPage } name="pageName">
 				<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
@@ -177,10 +177,41 @@
 				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
 			}
 		});
+/* 		function statusGroup(mpdText,mpdKeyword){
+			var mpdText = $('[name=mpdText]').val();
+			alert(mpdText);
+			var mpdKeyword = $('[name=mpdKeyword]').val();
+			alert(mpdKeyword);
+			var statusText = $(this).val();
+			alert(statusText);
+			if(statusText=="준비"){
+				var status = 1;
+				location.href="/selectSearchStatus.do?keyword="+mpdKeyword+"&text="+mpdText+"&status="+status;
+			}else if(statusText=="영업"){
+				var status = 2;
+				location.href="/selectSearchStatus.do?keyword="+mpdKeyword+"&text="+mpdText+"&status="+status;
+			}else if(statusText=="폐업"){
+				var status = 3;
+				location.href="/selectSearchStatus.do?keyword="+mpdKeyword+"&text="+mpdText+"&status="+status;
+			}
+		} */
 		//상태별 분류
+		//검색 결과 내에서 상태 구분하는 부분 해야함
 		$("[name=statusGroup]").on("change",function(){
-			var keyword = $(this).val();
-			location.href="/selectStatus.do?keyword="+keyword;
+			var mpdText = $('[name=mpdText]').val();
+			alert(mpdText);
+			var mpdKeyword = $('[name=mpdKeyword]').val();
+			var statusText = $(this).val();
+			if(statusText=="준비"){
+				var status = 1;
+				location.href="/selectSearchStatus.do?keyword="+mpdKeyword+"&text="+mpdText+"&status="+status;
+			}else if(statusText=="영업"){
+				var status = 2;
+				location.href="/selectSearchStatus.do?keyword="+mpdKeyword+"&text="+mpdText+"&status="+status;
+			}else if(statusText=="폐업"){
+				var status = 3;
+				location.href="/selectSearchStatus.do?keyword="+mpdKeyword+"&text="+mpdText+"&status="+status;
+			} 
 		});
 		//더보기(keyword)
 		$("[name=more]").on("click",function(){

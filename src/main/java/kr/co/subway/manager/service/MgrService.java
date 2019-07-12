@@ -73,6 +73,16 @@ public class MgrService {
 		}
 		return list;
 	}
+	//검색 결과 상태별 분류
+	public List<Mgr> selectSearchStatus(MgrPageData mpd){
+		List<Mgr> list = null;
+		if(mpd.getKeyword().equals("주소")) {
+			list = mgrdao.selectSearchStatusAddr(mpd);
+		}else if(mpd.getKeyword().equals("이름")) {
+			list = mgrdao.selectSearchStatusName(mpd);
+		}
+		return list;
+	}
 	//상태별 검색
 	public List<Mgr> searchStatus(String keyword,Mgr mgr){
 		List<Mgr> list = null;

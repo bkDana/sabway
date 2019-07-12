@@ -159,7 +159,7 @@ public class MgrController {
 		}
 		return mav;
 	}
-	//검색어 검색
+	//검색
 	@RequestMapping(value="/searchKeyword.do")
 	public ModelAndView searchKeyword(@RequestParam String keyword, @RequestParam String text) {
 		MgrPageData mpd = new MgrPageData();
@@ -171,9 +171,13 @@ public class MgrController {
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.searchList(mpd);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
+			System.out.println(mpd.getText());
 			mav.addObject("mgrSize",list.size());
 			mav.addObject("total",total);
+			System.out.println(mpd.getKeyword());
+			System.out.println(mpd.getText());
 			mav.addObject("mpd",mpd);
+			System.out.println(mpd);
 			mav.addObject("list",list);
 			mav.setViewName("manager/mgrList");
 		}else {
@@ -190,6 +194,29 @@ public class MgrController {
 		mpd.setKeyword(keyword);
 		int total = mgrservice.totalCount();
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectStatus(mpd);
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("mgrSize",list.size());
+			mav.addObject("total",total);
+			mav.addObject("mpd",mpd);
+			mav.addObject("list", list);
+			mav.setViewName("manager/statusList");
+		}else {
+			mav.setViewName("manager/listFail");
+		}
+		return mav;
+	}
+	//검색 결과 상태별 분류
+	@RequestMapping(value="/selectSearchStatus.do")
+	public ModelAndView selectSearchStatus(@RequestParam String keyword,@RequestParam String text,@RequestParam int status) {
+		MgrPageData mpd = new MgrPageData();
+		mpd.setFirstPage(1);
+		mpd.setLastPage(10);
+		mpd.setKeyword(keyword);
+		mpd.setText(text);
+		mpd.setStatus(status);
+		int total = mgrservice.totalCount();
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectSearchStatus(mpd);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
 			mav.addObject("mgrSize",list.size());

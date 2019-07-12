@@ -63,6 +63,14 @@ public class MgrDAO {
 	public List<Mgr> searchStatusAddr(Mgr mgr){
 		return session.selectList("mgr.searchStatusAddr",mgr);
 	}
+	//selectSearchStatusName 검색
+	public List<Mgr> selectSearchStatusName(MgrPageData mpd){
+		return session.selectList("mgr.selectSearchStatusName",mpd);
+	}	
+	//selectSearchStatusAddr 검색
+	public List<Mgr> selectSearchStatusAddr(MgrPageData mpd){
+		return session.selectList("mgr.selectSearchStatusAddr",mpd);
+	}
 	//searchStore 검색
 	public List<Mgr> searchStore(String keyword){
 		return session.selectList("mgr.searchStore",keyword);
