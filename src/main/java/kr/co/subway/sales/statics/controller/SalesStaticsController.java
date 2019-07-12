@@ -2,15 +2,14 @@ package kr.co.subway.sales.statics.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -34,12 +33,6 @@ public class SalesStaticsController {
 	@RequestMapping("/totalSales.do")
 	public void totalSales(HttpServletResponse response) throws JsonIOException, IOException {
 		ArrayList<SalesStaticsGrpVo> list = service.totalSales();
-		/*Map<String,String> map = H
-		for(int i=0;i<list.size();i++) {
-			if()
-			list.get(i).getOrderMonth()
-		}*/
-		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());
@@ -52,6 +45,7 @@ public class SalesStaticsController {
 		String orderMonth = month.substring(0,month.length()-1);
 		System.out.println(orderMonth);
 		ArrayList<SalesStaticsGrpVo> list = service.monthTotalSales(orderMonth);
+		System.out.println(list.get(2).getCusoBranch());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());
@@ -63,6 +57,28 @@ public class SalesStaticsController {
 		return "admin/salesStatics/branchSales";
 	}
 	
+	//지점명 가져오기
+	@ResponseBody
+	@RequestMapping("/getBranch.do")
+	public void getBranch(String cusoBranch,HttpServletResponse response) throws JsonIOException, IOException {
+		System.out.println(cusoBranch);
+		List list = service.getBranch(cusoBranch);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+	}
+	
+	//지점 매출 가져오기
+	@ResponseBody
+	@RequestMapping("/getBranchSales.do")
+	public void getBranchSales(String branchName,HttpServletResponse response) throws JsonIOException, IOException {
+		//System.out.println(branchName);
+		ArrayList<SalesStaticsGrpVo> list = service.getBranchSales(branchName);
+		System.out.println("월 : "+list.get(2).getOrderMonth()+"매출 : "+list.get(2).getTotalCost());
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+	}
 	
 	//매출 가져오기
 	/*@RequestMapping("/totalSales.do")

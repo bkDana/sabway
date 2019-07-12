@@ -14,4 +14,16 @@
 		where cuso_order_state=2 and substr(cuso_order_date,1,2)=to_char(sysdate,'yy') and substr(cuso_order_date,4,2)=#{orderMonth} group by cuso_branch
 		 order by totalCost desc, cusoBranch
 	</select>
+	
+	<!-- 지점명 가져오기 -->
+	<select id="getBranch" parameterType="string" resultType="mgr">
+		select mgr_name as mgrName from manager where mgr_name like '%'||#{cusoBranch}||'%'
+	</select>
+	
+	<!-- 지점별 매출 현황 가져오기 -->
+	<select id="getBranchSales" parameterType="string" resultType="graph">
+		select nvl(substr(cuso_order_date,4,2),'total') as orderMonth, sum(cuso_total_cost) as totalCost  from cusorder 
+		where cuso_order_state=2 and substr(cuso_order_date,1,2)=to_char(sysdate,'yy') and cuso_branch=#{branchName} 
+		group by rollup (cuso_branch,substr(cuso_order_date,4,2))
+	</select>
 </mapper>

@@ -83,11 +83,20 @@
 					</span>
 					<span class="label">${ingre.ingreLabel }</span>
 					<span class="kcal">${ingre.ingreKcal }kcal</span>
+					<div class="cover">
+						<div class="cover-con">
+							<div class="cover-inner">
+								<span class="tit">${ingre.ingreLabel }</span>
+								<span class="desc">${ingre.ingreDescription }</span>
+							</div>
+						</div>
+					</div>
 				</li>
 			</c:forEach>
 		</ul>
 	</div>
 </section>
+
 
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

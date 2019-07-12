@@ -38,6 +38,14 @@
 							<input type="text" name="ingreLabel" id="ingreLabel" required>
 						</td>
 					</tr>
+					<%-- <tr id="sauceTr">
+						<th>추천 소스</th>
+						<td>
+							<c:forEach items="${sauce}" var="sauce">
+								<label><input type="checkbox" name="ingreRecomSauce" value="${sauce.ingreLabel}"> ${sauce.ingreLabel}</label>
+							</c:forEach>
+						</td>
+					</tr> --%>
 					<tr>
 						<th>판매 가격</th>
 						<td>
@@ -91,6 +99,36 @@
 		</div>
 	
 </section>
+
+<script>
+	/* $(document).ready(function(){
+		$("#sauceTr").hide();
+	});
+	
+	//재료 카테고리 변경시
+	$("#ingreType").change(function(){
+		//메인재료 선택시
+		if($("#ingreType").val()=='메인재료'){
+			$("#sauceTr").show();
+			/* $.ajax({
+				url : "ingre"
+			}) */
+		}else{
+			$("#sauceTr").hide();
+		}
+	}); */
+</script>
+
+
+
+
+
+
+
+
+
+
+
 
 
 <%-- Footer --%>
