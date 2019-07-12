@@ -136,7 +136,8 @@
   		</if>
   	</if>
   	 order by ingre_reg_date desc) i)
-  </select> 
+  </select>
+  
   <!-- select * from (select rownum as rnum, b.* from (select ba.no, m.name careNm, ba.id, ba.name,ba.phone, ba.visit_date, ba.visit_time, ba.apply_date, ba.status 
   from ((select * from book_apply where code=?"+ sql +" order by 1 desc)ba) Join member m Using(code)) b) 
   where rnum BETWEEN ? and ? -->
