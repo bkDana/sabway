@@ -17,6 +17,11 @@ public class IngreManageDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
+
+	//재료 등록페이지 이동시 소스 가져오기
+	public List getSauce() {
+		return sqlSession.selectList("ingre.getSauce");
+	}
 	
 	//재료 등록페이지로
 	public int ingreReg(IngreVo iv) {
@@ -70,21 +75,22 @@ public class IngreManageDao {
 	}
 
 	//엑셀 다운로드 할 리스트 가져오기
-		public List ingreSelectAll(String searchType, String searchVal) {
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("searchType", searchType);
-			map.put("searchVal", searchVal);
-			return sqlSession.selectList("ingre.ingreListExcel",map);
-		}
+	public List ingreSelectAll(String searchType, String searchVal) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchType", searchType);
+		map.put("searchVal", searchVal);
+		return sqlSession.selectList("ingre.ingreListExcel",map);
+	}
 
 	// 재료 하나 골라오기
-		public IngreVo ingreSelectOne(IngreVo ingreVo) {
-			return sqlSession.selectOne("ingre.selectOneIngre",ingreVo);
-		}
+	public IngreVo ingreSelectOne(IngreVo ingreVo) {
+		return sqlSession.selectOne("ingre.selectOneIngre",ingreVo);
+	}
 	// 재료 타입 골라서 리스트 만들기
-		public List<IngreVo> selectIngreList(IngreVo ingreVo) {
-			return sqlSession.selectList("ingre.selectIngreList",ingreVo);
-		}
+	public List<IngreVo> selectIngreList(IngreVo ingreVo) {
+		return sqlSession.selectList("ingre.selectIngreList",ingreVo);
+	}
+
 
 
 	

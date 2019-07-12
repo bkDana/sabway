@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ingre">
+	<!-- 재료등록 페이지 이동시 소스 종류 가져오기 -->
+	<select id="getSauce" resultType="ingre">
+		select ingre_label as ingreLabel from ingredients where ingre_type='소스' order by ingre_label
+	</select>
+
   <!-- 메뉴 등록 -->
   <insert id="ingreReg" parameterType="ingre">
   	insert into ingredients values (seq_ingre_idx.nextval, #{ingreLabel}, #{ingreType}, #{ingreCost15}, #{ingreCost30}, 0, 
@@ -13,7 +18,7 @@
 		  	null,
 		  </otherwise>
 	  </choose>
-  	sysdate)
+  	sysdate,null)
   </insert>
   
   <!-- 재료 리스트 개수 구하기 -->
