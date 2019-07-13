@@ -28,6 +28,7 @@ import kr.co.subway.manager.service.AddrType;
 import kr.co.subway.manager.service.MgrService;
 import kr.co.subway.manager.service.RandomTel;
 import kr.co.subway.manager.vo.Mgr;
+import kr.co.subway.manager.vo.MgrPageData;
 import kr.co.subway.manager.vo.PageNo;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -115,10 +116,17 @@ public class MgrController {
 	//가맹점 목록
 	@RequestMapping(value="/managerList.do")
 	public ModelAndView managerList() {
-		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
+		MgrPageData mpd = new MgrPageData();
+		mpd.setFirstPage(1);
+		mpd.setLastPage(10);
+		int total = mgrservice.totalCount();
+		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.mpdList(mpd);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
-			mav.addObject("list", list);
+			mav.addObject("mgrSize",list.size());
+			mav.addObject("total",total);
+			mav.addObject("mpd",mpd);
+			mav.addObject("list",list);
 			mav.setViewName("manager/managerList");
 		}else {
 			mav.setViewName("manager/listMsg");
@@ -134,23 +142,43 @@ public class MgrController {
 	//변경된 목록
 	@RequestMapping(value="/listMgr.do")
 	public ModelAndView listMgr() {
-		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
+		MgrPageData mpd = new MgrPageData();
+		mpd.setFirstPage(1);
+		mpd.setLastPage(10);
+		int total = mgrservice.totalCount();
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mpdList(mpd);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
-			mav.addObject("list", list);
+			mav.addObject("mgrSize",list.size());
+			mav.addObject("total",total);
+			mav.addObject("mpd",mpd);
+			mav.addObject("list",list);
 			mav.setViewName("manager/managerList");
 		}else {
-			mav.setViewName("manager/listFail");
+			mav.setViewName("manager/listMsg");
 		}
 		return mav;
 	}
-	//검색어 검색
+	//검색
 	@RequestMapping(value="/searchKeyword.do")
 	public ModelAndView searchKeyword(@RequestParam String keyword, @RequestParam String text) {
-		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.searchList(keyword,text);
+		MgrPageData mpd = new MgrPageData();
+		mpd.setFirstPage(1);
+		mpd.setLastPage(10);
+		mpd.setText(text);
+		mpd.setKeyword(keyword);
+		int total = mgrservice.totalCount();
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.searchList(mpd);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
-			mav.addObject("list", list);
+			System.out.println(mpd.getText());
+			mav.addObject("mgrSize",list.size());
+			mav.addObject("total",total);
+			System.out.println(mpd.getKeyword());
+			System.out.println(mpd.getText());
+			mav.addObject("mpd",mpd);
+			System.out.println(mpd);
+			mav.addObject("list",list);
 			mav.setViewName("manager/mgrList");
 		}else {
 			mav.setViewName("manager/listFail");
@@ -160,9 +188,40 @@ public class MgrController {
 	//상태별 분류
 	@RequestMapping(value="/selectStatus.do")
 	public ModelAndView selectStatus(@RequestParam String keyword) {
-		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectStatus(keyword);
+		MgrPageData mpd = new MgrPageData();
+		mpd.setFirstPage(1);
+		mpd.setLastPage(10);
+		mpd.setKeyword(keyword);
+		int total = mgrservice.totalCount();
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectStatus(mpd);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
+			mav.addObject("mgrSize",list.size());
+			mav.addObject("total",total);
+			mav.addObject("mpd",mpd);
+			mav.addObject("list", list);
+			mav.setViewName("manager/statusList");
+		}else {
+			mav.setViewName("manager/listFail");
+		}
+		return mav;
+	}
+	//검색 결과 상태별 분류
+	@RequestMapping(value="/selectSearchStatus.do")
+	public ModelAndView selectSearchStatus(@RequestParam String keyword,@RequestParam String text,@RequestParam int status) {
+		MgrPageData mpd = new MgrPageData();
+		mpd.setFirstPage(1);
+		mpd.setLastPage(10);
+		mpd.setKeyword(keyword);
+		mpd.setText(text);
+		mpd.setStatus(status);
+		int total = mgrservice.totalCount();
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectSearchStatus(mpd);
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("mgrSize",list.size());
+			mav.addObject("total",total);
+			mav.addObject("mpd",mpd);
 			mav.addObject("list", list);
 			mav.setViewName("manager/statusList");
 		}else {
@@ -184,24 +243,6 @@ public class MgrController {
 			mav.setViewName("manager/mgrList");
 		}else {
 			mav.setViewName("manager/listFail");
-		}
-		return mav;
-	}
-	//테스트 jsp
-	@RequestMapping(value="/mgrPage.do")
-	public ModelAndView page() {
-		PageNo pn = new PageNo();
-		pn.setFirstPage(1);
-		pn.setLastPage(10);
-		int total = mgrservice.totalCount();
-		System.out.println(total);
-		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.morePage(pn);
-		ModelAndView mav = new ModelAndView();
-		if(!list.isEmpty()) {
-			mav.addObject("total",total);
-			mav.addObject("pn",pn);
-			mav.addObject("list",list);
-			mav.setViewName("manager/test");
 		}
 		return mav;
 	}
@@ -267,7 +308,39 @@ public class MgrController {
 //			e.printStackTrace();
 //		}
 	}
-	
+	//ajax 더보기 (keyword)
+	@ResponseBody
+	@RequestMapping(value="/mgrKeywordMore.do",produces="text/plain;charset=UTF-8")
+	public String keywordMore(HttpServletResponse response,@RequestParam int firstPage,@RequestParam String text,@RequestParam String keyword) {
+		MgrPageData mpd = new MgrPageData();
+		mpd.setFirstPage(firstPage+1);
+		mpd.setLastPage(firstPage+10);
+		mpd.setKeyword(keyword);
+		mpd.setText(text);
+		System.out.println(mpd.getFirstPage());
+		System.out.println(mpd.getLastPage());
+		System.out.println(mpd.getKeyword());
+		System.out.println(mpd.getText());
+		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.keywordMore(mpd);
+		System.out.println(list.size());
+		return new Gson().toJson(list);
+	}
+	//ajax 더보기 (status)
+	@ResponseBody
+	@RequestMapping(value="/mgrStatusMore.do",produces="text/plain;charset=UTF-8")
+	public String statusMore(HttpServletResponse response,@RequestParam int firstPage,@RequestParam String keyword) {
+		MgrPageData mpd = new MgrPageData();
+		mpd.setFirstPage(firstPage+1);
+		mpd.setLastPage(firstPage+10);
+		mpd.setKeyword(keyword);
+		System.out.println(mpd.getFirstPage());
+		System.out.println(mpd.getLastPage());
+		System.out.println(mpd.getKeyword());
+		System.out.println(mpd.getText());
+		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.statusMore(mpd);
+		System.out.println(list.size());
+		return new Gson().toJson(list);
+	}
 	//신규가맹점 목록
 	@RequestMapping(value="/findStore.do")
 	public ModelAndView newStoreList() {

@@ -98,7 +98,7 @@
 		//더보기
 		$("[name=more]").on("click",function(){
 			var total = Number($('[name=totalCount]').val());
-			var firstPage = Number($('[name=pageName]').val());	//여기서부터 수정
+			var firstPage = Number($('[name=pageName]').val());
 			var length = firstPage+10;
 			console.log(length);
 			if(length <= total){
