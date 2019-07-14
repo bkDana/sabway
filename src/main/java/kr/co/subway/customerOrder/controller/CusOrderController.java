@@ -79,8 +79,8 @@ public class CusOrderController {
 				}// for ends
 			}
 			if(!quantity.equals("1")) {															// 수량이 1 이상이면
-				int multiflier = Integer.parseInt(quantity);									// multiflier 설정
-				cost *= multiflier;																// totalCost에 계수 곱하기
+				int multiplier = Integer.parseInt(quantity);									// multiplier 설정
+				cost *= multiplier;																// totalCost에 계수 곱하기
 			}
 			
 		} else { 																				// 30cm일때 - 위와 같으나 30cm 가격을 받아옴
@@ -139,33 +139,7 @@ public class CusOrderController {
 			ingre.setIngreIdx(Integer.parseInt(main));
 			IngreVo mainIngre = cusOrderService.selectCostMain(ingre); 
 			b.setBucMain("/resources/upload/ingredients/"+mainIngre.getIngreFilepath());
-//			
-//			//빵
-//			String bread = b.getBucBread();
-//			switch(bread) {
-//			case "1" : b.setBucBread("허니오트"); 			break;
-//			case "2" : b.setBucBread("하티"); 			break;
-//			case "3" : b.setBucBread("위트"); 			break;
-//			case "4" : b.setBucBread("파마산오레가노"); 	break;
-//			case "5" : b.setBucBread("화이트");			break;
-//			case "6" : b.setBucBread("플랫브레드"); 		break;
-//			default : b.setBucBread("");
-//			}
-//			//치즈
-//			String cheese = b.getBucCheese();
-//			switch(cheese) {
-//			case "-1" : b.setBucCheese("선택안함");		break;
-//			case "0" : b.setBucCheese("아메리칸치즈");		break;
-//			case "1" : b.setBucCheese("슈레드치즈");		break;
-//			}
-//			//소스
-//			String source = b.getBucSource();
-//			switch(source) {
-//			case "-1" : b.setBucSource("선택안함");		break;
-//			case "0" : b.setBucSource("렌치드래싱");		
-//			}
-			
-			
+	
 		}
 
 		ModelAndView mav = new ModelAndView();

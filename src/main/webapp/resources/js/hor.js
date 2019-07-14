@@ -302,6 +302,8 @@ tagSalad = '<h3>메인재료</h3> \
 
 //// 정엄이가 쓴거
 //메인 재료 선택된 거에 따라서 추천 소스 보여주기
+
+
 	function delay(gap){ /* gap is in millisecs */ 
 	  var then,now; 
 	  then=new Date().getTime(); 
@@ -359,6 +361,7 @@ tagSalad = '<h3>메인재료</h3> \
 		}
 	});
 	$('.bread-amount').click(function(){
+		$(this).addClass('selected');
 		var breadIdx = $(this).parent().prev().text();
 		var amountIdx = -1;
 		if(($('.bread-amount').index(this)+1)%2 == 1) {
@@ -387,7 +390,7 @@ tagSalad = '<h3>메인재료</h3> \
 			if($('.topping').eq(i).hasClass("selects")){
 				str += '1';
 			}else{
-				str += '0';
+				str += '0'; 
 			}
 		}
 		$('input[name=bucTopping]').val(str);
@@ -506,20 +509,19 @@ tagSalad = '<h3>메인재료</h3> \
 				str += '0';
 			}
 		}
-		/////////////////////////////////////////////////////월요일 마커!!!!!!!!!!!!!!!!씨이바아아아아아앙아
-		$('input[name=bucTopping]').val(str);
-		console.log($('input[name=bucTopping]').val());
-		$(".step").eq(5).trigger("click");
+		$('input[name=bucSide]').val(str);
+		console.log($('input[name=bucSide]').val());
+		$(".step").eq(9).trigger("click");
 	});
-	$('.topping.img-box.select-none').click(function(){
-		for(var i = 1; i<$('.topping').length;i++){
-			if($('.topping').eq(i).hasClass("selects")){
-				$('.topping').eq(i).removeClass("selects");
-				$('.topping').eq(i).find('img').css("display","block");
-				$('.topping').eq(i).find('p').css("display","none");
-				$('.topping').eq(i).find('button').css("display","none");
-				$('.topping').eq(i).css("background-color","#fff");
-				$('.topping').eq(i).bind("mouseleave",function(){
+	$('.sidemenu.img-box.select-none').click(function(){
+		for(var i = 1; i<$('.sidemenu').length;i++){
+			if($('.sidemenu').eq(i).hasClass("selects")){
+				$('.sidemenu').eq(i).removeClass("selects");
+				$('.sidemenu').eq(i).find('img').css("display","block");
+				$('.sidemenu').eq(i).find('p').css("display","none");
+				$('.sidemenu').eq(i).find('button').css("display","none");
+				$('.sidemenu').eq(i).css("background-color","#fff");
+				$('.sidemenu').eq(i).bind("mouseleave",function(){
 					$(this).find('img').css("display","block");
 					$(this).find('p').css("display","none");
 					$(this).find('button').css("display","none");
@@ -529,4 +531,24 @@ tagSalad = '<h3>메인재료</h3> \
 		}
 	});
 	
+	$('.set').click(function(){
+		var idx = $('.set').index(this);
+		$('input[name=bucSet]').val(idx);
+		//0 : 단품, 1 : 웨지감자세트, 2 : 쿠키세트
+		//$(".step").eq(10).trigger("click");
+	});
+	var str ="";
+	
+	$('select').children().click(function(){
+		console.log($(this));
+		$('input[name=bucQuantity]').val($(this).html());
+	});
+	
+/////////////////////////////////////////////////////월요일 마커!!!!!!!!!!!!!!!!씨이바아아아아아앙아
+	// jstl이용한 스크립트 처리 : jsp문서에서 실행해야함 -> 아래 주석 내용 역시 jsp에서 처리함
+	/* 칼로리 설정 및 실시간 표시 */
+
+	/* 가격 설정 및 실시간 표시 */
+	
+
 

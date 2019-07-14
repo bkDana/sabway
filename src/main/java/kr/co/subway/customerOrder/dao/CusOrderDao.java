@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.customerOrder.vo.Bucket;
+import kr.co.subway.ingreManage.vo.IngreVo;
 
 @Repository("cusOrderDao")
 public class CusOrderDao {
@@ -21,8 +22,12 @@ public class CusOrderDao {
 		return sqlSession.insert("bucket.insertBucket",buc);
 	}
 
-	public List<Bucket> allBucketList(int cusoIdx) {
-		return sqlSession.selectList("bucket.selectAllBucket", cusoIdx);
+	public List<Bucket> allBucketList(int customerIdx) {
+		return sqlSession.selectList("bucket.selectAllBucket", customerIdx);
+	}
+
+	public IngreVo selectCostMain(IngreVo ingre) {
+		return sqlSession.selectOne("ingre.selectOneMain", ingre);
 	}
 
 }
