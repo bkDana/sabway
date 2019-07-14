@@ -351,7 +351,7 @@ tagSalad = '<h3>메인재료</h3> \
 		if(typeIdx==1){
 			$('.next-step').css("display","none");
 			$('.bread').css("display","block");
-			$('input[name=isSalad]').val("샌드위치");
+			$('input[name=bucIsSalad]').val("샌드위치");
 			$(".step").eq(1).trigger("click");
 		}else if(typeIdx==2){
 			$('input[name=bucIsSalad]').val("샐러드");
@@ -360,7 +360,12 @@ tagSalad = '<h3>메인재료</h3> \
 	});
 	$('.bread-amount').click(function(){
 		var breadIdx = $(this).parent().prev().text();
-		var amountIdx = ($('.bread-amount').index(this)+1)*15;
+		var amountIdx = -1;
+		if(($('.bread-amount').index(this)+1)%2 == 1) {
+			amountIdx = 15;
+		} else {
+			amountIdx = 30;
+		}
 		var str = breadIdx+','+amountIdx;
 		$('input[name=bucBread]').val(str);
 		console.log(str);
@@ -373,7 +378,7 @@ tagSalad = '<h3>메인재료</h3> \
 	});
 	$('.cheeze').click(function(){
 		var str = $(this).find('p').text();
-		$('input[name=bucMain]').val(str);
+		$('input[name=bucCheese]').val(str);
 		$(".step").eq(4).trigger("click");
 	});
 	$('.topping-check').click(function(){
