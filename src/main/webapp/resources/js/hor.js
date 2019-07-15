@@ -94,6 +94,10 @@ $(document).ready(function() {
 			cost +=  Number($(this).find('input').eq(2).val());
 			kcal +=  Number($(this).find('input').eq(0).val())*2;
 		}
+		console.log(Number($(this).find('input').eq(1).val()));
+		console.log(Number($(this).find('input').eq(2).val()));
+		$('#recom-sauce').val($(this).find('input').eq(3).val());
+		$('#recom-main').val(str);
 		$('input[name=bucMain]').val(str);
 		$(".step").eq(3).trigger("click");
 	});
@@ -215,6 +219,25 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+//	$('.source-recom').click(function(){
+//		var sauceStr = $('#recom-sauce').val();
+//		var arrSauce = sauceStr.split(',');
+//		console.log(arrSauce);
+//		for(var i=0; i<$('.source').length;i++){
+//			for(var k=0; k<arrSauce.length; k++){
+//				if($('.source').eq(i).find('p').text()===arrSauce[k]){
+//					console.log("k도냐"+k);
+//					$('.source').eq(i).unbind("mouseleave");
+//					$('.source').eq(i).find('img').css("display","none");
+//					$('.source').eq(i).find('p').css("display","block");
+//					$('.source').eq(i).find('button').css("display","block");
+//					$('.source').eq(i).css("background-color","#009223");
+//					$('.source').eq(i).toggleClass("selected");
+//				}
+//			}
+//		}
+//	});
 	
 	$('.source-check').click(function(){
 		var str = "";
@@ -343,18 +366,12 @@ $(document).ready(function() {
 		$('input[name=bucSet]').val(str);
 		$(".step").eq(9).trigger("click");
 	});
-	
-	$('.sidemenu').click(function() {
-		$('#itemStatus').html($('input[name=bucMain]').val() + " " + $('input[name=bucIsSalad]').val() + " " + $('input[name=bucSet]').val());
-	});
-	
-	$('#bucketArea').click(function() {
+
+	/* bucCusoIdx(날짜정보로 만듦) */
+	$('#sbmOrder').click(function() {
 		var d = new Date();
 		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
 		$('input[name=bucCusoIdx]').val(date);
-		$('#feedbackform').attr('action','/loadBucket.do'); 
-		$('#feedbackform').attr('method','post');
-		$('#feedbackform').submit();
 	});
 
 	$('.add-order').click(function(){
@@ -379,6 +396,10 @@ $(document).ready(function() {
 		var offset = $(".step").eq(0).offset();
         $('html, body').animate({scrollTop : offset.top}, 400);
 		$(".step").eq(0).trigger("click");
+	});
+	
+	$('.add-bucket').click(function() {
+		
 	});
 
 

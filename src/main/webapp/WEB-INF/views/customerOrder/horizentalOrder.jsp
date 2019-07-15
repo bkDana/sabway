@@ -19,15 +19,10 @@ var myform=new formtowizard({
 <%-- content--%>
 <section id="content-wrapper">
 	<div class="area">	
-	<strong style="font-size:40px; font-weight:bolder;">온라인 주문 예약</strong><br><br>
-		<div id="bucketWrapper" style=" width:100%; background-color:white;">
-			<div id="bucketArea" style="width:200px; float:right; background-color:orange; cursor:pointer;">
-				<strong style="font-size:30px;">카트</strong><span id="itemCount"></span><br>
-				<span id="itemStatus">카트에 담긴 상품이 없습니다</span>
-				<br><br>
-			</div>
-		</div>
-		
+	<strong style="font-size:40px; font-weight:bolder;">온라인 주문 예약</strong>
+		<c:if test="${not empty sessionScope.customer}">
+			<a class="header-btn" style="margin-right:30px; float:right; cursor:pointer;"><img src="/resources/img/shopping-cart.png" width="30px"></a><!-- 장바구니 개수 넣어주세요 -->
+		</c:if>
 		<form id="feedbackform" name="feedbackform" method="post">
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
@@ -69,8 +64,15 @@ var myform=new formtowizard({
 							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 							<p class="label">${ingre.ingreLabel }</p>
 							<input type="hidden" value="${ingre.ingreKcal }">
-							<input type="hidden" value="${ingre.ingreCost15 }">
-							<input type="hidden" value="${ingre.ingreCost30 }">
+							<c:set var="discnt" value="${ingre.ingreDiscntRate}"/>
+							<c:if test="${discnt ne 0 }">
+								<input type="hidden" value="${ingre.ingreCost15*(100-discnt)/100 }">
+								<input type="hidden" value="${ingre.ingreCost30*(100-discnt)/100 }">
+							</c:if>
+							<c:if test="${ingre.ingreDiscntRate eq 0 }">
+								<input type="hidden" value="${ingre.ingreCost15 }">
+								<input type="hidden" value="${ingre.ingreCost30 }">
+							</c:if>
 							<input type="hidden" value="${ingre.ingreRecomSauce }">
 						</div>
 					</c:if>
@@ -235,7 +237,10 @@ var myform=new formtowizard({
 					</table>
 					<div class="common-tbl-btn-group">
 						<button type="button" class="btn-style2 add-order">추가 주문</button>
-						<button type="button" class="btn-style2">주문 완료</button>
+						<c:if test="${not empty sessionScope.customer}">
+							<button type="button" class="btn-style2 add-bucket">카트에 담기</button>
+						</c:if>
+						<button type="button" id="sbmOrder" class="btn-style2">주문 완료</button>
 					</div>
 				</div>
 			<input type="hidden" name="bucBread" class="orderInput">
@@ -251,8 +256,11 @@ var myform=new formtowizard({
 			<input type="hidden" name="bucKcal" class="orderInput"> 
 			<input type="hidden" name="bucIsSalad" class="orderInput">
 			<input type="hidden" name="bucIsOvened" class="orderInput">
-			<input type="hidden" name="bucCusoIdx" class="orderInput">
+<!-- 			<input type="hidden" name="bucCusoIdx" class="orderInput"> -->
 		</form>
+		
+				<input type="hidden" id="recom-sauce">
+				<input type="hidden" id="recom-main">
 	</div>
 </section>
 
