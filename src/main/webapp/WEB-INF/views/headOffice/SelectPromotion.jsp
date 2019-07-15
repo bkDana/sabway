@@ -26,7 +26,7 @@
 					<c:if test="${ingre.ingreType == '메인재료'}">
  						<tr>
  							<td><span>${i.count }</span></td>
-							<td><span>${ingre.ingreLabel }</span></td>
+							<td><span>${fn:escapeXml(ingre.ingreLabel) }</span></td>
  							<td><span>${ingre.ingreCost15 }</span></td>
  							<td><span>${ingre.ingreCost30 }</span></td>
  							<td>
@@ -66,49 +66,20 @@
 		$(this).parent().next().children().html('15cm : '+ingreCost15Discnt+'<br>30cm : '+ingreCost30Discnt);
 		//할인 적용한 메뉴 submit
 		$("#submitLink").click(function(){
-			console.log(ingreType+","+ingreLabel+","+discntRate);
-			location.href="/selectPromotion.do?ingreLabel="+ingreLabel+'&ingreType='+ingreType+"&discntRate="+discntRate;
+			$.ajax({
+				url:"/selectPromotion.do",
+				dataType:"json",
+				data:{ingreLabel:ingreLabel,ingreType:ingreType,discntRate:discntRate},
+				success:function(data){
+					console.log(ingreLabel+" = " + '15cm : '+ingreCost15Discnt+' / 30cm : '+ingreCost30Discnt);
+				}
+			});
 		});
 	});
 	//메인페이지 이동 버튼
 	$("#mainLink").click(function(){
 		location.href="/admin.do";
 	});
-	
-/* 		//메뉴 변경시 적용되게
-		var selectMenu;
-		var discntPrice;
-		$('[name=menuNo]').on("change",function(){//상품을 선택해서 값이 변하면
-			$(this).parent().siblings().eq(0).children().hide();//선택한 객체의 부모객체의 바로 다음 형제의 자식객체들을 다 숨김
-			$(this).parent().siblings().eq(0).children().eq($(this).val()).show();//선택한 객체의 부모객체의 바로 다음 형제의 자식객체 중에서 선택한 인덱스의 객체만 보이게
-			var selectMenuName = $('[name=spMenuName]').eq($(this).val()).html();//이름 저장
-			$('[name=menuName]').val(selectMenuName);
-
-			selectMenu = $(this).parent().siblings().eq(0).find('span').eq($(this).val()).html();//선택한 selectBox의 index(메뉴)에 들어있는 가격을 변수에 저장
-			$('[name=menuBasePrice]').val(selectMenu);//controller에 보낼 파라미터(가격을 저장한 변수를 전달)
-			
-			//선택 되어있는 함수 적용
-				var price = selectMenu;//가격 변수
-				var rate = $('[name=menuDiscntRate2]').val();//할인 계산용 변수
-				$('rate').attr("selected","selected");
-				var discntPrice = Math.round(price*rate);//할인율 변수
-				//view page 출력용 menuDiscntPrice값  
-				$(".menuDiscntPrice").html(discntPrice);
-				//controller 전달용 menuDiscntPrice 파라미터 
-				$("[name=menuDiscntPrice]").val(discntPrice);
-			
-			//할인율 변경했을 때 적용
-			$('[name=menuDiscntRate2]').on("change",function(){
-				var price = selectMenu;//가격 변수
-				var rate = $('[name=menuDiscntRate2]').val();//할인 계산용 변수
-				$('rate').attr("selected","selected");
-				discntPrice = Math.round(price*rate);//할인율 변수
-				//view page 출력용 menuDiscntPrice값  
-				$(".menuDiscntPrice").html(discntPrice);
-				//controller 전달용 menuDiscntPrice 파라미터 
-				$("[name=menuDiscntPrice]").val(discntPrice);
-			});
-		}); */
 	</script>
 </section>
 
