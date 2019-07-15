@@ -129,7 +129,7 @@ $(document).ready(function(){
 	
 	/* 단위 선택 셋팅 */
 	var ingreUnit = $('select[name=ingreUnit]').data('unit');
-	$('select[name=ingreUnit]').children('option').each(function(){
+	$('select[name=ingreUnit]').children('option').each(function(){ 
 		if(ingreUnit == $(this).val()){
 			$(this).prop("selected",true);
 		}
