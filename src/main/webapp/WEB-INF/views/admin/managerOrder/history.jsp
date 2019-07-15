@@ -2,17 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%-- Header --%>
-<jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
+<%--  Header --%>
+<jsp:include page="/WEB-INF/views/admin/common/header.jsp" /> 
 
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
-
 	<%-- LEFT MENU --%>
-	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
-	<div class="area">
-		<div class="sub-menu">※ 재고관리 > <a href="/managerOrder/stockList.do">재고현황</a></div>
-		<%-- 
+ 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
+	<div class="area"> 
+		<%-- <div class="sub-menu">※ 재고관리 > <a href="/managerOrder/stockList.do">재고현황</a></div>
+		
 		<p>
 		
 			<select id="order" data-val="${search.orderBy }">
@@ -22,29 +21,38 @@
 			</select>
 		</p>
 		 --%>
-		<table class="his-tbl">
-			<colgroup>
-				<col width="">
-				<col width="50%">
-			</colgroup>
-			<tr>
-				<th>내역</th><th>시간</th>
-			</tr>
-			<c:forEach items="${history }" var="history">
-				<c:if test="${history.hContent ne 0 }">
-					<tr>
-						<td>
-							<c:choose>
-								<c:when test="${fn:contains(history.hContent,'-') }"><span class="state-can">${history.hContent }</span> (재고조사 차감)</c:when>
-								<c:otherwise><span class="state-arr">+${history.hContent }</span> (발주물품 입고)</c:otherwise>
-							</c:choose>
-						</td>
-						<td>${history.hDate }</td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</table>
-		
+
+		<div class="common-tbl-btn-group">
+			<button class="modal-close-btn btn-style1">닫기</button>
+		</div>
+		<div>
+			<img src="">
+			<p></p>
+		</div>
+		<div>
+			<table class="his-tbl">
+				<colgroup>
+					<col width="">
+					<col width="50%">
+				</colgroup>
+				<tr>
+					<th>내역</th><th>시간</th>
+				</tr>
+				<c:forEach items="${history }" var="history">
+					<c:if test="${history.hContent ne 0 }">
+						<tr>
+							<td>
+								<c:choose>
+									<c:when test="${fn:contains(history.hContent,'-') }"><span class="state-can">${history.hContent }</span> (재고조사 차감)</c:when>
+									<c:otherwise><span class="state-arr">+${history.hContent }</span> (발주물품 입고)</c:otherwise>
+								</c:choose>
+							</td>
+							<td>${history.hDate }</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</table>
+		</div>
 		<!-- paging 
 		<div class="paging">
 			${list.pageNavi }	
@@ -53,6 +61,21 @@
 	</div>
 </section>
 
-
+<script>
+$(document).ready(function  () {
+	var $modalWrap = $(".modal-fixed-pop-wrapper");
+	$(".modal-close-btn").click(function  () {
+		$(".modal-inner-content").empty();
+		$modalWrap.css("display","none");
+		$("html").css({
+			"margin-right":"0",
+			"overflow-y":"scroll"
+		});
+		$modalWrap.fadeOut();
+		return false;
+	});
+	
+});
+</script>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
