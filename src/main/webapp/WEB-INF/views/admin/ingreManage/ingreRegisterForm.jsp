@@ -4,6 +4,9 @@
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 
+<style>
+.recom li{float: left;width: 20%;}
+</style>
 
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
@@ -30,6 +33,7 @@
 								<option value="채소">채소</option>
 								<option value="소스">소스</option>
 								<option value="사이드메뉴">사이드메뉴</option>
+								<option value="세트메뉴">세트메뉴</option>
 							</select>
 						</td>
 					</tr>
@@ -42,9 +46,12 @@
 					<tr id="sauceTr">
 						<th>추천 소스</th>
 						<td>
-							<c:forEach items="${sauce}" var="sauce">
-								<label><input type="checkbox" class="ckRecomSauce" name="ckRecomSauce" value="${sauce.ingreLabel}"> ${sauce.ingreLabel}</label>
-							</c:forEach>
+							<label><input type="checkbox" name="ckRecomSauce" id="chk-del-all" value="">전체 선택 해제</label>
+							<ul class="recom">
+								<c:forEach items="${sauce}" var="sauce">
+									<li><label><input type="checkbox" class="ckRecomSauce" name="ckRecomSauce" value="${sauce.ingreLabel}"> ${sauce.ingreLabel}</label></li>
+								</c:forEach>
+							</ul>
 							<input type="hidden" name="ingreRecomSauce" id="ingreRecomSauce">
 						</td>
 					</tr>
@@ -119,6 +126,9 @@
 	
 	//추천소스 선택시
 	$("input[name=ckRecomSauce]").change(function(){
+		if($("#chk-del-all").is(":checked")){
+			$("input[name='ckRecomSauce']").prop("checked",false);
+		}
 		var values = "";
 		for(var i=0;i<$('input[name="ckRecomSauce"]:checked').length;i++){
 			if(i!= $('input[name="ckRecomSauce"]:checked').length-1){
@@ -126,19 +136,10 @@
 			}else{
 				values += $('input[name="ckRecomSauce"]:checked').eq(i).val();
 			}
-			$("#ingreRecomSauce").val(values);
 		}
+		$("#ingreRecomSauce").val(values);
 	});
 </script>
-
-
-
-
-
-
-
-
-
 
 
 
