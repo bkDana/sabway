@@ -303,7 +303,9 @@ tagSalad = '<h3>메인재료</h3> \
 //// 정엄이가 쓴거
 //메인 재료 선택된 거에 따라서 추천 소스 보여주기
 
-
+	var cost = Number(0);
+	var kcal = Number(0);
+	var breadCheck=0;
 	function delay(gap){ /* gap is in millisecs */ 
 	  var then,now; 
 	  then=new Date().getTime(); 
@@ -357,6 +359,7 @@ tagSalad = '<h3>메인재료</h3> \
 			$(".step").eq(1).trigger("click");
 		}else if(typeIdx==2){
 			$('input[name=bucIsSalad]').val("샐러드");
+			$('input[name=bucBread]').val("선택안함");
 			$(".step").eq(2).trigger("click");
 		}
 	});
@@ -366,21 +369,38 @@ tagSalad = '<h3>메인재료</h3> \
 		var amountIdx = -1;
 		if(($('.bread-amount').index(this)+1)%2 == 1) {
 			amountIdx = 15;
+			kcal += Number($(this).parent().parent().find('input').eq(0).val());
+			breadCheck=1;
 		} else {
 			amountIdx = 30;
+			kcal +=  Number($(this).parent().parent().find('input').eq(0).val())*2;
+			breadCheck=2;
 		}
 		var str = breadIdx+','+amountIdx;
+		
 		$('input[name=bucBread]').val(str);
 		console.log(str);
 		$(".step").eq(2).trigger("click");
 	});
 	$('.main').click(function(){
 		var str = $(this).find('p').text();
+		if(breadCheck==1){
+			cost +=  Number($(this).find('input').eq(1).val());
+			kcal +=  Number($(this).find('input').eq(0).val());
+		}else if(breadCheck==2){
+			cost +=  Number($(this).find('input').eq(2).val());
+			kcal +=  Number($(this).find('input').eq(0).val())*2;
+		}
 		$('input[name=bucMain]').val(str);
 		$(".step").eq(3).trigger("click");
 	});
 	$('.cheeze').click(function(){
 		var str = $(this).find('p').text();
+		if(breadCheck==1){
+			kcal +=  Number($(this).find('input').eq(0).val());
+		}else if(breadCheck==2){
+			kcal +=  Number($(this).find('input').eq(0).val())*2;
+		}
 		$('input[name=bucCheese]').val(str);
 		$(".step").eq(4).trigger("click");
 	});
@@ -389,6 +409,13 @@ tagSalad = '<h3>메인재료</h3> \
 		for(var i = 1; i<$('.topping').length;i++){
 			if($('.topping').eq(i).hasClass("selects")){
 				str += '1';
+				if(breadCheck==1){
+					cost += Number($('.topping').eq(i).find('input').eq(1).val());
+					kcal += Number($('.topping').eq(i).find('input').eq(0).val());
+				}else if(breadCheck==2){
+					cost += Number($('.topping').eq(i).find('input').eq(2).val());
+					kcal += Number($('.topping').eq(i).find('input').eq(0).val())*2;
+				}
 			}else{
 				str += '0'; 
 			}
@@ -457,6 +484,7 @@ tagSalad = '<h3>메인재료</h3> \
 				for(var k=0; k<4; k++){
 					if($('.vegi').eq(i).find("button").eq(k).hasClass("select-vegi")){
 						str += k;
+						kcal += Number($('.vegi').eq(i).find("input").val());
 					}
 				}
 			}else{
@@ -491,6 +519,11 @@ tagSalad = '<h3>메인재료</h3> \
 		for(var i = 1; i<$('.source').length;i++){
 			if($('.source').eq(i).hasClass("selects")){
 				str += '1';
+				if(breadCheck==1){
+					kcal += Number($('.source').eq(i).find('input').eq(0).val());
+				}else if(breadCheck==2){
+					kcal += Number($('.source').eq(i).find('input').eq(0).val())*2;
+				}
 			}else{
 				str += '0';
 			}
@@ -505,13 +538,38 @@ tagSalad = '<h3>메인재료</h3> \
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selects")){
 				str += '1';
+				cost += Number($('.sidemenu').eq(i).find('input').eq(1));
+				kcal += Number($('.sidemenu').eq(i).find('input').eq(0));
 			}else{
 				str += '0';
 			}
 		}
+		console.log(str);
+		$('input[name=bucCost]').val(cost);
+		$('input[name=bucKcal]').val(kcal);
+		$('input[name=bucQuantity]').val('1');
 		$('input[name=bucSide]').val(str);
-		console.log($('input[name=bucSide]').val());
-		$(".step").eq(9).trigger("click");
+		
+//		serialize()
+		var form = $("form[name=feedbackform]")[0];
+//		console.log(queryString);
+		var data = new FormData(form);
+        $.ajax({
+        	url : "/tempOrder.do",
+            type : 'post',
+            data : data,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            dataType : 'json',
+//            error: function(xhr, status, error){
+//                alert("error");
+//            },
+            success : function(json){
+                alert("임시저장 성공");
+            },
+        });
 	});
 	$('.sidemenu.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.sidemenu').length;i++){
@@ -532,16 +590,9 @@ tagSalad = '<h3>메인재료</h3> \
 	});
 	
 	$('.set').click(function(){
-		var idx = $('.set').index(this);
-		$('input[name=bucSet]').val(idx);
-		//0 : 단품, 1 : 웨지감자세트, 2 : 쿠키세트
-		//$(".step").eq(10).trigger("click");
-	});
-	var str ="";
-	
-	$('select').children().click(function(){
-		console.log($(this));
-		$('input[name=bucQuantity]').val($(this).html());
+		var str = $(this).find('p').text();
+		$('input[name=bucSet]').val(str);
+		$(".step").eq(9).trigger("click");
 	});
 	
 /////////////////////////////////////////////////////월요일 마커!!!!!!!!!!!!!!!!씨이바아아아아아앙아

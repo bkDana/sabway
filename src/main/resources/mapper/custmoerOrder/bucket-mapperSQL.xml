@@ -27,7 +27,32 @@
  			#{bucCustomerIdx}
  			)	
  	</insert>
-
+	<insert id="tempOrderInsert" parameterType="bucket">
+ 		insert into
+ 			bucket
+ 		values
+ 			(
+ 			seq_buc_idx.nextval,
+ 			#{bucCusoIdx},
+ 			#{bucBread},
+ 			#{bucMain},
+ 			#{bucVegi},
+ 			#{bucCheese},
+ 			#{bucSource},
+ 			#{bucTopping},
+ 			#{bucSide},
+ 			#{bucIsSalad},
+ 			#{bucIsOvened},
+ 			#{bucSet},
+ 			#{bucCost},
+ 			#{bucDiscntRate},
+ 			#{bucKcal},
+ 			#{bucQuantity},
+ 			default,
+ 			#{bucIs15},
+ 			#{bucCustomerIdx}
+ 			)	
+ 	</insert>
  	<select id="selectAllBucket" parameterType="_int" resultType="bucket">
  		select
  			buc_bread as bucBread,

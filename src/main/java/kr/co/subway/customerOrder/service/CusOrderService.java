@@ -37,4 +37,9 @@ public class CusOrderService {
 		IngreVo mainIngre = cusOrderDao.selectCostMain(ingre);
 		return mainIngre;
 	}
+	
+	@Transactional
+	public int tempOrderInsert(Bucket b) {
+		return cusOrderDao.tempOrderInsert(b); 
+	}
 }

@@ -24,7 +24,7 @@ var myform=new formtowizard({
 		</c:if>
 		<br><br>
 		<h1>온라인 주문 예약</h1><br>
-		<form id="feedbackform" action="/submitCusOrder.do" method="post">
+		<form id="feedbackform" name="feedbackform" method="post">
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
 				<div class="type img-box select-one fix-img" style="background-color:white;" >
@@ -35,6 +35,9 @@ var myform=new formtowizard({
 					<img src="/resources/img/salad/salad_fl04.jpg">
 					<p class="label">샐러드</p>
 				</div>
+				
+				
+				
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>빵</legend>
@@ -47,6 +50,9 @@ var myform=new formtowizard({
 								<button type="button" class="bread-amount">15cm</button>
 								<button type="button" class="bread-amount">30cm</button>
 							</div>
+							<input type="hidden" value="${ingre.ingreKcal }">
+							<input type="hidden" value="${ingre.ingreCost15 }">
+							<input type="hidden" value="${ingre.ingreCost30 }">
 						</div>
 					</c:if>
 				</c:forEach>
@@ -60,6 +66,9 @@ var myform=new formtowizard({
 						<div class="main img-box select-one">
 							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 							<p class="label">${ingre.ingreLabel }</p>
+							<input type="hidden" value="${ingre.ingreKcal }">
+							<input type="hidden" value="${ingre.ingreCost15 }">
+							<input type="hidden" value="${ingre.ingreCost30 }">
 						</div>
 					</c:if>
 				</c:forEach>
@@ -75,6 +84,7 @@ var myform=new formtowizard({
 						<div class="cheeze img-box select-one">
 							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 							<p class="label">${ingre.ingreLabel }</p>
+							<input type="hidden" value="${ingre.ingreKcal }">
 						</div>
 					</c:if>
 				</c:forEach>
@@ -90,6 +100,9 @@ var myform=new formtowizard({
 						<div class="topping img-box select-many">
 							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 							<p class="label">${ingre.ingreLabel }</p>
+							<input type="hidden" value="${ingre.ingreKcal }">
+							<input type="hidden" value="${ingre.ingreCost15 }">
+							<input type="hidden" value="${ingre.ingreCost30 }">
 						</div>
 					</c:if>
 				</c:forEach>
@@ -122,6 +135,7 @@ var myform=new formtowizard({
 								<button type="button" class="vegi-amount select-vegi">보통</button>
 								<button type="button" class="vegi-amount">많이</button>
 							</div>
+							<input type="hidden" value="${ingre.ingreKcal }">
 						</div>
 					</c:if>
 				</c:forEach>
@@ -140,11 +154,37 @@ var myform=new formtowizard({
 						<div class="source img-box select-many">
 							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 							<p class="label">${ingre.ingreLabel }</p>
+							<input type="hidden" value="${ingre.ingreKcal }">
 						</div>
 					</c:if>
 				</c:forEach>
 				<div class="common-tbl-btn-group">
 					<button type="button" class="btn-style2 source-check" style="clear:both;">소스 선택완료</button>
+				</div>
+			</fieldset>
+			<fieldset class="sectionwrap">
+				<legend>세트</legend>
+				<div class="set img-box select-one fix-img" style="background-color:white;" >
+					<img src="/resources/img/checkedgreen.png">
+					<p class="label">단품</p>
+				</div>
+				<div class="set img-box select-one fix-img" style="background-color:white;" >
+					<img src="/resources/img/checkedgreen.png">
+					<p class="label">음료세트</p>
+					<input type="hidden" value="${ingre.ingreKcal }">
+					<input type="hidden" value="${ingre.ingreCost15 }">
+				</div>
+				<div class="set img-box select-one fix-img" style="background-color:white;" >
+					<img src="/resources/img/checkedgreen.png">
+					<p class="label">감자세트</p>
+					<input type="hidden" value="${ingre.ingreKcal }">
+					<input type="hidden" value="${ingre.ingreCost15 }">
+				</div>
+				<div class="set img-box select-one fix-img" style="background-color:white;" >
+					<img src="/resources/img/checkedgreen.png">
+					<p class="label">쿠키세트</p>
+					<input type="hidden" value="${ingre.ingreKcal }">
+					<input type="hidden" value="${ingre.ingreCost15 }">
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
@@ -158,28 +198,33 @@ var myform=new formtowizard({
 						<div class="sidemenu img-box select-many">
 							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 							<p class="label">${ingre.ingreLabel }</p>
+							<input type="hidden" value="${ingre.ingreKcal }">
+							<input type="hidden" value="${ingre.ingreCost15 }">
 						</div>
 					</c:if>
 				</c:forEach>
 				<div class="common-tbl-btn-group">
-					<button type="button" class="btn-style2 sidemenu-check" style="clear:both;">사이드 선택완료</button>
+					<button type="button" class="btn-style2 sidemenu-check" style="clear:both;">주문 완료</button>
 				</div>
 			</fieldset>
-			<fieldset class="sectionwrap">
-				<legend>세트</legend>
-				<div class="set img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/checkedgreen.png">
-					<p class="label">단품</p>
+				<div class="common-tbl-box">
+					<table class="comm-tbl">
+					<colgroup>
+						<col width="15%">
+						<col width="/">
+						<col width="15%">
+					</colgroup>
+						<tr>
+							<th>카테고리</th>
+							<th>제목</th>
+							<th>작성일</th>
+						</tr>
+					
+					</table>
+					<div class="common-tbl-btn-group">
+						<button class="btn-style2 insert-order">주문 완료</button>
+					</div>
 				</div>
-				<div class="set img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/checkedgreen.png">
-					<p class="label">감자칩세트</p>
-				</div>
-				<div class="set img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/checkedgreen.png">
-					<p class="label">쿠키세트</p>
-				</div>
-			</fieldset>
 				<input type="hidden" name="bucBread" class="orderInput">
 				<input type="hidden" name="bucMain" class="orderInput">
 				<input type="hidden" name="bucVegi" class="orderInput">
@@ -193,168 +238,144 @@ var myform=new formtowizard({
 				<input type="hidden" name="bucCost" class="orderInput">
 				<input type="hidden" name="bucKcal" class="orderInput"> 
 				<input type="hidden" name="bucQuantity" class="orderInput">
-				
-			<div id="test" style="width:100%; height:150px; background-color:white;">
-				<h3>장바구니 영역</h3>
-				<div id="quantityWrapper">
-					<select>
-						<option>수량</option>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-					</select>
-				</div>
-				<div id="infoWrapper">
-					<span id="totalCost"></span><br>
-					<span id="totalKcal"></span>
-				</div>
-				
-				<div id="btn-wrapper" style="width:400px; margin-left:400px; background-color:orange;">
-					<button type="submit">주문</button>
-					<button type="button">추가주문</button>
-				</div>
-			</div>
 		</form>
 	</div>
 </section>
 
-<script>
-	/* 서버 작동순서 : JAVA>JSTL>HTML>Javscript */
+<!-- <script>
+// 	/* 서버 작동순서 : JAVA>JSTL>HTML>Javscript */
 	
-	$(function(){
-		ingreList = new Array(); 
-		kCalList = new Array();
-		costLsit = new Array();
-		totalKcal = 0;
-		totalCost = 0;
-		var ingreTypes = []; //ingreList 에서 type만 뺴올것
-		var uniqueType = []; //orcle's 'distinct'처리(8개나옴(빵,채소,치즈,소스,추가토핑,메인재료,사이드메뉴,샐러드..?))
+// 	$(function(){
+// 		ingreList = new Array(); 
+// 		kCalList = new Array();
+// 		costLsit = new Array();
+// 		totalKcal = 0;
+// 		totalCost = 0;
+// 		var ingreTypes = []; //ingreList 에서 type만 뺴올것
+// 		var uniqueType = []; //orcle's 'distinct'처리(8개나옴(빵,채소,치즈,소스,추가토핑,메인재료,사이드메뉴,샐러드..?))
 		
-		/* 처음 쿼리 결과물 jsonArray로 만들어 js로 가져오기 */
-		<c:forEach items="${ingreList}" var="ingre">
-			var json = new Object();
-			json.ingreLabel = "${ingre.ingreLabel}";
-			json.ingreType = "${ingre.ingreType}";
-			json.ingreKcal = "${ingre.ingreKcal}";
-			json.ingreCost15 = "${ingre.ingreCost15}";
-			json.ingreCost30 = "${ingre.ingreCost30}";
-			ingreList.push(json);
-		</c:forEach>
+// 		/* 처음 쿼리 결과물 jsonArray로 만들어 js로 가져오기 */
+// 		<c:forEach items="${ingreList}" var="ingre">
+// 			var json = new Object();
+// 			json.ingreLabel = "${ingre.ingreLabel}";
+// 			json.ingreType = "${ingre.ingreType}";
+// 			json.ingreKcal = "${ingre.ingreKcal}";
+// 			json.ingreCost15 = "${ingre.ingreCost15}";
+// 			json.ingreCost30 = "${ingre.ingreCost30}";
+// 			ingreList.push(json);
+// 		</c:forEach>
 		
-		/* ingreList에서 type만 가져오기 */
-		for(var index in ingreList) ingreTypes[index] = ingreList[index].ingreType;
+// 		/* ingreList에서 type만 가져오기 */
+// 		for(var index in ingreList) ingreTypes[index] = ingreList[index].ingreType;
 		
-		/* ingreTypes에서 distinct한 값만 uniqueType에 저장하기(8종류), kCalList만들기(필요한가?) */
-		$.each(ingreTypes, function(index, element) {
-			if(($.inArray(element, uniqueType) === -1)) {
-				uniqueType.push(element); 
-				var json = new Object();
-				json.type = element;
-				json.kcal = null;
-				var json1 = new Object();
-				kCalList.push(json);
-			}
-		});
-		console.log(ingreList);
-		console.log(kCalList);
-	});
+// 		/* ingreTypes에서 distinct한 값만 uniqueType에 저장하기(8종류), kCalList만들기(필요한가?) */
+// 		$.each(ingreTypes, function(index, element) {
+// 			if(($.inArray(element, uniqueType) === -1)) {
+// 				uniqueType.push(element); 
+// 				var json = new Object();
+// 				json.type = element;
+// 				json.kcal = null;
+// 				var json1 = new Object();
+// 				kCalList.push(json);
+// 			}
+// 		});
+// 		console.log(ingreList);
+// 		console.log(kCalList);
+// 	});
 	
-	$('.img-box').click(function() {
-		var menulabel = $(this).find('p').text();
-		var menuType = $(this).siblings('legend').html();
+// 	$('.img-box').click(function() {
+// 		var menulabel = $(this).find('p').text();
+// 		var menuType = $(this).siblings('legend').html();
 
-		for(var i in ingreList) {
-			if(!$(this).hasClass('.select-many')) {
-				if((ingreList[i].ingreLabel == menulabel) && (ingreList[i].ingreType == menuType)) {
-					var ingreKcal = ingreList[i].ingreKcal;
-					console.log("ingreKcal : " + ingreKcal);
-					var ingreType = ingreList[i].ingreType;
-					for(var i in kCalList) {
-						if((kCalList[i].type == ingreType) && (kCalList[i].kcal == null)) {
-							if(ingreKcal != "0") {
-								kCalList[i].kcal = (Number)(ingreKcal);
-								console.log(kCalList[i].type + " - first : " + kCalList[i].kcal);
-								totalKcal += (Number)(kCalList[i].kcal);
-							}
-						} else if((kCalList[i].type == ingreType) && (kCalList[i].kcal != null)) {
-							if(ingreKcal != "0") {
-								totalKcal -= (Number)(kCalList[i].kcal);
-								kCalList[i].kcal = (Number)(ingreKcal);
-								console.log(kCalList[i].type + " - after : " + kCalList[i].kcal);
-								totalKcal += (Number)(kCalList[i].kcal);
-							}
-						} 
-						//totalKcal += (Number)(kCalList[i].kcal);
-					}//inner for-in ends
-				}
-			} else if($(this).hasClass('.select-many')) { //다중선택메뉴(토핑, 소스, 사이드)
-				console.log($(this).siblings('legend').html());
-				if(ingreList[i].ingreLabel == label) {
-					var ingreKcal = ingreList[i].ingreKcal;
-					var ingreType = ingreList[i].ingreType;
-					for(var i in kCalList) {
-						if((kCalList[i].type == ingreType) && (kCalList[i].kcal == null)) {
-							if(ingreKcal != "0") {
-								kCalList[i].kcal = (Number)(ingreKcal);
-								totalKcal += (Number)(ingreKcal);
-							}
-						}  else if((kCalList[i].type == ingreType) && (kCalList[i].kcal != null)) {
-							if(ingreKcal != "0") {
-								if($(this).hasClass("selects")) {
-									totalKcal -= (Number)(kCalList[i].kcal);
-								} else {
-									kCalList[i].kcal += (Number)(ingreKcal);
-									totalKcal += (Number)(ingreKcal);
-								}
-							}
-						}
-						//totalKcal += (Number)(kCalList[i].kcal);
-					}//inner for-in ends
-				}
-			}
-		}//outer for-in ends
-		$('#totalKcal').html(totalKcal+" 칼로리");
-		$('input[name=bucKcal]').val(totalKcal);
+// 		for(var i in ingreList) {
+// 			if(!$(this).hasClass('.select-many')) {
+// 				if((ingreList[i].ingreLabel == menulabel) && (ingreList[i].ingreType == menuType)) {
+// 					var ingreKcal = ingreList[i].ingreKcal;
+// 					console.log("ingreKcal : " + ingreKcal);
+// 					var ingreType = ingreList[i].ingreType;
+// 					for(var i in kCalList) {
+// 						if((kCalList[i].type == ingreType) && (kCalList[i].kcal == null)) {
+// 							if(ingreKcal != "0") {
+// 								kCalList[i].kcal = (Number)(ingreKcal);
+// 								console.log(kCalList[i].type + " - first : " + kCalList[i].kcal);
+// 								totalKcal += (Number)(kCalList[i].kcal);
+// 							}
+// 						} else if((kCalList[i].type == ingreType) && (kCalList[i].kcal != null)) {
+// 							if(ingreKcal != "0") {
+// 								totalKcal -= (Number)(kCalList[i].kcal);
+// 								kCalList[i].kcal = (Number)(ingreKcal);
+// 								console.log(kCalList[i].type + " - after : " + kCalList[i].kcal);
+// 								totalKcal += (Number)(kCalList[i].kcal);
+// 							}
+// 						} 
+// 						//totalKcal += (Number)(kCalList[i].kcal);
+// 					}//inner for-in ends
+// 				}
+// 			} else if($(this).hasClass('.select-many')) { //다중선택메뉴(토핑, 소스, 사이드)
+// 				console.log($(this).siblings('legend').html());
+// 				if(ingreList[i].ingreLabel == label) {
+// 					var ingreKcal = ingreList[i].ingreKcal;
+// 					var ingreType = ingreList[i].ingreType;
+// 					for(var i in kCalList) {
+// 						if((kCalList[i].type == ingreType) && (kCalList[i].kcal == null)) {
+// 							if(ingreKcal != "0") {
+// 								kCalList[i].kcal = (Number)(ingreKcal);
+// 								totalKcal += (Number)(ingreKcal);
+// 							}
+// 						}  else if((kCalList[i].type == ingreType) && (kCalList[i].kcal != null)) {
+// 							if(ingreKcal != "0") {
+// 								if($(this).hasClass("selects")) {
+// 									totalKcal -= (Number)(kCalList[i].kcal);
+// 								} else {
+// 									kCalList[i].kcal += (Number)(ingreKcal);
+// 									totalKcal += (Number)(ingreKcal);
+// 								}
+// 							}
+// 						}
+// 						//totalKcal += (Number)(kCalList[i].kcal);
+// 					}//inner for-in ends
+// 				}
+// 			}
+// 		}//outer for-in ends
+// 		$('#totalKcal').html(totalKcal+" 칼로리");
+// 		$('input[name=bucKcal]').val(totalKcal);
 		
-		for(var i in ingreList) {
+// 		for(var i in ingreList) {
 			
-		}
-		$('input[name=bucCost]').val(totalCost);
-	});
+// 		}
+// 		$('input[name=bucCost]').val(totalCost);
+// 	});
 	
-	/* 아임포트 */
-	$(function(){
+// 	/* 아임포트 */
+// 	$(function(){
 		
-		$("#pay button").click(function(){
-			var price = $("input[name=bucCost]").val();
-			var d = new Date();
-			var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-			IMP.init('imp25889583');
-			IMP.request_pay({
-				pay_method : 'card',
-				merchant_uid : "상품명_"+date,			//거래ID - 유니크 주려고 날짜까지 넣음
-				name : $('input[name=bucMain]').val()+"외";,	//결재명
-				amount : price,							//결재 금액
-				buyer_tel : '010-3159-5618'
+// 		$("#pay button").click(function(){
+// 			var price = $("input[name=bucCost]").val();
+// 			var d = new Date();
+// 			var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+// 			IMP.init('imp25889583');
+// 			IMP.request_pay({
+// 				pay_method : 'card',
+// 				merchant_uid : "상품명_"+date,			//거래ID - 유니크 주려고 날짜까지 넣음
+// 				name : $('input[name=bucMain]').val()+"외";,	//결재명
+// 				amount : price,							//결재 금액
+// 				buyer_tel : '010-3159-5618'
 				
-			},function(response){
-				if(response.success){
-					var msg = "결재가 완료되었습니다.";
-					var info1 = "고유 ID : "+response.imp_uid;
-					var info2 = "결재 금액 : "+response.paid_amount;
-					var info3 = "카드 승인 번호 : "+response.apply_num;
-					$("#paymentResult").html(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
-				} else {
-					$("#patmentResult").html('에러 내용 : '+response.error_mgs+date);
-				}
-			});
-		});
-	});
+// 			},function(response){
+// 				if(response.success){
+// 					var msg = "결재가 완료되었습니다.";
+// 					var info1 = "고유 ID : "+response.imp_uid;
+// 					var info2 = "결재 금액 : "+response.paid_amount;
+// 					var info3 = "카드 승인 번호 : "+response.apply_num;
+// 					$("#paymentResult").html(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
+// 				} else {
+// 					$("#patmentResult").html('에러 내용 : '+response.error_mgs+date);
+// 				}
+// 			});
+// 		});
+// 	});
 	
-</script>
+</script> -->
 <!-- 이 스크립트는 아래에 있어야 작동함 -->
 <script src="/resources/js/hor.js" type="text/javascript"></script> 
 <%-- Footer --%>
