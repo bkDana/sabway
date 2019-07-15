@@ -22,7 +22,9 @@
  			#{bucDiscntRate},
  			#{bucKcal},
  			#{bucQuantity},
- 			default
+ 			default,
+ 			#{bucIs15},
+ 			#{bucCustomerIdx}
  			)	
  	</insert>
 
@@ -42,10 +44,12 @@
  			buc_discnt_rate as bucDiscntRate,
  			buc_kcal as bucKcal,
  			buc_quantity as bucQuantity,
- 			buc_reg_date as bucRegDate
+ 			buc_reg_date as bucRegDate,
+ 			buc_customer_idx asbucCustomerIdx,
+ 			buc_is15 as bucIs15
  		from bucket
  		where
- 			buc_cuso_idx = #{cusoIdx}
+ 			buc_customer_idx = #{bucCustomerIdx}
     </select>
  	<select id="ingreSelectAll" resultType="ingre">
  		select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, 

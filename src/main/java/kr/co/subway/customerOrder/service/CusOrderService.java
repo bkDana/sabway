@@ -28,8 +28,13 @@ public class CusOrderService {
 		
 	}
 
-	public ArrayList<Bucket> allBucketList(int cusoIdx) {
-		List<Bucket> list = cusOrderDao.allBucketList(cusoIdx);
+	public ArrayList<Bucket> allOrderList(int customerIdx) {
+		List<Bucket> list = cusOrderDao.allOrderList(customerIdx);
 		return (ArrayList<Bucket>)list;
+	}
+
+	public IngreVo selectCostMain(IngreVo ingre) {
+		IngreVo mainIngre = cusOrderDao.selectCostMain(ingre);
+		return mainIngre;
 	}
 }

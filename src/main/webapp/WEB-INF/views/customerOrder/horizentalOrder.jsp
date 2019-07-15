@@ -3,11 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- Header --%>
 <link rel="stylesheet" type="text/css" href="/resources/css/formwizard.css?after" />
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <script src="/resources/js/formwizard.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
 
-<!-- 모든 한글로 쓰인 attribute : 실재 EL로 바꿔야함 -->
+
 <script type="text/javascript">
 var myform=new formtowizard({
 	formid: 'feedbackform',
@@ -19,7 +20,6 @@ var myform=new formtowizard({
 <section id="content-wrapper">
 	<div class="area">
 		<c:if test="${not empty sessionScope.customer}">
-			<a class="header-btn" href="/myBucket.do">내 주문정보 보기</a>
 		</c:if>
 		<br><br>
 		<h1>온라인 주문 예약</h1><br>
@@ -51,7 +51,7 @@ var myform=new formtowizard({
 				</c:forEach>
 			</fieldset>
 			<fieldset class="sectionwrap">
-				<legend>주 재료</legend>
+				<legend>메인재료</legend>
 				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 					<c:if test="${ingre.ingreType eq '메인재료' }">
 <%-- 						<label for="${ingre.ingreLabel }"><img src="/resources/upload/ingredients/${ingre.ingreFilepath }"></label>  --%>
@@ -59,6 +59,7 @@ var myform=new formtowizard({
 						<div class="main img-box select-one">
 							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 							<p class="label">${ingre.ingreLabel }</p>
+							<p class="label">15cm ${ingre.ingreCost15 }￦ / 30cm ${ingre.ingreCost30 }￦ </p>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -191,35 +192,161 @@ var myform=new formtowizard({
 				<input type="hidden" name="bucSet" class="orderInput">
 				<input type="hidden" name="bucCost" class="orderInput">
 				<input type="hidden" name="bucKcal" class="orderInput"> 
-				<input type="hidden" name="bucQua" class="orderInput">
 				<input type="hidden" name="bucQuantity" class="orderInput">
 				
-			<div id="test" style="width:100%; height:150px; background-color:white;">
-				<h3>장바구니 영역</h3>
-				<div id="orderAjax">
-					<span id="ajaxMain"></span>&nbsp;<span id="ajaxBread"></span>&nbsp;<span id="ajaxIs15"></span>
-					&nbsp;<span id="ajaxCheese"></span>&nbsp;<span id="ajaxTopping"></span>&nbsp;<span id="ajaxIsOvened"></span>
-					&nbsp;<span id="ajaxVegi"></span>&nbsp;<span id="ajaxSource"></span>&nbsp;<span id="ajaxSide"></span>&nbsp;<span id="ajaxSet"></span>
-					<br>
-					<select class="hide">
-						<option>수량</option>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-					</select>
+			<div id="bucketWrapper" style="width:100%; height:150px; background-color:white;">
+				<div id="bucketArea" style="width:300px; heignt:150px; margin-left:400px; background-color:red; cursor:pointer;">
+					<strong style="font-size:30px;">장바구니</strong><span id="itemCount"></span><br>
+					<span id="itemStatus">장바구니에 담긴 상품이 없습니다</span>
 				</div>
-				<div id="costWrapper"><span id="totalCost"></span><br></div>
+				<div id="infoWrapper">
+					<span id="totalCost"></span><br>
+					<span id="totalKcal"></span>
+				</div>
+				
 				<div id="btn-wrapper" style="width:400px; margin-left:400px; background-color:orange;">
-					<button type="submit">주문</button>
+					<button type="button">주문</button>
 					<button type="button">추가주문</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </section>
+
+<script>
+	/* 서버 작동순서 : JAVA>JSTL>HTML>Javscript */
+	
+	$(function(){
+		ingreList = new Array(); 
+		kCalList = new Array();
+		costLsit = new Array();
+		totalKcal = 0;
+		totalCost = 0;
+		var ingreTypes = []; //ingreList 에서 type만 뺴올것
+		var uniqueType = []; //orcle's 'distinct'처리(8개나옴(빵,채소,치즈,소스,추가토핑,메인재료,사이드메뉴,샐러드..?))
+		
+		/* 처음 쿼리 결과물 jsonArray로 만들어 js로 가져오기 */
+		<c:forEach items="${ingreList}" var="ingre">
+			var json = new Object();
+			json.ingreLabel = "${ingre.ingreLabel}";
+			json.ingreType = "${ingre.ingreType}";
+			json.ingreKcal = "${ingre.ingreKcal}";
+			json.ingreCost15 = "${ingre.ingreCost15}";
+			json.ingreCost30 = "${ingre.ingreCost30}";
+			ingreList.push(json);
+		</c:forEach>
+		
+		/* ingreList에서 type만 가져오기 */
+		for(var index in ingreList) ingreTypes[index] = ingreList[index].ingreType;
+		
+		/* ingreTypes에서 distinct한 값만 uniqueType에 저장하기(8종류), kCalList만들기(필요한가?) */
+		$.each(ingreTypes, function(index, element) {
+			if(($.inArray(element, uniqueType) === -1)) {
+				uniqueType.push(element); 
+				var json = new Object();
+				json.type = element;
+				json.kcal = null;
+				var json1 = new Object();
+				kCalList.push(json);
+			}
+		});
+		console.log(ingreList);
+		console.log(kCalList);
+	});
+	
+	$('.img-box').click(function() {
+		var menulabel = $(this).find('p').text();
+		var menuType = $(this).siblings('legend').html();
+
+		for(var i in ingreList) {
+			if(!$(this).hasClass('.select-many')) {
+				if((ingreList[i].ingreLabel == menulabel) && (ingreList[i].ingreType == menuType)) {
+					var ingreKcal = ingreList[i].ingreKcal;
+					console.log("ingreKcal : " + ingreKcal);
+					var ingreType = ingreList[i].ingreType;
+					for(var i in kCalList) {
+						if((kCalList[i].type == ingreType) && (kCalList[i].kcal == null)) {
+							if(ingreKcal != "0") {
+								kCalList[i].kcal = (Number)(ingreKcal);
+								console.log(kCalList[i].type + " - first : " + kCalList[i].kcal);
+								totalKcal += (Number)(kCalList[i].kcal);
+							}
+						} else if((kCalList[i].type == ingreType) && (kCalList[i].kcal != null)) {
+							if(ingreKcal != "0") {
+								totalKcal -= (Number)(kCalList[i].kcal);
+								kCalList[i].kcal = (Number)(ingreKcal);
+								console.log(kCalList[i].type + " - after : " + kCalList[i].kcal);
+								totalKcal += (Number)(kCalList[i].kcal);
+							}
+						} 
+						//totalKcal += (Number)(kCalList[i].kcal);
+					}//inner for-in ends
+				}
+			} else if($(this).hasClass('.select-many')) { //다중선택메뉴(토핑, 소스, 사이드)
+				console.log($(this).siblings('legend').html());
+				if(ingreList[i].ingreLabel == label) {
+					var ingreKcal = ingreList[i].ingreKcal;
+					var ingreType = ingreList[i].ingreType;
+					for(var i in kCalList) {
+						if((kCalList[i].type == ingreType) && (kCalList[i].kcal == null)) {
+							if(ingreKcal != "0") {
+								kCalList[i].kcal = (Number)(ingreKcal);
+								totalKcal += (Number)(ingreKcal);
+							}
+						}  else if((kCalList[i].type == ingreType) && (kCalList[i].kcal != null)) {
+							if(ingreKcal != "0") {
+								if($(this).hasClass("selects")) {
+									totalKcal -= (Number)(kCalList[i].kcal);
+								} else {
+									kCalList[i].kcal += (Number)(ingreKcal);
+									totalKcal += (Number)(ingreKcal);
+								}
+							}
+						}
+						//totalKcal += (Number)(kCalList[i].kcal);
+					}//inner for-in ends
+				}
+			}
+		}//outer for-in ends
+		$('#totalKcal').html(totalKcal+" 칼로리");
+		$('input[name=bucKcal]').val(totalKcal);
+		
+		for(var i in ingreList) {
+			
+		}
+		$('input[name=bucCost]').val(totalCost);
+	});
+	
+	/* 아임포트 */
+	$(function(){
+		
+		$('#btn-wrapper button').eq(0).click(function(){
+			var price = $("input[name=bucCost]").val();
+			var d = new Date();
+			var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+			IMP.init('imp25889583');
+			IMP.request_pay({
+				pay_method : 'card',
+				merchant_uid : "상품명_"+date,					//거래ID - 유니크 주려고 날짜까지 넣음
+				name : $('input[name=bucMain]').val()+"외",		//결재명
+				amount : price,									//결재 금액
+				buyer_tel : '010-3159-5618'
+				
+			},function(response){
+				if(response.success){
+					var msg = "결재가 완료되었습니다.";
+					var info1 = "고유 ID : "+response.imp_uid;
+					var info2 = "결재 금액 : "+response.paid_amount;
+					var info3 = "카드 승인 번호 : "+response.apply_num;
+					$("#paymentResult").html(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
+				} else {
+					$("#patmentResult").html('에러 내용 : '+response.error_mgs+date);
+				}
+			});
+		});
+	});
+	
+</script>
 <!-- 이 스크립트는 아래에 있어야 작동함 -->
 <script src="/resources/js/hor.js" type="text/javascript"></script> 
 <%-- Footer --%>
