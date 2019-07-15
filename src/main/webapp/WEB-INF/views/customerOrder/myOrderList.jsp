@@ -21,17 +21,17 @@
 				</tr>
 				<c:forEach items="${list }" var="bucket" varStatus="status">
 				
-				<%-- <div class="hiddenInfo">
- 				<input type="hidden" class="hiddenBread" value="${bucket.bucBread }">
-				<input type="hidden" class="hiddenMain" value="${bucket.bucMain }">
-				<input type="hidden" class="hiddenVegi" value="${bucket.bucVegi }">
-				<input type="hidden" class="hiddenCheese" value="${bucket.bucCheese }">
-				<input type="hidden" class="hiddenSource" value="${bucket.bucSource }">
-				<input type="hidden" class="hiddenSide" value="${bucket.bucSide }">
-				<input type="hidden" class="hiddenIsSalad" value="${bucket.bucIsSalad }">
-				<input type="hidden" class="hiddenIsOvened" value="${bucket.bucIsOvened }">
-				<input type="hidden" class="hiddenSet" value="${bucket.bucSet }">
-				</div> --%>
+				<div class="hiddenInfo">
+	 				<input type="hidden" class="hiddenBread" value="${bucket.bucBread }">
+					<input type="hidden" class="hiddenMain" value="${bucket.bucMain }">
+					<input type="hidden" class="hiddenVegi" value="${bucket.bucVegi }">
+					<input type="hidden" class="hiddenCheese" value="${bucket.bucCheese }">
+					<input type="hidden" class="hiddenSource" value="${bucket.bucSource }">
+					<input type="hidden" class="hiddenSide" value="${bucket.bucSide }">
+					<input type="hidden" class="hiddenIsSalad" value="${bucket.bucIsSalad }">
+					<input type="hidden" class="hiddenIsOvened" value="${bucket.bucIsOvened }">
+					<input type="hidden" class="hiddenSet" value="${bucket.bucSet }">
+				</div>
 				<tr>
 					<td>${bucket.bucRegDate }</td>
 					<td class="itemImg">
@@ -44,7 +44,7 @@
 						</c:if>
 					</td>
 					<td>${bucket.bucQuantity }</td>
-					<td>${bucket.bucCost }원</td>
+					<td>${bucket.bucCost }￦</td>
 					<td><button type="submit" style="font-size:15px; font-weight:bolder; color:#009233;'">빠른 주문하기</button></td>
 				</tr>
 
