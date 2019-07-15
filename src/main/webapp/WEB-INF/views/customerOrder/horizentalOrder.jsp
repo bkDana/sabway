@@ -21,7 +21,7 @@ var myform=new formtowizard({
 	<div class="area">	
 	<strong style="font-size:40px; font-weight:bolder;">온라인 주문 예약</strong><br><br>
 		<div id="bucketWrapper" style=" width:100%; background-color:white;">
-			<div id="bucketArea" style="width:200px; heignt:150px; float:right; background-color:orange; cursor:pointer;">
+			<div id="bucketArea" style="width:200px; float:right; background-color:orange; cursor:pointer;">
 				<strong style="font-size:30px;">카트</strong><span id="itemCount"></span><br>
 				<span id="itemStatus">카트에 담긴 상품이 없습니다</span>
 				<br><br>
@@ -249,7 +249,7 @@ var myform=new formtowizard({
 			<input type="hidden" name="bucKcal" class="orderInput"> 
 			<input type="hidden" name="bucIsSalad" class="orderInput">
 			<input type="hidden" name="bucIsOvened" class="orderInput">
-
+			<input type="hidden" name="bucCusoIdx" class="orderInput">
 		</form>
 	</div>
 </section>
