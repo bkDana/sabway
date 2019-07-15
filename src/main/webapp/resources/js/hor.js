@@ -355,11 +355,10 @@ $(document).ready(function() {
 	$('#bucketArea').click(function() {
 		var d = new Date();
 		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-		$('input[name=bucCusoIdx]').val("sabway"+date);
-		var form = $("form[name=feedbackform]")[0];
-		var data = new FormData(form);
-		data.submit();
-		location.href = "/loadBucket.do";
+		$('input[name=bucCusoIdx]').val(date);
+		$('#feedbackform').attr('action','/loadBucket.do'); 
+		$('#feedbackform').attr('method','post');
+		$('#feedbackform').submit();
 	});
 
 	
