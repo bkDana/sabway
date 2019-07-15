@@ -42,7 +42,7 @@ public class IngreManageService {
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo != 1) {
-			pageNavi += "<a class='paging-arrow prev-arrow' href='/ingreManage/ingreList.do?reqPage="+(pageNo-1)+"&searchType="+searchType+"&searchVal="+searchVal+"'"+pageNo+"'>이전</a>";
+			pageNavi += "<a class='paging-arrow prev-arrow' href='/ingreManage/ingreList.do?reqPage="+(pageNo-1)+"&searchType="+searchType+"&searchVal="+searchVal+"'"+pageNo+"'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
@@ -54,7 +54,7 @@ public class IngreManageService {
 			pageNo++;
 		}
 		if(pageNo < totalPage) {
-			pageNavi +="<a class='paging-arrow next-arrow' href='/ingreManage/ingreList.do?reqPage="+pageNo+"&searchType="+searchType+"&searchVal="+searchVal+"'"+pageNo+"'>다음</a>";
+			pageNavi +="<a class='paging-arrow next-arrow' href='/ingreManage/ingreList.do?reqPage="+pageNo+"&searchType="+searchType+"&searchVal="+searchVal+"'"+pageNo+"'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		
 		return new IngrePageNaviData(ingreList, pageNavi);

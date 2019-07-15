@@ -42,4 +42,10 @@ public class CusOrderService {
 	public int tempOrderInsert(Bucket b) {
 		return cusOrderDao.tempOrderInsert(b); 
 	}
+	
+	@Transactional(value="transactionManager")
+	public int insertBucket(Bucket b) {
+		int result = cusOrderDao.insertBucket(b);
+		return result;
+	}
 }

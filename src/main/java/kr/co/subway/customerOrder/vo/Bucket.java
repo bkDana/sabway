@@ -14,7 +14,6 @@ public class Bucket {
 	private String bucSource;
 	private String bucTopping;
 	private String bucSide;
-	private String bucIs15;
 	private String bucIsSalad;
 	private String bucIsOvened;
 	private String bucSet;
@@ -28,7 +27,7 @@ public class Bucket {
 		// TODO Auto-generated constructor stub
 	}
 	public Bucket(int bucIdx, int bucCustomerIdx, int bucCusoIdx, String bucBread, String bucMain, String bucVegi,
-			String bucCheese, String bucSource, String bucTopping, String bucSide, String bucIs15, String bucIsSalad,
+			String bucCheese, String bucSource, String bucTopping, String bucSide, String bucIsSalad,
 			String bucIsOvened, String bucSet, int bucCost, double bucDiscntRate, int bucKcal, int bucQuantity,
 			Date bucRegDate) {
 		super();
@@ -42,7 +41,6 @@ public class Bucket {
 		this.bucSource = bucSource;
 		this.bucTopping = bucTopping;
 		this.bucSide = bucSide;
-		this.bucIs15 = bucIs15;
 		this.bucIsSalad = bucIsSalad;
 		this.bucIsOvened = bucIsOvened;
 		this.bucSet = bucSet;
@@ -112,12 +110,6 @@ public class Bucket {
 	public void setBucSide(String bucSide) {
 		this.bucSide = bucSide;
 	}
-	public String getBucIs15() {
-		return bucIs15;
-	}
-	public void setBucIs15(String bucIs15) {
-		this.bucIs15 = bucIs15;
-	}
 	public String getBucIsSalad() {
 		return bucIsSalad;
 	}
@@ -166,5 +158,6 @@ public class Bucket {
 	public void setBucRegDate(Date bucRegDate) {
 		this.bucRegDate = bucRegDate;
 	}
+	
 	
 }	

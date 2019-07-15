@@ -5,11 +5,7 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
-<style>
-	.bucketImg{
-		width:200px;
-	}
-</style>
+
 <%-- content --%>
 <section id="content-wrapper">
 	<div class="area">
@@ -17,7 +13,7 @@
 		<br><br>
 			<table class="comm-tbl type2">
 				<tr>
-					<th>주문 일시</th><th>메뉴</th><th>옵션</th><th>수량</th><th>가격</th><th>빠른 주문하기</th>
+					<th>주문 일시</th><th>메뉴</th><th>수량</th><th>가격</th><th>빠른 주문하기</th>
 				</tr>
 				<c:forEach items="${list }" var="bucket" varStatus="status">
 				
@@ -34,16 +30,14 @@
 				</div>
 				<tr>
 					<td>${bucket.bucRegDate }</td>
-					<td class="itemImg">
-						<img alt="메인메뉴 이미지" class="bucketImg" src="${bucket.bucMain }">
-					</td>
 					<td class="bucketOption">
-						<c:if test="${isSalad eq '0' }">
+						<c:if test="${bucIsSalad eq '샌드위치' }">
 							빵 : ${bucket.bucBread }<br>
-							
 						</c:if>
+							메인재료 : ${bucket.bucMain }<br>
+							치즈 : ${bucket.bucCheese }
 					</td>
-					<td>${bucket.bucQuantity }</td>
+					<td>수량 : ${bucket.bucQuantity }</td>
 					<td>${bucket.bucCost }￦</td>
 					<td><button type="submit" style="font-size:15px; font-weight:bolder; color:#009233;'">빠른 주문하기</button></td>
 				</tr>
