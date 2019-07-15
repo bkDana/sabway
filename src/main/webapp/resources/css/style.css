@@ -117,7 +117,7 @@ input[type=checkbox]{width: 15px;height: 15px;}
 
 
 /* 재고 내역 테이블 */
-.his-tbl{width:100%; max-width:600px; /* margin:0 auto; */ background-color:#fff;}
+.his-tbl{width:100%; max-width:600px; margin:0 auto; background-color:#fff;}
 .his-tbl th, .his-tbl td{border:1px solid #ddd; padding:10px; text-align:center; font-weight:normal; line-height:15px;}
 .his-tbl tr:first-child th, .his-tbl tr:first-child td{/* border-top:2px solid #009223; */ }
 
