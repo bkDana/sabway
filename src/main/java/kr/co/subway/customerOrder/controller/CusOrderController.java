@@ -1,9 +1,8 @@
 package kr.co.subway.customerOrder.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,13 +10,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
 
 import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
@@ -124,7 +123,7 @@ public class CusOrderController {
 		}
 		
 		// test code : 실제로는 이 정보를 바탕으로 아임포트 연결해야하며, 결재 완료 시 '주문정보'와 '주문 아이템 or bucket' 테이블로 나뉘어 정보가 저장된다?
-		Bucket buc = new Bucket(0/*bucIdx*/,customerIdx, 100/*cusOrderIdx */, bread, main, vegi, cheese, source, topping, side, is15, isSalad, isOvened, set, 
+		Bucket buc = new Bucket(0/*bucIdx*/,customerIdx, 100/*cusOrderIdx */, bread, main, vegi, cheese, source, topping, side, isSalad, isOvened, set, 
 				cost/*cost*/, ingre.getIngreDiscntRate()/*discntRate*/, 500/*Kcal*/, Integer.parseInt(quantity), null/*Date*/);
 		int result = cusOrderService.insertCusOrder(buc);
 		if(result>0) {
@@ -163,10 +162,9 @@ public class CusOrderController {
 		@ResponseBody
 		@RequestMapping("/tempOrder.do")
 		public void tempOrderInsert(HttpServletResponse response, Bucket b){
-			System.out.println(b.getBucMain());
+			
 			b.setBucCusoIdx(123123);
 			b.setBucCustomerIdx(1111);
-			b.setBucIs15("0");
 			int result = cusOrderService.tempOrderInsert(b);
 //			System.out.println("controller updateIngreActive() result : "+result);
 			response.setContentType("text/html;charset=utf-8");
