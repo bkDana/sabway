@@ -94,8 +94,10 @@ $(document).ready(function() {
 			cost +=  Number($(this).find('input').eq(2).val());
 			kcal +=  Number($(this).find('input').eq(0).val())*2;
 		}
-//		$('#recom-sauce').val($(this).find('input').eq(3).val());
-//		$('#recom-main').val(str);
+		console.log(Number($(this).find('input').eq(1).val()));
+		console.log(Number($(this).find('input').eq(2).val()));
+		$('#recom-sauce').val($(this).find('input').eq(3).val());
+		$('#recom-main').val(str);
 		$('input[name=bucMain]').val(str);
 		$(".step").eq(3).trigger("click");
 	});

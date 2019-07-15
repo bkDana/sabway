@@ -69,8 +69,15 @@ var myform=new formtowizard({
 							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 							<p class="label">${ingre.ingreLabel }</p>
 							<input type="hidden" value="${ingre.ingreKcal }">
-							<input type="hidden" value="${ingre.ingreCost15 }">
-							<input type="hidden" value="${ingre.ingreCost30 }">
+							<c:set var="discnt" value="${ingre.ingreDiscntRate}"/>
+							<c:if test="${discnt ne 0 }">
+								<input type="hidden" value="${ingre.ingreCost15*(100-discnt)/100 }">
+								<input type="hidden" value="${ingre.ingreCost30*(100-discnt)/100 }">
+							</c:if>
+							<c:if test="${ingre.ingreDiscntRate eq 0 }">
+								<input type="hidden" value="${ingre.ingreCost15 }">
+								<input type="hidden" value="${ingre.ingreCost30 }">
+							</c:if>
 							<input type="hidden" value="${ingre.ingreRecomSauce }">
 						</div>
 					</c:if>
