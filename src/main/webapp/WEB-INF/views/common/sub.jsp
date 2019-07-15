@@ -3,14 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String[] pname = request.getRequestURL().toString().split("/");
-String p6 = "";
-//String p7 = "";
-if(pname.length==7){
-	p6 = pname[6];
-}
 %>
+
+	<%if(pname[5].equals("menu")){ %>
 	<!-- 서브 메뉴 -->
-	<nav id="sub" class="total-menu">
+	<nav id="sub"> <!-- class="total-menu" -->
 		<div id="subBg"></div>
 		<ul class="clearfix">
 			<li>
@@ -35,3 +32,22 @@ if(pname.length==7){
 			</li>
 		</ul>
 	</nav>
+	<%} %>
+
+	<%if(pname[5].equals("notice")||pname[5].equals("qna")||pname[5].equals("review")){ %>
+	<!-- 서브 메뉴 -->
+	<nav id="sub" class="basic-sub">
+		<div id="subBg"></div>
+		<ul class="clearfix">
+			<li>
+				<a href="/notice.do?currentPage=1" class="<%if(pname[5].equals("notice")){ %>on<%}%>">공지사항/이벤트</a>
+			</li>
+			<li>
+				<a href="/qna.do?currentPage=1" class="<%if(pname[5].equals("qna")){ %>on<%}%>">Q&A</a>
+			</li>
+			<li>
+				<a href="/review.do?currentPage=1" class="<%if(pname[5].equals("review")){ %>on<%}%>">리뷰</a>
+			</li>
+		</ul>
+	</nav>
+	<%} %>
