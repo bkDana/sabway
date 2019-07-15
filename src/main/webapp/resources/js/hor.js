@@ -252,9 +252,30 @@ $(document).ready(function() {
 		$('input[name=bucKcal]').val(kcal);
 		$('input[name=bucQuantity]').val('1');
 		
-		console.log($('input[name=bucSide]').val());
+//		serialize()
+		var form = $("form[name=feedbackform]")[0];
+//		console.log(queryString);
+		var data = new FormData(form);
+		console.log(data);
+        $.ajax({
+        	url : "/tempOrder.do",
+            type : 'post',
+            data : data,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            dataType : 'json',
+//            error: function(xhr, status, error){
+//                alert("error");
+//            },
+            success : function(json){
+                alert("임시저장 성공");
+            },
+        });
 	});
 	$('.sidemenu.img-box.select-none').click(function(){
+		var str = "";
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selects")){
 				$('.sidemenu').eq(i).removeClass("selects");
@@ -269,6 +290,12 @@ $(document).ready(function() {
 					$(this).css("background-color","#fff");
 				});
 			}
+			str += '0';
+			$('input[name=bucCost]').val(cost);
+			$('input[name=bucKcal]').val(kcal);
+			$('input[name=bucQuantity]').val('1');
+			$('input[name=bucSide]').val(str);
+			
 		}
 	});
 	////추가
@@ -318,19 +345,23 @@ $(document).ready(function() {
 		var str = $(this).find('p').text();
 		$('input[name=bucSet]').val(str);
 		$(".step").eq(9).trigger("click");
-
 	});
 	var str ="";
 	
+	$('.sidemenu').click(function() {
+		$('#itemStatus').html($('input[name=bucMain]').val() + " " + $('input[name=bucIsSalad]').val() + " " + $('input[name=bucSet]').val());
+	});
+	
 	$('#bucketArea').click(function() {
+		var d = new Date();
+		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+		$('input[name=bucCusoIdx]').val("sabway"+date);
+		var form = $("form[name=feedbackform]")[0];
+		var data = new FormData(form);
+		data.submit();
 		location.href = "/loadBucket.do";
 	});
-/////////////////////////////////////////////////////월요일 마커!!!!!!!!!!!!!!!!씨이바아아아아아앙아
 
-	// jstl이용한 스크립트 처리 : jsp문서에서 실행해야함 -> 아래 주석 내용 역시 jsp에서 처리함
-	/* 칼로리 설정 및 실시간 표시 */
-
-	/* 가격 설정 및 실시간 표시 */
 	
 
 

@@ -66,7 +66,7 @@
 					<tr>
 						<th>아이디</th>
 						<!-- 아이디 뒤에 정해놓은 지역코드 + -->
-						<td><input type="text" name="mgrId" value="manager" readonly></td>
+						<td><input type="text" name="mgrId" value="manager${i }" readonly></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>

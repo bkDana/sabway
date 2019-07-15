@@ -23,7 +23,7 @@ var myform=new formtowizard({
 		<div id="bucketWrapper" style=" width:100%; background-color:white;">
 			<div id="bucketArea" style="width:200px; heignt:150px; float:right; background-color:orange; cursor:pointer;">
 				<strong style="font-size:30px;">카트</strong><span id="itemCount"></span><br>
-				<span id="itemStatus">카트에 담긴 제품이 없습니다</span>
+				<span id="itemStatus">카트에 담긴 상품이 없습니다</span>
 				<br><br>
 			</div>
 		</div>
@@ -245,6 +245,7 @@ var myform=new formtowizard({
 			<input type="hidden" name="bucKcal" class="orderInput"> 
 			<input type="hidden" name="bucQuantity" class="orderInput">
 			<input type="hidden" name="bucSide" class="orderInput">
+
 		</form>
 	</div>
 </section>

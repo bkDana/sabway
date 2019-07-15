@@ -33,4 +33,8 @@ public class CusOrderDao {
 	public int tempOrderInsert(Bucket b) {
 		return sqlSession.insert("bucket.tempOrderInsert", b);
 	}
+
+	public int insertBucket(Bucket b) {
+		return sqlSession.insert("bucket.insertBucket",b);
+	}
 }
