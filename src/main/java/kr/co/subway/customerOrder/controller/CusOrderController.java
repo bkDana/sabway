@@ -45,16 +45,7 @@ public class CusOrderController {
 		Customer c = (Customer)session.getAttribute("customer");
 		int customerIdx = c.getCustomerNo();
 		ArrayList<Bucket> list = cusOrderService.allOrderList(customerIdx);
-		for(Bucket b : list) {
-			String main = b.getBucMain();
-			IngreVo ingre = new IngreVo();
-			ingre.setIngreType("메인재료");
-			ingre.setIngreIdx(Integer.parseInt(main));
-			IngreVo mainIngre = cusOrderService.selectCostMain(ingre); 
-			b.setBucMain("/resources/upload/ingredients/"+mainIngre.getIngreFilepath());
-	
-		}
-
+		
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
 			mav.addObject("list",list);
@@ -102,12 +93,13 @@ public class CusOrderController {
 	}
 				
 	@RequestMapping("/loadBucket.do")
-	public ModelAndView loadBucket (HttpServletRequest request, Bucket b) {
-		
+	public ModelAndView loadBucket (HttpServletRequest request, @RequestParam String bucBread,@RequestParam String bucMain,@RequestParam String bucVegi,@RequestParam String bucCheese,@RequestParam String bucSource,@RequestParam String bucTopping,@RequestParam String bucIsSalad,@RequestParam String bucIsOvened,@RequestParam String bucSet,@RequestParam String bucCost,@RequestParam String bucKcal,@RequestParam String bucQuantity,@RequestParam String bucSide,@RequestParam String bucCusoIdx ) {
+		Bucket b = new Bucket(0, -1, Integer.parseInt(bucCusoIdx), bucBread, bucMain, bucVegi, bucCheese, bucSource, bucTopping, bucSide, bucIsSalad, bucIsOvened, bucSet, Integer.parseInt(bucCost), 0.0, Integer.parseInt(bucKcal), Integer.parseInt(bucQuantity), null);
 		HttpSession session = request.getSession(false);
 		int customerIdx = -1;
 		Customer c = (Customer)session.getAttribute("customer");
 		if(c == null) { // 비회원이 주문할 때
+			System.out.println("비회원임");
 			session.invalidate(); 
 		} else {
 			customerIdx = c.getCustomerNo();

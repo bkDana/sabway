@@ -47,7 +47,10 @@
 						<input type="text" class="short num" value="${stock.mStock }" data-idx="${stock.mStockIdx }" data-pre="${stock.mStock }" > ${stock.ingreUnit }<c:if test="${empty stock.ingreUnit }">개</c:if>
 						<button type="button" class="update-btn" >수정</button>
 					</span>
-					<span><button type="button" class="detail-btn" onclick="location.href='/managerOrder/stockHistory.do?no=${stock.mStockIdx }';">상세</button></span>
+					<span>
+						<%-- <button type="button" class="detail-btn" onclick="location.href='/managerOrder/stockHistory.do?no=${stock.mStockIdx }';">상세</button> --%>
+						<button type="button" class="detail-btn" onclick="layerLoad('/managerOrder/stockHistory.do?no=${stock.mStockIdx }');">상세</button>
+					</span>
 				
 			</li>
 			</c:forEach>
@@ -59,7 +62,67 @@
 		</div>
 	</div>
 </section>
+
+<%-- 모달 레이어 팝업 --%>
+<article class="modal-fixed-pop-wrapper">
+	<div class="modal-fixed-pop-inner">
+		<div class="modal-loading"><span class="loading"></span></div>
+		<div class="modal-inner-box">
+			<div class="modal-inner-content"></div>
+		</div>
+	</div>
+</article>
 <script>
+
+function layerLoad(strUrl){
+	var $modalWrap = $(".modal-fixed-pop-wrapper");
+
+	$("html").css({
+		"margin-right":"17px",
+		"overflow-y":"hidden"
+	});
+	$modalWrap.fadeIn();
+	 
+	$.ajax({
+		type: "POST",
+		url: strUrl,
+		data: "",
+		success: function(resultText){
+			$modalWrap.find(".modal-inner-content").html(resultText);
+		},
+		error: function() {
+			alert("호출에 실패했습니다.");
+			$(".modal-fixed-pop-wrapper").hide();
+			$("html").css({
+				"margin-right":"0",
+				"overflow-y":"scroll"
+			});
+		},
+		beforeSend:function(){ 
+			$('.modal-loading').fadeIn(); 
+		},
+		complete:function(){ 
+			$('.modal-loading').hide();
+		}
+	});
+	 
+}
+
+// 모달 창 닫기
+$(document).ready(function  () {
+	var $modalWrap = $(".modal-fixed-pop-wrapper");
+	$(".modal-close-btn").click(function  () {
+		$(".modal-inner-content").empty();
+		$modalWrap.css("display","none");
+		$("html").css({
+			"margin-right":"0",
+			"overflow-y":"scroll"
+		});
+		$modalWrap.fadeOut();
+		return false;
+	});
+});
+
 	
 $(function(){
 	/* 수량 수정 */

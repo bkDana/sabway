@@ -7,7 +7,6 @@
  		values
  			(
  			seq_buc_idx.nextval,
- 			#{bucCustomerIdx},
  			#{bucCusoIdx},
  			#{bucBread},
  			#{bucMain},
@@ -23,7 +22,8 @@
  			#{bucDiscntRate},
  			#{bucKcal},
  			#{bucQuantity},
- 			default
+ 			default,
+ 			#{bucCustomerIdx}
  			)	
  	</insert>
 	<insert id="tempOrderInsert" parameterType="bucket">
@@ -68,8 +68,7 @@
  			buc_kcal as bucKcal,
  			buc_quantity as bucQuantity,
  			buc_reg_date as bucRegDate,
- 			buc_customer_idx asbucCustomerIdx,
- 			buc_is15 as bucIs15
+ 			buc_customer_idx asbucCustomerIdx
  		from bucket
  		where
  			buc_customer_idx = #{bucCustomerIdx}
