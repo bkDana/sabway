@@ -150,7 +150,6 @@ $(document).ready(function() {
 		//0이 오븐하는거임
 		$(".step").eq(6).trigger("click");
 	});
-	var str ="";
 	
 	$('.vegi').click(function(){
 		if($(this).hasClass("selects")){
@@ -237,21 +236,21 @@ $(document).ready(function() {
 	});
 	
 	$('.sidemenu-check').click(function(){
-		var str = "";
+		var str='';
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selects")){
-				str += '1';
-				cost += Number($('.sidemenu').eq(i).find('input').eq(1));
-				kcal += Number($('.sidemenu').eq(i).find('input').eq(0));
+				str += "1";
+				cost += Number($('.sidemenu').eq(i).find('input').eq(1).val());
+				kcal += Number($('.sidemenu').eq(i).find('input').eq(0).val());
 			}else{
 				str += '0';
 			}
 		}
 		console.log(str);
+		$('input[name=bucSide]').val(str);
 		$('input[name=bucCost]').val(cost);
 		$('input[name=bucKcal]').val(kcal);
 		$('input[name=bucQuantity]').val('1');
-		$('input[name=bucSide]').val(str);
 		
 //		serialize()
 		var form = $("form[name=feedbackform]")[0];
@@ -299,7 +298,49 @@ $(document).ready(function() {
 			
 		}
 	});
-	var str = "";
+	////추가
+//	jQuery.fn.serializeObject = function() {
+//
+//        var obj = null;
+//        try {
+//            // this[0].tagName이 form tag일 경우
+//            if(this[0].tagName && this[0].tagName.toUpperCase() == "FORM" ) {
+//            var arr = this.serializeArray();
+//                if(arr){
+//                    obj = {};    
+//                    jQuery.each(arr, function() {
+//                        // obj의 key값은 arr의 name, obj의 value는 value값
+//                        obj[this.name] = this.value;
+//                    });
+//                }
+//            }
+//        }catch(e) {
+//
+//            alert(e.message);
+//
+//        }
+//            return obj;
+//
+//        };
+        ///
+	$('.order-check').click(function(){
+		var form = $("form[name=feedbackform]")[0];
+		var data = new FormData(form);
+        $.ajax({
+        	url : "/tempOrder.do",
+            type : 'post',
+            data : data,
+//            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            //cache: false,
+            dataType : 'json',
+            
+            success : function(json){
+                alert("임시저장 성공");
+            },
+        });
+	});
 	$('.set').click(function(){
 		var str = $(this).find('p').text();
 		$('input[name=bucSet]').val(str);

@@ -48,7 +48,6 @@
  			#{bucKcal},
  			#{bucQuantity},
  			default,
- 			#{bucIs15},
  			#{bucCustomerIdx}
  			)	
  	</insert>

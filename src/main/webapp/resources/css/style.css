@@ -24,10 +24,17 @@ input[type=checkbox]{width: 15px;height: 15px;}
 #subBg{display:none; width:100%; min-width:1300px; height:330px; background:#fff; z-index:99; }
 #sub{ width:100%; position:absolute; left:0; top:150px;z-index:95; border-bottom:1px solid rgba(255,255,255,0.1);}
 #sub > ul{text-align:center; }
-#sub > ul > li{position:relative; display:inline-block; min-width:100px; }
+#sub > ul > li{position:relative; display:inline-block; min-width:120px; }
 #sub > ul > li > a{position:relative;  display:block; height:70px; line-height:70px; text-align:center; color:#fff; font-size:15px;z-index:100;}
 #sub > ul > li > a:hover{color:#ffce32; border-bottom:4px solid #ffce32;}
 #sub > ul > li > a.on{color:#ffce32; border-bottom:4px solid #ffce32;}
+
+
+
+#sub.basic-sub > ul{text-align:center; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;}
+#sub.basic-sub > ul > li > a{position:relative;  display:block; height:60px; line-height:60px; text-align:center; color:#999; font-size:16px;z-index:100;}
+#sub.basic-sub > ul > li > a:hover{color:#009223; border-bottom:4px solid #009223;}
+#sub.basic-sub > ul > li > a.on{color:#009223; border-bottom:4px solid #009223;}
 
 
 .sub-menu-title{position:absolute;left:650px; top:270px; color:#fff; font-size:16px;  text-align: center; margin: 0 auto; min-width: 600px;}

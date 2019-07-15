@@ -159,4 +159,5 @@ public class Bucket {
 		this.bucRegDate = bucRegDate;
 	}
 	
+	
 }	

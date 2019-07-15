@@ -27,7 +27,8 @@ var myform=new formtowizard({
 				<br><br>
 			</div>
 		</div>
-		<form id="feedbackform" action="/submitCusOrder.do" method="post">
+		
+		<form id="feedbackform" name="feedbackform" method="post">
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
 				<div class="type img-box select-one fix-img" style="background-color:white;" >
@@ -172,24 +173,24 @@ var myform=new formtowizard({
 					<img src="/resources/img/checkedgreen.png">
 					<p class="label">단품</p>
 				</div>
-				<div class="set img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/checkedgreen.png">
-					<p class="label">음료세트</p>
-					<input type="hidden" value="${ingre.ingreKcal }">
-					<input type="hidden" value="${ingre.ingreCost15 }">
-				</div>
-				<div class="set img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/checkedgreen.png">
-					<p class="label">감자세트</p>
-					<input type="hidden" value="${ingre.ingreKcal }">
-					<input type="hidden" value="${ingre.ingreCost15 }">
-				</div>
-				<div class="set img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/checkedgreen.png">
-					<p class="label">쿠키세트</p>
-					<input type="hidden" value="${ingre.ingreKcal }">
-					<input type="hidden" value="${ingre.ingreCost15 }">
-				</div>
+<!-- 				<div class="set img-box select-one fix-img" style="background-color:white;" > -->
+<!-- 					<img src="/resources/img/checkedgreen.png"> -->
+<!-- 					<p class="label">음료세트</p> -->
+<%-- 					<input type="hidden" value="${ingre.ingreKcal }"> --%>
+<%-- 					<input type="hidden" value="${ingre.ingreCost15 }"> --%>
+<!-- 				</div> -->
+<!-- 				<div class="set img-box select-one fix-img" style="background-color:white;" > -->
+<!-- 					<img src="/resources/img/checkedgreen.png"> -->
+<!-- 					<p class="label">감자세트</p> -->
+<%-- 					<input type="hidden" value="${ingre.ingreKcal }"> --%>
+<%-- 					<input type="hidden" value="${ingre.ingreCost15 }"> --%>
+<!-- 				</div> -->
+<!-- 				<div class="set img-box select-one fix-img" style="background-color:white;" > -->
+<!-- 					<img src="/resources/img/checkedgreen.png"> -->
+<!-- 					<p class="label">쿠키세트</p> -->
+<%-- 					<input type="hidden" value="${ingre.ingreKcal }"> --%>
+<%-- 					<input type="hidden" value="${ingre.ingreCost15 }"> --%>
+<!-- 				</div> -->
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>사이드메뉴</legend>
@@ -208,9 +209,11 @@ var myform=new formtowizard({
 					</c:if>
 				</c:forEach>
 				<div class="common-tbl-btn-group">
-					<button type="button" class="btn-style2 sidemenu-check" style="clear:both;">주문 완료</button>
+					<button type="button" class="btn-style2 sidemenu-check" style="clear:both;">사이드 선택완료</button>
+					<button type="button" class="btn-style2 order-check" style="clear:both;">주문확인</button>
 				</div>
 			</fieldset>
+		
 				<div class="common-tbl-box">
 					<table class="comm-tbl">
 					<colgroup>
@@ -226,23 +229,23 @@ var myform=new formtowizard({
 					
 					</table>
 					<div class="common-tbl-btn-group">
-						<button class="btn-style2 insert-order">주문 완료</button>
+						<button type="button" class="btn-style2">주문 완료</button>
 					</div>
 				</div>
-				<input type="hidden" name="bucBread" class="orderInput">
-				<input type="hidden" name="bucMain" class="orderInput">
-				<input type="hidden" name="bucVegi" class="orderInput">
-				<input type="hidden" name="bucCheese" class="orderInput">
-				<input type="hidden" name="bucSource" class="orderInput">
-				<input type="hidden" name="bucTopping" class="orderInput">
-				<input type="hidden" name="bucSide" class="orderInput">
-				<input type="hidden" name="bucIsSalad" class="orderInput">
-				<input type="hidden" name="bucIsOvened" class="orderInput">
-				<input type="hidden" name="bucSet" class="orderInput">
-				<input type="hidden" name="bucCost" class="orderInput">
-				<input type="hidden" name="bucKcal" class="orderInput"> 
-				<input type="hidden" name="bucQuantity" class="orderInput">
-				<input type="hidden" name="bucCusoIdx" class="orderInput">
+			<input type="hidden" name="bucBread" class="orderInput">
+			<input type="hidden" name="bucMain" class="orderInput">
+			<input type="hidden" name="bucVegi" class="orderInput">
+			<input type="hidden" name="bucCheese" class="orderInput">
+			<input type="hidden" name="bucSource" class="orderInput">
+			<input type="hidden" name="bucTopping" class="orderInput">
+			<input type="hidden" name="bucIsSalad" class="orderInput">
+			<input type="hidden" name="bucIsOvened" class="orderInput">
+			<input type="hidden" name="bucSet" class="orderInput">
+			<input type="hidden" name="bucCost" class="orderInput">
+			<input type="hidden" name="bucKcal" class="orderInput"> 
+			<input type="hidden" name="bucQuantity" class="orderInput">
+			<input type="hidden" name="bucSide" class="orderInput">
+
 		</form>
 	</div>
 </section>

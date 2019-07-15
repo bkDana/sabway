@@ -1,15 +1,19 @@
 package kr.co.subway.customerOrder.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
@@ -34,7 +38,6 @@ public class CusOrderController {
 		}
 		return mav;
 	}
-	
 	@RequestMapping("/myOrderInfo.do")
 	public ModelAndView loadMyOrder(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -60,6 +63,29 @@ public class CusOrderController {
 		}
 		return mav;
 	}
+	//활성화 여부 ajax로 변경
+	@ResponseBody
+		@RequestMapping("/tempOrder.do")
+		public void tempOrderInsert(HttpServletResponse response, Bucket b){
+			
+			b.setBucCusoIdx(123123);
+			b.setBucCustomerIdx(1111);
+			int result = cusOrderService.tempOrderInsert(b);
+//			System.out.println("controller updateIngreActive() result : "+result);
+			response.setContentType("text/html;charset=utf-8");
+			try {
+				response.setContentType("application/json");
+				new Gson().toJson("result",response.getWriter());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(result>0) {
+				System.out.println("임시저장 성공");
+			}else{
+				System.out.println("임시저장 실패");
+			}
+		}
 	
 	@RequestMapping("/loadBucket.do")
 	public ModelAndView loadBucket (HttpServletRequest request, Bucket b) {
