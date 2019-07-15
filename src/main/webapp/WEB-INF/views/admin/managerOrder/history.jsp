@@ -11,8 +11,8 @@
 	<%-- LEFT MENU --%>
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 재고관리 > <a href="/managerOrder/stockList.do">재고현황</a></div>
-		<%-- 
+		<%-- <div class="sub-menu">※ 재고관리 > <a href="/managerOrder/stockList.do">재고현황</a></div>
+		
 		<p>
 		
 			<select id="order" data-val="${search.orderBy }">
@@ -22,6 +22,7 @@
 			</select>
 		</p>
 		 --%>
+		<button class="modal-close-btn">닫기</button>
 		<table class="his-tbl">
 			<colgroup>
 				<col width="">

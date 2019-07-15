@@ -59,11 +59,13 @@
 					<c:if test="${not empty sessionScope.customer}">
 					<li><a class="header-btn" href="/myOrderInfo.do">내 주문내역</a>
 					</c:if>
+					<!--
 					<li><a class="header-btn">매장찾기</a></li>
 					<li><a class="header-btn">가맹신청 · 문의</a></li>
 					<li><a class="header-btn">고객센터</a></li>
-					<li><a href="/admin.do" class="header-btn">관리자</a>
-					</li>
+					-->
+					<li><a href="/admin.do" class="header-btn">관리자</a></li>
+					<li><a class="header-btn"><img src="/resources/img/shopping-cart.png" width="20px"> 1</a></li><!-- 장바구니 개수 넣어주세요 -->
 				</ul>
 			</div>
 			<!-- 헤더 상단 -->
