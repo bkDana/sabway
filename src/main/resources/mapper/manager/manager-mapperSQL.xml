@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mgr"><insert id="enrollMgr" parameterType="mgr">
+<mapper namespace="mgr">
+	<insert id="enrollMgr" parameterType="mgr">
 		insert into manager values(seq_mgr_no.nextval,#{mgrId}, #{mgrPw}, #{mgrName}, #{mgrTel}, #{mgrPost}, #{mgrAddr}, #{mgrLevel}, #{mgrStatus}, sysdate, #{mgrAddrCode}, #{mgrBossName}, sysdate)
 	</insert>
 	<select id="mgrList" resultType="mgr">
@@ -16,7 +17,7 @@
 	      ,mgr_enroll_date as mgrEnrollDate
 	      ,mgr_addr_code as mgrAddrCode
 	      ,mgr_boss_name as mgrBossName
-	      ,mgr_open_date as mgrOpenDate        
+	      ,mgr_open_date as mgrOpenDate
 	      from manager
 	</select>
 	<select id="mpdList" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">

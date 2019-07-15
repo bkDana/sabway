@@ -45,24 +45,25 @@ public class MgrController {
 	RandomTel randomtel;
 	@Resource(name="addrcode")
 	AddrCode addrcode;
-	//랜덤 전화번호, 지역별 번호, 지역별 코드 설정
 	@RequestMapping(value="/enrollMgr.do")
+	//랜덤 전화번호, 지역별 번호, 지역별 코드 설정
 	public String enrollMgr(@RequestParam String applyArea,@RequestParam String applyName,@RequestParam int applyNo,Model model) {
 		int i = 1;
 		//가맹점 승인하면 applyName과 applyArea를 매개변수로 받음
 		//applyArea : 지역 정보를 알아보기 위함
 		//applyName : 가맹점 등록에 사용할 목적
+		System.out.println(applyArea);
 		String ranTel = randomtel.randomTel();
 		String addrType = addrtype.addrType(applyArea);
 		String mgrTel = addrcode.addrCode(ranTel,addrType);
 		//가맹점 정보를 가져와서 이름 체크
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
 		for(int y=0;y<list.size();y++) {
-			if(list.get(y).getMgrAddr().contains(applyArea)) {		
+			if(list.get(y).getMgrAddr().contains(applyArea)) {
 				i++;
 			}
 		}
-		//이름 중복시 1호점씩 증가
+		//이름 중복시 1호점/id +1
 		model.addAttribute("i",i);
 		model.addAttribute("applyName",applyName);
 		model.addAttribute("mgrAddrType",addrType);
@@ -135,19 +136,6 @@ public class MgrController {
 		}
 		return mav;
 	}
-//	@RequestMapping(value="/managerList.do")
-//	public ModelAndView managerList() {
-//		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
-//		ModelAndView mav = new ModelAndView();
-//		if(!list.isEmpty()) {
-//			mav.addObject("list", list);
-//			mav.setViewName("manager/managerList");
-//		}else {
-//			mav.setViewName("manager/listMsg");
-//		}
-//		return mav;
-//	}
-
 	//가맹점 상태변경(update)
 	@RequestMapping(value="/mgrUpdate.do")
 	public String mgrUpdate(Mgr mgr) {
