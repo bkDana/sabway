@@ -70,7 +70,7 @@
 		var ingreCost15Discnt = Math.round(discntRate*ingreCost15);
 		var ingreCost30Discnt = Math.round(discntRate*ingreCost30);
 		$(this).parent().next().children().html('15cm : '+ingreCost15Discnt+'<br>30cm : '+ingreCost30Discnt);
-		//할인 적용한 메뉴 submit
+		//할인율 선택하면 바로 적용
 		$.ajax({
 			url:"/selectPromotion.do",
 			dataType:"json",

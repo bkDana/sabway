@@ -210,7 +210,8 @@
 		//상태별 분류
 		$("[name=statusGroup]").on("change",function(){
 			var keyword = $(this).val();
-			location.href="/selectStatus.do?keyword="+keyword;
+			var text = $('[name=text]').val();
+			location.href="/selectStatus.do?keyword="+keyword+"&text="+text;
 		});
 		//더보기(status)
 		$("[name=more]").on("click",function(){
