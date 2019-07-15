@@ -245,7 +245,7 @@ var myform=new formtowizard({
 			<input type="hidden" name="bucKcal" class="orderInput"> 
 			<input type="hidden" name="bucQuantity" class="orderInput">
 			<input type="hidden" name="bucSide" class="orderInput">
-
+			<input type="hidden" name="bucCusoIdx" class="orderInput">
 		</form>
 	</div>
 </section>
