@@ -94,6 +94,8 @@ $(document).ready(function() {
 			cost +=  Number($(this).find('input').eq(2).val());
 			kcal +=  Number($(this).find('input').eq(0).val())*2;
 		}
+//		$('#recom-sauce').val($(this).find('input').eq(3).val());
+//		$('#recom-main').val(str);
 		$('input[name=bucMain]').val(str);
 		$(".step").eq(3).trigger("click");
 	});
@@ -215,6 +217,25 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+//	$('.source-recom').click(function(){
+//		var sauceStr = $('#recom-sauce').val();
+//		var arrSauce = sauceStr.split(',');
+//		console.log(arrSauce);
+//		for(var i=0; i<$('.source').length;i++){
+//			for(var k=0; k<arrSauce.length; k++){
+//				if($('.source').eq(i).find('p').text()===arrSauce[k]){
+//					console.log("k도냐"+k);
+//					$('.source').eq(i).unbind("mouseleave");
+//					$('.source').eq(i).find('img').css("display","none");
+//					$('.source').eq(i).find('p').css("display","block");
+//					$('.source').eq(i).find('button').css("display","block");
+//					$('.source').eq(i).css("background-color","#009223");
+//					$('.source').eq(i).toggleClass("selected");
+//				}
+//			}
+//		}
+//	});
 	
 	$('.source-check').click(function(){
 		var str = "";
