@@ -82,7 +82,7 @@ function layerLoad(strUrl){
 		"overflow-y":"hidden"
 	});
 	$modalWrap.fadeIn();
-	 
+	
 	$.ajax({
 		type: "POST",
 		url: strUrl,
@@ -109,7 +109,7 @@ function layerLoad(strUrl){
 }
 
 // 모달 창 닫기
-$(document).ready(function  () {
+/* $(document).ready(function  () {
 	var $modalWrap = $(".modal-fixed-pop-wrapper");
 	$(".modal-close-btn").click(function  () {
 		$(".modal-inner-content").empty();
@@ -121,7 +121,7 @@ $(document).ready(function  () {
 		$modalWrap.fadeOut();
 		return false;
 	});
-});
+}); */
 
 	
 $(function(){
