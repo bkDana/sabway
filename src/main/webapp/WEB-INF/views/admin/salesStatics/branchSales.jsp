@@ -206,6 +206,7 @@
 
 	//전체 매뉴 매출순위(파이차트)
 	function getBranchMenuSales(){
+		var branchName = $("#selBranch").val();
 		$.ajax({
 			url:"/salesStatics/totalSales.do",
 			dataType:'json',
@@ -215,7 +216,9 @@
         			if(cost[i].cusoBranch=='total'){
         				if(Number(cost[i].orderMonth)==i){
         					//console.log(cost[i].totalCo3st);
-        					arr.push(cost[i].totalCost);
+        					console.log("파이차트 로그");
+        					arr.push({name:cost[i].orderMonth+'월', y:cost[i].totalCost});
+        					console.log(arr);
         				}
         			}
 				}
@@ -228,7 +231,7 @@
 			            type: 'pie'
 			        },
 			        title: {
-			            text: '매출 통계',
+			            text: branchName+' 메뉴 매출 현황',
 			        },
 			        tooltip: {
 			            headerFormat: '<span style="font-size:10px">{point.key}</span><table class="comm-tbl" style="width:150px;">',
@@ -250,22 +253,11 @@
 			                    }
 			                }
 			            },
-			            /* 클릭이벤트 */
-			            /* series: {
-			            	cursor: 'pointer',
-			            	point:{
-			            		events:{
-			            			click:function(){
-			            				getFunc()
-			            			}
-			            		}
-			            	}
-			            } */
 			        },
 			        series: [{
 			        	name:"매출",
 			        	colorByPoint:true,
-			        	data: [{name:'당산점',y:290000},{name:'당산점',y:500000},{name:'당산점',y:2190000}]
+			        	data: arr
 			        }]
 			    });
 			}
@@ -311,11 +303,6 @@
 	     });
 		
 	});	//$(document) 종료
-	
-	
-	
-		
-
 </script>
 
 
