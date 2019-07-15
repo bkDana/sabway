@@ -29,6 +29,8 @@ import kr.co.subway.manager.service.MgrService;
 import kr.co.subway.manager.service.RandomTel;
 import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.manager.vo.PageNo;
+import kr.co.subway.manager.vo.StorePageNaviData;
+import kr.co.subway.notice.vo.PageNaviData;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -125,6 +127,7 @@ public class MgrController {
 		}
 		return mav;
 	}
+
 	//가맹점 상태변경(update)
 	@RequestMapping(value="/mgrUpdate.do")
 	public String mgrUpdate(Mgr mgr) {
@@ -266,8 +269,24 @@ public class MgrController {
 	
 	//신규가맹점 목록
 	@RequestMapping(value="/findStore.do")
-	public ModelAndView newStoreList() {
+	public ModelAndView newStoreList(String currentPage) {
+		//신규매점 리스트
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.newStoreList();
+		int currentPage1;
+		try {
+			currentPage1 = Integer.parseInt(currentPage);
+		}catch (Exception e) {
+			currentPage1=1;
+		}
+		StorePageNaviData pd = mgrservice.StoreSelectPaging(currentPage1);
+		// 전체매점 리스트
+		//ArrayList<Mgr> listS = (ArrayList<Mgr>) mgrservice.mgrList();
+
+		
+		
+		// 페이징		
+		String pageNavi = pd.getPageNavi();
+		
 		ArrayList<Integer> listDate = new ArrayList<Integer>();
 		for(int i=0; i<list.size(); i++){
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
@@ -280,16 +299,29 @@ public class MgrController {
 				}
 			}	
 		}
+		
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
 			mav.addObject("list", list);
 			mav.addObject("listDate", listDate);
+			mav.addObject("listS", pd.getStoreList());
+			mav.addObject("totalCnt", pd.getStoreList().get(0).getTotalCount());
+			mav.addObject("pageNavi",pageNavi);
 			mav.setViewName("findStore/findStore");
 		}else {
 			mav.setViewName("manager/listMsg");
 		}
 		return mav;
 	}
+	
+	//매장 키워드검색
+	@ResponseBody
+	@RequestMapping(value="/searchKeyword.do",produces="application/json; charset=utf-8")
+	public String storeList(@RequestParam String keyword) {
+		ArrayList<Mgr> searchKeyword = (ArrayList<Mgr>) mgrservice.searchStore(keyword);
+		return new Gson().toJson(searchKeyword);
+	}
+	
 	// 가맹점키워드검색
 	
 	@RequestMapping(value="/searchStore.do")

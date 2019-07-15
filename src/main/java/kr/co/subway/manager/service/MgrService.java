@@ -1,5 +1,6 @@
 package kr.co.subway.manager.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
@@ -10,6 +11,10 @@ import kr.co.subway.headOffice.dao.ApplyDAO;
 import kr.co.subway.manager.dao.MgrDAO;
 import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.manager.vo.PageNo;
+import kr.co.subway.manager.vo.StorePageNaviData;
+import kr.co.subway.notice.vo.Notice;
+import kr.co.subway.notice.vo.PageBound;
+import kr.co.subway.notice.vo.PageNaviData;
 
 @Service("mgrservice")
 public class MgrService {
@@ -30,6 +35,48 @@ public class MgrService {
 		List<Mgr> list= mgrdao.mgrList();
 		return list;
 	}
+	
+	
+	// 가맹점 페이징
+	@SuppressWarnings("unchecked")
+	public StorePageNaviData StoreSelectPaging(int currentPage){
+		String pageNavi = "";
+		int numPerPage = 10; // 출력될 개시판 개수
+		int pageNaviSize = 5; // 하단 페이징 노출 수
+		
+		int totalCount = mgrdao.storeTotalCount();
+		
+		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
+		int start = (currentPage-1)*numPerPage+1;
+		int end = currentPage*numPerPage;
+		
+		
+		PageBound pb = new PageBound(start, end);
+		
+		ArrayList<Mgr> storeList = (ArrayList<Mgr>)mgrdao.storeSelectPaging(pb);
+		storeList.get(0).setTotalCount(totalCount);
+		
+		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
+		if(currentPage != 1) {
+			pageNavi += "<a href='/findStore.do?currentPage="+(currentPage-1)+"'>이전</a>";
+		}
+		int i = 1;
+		while(!(i++>pageNaviSize || pageNo>totalPage)) {
+			if(currentPage == pageNo) {
+				pageNavi += "<span>"+pageNo+"</span>";
+			}else {
+				pageNavi += "<a href='/findStore.do?currentPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		if(currentPage < totalPage) {
+			pageNavi +="<a href='/findStore.do?currentPage="+(currentPage+1)+"'>다음</a>";
+		}
+		
+		return new StorePageNaviData(storeList,pageNavi);
+	}
+	
+	
 	
 	//신규가맹점 목록
 	public List<Mgr> newStoreList() {

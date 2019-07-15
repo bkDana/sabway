@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.manager.vo.PageNo;
+import kr.co.subway.notice.vo.PageBound;
 
 @Repository("mgrdao")
 public class MgrDAO {
@@ -20,6 +21,15 @@ public class MgrDAO {
 	//가맹점 목록
 	public List<Mgr> mgrList() {
 		return session.selectList("mgr.mgrList");
+	}
+	// 가맹점 토탈카운트
+	public int storeTotalCount() {
+		return session.selectOne("mgr.storeTotalCount");
+	}
+	
+	// 가맹점 페이징
+	public List storeSelectPaging(PageBound pb){
+		return session.selectList("mgr.storeSelectPaging", pb);
 	}
 	//신규매장 목록
 		public List<Mgr> newStoreList() {

@@ -98,8 +98,9 @@
     
     <!-- 회원 리스트  -->
     <select id="allCustomerList" resultType="customer">
-    	select 
-    	customer_no as customerNo
+    	select
+    	rnum 
+    	,customer_no as customerNo
     	,customer_id as customerId
     	,customer_name as customerName
     	,customer_nickname as customerNick
@@ -110,7 +111,7 @@
     	,customer_state as customerState
     	,reg_date as regDate
     	,lastlog_date as lastLogDate
-    	from customer order by customer_no
+    	from (select rownum as rnum, m.* from (select * from customer order by reg_date desc) m)
     </select>
     
     <!-- 회원탈퇴시키기 -->
