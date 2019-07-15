@@ -65,7 +65,7 @@
 					<tr>
 						<th>활성화/비활성화</th>
 						<td>
-							<select name="ingreActive" id="ingreActive" class="short">
+							<select name="ingreActive" id="ingreActive" data-active="${iv.ingreActive}" class="short">
 								<option value="1">활성화</option>
 								<option value="0">비활성화</option>
 							</select>
@@ -131,6 +131,14 @@ $(document).ready(function(){
 	var ingreUnit = $('select[name=ingreUnit]').data('unit');
 	$('select[name=ingreUnit]').children('option').each(function(){
 		if(ingreUnit == $(this).val()){
+			$(this).prop("selected",true);
+		}
+	});
+	
+	/* 활성화/비활성화 선택 셋팅 */
+	var ingreActive = $('select[name=ingreActive]').data('active');
+	$('select[name=ingreActive]').children('option').each(function(){
+		if(ingreActive == $(this).val()){
 			$(this).prop("selected",true);
 		}
 	});

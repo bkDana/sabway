@@ -40,19 +40,19 @@ public class NoticeService {
 		int pageNaviSize = 5;
 		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage != 1) {
-			pageNavi += "<a href='/notice.do?currentPage="+(currentPage-1)+"'>이전</a>";
+			pageNavi += "<a href='/notice.do?currentPage="+(currentPage-1)+"'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
 			if(currentPage == pageNo) {
-				pageNavi += "<span>"+pageNo+"</span>";
+				pageNavi += "<span class='cur'>"+pageNo+"</span>";
 			}else {
 				pageNavi += "<a href='/notice.do?currentPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		if(currentPage < totalPage) {
-			pageNavi +="<a href='/notice.do?currentPage="+(currentPage+1)+"'>다음</a>";
+			pageNavi +="<a href='/notice.do?currentPage="+(currentPage+1)+"'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		
 		return new PageNaviData(noticeList,null,null, pageNavi);
@@ -95,19 +95,19 @@ public class NoticeService {
 		int pageNaviSize = 5;
 		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage != 1) {
-			pageNavi += "<a href='/qna.do?currentPage="+(currentPage-1)+"'>이전</a>";
+			pageNavi += "<a href='/qna.do?currentPage="+(currentPage-1)+"'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
 			if(currentPage == pageNo) {
-				pageNavi += "<span>"+pageNo+"</span>";
+				pageNavi += "<span class='cur'>"+pageNo+"</span>";
 			}else {
 				pageNavi += "<a href='/qna.do?currentPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		if(currentPage < totalPage) {
-			pageNavi +="<a href='/qna.do?currentPage="+(currentPage+1)+"'>다음</a>";
+			pageNavi +="<a href='/qna.do?currentPage="+(currentPage+1)+"'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		
 		return new PageNaviData(null,qnaList,null, pageNavi);
@@ -145,19 +145,19 @@ public class NoticeService {
 		int pageNaviSize = 5;
 		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage != 1) {
-			pageNavi += "<a href='/review.do?currentPage="+(currentPage-1)+"'>이전</a>";
+			pageNavi += "<a href='/review.do?currentPage="+(currentPage-1)+"'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
 			if(currentPage == pageNo) {
-				pageNavi += "<span>"+pageNo+"</span>";
+				pageNavi += "<span class='cur'>"+pageNo+"</span>";
 			}else {
 				pageNavi += "<a href='/review.do?currentPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		if(currentPage < totalPage) {
-			pageNavi +="<a href='/review.do?currentPage="+(currentPage+1)+"'>다음</a>";
+			pageNavi +="<a href='/review.do?currentPage="+(currentPage+1)+"'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		
 		return new PageNaviData(null,null,reviewList, pageNavi);

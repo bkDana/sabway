@@ -4,19 +4,17 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
-<style>
-	.move-one-qna:hover{
-		cursor: pointer;
-		color: #ffce32;
-	}
-</style>
+
+
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
+
 <%-- Content --%>
-<section id="content-wrapper">
+<section id="content-wrapper" style="background-color: #fff;">
 	<div class="area">
-		<h1 class="comm-content-tit">Q&A/신고</h1>
-		<div class="common-tbl-box">
+		<h1 class="board-tit">Q&A/신고</h1>
+		<!-- <div class="common-tbl-box"> -->
 			
-			<table class="comm-tbl">
+			<table class="comm-tbl board">
 			<colgroup>
 				<col width="10%">
 				<col width="10%">
@@ -24,14 +22,14 @@
 				<col width="15%">
 			</colgroup>
 				<tr>
-					<th>번호</th>
-					<th>작성자</th>
-					<th>제목</th>
-					<th>작성일</th>
+					<td>번호</td>
+					<td>작성자</td>
+					<td>제목</td>
+					<td>작성일</td>
 				</tr>
 				
 			<c:forEach items="${qnaList}" var="qna">
-				<tr>
+				<tr class="normal">
 					<td>${qna.qnaCategory }</td>
 					<td>${qna.qnaWriter }</td>
 					<td style="display:none;">${qna.qnaNo }</td>
@@ -54,7 +52,7 @@
 				</div>
 			<div class="paging">${pageNavi }</div>
 		</div>
-	</div>
+	<!-- </div> -->
 </section>
 
 <%-- Footer --%>
