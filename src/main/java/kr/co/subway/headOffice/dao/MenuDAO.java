@@ -15,22 +15,10 @@ public class MenuDAO {
 	private SqlSession session;
 	//메뉴목록
 	public List<IngreVo> menuList() {
-//		return session.selectList("menu.menuList");
 		return session.selectList("ingre.ingreMainList");
 	}
 	//할인 및 할인율 수정
 	public int updateIngre(IngreVo ingre) {
-		System.out.println("dao : "+ingre.getIngreDiscntRate());
-		System.out.println("dao : "+ingre.getIngreLabel());
-		System.out.println("dao : "+ingre.getIngreType());
 		return session.update("ingre.updateIngre",ingre);
 	}
-	//메뉴목록
-//	public List<Menu> menuList() {
-//		return session.selectList("menu.menuList");
-//	}
-//	//할인 및 할인율 수정
-//	public int updateMenu(Menu menu) {
-//		return session.update("menu.updateMenu",menu);
-//	}
 }

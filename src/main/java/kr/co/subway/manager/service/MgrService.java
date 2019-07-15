@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.subway.headOffice.dao.ApplyDAO;
 import kr.co.subway.manager.dao.MgrDAO;
 import kr.co.subway.manager.vo.Mgr;
+import kr.co.subway.manager.vo.MgrPageData;
 import kr.co.subway.manager.vo.PageNo;
 import kr.co.subway.manager.vo.StorePageNaviData;
 import kr.co.subway.notice.vo.Notice;
@@ -33,6 +34,11 @@ public class MgrService {
 	//가맹점 목록
 	public List<Mgr> mgrList() {
 		List<Mgr> list= mgrdao.mgrList();
+		return list;
+	}
+	//가맹점 목록(더보기)
+	public List<Mgr> mpdList(MgrPageData mpd) {
+		List<Mgr> list= mgrdao.mpdList(mpd);
 		return list;
 	}
 	
@@ -93,14 +99,39 @@ public class MgrService {
 	public int mgrUpdate(Mgr mgr) {
 		int result = mgrdao.mgrUpdate(mgr);
 		return result;
-	}
+	}	
 	//검색어 검색
-	public List<Mgr> searchList(String keyword, String text){
+	public List<Mgr> searchList(MgrPageData mpd){
 		List<Mgr> list = null;
-		if(keyword.equals("이름")) {
-			list = mgrdao.searchBossName(text);
-		}else if(keyword.equals("주소")){
-			list = mgrdao.searchAddr(text);
+		if(mpd.getKeyword().equals("이름")) {
+			list = mgrdao.searchBossName(mpd);
+		}else if(mpd.getKeyword().equals("주소")){
+			list = mgrdao.searchAddr(mpd);
+		}
+		return list;
+	}
+	//상태별 분류
+	public List<Mgr> selectStatus(MgrPageData mpd){
+		List<Mgr> list = null;
+		if(mpd.getKeyword().equals("준비")) {
+			mpd.setStatus(1);
+			list = mgrdao.selectStatus(mpd);
+		}else if(mpd.getKeyword().equals("영업")) {
+			mpd.setStatus(2);
+			list = mgrdao.selectStatus(mpd);
+		}else if(mpd.getKeyword().equals("폐업")) {
+			mpd.setStatus(3);
+			list = mgrdao.selectStatus(mpd);
+		}
+		return list;
+	}
+	//검색 결과 상태별 분류
+	public List<Mgr> selectSearchStatus(MgrPageData mpd){
+		List<Mgr> list = null;
+		if(mpd.getKeyword().equals("주소")) {
+			list = mgrdao.selectSearchStatusAddr(mpd);
+		}else if(mpd.getKeyword().equals("이름")) {
+			list = mgrdao.selectSearchStatusName(mpd);
 		}
 		return list;
 	}
@@ -108,21 +139,6 @@ public class MgrService {
 		List<Mgr> list = mgrdao.searchStore(keyword);
 		return list;
 		
-	}
-	//상태별 분류
-	public List<Mgr> selectStatus(String keyword){
-		List<Mgr> list = null;
-		if(keyword.equals("준비")) {
-			int status = 1;
-			list = mgrdao.selectStatus(status);
-		}else if(keyword.equals("영업")) {
-			int status = 2;
-			list = mgrdao.selectStatus(status);
-		}else if(keyword.equals("폐업")) {
-			int status = 3;
-			list = mgrdao.selectStatus(status);
-		}
-		return list;
 	}
 	//상태별 검색
 	public List<Mgr> searchStatus(String keyword,Mgr mgr){
@@ -134,13 +150,34 @@ public class MgrService {
 		}
 		return list;
 	}
-	public List<Mgr> morePage(PageNo pn){
-		List<Mgr> list = mgrdao.morePage(pn);
-		return list;
-	}
+	//더보기
 	public List<Mgr> pageMore(PageNo pn){
 		List<Mgr> list = mgrdao.pageMore(pn);
 		return list;
 	}
-	
+	//mgr 개수
+	public int totalCount(){
+		int result = mgrdao.totalCount();
+		return result;
+	}
+	//더보기(keyword)
+	public List<Mgr> keywordMore(MgrPageData mpd){
+		List<Mgr> list = mgrdao.keywordMore(mpd);
+		return list;
+	}
+	//더보기(status)
+	public List<Mgr> statusMore(MgrPageData mpd){
+		List<Mgr> list = null;
+		if(mpd.getKeyword().equals("준비")) {
+			mpd.setStatus(1);
+			list = mgrdao.statusMore(mpd);
+		}else if(mpd.getKeyword().equals("영업")) {
+			mpd.setStatus(2);
+			list = mgrdao.statusMore(mpd);
+		}else if(mpd.getKeyword().equals("폐업")) {
+			mpd.setStatus(3);
+			list = mgrdao.statusMore(mpd);
+		}
+		return list;
+	}
 }

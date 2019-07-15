@@ -26,7 +26,6 @@
 						<td>
 							<select name="ingreType" id="ingreType" class="short" data-type="${iv.ingreType }" required>
 								<option value="">== 카테고리 ==</option>
-								<option value="메인메뉴">메인메뉴</option>
 								<option value="메인재료">메인재료</option>
 								<option value="빵">빵</option>
 								<option value="추가토핑">추가토핑</option>
@@ -101,7 +100,7 @@
 					<tr>
 						<th>단위(unit)</th>
 						<td>
-							<select name="ingreUnit" class="short" required>
+							<select name="ingreUnit" class="short" data-unit="${iv.ingreUnit}" required>
 								<option value="box">box</option>
 								<option value="kg">kg</option>
 								<option value="통">통</option>
@@ -127,6 +126,15 @@ $(document).ready(function(){
 			$(this).prop("selected",true);
 		}
 	});
+	
+	/* 단위 선택 셋팅 */
+	var ingreUnit = $('select[name=ingreUnit]').data('unit');
+	$('select[name=ingreUnit]').children('option').each(function(){
+		if(ingreUnit == $(this).val()){
+			$(this).prop("selected",true);
+		}
+	});
+	
 	
 	$("#sauceTr").hide();
 	

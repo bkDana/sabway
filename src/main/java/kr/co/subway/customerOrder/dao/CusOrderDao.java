@@ -29,5 +29,12 @@ public class CusOrderDao {
 	public IngreVo selectCostMain(IngreVo ingre) {
 		return sqlSession.selectOne("ingre.selectOneMain", ingre);
 	}
+	
+	public int tempOrderInsert(Bucket b) {
+		return sqlSession.insert("bucket.tempOrderInsert", b);
+	}
 
+	public int insertBucket(Bucket b) {
+		return sqlSession.insert("bucket.insertBucket",b);
+	}
 }

@@ -74,7 +74,7 @@ public class SalesStaticsController {
 	public void getBranchSales(String branchName,HttpServletResponse response) throws JsonIOException, IOException {
 		//System.out.println(branchName);
 		ArrayList<SalesStaticsGrpVo> list = service.getBranchSales(branchName);
-		System.out.println("월 : "+list.get(2).getOrderMonth()+"매출 : "+list.get(2).getTotalCost());
+		//System.out.println("월 : "+list.get(2).getOrderMonth()+"매출 : "+list.get(2).getTotalCost());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());
