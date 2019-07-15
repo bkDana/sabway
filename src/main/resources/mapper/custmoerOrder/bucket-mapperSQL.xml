@@ -80,4 +80,10 @@
  		ingre_description as ingreDescription, ingre_filepath as ingreFilepath,ingre_reg_date as ingreRegDate
  		from ingredients
  	</select>
+ 	<select id="tempOrderSelect" resultType="_int">
+ 		select buc_idx from (select rownum as rnum, b.* from (select * from bucket order by buc_idx desc) b) where rnum = 1
+    </select>
+    <delete id="tempOrderDelete" parameterType="_int">
+		delete from bucket where buc_idx=#{idx}
+	</delete>
 </mapper>

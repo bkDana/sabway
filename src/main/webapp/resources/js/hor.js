@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-	
+	$(".step").eq(0).trigger("click");
 	var typeStatus = 0;
 });
 //// 정엄이가 쓴거
@@ -268,15 +268,18 @@ $(document).ready(function() {
 //            error: function(xhr, status, error){
 //                alert("error");
 //            },
-            success : function(json){
-                alert("임시저장 성공");
+            success : function(data){
+                alert(data);
                 var orderCheckStr = "<tr>";
         		for(var i=0; i<10; i++){
         			orderCheckStr += "<td>"+$('.orderInput').eq(i).val()+"</td>";
         		}
+        		orderCheckStr += "<td><button type='button' onclick='deleteOrder(this)'>취소</button>";
+        		orderCheckStr += "<input type='hidden' class='idxHidden' value='"+data+"'></td>";
         		orderCheckStr += "</tr>";
+        		
         		console.log(orderCheckStr);
-        		$('.comm-tbl type2').append(orderCheckStr);
+        		$('.comm-tbl.type2').append(orderCheckStr);
             },
         });
 	});
@@ -297,6 +300,17 @@ $(document).ready(function() {
 			}
 		}
 	});
+	function deleteOrder(idx){
+		var delIdx = $(idx).next().val();
+		$.ajax({
+        	url : "/tempOrderDelete.do",
+            type : 'get',
+            data : {delIdx:delIdx},
+            success : function(){
+                $(idx).parent().parent().remove();
+            },
+        });
+	}
 	////추가
 //	jQuery.fn.serializeObject = function() {
 //
@@ -324,8 +338,8 @@ $(document).ready(function() {
         ///
 	$('.set').click(function(){
 		var str = $(this).find('p').text();
-		cost += Number($('.set').eq(i).find('input').eq(1).val());
-		kcal += Number($('.set').eq(i).find('input').eq(0).val());
+		cost += Number($(this).find('input').eq(1).val());
+		kcal += Number($(this).find('input').eq(0).val());
 		$('input[name=bucSet]').val(str);
 		$(".step").eq(9).trigger("click");
 	});
@@ -344,6 +358,28 @@ $(document).ready(function() {
 		location.href = "/loadBucket.do";
 	});
 
-	
+	$('.add-order').click(function(){
+		for(var i = 1; i<$('.img-box').length;i++){
+			if($('.img-box').eq(i).hasClass("selects")){
+				$('.img-box').eq(i).removeClass("selects");
+				$('.img-box').eq(i).find('img').css("display","block");
+				$('.img-box').eq(i).find('p').css("display","none");
+				$('.img-box').eq(i).find('button').css("display","none");
+				$('.img-box').eq(i).css("background-color","#fff");
+				$('.img-box').eq(i).bind("mouseleave",function(){
+					$(this).find('img').css("display","block");
+					$(this).find('p').css("display","none");
+					$(this).find('button').css("display","none");
+					$(this).css("background-color","#fff");
+				});
+			}
+		}
+		for(var i=0; i<$('.orderInput').length; i++){
+			$('.orderInput').eq(i).val("");
+		}
+		var offset = $(".step").eq(0).offset();
+        $('html, body').animate({scrollTop : offset.top}, 400);
+		$(".step").eq(0).trigger("click");
+	});
 
 

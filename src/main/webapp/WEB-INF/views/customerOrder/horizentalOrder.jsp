@@ -71,9 +71,7 @@ var myform=new formtowizard({
 							<input type="hidden" value="${ingre.ingreKcal }">
 							<input type="hidden" value="${ingre.ingreCost15 }">
 							<input type="hidden" value="${ingre.ingreCost30 }">
-
-							<!--  <p class="label">15cm ${ingre.ingreCost15 }￦ / 30cm ${ingre.ingreCost30 }￦ </p>-->
-
+							<input type="hidden" value="${ingre.ingreRecomSauce }">
 						</div>
 					</c:if>
 				</c:forEach>
@@ -164,6 +162,7 @@ var myform=new formtowizard({
 					</c:if>
 				</c:forEach>
 				<div class="common-tbl-btn-group">
+					<button type="button" class="btn-style2 source-recom" style="clear:both;">추천소스 적용</button>
 					<button type="button" class="btn-style2 source-check" style="clear:both;">소스 선택완료</button>
 				</div>
 			</fieldset>
@@ -208,15 +207,16 @@ var myform=new formtowizard({
 				<div class="common-tbl-box">
 					<table class="comm-tbl type2">
 						<colgroup>
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
+							<col width="9%">
+							<col width="9%">
+							<col width="9%">
+							<col width="9%">
+							<col width="9%">
+							<col width="9%">
+							<col width="9%">
+							<col width="9%">
+							<col width="9%">
+							<col width="9%">
 							<col width="10%">
 						</colgroup>
 						<tr>
@@ -230,9 +230,11 @@ var myform=new formtowizard({
 							<th>사이드</th>
 							<th>수량</th>
 							<th>가격</th>
+							<th>취소</th>
 						</tr>
 					</table>
 					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 add-order">추가 주문</button>
 						<button type="button" class="btn-style2">주문 완료</button>
 					</div>
 				</div>

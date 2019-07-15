@@ -48,4 +48,13 @@ public class CusOrderService {
 		int result = cusOrderDao.insertBucket(b);
 		return result;
 	}
+	
+	public int tempOrderSelect() {
+		return cusOrderDao.tempOrderSelect(); 
+	}
+	
+	@Transactional
+	public int tempOrderDelete(int idx) {
+		return cusOrderDao.tempOrderDelete(idx); 
+	}
 }
