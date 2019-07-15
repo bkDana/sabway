@@ -153,8 +153,26 @@ public class CusOrderController {
 	}
 	
 	@RequestMapping("/loadBucket.do")
-	public String loadBucket () {
-		return "/customerOrder/bucket";
+	public ModelAndView loadBucket () {
+		ArrayList<Bucket> list = cusOrderService.allOrderList(-1);
+		for(Bucket b : list) {
+			String main = b.getBucMain();
+			IngreVo ingre = new IngreVo();
+			ingre.setIngreType("메인재료");
+			ingre.setIngreIdx(Integer.parseInt(main));
+			IngreVo mainIngre = cusOrderService.selectCostMain(ingre); 
+			b.setBucMain("/resources/upload/ingredients/"+mainIngre.getIngreFilepath());
+	
+		}
+
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list",list);
+			mav.setViewName("/customerOrder/bucket");	
+		} else {
+			mav.setViewName("/common/error");
+		}
+		return mav;
 	}
 
 }
