@@ -235,7 +235,7 @@ $(document).ready(function() {
 		$(".step").eq(8).trigger("click");
 	});
 	
-	$('.sidemenu-check').click(function(){
+	$('.order-check').click(function(){
 		var str='';
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selects")){
@@ -251,7 +251,6 @@ $(document).ready(function() {
 		$('input[name=bucCost]').val(cost);
 		$('input[name=bucKcal]').val(kcal);
 		$('input[name=bucQuantity]').val('1');
-		
 //		serialize()
 		var form = $("form[name=feedbackform]")[0];
 //		console.log(queryString);
@@ -271,11 +270,17 @@ $(document).ready(function() {
 //            },
             success : function(json){
                 alert("임시저장 성공");
+                var orderCheckStr = "<tr>";
+        		for(var i=0; i<10; i++){
+        			orderCheckStr += "<td>"+$('.orderInput').eq(i).val()+"</td>";
+        		}
+        		orderCheckStr += "</tr>";
+        		console.log(orderCheckStr);
+        		$('.comm-tbl type2').append(orderCheckStr);
             },
         });
 	});
 	$('.sidemenu.img-box.select-none').click(function(){
-		var str = "";
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selects")){
 				$('.sidemenu').eq(i).removeClass("selects");
@@ -290,12 +295,6 @@ $(document).ready(function() {
 					$(this).css("background-color","#fff");
 				});
 			}
-			str += '0';
-			$('input[name=bucCost]').val(cost);
-			$('input[name=bucKcal]').val(kcal);
-			$('input[name=bucQuantity]').val('1');
-			$('input[name=bucSide]').val(str);
-			
 		}
 	});
 	////추가
@@ -323,30 +322,13 @@ $(document).ready(function() {
 //
 //        };
         ///
-	$('.order-check').click(function(){
-		var form = $("form[name=feedbackform]")[0];
-		var data = new FormData(form);
-        $.ajax({
-        	url : "/tempOrder.do",
-            type : 'post',
-            data : data,
-//            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false,
-            //cache: false,
-            dataType : 'json',
-            
-            success : function(json){
-                alert("임시저장 성공");
-            },
-        });
-	});
 	$('.set').click(function(){
 		var str = $(this).find('p').text();
+		cost += Number($('.set').eq(i).find('input').eq(1).val());
+		kcal += Number($('.set').eq(i).find('input').eq(0).val());
 		$('input[name=bucSet]').val(str);
 		$(".step").eq(9).trigger("click");
 	});
-	var str ="";
 	
 	$('.sidemenu').click(function() {
 		$('#itemStatus').html($('input[name=bucMain]').val() + " " + $('input[name=bucIsSalad]').val() + " " + $('input[name=bucSet]').val());
