@@ -9,11 +9,11 @@
 <%-- content --%>
 <section id="content-wrapper">
 	<div class="area">
-		<strong style="font-size:40px;">내 주문내역</strong>
+		<strong style="font-size:40px;">내 주문 </strong>
 		<br><br>
 			<table class="comm-tbl type2">
 				<tr>
-					<th>주문 일시</th><th>메뉴</th><th>수량</th><th>가격</th><th>빠른 주문하기</th>
+					<th>주문 일시</th><th>메뉴</th><th>수량</th><th>가격</th><th>나만의 메뉴</th>
 				</tr>
 				<c:forEach items="${list }" var="bucket" varStatus="status">
 				
@@ -31,7 +31,7 @@
 				<tr>
 					<td>${bucket.bucRegDate }</td>
 					<td class="bucketOption">
-						<c:if test="${bucIsSalad eq '샌드위치' }">
+						<c:if test='${bucIsSalad eq "샌드위치" }'>
 							빵 : ${bucket.bucBread }<br>
 						</c:if>
 							메인재료 : ${bucket.bucMain }<br>
@@ -39,7 +39,7 @@
 					</td>
 					<td>수량 : ${bucket.bucQuantity }</td>
 					<td>${bucket.bucCost }￦</td>
-					<td><button type="submit" style="font-size:15px; font-weight:bolder; color:#009233;'">빠른 주문하기</button></td>
+					<td><button type="submit" style="font-size:15px; font-weight:bolder; color:#009233;'">나만의 메뉴로 만들기</button></td>
 				</tr>
 
 				</c:forEach>

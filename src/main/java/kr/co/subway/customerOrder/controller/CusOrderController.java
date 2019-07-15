@@ -39,8 +39,46 @@ public class CusOrderController {
 		}
 		return mav;
 	}
-	@RequestMapping("/myOrderInfo.do")
-	public ModelAndView loadMyOrder(HttpServletRequest request) {
+
+	//활성화 여부 ajax로 변경
+	@ResponseBody
+	@RequestMapping("/tempOrder.do")
+	public void tempOrderInsert(HttpServletResponse response, Bucket b){
+		
+		b.setBucCusoIdx(123123);
+		b.setBucCustomerIdx(1111);
+		int result = cusOrderService.tempOrderInsert(b);
+		int bucIdx = cusOrderService.tempOrderSelect();
+	//			System.out.println("controller updateIngreActive() result : "+result);
+		response.setContentType("text/html;charset=utf-8");
+		try {
+			response.setContentType("application/json");
+			new Gson().toJson(bucIdx,response.getWriter());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(result>0) {
+			System.out.println("임시저장 성공");
+		}else{
+			System.out.println("임시저장 실패");
+		}
+	}
+	@ResponseBody
+	@RequestMapping("/tempOrderDelete.do")
+	public void tempOrderDelete(HttpServletResponse response, @RequestParam String delIdx){
+		int idx = Integer.parseInt(delIdx);
+		int result = cusOrderService.tempOrderDelete(idx);
+		
+		if(result>0) {
+			System.out.println("임시저장 성공");
+		}else{
+			System.out.println("임시저장 실패");
+		}
+	}
+				
+	@RequestMapping("/loadBucket.do")
+	public ModelAndView loadBucket(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Customer c = (Customer)session.getAttribute("customer");
 		int customerIdx = c.getCustomerNo();
@@ -50,55 +88,6 @@ public class CusOrderController {
 		if(!list.isEmpty()) {
 			mav.addObject("list",list);
 			mav.setViewName("/customerOrder/myOrderList");	
-		} else {
-			mav.setViewName("/common/error");
-		}
-		return mav;
-	}
-	//활성화 여부 ajax로 변경
-	@ResponseBody
-		@RequestMapping("/tempOrder.do")
-		public void tempOrderInsert(HttpServletResponse response, Bucket b){
-			
-			b.setBucCusoIdx(123123);
-			b.setBucCustomerIdx(1111);
-			int result = cusOrderService.tempOrderInsert(b);
-//			System.out.println("controller updateIngreActive() result : "+result);
-			response.setContentType("text/html;charset=utf-8");
-			try {
-				response.setContentType("application/json");
-				new Gson().toJson("result",response.getWriter());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(result>0) {
-				System.out.println("임시저장 성공");
-			}else{
-				System.out.println("임시저장 실패");
-			}
-		}
-	
-	@RequestMapping("/loadBucket.do")
-	public ModelAndView loadBucket (HttpServletRequest request, @RequestParam String bucBread,@RequestParam String bucMain,@RequestParam String bucVegi,@RequestParam String bucCheese,@RequestParam String bucSource,@RequestParam String bucTopping,@RequestParam String bucIsSalad,@RequestParam String bucIsOvened,@RequestParam String bucSet,@RequestParam String bucCost,@RequestParam String bucKcal,@RequestParam String bucQuantity,@RequestParam String bucSide,@RequestParam String bucCusoIdx ) {
-		Bucket b = new Bucket(0, -1, Integer.parseInt(bucCusoIdx), bucBread, bucMain, bucVegi, bucCheese, bucSource, bucTopping, bucSide, bucIsSalad, bucIsOvened, bucSet, Integer.parseInt(bucCost), 0.0, Integer.parseInt(bucKcal), Integer.parseInt(bucQuantity), null);
-		HttpSession session = request.getSession(false);
-		int customerIdx = -1;
-		Customer c = (Customer)session.getAttribute("customer");
-		if(c == null) { // 비회원이 주문할 때
-			System.out.println("비회원임");
-			session.invalidate(); 
-		} else {
-			customerIdx = c.getCustomerNo();
-		}
-		b.setBucCustomerIdx(customerIdx);
-		int result = cusOrderService.insertBucket(b);
-		System.out.println("/loadBucket.do : " + result);
-		ArrayList<Bucket> list = cusOrderService.allOrderList(b.getBucCustomerIdx());
-		ModelAndView mav = new ModelAndView();
-		if(!list.isEmpty()) {
-			mav.addObject("list",list);
-			mav.setViewName("/customerOrder/bucket");	
 		} else {
 			mav.setViewName("/common/error");
 		}
