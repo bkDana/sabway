@@ -50,18 +50,18 @@ public class HeadOfficeController {
 	//할인 및 할인율 수정
 	@ResponseBody
 	@RequestMapping(value="/selectPromotion.do",produces="text/html;charset=utf-8")
-	public String selectPromotion(@RequestParam String ingreLabel,@RequestParam String ingreType,@RequestParam double discntRate) {
-		System.out.println("넘어온 이름 : "+ingreLabel);
+	public String selectPromotion(@RequestParam int ingreIdx,@RequestParam String ingreType,@RequestParam double discntRate) {
+		System.out.println("넘어온 이름 : "+ingreIdx);
 		System.out.println("넘어온 타입 : "+ingreType);
 		System.out.println("넘어온 할인율 : "+discntRate);
 		//정수로 변환
 		int ingreDiscntRate = (int)Math.floor(100-(discntRate*100));
-		IngreVo ingre = new IngreVo(0, 0, ingreLabel, ingreType, 0, 0, ingreDiscntRate, 0, 0, null, null, null, null, null);
+		IngreVo ingre = new IngreVo(0, ingreIdx, null, ingreType, 0, 0, ingreDiscntRate, 0, 0, null, null, null, null, null);
 		ingre.setIngreDiscntRate(ingreDiscntRate);
-		ingre.setIngreLabel(ingreLabel);
+		ingre.setIngreIdx(ingreIdx);
 		ingre.setIngreType(ingreType);
 		System.out.println("할인율 대입 : "+ingre.getIngreDiscntRate()+"%");
-		System.out.println("이름 대입 : "+ingre.getIngreLabel());
+		System.out.println("이름 대입 : "+ingre.getIngreIdx());
 		System.out.println("타입 대입 : "+ingre.getIngreType());
 		int result = menuservice.updateIngre(ingre);
 		String view = "";

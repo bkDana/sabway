@@ -23,10 +23,11 @@
 				</tr>
 				<c:forEach items="${list }" var="ingre" varStatus="i">
 					<input type="hidden" value="${ingre.ingreType }">
+					<input type="hidden" value="${ingre.ingreIdx }">
 					<c:if test="${ingre.ingreType == '메인재료'}">
  						<tr>
  							<td><span>${i.count }</span></td>
-							<td><span>${fn:escapeXml(ingre.ingreLabel) }</span></td>
+							<td><span>${ingre.ingreLabel }</span></td>
  							<td><span>${ingre.ingreCost15 }</span></td>
  							<td><span>${ingre.ingreCost30 }</span></td>
  							<td>
@@ -55,7 +56,8 @@
 	<script type="text/javascript">
 	//선택한 할인율에 따른 가격 변경
 	$('[name=ingreDiscntRate]').on('change',function(){
-		var ingreType = $(this).parent().parent().prev().val();
+		var ingreIdx = $(this).parent().parent().prev().val();
+		var ingreType = $(this).parent().parent().prev().prev().val();
 		var ingreLabel = $(this).parent().prev().prev().prev().children().html();
 		var ingreCost15 = $(this).parent().prev().prev().children().html();
 		var ingreCost30 = $(this).parent().prev().children().html();
@@ -69,7 +71,7 @@
 			$.ajax({
 				url:"/selectPromotion.do",
 				dataType:"json",
-				data:{ingreLabel:ingreLabel,ingreType:ingreType,discntRate:discntRate},
+				data:{ingreIdx:ingreIdx,ingreType:ingreType,discntRate:discntRate},
 				success:function(data){
 					console.log(ingreLabel+" = " + '15cm : '+ingreCost15Discnt+' / 30cm : '+ingreCost30Discnt);
 				}

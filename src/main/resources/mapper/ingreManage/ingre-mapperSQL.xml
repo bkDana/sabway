@@ -184,6 +184,6 @@
   	from ingredients
   </select>
   <update id="updateIngre" parameterType="ingre">
-  	update ingredients set ingre_discnt_rate = #{ingreDiscntRate} where ingre_label = #{ingreLabel} and ingre_type = #{ingreType}
+  	update ingredients set ingre_discnt_rate = #{ingreDiscntRate} where ingre_idx = #{ingreIdx} and ingre_type = #{ingreType}
   </update>
 </mapper>
