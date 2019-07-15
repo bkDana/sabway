@@ -366,18 +366,12 @@ $(document).ready(function() {
 		$('input[name=bucSet]').val(str);
 		$(".step").eq(9).trigger("click");
 	});
-	
-	$('.sidemenu').click(function() {
-		$('#itemStatus').html($('input[name=bucMain]').val() + " " + $('input[name=bucIsSalad]').val() + " " + $('input[name=bucSet]').val());
-	});
-	
-	$('#bucketArea').click(function() {
+
+	/* bucCusoIdx(날짜정보로 만듦) */
+	$('#sbmOrder').click(function() {
 		var d = new Date();
 		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
 		$('input[name=bucCusoIdx]').val(date);
-		$('#feedbackform').attr('action','/loadBucket.do'); 
-		$('#feedbackform').attr('method','post');
-		$('#feedbackform').submit();
 	});
 
 	$('.add-order').click(function(){
@@ -402,6 +396,10 @@ $(document).ready(function() {
 		var offset = $(".step").eq(0).offset();
         $('html, body').animate({scrollTop : offset.top}, 400);
 		$(".step").eq(0).trigger("click");
+	});
+	
+	$('.add-bucket').click(function() {
+		
 	});
 
 
