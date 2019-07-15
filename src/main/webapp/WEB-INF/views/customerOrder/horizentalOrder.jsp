@@ -18,11 +18,15 @@ var myform=new formtowizard({
 </script>
 <%-- content--%>
 <section id="content-wrapper">
-	<div class="area">
-		<c:if test="${not empty sessionScope.customer}">
-		</c:if>
-		<br><br>
-		<h1>온라인 주문 예약</h1><br>
+	<div class="area">	
+	<strong style="font-size:40px; font-weight:bolder;">온라인 주문 예약</strong><br><br>
+		<div id="bucketWrapper" style=" width:100%; background-color:white;">
+			<div id="bucketArea" style="width:200px; heignt:150px; float:right; background-color:orange; cursor:pointer;">
+				<strong style="font-size:30px;">카트</strong><span id="itemCount"></span><br>
+				<span id="itemStatus">카트에 담긴 제품이 없습니다</span>
+				<br><br>
+			</div>
+		</div>
 		<form id="feedbackform" action="/submitCusOrder.do" method="post">
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
@@ -193,29 +197,12 @@ var myform=new formtowizard({
 				<input type="hidden" name="bucCost" class="orderInput">
 				<input type="hidden" name="bucKcal" class="orderInput"> 
 				<input type="hidden" name="bucQuantity" class="orderInput">
-				
-			<div id="bucketWrapper" style="width:100%; height:150px; background-color:white;">
-				<div id="bucketArea" style="width:300px; heignt:150px; margin-left:400px; background-color:red; cursor:pointer;">
-					<strong style="font-size:30px;">장바구니</strong><span id="itemCount"></span><br>
-					<span id="itemStatus">장바구니에 담긴 상품이 없습니다</span>
-				</div>
-				<div id="infoWrapper">
-					<span id="totalCost"></span><br>
-					<span id="totalKcal"></span>
-				</div>
-				
-				<div id="btn-wrapper" style="width:400px; margin-left:400px; background-color:orange;">
-					<button type="button">주문</button>
-					<button type="button">추가주문</button>
-				</div>
-			</div>
 		</form>
 	</div>
 </section>
 
 <script>
 	/* 서버 작동순서 : JAVA>JSTL>HTML>Javscript */
-	
 	$(function(){
 		ingreList = new Array(); 
 		kCalList = new Array();
@@ -308,13 +295,13 @@ var myform=new formtowizard({
 				}
 			}
 		}//outer for-in ends
-		$('#totalKcal').html(totalKcal+" 칼로리");
+		/* $('#totalKcal').html(totalKcal+" 칼로리");
 		$('input[name=bucKcal]').val(totalKcal);
 		
 		for(var i in ingreList) {
 			
 		}
-		$('input[name=bucCost]').val(totalCost);
+		$('input[name=bucCost]').val(totalCost); */
 	});
 	
 	/* 아임포트 */
