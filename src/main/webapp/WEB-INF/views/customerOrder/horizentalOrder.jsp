@@ -249,8 +249,11 @@ var myform=new formtowizard({
 			<input type="hidden" name="bucKcal" class="orderInput"> 
 			<input type="hidden" name="bucIsSalad" class="orderInput">
 			<input type="hidden" name="bucIsOvened" class="orderInput">
-			<input type="hidden" name="bucCusoIdx" class="orderInput">
+<!-- 			<input type="hidden" name="bucCusoIdx" class="orderInput"> -->
 		</form>
+		
+				<input type="hidden" id="recom-sauce">
+				<input type="hidden" id="recom-main">
 	</div>
 </section>
 
