@@ -18,15 +18,6 @@ var myform=new formtowizard({
 </script>
 <%-- content--%>
 <section id="content-wrapper">
-<<<<<<< HEAD
-	<div class="area">
-		<c:if test="${not empty sessionScope.customer}">
-			<a class="header-btn" href="/myBucket.do">내 주문정보 보기</a>
-		</c:if>
-		<br><br>
-		<h1>온라인 주문 예약</h1><br>
-		<form id="feedbackform" name="feedbackform" method="post">
-=======
 	<div class="area">	
 	<strong style="font-size:40px; font-weight:bolder;">온라인 주문 예약</strong><br><br>
 		<div id="bucketWrapper" style=" width:100%; background-color:white;">
@@ -37,7 +28,6 @@ var myform=new formtowizard({
 			</div>
 		</div>
 		<form id="feedbackform" action="/submitCusOrder.do" method="post">
->>>>>>> acb79110b240f785653c3ba844b4948597dc38d6
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
 				<div class="type img-box select-one fix-img" style="background-color:white;" >
@@ -48,9 +38,7 @@ var myform=new formtowizard({
 					<img src="/resources/img/salad/salad_fl04.jpg">
 					<p class="label">샐러드</p>
 				</div>
-				
-				
-				
+
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>빵</legend>
@@ -79,13 +67,12 @@ var myform=new formtowizard({
 						<div class="main img-box select-one">
 							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 							<p class="label">${ingre.ingreLabel }</p>
-<<<<<<< HEAD
 							<input type="hidden" value="${ingre.ingreKcal }">
 							<input type="hidden" value="${ingre.ingreCost15 }">
 							<input type="hidden" value="${ingre.ingreCost30 }">
-=======
-							<p class="label">15cm ${ingre.ingreCost15 }￦ / 30cm ${ingre.ingreCost30 }￦ </p>
->>>>>>> acb79110b240f785653c3ba844b4948597dc38d6
+
+							<!--  <p class="label">15cm ${ingre.ingreCost15 }￦ / 30cm ${ingre.ingreCost30 }￦ </p>-->
+
 						</div>
 					</c:if>
 				</c:forEach>
