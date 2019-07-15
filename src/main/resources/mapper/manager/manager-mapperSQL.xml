@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mgr">
-	<insert id="enrollMgr" parameterType="mgr">
+<mapper namespace="mgr"><insert id="enrollMgr" parameterType="mgr">
 		insert into manager values(seq_mgr_no.nextval,#{mgrId}, #{mgrPw}, #{mgrName}, #{mgrTel}, #{mgrPost}, #{mgrAddr}, #{mgrLevel}, #{mgrStatus}, sysdate, #{mgrAddrCode}, #{mgrBossName}, sysdate)
 	</insert>
 	<select id="mgrList" resultType="mgr">
@@ -299,7 +298,7 @@
 	      ,mgr_boss_name as mgrBossName
 	      ,mgr_open_date as mgrOpenDate        
 	      from 
-	        (select rownum as rnum, m.* from (select * from manager where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status} order by mgr_no) m)
+	        (select rownum as rnum, m.* from (select * from manager where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status}) m)
 	      where rnum between #{firstPage} and #{lastPage}
    </select>
    	<select id="selectSearchStatusAddr" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
@@ -317,7 +316,7 @@
 	      ,mgr_boss_name as mgrBossName
 	      ,mgr_open_date as mgrOpenDate        
 	      from 
-	        (select rownum as rnum, m.* from (select * from manager where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status} order by mgr_no) m)
+	        (select rownum as rnum, m.* from (select * from manager where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status}) m)
 	      where rnum between #{firstPage} and #{lastPage}
    </select>
 </mapper>

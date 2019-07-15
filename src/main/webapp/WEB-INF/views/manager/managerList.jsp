@@ -121,11 +121,11 @@
 		<div class="common-tbl-btn-group" name="moreDiv">
 			<c:if test="${total > mpd.lastPage}">
 				<hr>
-				<input type="hidden" value="${total }" name="totalCount">
-				<input type="hidden" value=${mpd.lastPage } name="pageName">
 				<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
 				<hr>
 			</c:if>
+			<input type="hidden" value="${total }" name="totalCount">
+			<input type="hidden" value=${mpd.lastPage } name="pageName">
 		</div>
 		<br>
 		<span name="selectBox">

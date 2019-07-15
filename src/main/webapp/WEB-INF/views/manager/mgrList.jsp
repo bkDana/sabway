@@ -121,14 +121,14 @@
 		<div class="common-tbl-btn-group" name="moreDiv">
 			<c:if test="${mgrSize+1 > mpd.lastPage && total > mpd.lastPage}">
 				<hr>
-				<input type="hidden" value="${mgrSize }" name="mgrSize">
-				<input type="hidden" value="${mpd.text }" name="mpdText">
-				<input type="hidden" value="${mpd.keyword }" name="mpdKeyword">
-				<input type="hidden" value="${total }" name="totalCount">
-				<input type="hidden" value=${mpd.lastPage } name="pageName">
 				<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
 				<hr>
 			</c:if>
+			<input type="hidden" value="${mgrSize }" name="mgrSize">
+			<input type="hidden" value="${total }" name="totalCount">
+			<input type="hidden" value=${mpd.lastPage } name="pageName">
+			<input type="hidden" value="${mpd.text }" name="mpdText">
+			<input type="hidden" value="${mpd.keyword }" name="mpdKeyword">
 		</div>
 		<br>
 		<span name="selectBox">
@@ -199,16 +199,16 @@
 		//검색 결과 내에서 상태 구분하는 부분 해야함
 		$("[name=statusGroup]").on("change",function(){
 			var mpdText = $('[name=mpdText]').val();
-			alert(mpdText);
 			var mpdKeyword = $('[name=mpdKeyword]').val();
-			var statusText = $(this).val();
-			if(statusText=="준비"){
+			var status = $(this).val();
+			alert(status);
+			if(status=="준비"){
 				var status = 1;
 				location.href="/selectSearchStatus.do?keyword="+mpdKeyword+"&text="+mpdText+"&status="+status;
-			}else if(statusText=="영업"){
+			}else if(status=="영업"){
 				var status = 2;
 				location.href="/selectSearchStatus.do?keyword="+mpdKeyword+"&text="+mpdText+"&status="+status;
-			}else if(statusText=="폐업"){
+			}else if(status=="폐업"){
 				var status = 3;
 				location.href="/selectSearchStatus.do?keyword="+mpdKeyword+"&text="+mpdText+"&status="+status;
 			} 

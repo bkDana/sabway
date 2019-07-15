@@ -41,60 +41,41 @@ public class HeadOfficeController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",list);
 		mav.setViewName("headOffice/SelectPromotion");
-//		ArrayList<Menu> list = (ArrayList<Menu>) menuservice.menuList();
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("list",list);
-//		mav.setViewName("headOffice/SelectPromotion");
 		return mav;
 	}
 	//할인 및 할인율 수정
 	@ResponseBody
 	@RequestMapping(value="/selectPromotion.do",produces="text/html;charset=utf-8")
 	public String selectPromotion(@RequestParam int ingreIdx,@RequestParam String ingreType,@RequestParam double discntRate) {
-		System.out.println("넘어온 이름 : "+ingreIdx);
+		System.out.println("넘어온 인덱스 : "+ingreIdx);
 		System.out.println("넘어온 타입 : "+ingreType);
 		System.out.println("넘어온 할인율 : "+discntRate);
+		
 		//정수로 변환
 		int ingreDiscntRate = (int)Math.floor(100-(discntRate*100));
+		
 		IngreVo ingre = new IngreVo(0, ingreIdx, null, ingreType, 0, 0, ingreDiscntRate, 0, 0, null, null, null, null, null);
 		ingre.setIngreDiscntRate(ingreDiscntRate);
 		ingre.setIngreIdx(ingreIdx);
 		ingre.setIngreType(ingreType);
+		
 		System.out.println("할인율 대입 : "+ingre.getIngreDiscntRate()+"%");
-		System.out.println("이름 대입 : "+ingre.getIngreIdx());
+		System.out.println("인덱스 대입 : "+ingre.getIngreIdx());
 		System.out.println("타입 대입 : "+ingre.getIngreType());
+		
 		int result = menuservice.updateIngre(ingre);
 		String view = "";
-		if(result>0) {
+		try {
+			if(result>0) {
+				view = "redirect:/promotionSelect.do";
+			}else {
+				view = "redirect:/index.jsp";
+			}
+		}catch(Exception e) {
 			view = "redirect:/promotionSelect.do";
-		}else {
-			view = "redirect:/index.jsp";
 		}
 		return new Gson().toJson(view);
 	}
-//	@RequestMapping(value="/selectPromotion.do")
-//	public String selectPromotion(@RequestParam String ingreLabel,@RequestParam String ingreType,@RequestParam double discntRate) {
-//		System.out.println("넘어온 이름 : "+ingreLabel);
-//		System.out.println("넘어온 타입 : "+ingreType);
-//		System.out.println("넘어온 할인율 : "+discntRate);
-//		//정수로 변환
-//		int ingreDiscntRate = (int)Math.floor(100-(discntRate*100));
-//		IngreVo ingre = new IngreVo(0, 0, ingreLabel, ingreType, 0, 0, ingreDiscntRate, 0, 0, null, null, null, null, null);
-//		ingre.setIngreDiscntRate(ingreDiscntRate);
-//		ingre.setIngreLabel(ingreLabel);
-//		ingre.setIngreType(ingreType);
-//		System.out.println("할인율 대입 : "+ingre.getIngreDiscntRate()+"%");
-//		System.out.println("이름 대입 : "+ingre.getIngreLabel());
-//		System.out.println("타입 대입 : "+ingre.getIngreType());
-//		int result = menuservice.updateIngre(ingre);
-//		String view = "";
-//		if(result>0) {
-//			view = "redirect:/promotionSelect.do";
-//		}else {
-//			view = "redirect:/index.jsp";
-//		}
-//		return view;
-//	}
 	//가맹점 신청목록
 	@RequestMapping(value="/managerApply.do")
 	public ModelAndView applyList() {

@@ -57,8 +57,8 @@
 	//선택한 할인율에 따른 가격 변경
 	$('[name=ingreDiscntRate]').on('change',function(){
 		var ingreIdx = $(this).parent().parent().prev().val();
+		alert(ingreIdx);
 		var ingreType = $(this).parent().parent().prev().prev().val();
-		var ingreLabel = $(this).parent().prev().prev().prev().children().html();
 		var ingreCost15 = $(this).parent().prev().prev().children().html();
 		var ingreCost30 = $(this).parent().prev().children().html();
 		var discntRate = $(this).val();
@@ -72,8 +72,11 @@
 				url:"/selectPromotion.do",
 				dataType:"json",
 				data:{ingreIdx:ingreIdx,ingreType:ingreType,discntRate:discntRate},
-				success:function(data){
-					console.log(ingreLabel+" = " + '15cm : '+ingreCost15Discnt+' / 30cm : '+ingreCost30Discnt);
+				success:function(){
+					alert("프로모션이 적용되었습니다.");
+				},
+				error:function(){
+					alert("적용실패. 다시 시도해주세요.");
 				}
 			});
 		});
