@@ -37,4 +37,12 @@ public class CusOrderDao {
 	public int insertBucket(Bucket b) {
 		return sqlSession.insert("bucket.insertBucket",b);
 	}
+	
+	public int tempOrderSelect() {
+		return sqlSession.selectOne("bucket.tempOrderSelect");
+	}
+	
+	public int tempOrderDelete(int idx) {
+		return sqlSession.delete("bucket.tempOrderDelete",idx);
+	}
 }
