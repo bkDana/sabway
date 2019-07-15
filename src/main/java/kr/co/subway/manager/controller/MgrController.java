@@ -164,13 +164,13 @@ public class MgrController {
 	}
 	//검색
 	@RequestMapping(value="/searchKeyword.do")
-	public ModelAndView searchKeyword(@RequestParam String keyword, @RequestParam String text) {
-		MgrPageData mpd = new MgrPageData();
+	public ModelAndView searchKeyword(MgrPageData mpd) {
+//		MgrPageData mpd = new MgrPageData();
 		mpd.setFirstPage(1);
 		mpd.setLastPage(10);
-		mpd.setText(text);
-		mpd.setKeyword(keyword);
-		int total = mgrservice.totalCount();
+//		mpd.setText(text);
+//		mpd.setKeyword(keyword);
+		int total = mgrservice.searchTotalCount(mpd);
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.searchList(mpd);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
@@ -186,12 +186,12 @@ public class MgrController {
 	}
 	//상태별 분류
 	@RequestMapping(value="/selectStatus.do")
-	public ModelAndView selectStatus(@RequestParam String keyword) {
-		MgrPageData mpd = new MgrPageData();
+	public ModelAndView selectStatus(MgrPageData mpd) {
+//		MgrPageData mpd = new MgrPageData();
 		mpd.setFirstPage(1);
 		mpd.setLastPage(10);
-		mpd.setKeyword(keyword);
-		int total = mgrservice.totalCount();
+//		mpd.setKeyword(keyword);
+		int total = mgrservice.statusTotalCount(mpd);
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectStatus(mpd);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
@@ -207,14 +207,15 @@ public class MgrController {
 	}
 	//검색 결과 상태별 분류
 	@RequestMapping(value="/selectSearchStatus.do")
-	public ModelAndView selectSearchStatus(@RequestParam String keyword,@RequestParam String text,@RequestParam int status) {
-		MgrPageData mpd = new MgrPageData();
+//	public ModelAndView selectSearchStatus(@RequestParam String keyword,@RequestParam String text,@RequestParam int status) {
+	public ModelAndView selectSearchStatus(MgrPageData mpd) {
+//		MgrPageData mpd = new MgrPageData();
 		mpd.setFirstPage(1);
 		mpd.setLastPage(10);
-		mpd.setKeyword(keyword);
-		mpd.setText(text);
-		mpd.setStatus(status);
-		int total = mgrservice.totalCount();
+//		mpd.setKeyword(keyword);
+//		mpd.setText(text);
+//		mpd.setStatus(status);
+		int total = mgrservice.statusTotalCount(mpd);
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.selectSearchStatus(mpd);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
@@ -228,16 +229,22 @@ public class MgrController {
 		}
 		return mav;
 	}
-	//상태별 검색
+	//상태분류 상태에서 검색
 	@RequestMapping(value="/searchStatus.do")
-	public ModelAndView searchStatus(@RequestParam String keyword, @RequestParam String text, @RequestParam int status) {
-		Mgr mgr = new Mgr();
-		mgr.setMgrAddr(text);
-		mgr.setMgrBossName(text);
-		mgr.setMgrStatus(status);
-		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.searchStatus(keyword,mgr);
+//	public ModelAndView searchStatus(@RequestParam String keyword, @RequestParam String text, @RequestParam int status) {
+	public ModelAndView searchStatus(MgrPageData mpd) {
+//		Mgr mgr = new Mgr();
+//		mgr.setMgrAddr(text);
+//		mgr.setMgrBossName(text);
+//		mgr.setMgrStatus(status);
+		int total = mgrservice.searchTotalCount(mpd);
+		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.searchStatus(mpd);
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
+			mav.addObject("mgrSize",list.size());
+			mav.addObject("total",total);
+			mav.addObject("mpd",mpd);
+			mav.addObject("list", list);
 			mav.addObject("list", list);
 			mav.setViewName("manager/mgrList");
 		}else {
@@ -248,25 +255,27 @@ public class MgrController {
 	//ajax 더보기 
 	@ResponseBody
 	@RequestMapping(value="/mgrPageMore.do",produces="text/plain;charset=UTF-8")
-	public String pageMore(HttpServletResponse response,@RequestParam int firstPage) {
-		PageNo pn = new PageNo();
-		pn.setFirstPage(firstPage+1);
-		pn.setLastPage(firstPage+10);		
-		System.out.println(pn.getFirstPage());
-		System.out.println(pn.getLastPage());
-		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.pageMore(pn);
+	public String pageMore(HttpServletResponse response,MgrPageData mpd) {
+//		PageNo pn = new PageNo();
+		mpd.setFirstPage(mpd.getFirstPage()+1);
+		mpd.setLastPage(mpd.getFirstPage()+10);	
+		System.out.println(mpd.getFirstPage());
+		System.out.println(mpd.getLastPage());
+		System.out.println(mpd.getKeyword());
+		System.out.println(mpd.getText());
+		ArrayList<Mgr> list = (ArrayList<Mgr>)mgrservice.pageMore(mpd);
 		System.out.println(list.size());
 		return new Gson().toJson(list);
 	}
 	//ajax 더보기 (keyword)
 	@ResponseBody
 	@RequestMapping(value="/mgrKeywordMore.do",produces="text/plain;charset=UTF-8")
-	public String keywordMore(HttpServletResponse response,@RequestParam int firstPage,@RequestParam String text,@RequestParam String keyword) {
-		MgrPageData mpd = new MgrPageData();
-		mpd.setFirstPage(firstPage+1);
-		mpd.setLastPage(firstPage+10);
-		mpd.setKeyword(keyword);
-		mpd.setText(text);
+	public String keywordMore(HttpServletResponse response,MgrPageData mpd) {
+//		MgrPageData mpd = new MgrPageData();
+		mpd.setFirstPage(mpd.getFirstPage()+1);
+		mpd.setLastPage(mpd.getFirstPage()+10);
+//		mpd.setKeyword(keyword);
+//		mpd.setText(text);
 		System.out.println(mpd.getFirstPage());
 		System.out.println(mpd.getLastPage());
 		System.out.println(mpd.getKeyword());
@@ -278,11 +287,11 @@ public class MgrController {
 	//ajax 더보기 (status)
 	@ResponseBody
 	@RequestMapping(value="/mgrStatusMore.do",produces="text/plain;charset=UTF-8")
-	public String statusMore(HttpServletResponse response,@RequestParam int firstPage,@RequestParam String keyword) {
-		MgrPageData mpd = new MgrPageData();
-		mpd.setFirstPage(firstPage+1);
-		mpd.setLastPage(firstPage+10);
-		mpd.setKeyword(keyword);
+	public String statusMore(HttpServletResponse response,MgrPageData mpd) {
+//		MgrPageData mpd = new MgrPageData();
+		mpd.setFirstPage(mpd.getFirstPage()+1);
+		mpd.setLastPage(mpd.getFirstPage()+10);
+//		mpd.setKeyword(keyword);
 		System.out.println(mpd.getFirstPage());
 		System.out.println(mpd.getLastPage());
 		System.out.println(mpd.getKeyword());

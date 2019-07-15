@@ -141,23 +141,63 @@ public class MgrService {
 		
 	}
 	//상태별 검색
-	public List<Mgr> searchStatus(String keyword,Mgr mgr){
+	public List<Mgr> searchStatus(MgrPageData mpd){
 		List<Mgr> list = null;
-		if(keyword.equals("이름")) {
-			list = mgrdao.searchStatusName(mgr);
-		}else if(keyword.equals("주소")){
-			list = mgrdao.searchStatusAddr(mgr);
+		if(mpd.getKeyword().equals("이름")) {
+			list = mgrdao.searchStatusName(mpd);
+		}else if(mpd.getKeyword().equals("주소")){
+			list = mgrdao.searchStatusAddr(mpd);
 		}
 		return list;
 	}
 	//더보기
-	public List<Mgr> pageMore(PageNo pn){
-		List<Mgr> list = mgrdao.pageMore(pn);
+	public List<Mgr> pageMore(MgrPageData mpd){
+		List<Mgr> list = mgrdao.pageMore(mpd);
 		return list;
 	}
 	//mgr 개수
 	public int totalCount(){
 		int result = mgrdao.totalCount();
+		return result;
+	}
+	//검색어를 조건으로 mgr 개수
+	public int searchTotalCount(MgrPageData mpd){
+		int result = 0;
+		if(mpd.getKeyword().equals("주소")) {
+			result = mgrdao.addrTotalCount(mpd);
+		}else if(mpd.getKeyword().equals("이름")) {
+			result = mgrdao.nameTotalCount(mpd);
+		}
+		return result;
+	}
+	//상태를 조건으로 mgr 개수
+	public int statusTotalCount(MgrPageData mpd){
+		int result = 0;
+		if(mpd.getKeyword().equals("준비")) {
+			mpd.setStatus(1);
+			result = mgrdao.statusTotalCount(mpd);
+		}else if(mpd.getKeyword().equals("영업")) {
+			mpd.setStatus(2);
+			result = mgrdao.statusTotalCount(mpd);
+		}else if(mpd.getKeyword().equals("폐업")) {
+			mpd.setStatus(3);
+			result = mgrdao.statusTotalCount(mpd);
+		}
+		return result;
+	}
+	//검색 결과 내 상태를 조건으로 mgr 개수
+	public int searchStatusTotalCount(MgrPageData mpd){
+		int result = 0;
+		if(mpd.getKeyword().equals("준비")) {
+			mpd.setStatus(1);
+			result = mgrdao.searchStatusTotalCount(mpd);
+		}else if(mpd.getKeyword().equals("영업")) {
+			mpd.setStatus(2);
+			result = mgrdao.searchStatusTotalCount(mpd);
+		}else if(mpd.getKeyword().equals("폐업")) {
+			mpd.setStatus(3);
+			result = mgrdao.searchStatusTotalCount(mpd);
+		}
 		return result;
 	}
 	//더보기(keyword)

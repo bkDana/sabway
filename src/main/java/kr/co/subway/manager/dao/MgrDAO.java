@@ -66,12 +66,12 @@ public class MgrDAO {
 		return session.selectList("mgr.selectStatus",mpd);
 	}
 	//statusName 검색
-	public List<Mgr> searchStatusName(Mgr mgr){
-		return session.selectList("mgr.searchStatusName",mgr);
+	public List<Mgr> searchStatusName(MgrPageData mpd){
+		return session.selectList("mgr.searchStatusName",mpd);
 	}	
 	//statusAddr 검색
-	public List<Mgr> searchStatusAddr(Mgr mgr){
-		return session.selectList("mgr.searchStatusAddr",mgr);
+	public List<Mgr> searchStatusAddr(MgrPageData mpd){
+		return session.selectList("mgr.searchStatusAddr",mpd);
 	}
 	//selectSearchStatusName 검색
 	public List<Mgr> selectSearchStatusName(MgrPageData mpd){
@@ -85,17 +85,36 @@ public class MgrDAO {
 	public List<Mgr> searchStore(String keyword){
 		return session.selectList("mgr.searchStore",keyword);
 	}
-	//초기화면 10개 출력
-	public List<Mgr> morePage(PageNo pn){
-		return session.selectList("mgr.pageMore",pn);
-	}
+//	//초기화면 10개 출력
+//	public List<Mgr> morePage(PageNo pn){
+//		return session.selectList("mgr.pageMore",pn);
+//	}
 	//더보기
-	public List<Mgr> pageMore(PageNo pn){
-		return session.selectList("mgr.pageMore",pn);
+	public List<Mgr> pageMore(MgrPageData mpd){
+		return session.selectList("mgr.pageMore",mpd);
 	}
 	//mgr 개수
 	public int totalCount(){
 		return session.selectOne("mgr.totalCount");
+	}
+	//주소를 조건으로 mgr 개수
+	public int addrTotalCount(MgrPageData mpd){
+		return session.selectOne("mgr.addrTotalCount",mpd);
+	}
+	//이름을 조건으로 mgr 개수
+	public int nameTotalCount(MgrPageData mpd){
+		return session.selectOne("mgr.nameTotalCount",mpd);
+	}
+	//상태를 조건으로 mgr 개수
+	public int statusTotalCount(MgrPageData mpd){
+		return session.selectOne("mgr.statusTotalCount",mpd);
+	}
+	//검색 결과 내 상태를 조건으로 mgr 개수
+	public int searchStatusTotalCount(MgrPageData mpd){
+		if(mpd.getKeyword().equals("주소")) {
+			return session.selectOne("mgr.addrStatusTotalCount",mpd);
+		}
+		return session.selectOne("mgr.nameStatusTotalCount",mpd);
 	}
 	//더보기(keyword)
 	public List<Mgr> keywordMore(MgrPageData mpd){
