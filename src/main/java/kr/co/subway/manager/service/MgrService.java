@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.subway.headOffice.dao.ApplyDAO;
 import kr.co.subway.manager.dao.MgrDAO;
 import kr.co.subway.manager.vo.Mgr;
-import kr.co.subway.manager.vo.MgrPageData;
 import kr.co.subway.manager.vo.PageNo;
+import kr.co.subway.manager.vo.StorePageNaviData;
+import kr.co.subway.notice.vo.Notice;
+import kr.co.subway.notice.vo.PageBound;
+import kr.co.subway.notice.vo.PageNaviData;
 
 @Service("mgrservice")
 public class MgrService {
@@ -32,9 +35,52 @@ public class MgrService {
 		List<Mgr> list= mgrdao.mgrList();
 		return list;
 	}
-	//가맹점 목록(더보기)
-	public List<Mgr> mpdList(MgrPageData mpd) {
-		List<Mgr> list= mgrdao.mpdList(mpd);
+	
+	
+	// 가맹점 페이징
+	@SuppressWarnings("unchecked")
+	public StorePageNaviData StoreSelectPaging(int currentPage){
+		String pageNavi = "";
+		int numPerPage = 10; // 출력될 개시판 개수
+		int pageNaviSize = 5; // 하단 페이징 노출 수
+		
+		int totalCount = mgrdao.storeTotalCount();
+		
+		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
+		int start = (currentPage-1)*numPerPage+1;
+		int end = currentPage*numPerPage;
+		
+		
+		PageBound pb = new PageBound(start, end);
+		
+		ArrayList<Mgr> storeList = (ArrayList<Mgr>)mgrdao.storeSelectPaging(pb);
+		storeList.get(0).setTotalCount(totalCount);
+		
+		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
+		if(currentPage != 1) {
+			pageNavi += "<a href='/findStore.do?currentPage="+(currentPage-1)+"'>이전</a>";
+		}
+		int i = 1;
+		while(!(i++>pageNaviSize || pageNo>totalPage)) {
+			if(currentPage == pageNo) {
+				pageNavi += "<span>"+pageNo+"</span>";
+			}else {
+				pageNavi += "<a href='/findStore.do?currentPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		if(currentPage < totalPage) {
+			pageNavi +="<a href='/findStore.do?currentPage="+(currentPage+1)+"'>다음</a>";
+		}
+		
+		return new StorePageNaviData(storeList,pageNavi);
+	}
+	
+	
+	
+	//신규가맹점 목록
+	public List<Mgr> newStoreList() {
+		List<Mgr> list= mgrdao.newStoreList();
 		return list;
 	}
 	//관리자 로그인
@@ -49,37 +95,32 @@ public class MgrService {
 		return result;
 	}
 	//검색어 검색
-	public List<Mgr> searchList(MgrPageData mpd){
+	public List<Mgr> searchList(String keyword, String text){
 		List<Mgr> list = null;
-		if(mpd.getKeyword().equals("이름")) {
-			list = mgrdao.searchBossName(mpd);
-		}else if(mpd.getKeyword().equals("주소")){
-			list = mgrdao.searchAddr(mpd);
+		if(keyword.equals("이름")) {
+			list = mgrdao.searchBossName(text);
+		}else if(keyword.equals("주소")){
+			list = mgrdao.searchAddr(text);
 		}
 		return list;
+	}
+	public List<Mgr> searchStore(String keyword){
+		List<Mgr> list = mgrdao.searchStore(keyword);
+		return list;
+		
 	}
 	//상태별 분류
-	public List<Mgr> selectStatus(MgrPageData mpd){
+	public List<Mgr> selectStatus(String keyword){
 		List<Mgr> list = null;
-		if(mpd.getKeyword().equals("준비")) {
-			mpd.setStatus(1);
-			list = mgrdao.selectStatus(mpd);
-		}else if(mpd.getKeyword().equals("영업")) {
-			mpd.setStatus(2);
-			list = mgrdao.selectStatus(mpd);
-		}else if(mpd.getKeyword().equals("폐업")) {
-			mpd.setStatus(3);
-			list = mgrdao.selectStatus(mpd);
-		}
-		return list;
-	}
-	//검색 결과 상태별 분류
-	public List<Mgr> selectSearchStatus(MgrPageData mpd){
-		List<Mgr> list = null;
-		if(mpd.getKeyword().equals("주소")) {
-			list = mgrdao.selectSearchStatusAddr(mpd);
-		}else if(mpd.getKeyword().equals("이름")) {
-			list = mgrdao.selectSearchStatusName(mpd);
+		if(keyword.equals("준비")) {
+			int status = 1;
+			list = mgrdao.selectStatus(status);
+		}else if(keyword.equals("영업")) {
+			int status = 2;
+			list = mgrdao.selectStatus(status);
+		}else if(keyword.equals("폐업")) {
+			int status = 3;
+			list = mgrdao.selectStatus(status);
 		}
 		return list;
 	}
@@ -93,38 +134,12 @@ public class MgrService {
 		}
 		return list;
 	}
-	//더보기
+	public List<Mgr> morePage(PageNo pn){
+		List<Mgr> list = mgrdao.morePage(pn);
+		return list;
+	}
 	public List<Mgr> pageMore(PageNo pn){
 		List<Mgr> list = mgrdao.pageMore(pn);
-		return list;
-	}
-	public ArrayList<Mgr> newStoreList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	//mgr 개수
-	public int totalCount(){
-		int result = mgrdao.totalCount();
-		return result;
-	}
-	//더보기(keyword)
-	public List<Mgr> keywordMore(MgrPageData mpd){
-		List<Mgr> list = mgrdao.keywordMore(mpd);
-		return list;
-	}
-	//더보기(status)
-	public List<Mgr> statusMore(MgrPageData mpd){
-		List<Mgr> list = null;
-		if(mpd.getKeyword().equals("준비")) {
-			mpd.setStatus(1);
-			list = mgrdao.statusMore(mpd);
-		}else if(mpd.getKeyword().equals("영업")) {
-			mpd.setStatus(2);
-			list = mgrdao.statusMore(mpd);
-		}else if(mpd.getKeyword().equals("폐업")) {
-			mpd.setStatus(3);
-			list = mgrdao.statusMore(mpd);
-		}
 		return list;
 	}
 	

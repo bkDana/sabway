@@ -134,12 +134,12 @@ public class CusOrderController {
 		}
 	}
 	
-	@RequestMapping("/myBucket.do")
-	public ModelAndView loadMyBucket(HttpServletRequest request) {
+	@RequestMapping("/myOrderInfo.do")
+	public ModelAndView loadMyOrder(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Customer c = (Customer)session.getAttribute("customer");
 		int customerIdx = c.getCustomerNo();
-		ArrayList<Bucket> list = cusOrderService.allBucketList(customerIdx);
+		ArrayList<Bucket> list = cusOrderService.allOrderList(customerIdx);
 		for(Bucket b : list) {
 			String main = b.getBucMain();
 			IngreVo ingre = new IngreVo();
@@ -153,7 +153,7 @@ public class CusOrderController {
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
 			mav.addObject("list",list);
-			mav.setViewName("/customerOrder/myBucket");	
+			mav.setViewName("/customerOrder/myOrderList");	
 		} else {
 			mav.setViewName("/common/error");
 		}
@@ -183,6 +183,9 @@ public class CusOrderController {
 				System.out.println("임시저장 실패");
 			}
 		}
-		
+	@RequestMapping("/loadBucket.do")
+	public String loadBucket () {
+		return "/customerOrder/bucket";
+	}
 
 }

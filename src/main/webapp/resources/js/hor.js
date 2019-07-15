@@ -593,9 +593,15 @@ tagSalad = '<h3>메인재료</h3> \
 		var str = $(this).find('p').text();
 		$('input[name=bucSet]').val(str);
 		$(".step").eq(9).trigger("click");
+
 	});
+	var str ="";
 	
+	$('#bucketArea').click(function() {
+		location.href = "/loadBucket.do";
+	});
 /////////////////////////////////////////////////////월요일 마커!!!!!!!!!!!!!!!!씨이바아아아아아앙아
+
 	// jstl이용한 스크립트 처리 : jsp문서에서 실행해야함 -> 아래 주석 내용 역시 jsp에서 처리함
 	/* 칼로리 설정 및 실시간 표시 */
 

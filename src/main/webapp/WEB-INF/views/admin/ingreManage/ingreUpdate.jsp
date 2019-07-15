@@ -5,7 +5,9 @@
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 
-
+<style>
+.recom li{float: left;width: 20%;}
+</style>
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
@@ -24,7 +26,6 @@
 						<td>
 							<select name="ingreType" id="ingreType" class="short" data-type="${iv.ingreType }" required>
 								<option value="">== 카테고리 ==</option>
-								<option value="메인메뉴">메인메뉴</option>
 								<option value="메인재료">메인재료</option>
 								<option value="빵">빵</option>
 								<option value="추가토핑">추가토핑</option>
@@ -32,6 +33,7 @@
 								<option value="채소">채소</option>
 								<option value="소스">소스</option>
 								<option value="사이드메뉴">사이드메뉴</option>
+								<option value="세트메뉴">세트메뉴</option>
 							</select>
 						</td>
 					</tr>
@@ -44,12 +46,13 @@
 					<tr id="sauceTr">
 						<th>추천 소스</th>
 						<td>
+							<label><input type="checkbox" name="ckRecomSauce" id="chk-del-all" value="">전체 선택 해제</label>
+							<ul class="recom">
 							<c:forEach items="${sauceList}" var="list" varStatus="i">
-								<label><input type="checkbox" class="ckRecomSauce" name="ckRecomSauce" value="${list.ingreLabel}" data-cnt="${i.count}"> ${list.ingreLabel}</label>
+								<li><label><input type="checkbox" class="ckRecomSauce" name="ckRecomSauce" value="${list.ingreLabel}" data-cnt="${i.count}"> ${list.ingreLabel}</label></li>
 							</c:forEach>
-							
-							<input type="hidden" name="ingreRecomSauce" id="ingreRecomSauce">
-							
+							</ul>
+							<input type="hidden" name="ingreRecomSauce" id="ingreRecomSauce" value="${iv.ingreRecomSauce }">
 						</td>
 					</tr>
 					<tr>
@@ -97,7 +100,7 @@
 					<tr>
 						<th>단위(unit)</th>
 						<td>
-							<select name="ingreUnit" class="short" required>
+							<select name="ingreUnit" class="short" data-unit="${iv.ingreUnit}" required>
 								<option value="box">box</option>
 								<option value="kg">kg</option>
 								<option value="통">통</option>
@@ -124,21 +127,34 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#sauceTr").hide();
-	//추천 소스 개수
-	/* var count = $("#ingreRecomSauce").val(); */
+	/* 단위 선택 셋팅 */
+	var ingreUnit = $('select[name=ingreUnit]').data('unit');
+	$('select[name=ingreUnit]').children('option').each(function(){
+		if(ingreUnit == $(this).val()){
+			$(this).prop("selected",true);
+		}
+	});
 	
-	/* 메인 재료일 경우 tr 보여주고 추천소스 checked로 */
+	
+	$("#sauceTr").hide();
+	
+	//받아온 추천 소스
+	var list = '${iv.ingreRecomSauce}';
+	var sauce = list.split(',');	//배열로만들기
+	console.log(sauce);
+	
+	/* 메인 재료일 경우 tr 보여주 고 추천소스 checked로 */
 	if($("#ingreType").val()=='메인재료'){
 		$("#sauceTr").show();
-		/* $("input:checkbox[name='ckRecomSauce']").each(function(){
-			/for(var i=0;i<count;i++){
-				if($("input:checkbox[name='ckRecomSauce']").val() == ${sauce}){
-					 this.checked=true; // checked 처리
+		$("input:checkbox[name='ckRecomSauce']" ).each(function(){
+			for(var i=0;i<sauce.length;i++){
+					console.log($(this).val());
+					//console.log(sauce[i]);
+				if($(this).val() == sauce[i]){
+					$(this).prop("checked",true); // checked 처리
 				}
 			}
-			
-		}); */
+		});
 	}
 	
 	//재료 카테고리 변경시
@@ -150,11 +166,12 @@ $(document).ready(function(){
 			$("#sauceTr").hide();
 		}
 	});
-	
-	
-	
+		
 	//추천소스 선택시
 	$("input[name=ckRecomSauce]").change(function(){
+		if($("#chk-del-all").is(":checked")){
+			$("input[name='ckRecomSauce']").prop("checked",false);
+		}
 		var values = "";
 		for(var i=0;i<$('input[name="ckRecomSauce"]:checked').length;i++){
 			if(i!= $('input[name="ckRecomSauce"]:checked').length-1){
@@ -162,8 +179,9 @@ $(document).ready(function(){
 			}else{
 				values += $('input[name="ckRecomSauce"]:checked').eq(i).val();
 			}
-			$("#ingreRecomSauce").val(values);
 		}
+		$("#ingreRecomSauce").val(values);
+		console.log(values);
 	});
 	
 	/* 첨부파일 삭제 */
@@ -179,10 +197,12 @@ $(document).ready(function(){
 	/* 파일 여부 체크 */
 	$("#submit-btn").click(function(){
 		if($('input[name=oldFilepath]').val()!=''){
-			var filepath1 = $("#filepath1").val();
-			if(filepath1==""){
-				$("#filepath1").focus();
-				return false;
+			if($('input[name=deleteFile]').val()=='1'){
+				var filepath1 = $("#filepath1").val();
+				if(filepath1==""){
+					$("#filepath1").focus();
+					return false;
+				}
 			}
 		}else{
 			var filepath2 = $("#filepath2").val();

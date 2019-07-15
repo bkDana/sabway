@@ -28,8 +28,8 @@ public class CusOrderService {
 		
 	}
 
-	public ArrayList<Bucket> allBucketList(int customerIdx) {
-		List<Bucket> list = cusOrderDao.allBucketList(customerIdx);
+	public ArrayList<Bucket> allOrderList(int customerIdx) {
+		List<Bucket> list = cusOrderDao.allOrderList(customerIdx);
 		return (ArrayList<Bucket>)list;
 	}
 

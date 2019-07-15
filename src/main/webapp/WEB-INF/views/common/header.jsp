@@ -57,7 +57,7 @@
 				<a href="/" class="sabway"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a>
 				<ul class="header-menu clearfix">
 					<c:if test="${not empty sessionScope.customer}">
-					<li><a class="header-btn" href="/myBucket.do">내 주문정보</a>
+					<li><a class="header-btn" href="/myOrderInfo.do">내 주문내역</a>
 					</c:if>
 					<li><a class="header-btn">매장찾기</a></li>
 					<li><a class="header-btn">가맹신청 · 문의</a></li>
