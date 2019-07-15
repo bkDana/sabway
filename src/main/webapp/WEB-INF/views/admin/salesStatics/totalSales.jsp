@@ -23,33 +23,18 @@
 	
 	
 <script>
+	//올해 년도 구하기
+	var year1 = new Date();
+	var year = year1.getFullYear(); 
+	
 	$(document).ready(function(){
 		
-		
-		/* function addComma() {
-			var price = $(".price").text();
-			   var regexp = /\B(?=(\d{3})+(?!\d))/g;
-			   return price.toString().replace(regexp, ',');
-		} */
+		totalSales();
+		totalSalesPie();
 		
 		//그래프 디자인 설정
 		Highcharts.setOptions({
 			colors:['#ffce32','#009223'],	/* 막대 색상 */
-//	         chart: {
-// 	             backgroundColor: {
-// 	                 linearGradient: [0, 0, 500, 500],
-// 	                 stops: [
-// 	                	 /* 그래프 밖 배경 흰색으로만 */
-// 	                     [0, 'rgb(255, 255, 255)']/* ,
-// 	                     [1, '#009223']*/
-// 	                     ] 
-// 	             },
-// 	             borderWidth: 0,
-// 	             plotBackgroundColor: 'rgba(255, 255, 255, .9)',	/* 그래프  배경 */
-// 	             plotShadow: true,
-// 	             plotBorderWidth: 1,
-//	             
-//	         },
 	         title:{
 	        	 style: {
 	        		 fontSize:'18px',
@@ -81,19 +66,26 @@
 	             }
 	         },
 	     });
+		
+	});	//$(document) 종료
 	
-		//전체 매출 가져오기(막대그래프)
+	
+	//전체 매출 가져오기(막대그래프)
+	function totalSales(){
 		$.ajax({
 			url:"/salesStatics/totalSales.do",
 			dataType:'json',
 			success : function(cost){ 
 				var arr = new Array();
+				var month = new Array();
 				for(var i=1;i<13;i++){
         			if(cost[i].cusoBranch=='total'){
         				//console.log(cost[i]);
+        				console.log(cost[i].orderMonth);
         				if(Number(cost[i].orderMonth)==i){
         					//console.log(cost[i].totalCost);
         					arr.push(cost[i].totalCost);
+        					month.push(cost[i].orderMonth+"월");
         				}
         			}
 				}
@@ -118,13 +110,13 @@
 			             plotBorderWidth: 1,
 			        },
 			        title: {
-			            text: '매출 통계',
+			            text: year+'년도 전 매장 매출 현황',
 			        },
-			        subtitle: {
+			        /* subtitle: {
 			            text: '월별 전체 매출액'
-			        },
+			        }, */
 			        xAxis: {
-			            categories: ['01월','02월', '03월', '04월','05월','06월','07월','08월','09월','10월','11월','12월'],
+			            categories: month,
 			            crosshair: true
 			        },
 			        yAxis: {
@@ -153,7 +145,8 @@
 			            		events:{
 			            			click:function(){
 			            				console.log("막대그래프 클릭~!")	//event.point : 클릭한 값에 대한 정보
-			            				getBranchSales(event.point.category)	//해당 월 보내주기
+			            				console.log()
+			            				getMonthTotalSales(event.point.category)	//해당 월 보내주기
 			            			}
 			            		}
 			            	}
@@ -167,9 +160,10 @@
 				
 			}
 		});
+	}
 		
-		
-		//전체 매뉴 매출순위(파이차트)
+	//전체 매뉴 매출순위(파이차트)
+	function totalSalesPie(){
 		$.ajax({
 			url:"/salesStatics/totalSales.do",
 			dataType:'json',
@@ -192,7 +186,7 @@
 			            type: 'pie'
 			        },
 			        title: {
-			            text: '매출 통계',
+			            text: year+'년도 메뉴 매출 현황',
 			        },
 			        tooltip: {
 			            headerFormat: '<span style="font-size:10px">{point.key}</span><table class="comm-tbl" style="width:150px;">',
@@ -234,14 +228,11 @@
 			    });
 			}
 		});
-
-	
-	});	//$(document) 종료
-	
+	}	
+		
 	
 	//선택한 월의 매출 가져오기
-	function  getBranchSales(month){
-		
+	function  getMonthTotalSales(month){
 		$.ajax({
 			url:"/salesStatics/monthTotalSales.do",
 			data : {month:month},
@@ -249,13 +240,14 @@
 			success : function(branch){ 
 				var name = new Array();	//지점명
 				var cost = new Array();	//매출
-				for(var i=0;i<10;i++){
-					//console.log(branch);
+				for(var i=0;i<branch.length;i++){
+					console.log(branch[i].cusoBranch);
 					name.push(branch[i].cusoBranch);
 					cost.push(branch[i].totalCost);
+					if(i==9){
+						break;
+					}
 				}
-				//console.log(name);
-				//console.log(cost);
 				Highcharts.chart('graph3', {
 			        chart: {
 			            type: 'column',
@@ -273,7 +265,7 @@
 			             plotBorderWidth: 1,
 			        },
 			        title: {
-			            text: month,
+			            text: month+' Top10 매장 매출 현황(?)',
 			        },
 			        subtitle: {
 			            text: '서브 타이틀'
@@ -302,7 +294,7 @@
 			                borderWidth: 0
 			            },
 			            /* 클릭이벤트 */
-			            series: {
+			            /* series: {
 			            	cursor: 'pointer',
 			            	point:{
 			            		events:{
@@ -313,7 +305,7 @@
 			            			}
 			            		}
 			            	}
-			            }
+			            } */
 			        },
 			        series: [{
 			        	name:"매출",

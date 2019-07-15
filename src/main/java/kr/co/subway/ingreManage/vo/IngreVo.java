@@ -11,10 +11,10 @@ public class IngreVo {
 	private int ingreCost30;		//30cm 가격
 	private int ingreDiscntRate;	//할인률
 	private int ingreKcal;			//기본 칼로리
-	private int ingreKcalSalad;		//샐러드 칼로리(메인메뉴용)
 	private int ingreActive;		//활성화 비활성화 (0:비활성화 1:활성화)
 	private String ingreUnit;		//단위
 	private String ingreDescription;//설명
+	private String ingreRecomSauce; //추천 소스
 	private String ingreFilepath;	//관련 이미지
 	private Date ingreRegDate;		//재료 등록일
 	public IngreVo() {
@@ -23,8 +23,8 @@ public class IngreVo {
 	}
 	
 	public IngreVo(int rnum, int ingreIdx, String ingreLabel, String ingreType, int ingreCost15, int ingreCost30,
-			int ingreDiscntRate, int ingreKcal, int ingreKcalSalad, int ingreActive, String ingreUnit,
-			String ingreDescription, String ingreFilepath, Date ingreRegDate) {
+			int ingreDiscntRate, int ingreKcal, int ingreActive, String ingreUnit, String ingreDescription,
+			String ingreRecomSauce, String ingreFilepath, Date ingreRegDate) {
 		super();
 		this.rnum = rnum;
 		this.ingreIdx = ingreIdx;
@@ -34,15 +34,14 @@ public class IngreVo {
 		this.ingreCost30 = ingreCost30;
 		this.ingreDiscntRate = ingreDiscntRate;
 		this.ingreKcal = ingreKcal;
-		this.ingreKcalSalad = ingreKcalSalad;
 		this.ingreActive = ingreActive;
 		this.ingreUnit = ingreUnit;
 		this.ingreDescription = ingreDescription;
+		this.ingreRecomSauce = ingreRecomSauce;
 		this.ingreFilepath = ingreFilepath;
 		this.ingreRegDate = ingreRegDate;
 	}
-	
-	
+
 	public int getRnum() {
 		return rnum;
 	}
@@ -91,12 +90,6 @@ public class IngreVo {
 	public void setIngreKcal(int ingreKcal) {
 		this.ingreKcal = ingreKcal;
 	}
-	public int getIngreKcalSalad() {
-		return ingreKcalSalad;
-	}
-	public void setIngreKcalSalad(int ingreKcalSalad) {
-		this.ingreKcalSalad = ingreKcalSalad;
-	}
 	public int getIngreActive() {
 		return ingreActive;
 	}
@@ -115,6 +108,15 @@ public class IngreVo {
 	public void setIngreDescription(String ingreDescription) {
 		this.ingreDescription = ingreDescription;
 	}
+	
+	public String getIngreRecomSauce() {
+		return ingreRecomSauce;
+	}
+
+	public void setIngreRecomSauce(String ingreRecomSauce) {
+		this.ingreRecomSauce = ingreRecomSauce;
+	}
+
 	public String getIngreFilepath() {
 		return ingreFilepath;
 	}

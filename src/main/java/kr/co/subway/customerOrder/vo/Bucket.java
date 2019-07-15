@@ -5,6 +5,7 @@ import java.sql.Date;
 
 public class Bucket {
 	private int bucIdx;
+	private int bucCustomerIdx;
 	private int bucCusoIdx;
 	private String bucBread;
 	private String bucMain;
@@ -13,6 +14,7 @@ public class Bucket {
 	private String bucSource;
 	private String bucTopping;
 	private String bucSide;
+	private String bucIs15;
 	private String bucIsSalad;
 	private String bucIsOvened;
 	private String bucSet;
@@ -25,11 +27,13 @@ public class Bucket {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Bucket(int bucIdx, int bucCusoIdx, String bucBread, String bucMain, String bucVegi, String bucCheese,
-			String bucSource, String bucTopping, String bucSide, String bucIsSalad, String bucIsOvened, String bucSet,
-			int bucCost, double bucDiscntRate, int bucKcal, int bucQuantity, Date bucRegDate) {
+	public Bucket(int bucIdx, int bucCustomerIdx, int bucCusoIdx, String bucBread, String bucMain, String bucVegi,
+			String bucCheese, String bucSource, String bucTopping, String bucSide, String bucIs15, String bucIsSalad,
+			String bucIsOvened, String bucSet, int bucCost, double bucDiscntRate, int bucKcal, int bucQuantity,
+			Date bucRegDate) {
 		super();
 		this.bucIdx = bucIdx;
+		this.bucCustomerIdx = bucCustomerIdx;
 		this.bucCusoIdx = bucCusoIdx;
 		this.bucBread = bucBread;
 		this.bucMain = bucMain;
@@ -38,6 +42,7 @@ public class Bucket {
 		this.bucSource = bucSource;
 		this.bucTopping = bucTopping;
 		this.bucSide = bucSide;
+		this.bucIs15 = bucIs15;
 		this.bucIsSalad = bucIsSalad;
 		this.bucIsOvened = bucIsOvened;
 		this.bucSet = bucSet;
@@ -52,6 +57,12 @@ public class Bucket {
 	}
 	public void setBucIdx(int bucIdx) {
 		this.bucIdx = bucIdx;
+	}
+	public int getBucCustomerIdx() {
+		return bucCustomerIdx;
+	}
+	public void setBucCustomerIdx(int bucCustomerIdx) {
+		this.bucCustomerIdx = bucCustomerIdx;
 	}
 	public int getBucCusoIdx() {
 		return bucCusoIdx;
@@ -100,6 +111,12 @@ public class Bucket {
 	}
 	public void setBucSide(String bucSide) {
 		this.bucSide = bucSide;
+	}
+	public String getBucIs15() {
+		return bucIs15;
+	}
+	public void setBucIs15(String bucIs15) {
+		this.bucIs15 = bucIs15;
 	}
 	public String getBucIsSalad() {
 		return bucIsSalad;

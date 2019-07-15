@@ -118,15 +118,15 @@
 				</c:if>
 			</c:forEach>
 		</table>
-		<br>
-		<hr>
-		<%-- <c:if test="${mgr.size }"> --%>
-		<div style="text-align:center;">
-			<input type="hidden" name="moreNo" value=10>
-			<button type="button" name="more" >더보기(More)</button>
+		<div class="common-tbl-btn-group" name="moreDiv">
+			<c:if test="${total > mpd.lastPage}">
+				<hr>
+				<input type="hidden" value="${total }" name="totalCount">
+				<input type="hidden" value=${mpd.lastPage } name="pageName">
+				<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
+				<hr>
+			</c:if>
 		</div>
-		<%-- </c:if> --%>
-		<hr>
 		<br>
 		<span name="selectBox">
 			<select name="statusGroup">
@@ -179,15 +179,54 @@
 			var keyword = $(this).val();
 			location.href="/selectStatus.do?keyword="+keyword;
 		});
+		//더보기
 		$("[name=more]").on("click",function(){
-			var moreNo = $(this).prev().val();
-			$.ajax({
-				url:"mgrPageMore.do",
-				data:{moreNo:moreNo},
-				success:function(data){
-					
-				}
-			});
+			var total = Number($('[name=totalCount]').val());
+			var firstPage = Number($('[name=pageName]').val());
+			var length = firstPage+10;
+			console.log(length);
+			if(length <= total){
+				$.ajax({
+					url:"/mgrPageMore.do",
+					data:{firstPage:firstPage},
+					dataType:"json",
+					success:function(data){
+						var last = Number($('[name=pageName]').val())+10;
+						Number($('[name=pageName]').val(last));
+						for(var i=0;i<data.length;i++){
+							if(data[i].mgrStatus == 1){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:green;'>"+"준비중"+"</td><td style='text-align:center;'><button type='button' class='onBtn' name='mgrStatus' value='2'>영업</button>&nbsp;<button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
+							}else if(data[i].mgrStatus == 2){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:blue;'>"+"영업중"+"</td><td style='text-align:center;'><button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
+							}else if(data[i].mgrStatus == 3){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:pink;'>"+"폐업"+"</td><td style='text-align:center;'><button type='button'></button></td></tr>";
+							}
+							$('table').append(str);
+						}
+					}
+				});		
+			}else{
+				$.ajax({
+					url:"/mgrPageMore.do",
+					data:{firstPage:firstPage},
+					dataType:"json",
+					success:function(data){
+						var last = Number($('[name=pageName]').val())+10;
+						Number($('[name=pageName]').val(last));
+						for(var i=0;i<data.length;i++){
+							if(data[i].mgrStatus == 1){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:green;'>"+"준비중"+"</td><td style='text-align:center;'><button type='button' class='onBtn' name='mgrStatus' value='2'>영업</button>&nbsp;<button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
+							}else if(data[i].mgrStatus == 2){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:blue;'>"+"영업중"+"</td><td style='text-align:center;'><button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
+							}else if(data[i].mgrStatus == 3){
+								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:pink;'>"+"폐업"+"</td><td style='text-align:center;'><button type='button'></button></td></tr>";
+							}
+							$('table').append(str);
+						}
+					}
+				});		
+				$("[name=moreDiv]").attr("style","display:none");
+			}
 		});
 	});
 </script>

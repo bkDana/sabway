@@ -166,7 +166,6 @@
 					success : function(data){
 						console.log(data.result);
 						$('.like-inner-box').eq(0).html(data.result+"<br><br>Likes");
-						
 					}
 				});
 			}
