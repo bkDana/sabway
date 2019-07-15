@@ -335,9 +335,9 @@ var myform=new formtowizard({
 			IMP.init('imp25889583');
 			IMP.request_pay({
 				pay_method : 'card',
-				merchant_uid : "상품명_"+date,			//거래ID - 유니크 주려고 날짜까지 넣음
-				name : $('input[name=bucMain]').val()+"외";,	//결재명
-				amount : price,							//결재 금액
+				merchant_uid : "상품명_"+date,					//거래ID - 유니크 주려고 날짜까지 넣음
+				name : $('input[name=bucMain]').val()+"외",		//결재명
+				amount : price,									//결재 금액
 				buyer_tel : '010-3159-5618'
 				
 			},function(response){
