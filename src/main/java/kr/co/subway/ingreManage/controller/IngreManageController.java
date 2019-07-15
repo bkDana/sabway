@@ -169,22 +169,13 @@ public class IngreManageController {
 		System.out.println("controller goUpdatePage() idx : "+ingreIdx);
 		IngreVo iv = ingreService.goUpdateIngre(ingreIdx);
 		ArrayList<IngreVo> sauceList = (ArrayList<IngreVo>)ingreService.getSauce();
-		//추천소스 , 를 기준으로 잘라서 보내기
-		if(iv.getIngreRecomSauce()!=null) {
-			String[] sauce = iv.getIngreRecomSauce().split(",");
-			System.out.println(sauce);
-			for(int i=0;i<sauce.length;i++) {
-				System.out.println(sauce[i]);
-			}
-			mav.addObject("sauce",sauce);
-		}		
 		if(iv!=null) {
 			mav.addObject("iv",iv);
 			mav.addObject("sauceList",sauceList);
 			mav.setViewName("admin/ingreManage/ingreUpdate");
-		}/*else {
+		}else {
 			mav.setViewName("common/error");
-		}*/
+		}
 		return mav;
 	}
 	
@@ -192,6 +183,7 @@ public class IngreManageController {
 	@RequestMapping("/ingreUpdate.do")
 	public String ingreUpdate(HttpServletRequest request, @RequestParam MultipartFile filepath, IngreVo iv, String oldFilepath, String deleteFile, RedirectAttributes redirectAttributes) {
 		String fullPath="";
+		System.out.println(iv.getIngreRecomSauce());
 		//파일 있으면
 		if(!filepath.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/ingredients");
@@ -214,7 +206,7 @@ public class IngreManageController {
 				}
 			}
 		}else {
-			iv.setIngreFilepath("");
+			iv.setIngreFilepath(oldFilepath);
 		}
 		
 		int result = ingreService.ingreUpdate(iv);

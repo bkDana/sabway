@@ -19,7 +19,7 @@
 		  </otherwise>
 	  </choose>
   	sysdate,
-  	<if test="ingreRecomSauce != '' or ingreRecomSauce != null">
+  	<if test="ingreRecomSauce != '' and ingreRecomSauce != null">
   		#{ingreRecomSauce})
   	</if>
   	<if test="ingreRecomSauce == '' or ingreRecomSauce == null">
@@ -101,7 +101,14 @@
   
   <!-- 재료 수정하기 -->
   <update id="ingreUpdate" parameterType="ingre">
-  	update ingredients set ingre_label=#{ingreLabel}, ingre_type=#{ingreType}, ingre_cost15=#{ingreCost15}, ingre_cost30=#{ingreCost30}, ingre_kcal=#{ingreKcal}, ingre_active=#{ingreActive}, ingre_unit=#{ingreUnit}, ingre_description=#{ingreDescription}, ingre_filepath=#{ingreFilepath} where ingre_idx=#{ingreIdx}
+  	update ingredients set ingre_label=#{ingreLabel}, ingre_type=#{ingreType}, ingre_cost15=#{ingreCost15}, ingre_cost30=#{ingreCost30}, ingre_kcal=#{ingreKcal}, ingre_active=#{ingreActive}, ingre_unit=#{ingreUnit}, ingre_description=#{ingreDescription},
+  		<if test="ingreRecomSauce != null and ingreRecomSauce != ''">
+  			ingre_recom_sauce=#{ingreRecomSauce},
+  		</if>
+  		<if test="ingreRecomSauce == null or ingreRecomSauce == ''">
+  			ingre_recom_sauce=null,
+  		</if>
+  	ingre_filepath=#{ingreFilepath} where ingre_idx=#{ingreIdx}
   </update>
   <!-- 재료 삭제하기 -->
   <delete id="ingreDelete" parameterType="string">

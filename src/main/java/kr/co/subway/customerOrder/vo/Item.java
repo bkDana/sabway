@@ -1,30 +1,32 @@
 package kr.co.subway.customerOrder.vo;
 
+
 public class Item {
 	private int itemIdx;
-	private int itemCusoIdx;
+	private int cusiIdx;		// 해당 주문내역 번호
 	private int itemBread;
-	private int itemMain;
+	private int itemMain;		// 메인메뉴
 	private int itemVegi;
 	private int itemCheese;
 	private int itemSource;
 	private int itemTopping;
 	private int itemSide;
-	private int itemIsSalad;
-	private int itemIsOvened;
-	private int itemSet;
-	private int itemQuantity;
+	private int itemIsSalad;	// 샐러드여부
+	private int itemIsOvened;	// 오븐 여부
+	private int itemIsSet;		// 세트 여부
+	private int itemQuantity;	// 제품의 수량
 	private double itemDiscntRate;
-	private int itemDiscntCost;
+	private int itemDiscntCost;	// 할인 후 가격
 	public Item() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	public Item(int itemIdx, int itemCusoIdx, int itemBread, int itemMain, int itemVegi, int itemCheese, int itemSource,
-			int itemTopping, int itemSide, int itemIsSalad, int itemIsOvened, int itemSet, int itemQuantity,
-			double itemDiscntRate, int itemDiscntCost) {
+	public Item(int itemIdx, int cusiIdx, int itemBread, int itemMain, int itemVegi, int itemCheese,
+			int itemSource, int itemTopping, int itemSide, int itemIsSalad, int itemIsOvened, int itemIsSet,
+			int itemQuantity, double itemDiscntRate, int itemDiscntCost) {
 		super();
 		this.itemIdx = itemIdx;
-		this.itemCusoIdx = itemCusoIdx;
+		this.cusiIdx = cusiIdx;
 		this.itemBread = itemBread;
 		this.itemMain = itemMain;
 		this.itemVegi = itemVegi;
@@ -34,7 +36,7 @@ public class Item {
 		this.itemSide = itemSide;
 		this.itemIsSalad = itemIsSalad;
 		this.itemIsOvened = itemIsOvened;
-		this.itemSet = itemSet;
+		this.itemIsSet = itemIsSet;
 		this.itemQuantity = itemQuantity;
 		this.itemDiscntRate = itemDiscntRate;
 		this.itemDiscntCost = itemDiscntCost;
@@ -45,11 +47,11 @@ public class Item {
 	public void setItemIdx(int itemIdx) {
 		this.itemIdx = itemIdx;
 	}
-	public int getItemCusoIdx() {
-		return itemCusoIdx;
+	public int getCusiIdx() {
+		return cusiIdx;
 	}
-	public void setItemCusoIdx(int itemCusoIdx) {
-		this.itemCusoIdx = itemCusoIdx;
+	public void setCusiIdx(int cusiIdx) {
+		this.cusiIdx = cusiIdx;
 	}
 	public int getItemBread() {
 		return itemBread;
@@ -105,11 +107,11 @@ public class Item {
 	public void setItemIsOvened(int itemIsOvened) {
 		this.itemIsOvened = itemIsOvened;
 	}
-	public int getItemSet() {
-		return itemSet;
+	public int getItemIsSet() {
+		return itemIsSet;
 	}
-	public void setItemSet(int itemSet) {
-		this.itemSet = itemSet;
+	public void setItemIsSet(int itemIsSet) {
+		this.itemIsSet = itemIsSet;
 	}
 	public int getItemQuantity() {
 		return itemQuantity;

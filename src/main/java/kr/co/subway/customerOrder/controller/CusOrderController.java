@@ -151,5 +151,10 @@ public class CusOrderController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping("/loadBucket.do")
+	public String loadBucket () {
+		return "/customerOrder/bucket";
+	}
 
 }
