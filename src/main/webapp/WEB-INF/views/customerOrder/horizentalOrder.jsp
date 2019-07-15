@@ -20,7 +20,6 @@ var myform=new formtowizard({
 <section id="content-wrapper">
 	<div class="area">
 		<c:if test="${not empty sessionScope.customer}">
-			<a class="header-btn" href="/myBucket.do">내 주문정보 보기</a>
 		</c:if>
 		<br><br>
 		<h1>온라인 주문 예약</h1><br>
@@ -60,6 +59,7 @@ var myform=new formtowizard({
 						<div class="main img-box select-one">
 							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 							<p class="label">${ingre.ingreLabel }</p>
+							<p class="label">15cm ${ingre.ingreCost15 }￦ / 30cm ${ingre.ingreCost30 }￦ </p>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -194,18 +194,10 @@ var myform=new formtowizard({
 				<input type="hidden" name="bucKcal" class="orderInput"> 
 				<input type="hidden" name="bucQuantity" class="orderInput">
 				
-			<div id="test" style="width:100%; height:150px; background-color:white;">
-				<h3>장바구니 영역</h3>
-				<div id="quantityWrapper">
-					<select>
-						<option>수량</option>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-					</select>
+			<div id="bucketWrapper" style="width:100%; height:150px; background-color:white;">
+				<div id="bucketArea" style="width:300px; heignt:150px; margin-left:400px; background-color:red; cursor:pointer;">
+					<strong style="font-size:30px;">장바구니</strong><span id="itemCount"></span><br>
+					<span id="itemStatus">장바구니에 담긴 상품이 없습니다</span>
 				</div>
 				<div id="infoWrapper">
 					<span id="totalCost"></span><br>
@@ -213,7 +205,7 @@ var myform=new formtowizard({
 				</div>
 				
 				<div id="btn-wrapper" style="width:400px; margin-left:400px; background-color:orange;">
-					<button type="submit">주문</button>
+					<button type="button">주문</button>
 					<button type="button">추가주문</button>
 				</div>
 			</div>
@@ -328,7 +320,7 @@ var myform=new formtowizard({
 	/* 아임포트 */
 	$(function(){
 		
-		$("#pay button").click(function(){
+		$('#btn-wrapper button').eq(0).click(function(){
 			var price = $("input[name=bucCost]").val();
 			var d = new Date();
 			var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
