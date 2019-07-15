@@ -5,6 +5,8 @@
 .comm-content-tit{position:relative; font-size:26px; color:#2b2b2b; text-align:center; font-weight:500; padding:20px 0; margin-bottom:50px;}
 .comm-content-tit:after{display:block; content:""; width:50px; height:4px; background-color:rgba(254,67,30); position:absolute; bottom:0; left:50%; margin-left:-30px;}
 
+.board-tit{text-align: center;font-size: 40px;color: #292929;font-weight: 300;letter-spacing: -0.07em;padding: 134px 0 80px;}
+
 /* 공통 :: PAGING */
 .paging{width:100%; text-align:center; margin:30px 0;}
 .paging a{display:inline-block; vertical-align:middle; width:30px; height:30px; border:1px solid #ddd; text-align:center; font-size:12px; line-height:30px; color:#868686; letter-spacing:-0.25px; margin: 2px 0; background:#fff;}
