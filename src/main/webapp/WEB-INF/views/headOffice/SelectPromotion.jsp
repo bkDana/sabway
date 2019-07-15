@@ -33,7 +33,12 @@
  							<td>
 								<!-- 선택한 promotion으로 DB update -->
 								<select name="ingreDiscntRate"><!-- 상품 할인 유/무 & 할인율 선택 -->
-									<option selected="selected" disabled="disabled">할인선택</option>
+									<option selected="selected" disabled="disabled">
+										<c:choose>
+											<c:when test="${ingre.ingreDiscntRate != 0 }">${ingre.ingreDiscntRate }% 할인</c:when>
+											<c:otherwise>할인선택</c:otherwise>
+										</c:choose>
+									</option>
 									<option value=1.0>적용안함</option>
 									<option value=0.9>10% 할인</option>
 									<option value=0.8>20% 할인</option>
@@ -57,7 +62,6 @@
 	//선택한 할인율에 따른 가격 변경
 	$('[name=ingreDiscntRate]').on('change',function(){
 		var ingreIdx = $(this).parent().parent().prev().val();
-		alert(ingreIdx);
 		var ingreType = $(this).parent().parent().prev().prev().val();
 		var ingreCost15 = $(this).parent().prev().prev().children().html();
 		var ingreCost30 = $(this).parent().prev().children().html();
@@ -67,18 +71,16 @@
 		var ingreCost30Discnt = Math.round(discntRate*ingreCost30);
 		$(this).parent().next().children().html('15cm : '+ingreCost15Discnt+'<br>30cm : '+ingreCost30Discnt);
 		//할인 적용한 메뉴 submit
-		$("#submitLink").click(function(){
-			$.ajax({
-				url:"/selectPromotion.do",
-				dataType:"json",
-				data:{ingreIdx:ingreIdx,ingreType:ingreType,discntRate:discntRate},
-				success:function(){
-					alert("프로모션이 적용되었습니다.");
-				},
-				error:function(){
-					alert("적용실패. 다시 시도해주세요.");
-				}
-			});
+		$.ajax({
+			url:"/selectPromotion.do",
+			dataType:"json",
+			data:{ingreIdx:ingreIdx,ingreType:ingreType,discntRate:discntRate},
+			success:function(){
+				alert("적용이 완료되었습니다.");
+			},
+			error:function(){
+				alert("에러발생. 다시 시도해주세요.");
+			}
 		});
 	});
 	//메인페이지 이동 버튼

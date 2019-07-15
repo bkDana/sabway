@@ -158,6 +158,11 @@
 		</span>
 	</div>
 </section>
+
+
+	<!-- 버튼 show/hide 조건 설정 제대로 해야함 -->
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		//상태변경(오픈)
@@ -213,7 +218,6 @@
 			var keyword = $('[name=keyword]').val();
 			var total = Number($('[name=totalCount]').val());
 			var firstPage = Number($('[name=pageName]').val());
-			//계산식들 추가해야 됨
 			if(mgrSize > 10){
 				$.ajax({
 					url:"/mgrStatusMore.do",
