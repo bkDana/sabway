@@ -3,6 +3,7 @@ package kr.co.subway.customer.vo;
 import java.sql.Date;
 
 public class Customer {
+	private int rnum;
 	private int customerNo;
 	private String customerId;
 	private String customerPw;
@@ -21,10 +22,11 @@ public class Customer {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Customer(int customerNo, String customerId, String customerPw, String customerName, String customerNick,
-			String phone, String phone1, String phone2, String birthday, String email, String gender, int customerState,
-			Date regDate, Date lastLogDate) {
+	public Customer(int rnum, int customerNo, String customerId, String customerPw, String customerName,
+			String customerNick, String phone, String phone1, String phone2, String birthday, String email,
+			String gender, int customerState, Date regDate, Date lastLogDate) {
 		super();
+		this.rnum = rnum;
 		this.customerNo = customerNo;
 		this.customerId = customerId;
 		this.customerPw = customerPw;
@@ -39,6 +41,12 @@ public class Customer {
 		this.customerState = customerState;
 		this.regDate = regDate;
 		this.lastLogDate = lastLogDate;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getCustomerNo() {
 		return customerNo;
@@ -124,6 +132,5 @@ public class Customer {
 	public void setLastLogDate(Date lastLogDate) {
 		this.lastLogDate = lastLogDate;
 	}
-	
 	
 }

@@ -24,6 +24,7 @@ import kr.co.subway.headOffice.service.ApplyService;
 import kr.co.subway.headOffice.service.MenuService;
 import kr.co.subway.headOffice.vo.Apply;
 import kr.co.subway.headOffice.vo.Menu;
+import kr.co.subway.ingreManage.vo.IngreVo;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -36,23 +37,34 @@ public class HeadOfficeController {
 	//메뉴 목록 출력 및 할인 적용 페이지 이동
 	@RequestMapping(value="/promotionSelect.do")
 	public ModelAndView promotion() {
-		ArrayList<Menu> list = (ArrayList<Menu>) menuservice.menuList();
+		ArrayList<IngreVo> list = (ArrayList<IngreVo>) menuservice.menuList();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",list);
 		mav.setViewName("headOffice/SelectPromotion");
+//		ArrayList<Menu> list = (ArrayList<Menu>) menuservice.menuList();
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("list",list);
+//		mav.setViewName("headOffice/SelectPromotion");
 		return mav;
 	}
 	//할인 및 할인율 수정
 	@RequestMapping(value="/selectPromotion.do")
-	public String selectPromotion(@RequestParam int menuNo, @RequestParam String menuName, @RequestParam int menuBasePrice, @RequestParam int menuDiscntPrice, @RequestParam double menuDiscntRate2) {
+	public String selectPromotion(@RequestParam String ingreLabel,@RequestParam String ingreType,@RequestParam double discntRate) {
+		System.out.println("넘어온 이름 : "+ingreLabel);
+		System.out.println("넘어온 타입 : "+ingreType);
+		System.out.println("넘어온 할인율 : "+discntRate);
 		//정수로 변환
-		int menuDiscntRate = (int)Math.floor(100-(menuDiscntRate2*100));
-		System.out.println(menuName+" : "+menuBasePrice+"원");
-		System.out.println("할인율 : "+(100-(menuDiscntRate2*100))+"%");
-		System.out.println("할인후 가격 : "+menuDiscntPrice+"원");
-		//index라 0부터 오기 때문에 +1
-		Menu menu = new Menu(menuNo+1, menuName, menuBasePrice, menuDiscntPrice, menuDiscntRate);
-		int result = menuservice.updateMenu(menu);
+		int ingreDiscntRate = (int)Math.floor(100-(discntRate*100));
+//		int ingreDiscntRate = (int)Math.floor(100-(ingre.getIngreDiscntRate()*100));
+		IngreVo ingre = new IngreVo(0, 0, ingreLabel, ingreType, 0, 0, ingreDiscntRate, 0, 0, null, null, null, null, null);
+		ingre.setIngreDiscntRate(ingreDiscntRate);
+		ingre.setIngreLabel(ingreLabel);
+		ingre.setIngreType(ingreType);
+		System.out.println("할인율 대입 : "+ingre.getIngreDiscntRate()+"%");
+		System.out.println("이름 대입 : "+ingre.getIngreLabel());
+		System.out.println("타입 대입 : "+ingre.getIngreType());
+		int result = menuservice.updateIngre(ingre);
+		System.out.println("controller result : " +result);
 		String view = "";
 		if(result>0) {
 			view = "redirect:/promotionSelect.do";

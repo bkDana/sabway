@@ -37,7 +37,7 @@
 			</tr>
 			<c:forEach items="${list }" var="c">
 				<tr>
-					<td>${c.customerNo}</td>
+					<td>${c.rnum}</td>
 					<td>${c.customerId}</td>
 					<td>${c.customerName}</td>
 					<td>${c.customerNick}</td>
