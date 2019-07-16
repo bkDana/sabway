@@ -37,13 +37,8 @@
 								<button type="submit" class="btn-style1">로그인</button>
 								<button type="button" class="btn-style3" onclick="location.href='/enrollPage.do'">회원가입</button>
 
-								<div class="common-tbl-btn-group">
-									<button type="submit" class="btn-style1">로그인</button>
-									<button type="button" class="btn-style3" onclick="location.href='/enrollPage.do'">회원가입</button>
-								</div>
-
 							</div>
-							<div >
+							<div style="text-align: center;">
 								<button type="button" class="btn-style1" onclick="location.href='/findIdPage.do'">아이디 찾기</button>
 								<button type="button" class="btn-style3" onclick="location.href='/findPwPage.do'">비번 찾기</button>
 							</div>

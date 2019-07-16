@@ -15,5 +15,7 @@ public interface CustomerService {
 	public ArrayList<Customer> allCustomerList();			//회원리스트
 	public int adminCustomerDelete(int customerNo);			//회원탈퇴시키기
 	public int adminCustomerDeleteCancle(int customerNo);	//회원탈퇴해제시키기
-	public String findId (Customer vo);					//아이디찾기
+	public String findId (Customer vo);						//아이디찾기
+	public Customer idAndEmailCheck(Customer customerVo);	//비번찾기
+	public int pwUpdate(Customer customerVo);				//비번찾기(비번업뎃)
 }

@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.subway.customer.common.SHA256Util;
 import kr.co.subway.customer.service.CustomerService;
 import kr.co.subway.customer.vo.Customer;
 
@@ -48,6 +49,9 @@ public class CustomerController {
       
       String customerId = request.getParameter("customerId");
       String customerPw = request.getParameter("customerPw");
+      System.out.println(customerId);
+      System.out.println(customerPw);
+      
       String oldUserToNew = request.getParameter("oldUserToNew");
       
       Customer vo = new Customer();
@@ -374,13 +378,25 @@ public class CustomerController {
       return "customer/findIdPage";
    }
    
+   //비번찾기 페이지 이동
+   @RequestMapping(value="/findPwPage.do")
+   public String findPwPage() {
+      return "customer/findPwPage";
+   }
+   
    //아이디 찾기
    @RequestMapping(value="/findId.do")
    public String findId(HttpServletRequest request) {
       Customer customerVo = new Customer();
       customerVo.setCustomerName(request.getParameter("customerName"));
       customerVo.setPhone(request.getParameter("phone"));
+      customerVo.setPhone1(request.getParameter("phone1"));
+      customerVo.setPhone2(request.getParameter("phone2"));
+      customerVo.setBirthday(request.getParameter("birthday"));
+      System.out.println(customerVo.getPhone());
+      
       customerVo.setCustomerId(customerService.findId(customerVo));
+      System.out.println(customerVo.getCustomerId());
       String view="";
       if(customerVo.getCustomerId()==null) {
           view="common/msg";
@@ -390,12 +406,85 @@ public class CustomerController {
       
       System.out.println(customerVo.getCustomerId());
       view="common/msg";
-      request.setAttribute("msg", "아이디는"+customerVo.getCustomerId()+"입니다");
+      request.setAttribute("msg", "아이디는 "+customerVo.getCustomerId()+" 입니다");
       request.setAttribute("loc", "/index.do");
       }return view;
    }
    
-   
+   //비번 찾기
+   @RequestMapping(value="/findPw.do")
+   public String findPw(HttpServletRequest request) {
+      Customer customerVo = new Customer();
+      customerVo.setCustomerId(request.getParameter("customerId")); 
+      customerVo.setEmail(request.getParameter("email"));
+      System.out.println(customerVo.getEmail());
+      System.out.println(customerVo.getCustomerId());
+      Customer customer = customerService.idAndEmailCheck(customerVo);
+      System.out.println("dd");
+      String view="common/msg";
+      if(customer==null) {
+         request.setAttribute("msg", "아이디와 이름을 확인해주세요");
+         request.setAttribute("loc","/findPwPage.do");
+         return view;
+      }
+      else {
+      String host = "smtp.googlemail.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정 
+
+         final String user = "ssuyong2@gmail.com"; 
+         final String password = "tjqmdnpdl2";       
+
+         Properties props = new Properties(); 
+         props.put("mail.smtp.host", host); 
+         props.put("mail.smtp.port", 587); 
+         props.put("mail.smtp.auth", "true");
+         props.put("mail.smtp.starttls.enable","true");
+         
+         Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() { 
+             protected PasswordAuthentication getPasswordAuthentication() { 
+                return new PasswordAuthentication(user, password); 
+                } 
+             });
+          String msg=null;
+          try {
+             String pw = "";
+            for (int i = 0; i < 12; i++) {
+               pw += (char) ((Math.random() * 26) + 97);
+            }
+            customerVo.setCustomerPw(pw);
+             
+             MimeMessage message = new MimeMessage(session); 
+             message.setFrom(new InternetAddress(user)); 
+             message.addRecipient(Message.RecipientType.TO, new InternetAddress(customerVo.getEmail())); 
+             // 메일 제목 
+             message.setSubject("sabway");
+             message.setContent(
+             "<div align='center' style='border:1px solid black; font-family:verdana'>"+
+             "<h3 style='color: blue;'>"+
+             customerVo.getCustomerId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>"+
+             "<p>임시 비밀번호 : "+
+             customerVo.getCustomerPw() + "</p></div>","text/html;charset=euc-kr");
+            Transport.send(message); 
+          }catch (Exception e) {
+      }
+          System.out.println("암호화 이전"+customerVo.getCustomerPw());
+          try {
+         customer.setCustomerPw(new SHA256Util().encData(customerVo.getCustomerPw()));
+      } catch (Exception e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+          System.out.println("암호화 다음"+customerVo.getCustomerPw());
+          int result = customerService.pwUpdate(customerVo);
+          if(result>0) {
+             request.setAttribute("msg", "비밀번호 변경 메일을 확인해주세요");
+             request.setAttribute("loc", "/index.do");
+          }else {
+             request.setAttribute("msg","비밀번호 변경 실패");
+             request.setAttribute("loc", "/findPwPage.do");
+          }
+      }return view;
+   }
+
    
    
    

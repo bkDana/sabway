@@ -59,5 +59,22 @@ public class CustomerDaoImpl implements CustomerDao{
 	public int adminCustomerDeleteCancle(int customerNo) {
 		return sqlsession.update("customer.adminCustomerDeleteCancle",customerNo);
 	}
+	@Override
+	public String findId(Customer customerVo) {
+	    String id = sqlsession.selectOne("customer.findId",customerVo);
+	    return id;
+	   }
+	//비번찾기(아디검색)
+	@Override
+   public Customer idAndEmailCheck(Customer customerVo) {
+		return sqlsession.selectOne("customer.idAndEmailCheck",customerVo);
+		
+   }
+	
+	//비번찾기(비번업뎃)
+	@Override
+	public int pwUpdate(Customer customerVo) {
+		return sqlsession.update("customer.pwUpdate",customerVo);
+	}
 	
 }
