@@ -36,4 +36,13 @@ public class SalesStaticsService {
 		ArrayList<SalesStaticsGrpVo> list = (ArrayList<SalesStaticsGrpVo>)dao.getBranchSales(branchName);
 		return list;
 	}
+	
+	
+	//파이차트 부분
+	//해당년도 전체 메뉴 판매 현황
+	public ArrayList<SalesStaticsGrpVo> getTotalMenu() {
+		ArrayList<SalesStaticsGrpVo> list = (ArrayList<SalesStaticsGrpVo>)dao.getTotalMenu();
+		System.out.println(list.size());
+		return list;
+	}
 }

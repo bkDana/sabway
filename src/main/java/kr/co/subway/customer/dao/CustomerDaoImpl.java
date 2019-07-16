@@ -61,8 +61,20 @@ public class CustomerDaoImpl implements CustomerDao{
 	}
 	@Override
 	public String findId(Customer customerVo) {
-		// TODO Auto-generated method stub
-		return null;
+	    String id = sqlsession.selectOne("customer.findId",customerVo);
+	    return id;
+	   }
+	//비번찾기(아디검색)
+	@Override
+   public Customer idAndEmailCheck(Customer customerVo) {
+		return sqlsession.selectOne("customer.idAndEmailCheck",customerVo);
+		
+   }
+	
+	//비번찾기(비번업뎃)
+	@Override
+	public int pwUpdate(Customer customerVo) {
+		return sqlsession.update("customer.pwUpdate",customerVo);
 	}
 	
 }

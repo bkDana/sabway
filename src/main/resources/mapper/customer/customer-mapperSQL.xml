@@ -127,4 +127,22 @@
     		set customer_state = 1
     		where customer_no = #{customerNo}
     </update>
+    
+    <!-- 아이디 찾기 -->
+	<select id="findId" parameterType="customer" resultType="String">
+	   select rpad(subStr(customer_id,0,3),5,'*') from customer where customer_name=#{customerName} and phone =#{phone} and birthday =#{birthday}
+	</select>
+	
+	  <!-- 비번 찾기 (아이디,이메일 체크)-->
+	<select id="idAndEmailCheck" parameterType="customer" resultType="customer">
+	   select customer_id as customerId from customer where customer_id=#{customerId} and email =#{email}
+	</select>
+	
+	<!-- 비번 찾기(비번업뎃) -->
+	<update id="pwUpdate" parameterType="customer">
+       update customer
+           set customer_pw = #{customerPw}
+           where customer_id = #{customerId} and email = #{email}
+    </update>
+	
 </mapper>
