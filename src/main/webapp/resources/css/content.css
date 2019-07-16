@@ -51,6 +51,9 @@
 .comm-tbl.type2 th{text-align:center; font-size:16px; border-top:2px solid rgba(254,67,30);}
 .comm-tbl.type2 td{color:#2b2b2b; font-size:14px; text-align:center;}
 .comm-tbl.type2 tr:hover td{background-color:rgba(254,67,30,0.05);}
+/* 회원가입, 가맹점신청  :보경 */
+
+
 
 /* 게시판용  :: 지영*/
 .comm-tbl.board{width:100%; max-width:none; background-color:#f8f8f8; border-top:4px solid #009223;}
@@ -85,7 +88,7 @@
 .common-tbl-btn-group > button.btn-style1{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style2{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style3{background-color:#888;}
-.common-tbl-btn-group > button.small{width:100px; height:35px; font-size:15px;}
+.common-tbl-btn-group > button.small{background-color:#009223;width:100px; height:35px; font-size:15px;}
 .common-tbl-btn-group > button.supersmall{width:55px; height:30px; font-size:14px;}
 .comm-tbl .file-del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#888; color:#fff; margin-left:5px;}
 
