@@ -368,7 +368,32 @@ public class CustomerController {
        }
    
    
+   //아이디찾기 페이지 이동
+   @RequestMapping(value="/findIdPage.do")
+   public String findIdPage() {
+      return "customer/findIdPage";
+   }
    
+   //아이디 찾기
+   @RequestMapping(value="/findId.do")
+   public String findId(HttpServletRequest request) {
+      Customer customerVo = new Customer();
+      customerVo.setCustomerName(request.getParameter("customerName"));
+      customerVo.setPhone(request.getParameter("phone"));
+      customerVo.setCustomerId(customerService.findId(customerVo));
+      String view="";
+      if(customerVo.getCustomerId()==null) {
+          view="common/msg";
+         request.setAttribute("msg", "이름과 핸드폰 번호를 정확히 입력해주세요");
+         request.setAttribute("loc", "/index.do");
+      }else {
+      
+      System.out.println(customerVo.getCustomerId());
+      view="common/msg";
+      request.setAttribute("msg", "아이디는"+customerVo.getCustomerId()+"입니다");
+      request.setAttribute("loc", "/index.do");
+      }return view;
+   }
    
    
    

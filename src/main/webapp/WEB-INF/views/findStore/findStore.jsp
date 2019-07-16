@@ -102,6 +102,7 @@
 	.board_list_wrapper table td .coming{color:#009223; font-family:font_sw; font-size:13px; font-weight:bold; background-color:#ffce32; height:25px; line-height:22px; width:110px; margin:0 auto; text-align:center; border-radius:15px}
 	.board_list_wrapper table tr.notice td{background-color:#f8f8f8}
 	.board_list_wrapper table tr.notice td .title a{color:#009223; font-weight:bold;}
+	
 	.cont_right {
 	    float: right;
 	    margin-bottom: 10px;
@@ -133,7 +134,7 @@
 	}
 	.store_map_layer {
 	    width: 298px;
-	    height: 243px;
+	    height: 236px;
 	    border: 1px solid #000000;
 	    background-color: #fff;
 	    position: absolute;
@@ -166,7 +167,7 @@
 	}
 	.store_map_layer .info dt {
 	    color: #292929;
-	    font-size: 13px;
+	    font-size: 16px;
 	    float: left;
 	    height: 21px;
 	    padding-left: 2px;
@@ -176,7 +177,7 @@
 	}
 	.store_map_layer .info dd {
 	    color: #999999;
-	    font-size: 13px;
+	    font-size: 14px;
 	    line-height: 21px;
 	    margin: 0 0 4px 76px;
 	    position: relative;
@@ -184,8 +185,19 @@
 	    letter-spacing: -0.03em;
 	    min-height: 21px;
 	}
-	.foot{
-		img src="/resources/img/logo_w.png" style="max-height:68px;
+	#searchViewTbl td {
+		font-size: 16px;
+	}
+	.store_map_layer .foot {
+	    text-align: center;
+	    padding-top: 17px;
+	}
+	.store_map_layer .foot a {
+	    display: inline-block;
+	    color: #292929;
+	    font-size: 16px;
+	    font-weight: 300;
+	    letter-spacing: -0.045em;
 	}
 </style>
 <%-- Header --%>
@@ -208,7 +220,7 @@
          	<div class="content">
 	            <p class="board_total">검색 결과 <strong id="pageCount">0</strong>건</p>
 	            <div class="store_list_scroll mCustomScrollbar _mCS_1 mCS_no_scrollbar">
-		            <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 421px;" tabindex="0">
+		            <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 421px; overflow:auto; overflow-x:hidden" tabindex="0">
 			            <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
 				            <ul id="uiResultList">
 				            </ul>
@@ -335,7 +347,7 @@
 				<td>${s.mgrName }</td>
 				<td>${s.mgrAddr }</td>
 				<td>${s.mgrBossName }</td>
-				<td>${s.mgrTel }</td>
+				<td style="color: #bbbbbb;">${s.mgrTel }</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -402,7 +414,7 @@
 					}
 				for(var i=0; i<data.storeList.length; i++){
 					
-					$("#searchViewTbl").append("<tr style='height:60px' class='searchTr'><td style='color:#ffc300;font-weight: bold;'id='search"+i+"'>"+data.storeList[i].rnum+"</td><td>"+data.storeList[i].mgrName+"</td><td>"+data.storeList[i].mgrAddr+"</td><td>"+data.storeList[i].mgrBossName+"</td><td>"+data.storeList[i].mgrTel+"</td></tr>");
+					$("#searchViewTbl").append("<tr style='height:60px' class='searchTr'><td style='color:#ffc300;font-weight: bold;'id='search"+i+"'>"+data.storeList[i].rnum+"</td><td>"+data.storeList[i].mgrName+"</td><td>"+data.storeList[i].mgrAddr+"</td><td>"+data.storeList[i].mgrBossName+"</td><td style='color:#bbbbbb'>"+data.storeList[i].mgrTel+"</td></tr>");
 					$("#uiResultCount").text(index);
 				}
 				$(".paging").html(data.pageNavi);
@@ -425,7 +437,10 @@
 		})
 		
 	})
-
+	// 주문하기 클릭
+	function detailMarket2(idx){
+		location.href ="/cusOrder.do?mgrNo="+idx;
+	}
 	// 지점 클릭
 	function detailMarket(num){
 		mapXyInfo(dataList[num]);

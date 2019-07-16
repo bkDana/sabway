@@ -257,7 +257,10 @@ $(document).ready(function() {
 		console.log($('input[name=bucSource]').val());
 		$(".step").eq(8).trigger("click");
 	});
-	
+	var getCookie = function(name) {
+		  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+		  return value? value[2] : null;
+		};
 	$('.order-check').click(function(){
 		var str='';
 		for(var i = 1; i<$('.sidemenu').length;i++){
@@ -274,6 +277,9 @@ $(document).ready(function() {
 		$('input[name=bucCost]').val(cost);
 		$('input[name=bucKcal]').val(kcal);
 		$('input[name=bucQuantity]').val('1');
+		var cookieVal = getCookie('noneCustomer');
+		$('#cookie').val(cookieVal);
+		console.log($('#cookie').val());
 //		serialize()
 		var form = $("form[name=feedbackform]")[0];
 //		console.log(queryString);

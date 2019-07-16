@@ -77,5 +77,10 @@ public class CustomerServiceImpl implements CustomerService{
 	public int adminCustomerDeleteCancle(int customerNo) {
 		return customerdao.adminCustomerDeleteCancle(customerNo);
 	}
-
+	//아이디찾기
+	@Override
+   public Customer findId(Customer customerVo) {
+      Customer c = customerdao.findId(customerVo);
+      return c;
+   }
 }

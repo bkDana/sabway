@@ -6,7 +6,7 @@
 
 <section id="content-wrapper">
 	<div class="area">
-		<h1 class="comm-content-tit">일반 로그인</h1>
+		<h1 class="comm-content-tit">LOGIN</h1>
 		<div class="common-tbl-box">
 			<c:choose>
 				<c:when test="${not empty sessionScope.customer }">
@@ -14,17 +14,41 @@
 					<a href="/logout.do">로그아웃</a>
 				</c:when>
 				<c:otherwise>
-					<fieldset>
-					<legend>로그인</legend>
 					<form action="/login.do" method="post">
-						ID : <input type="text" name="customerId"><br>
-						PW : <input type="password" name ="customerPw"><br>
-						<input type="submit" value="로그인">
-						<a href="/enrollPage.do">회원가입</a>
-						<a href="/views/map.jsp">지도</a>
-						<a href="/views/map2.jsp">지도(테스트)</a>
-					</form>	
-			</fieldset>
+						<div class="login-inner clearfix">
+							<div class="login-tbl-box">
+								<table class="comm-tbl login-tbl">
+									<colgroup>
+										<col width="20%">
+										<col width="/">
+									</colgroup>
+									<tr>
+										<th>아이디</th>
+										<td><input type="text" name="customerId"></td>
+									</tr>
+									<tr>
+										<th>비밀번호</th>
+										<td><input type="password" name="customerPw"></td>
+									</tr>
+								</table>
+
+							</div>
+							<div class="common-tbl-btn-group" style="padding-top:35px;text-align:center">
+								<button type="submit" class="btn-style1">로그인</button>
+								<button type="button" class="btn-style3" onclick="location.href='/enrollPage.do'">회원가입</button>
+
+								<div class="common-tbl-btn-group">
+									<button type="submit" class="btn-style1">로그인</button>
+									<button type="button" class="btn-style3" onclick="location.href='/enrollPage.do'">회원가입</button>
+								</div>
+
+							</div>
+							<div >
+								<button type="button" class="btn-style1" onclick="location.href='/findIdPage.do'">아이디 찾기</button>
+								<button type="button" class="btn-style3" onclick="location.href='/findPwPage.do'">비번 찾기</button>
+							</div>
+						</div>
+					</form>
 				</c:otherwise>
 			</c:choose>
 		</div>

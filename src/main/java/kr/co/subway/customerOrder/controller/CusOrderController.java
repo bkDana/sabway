@@ -20,18 +20,21 @@ import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.ingreManage.vo.IngreVo;
+import kr.co.subway.manager.vo.Mgr;
 
 @Controller
 public class CusOrderController {
 	@Autowired
 	private CusOrderService cusOrderService;
-	
+	///매개변수로 지점명
 	@RequestMapping("/cusOrder.do")
-	public ModelAndView loadCusOrder() {
+	public ModelAndView loadCusOrder(@RequestParam int mgrNo) {
 		ArrayList<IngreVo> ingreList = cusOrderService.ingreSelectAll();
+		Mgr mgr = cusOrderService.mgrSelectOne(mgrNo);
 		ModelAndView mav = new ModelAndView();
 		if (!ingreList.isEmpty()) {
 			mav.addObject("ingreList", ingreList); // view에서 사용할 객체 추가
+			mav.addObject("mgr", mgr);
 			mav.setViewName("customerOrder/horizentalOrder");
 		} else {
 			System.out.println("비어dltdma");
@@ -43,16 +46,8 @@ public class CusOrderController {
 	//활성화 여부 ajax로 변경
 	@ResponseBody
 	@RequestMapping("/tempOrder.do")
-	public void tempOrderInsert(HttpServletRequest request, HttpServletResponse response, Bucket b){
-		HttpSession session = request.getSession();
-		Customer c = (Customer)session.getAttribute("customer");
-		int customerIdx = -1;
-		if(c != null) {
-			customerIdx = c.getCustomerNo();
-		}
-		
-		b.setBucCusoIdx(customerIdx);
-		b.setBucCustomerIdx(1111);
+	public void tempOrderInsert(HttpServletResponse response, Bucket b){
+		b.setBucCusoIdx("0");
 		int result = cusOrderService.tempOrderInsert(b);
 		int bucIdx = cusOrderService.tempOrderSelect();
 	//			System.out.println("controller updateIngreActive() result : "+result);
@@ -99,5 +94,6 @@ public class CusOrderController {
 		}
 		return mav;
 	}
-
+	
+	
 }
