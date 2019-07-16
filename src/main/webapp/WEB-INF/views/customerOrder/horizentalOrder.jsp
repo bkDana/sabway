@@ -83,6 +83,7 @@ var myform=new formtowizard({
 				<div class="cheeze img-box select-none fix-img" style="background-color:white; clear:both;" >
 					<img src="/resources/img/cancelyellow.png">
 					<p class="label">선택안함</p>
+					<input type="hidden" value="0">
 				</div>
 				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 					<c:if test="${ingre.ingreType eq '치즈' and ingre.ingreActive eq '1' }">
@@ -99,6 +100,9 @@ var myform=new formtowizard({
 				<div class="topping img-box select-none fix-img" style="background-color:white; clear:both;" >
 					<img src="/resources/img/cancelyellow.png">
 					<p class="label">선택안함</p>
+					<input type="hidden" value="0">
+					<input type="hidden" value="0">
+					<input type="hidden" value="0">
 				</div>
 				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 					<c:if test="${ingre.ingreType eq '추가토핑' and ingre.ingreActive eq '1' }">
@@ -153,6 +157,7 @@ var myform=new formtowizard({
 				<div class="source img-box select-none fix-img" style="background-color:white; clear:both;" >
 					<img src="/resources/img/cancelyellow.png">
 					<p class="label">선택안함</p>
+					<input type="hidden" value="0">
 				</div>
 				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 					<c:if test="${ingre.ingreType eq '소스' and ingre.ingreActive eq '1' }">

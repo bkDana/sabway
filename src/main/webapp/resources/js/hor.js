@@ -72,7 +72,7 @@ $(document).ready(function() {
 		var amountIdx = -1;
 		if(($('.bread-amount').index(this)+1)%2 == 1) {
 			amountIdx = 15;
-			kcal += Number($(this).parent().parent().find('input').eq(0).val());
+			kcal += Number($(this).parent().parent().find('input').eq(0).val())*1;
 			breadCheck=1;
 		} else {
 			amountIdx = 30;
@@ -89,10 +89,10 @@ $(document).ready(function() {
 	$('.main').click(function(){
 		var str = $(this).find('p').text();
 		if(breadCheck==1){
-			cost +=  Number($(this).find('input').eq(1).val());
-			kcal +=  Number($(this).find('input').eq(0).val());
+			cost +=  Number($(this).find('input').eq(1).val())*1;
+			kcal +=  Number($(this).find('input').eq(0).val())*1;
 		}else if(breadCheck==2){
-			cost +=  Number($(this).find('input').eq(2).val());
+			cost +=  Number($(this).find('input').eq(2).val())*1;
 			kcal +=  Number($(this).find('input').eq(0).val())*2;
 		}
 		console.log(cost);
@@ -107,7 +107,7 @@ $(document).ready(function() {
 	$('.cheeze').click(function(){
 		var str = $(this).find('p').text();
 		if(breadCheck==1){
-			kcal +=  Number($(this).find('input').eq(0).val());
+			kcal +=  Number($(this).find('input').eq(0).val())*1;
 		}else if(breadCheck==2){
 			kcal +=  Number($(this).find('input').eq(0).val())*2;
 		}
@@ -122,10 +122,10 @@ $(document).ready(function() {
 			if($('.topping').eq(i).hasClass("selects")){
 				str += '1';
 				if(breadCheck==1){
-					cost += Number($('.topping').eq(i).find('input').eq(1).val());
-					kcal += Number($('.topping').eq(i).find('input').eq(0).val());
+					cost += Number($('.topping').eq(i).find('input').eq(1).val())*1;
+					kcal += Number($('.topping').eq(i).find('input').eq(0).val())*1;
 				}else if(breadCheck==2){
-					cost += Number($('.topping').eq(i).find('input').eq(2).val());
+					cost += Number($('.topping').eq(i).find('input').eq(2).val())*1;
 					kcal += Number($('.topping').eq(i).find('input').eq(0).val())*2;
 				}
 			}else{
@@ -197,7 +197,7 @@ $(document).ready(function() {
 				for(var k=0; k<4; k++){
 					if($('.vegi').eq(i).find("button").eq(k).hasClass("select-vegi")){
 						str += k;
-						kcal += Number($('.vegi').eq(i).find("input").val());
+						kcal += Number($('.vegi').eq(i).find("input").val())*1;
 					}
 				}
 			}else{
@@ -254,7 +254,7 @@ $(document).ready(function() {
 			if($('.source').eq(i).hasClass("selects")){
 				str += '1';
 				if(breadCheck==1){
-					kcal += Number($('.source').eq(i).find('input').eq(0).val());
+					kcal += Number($('.source').eq(i).find('input').eq(0).val())*1;
 				}else if(breadCheck==2){
 					kcal += Number($('.source').eq(i).find('input').eq(0).val())*2;
 				}
@@ -270,8 +270,11 @@ $(document).ready(function() {
 	});
 	$('.set').click(function(){
 		var str = $(this).find('p').text();
-		cost += Number($(this).find('input').eq(1).val());
-		kcal += Number($(this).find('input').eq(0).val());
+		if($(this).hasClass("selected")){
+			kcal += Number($(this).find('input').eq(0).val());
+			cost += Number($(this).find('input').eq(1).val());
+		}
+		$(this).toggleClass("selected");
 		$('input[name=bucSet]').val(str);
 		$(".step").eq(9).trigger("click");
 	});
@@ -327,8 +330,8 @@ $(document).ready(function() {
         			if(i!=8){
         				orderCheckStr += "<td>"+$('.orderInput').eq(i).val()+"</td>";        				
         			}else{
-        				orderCheckStr += "<td><button class='quantityChange' type='button' onclick='quantityChange("+i+",0,this);'>-</button>"
-        					+$('.orderInput').eq(i).val()+"<button class='quantityChange' type='button' onclick='quantityChange("+i+",1,this);'>+</button></td>";
+        				orderCheckStr += "<td><button class='quantityChange type1' type='button' onclick='quantityChange(0,this);'>-</button>&nbsp;&nbsp;&nbsp;<span>"
+        					+$('.orderInput').eq(i).val()+"</span>&nbsp;&nbsp;&nbsp;<button class='quantityChange type2' type='button' onclick='quantityChange(1,this);'>+</button></td>";
         			}
         			
         		}
@@ -341,8 +344,9 @@ $(document).ready(function() {
             },
         });
 	});
-		function quantityChange(valueIdx,changeIdx,btn){
-			var value = $('.orderInput').eq(valueIdx).val();
+	
+		function quantityChange(changeIdx,btn){
+			var value = Number($(btn).parent().find('span').text());
 			var idx = $(btn).parent().next().next().find('input').val();
 			if(changeIdx==0){
 				value--;
@@ -354,7 +358,7 @@ $(document).ready(function() {
 	            type : 'get',
 	            data : {value:value,idx:idx},
 	            success : function(){
-	            	$('.orderInput').eq(valueIdx).val(value);
+	            	$(btn).parent().find('span').text(value);
 	            },
 	        });
 		}

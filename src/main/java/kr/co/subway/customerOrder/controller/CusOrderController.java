@@ -80,9 +80,8 @@ public class CusOrderController {
 	}
 	@ResponseBody
 	@RequestMapping("/updateQuantity.do")
-	public void updateQuantity(HttpServletResponse response, @RequestParam String value, @RequestParam int idx){
-		int val = Integer.parseInt(value);
-		UpdateQuantity uq = new UpdateQuantity(val, idx);
+	public void updateQuantity(HttpServletResponse response, @RequestParam int value, @RequestParam int idx){
+		UpdateQuantity uq = new UpdateQuantity(value, idx);
 		int result = cusOrderService.updateQuantity(uq);
 		
 		if(result>0) {
