@@ -69,13 +69,17 @@ public class MgrDAO {
 		return session.selectList("mgr.searchStatusAddr",mgr);
 	}
 	//searchStore 검색
-	public List<Mgr> searchStore(String keyword){
-		return session.selectList("mgr.searchStore",keyword);
+	public List<Mgr> searchStore(PageBound pb){
+		return session.selectList("mgr.storeSelectPaging",pb);
 	}
+
 	public List<Mgr> morePage(PageNo pn){
 		return session.selectList("mgr.pageMore",pn);
 	}
 	public List<Mgr> pageMore(PageNo pn){
 		return session.selectList("mgr.pageMore",pn);
+	}
+	public int allStoreTotalCount(String keyword) {
+		return session.selectOne("mgr.allStoreTotalCount",keyword);
 	}
 }

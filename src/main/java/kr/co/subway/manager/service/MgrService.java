@@ -51,7 +51,7 @@ public class MgrService {
 		int end = currentPage*numPerPage;
 		
 		
-		PageBound pb = new PageBound(start, end);
+		PageBound pb = new PageBound(start, end ,null);
 		
 		ArrayList<Mgr> storeList = (ArrayList<Mgr>)mgrdao.storeSelectPaging(pb);
 		storeList.get(0).setTotalCount(totalCount);
@@ -75,6 +75,45 @@ public class MgrService {
 		
 		return new StorePageNaviData(storeList,pageNavi);
 	}
+	
+	// 전체매장 select 필터 검색 페이징
+		@SuppressWarnings("unchecked")
+		public StorePageNaviData allStoreSelectPaging(int currentPage,String keyword,String area){
+			System.out.println(keyword);
+			String pageNavi = "";
+			int numPerPage = 10; // 출력될 개시판 개수
+			int pageNaviSize = 5; // 하단 페이징 노출 수
+			
+			int totalCount = mgrdao.allStoreTotalCount(keyword);
+			System.out.println("갯수:"+totalCount);
+			int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
+			int start = (currentPage-1)*numPerPage+1;
+			int end = currentPage*numPerPage;
+			
+			
+			PageBound pb = new PageBound(start, end ,keyword);
+			
+			ArrayList<Mgr> storeList = (ArrayList<Mgr>)mgrdao.storeSelectPaging(pb);
+			
+			int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
+			if(pageNo != 1) {
+				pageNavi += "<a onclick='applyArea(\""+area+"\",\""+(pageNo-1)+"\");'>이전</a>";
+			}
+			int i = 1;
+			while(!(i++>pageNaviSize || pageNo>totalPage)) {
+				if(currentPage == pageNo) {
+					pageNavi += "<span>"+pageNo+"</span>";
+				}else {
+					pageNavi += "<a href='javascript:applyArea(\""+area+"\",\""+pageNo+"\");'>"+pageNo+"</a>";
+				}
+				pageNo++;
+			}
+			if(pageNo < totalPage) {
+				pageNavi +="<a onclick='applyArea("+area+","+(pageNo+1)+")'>다음</a>";
+			}
+			
+			return new StorePageNaviData(storeList,pageNavi);
+		}
 	
 	
 	
@@ -104,8 +143,11 @@ public class MgrService {
 		}
 		return list;
 	}
+	
+	//매장찾기 키워드 검색
 	public List<Mgr> searchStore(String keyword){
-		List<Mgr> list = mgrdao.searchStore(keyword);
+		PageBound pb = new PageBound(0,0,keyword);
+		List<Mgr> list = mgrdao.searchStore(pb);
 		return list;
 		
 	}
