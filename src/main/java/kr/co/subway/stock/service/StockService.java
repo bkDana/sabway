@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.subway.common.SearchVO;
+import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.managerOrder.vo.StockVO;
 import kr.co.subway.stock.vo.stockViewVO;
 import kr.co.subway.stock.dao.StockDao;
@@ -39,7 +40,30 @@ public class StockService {
 			pageNo++;
 		}
 		if(reqPage!=totalPage && totalPage!=0) {
-			pageNavi += "<a class='paging-arrow next-arrrow' href='javascript:list("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
+			pageNavi += "<a class='paging-arrow next-arrow' href='javascript:list("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
+		}
+		return pageNavi;
+	}
+	
+	public String getModalPageNavi(int total, int reqPage, int pageNum, int totalNavi) {
+		String pageNavi = "";
+		int totalPage = (total%pageNum==0)?(total/pageNum):(total/pageNum)+1;
+		int pageNo = ((reqPage-1)/totalNavi)*totalNavi+1;
+		if(reqPage != 1) {
+			pageNavi += "<a class='paging-arrow prev-arrow' href='javascript:list2("+(reqPage-1)+");'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";	
+		}
+		
+		int i = 1;
+		while(!(i++>totalNavi || pageNo>totalPage)) {
+			if(reqPage == pageNo) {
+				pageNavi += "<a class='cur'>"+pageNo+"</a>";
+			}else {
+				pageNavi += "<a href='javascript:list2("+pageNo+");'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		if(reqPage!=totalPage && totalPage!=0) {
+			pageNavi += "<a class='paging-arrow next-arrow' href='javascript:list2("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		return pageNavi;
 	}
@@ -75,15 +99,16 @@ public class StockService {
 	/* 입출고 내역 리스트 */
 	public HistoryListVO stockHistory(SearchVO search) {
 		int reqPage = search.getReqPage();
-		int total = dao.totalCount(search);
-		int pageNum = 2;
+		int total = dao.totalStock(search);
+		int pageNum = 10;
 		
 		search.setStart((reqPage*pageNum-pageNum)+1);
 		search.setEnd(reqPage*pageNum);
 		/* 리스트 */
 		ArrayList<HistoryVO> stockList = (ArrayList<HistoryVO>)(dao.stockHistory(search));
-
-		HistoryListVO list = new HistoryListVO(stockList, getPageNavi(total,reqPage,pageNum,10));//전체 row, 현재페이지, 한페이지 출력 개수, 출력할 페이지 개수
+		
+		IngreVo ingre = dao.ingreInfo(search);
+		HistoryListVO list = new HistoryListVO(stockList,ingre, getModalPageNavi(total,reqPage,pageNum,10));//전체 row, 현재페이지, 한페이지 출력 개수, 출력할 페이지 개수
 		return list;
 	}
 

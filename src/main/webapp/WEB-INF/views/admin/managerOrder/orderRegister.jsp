@@ -69,7 +69,9 @@ $.ajax({
 	url : '/ingreManage/ingreType.do',
 	success : function(data){
 		for(var i=0;i<data.length;i++){
-			$('#itemType').append('<option value='+data[i]+'>'+data[i]+'</option>');
+			if(data[i]!='샐러드'&&data[i]!='세트메뉴'){
+				$('#itemType').append('<option value='+data[i]+'>'+data[i]+'</option>');
+			}
 		}
 	},
 	error : function(){

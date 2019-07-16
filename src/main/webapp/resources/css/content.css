@@ -51,6 +51,9 @@
 .comm-tbl.type2 th{text-align:center; font-size:16px; border-top:2px solid rgba(254,67,30);}
 .comm-tbl.type2 td{color:#2b2b2b; font-size:14px; text-align:center;}
 .comm-tbl.type2 tr:hover td{background-color:rgba(254,67,30,0.05);}
+/* 회원가입, 가맹점신청  :보경 */
+
+
 
 /* 게시판용  :: 지영*/
 .comm-tbl.board{width:100%; max-width:none; background-color:#f8f8f8; border-top:4px solid #009223;}
@@ -85,7 +88,7 @@
 .common-tbl-btn-group > button.btn-style1{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style2{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style3{background-color:#888;}
-.common-tbl-btn-group > button.small{width:100px; height:35px; font-size:15px;}
+.common-tbl-btn-group > button.small{background-color:#009223;width:100px; height:35px; font-size:15px;}
 .common-tbl-btn-group > button.supersmall{width:55px; height:30px; font-size:14px;}
 .comm-tbl .file-del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#888; color:#fff; margin-left:5px;}
 
@@ -161,7 +164,7 @@
 
 /* ****************** 로그인 ********************** */
 .login-inner{max-width:65%; margin:0 auto 30px;}
-.login-inner .login-tbl-box{float:left; width:72%;}
+.login-inner .login-tbl-box{float:left; width:70%; margin-left:15%;}
 .login-inner .login-tbl-box .login-tbl{max-width:none;}
 .comm-tbl.login-tbl th, .comm-tbl.login-tbl td{border-left:0; border-right:0;}
 .login-inner .login-btn-box{float:right; width:23%;text-align:center;}
@@ -171,6 +174,10 @@
 .login-util-box{text-align:center;}
 .login-util-box > span{display:inline-block; vertical-align:middle; margin:0 15px;}
 .login-util-box > span a{display:inline-block; padding:5px; font-size:16px; line-height:20px; color:#2d2d2d;}
+/* 
+.login-inner .login-btn-box > button{width:100px; height:50px; border-radius:50px; font-size:17px; color:#fff; margin:0 10px;}
+.login-inner .login-btn-box > button.btn-style1{background-color:#009223;}
+.login-inner .login-btn-box > button.btn-style3{background-color:#888;} */
 
 /* ****************** 이용약관 ********************** */
 .terms-tit{font-size: 18px;margin-bottom: 20px;font-weight:500;}

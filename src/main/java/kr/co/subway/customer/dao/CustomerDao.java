@@ -16,4 +16,5 @@ public interface CustomerDao {
 	public int adminCustomerDelete(int customerNo);			//회원탈퇴시키기
 	public int adminCustomerDeleteCancle(int customerNo);	//회원탈퇴해제시키기
 //	public void GetKey(String user_id, String key);
+	public Customer findId(Customer customerVo);			//아이디찾기
 }

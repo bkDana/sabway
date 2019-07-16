@@ -133,7 +133,7 @@
 	}
 	.store_map_layer {
 	    width: 298px;
-	    height: 243px;
+	    height: 236px;
 	    border: 1px solid #000000;
 	    background-color: #fff;
 	    position: absolute;
@@ -218,16 +218,21 @@
 					}
 					
 					for(var i=0; i<data.length; i++){
-						$("#uiResultList").append("<li id='searchData"+i+"'><a href='#' onclick='detailMarket("+data[i].mgrNo+");'><span><strong>"+data[i].mgrAddr+"</strong></span>"+"<br><span class='uiResultSpan'>"+data[i].mgrName+"</span><br><span class='uiResultSpan'>"+data[i].mgrTel+"</span></a></li>");
+						$("#uiResultList").append("<li id='searchData"+i+"'><a href='#' onclick='detailMarket("+i+");'><span><strong>"+data[i].mgrAddr+"</strong></span>"+"<br><span class='uiResultSpan'>"+data[i].mgrName+"</span><br><span class='uiResultSpan'>"+data[i].mgrTel+"</span></a></li>");
 					}
 					
 					mapXyInfo(data[0]);
 				}
 			});
 		    
-		 }	
-	function detailMarket(idx){
+		 }
+	// 주문하기 클릭
+	function detailMarket2(idx){
 		location.href ="/cusOrder.do?mgrNo="+idx;
+	}
+	// 지점 클릭
+	function detailMarket(num){
+		mapXyInfo(dataList[num]);
 	}
 </script>
 <%-- Header --%>
@@ -250,7 +255,7 @@
          	<div class="content">
 	            <p class="board_total">검색 결과 <strong id="pageCount">0</strong>건</p>
 	            <div class="store_list_scroll mCustomScrollbar _mCS_1 mCS_no_scrollbar">
-		            <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 421px;" tabindex="0">
+		            <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 421px; overflow:auto; overflow-x:hidden" tabindex="0">
 			            <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
 				            <ul id="uiResultList">
 				            </ul>
