@@ -1,22 +1,34 @@
 
-function deleteOrder(idx){
-	var delIdx = $('.hiddenBucIdx').val();
-	$.ajax({
-    	url : "/tempOrderDelete.do",
-        type : 'get',
-        data : {delIdx:delIdx},
-        success : function(){
-            $(idx).parent().parent().remove();
-        },
-    });
-}
+
 var getCookie = function(name) {
 	  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
 	  return value? value[2] : null;			//현재 쿠키가 3개 생성되어 있음, 3번째가 커스텀 쿠키
 	};
 
 $(document).ready(function(){
-    var sessionPhone = $('#sessionContainer').val(); // 주문할 때 쓰임
+	/* 주문삭제용 */
+	function deleteOrder(idx){
+		var delIdx = $('.hiddenBucIdx').val();
+		$.ajax({
+	    	url : "/tempOrderDelete.do",
+	        type : 'get',
+	        data : {delIdx:delIdx},
+	        success : function(){
+	        	totalCost -= Number($(idx).parent().find('.cost').html());
+	            $(idx).parent().parent().remove();
+	        },
+	    });
+	}
+	
+	var totalCost = Number(0); // 결재할 때 쓰임
+	
+	for(var i = 0; i<$('.cost').length; i++){
+		totalCost += Number($('.cost').html());
+	};
+    var sessionPhone = $('#sessionContainer').val(); // 결재할 때 쓰임
+    if(!$('#sessionContainer').val()) {
+    	sessionPhone = "010-2222-3333";
+    }
     var cookieVal = getCookie('noneCustomer');	// 헤더에서 쓰임
     console.log(sessionPhone);
     console.log(cookieVal);
@@ -382,19 +394,16 @@ $(document).ready(function(){
   
     /* 아임포트 */
     $('#sbmOrder').click(function(){
-    	var price = Number(0);
-    	for(var i = 0; i<$('.cost').length; i++){
-    		price += Number($('.cost').html());
-    	};
-    	console.log(price);
+
+    	console.log(totalCost);
 		var d = new Date();
 		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
 		IMP.init('imp25889583');
 		IMP.request_pay({
 			pay_method : 'card',
-			merchant_uid : $('#main').html()+date,			//거래ID - 유니크 주려고 날짜까지 넣음
-			name : $('#main').html()+"외",					//결재명
-			amount : price,									//결재 금액
+			merchant_uid : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+$('.hiddenInfo').eq(0).find('.hiddenIsSalad').val()+date,				//거래ID - 유니크 주려고 날짜까지 넣음
+			name : $('#main').html()+"외",						//결재명
+			amount : 1,									//결재 금액
 			buyer_tel : sessionPhone
 			
 		},function(response){

@@ -16,9 +16,7 @@
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<div class="hiddenInfo">
-				<c:if test="${sessionScope.customer ne null }">
 				<input type="hidden" class="hiddenBucCustomerIdx" value="${bucket.bucCustomerIdx }">
-				</c:if>
 				<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
  				<input type="hidden" class="hiddenBread" value="${bucket.bucBread }">
 				<input type="hidden" class="hiddenMain" value="${bucket.bucMain }">
