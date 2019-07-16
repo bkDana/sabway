@@ -187,8 +187,8 @@ function mapXyInfo (data) {
 						"		</dl>",
 						"	</div>",
 						"	<div class='foot'>",
-						"		<a href='#' target='blank' style='font-weight:bold'>주문하기</a><img src='../resources/img/icon_more.png' style='margin-left:10px;margin-bottom:3px'>",
-						"	</div>",
+						"		<a href='#' target='blank' style='font-weight:bold' onclick='detailMarket2("+data.mgrNo+")'>주문하기<img src='../resources/img/icon_more.png' style='margin-left:10px;margin-bottom:3px'>",
+						"	</a></div>",
 						"</div>"
 						].join('');
 					
