@@ -29,9 +29,9 @@
 	}
 </style>
 <%-- Header --%>
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	
-	<section id="content-wrapper">
+<section id="content-wrapper">
 	<div class="area">
 	<h1 class="comm-content-tit">회원가입</h1>
 		<form id="enrollForm" action="/enroll.do" method="post">
@@ -110,7 +110,7 @@
 			</div>
 		</form>
 	</div>
-	</section>
+</section>
 
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
