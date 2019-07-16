@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.customerOrder.vo.Bucket;
+import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
 
@@ -49,5 +50,10 @@ public class CusOrderDao {
 	
 	public Mgr mgrSelectOne(int mgrNo) {
 		return sqlSession.selectOne("bucket.mgrSelectOne", mgrNo); 
+	}
+	
+	public int updateQuantity(UpdateQuantity uq) {
+		
+		return sqlSession.update("bucket.updateQuantity", uq);
 	}
 }

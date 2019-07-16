@@ -90,4 +90,7 @@
 	<select id="mgrSelectOne" parameterType="_int" resultType="mgr">
 		select mgr_no as mgrNo, mgr_name as mgrName from manager where mgr_no = #{mrgNo}
 	</select>
+	<update id="updateQuantity" parameterType="kr.co.subway.customerOrder.vo.UpdateQuantity">
+		update bucket set buc_quantity = #{val} where buc_idx = #{bucIdx}
+	</update>
 </mapper>

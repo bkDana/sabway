@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
 import kr.co.subway.customerOrder.vo.Bucket;
+import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
 
@@ -77,7 +78,19 @@ public class CusOrderController {
 			System.out.println("임시저장 실패");
 		}
 	}
-				
+	@ResponseBody
+	@RequestMapping("/updateQuantity.do")
+	public void updateQuantity(HttpServletResponse response, @RequestParam String value, @RequestParam int idx){
+		int val = Integer.parseInt(value);
+		UpdateQuantity uq = new UpdateQuantity(val, idx);
+		int result = cusOrderService.updateQuantity(uq);
+		
+		if(result>0) {
+			System.out.println("수량 수정 성공");
+		}else{
+			System.out.println("수량 수정 실패");
+		}
+	}			
 	@RequestMapping("/loadBucket.do")
 	public ModelAndView loadBucket(HttpServletRequest request) {
 		HttpSession session = request.getSession();

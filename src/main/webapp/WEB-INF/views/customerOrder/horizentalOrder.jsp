@@ -173,6 +173,8 @@ var myform=new formtowizard({
 				<div class="set img-box select-one fix-img" style="background-color:white;" >
 					<img src="/resources/img/checkedgreen.png">
 					<p class="label">단품</p>
+					<input type="hidden" value="0">
+					<input type="hidden" value="0">
 				</div>
 				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 					<c:if test="${ingre.ingreType eq '세트메뉴' and ingre.ingreActive eq '1' }">
@@ -236,7 +238,7 @@ var myform=new formtowizard({
 						</tr>
 					</table>
 					<div class="common-tbl-btn-group">
-						<button type="button" class="btn-style2 add-order">추가 주문</button>
+						<button type="button" id="sbmOrder" class="btn-style2 add-order">추가 주문</button>
 						<button type="button" id="sbmOrder" class="btn-style2">주문 완료</button>
 					</div>
 				</div>
