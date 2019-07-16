@@ -19,7 +19,10 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 매장관리 > 가맹점 목록</div>
+		<div class="sub-menu">
+			※ 매장관리 > 가맹점 목록<br><br>
+			<button style="font-size:15px;" id="adminLink">목록으로 이동</button>
+		</div>
 		<h1 class="comm-content-tit">신청 목록</h1>
 		<table class="comm-tbl">
 			<tr>
@@ -65,31 +68,34 @@
 	</div>
 	<div class="area">
 		<h1 class="comm-content-tit">처리된 목록</h1>
-		<table class="comm-tbl">
+		<table class="comm-tbl" name="tr">
 			<tr>
 				<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
 			</tr>
-				<c:forEach items="${cpd.applyList }" var="cpt">
-						<tr class="tr">
-							<td>${cpt.applyName }s</td>
-							<td>${cpt.applyTitle }</td>
-							<td>${cpt.applyPhone }</td>
-							<td>${cpt.applyArea }</td>
-							<td>${cpt.applyDate }</td>
-							<!-- 상태값을 가져와서 승인/거절로 출력 -->
-							<c:if test="${cpt.applyStatus eq 1 }">
-								<td>승인</td>
-							</c:if>
-							<c:if test="${cpt.applyStatus eq 2 }">
-								<td>거절</td>
-							</c:if>
-						</tr>
-				</c:forEach>
+			
+<%-- 			<c:forEach items="${cpd.applyList }" var="cpt">
+				<tr>
+					<td>${cpt.applyName }</td>
+					<td>${cpt.applyTitle }</td>
+					<td>${cpt.applyPhone }</td>
+					<td>${cpt.applyArea }</td>
+					<td>${cpt.applyDate }</td>
+					<td>
+						<!-- 상태값을 가져와서 승인/거절로 출력 -->
+						<c:if test="${cpt.applyStatus eq 1 }">
+							<td>승인</td>
+						</c:if>
+						<c:if test="${cpt.applyStatus eq 2 }">
+							<td>거절</td>
+						</c:if>
+					</td>
+				</tr>
+			</c:forEach>
 			<c:if test="${cpd.totalCount <= 0 }">
 				<tr>
 					<td>처리된 목록이 없습니다.</td>
 				</tr>
-			</c:if>
+			</c:if> --%>
 		</table>
 		<div class="pageNavi">${cpd.pageNavi }</div>
 	</div>
@@ -101,7 +107,10 @@
 			url:"/applyCompletion.do",
 			data:{currentPage:currentPage},
 			success:function(data){
-				$('.tr').append('<td>'+data+'</td>');
+				for(var i=0;i<10;i++){
+					$('[name=tr]').append("<tr><td>"+data.applyName+"</td>"+"<td>"+data.applyTitle+"</td><td>"+data.applyPhone+"</td><td>"+data.applyArea+"</td><td>"+data.applyDate+"</td><td>"+data.status+"</td></tr>");
+				}
+				console.log(data);
 			}
 		});
 	});
@@ -128,7 +137,7 @@
 					dataType : "json",
 					success : function(data){
 						if(data.result == 0){
-							alert("거절 되었습니다.");
+							alert("수정 완료.");
 						}
 					},
 					error : function(){
@@ -137,6 +146,9 @@
 				});
 			}
 		}
+	});
+	$("#adminLink").click(function(){
+		location.href="/admin.do";
 	});
 </script>
 

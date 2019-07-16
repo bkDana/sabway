@@ -59,5 +59,10 @@ public class CustomerDaoImpl implements CustomerDao{
 	public int adminCustomerDeleteCancle(int customerNo) {
 		return sqlsession.update("customer.adminCustomerDeleteCancle",customerNo);
 	}
+	@Override
+	public String findId(Customer customerVo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

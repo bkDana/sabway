@@ -79,8 +79,8 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 	//아이디찾기
 	@Override
-   public Customer findId(Customer customerVo) {
-      Customer c = customerdao.findId(customerVo);
-      return c;
+   public String findId(Customer customerVo) {
+      String id = customerdao.findId(customerVo);
+      return id;
    }
 }

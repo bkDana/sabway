@@ -166,9 +166,9 @@ public class HeadOfficeController {
 		}
 	}
 	//처리한 가맹점 목록 가져오기
-	
-	@RequestMapping(value="/applyCompletion.do")
-	public ModelAndView applyCompletion(@RequestParam String currentPage) {
+	@ResponseBody
+	@RequestMapping(value="/applyCompletion.do",produces="text/plain;charset=utf-8")
+	public String applyCompletion(@RequestParam String currentPage) {
 		//페이징
 		ArrayList<Apply> list = (ArrayList<Apply>) applyService.applyList();
 		int currentPage1;
@@ -179,14 +179,7 @@ public class HeadOfficeController {
 		}
 		CompletionPageData cpd = applyService.completionPaging(currentPage1);
 		String pageNavi = cpd.getPageNavi();
-		ModelAndView mav = new ModelAndView();
-		if(!list.isEmpty()) {
-			mav.addObject("cpd",cpd);
-			mav.setViewName("headOffice/managerApply");
-		}else {
-			mav.setViewName("redirect:/");
-		}
-		return mav;
+		return new Gson().toJson(cpd);
 	}
 	
 
