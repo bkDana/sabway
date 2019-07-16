@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.manager.vo.Mgr;
+import kr.co.subway.manager.vo.MgrPageData;
 import kr.co.subway.manager.vo.PageNo;
 import kr.co.subway.notice.vo.PageBound;
 
@@ -21,6 +22,10 @@ public class MgrDAO {
 	//가맹점 목록
 	public List<Mgr> mgrList() {
 		return session.selectList("mgr.mgrList");
+	}
+	//가맹점 목록(더보기)
+	public List<Mgr> mpdList(MgrPageData mpd) {
+		return session.selectList("mgr.mpdList",mpd);
 	}
 	// 가맹점 토탈카운트
 	public int storeTotalCount() {
@@ -49,35 +54,75 @@ public class MgrDAO {
 		return session.update("mgr.mgrUpdate",mgr);
 	}
 	//검색어 검색(name)
-	public List<Mgr> searchBossName(String text){
-		return session.selectList("mgr.searchBossName",text);
+	public List<Mgr> searchBossName(MgrPageData mpd){
+		return session.selectList("mgr.searchBossName",mpd);
 	}
 	//검색어 검색(addr)
-	public List<Mgr> searchAddr(String text){
-		return session.selectList("mgr.searchAddr",text);
+	public List<Mgr> searchAddr(MgrPageData mpd){
+		return session.selectList("mgr.searchAddr",mpd);
 	}	
 	//상태별 분류
-	public List<Mgr> selectStatus(int status){
-		return session.selectList("mgr.selectStatus",status);
+	public List<Mgr> selectStatus(MgrPageData mpd){
+		return session.selectList("mgr.selectStatus",mpd);
 	}
 	//statusName 검색
-	public List<Mgr> searchStatusName(Mgr mgr){
-		return session.selectList("mgr.searchStatusName",mgr);
+	public List<Mgr> searchStatusName(MgrPageData mpd){
+		return session.selectList("mgr.searchStatusName",mpd);
 	}	
 	//statusAddr 검색
-	public List<Mgr> searchStatusAddr(Mgr mgr){
-		return session.selectList("mgr.searchStatusAddr",mgr);
+	public List<Mgr> searchStatusAddr(MgrPageData mpd){
+		return session.selectList("mgr.searchStatusAddr",mpd);
+	}
+	//selectSearchStatusName 검색
+	public List<Mgr> selectSearchStatusName(MgrPageData mpd){
+		return session.selectList("mgr.selectSearchStatusName",mpd);
+	}	
+	//selectSearchStatusAddr 검색
+	public List<Mgr> selectSearchStatusAddr(MgrPageData mpd){
+		return session.selectList("mgr.selectSearchStatusAddr",mpd);
 	}
 	//searchStore 검색
 	public List<Mgr> searchStore(PageBound pb){
 		return session.selectList("mgr.storeSelectPaging",pb);
 	}
 
-	public List<Mgr> morePage(PageNo pn){
-		return session.selectList("mgr.pageMore",pn);
+	//더보기
+	public List<Mgr> pageMore(MgrPageData mpd){
+		return session.selectList("mgr.pageMore",mpd);
 	}
-	public List<Mgr> pageMore(PageNo pn){
-		return session.selectList("mgr.pageMore",pn);
+	//mgr 개수
+	public int totalCount(){
+		return session.selectOne("mgr.totalCount");
+	}
+	//주소를 조건으로 mgr 개수
+	public int addrTotalCount(MgrPageData mpd){
+		return session.selectOne("mgr.addrTotalCount",mpd);
+	}
+	//이름을 조건으로 mgr 개수
+	public int nameTotalCount(MgrPageData mpd){
+		return session.selectOne("mgr.nameTotalCount",mpd);
+	}
+	//상태를 조건으로 mgr 개수
+	public int statusTotalCount(MgrPageData mpd){
+		return session.selectOne("mgr.statusTotalCount",mpd);
+	}
+	//검색 결과 내 상태를 조건으로 mgr 개수
+	public int searchStatusTotalCount(MgrPageData mpd){
+		if(mpd.getKeyword().equals("주소")) {
+			return session.selectOne("mgr.addrStatusTotalCount",mpd);
+		}
+		return session.selectOne("mgr.nameStatusTotalCount",mpd);
+	}
+	//더보기(keyword)
+	public List<Mgr> keywordMore(MgrPageData mpd){
+		if(mpd.getKeyword().equals("주소")) {
+			return session.selectList("mgr.addrMore",mpd);
+		}
+		return session.selectList("mgr.nameMore",mpd);
+	}
+	//더보기(status)
+	public List<Mgr> statusMore(MgrPageData mpd){
+		return session.selectList("mgr.statusMore",mpd);
 	}
 	public int allStoreTotalCount(String keyword) {
 		return session.selectOne("mgr.allStoreTotalCount",keyword);

@@ -22,12 +22,27 @@ public class CusOrderDao {
 		return sqlSession.insert("bucket.insertBucket",buc);
 	}
 
-	public List<Bucket> allBucketList(int customerIdx) {
+	public List<Bucket> allOrderList(int customerIdx) {
 		return sqlSession.selectList("bucket.selectAllBucket", customerIdx);
 	}
 
 	public IngreVo selectCostMain(IngreVo ingre) {
 		return sqlSession.selectOne("ingre.selectOneMain", ingre);
 	}
+	
+	public int tempOrderInsert(Bucket b) {
+		return sqlSession.insert("bucket.tempOrderInsert", b);
+	}
 
+	public int insertBucket(Bucket b) {
+		return sqlSession.insert("bucket.insertBucket",b);
+	}
+	
+	public int tempOrderSelect() {
+		return sqlSession.selectOne("bucket.tempOrderSelect");
+	}
+	
+	public int tempOrderDelete(int idx) {
+		return sqlSession.delete("bucket.tempOrderDelete",idx);
+	}
 }

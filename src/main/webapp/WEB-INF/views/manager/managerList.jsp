@@ -119,18 +119,26 @@
 			</c:forEach>
 		</table>
 		<div class="common-tbl-btn-group" name="moreDiv">
-			<c:if test="${total > mpd.lastPage}">
+			<c:if test="${total > 10}">
 				<hr>
-				<input type="hidden" value="${total }" name="totalCount">
-				<input type="hidden" value=${mpd.lastPage } name="pageName">
 				<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
 				<hr>
 			</c:if>
+			<input type="hidden" value="${mgrSize }" name="mgrSize">
+			<input type="hidden" value="${total }" name="totalCount">
+			<input type="hidden" value=${mpd.lastPage } name="pageName">
 		</div>
 		<br>
 		<span name="selectBox">
 			<select name="statusGroup">
-				<option selected="selected" disabled="disabled">상태 분류</option>
+				<option selected="selected" disabled="disabled">
+					<c:choose>
+						<c:when test="${mpd.status == 1 }">준비</c:when>
+						<c:when test="${mpd.status == 2 }">영업</c:when>
+						<c:when test="${mpd.status == 3 }">폐업</c:when>
+						<c:otherwise>상태분류</c:otherwise>
+					</c:choose>
+				</option>
 				<option id="open">영업</option>
 				<option id="prepare">준비</option>
 				<option id="close">폐업</option>
@@ -141,11 +149,16 @@
 				<option id="name">이름</option>
 				<option id="addr">주소</option>
 			</select>&nbsp;
-			<input type="text">
+			<input type="text" value="${mpd.text }">
 			<button type="button" name="searchBtn">검색</button>
 		</span>
 	</div>
 </section>
+
+
+	<!-- 버튼 show/hide 조건 설정 제대로 해야함 -->
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		//상태변경(오픈)
@@ -181,11 +194,10 @@
 		});
 		//더보기
 		$("[name=more]").on("click",function(){
+			var mgrSize = $('[name=mgrSize]').val();
 			var total = Number($('[name=totalCount]').val());
 			var firstPage = Number($('[name=pageName]').val());
-			var length = firstPage+10;
-			console.log(length);
-			if(length <= total){
+			if(mgrSize > 10){
 				$.ajax({
 					url:"/mgrPageMore.do",
 					data:{firstPage:firstPage},
@@ -203,6 +215,22 @@
 							}
 							$('table').append(str);
 						}
+						//상태변경(오픈)
+						$(".onBtn").click(function(){
+							var mgrStatus = $(this).val();
+							var mgrName = $(this).parent().parent().children().eq(3).html();
+							if(confirm("변경하시겠습니까?")){
+								location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
+							}
+						});
+						//상태변경(폐점)
+						$(".offBtn").click(function(){
+							var mgrStatus = $(this).val();
+							var mgrName = $(this).parent().parent().children().eq(3).html();
+							if(confirm("변경하시겠습니까?")){
+								location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
+							}
+						});
 					}
 				});		
 			}else{
@@ -223,6 +251,22 @@
 							}
 							$('table').append(str);
 						}
+						//상태변경(오픈)
+						$(".onBtn").click(function(){
+							var mgrStatus = $(this).val();
+							var mgrName = $(this).parent().parent().children().eq(3).html();
+							if(confirm("변경하시겠습니까?")){
+								location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
+							}
+						});
+						//상태변경(폐점)
+						$(".offBtn").click(function(){
+							var mgrStatus = $(this).val();
+							var mgrName = $(this).parent().parent().children().eq(3).html();
+							if(confirm("변경하시겠습니까?")){
+								location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
+							}
+						});
 					}
 				});		
 				$("[name=moreDiv]").attr("style","display:none");

@@ -19,7 +19,7 @@
 		  </otherwise>
 	  </choose>
   	sysdate,
-  	<if test="ingreRecomSauce != '' or ingreRecomSauce != null">
+  	<if test="ingreRecomSauce != '' and ingreRecomSauce != null">
   		#{ingreRecomSauce})
   	</if>
   	<if test="ingreRecomSauce == '' or ingreRecomSauce == null">
@@ -101,7 +101,14 @@
   
   <!-- 재료 수정하기 -->
   <update id="ingreUpdate" parameterType="ingre">
-  	update ingredients set ingre_label=#{ingreLabel}, ingre_type=#{ingreType}, ingre_cost15=#{ingreCost15}, ingre_cost30=#{ingreCost30}, ingre_kcal=#{ingreKcal}, ingre_active=#{ingreActive}, ingre_unit=#{ingreUnit}, ingre_description=#{ingreDescription}, ingre_filepath=#{ingreFilepath} where ingre_idx=#{ingreIdx}
+  	update ingredients set ingre_label=#{ingreLabel}, ingre_type=#{ingreType}, ingre_cost15=#{ingreCost15}, ingre_cost30=#{ingreCost30}, ingre_kcal=#{ingreKcal}, ingre_active=#{ingreActive}, ingre_unit=#{ingreUnit}, ingre_description=#{ingreDescription},
+  		<if test="ingreRecomSauce != null and ingreRecomSauce != ''">
+  			ingre_recom_sauce=#{ingreRecomSauce},
+  		</if>
+  		<if test="ingreRecomSauce == null or ingreRecomSauce == ''">
+  			ingre_recom_sauce=null,
+  		</if>
+  	ingre_filepath=#{ingreFilepath} where ingre_idx=#{ingreIdx}
   </update>
   <!-- 재료 삭제하기 -->
   <delete id="ingreDelete" parameterType="string">
@@ -162,4 +169,21 @@
   from ((select * from book_apply where code=?"+ sql +" order by 1 desc)ba) Join member m Using(code)) b) 
   where rnum BETWEEN ? and ? -->
   <!-- select rnum, ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_kcal_salad as ingreKcalSalad, ingre_active as ingreActive, ingre_unit as ingreUnit, ingre_description as ingreDescription, ingre_filepath as ingreFilepth,ingre_reg_date as ingreRegDate -->
+
+
+
+  <!-- 프로모션 페이지  -->
+  <!-- 메뉴 리스트 가져오기 -->
+  <select id="ingreMainList" resultType="ingre">
+  	select ingre_idx as ingreIdx
+  	,ingre_label as ingreLabel
+  	,ingre_type as ingreType
+  	,ingre_cost15 as ingreCost15
+  	,ingre_cost30 as ingreCost30
+  	,ingre_discnt_rate as ingreDiscntRate
+  	from ingredients
+  </select>
+  <update id="updateIngre" parameterType="ingre">
+  	update ingredients set ingre_discnt_rate = #{ingreDiscntRate} where ingre_idx = #{ingreIdx} and ingre_type = #{ingreType}
+  </update>
 </mapper>

@@ -7,17 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.headOffice.vo.Menu;
+import kr.co.subway.ingreManage.vo.IngreVo;
 
 @Repository("menuDao")
 public class MenuDAO {
 	@Autowired
 	private SqlSession session;
 	//메뉴목록
-	public List<Menu> menuList() {
-		return session.selectList("menu.menuList");
+	public List<IngreVo> menuList() {
+		return session.selectList("ingre.ingreMainList");
 	}
 	//할인 및 할인율 수정
-	public int updateMenu(Menu menu) {
-		return session.update("menu.updateMenu",menu);
+	public int updateIngre(IngreVo ingre) {
+		return session.update("ingre.updateIngre",ingre);
 	}
 }

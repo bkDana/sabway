@@ -10,7 +10,6 @@
 <img src="/resources/img/main_event.jpg">
 <section id="content-wrapper">
 	<div class="area">
-	<a href="/mgrPage.do">test</a>
 	<c:choose>
 		<c:when test="${not empty sessionScope.customer }">
 			[${sessionScope.customer.customerName }]<br>

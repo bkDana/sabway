@@ -28,13 +28,33 @@ public class CusOrderService {
 		
 	}
 
-	public ArrayList<Bucket> allBucketList(int customerIdx) {
-		List<Bucket> list = cusOrderDao.allBucketList(customerIdx);
+	public ArrayList<Bucket> allOrderList(int customerIdx) {
+		List<Bucket> list = cusOrderDao.allOrderList(customerIdx);
 		return (ArrayList<Bucket>)list;
 	}
 
 	public IngreVo selectCostMain(IngreVo ingre) {
 		IngreVo mainIngre = cusOrderDao.selectCostMain(ingre);
 		return mainIngre;
+	}
+	
+	@Transactional
+	public int tempOrderInsert(Bucket b) {
+		return cusOrderDao.tempOrderInsert(b); 
+	}
+	
+	@Transactional(value="transactionManager")
+	public int insertBucket(Bucket b) {
+		int result = cusOrderDao.insertBucket(b);
+		return result;
+	}
+	
+	public int tempOrderSelect() {
+		return cusOrderDao.tempOrderSelect(); 
+	}
+	
+	@Transactional
+	public int tempOrderDelete(int idx) {
+		return cusOrderDao.tempOrderDelete(idx); 
 	}
 }
