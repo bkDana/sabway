@@ -29,15 +29,15 @@
 				<!-- 첨부파일이 있으면 출력 -->
 				<c:if test="${not empty ap.applyFilename }">
 					<tr>
-						<th style="border-bottom:none; text-align:center;">첨부파일</th>
-						<td colspan="3" style="border-bottom:none; text-align:center;" name="contentTd">
+						<th height="400px" style="border-top:none; text-align:center;">내용</th>
+						<td colspan="3" text-align:center;" name="contentTd">
 							<img src="/resources/upload/${ap.applyFilepath }" width="500px" height="350px">
+							<br><br><br>
+							<span>${ap.applyContent }</span>
+							<br><br><br>
 						</td>
 					</tr>
-					<tr>
-						<th height="400px" style="border-top:none; text-align:center;">내용</th>
-						<td name="contentTd" colspan="3" style="border-top:none;"><span>${ap.applyContent }</span></td>
-					</tr>
+				
 				</c:if>
 				<c:if test="${empty ap.applyFilename }">
 					<tr>
@@ -48,10 +48,14 @@
 			</table>
 		</div>
 		<div class="common-tbl-btn-group">
-			<button type="button" class="btn-style2"><a href="/managerApply.do">목록으로</a></button>
+			<button type="button" class="btn-style2" id="applyListLink">목록으로</button>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$('#applyListLink').click(function(){
+			location.href="/managerApply.do?currentPage=";
+		});
+	</script>
 </section>
-
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
