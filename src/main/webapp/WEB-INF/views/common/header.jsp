@@ -19,9 +19,21 @@
 <script type="text/javascript" src="/resources/js/nav.js"></script><!-- nav.js -->
 
 <script>
-	var cookieDate = new Date();
-	var date = cookieDate.getFullYear()+''+(cookieDate.getMonth()+1)+''+cookieDate.getDate()+''+cookieDate.getHours()+''+cookieDate.getMinutes()+''+cookieDate.getSeconds();
-	document.cookie = "noneCustomer="+date;
+	$(document).ready(function(){
+		if(!document.cookie){
+			setCookie();
+			console.log("쿠키생성");
+		}else{
+			console.log("쿠키있음");			
+		}
+		
+	});
+	var setCookie = function setCookie(){
+		var cookieDate = new Date();
+		var date = cookieDate.getFullYear()+''+(cookieDate.getMonth()+1)+''+cookieDate.getDate()+''+cookieDate.getHours()+''+cookieDate.getMinutes()+''+cookieDate.getSeconds();
+		document.cookie = "noneCustomer="+date;
+	}
+	
 </script>
 <script type="text/javascript" src="/resources/js/bucket.js"></script>
 <title>진짜 메인</title>

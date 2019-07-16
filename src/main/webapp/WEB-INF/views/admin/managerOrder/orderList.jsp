@@ -16,7 +16,7 @@
 			<form action="/managerOrder/orderList.do" method="post" name="search">
 				<input type="hidden" name="reqPage" value="1">
 				<input type="hidden" name="orderBy" value="${search.orderBy }">
-				<input type="search" name="startDay" class="searchdate search-day" value="${search.startDay }" autocomplete="off"> ~ <input type="search" name="endDay" class="searchdate search-day" value="${search.endDay }" autocomplete="off">
+				발주서 등록일 : <input type="search" name="startDay" class="searchdate search-day" value="${search.startDay }" autocomplete="off"> ~ <input type="search" name="endDay" class="searchdate search-day" value="${search.endDay }" autocomplete="off">
 				<br><br>
 				<input type="search" name="delDay" class="datepicker search-day" value="${search.delDay }"  placeholder="희망배송일" autocomplete="off">
 				
@@ -52,7 +52,7 @@
 			</c:if>
 			<select id="order" data-val="${search.orderBy }">
 				<option value="new">최신등록순</option>
-				<option value="del">배송일순</option>
+				<option value="del">희망배송일순</option>
 				<c:if test="${sessionScope.mgr.mgrLevel eq 1 }"><option value="store">매장별</option></c:if>
 			</select>
 		</p>
