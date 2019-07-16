@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.ingreManage.vo.IngreVo;
+import kr.co.subway.manager.vo.Mgr;
 
 @Repository("cusOrderDao")
 public class CusOrderDao {
@@ -44,5 +45,9 @@ public class CusOrderDao {
 	
 	public int tempOrderDelete(int idx) {
 		return sqlSession.delete("bucket.tempOrderDelete",idx);
+	}
+	
+	public Mgr mgrSelectOne(int mgrNo) {
+		return sqlSession.selectOne("bucket.mgrSelectOne", mgrNo); 
 	}
 }
