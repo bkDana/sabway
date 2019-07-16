@@ -47,6 +47,7 @@ public class CusOrderController {
 	@ResponseBody
 	@RequestMapping("/tempOrder.do")
 	public void tempOrderInsert(HttpServletResponse response, Bucket b){
+		b.setBucCusoIdx("0");
 		int result = cusOrderService.tempOrderInsert(b);
 		int bucIdx = cusOrderService.tempOrderSelect();
 	//			System.out.println("controller updateIngreActive() result : "+result);
