@@ -76,7 +76,6 @@
 <script>
 /* 페이지 이동 */
 function list(p){
-	//console.log(p);
 	$('input[name=reqPage]').val(p);
 	searchform.submit();
 }
@@ -176,6 +175,9 @@ $(function(){
 	});
 	
 	function setting(value,search){
+		if(search==null){
+			search = '';
+		}
 		if(value=='cat'){
 			$('input[name=searchVal]').remove();
 			$.ajax({
@@ -188,7 +190,9 @@ $(function(){
 						if(search==data[i]){
 							chk = 'selected';
 						}
-						$sel.append('<option value='+data[i]+' '+chk+'>'+data[i]+'</option>');
+						if(data[i]!='샐러드'&&data[i]!='세트메뉴'){
+							$sel.append('<option value='+data[i]+' '+chk+'>'+data[i]+'</option>');
+						}
 					}
 					
 					$('select[name=searchType]').after($sel);
