@@ -34,6 +34,7 @@ public class ApplyService {
 		Apply ap = applyDao.applyView(applyNo);
 		return ap;
 	}
+	@Transactional
 	// 가맹신청/문의 등록
 	public int insertApply(Apply applyVo) {
 		

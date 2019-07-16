@@ -17,7 +17,14 @@
 <!-- script -->
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
 <script type="text/javascript" src="/resources/js/nav.js"></script><!-- nav.js -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
+<script>
+	var cookieDate = new Date();
+	var date = cookieDate.getFullYear()+''+(cookieDate.getMonth()+1)+''+cookieDate.getDate()+''+cookieDate.getHours()+''+cookieDate.getMinutes()+''+cookieDate.getSeconds();
+	$.cookie('name', date );
+</script>
+<script type="text/javascript" src="/resources/js/bucket.js"></script>
 <title>진짜 메인</title>
 </head>
 <body>
@@ -54,6 +61,7 @@
 		<div id="headerInnerWrap">
 			<!-- 로고 -->
 			<div class="header-logo">
+				<input type="hidden" id="sessionConatainer" value="${sessionScope.custmoer }">
 				<a href="/" class="sabway"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a>
 				<ul class="header-menu clearfix">
 					<!--
@@ -62,9 +70,7 @@
 					<li><a class="header-btn">고객센터</a></li>
 					-->
 					<li><a href="/admin.do" class="header-btn">관리자</a></li>
-					<c:if test="${not empty sessionScope.customer}">
-						<li><a class="header-btn"><img src="/resources/img/shopping-cart.png" width="20px"> 1</a></li><!-- 장바구니 개수 넣어주세요 -->
-					</c:if>
+					<li><a class="header-btn" id="bucket"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
 				</ul>
 			</div>
 			<!-- 헤더 상단 -->
@@ -89,7 +95,7 @@
 							<a href="/cusOrder.do">온라인 주문</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="/cusOrder.do">주문하기</a></li>
+									<li><a href="/findStore.do?status=11">주문하기</a></li>
 									<li><a href="#">단체메뉴 이용방법</a></li>
 								</ul>
 							</div>
@@ -132,3 +138,4 @@
 			</div>
 		</div>
 	</header>
+

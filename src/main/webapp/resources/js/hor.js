@@ -220,24 +220,24 @@ $(document).ready(function() {
 		}
 	});
 	
-//	$('.source-recom').click(function(){
-//		var sauceStr = $('#recom-sauce').val();
-//		var arrSauce = sauceStr.split(',');
-//		console.log(arrSauce);
-//		for(var i=0; i<$('.source').length;i++){
-//			for(var k=0; k<arrSauce.length; k++){
-//				if($('.source').eq(i).find('p').text()===arrSauce[k]){
-//					console.log("k도냐"+k);
-//					$('.source').eq(i).unbind("mouseleave");
-//					$('.source').eq(i).find('img').css("display","none");
-//					$('.source').eq(i).find('p').css("display","block");
-//					$('.source').eq(i).find('button').css("display","block");
-//					$('.source').eq(i).css("background-color","#009223");
-//					$('.source').eq(i).toggleClass("selected");
-//				}
-//			}
-//		}
-//	});
+	$('.source-recom').click(function(){
+		var sauceStr = $('#recom-sauce').val();
+		var arrSauce = sauceStr.split(',');
+		console.log(arrSauce);
+		for(var i=0; i<$('.source').length;i++){
+			for(var k=0; k<arrSauce.length; k++){
+				if($('.source').eq(i).find('p').text()===arrSauce[k]){
+					console.log("k도냐"+k);
+					$('.source').eq(i).unbind("mouseleave");
+					$('.source').eq(i).find('img').css("display","none");
+					$('.source').eq(i).find('p').css("display","block");
+					$('.source').eq(i).find('button').css("display","block");
+					$('.source').eq(i).css("background-color","#009223");
+					$('.source').eq(i).toggleClass("selected");
+				}
+			}
+		}
+	});
 	
 	$('.source-check').click(function(){
 		var str = "";
@@ -274,6 +274,8 @@ $(document).ready(function() {
 		$('input[name=bucCost]').val(cost);
 		$('input[name=bucKcal]').val(kcal);
 		$('input[name=bucQuantity]').val('1');
+		$('#cookie').val($.cookie('name'));
+		console.log($('#cookie').val($.cookie('name')));
 //		serialize()
 		var form = $("form[name=feedbackform]")[0];
 //		console.log(queryString);

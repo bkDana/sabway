@@ -297,7 +297,7 @@ public class MgrController {
 	}
 	//신규가맹점 목록
 	@RequestMapping(value="/findStore.do")
-	public ModelAndView newStoreList(String currentPage) {
+	public ModelAndView newStoreList(String currentPage, @RequestParam int status) {
 		//신규매점 리스트
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.newStoreList();
 		int currentPage1;
@@ -330,12 +330,22 @@ public class MgrController {
 		
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
-			mav.addObject("list", list);
-			mav.addObject("listDate", listDate);
-			mav.addObject("listS", pd.getStoreList());
-			mav.addObject("totalCnt", pd.getStoreList().get(0).getTotalCount());
-			mav.addObject("pageNavi",pageNavi);
-			mav.setViewName("findStore/findStore");
+			if(status!=11) {
+				mav.addObject("list", list);
+				mav.addObject("listDate", listDate);
+				mav.addObject("listS", pd.getStoreList());
+				mav.addObject("totalCnt", pd.getStoreList().get(0).getTotalCount());
+				mav.addObject("pageNavi",pageNavi);
+				mav.setViewName("findStore/findStore");
+			}else {
+				mav.addObject("list", list);
+				mav.addObject("listDate", listDate);
+				mav.addObject("listS", pd.getStoreList());
+				mav.addObject("totalCnt", pd.getStoreList().get(0).getTotalCount());
+				mav.addObject("pageNavi",pageNavi);
+				mav.setViewName("findStore/findStoreOrder");
+			}
+			
 		}else {
 			mav.setViewName("manager/listMsg");
 		}
