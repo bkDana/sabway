@@ -203,7 +203,7 @@ var myform=new formtowizard({
 					</c:if>
 				</c:forEach>
 				<div class="common-tbl-btn-group">
-					<button type="button" class="btn-style2 order-check" style="clear:both;">주문 완료</button>
+					<button type="button" class="btn-style2 order-check" style="clear:both;">카트에 담기</button>
 				</div>
 			</fieldset>
 		
@@ -238,9 +238,6 @@ var myform=new formtowizard({
 					</table>
 					<div class="common-tbl-btn-group">
 						<button type="button" class="btn-style2 add-order">추가 주문</button>
-						<c:if test="${not empty sessionScope.customer}">
-							<button type="button" class="btn-style2 add-bucket">카트에 담기</button>
-						</c:if>
 						<button type="button" id="sbmOrder" class="btn-style2">주문 완료</button>
 					</div>
 				</div>

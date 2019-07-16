@@ -9,6 +9,7 @@
 <section id="content-wrapper" class="clearfix">
 	<%-- LEFT MENU --%>
  	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
+ 	<button class="modal-close-btn"><img src="/resources/img/main_top_line_banner_closebtn.png" ></button>
 	<div class="area"> 
 		<%-- <div class="sub-menu">※ 재고관리 > <a href="/managerOrder/stockList.do">재고현황</a></div>
 		
@@ -22,9 +23,9 @@
 		</p>
 		 --%>
 
-		<div class="common-tbl-btn-group">
-			<button class="modal-close-btn btn-style1">닫기</button>
-		</div>
+		<!-- <div class="common-tbl-btn-group"> -->
+			
+		<!-- </div> -->
 		<div>
 			<img src="">
 			<p></p>
@@ -53,11 +54,11 @@
 				</c:forEach>
 			</table>
 		</div>
-		<!-- paging 
+		<!-- paging -->
 		<div class="paging">
 			${list.pageNavi }	
 		</div>
-		-->
+		
 	</div>
 </section>
 
