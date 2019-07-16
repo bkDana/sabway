@@ -48,7 +48,8 @@
  			#{bucKcal},
  			#{bucQuantity},
  			default,
- 			#{bucCustomerIdx}
+ 			#{bucCustomerIdx},
+ 			${bucBranch}
  			)	
  	</insert>
  	<select id="selectAllBucket" parameterType="_int" resultType="bucket">

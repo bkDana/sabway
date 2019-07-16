@@ -8,7 +8,6 @@
 <script src="/resources/js/formwizard.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
 
-
 <script type="text/javascript">
 var myform=new formtowizard({
 	formid: 'feedbackform',
@@ -262,9 +261,8 @@ var myform=new formtowizard({
 				<input type="hidden" name="bucCustomerIdx" class="orderInput" id="cookie">
 			</c:if>
 		</form>
-		
-				<input type="hidden" id="recom-sauce">
-				<input type="hidden" id="recom-main">
+		<input type="hidden" id="recom-sauce">
+		<input type="hidden" id="recom-main">
 	</div>
 </section>
 
