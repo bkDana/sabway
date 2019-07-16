@@ -223,3 +223,5 @@
 .bread p{line-height:100px;}
 .selects{border:1px solid #ffce32;}
 .select-vegi{color:#009223;}
+.quantityChange.type1{width:20px; height:20px; font-size: 20px; color:#009223; line-height:18px;}
+.quantityChange.type2{width:20px; height:20px; font-size: 17px; color:#009223; line-height:20px;}

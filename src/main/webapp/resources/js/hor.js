@@ -72,7 +72,7 @@ $(document).ready(function() {
 		var amountIdx = -1;
 		if(($('.bread-amount').index(this)+1)%2 == 1) {
 			amountIdx = 15;
-			kcal += Number($(this).parent().parent().find('input').eq(0).val());
+			kcal += Number($(this).parent().parent().find('input').eq(0).val())*1;
 			breadCheck=1;
 		} else {
 			amountIdx = 30;
@@ -80,7 +80,8 @@ $(document).ready(function() {
 			breadCheck=2;
 		}
 		var str = breadIdx+','+amountIdx;
-		
+		console.log(cost);
+		console.log(kcal);
 		$('input[name=bucBread]').val(str);
 		console.log(str);
 		$(".step").eq(2).trigger("click");
@@ -88,12 +89,14 @@ $(document).ready(function() {
 	$('.main').click(function(){
 		var str = $(this).find('p').text();
 		if(breadCheck==1){
-			cost +=  Number($(this).find('input').eq(1).val());
-			kcal +=  Number($(this).find('input').eq(0).val());
+			cost +=  Number($(this).find('input').eq(1).val())*1;
+			kcal +=  Number($(this).find('input').eq(0).val())*1;
 		}else if(breadCheck==2){
-			cost +=  Number($(this).find('input').eq(2).val());
+			cost +=  Number($(this).find('input').eq(2).val())*1;
 			kcal +=  Number($(this).find('input').eq(0).val())*2;
 		}
+		console.log(cost);
+		console.log(kcal);
 		console.log(Number($(this).find('input').eq(1).val()));
 		console.log(Number($(this).find('input').eq(2).val()));
 		$('#recom-sauce').val($(this).find('input').eq(3).val());
@@ -104,10 +107,12 @@ $(document).ready(function() {
 	$('.cheeze').click(function(){
 		var str = $(this).find('p').text();
 		if(breadCheck==1){
-			kcal +=  Number($(this).find('input').eq(0).val());
+			kcal +=  Number($(this).find('input').eq(0).val())*1;
 		}else if(breadCheck==2){
 			kcal +=  Number($(this).find('input').eq(0).val())*2;
 		}
+		console.log(cost);
+		console.log(kcal);
 		$('input[name=bucCheese]').val(str);
 		$(".step").eq(4).trigger("click");
 	});
@@ -117,16 +122,18 @@ $(document).ready(function() {
 			if($('.topping').eq(i).hasClass("selects")){
 				str += '1';
 				if(breadCheck==1){
-					cost += Number($('.topping').eq(i).find('input').eq(1).val());
-					kcal += Number($('.topping').eq(i).find('input').eq(0).val());
+					cost += Number($('.topping').eq(i).find('input').eq(1).val())*1;
+					kcal += Number($('.topping').eq(i).find('input').eq(0).val())*1;
 				}else if(breadCheck==2){
-					cost += Number($('.topping').eq(i).find('input').eq(2).val());
+					cost += Number($('.topping').eq(i).find('input').eq(2).val())*1;
 					kcal += Number($('.topping').eq(i).find('input').eq(0).val())*2;
 				}
 			}else{
 				str += '0'; 
 			}
 		}
+		console.log(cost);
+		console.log(kcal);
 		$('input[name=bucTopping]').val(str);
 		console.log($('input[name=bucTopping]').val());
 		$(".step").eq(5).trigger("click");
@@ -190,13 +197,15 @@ $(document).ready(function() {
 				for(var k=0; k<4; k++){
 					if($('.vegi').eq(i).find("button").eq(k).hasClass("select-vegi")){
 						str += k;
-						kcal += Number($('.vegi').eq(i).find("input").val());
+						kcal += Number($('.vegi').eq(i).find("input").val())*1;
 					}
 				}
 			}else{
 				str += '2';
 			}
 		}
+		console.log(cost);
+		console.log(kcal);
 		$('input[name=bucVegi]').val(str);
 		console.log($('input[name=bucVegi]').val());
 		$(".step").eq(7).trigger("click");
@@ -245,7 +254,7 @@ $(document).ready(function() {
 			if($('.source').eq(i).hasClass("selects")){
 				str += '1';
 				if(breadCheck==1){
-					kcal += Number($('.source').eq(i).find('input').eq(0).val());
+					kcal += Number($('.source').eq(i).find('input').eq(0).val())*1;
 				}else if(breadCheck==2){
 					kcal += Number($('.source').eq(i).find('input').eq(0).val())*2;
 				}
@@ -253,10 +262,23 @@ $(document).ready(function() {
 				str += '0';
 			}
 		}
+		console.log(cost);
+		console.log(kcal);
 		$('input[name=bucSource]').val(str);
 		console.log($('input[name=bucSource]').val());
 		$(".step").eq(8).trigger("click");
 	});
+	$('.set').click(function(){
+		var str = $(this).find('p').text();
+		if($(this).hasClass("selected")){
+			kcal += Number($(this).find('input').eq(0).val());
+			cost += Number($(this).find('input').eq(1).val());
+		}
+		$(this).toggleClass("selected");
+		$('input[name=bucSet]').val(str);
+		$(".step").eq(9).trigger("click");
+	});
+
 	var getCookie = function(name) {
 		  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
 		  return value? value[2] : null;
@@ -265,13 +287,17 @@ $(document).ready(function() {
 		var str='';
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selects")){
+				console.log("해즈클래스");
 				str += "1";
 				cost += Number($('.sidemenu').eq(i).find('input').eq(1).val());
 				kcal += Number($('.sidemenu').eq(i).find('input').eq(0).val());
 			}else{
+				console.log("논클래스");
 				str += '0';
 			}
 		}
+		console.log(cost);
+		console.log(kcal);
 		console.log(str);
 		$('input[name=bucSide]').val(str);
 		$('input[name=bucCost]').val(cost);
@@ -301,7 +327,13 @@ $(document).ready(function() {
                 alert(data);
                 var orderCheckStr = "<tr>";
         		for(var i=0; i<10; i++){
-        			orderCheckStr += "<td>"+$('.orderInput').eq(i).val()+"</td>";
+        			if(i!=8){
+        				orderCheckStr += "<td>"+$('.orderInput').eq(i).val()+"</td>";        				
+        			}else{
+        				orderCheckStr += "<td><button class='quantityChange type1' type='button' onclick='quantityChange(0,this);'>-</button>&nbsp;&nbsp;&nbsp;<span>"
+        					+$('.orderInput').eq(i).val()+"</span>&nbsp;&nbsp;&nbsp;<button class='quantityChange type2' type='button' onclick='quantityChange(1,this);'>+</button></td>";
+        			}
+        			
         		}
         		orderCheckStr += "<td><button type='button' onclick='deleteOrder(this)'>취소</button>";
         		orderCheckStr += "<input type='hidden' class='idxHidden' value='"+data+"'></td>";
@@ -312,6 +344,24 @@ $(document).ready(function() {
             },
         });
 	});
+	
+		function quantityChange(changeIdx,btn){
+			var value = Number($(btn).parent().find('span').text());
+			var idx = $(btn).parent().next().next().find('input').val();
+			if(changeIdx==0){
+				value--;
+			}else{
+				value++;
+			}
+			$.ajax({
+	        	url : "/updateQuantity.do",
+	            type : 'get',
+	            data : {value:value,idx:idx},
+	            success : function(){
+	            	$(btn).parent().find('span').text(value);
+	            },
+	        });
+		}
 	$('.sidemenu.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selects")){
@@ -365,13 +415,6 @@ $(document).ready(function() {
 //
 //        };
         ///
-	$('.set').click(function(){
-		var str = $(this).find('p').text();
-		cost += Number($(this).find('input').eq(1).val());
-		kcal += Number($(this).find('input').eq(0).val());
-		$('input[name=bucSet]').val(str);
-		$(".step").eq(9).trigger("click");
-	});
 
 	/* bucCusoIdx(날짜정보로 만듦) */
 	$('#sbmOrder').click(function() {
@@ -379,29 +422,28 @@ $(document).ready(function() {
 		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
 		$('input[name=bucCusoIdx]').val(date);
 	});
-
-	$('.add-order').click(function(){
-		for(var i = 1; i<$('.img-box').length;i++){
-			if($('.img-box').eq(i).hasClass("selects")){
-				$('.img-box').eq(i).removeClass("selects");
-				$('.img-box').eq(i).find('img').css("display","block");
-				$('.img-box').eq(i).find('p').css("display","none");
-				$('.img-box').eq(i).find('button').css("display","none");
-				$('.img-box').eq(i).css("background-color","#fff");
-				$('.img-box').eq(i).bind("mouseleave",function(){
-					$(this).find('img').css("display","block");
-					$(this).find('p').css("display","none");
-					$(this).find('button').css("display","none");
-					$(this).css("background-color","#fff");
-				});
-			}
-		}
-		for(var i=0; i<$('.orderInput').length; i++){
-			$('.orderInput').eq(i).val("");
-		}
-		var offset = $(".step").eq(0).offset();
+    $('.add-order').click(function() {
+    	for(var i = 0; i<$('.img-box').length;i++){
+    		if($('.img-box').eq(i).hasClass("selects")){
+    			$('.img-box').eq(i).removeClass("selects");
+    			$('.img-box').eq(i).find('img').css("display","block");
+    			$('.img-box').eq(i).find('p').css("display","none");
+    			$('.img-box').eq(i).find('button').css("display","none");
+    			$('.img-box').eq(i).css("background-color","#fff");
+    			$('.img-box').eq(i).bind("mouseleave",function(){
+    				$(this).find('img').css("display","block");
+    				$(this).find('p').css("display","none");
+    				$(this).find('button').css("display","none");
+    				$(this).css("background-color","#fff");
+    			});
+    		}
+    	}
+    	for(var i=0; i<13; i++){
+    			$('.orderInput').eq(i).val("");				
+    	}
+    	var offset = $("strong").eq(1).offset();
         $('html, body').animate({scrollTop : offset.top}, 400);
-		$(".step").eq(0).trigger("click");
+    	$(".step").eq(0).trigger("click");
 	});
 	
 	$('.add-bucket').click(function() {

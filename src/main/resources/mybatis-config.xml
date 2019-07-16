@@ -5,8 +5,8 @@
 		<typeAlias type="kr.co.subway.notice.vo.Notice" alias="notice"/>
 		<typeAlias type="kr.co.subway.notice.vo.PageBound" alias="pb"/>
 		<typeAlias type="kr.co.subway.notice.vo.Qna" alias="qna"/>
-		<typeAlias type="kr.co.subway.headOffice.vo.Apply" alias="apply"/>
-		<typeAlias type="kr.co.subway.manager.vo.Mgr" alias="mgr"/>
+		<typeAlias type="kr.co.subway.headOffice.vo.Apply" alias="apply"/><!-- 가맹점 신청 관련 클래스 -->
+		<typeAlias type="kr.co.subway.manager.vo.Mgr" alias="mgr"/><!-- 관리자 관련 클래스 -->
 		<typeAlias type="kr.co.subway.customer.vo.Customer" alias="customer"/>
 		<typeAlias type="kr.co.subway.ingreManage.vo.IngreVo" alias="ingre"/>	<!-- 재료 Vo -->
 		<typeAlias type="java.util.Map" alias="map"/>
@@ -20,5 +20,6 @@
 		<typeAlias type="kr.co.subway.sales.statics.vo.SalesStaticsVo" alias="salesStatics"/>	<!-- 주문내역 Vo -->
 		<typeAlias type="kr.co.subway.sales.statics.vo.SalesStaticsGrpVo" alias="graph"/>	<!-- 매출 통계 Vo -->
 		<typeAlias type="kr.co.subway.customerOrder.vo.Bucket" alias="bucket"/> <!-- 고객 주문 관련 장바구니 -->
+		<typeAlias type="kr.co.subway.headOffice.vo.ApplyPageBound" alias="apb"/><!-- 가맹점 paging에 사용하는 클래스 -->
 	</typeAliases>
 </configuration>

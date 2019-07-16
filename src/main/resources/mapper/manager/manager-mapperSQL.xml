@@ -334,7 +334,7 @@
 	      ,mgr_boss_name as mgrBossName
 	      ,mgr_open_date as mgrOpenDate        
 	      from 
-	        (select rownum as rnum, m.* from (select * from manager where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status} order by mgr_no) m)
+	        (select rownum as rnum, m.* from (select * from manager where mgr_boss_name = #{text} and mgr_status = #{status} order by mgr_no) m)
 	      where rnum between #{firstPage} and #{lastPage}
    </select>
    	<select id="selectSearchStatusAddr" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
@@ -352,7 +352,7 @@
 	      ,mgr_boss_name as mgrBossName
 	      ,mgr_open_date as mgrOpenDate        
 	      from 
-	        (select rownum as rnum, m.* from (select * from manager where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status}) m)
+	        (select rownum as rnum, m.* from (select * from manager where mgr_addr = #{text} and mgr_status = #{status}) m)
 	      where rnum between #{firstPage} and #{lastPage}
    </select>
 </mapper>

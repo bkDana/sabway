@@ -6,21 +6,31 @@
 <script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
 <title>가맹점 신청</title>
 </head>
-
+<style>
+	.pageNavi{
+		color:black;
+		text-align:center;
+		margin-top:35px;
+		font-size: 20px;
+		font-weight: bold;
+	}
+</style>
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
 		<div class="sub-menu">※ 매장관리 > 가맹점 목록</div>
-			<table class="comm-tbl">
-				<tr>
-					<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
-				</tr>
-				<c:forEach items="${list }" var="apply">
+		<h1 class="comm-content-tit">신청 목록</h1>
+		<table class="comm-tbl">
+			<tr>
+				<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
+			</tr>
+			<c:if test="${pd.totalCount > 0 }">
+				<c:forEach items="${pd.applyList }" var="apply">
 					<!-- 가맹점 신청(status == 0)인 경우 출력 -->
 					<c:if test="${apply.applyStatus eq 0 }">
 						<tr>
-							<td style="display:none;" name="applyNo">${apply.applyNo }</td>
+							<td style="display:none;" name="applyNo">${apply.applyNo }1</td>
 							<td name="applyName">${apply.applyName }</td>
 							<!-- 해달 게시글 상세보기 -->
 							<td><a href="/applyView.do?applyNo=${apply.applyNo }">${apply.applyTitle }</a></td>
@@ -43,38 +53,58 @@
 						</tr>
 					</c:if>
 				</c:forEach>
-			</table>
-			<br><br><hr>
-			<h1 class="comm-content-tit">처리한 목록</h1>
-			<table class="comm-tbl">
+			</c:if>
+			<c:if test="${pd.totalCount <= 0 }">
 				<tr>
-					<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
+					<td>신청 목록이 없습니다.</td>
 				</tr>
-				<c:forEach items="${list }" var="apply">
-					<!-- 승인/거절(status==1or2) 되면 테이블 출력 위치 변경 -->
-					<c:if test="${apply.applyStatus eq 1 || apply.applyStatus eq 2 }">
-						<tr id="tr">
-							<td>${apply.applyName }</td>
-							<td>${apply.applyTitle }</td>
-							<td>${apply.applyPhone }</td>
-							<td>${apply.applyArea }</td>
-							<td>${apply.applyDate }</td>
+			</c:if>
+		</table>
+		<div class="pageNavi">${pd.pageNavi }</div>
+		<br><br><hr>
+	</div>
+	<div class="area">
+		<h1 class="comm-content-tit">처리된 목록</h1>
+		<table class="comm-tbl">
+			<tr>
+				<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
+			</tr>
+				<c:forEach items="${cpd.applyList }" var="cpt">
+						<tr class="tr">
+							<td>${cpt.applyName }s</td>
+							<td>${cpt.applyTitle }</td>
+							<td>${cpt.applyPhone }</td>
+							<td>${cpt.applyArea }</td>
+							<td>${cpt.applyDate }</td>
 							<!-- 상태값을 가져와서 승인/거절로 출력 -->
-							<c:if test="${apply.applyStatus eq 1 }">
+							<c:if test="${cpt.applyStatus eq 1 }">
 								<td>승인</td>
 							</c:if>
-							<c:if test="${apply.applyStatus eq 2 }">
+							<c:if test="${cpt.applyStatus eq 2 }">
 								<td>거절</td>
 							</c:if>
 						</tr>
-					</c:if>
 				</c:forEach>
-			</table>
-		</div>
+			<c:if test="${cpd.totalCount <= 0 }">
+				<tr>
+					<td>처리된 목록이 없습니다.</td>
+				</tr>
+			</c:if>
+		</table>
+		<div class="pageNavi">${cpd.pageNavi }</div>
 	</div>
 </section>
-<!-- 페이지 전환 없이 승인/거부 -->
 <script type="text/javascript">
+	$(document).ready(function(){
+		var currentPage="";
+		$.ajax({
+			url:"/applyCompletion.do",
+			data:{currentPage:currentPage},
+			success:function(data){
+				$('.tr').append('<td>'+data+'</td>');
+			}
+		});
+	});
 	//승인 클릭 시 applyName과 applyArea를 enrollMgr.do에 전달
 	//MgrService의 enrollMgr 메소드에서 ApplyDao의 applyManagerUpdate 메소드 태워서 승인(applyStatus의 값 1로 변경) 처리
 	//승인
@@ -98,11 +128,11 @@
 					dataType : "json",
 					success : function(data){
 						if(data.result == 0){
-							location.href="/managerApply.do";
+							alert("거절 되었습니다.");
 						}
 					},
 					error : function(){
-						alert("에러발생");
+						alert("에러발생. 다시 시도해주세요.");
 					}
 				});
 			}

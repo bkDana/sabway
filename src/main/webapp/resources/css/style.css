@@ -121,4 +121,14 @@ input[type=checkbox]{width: 15px;height: 15px;}
 .his-tbl th, .his-tbl td{border:1px solid #ddd; padding:10px; text-align:center; font-weight:normal; line-height:15px;}
 .his-tbl tr:first-child th, .his-tbl tr:first-child td{/* border-top:2px solid #009223; */ }
 
+
+/* 모달창 :: PAGING */
+.modal-paging{width:100%; text-align:center; margin:30px 0;}
+.modal-paging a, .modal-paging span{display:inline-block; vertical-align:middle; width:30px; height:30px;  text-align:center; font-size:18px;font-weight: bold; line-height:30px; color:#868686; letter-spacing:-0.25px; margin: 2px 10px;}
+.modal-paging .cur{color:#009223;}
+.modal-paging a.paging-arrow img{display: none;}
+.modal-paging a.paging-arrow.next-arrow:after{content: '▶';color:#009223;font-size: 14px;}
+.modal-paging a.paging-arrow.prev-arrow:after{content: '◀';color:#009223;font-size: 14px;}
+.modal-paging i{vertical-align:middle; color:inherit}
+
 footer{background-color: #292929; color: #666; height: 100px;}
