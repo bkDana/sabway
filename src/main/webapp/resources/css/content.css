@@ -35,6 +35,7 @@
 /* ****************** 봉사활동 등록 폼 ********************** */
 .common-tbl-box{padding:70px 50px; background-color:#f8f8f8;}
 .comm-tbl{width:100%; max-width:800px; margin:0 auto; background-color:#fff;}
+.comm-tbl.login-tbl{max-width:600px;}
 .comm-tbl th, .comm-tbl td{border:1px solid #ddd; padding:15px; text-align:left; font-weight:normal; line-height:20px;}
 .comm-tbl tr:first-child th, .comm-tbl tr:first-child td{border-top:2px solid #009223;}
 .comm-tbl th{font-size:17px; line-height:20px; font-weight:500;}
