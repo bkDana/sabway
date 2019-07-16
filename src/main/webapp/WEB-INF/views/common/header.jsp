@@ -22,7 +22,7 @@
 <script>
 	var cookieDate = new Date();
 	var date = cookieDate.getFullYear()+''+(cookieDate.getMonth()+1)+''+cookieDate.getDate()+''+cookieDate.getHours()+''+cookieDate.getMinutes()+''+cookieDate.getSeconds();
-	$.cookie('name', date );
+	document.cookie = "noneCustomer="+date;
 </script>
 <script type="text/javascript" src="/resources/js/bucket.js"></script>
 <title>진짜 메인</title>
