@@ -46,16 +46,8 @@ public class CusOrderController {
 	//활성화 여부 ajax로 변경
 	@ResponseBody
 	@RequestMapping("/tempOrder.do")
-	public void tempOrderInsert(HttpServletRequest request, HttpServletResponse response, Bucket b){
-		HttpSession session = request.getSession();
-		Customer c = (Customer)session.getAttribute("customer");
-		int customerIdx = -1;
-		if(c != null) {
-			customerIdx = c.getCustomerNo();
-		}
-		
-		b.setBucCusoIdx(customerIdx);
-		b.setBucCustomerIdx(1111);
+	public void tempOrderInsert(HttpServletResponse response, Bucket b){
+		b.setBucCusoIdx("0");
 		int result = cusOrderService.tempOrderInsert(b);
 		int bucIdx = cusOrderService.tempOrderSelect();
 	//			System.out.println("controller updateIngreActive() result : "+result);

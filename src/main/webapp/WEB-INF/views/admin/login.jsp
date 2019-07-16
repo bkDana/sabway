@@ -41,38 +41,41 @@
 						</tr>
 					</table>
 					<label>
-						<input type="checkbox" id="saveId"><span>아이디 저장</span>
-					</label>
+	                   <input type="checkbox" id="saveId"><span>아이디 저장</span>
+	                </label>
 					</div>
 					<div class="common-tbl-btn-group">
-						<button type="submit" class="btn-style1">LOGIN</button>
+						<button type="submit" class="btn-style1">로그인</button>
+						<button type="button" class="btn-style3" onclick="location.href='/'">메인 페이지로</button>
 					</div>
 				</div>
 			</form>	
 		</div>
 	</div>
 </section>
+
 <script>
-	/* 쿠키에 저장된 값이 있다면 세팅 */
-	$("input[name=mgrId]").val(Cookies.get('key'));
-	if($("input[name=mgrId]").val() != ""){
-	    $("#saveId").attr("checked", true);
-	}
-	
-	/* 아이디 저장을 선택했을 때 쿠키에 저장 */
-	$("#saveId").change(function(){
-		if($("#saveId").is(":checked")){
-		    Cookies.set('key', $("input[name=mgrId]").val(), { expires: 7 });
-		}else{
-		      Cookies.remove('key');
-		}
-	});
-	 
-	$("input[name=mgrId]").keyup(function(){
-		if($("#saveId").is(":checked")){
-		    Cookies.set('key', $("input[name=mgrId]").val(), { expires: 7 });
-		}
-	});
+   /* 쿠키에 저장된 값이 있다면 세팅 */
+   $("input[name=mgrId]").val(Cookies.get('key'));
+   if($("input[name=mgrId]").val() != ""){
+       $("#saveId").attr("checked", true);
+   }
+   
+   /* 아이디 저장을 선택했을 때 쿠키에 저장ㄴ */
+   $("#saveId").change(function(){
+      if($("#saveId").is(":checked")){
+          Cookies.set('key', $("input[name=mgrId]").val(), { expires: 7 });
+      }else{
+            Cookies.remove('key');
+      }
+   });
+    
+   $("input[name=mgrId]").keyup(function(){
+      if($("#saveId").is(":checked")){
+          Cookies.set('key', $("input[name=mgrId]").val(), { expires: 7 });
+      }
+   });
 </script>
+
 <%-- Footer --%>
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp" /> --%>
