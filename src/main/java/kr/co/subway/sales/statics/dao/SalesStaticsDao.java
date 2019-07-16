@@ -34,4 +34,12 @@ public class SalesStaticsDao {
 		return sqlSession.selectList("sales.getBranchSales",branchName);
 	}
 
+	//파이차트 부분
+	//해당년도 전체 메뉴 판매 현황
+	public List getTotalMenu() {
+		return sqlSession.selectList("sales.getTotalMenu");
+	}
+	
+	
+
 }

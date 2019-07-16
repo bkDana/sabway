@@ -30,7 +30,7 @@
 	$(document).ready(function(){
 		
 		totalSales();
-		totalSalesPie();
+		totalMenuPie();
 		
 		//그래프 디자인 설정
 		Highcharts.setOptions({
@@ -163,9 +163,9 @@
 	}
 		
 	//전체 매뉴 매출순위(파이차트)
-	function totalSalesPie(){
+	function totalMenuPie(){
 		$.ajax({
-			url:"/salesStatics/totalSales.do",
+			url:"/salesStatics/totalMenu.do",
 			dataType:'json',
 			success : function(cost){ 
 				var arr = new Array();
@@ -208,17 +208,6 @@
 			                    }
 			                }
 			            },
-			            /* 클릭이벤트 */
-			            /* series: {
-			            	cursor: 'pointer',
-			            	point:{
-			            		events:{
-			            			click:function(){
-			            				getFunc()
-			            			}
-			            		}
-			            	}
-			            } */
 			        },
 			        series: [{
 			        	name:"매출",
