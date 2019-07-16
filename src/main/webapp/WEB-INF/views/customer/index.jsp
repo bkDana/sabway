@@ -31,10 +31,17 @@
 										<td><input type="password" name="customerPw"></td>
 									</tr>
 								</table>
+
 							</div>
 							<div class="common-tbl-btn-group" style="padding-top:35px;text-align:center">
 								<button type="submit" class="btn-style1">로그인</button>
 								<button type="button" class="btn-style3" onclick="location.href='/enrollPage.do'">회원가입</button>
+
+								<div class="common-tbl-btn-group">
+									<button type="submit" class="btn-style1">로그인</button>
+									<button type="button" class="btn-style3" onclick="location.href='/enrollPage.do'">회원가입</button>
+								</div>
+
 							</div>
 							<div >
 								<button type="button" class="btn-style1" onclick="location.href='/findIdPage.do'">아이디 찾기</button>

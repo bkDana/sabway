@@ -26,27 +26,27 @@
 			<form action="/adminLogin.do" method="post">
 				<div class="login-inner clearfix">
 					<div class="login-tbl-box">
-					<table class="comm-tbl login-tbl">
-						<colgroup>
-							<col width="20%">
-							<col width="/">
-						</colgroup>
-						<tr>
-							<th>아이디</th>
-							<td><input type="text" name="mgrId"></td>
-						</tr>
-						<tr>
-							<th>비밀번호</th>
-							<td><input type="password" name="mgrPw"></td>
-						</tr>
-					</table>
-					<label>
-	                   <input type="checkbox" id="saveId"><span>아이디 저장</span>
-	                </label>
-					</div>
-					<div class="common-tbl-btn-group">
-						<button type="submit" class="btn-style1">로그인</button>
-						<button type="button" class="btn-style3" onclick="location.href='/'">메인 페이지로</button>
+						<table class="comm-tbl login-tbl">
+							<colgroup>
+								<col width="20%">
+								<col width="/">
+							</colgroup>
+							<tr>
+								<th>아이디</th>
+								<td><input type="text" name="mgrId"></td>
+							</tr>
+							<tr>
+								<th>비밀번호</th>
+								<td><input type="password" name="mgrPw"></td>
+							</tr>
+						</table>
+						<label>
+		                   <input type="checkbox" id="saveId"><span>아이디 저장</span>
+		                </label>
+						<div class="common-tbl-btn-group">
+							<button type="submit" class="btn-style1">로그인</button>
+							<button type="button" class="btn-style3" onclick="location.href='/'">메인 페이지로</button>
+						</div>
 					</div>
 				</div>
 			</form>	
