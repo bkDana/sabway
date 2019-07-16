@@ -85,4 +85,8 @@
     <delete id="tempOrderDelete" parameterType="_int">
 		delete from bucket where buc_idx=#{idx}
 	</delete>
+	
+	<select id="mgrSelectOne" parameterType="_int" resultType="mgr">
+		select mgr_no as mgrNo, mgr_name as mgrName from manager where mgr_no = #{mrgNo}
+	</select>
 </mapper>
