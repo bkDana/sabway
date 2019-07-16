@@ -274,6 +274,8 @@ $(document).ready(function() {
 		$('input[name=bucCost]').val(cost);
 		$('input[name=bucKcal]').val(kcal);
 		$('input[name=bucQuantity]').val('1');
+		$('#cookie').val($.cookie('name'));
+		console.log($('#cookie').val($.cookie('name')));
 //		serialize()
 		var form = $("form[name=feedbackform]")[0];
 //		console.log(queryString);

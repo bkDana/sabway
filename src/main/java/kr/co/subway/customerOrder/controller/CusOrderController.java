@@ -20,18 +20,21 @@ import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.ingreManage.vo.IngreVo;
+import kr.co.subway.manager.vo.Mgr;
 
 @Controller
 public class CusOrderController {
 	@Autowired
 	private CusOrderService cusOrderService;
-	
+	///매개변수로 지점명
 	@RequestMapping("/cusOrder.do")
-	public ModelAndView loadCusOrder() {
+	public ModelAndView loadCusOrder(@RequestParam int mgrNo) {
 		ArrayList<IngreVo> ingreList = cusOrderService.ingreSelectAll();
+		Mgr mgr = cusOrderService.mgrSelectOne(mgrNo);
 		ModelAndView mav = new ModelAndView();
 		if (!ingreList.isEmpty()) {
 			mav.addObject("ingreList", ingreList); // view에서 사용할 객체 추가
+			mav.addObject("mgr", mgr);
 			mav.setViewName("customerOrder/horizentalOrder");
 		} else {
 			System.out.println("비어dltdma");
@@ -44,11 +47,9 @@ public class CusOrderController {
 	@ResponseBody
 	@RequestMapping("/tempOrder.do")
 	public void tempOrderInsert(HttpServletResponse response, Bucket b){
-		
-		b.setBucCusoIdx(123123);
-		b.setBucCustomerIdx(1111);
-		int result = cusOrderService.tempOrderInsert(b);
-		int bucIdx = cusOrderService.tempOrderSelect();
+		int result = cusOrderService.tempOrderInsert(b);//줌주문내역 인서트
+		//cusoIdx 여기서 생성;
+		int bucIdx = cusOrderService.tempOrderSelect();//cusoIdx 업데이트 상품내역->idx(bucket)개수다 보내서 ,매퍼에서 포이치
 	//			System.out.println("controller updateIngreActive() result : "+result);
 		response.setContentType("text/html;charset=utf-8");
 		try {
@@ -93,5 +94,6 @@ public class CusOrderController {
 		}
 		return mav;
 	}
-
+	
+	
 }

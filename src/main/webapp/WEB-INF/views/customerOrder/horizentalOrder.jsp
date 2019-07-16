@@ -23,6 +23,7 @@ var myform=new formtowizard({
 		<c:if test="${not empty sessionScope.customer}">
 			<a class="header-btn" style="margin-right:30px; float:right; cursor:pointer;"><img src="/resources/img/shopping-cart.png" width="30px"></a><!-- 장바구니 개수 넣어주세요 -->
 		</c:if>
+		<br><br><strong style="font-size:30px; font-weight:bolder;">${mgr.mgrName } 주문하기</strong>
 		<form id="feedbackform" name="feedbackform" method="post">
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
@@ -256,7 +257,13 @@ var myform=new formtowizard({
 			<input type="hidden" name="bucKcal" class="orderInput"> 
 			<input type="hidden" name="bucIsSalad" class="orderInput">
 			<input type="hidden" name="bucIsOvened" class="orderInput">
-<!-- 			<input type="hidden" name="bucCusoIdx" class="orderInput"> -->
+			<input type="hidden" name="bucBranch" class="orderInput" value="${mgr.mgrNo }">
+			<c:if test="${sessionScope.customer ne null }">
+				<input type="hidden" name="bucCustomerIdx" class="orderInput" value="${sessionScope.customer.customerNo}">
+			</c:if>
+			<c:if test="${sessionScope.customer eq null }">
+				<input type="hidden" name="bucCustomerIdx" class="orderInput" id="cookie">
+			</c:if>
 		</form>
 		
 				<input type="hidden" id="recom-sauce">
