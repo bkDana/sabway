@@ -1,7 +1,6 @@
 package kr.co.subway.stock.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -22,7 +20,6 @@ import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.managerOrder.vo.StockVO;
 import kr.co.subway.stock.service.StockService;
 import kr.co.subway.stock.vo.HistoryListVO;
-import kr.co.subway.stock.vo.HistoryVO;
 import kr.co.subway.stock.vo.StockListVO;
 
 @Controller
@@ -59,8 +56,21 @@ public class StockController {
 		}
 		HistoryListVO history = service.stockHistory(search);
 		
+		model.addAttribute("search", search);
 		model.addAttribute("history", history);
 		return "admin/managerOrder/history";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/moveHistory.do", produces="application/json;charset=utf-8;")
+	public String moveHistory(SearchVO search) {
+		if(search.getReqPage()==0) {
+			search.setReqPage(1);
+		}
+		HistoryListVO history = service.stockHistory(search);
+		
+		//model.addAttribute("history", history);
+		return new Gson().toJson(history);
 	}
 	
 	@ResponseBody

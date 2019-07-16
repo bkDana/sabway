@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.common.SearchVO;
+import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.managerOrder.vo.StockVO;
 import kr.co.subway.stock.vo.HistoryVO;
 
@@ -34,6 +35,14 @@ public class StockDao {
 
 	public List stockHistory(SearchVO search) {
 		return sqlSession.selectList("stock.stockHistory",search);
+	}
+
+	public int totalStock(SearchVO search) {
+		return sqlSession.selectOne("stock.totalStock",search);
+	}
+
+	public IngreVo ingreInfo(SearchVO search) {
+		return sqlSession.selectOne("stock.ingreInfo",search);
 	}
 
 }

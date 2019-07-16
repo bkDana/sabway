@@ -49,7 +49,7 @@
 					</span>
 					<span>
 						<%-- <button type="button" class="detail-btn" onclick="location.href='/managerOrder/stockHistory.do?no=${stock.mStockIdx }';">상세</button> --%>
-						<button type="button" class="detail-btn" onclick="layerLoad('/managerOrder/stockHistory.do?state=${stock.mStockIdx }');">상세</button>
+						<button type="button" class="detail-btn" onclick="layerLoad('/managerOrder/stockHistory.do?state=${stock.mStockIdx }');">입/출고 내역</button>
 					</span>
 				
 			</li>
@@ -72,7 +72,14 @@
 		</div>
 	</div>
 </article>
+
 <script>
+/* 페이지 이동 */
+function list(p){
+	//console.log(p);
+	$('input[name=reqPage]').val(p);
+	searchform.submit();
+}
 
 function layerLoad(strUrl){
 	var $modalWrap = $(".modal-fixed-pop-wrapper");
@@ -107,21 +114,6 @@ function layerLoad(strUrl){
 	});
 	 
 }
-
-// 모달 창 닫기
-/* $(document).ready(function  () {
-	var $modalWrap = $(".modal-fixed-pop-wrapper");
-	$(".modal-close-btn").click(function  () {
-		$(".modal-inner-content").empty();
-		$modalWrap.css("display","none");
-		$("html").css({
-			"margin-right":"0",
-			"overflow-y":"scroll"
-		});
-		$modalWrap.fadeOut();
-		return false;
-	});
-}); */
 
 	
 $(function(){
@@ -214,12 +206,7 @@ $(function(){
 	}
 	
 	
-	/* 페이지 이동 */
-	function list(p){
-		console.log(p);
-		$('input[name=reqPage]').val(p);
-		searchform.submit();
-	}
+	
 </script>
 
 <%-- Footer --%>

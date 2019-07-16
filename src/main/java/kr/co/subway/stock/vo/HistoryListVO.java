@@ -2,8 +2,11 @@ package kr.co.subway.stock.vo;
 
 import java.util.ArrayList;
 
+import kr.co.subway.ingreManage.vo.IngreVo;
+
 public class HistoryListVO {
 	private ArrayList<HistoryVO> list;
+	private IngreVo ingre;
 	private String pageNavi;
 	
 	public HistoryListVO() {
@@ -15,6 +18,13 @@ public class HistoryListVO {
 		this.pageNavi = pageNavi;
 	}
 	
+	
+	public HistoryListVO(ArrayList<HistoryVO> list, IngreVo ingre, String pageNavi) {
+		super();
+		this.list = list;
+		this.ingre = ingre;
+		this.pageNavi = pageNavi;
+	}
 	public ArrayList<HistoryVO> getList() {
 		return list;
 	}
@@ -27,6 +37,13 @@ public class HistoryListVO {
 	public void setPageNavi(String pageNavi) {
 		this.pageNavi = pageNavi;
 	}
+	public IngreVo getIngre() {
+		return ingre;
+	}
+	public void setIngre(IngreVo ingre) {
+		this.ingre = ingre;
+	}
+	
 	
 	
 }
