@@ -437,7 +437,10 @@
 		})
 		
 	})
-
+	// 주문하기 클릭
+	function detailMarket2(idx){
+		location.href ="/cusOrder.do?mgrNo="+idx;
+	}
 	// 지점 클릭
 	function detailMarket(num){
 		mapXyInfo(dataList[num]);

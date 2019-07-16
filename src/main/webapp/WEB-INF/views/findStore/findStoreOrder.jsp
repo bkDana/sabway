@@ -225,7 +225,8 @@
 				}
 			});
 		    
-		 }	
+		 }
+	// 주문하기 클릭
 	function detailMarket2(idx){
 		location.href ="/cusOrder.do?mgrNo="+idx;
 	}
