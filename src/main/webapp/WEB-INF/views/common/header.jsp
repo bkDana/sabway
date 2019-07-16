@@ -17,7 +17,7 @@
 <!-- script -->
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
 <script type="text/javascript" src="/resources/js/nav.js"></script><!-- nav.js -->
-
+<script type="text/javascript" src="/resources/js/bucket.js"></script>
 <title>진짜 메인</title>
 </head>
 <body>
@@ -54,6 +54,7 @@
 		<div id="headerInnerWrap">
 			<!-- 로고 -->
 			<div class="header-logo">
+				<input type="hidden" id="sessionConatainer" value="${sessionScope.custmoer }">
 				<a href="/" class="sabway"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a>
 				<ul class="header-menu clearfix">
 					<!--
@@ -62,7 +63,7 @@
 					<li><a class="header-btn">고객센터</a></li>
 					-->
 					<li><a href="/admin.do" class="header-btn">관리자</a></li>
-					<li><a class="header-btn"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
+					<li><a class="header-btn" id="bucket"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
 				</ul>
 			</div>
 			<!-- 헤더 상단 -->
@@ -130,6 +131,4 @@
 			</div>
 		</div>
 	</header>
-	<script type="text/javascript">
-		
-	</script>
+

@@ -43,9 +43,15 @@ public class CusOrderController {
 	//활성화 여부 ajax로 변경
 	@ResponseBody
 	@RequestMapping("/tempOrder.do")
-	public void tempOrderInsert(HttpServletResponse response, Bucket b){
+	public void tempOrderInsert(HttpServletRequest request, HttpServletResponse response, Bucket b){
+		HttpSession session = request.getSession();
+		Customer c = (Customer)session.getAttribute("customer");
+		int customerIdx = -1;
+		if(c != null) {
+			customerIdx = c.getCustomerNo();
+		}
 		
-		b.setBucCusoIdx(123123);
+		b.setBucCusoIdx(customerIdx);
 		b.setBucCustomerIdx(1111);
 		int result = cusOrderService.tempOrderInsert(b);
 		int bucIdx = cusOrderService.tempOrderSelect();
@@ -87,7 +93,7 @@ public class CusOrderController {
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {
 			mav.addObject("list",list);
-			mav.setViewName("/customerOrder/myOrderList");	
+			mav.setViewName("/customerOrder/bucket");	
 		} else {
 			mav.setViewName("/common/error");
 		}
