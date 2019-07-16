@@ -82,13 +82,10 @@ public class MgrDAO {
 		return session.selectList("mgr.selectSearchStatusAddr",mpd);
 	}
 	//searchStore 검색
-	public List<Mgr> searchStore(String keyword){
-		return session.selectList("mgr.searchStore",keyword);
+	public List<Mgr> searchStore(PageBound pb){
+		return session.selectList("mgr.storeSelectPaging",pb);
 	}
-//	//초기화면 10개 출력
-//	public List<Mgr> morePage(PageNo pn){
-//		return session.selectList("mgr.pageMore",pn);
-//	}
+
 	//더보기
 	public List<Mgr> pageMore(MgrPageData mpd){
 		return session.selectList("mgr.pageMore",mpd);
@@ -126,5 +123,8 @@ public class MgrDAO {
 	//더보기(status)
 	public List<Mgr> statusMore(MgrPageData mpd){
 		return session.selectList("mgr.statusMore",mpd);
+	}
+	public int allStoreTotalCount(String keyword) {
+		return session.selectOne("mgr.allStoreTotalCount",keyword);
 	}
 }
