@@ -1,10 +1,10 @@
 package kr.co.subway.manager.controller;
 
-import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import kr.co.subway.manager.service.AddrCode;
@@ -31,9 +29,6 @@ import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.manager.vo.MgrPageData;
 import kr.co.subway.manager.vo.PageNo;
 import kr.co.subway.manager.vo.StorePageNaviData;
-import kr.co.subway.notice.vo.PageNaviData;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 @Controller
 public class MgrController {
@@ -347,11 +342,37 @@ public class MgrController {
 		return mav;
 	}
 	
+	//전체매장 select 필터 검색
+	@ResponseBody
+	@RequestMapping(value="/allSearchKeyword.do",produces="application/json; charset=utf-8")
+	public String allSearchKeyword(String area, String currentPage) {
+		System.out.println("갔다오냐"+area);
+		System.out.println(currentPage);
+		String keyword = area.substring(0,2);
+		System.out.println(keyword);
+		//ArrayList<Mgr> allSearchKeyword = (ArrayList<Mgr>) mgrservice.searchStore(keyword);
+		int currentPage1;
+		try {
+			currentPage1 = Integer.parseInt(currentPage);
+		}catch (Exception e) {
+			currentPage1=1;
+		}
+		StorePageNaviData pd = mgrservice.allStoreSelectPaging(currentPage1,keyword,area);
+		/*for(int i=0; i<allSearchKeyword.size(); i++){
+
+		}*/
+		return new Gson().toJson(pd);
+	}
+	
 	//매장 키워드검색
 	@ResponseBody
 	@RequestMapping(value="/searchKeyword.do",produces="application/json; charset=utf-8")
 	public String storeList(@RequestParam String keyword) {
 		ArrayList<Mgr> searchKeyword = (ArrayList<Mgr>) mgrservice.searchStore(keyword);
+		for(int i=0; i<searchKeyword.size(); i++){
+
+			System.out.println(searchKeyword.get(i).getMgrAddr());
+		}
 		return new Gson().toJson(searchKeyword);
 	}
 	

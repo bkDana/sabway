@@ -20,9 +20,6 @@ var myform=new formtowizard({
 <section id="content-wrapper">
 	<div class="area">	
 	<strong style="font-size:40px; font-weight:bolder;">온라인 주문 예약</strong>
-		<c:if test="${not empty sessionScope.customer}">
-			<a class="header-btn" style="margin-right:30px; float:right; cursor:pointer;"><img src="/resources/img/shopping-cart.png" width="30px"></a><!-- 장바구니 개수 넣어주세요 -->
-		</c:if>
 		<form id="feedbackform" name="feedbackform" method="post">
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
@@ -202,7 +199,7 @@ var myform=new formtowizard({
 					</c:if>
 				</c:forEach>
 				<div class="common-tbl-btn-group">
-					<button type="button" class="btn-style2 order-check" style="clear:both;">주문 완료</button>
+					<button type="button" class="btn-style2 order-check" style="clear:both;">카트에 담기</button>
 				</div>
 			</fieldset>
 		
@@ -237,9 +234,6 @@ var myform=new formtowizard({
 					</table>
 					<div class="common-tbl-btn-group">
 						<button type="button" class="btn-style2 add-order">추가 주문</button>
-						<c:if test="${not empty sessionScope.customer}">
-							<button type="button" class="btn-style2 add-bucket">카트에 담기</button>
-						</c:if>
 						<button type="button" id="sbmOrder" class="btn-style2">주문 완료</button>
 					</div>
 				</div>
