@@ -16,7 +16,7 @@
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<div class="hiddenInfo">
-				<input type="hidden" class="hiddenBucCustomerIdx" value="${bucket.bucCustomerIdx }">
+				<input type="hidden" class="hiddenBucCustomerIdx" name="customerNo" value="${bucket.bucCustomerIdx }">
 				<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
  				<input type="hidden" class="hiddenBread" value="${bucket.bucBread }">
 				<input type="hidden" class="hiddenMain" value="${bucket.bucMain }">
