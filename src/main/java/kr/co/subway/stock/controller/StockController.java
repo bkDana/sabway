@@ -21,6 +21,7 @@ import kr.co.subway.common.SearchVO;
 import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.managerOrder.vo.StockVO;
 import kr.co.subway.stock.service.StockService;
+import kr.co.subway.stock.vo.HistoryListVO;
 import kr.co.subway.stock.vo.HistoryVO;
 import kr.co.subway.stock.vo.StockListVO;
 
@@ -52,9 +53,11 @@ public class StockController {
 	}
 	
 	@RequestMapping("/stockHistory.do")
-	public String stockHistory(@RequestParam String no, Model model) {
-		
-		ArrayList<HistoryVO> history = service.stockHistory(Integer.parseInt(no));
+	public String stockHistory(Model model, SearchVO search) {
+		if(search.getReqPage()==0) {
+			search.setReqPage(1);
+		}
+		HistoryListVO history = service.stockHistory(search);
 		
 		model.addAttribute("history", history);
 		return "admin/managerOrder/history";

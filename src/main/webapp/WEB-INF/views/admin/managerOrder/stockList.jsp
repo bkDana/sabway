@@ -49,7 +49,7 @@
 					</span>
 					<span>
 						<%-- <button type="button" class="detail-btn" onclick="location.href='/managerOrder/stockHistory.do?no=${stock.mStockIdx }';">상세</button> --%>
-						<button type="button" class="detail-btn" onclick="layerLoad('/managerOrder/stockHistory.do?no=${stock.mStockIdx }');">상세</button>
+						<button type="button" class="detail-btn" onclick="layerLoad('/managerOrder/stockHistory.do?state=${stock.mStockIdx }');">상세</button>
 					</span>
 				
 			</li>
