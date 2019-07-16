@@ -164,7 +164,7 @@
 
 /* ****************** 로그인 ********************** */
 .login-inner{max-width:65%; margin:0 auto 30px;}
-.login-inner .login-tbl-box{float:left; width:72%;}
+.login-inner .login-tbl-box{float:left; width:70%; margin-left:15%;}
 .login-inner .login-tbl-box .login-tbl{max-width:none;}
 .comm-tbl.login-tbl th, .comm-tbl.login-tbl td{border-left:0; border-right:0;}
 .login-inner .login-btn-box{float:right; width:23%;text-align:center;}
@@ -174,6 +174,10 @@
 .login-util-box{text-align:center;}
 .login-util-box > span{display:inline-block; vertical-align:middle; margin:0 15px;}
 .login-util-box > span a{display:inline-block; padding:5px; font-size:16px; line-height:20px; color:#2d2d2d;}
+/* 
+.login-inner .login-btn-box > button{width:100px; height:50px; border-radius:50px; font-size:17px; color:#fff; margin:0 10px;}
+.login-inner .login-btn-box > button.btn-style1{background-color:#009223;}
+.login-inner .login-btn-box > button.btn-style3{background-color:#888;} */
 
 /* ****************** 이용약관 ********************** */
 .terms-tit{font-size: 18px;margin-bottom: 20px;font-weight:500;}
