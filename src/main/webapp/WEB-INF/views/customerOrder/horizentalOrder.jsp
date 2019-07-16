@@ -8,7 +8,6 @@
 <script src="/resources/js/formwizard.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
 
-
 <script type="text/javascript">
 var myform=new formtowizard({
 	formid: 'feedbackform',
@@ -23,6 +22,7 @@ var myform=new formtowizard({
 		<c:if test="${not empty sessionScope.customer}">
 			<a class="header-btn" style="margin-right:30px; float:right; cursor:pointer;"><img src="/resources/img/shopping-cart.png" width="30px"></a><!-- 장바구니 개수 넣어주세요 -->
 		</c:if>
+		<br><br><strong style="font-size:30px; font-weight:bolder;">${mgr.mgrName } 주문하기</strong>
 		<form id="feedbackform" name="feedbackform" method="post">
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
@@ -83,6 +83,7 @@ var myform=new formtowizard({
 				<div class="cheeze img-box select-none fix-img" style="background-color:white; clear:both;" >
 					<img src="/resources/img/cancelyellow.png">
 					<p class="label">선택안함</p>
+					<input type="hidden" value="0">
 				</div>
 				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 					<c:if test="${ingre.ingreType eq '치즈' and ingre.ingreActive eq '1' }">
@@ -99,6 +100,9 @@ var myform=new formtowizard({
 				<div class="topping img-box select-none fix-img" style="background-color:white; clear:both;" >
 					<img src="/resources/img/cancelyellow.png">
 					<p class="label">선택안함</p>
+					<input type="hidden" value="0">
+					<input type="hidden" value="0">
+					<input type="hidden" value="0">
 				</div>
 				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 					<c:if test="${ingre.ingreType eq '추가토핑' and ingre.ingreActive eq '1' }">
@@ -153,6 +157,7 @@ var myform=new formtowizard({
 				<div class="source img-box select-none fix-img" style="background-color:white; clear:both;" >
 					<img src="/resources/img/cancelyellow.png">
 					<p class="label">선택안함</p>
+					<input type="hidden" value="0">
 				</div>
 				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 					<c:if test="${ingre.ingreType eq '소스' and ingre.ingreActive eq '1' }">
@@ -173,6 +178,8 @@ var myform=new formtowizard({
 				<div class="set img-box select-one fix-img" style="background-color:white;" >
 					<img src="/resources/img/checkedgreen.png">
 					<p class="label">단품</p>
+					<input type="hidden" value="0">
+					<input type="hidden" value="0">
 				</div>
 				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 					<c:if test="${ingre.ingreType eq '세트메뉴' and ingre.ingreActive eq '1' }">
@@ -202,7 +209,7 @@ var myform=new formtowizard({
 					</c:if>
 				</c:forEach>
 				<div class="common-tbl-btn-group">
-					<button type="button" class="btn-style2 order-check" style="clear:both;">주문 완료</button>
+					<button type="button" class="btn-style2 order-check" style="clear:both;">카트에 담기</button>
 				</div>
 			</fieldset>
 		
@@ -236,10 +243,7 @@ var myform=new formtowizard({
 						</tr>
 					</table>
 					<div class="common-tbl-btn-group">
-						<button type="button" class="btn-style2 add-order">추가 주문</button>
-						<c:if test="${not empty sessionScope.customer}">
-							<button type="button" class="btn-style2 add-bucket">카트에 담기</button>
-						</c:if>
+						<button type="button" id="sbmOrder" class="btn-style2 add-order">추가 주문</button>
 						<button type="button" id="sbmOrder" class="btn-style2">주문 완료</button>
 					</div>
 				</div>
@@ -256,11 +260,16 @@ var myform=new formtowizard({
 			<input type="hidden" name="bucKcal" class="orderInput"> 
 			<input type="hidden" name="bucIsSalad" class="orderInput">
 			<input type="hidden" name="bucIsOvened" class="orderInput">
-<!-- 			<input type="hidden" name="bucCusoIdx" class="orderInput"> -->
+			<input type="hidden" name="bucBranch" class="orderInput" value="${mgr.mgrNo }">
+			<c:if test="${sessionScope.customer ne null }">
+				<input type="hidden" name="bucCustomerIdx" class="orderInput" value="${sessionScope.customer.customerNo}">
+			</c:if>
+			<c:if test="${sessionScope.customer eq null }">
+				<input type="hidden" name="bucCustomerIdx" class="orderInput" id="cookie">
+			</c:if>
 		</form>
-		
-				<input type="hidden" id="recom-sauce">
-				<input type="hidden" id="recom-main">
+		<input type="hidden" id="recom-sauce">
+		<input type="hidden" id="recom-main">
 	</div>
 </section>
 

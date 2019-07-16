@@ -5,8 +5,8 @@ import java.sql.Date;
 
 public class Bucket {
 	private int bucIdx;
-	private int bucCustomerIdx;
-	private int bucCusoIdx;
+	private String bucCustomerIdx;
+	private String bucCusoIdx;
 	private String bucBread;
 	private String bucMain;
 	private String bucVegi;
@@ -22,14 +22,15 @@ public class Bucket {
 	private int bucKcal;
 	private int bucQuantity;
 	private Date bucRegDate;
+	private String bucBranch;
 	public Bucket() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Bucket(int bucIdx, int bucCustomerIdx, int bucCusoIdx, String bucBread, String bucMain, String bucVegi,
+	public Bucket(int bucIdx, String bucCustomerIdx, String bucCusoIdx, String bucBread, String bucMain, String bucVegi,
 			String bucCheese, String bucSource, String bucTopping, String bucSide, String bucIsSalad,
 			String bucIsOvened, String bucSet, int bucCost, double bucDiscntRate, int bucKcal, int bucQuantity,
-			Date bucRegDate) {
+			Date bucRegDate, String bucBranch) {
 		super();
 		this.bucIdx = bucIdx;
 		this.bucCustomerIdx = bucCustomerIdx;
@@ -49,6 +50,7 @@ public class Bucket {
 		this.bucKcal = bucKcal;
 		this.bucQuantity = bucQuantity;
 		this.bucRegDate = bucRegDate;
+		this.bucBranch = bucBranch;
 	}
 	public int getBucIdx() {
 		return bucIdx;
@@ -56,16 +58,16 @@ public class Bucket {
 	public void setBucIdx(int bucIdx) {
 		this.bucIdx = bucIdx;
 	}
-	public int getBucCustomerIdx() {
+	public String getBucCustomerIdx() {
 		return bucCustomerIdx;
 	}
-	public void setBucCustomerIdx(int bucCustomerIdx) {
+	public void setBucCustomerIdx(String bucCustomerIdx) {
 		this.bucCustomerIdx = bucCustomerIdx;
 	}
-	public int getBucCusoIdx() {
+	public String getBucCusoIdx() {
 		return bucCusoIdx;
 	}
-	public void setBucCusoIdx(int bucCusoIdx) {
+	public void setBucCusoIdx(String bucCusoIdx) {
 		this.bucCusoIdx = bucCusoIdx;
 	}
 	public String getBucBread() {
@@ -157,6 +159,12 @@ public class Bucket {
 	}
 	public void setBucRegDate(Date bucRegDate) {
 		this.bucRegDate = bucRegDate;
+	}
+	public String getBucBranch() {
+		return bucBranch;
+	}
+	public void setBucBranch(String bucBranch) {
+		this.bucBranch = bucBranch;
 	}
 	
 }	

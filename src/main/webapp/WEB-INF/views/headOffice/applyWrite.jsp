@@ -8,93 +8,98 @@
 </style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<section id="content-wrapper">
-		<div class="area">
-			<h1 class="comm-content-tit">가맹신청/문의</h1>
-			<form action="/insertApply.do" method="post" enctype="multipart/form-data">
-				<div class="common-tbl-box">
-					<table class="comm-tbl type2">
-						<tr>
-							<td><label for="applyName">이름</label></td>
-							<td><input class="inputBox" type="text" id="applyName" name="applyName" maxlength="16" style="width:1000px" placeholder="이름을 입력해주세요"></td>
-						</tr>
-						<tr>
-							<td><label for="applyPhone">연락처</label></td>
-							<td><input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="16" style="width:1000px"placeholder="연락 가능한 전화번호를 입력해주세요"></td>
-						</tr>
-						<tr>
-					    	<td>
-					        	<label for="email">E-Mail</label>
-					        </td>
-					       	<td>
-					        	<input class="inputBox" type="text" id="applyEmail" name="applyEmail"  style="width:50%" maxlength="20" placeholder="이메일">@
-					               
-					            <input type="text" id="applyEmail2" name="applyEmail2" style="width:20%" maxlength="20">
-					               
-					            <select name="emailEx" id="emailEx" style="width:20%">
-						            <option value="">직접입력</option>
-						            <option value="naver.com">naver.com</option>
-						            <option value="hanmail.net">hanmail.net</option>
-						            <option value="gmail.com">gmail.com</option>
-					       		</select>
-					                <button type="button" id="emailChk">중복확인안돼</button>
-					    	</td>            
-						</tr>
-						<tr>
-							<td><label for="applyArea">지역</label></td>
-							<td>
-								<select class="inputBox" name="applyArea" id="applyArea" style="width:50%">
-									<option value="">시/도</option>
-									<option value="서울특별시">서울특별시</option>
-									<option value="경기도">경기도</option>
-									<option value="인천광역시">인천광역시</option>
-									<option value="대전광역시">대전광역시</option>
-									<option value="세종특별자치시">세종특별자치시</option>
-									<option value="충청남도">충청남도</option>
-									<option value="경상남도">경상남도</option>
-									<option value="울산광역시">울산광역시</option>
-									<option value="부산광역시">부산광역시</option>
-									<option value="대구광역시">대구광역시</option>
-									<option value="제주특별자치도">제주특별자치도</option>
-									<option value="전라북도">전라북도</option>
-									<option value="충청북도">충청북도</option>
-									<option value="광주광역시">광주광역시</option>
-									<option value="전라남도">전라남도</option>
-									<option value="경상북도">경상북도</option>
-									<option value="강원도">강원도</option>
-								</select>
-								<select name="applyArea2" id="applyArea2" style="width:50%">
-									<option value="">시/군/구</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td><label for="applyTitle">제목</label></td>
-							<td><input class="inputBox" type="text" id="applyTitle" name="applyTitle" maxlength="16" style="width:1000px" placeholder="제목을 입력해주세요"></td>
-						</tr>
-						<tr>
-							<td><label for="applyContent">내용</label></td>
-							<td>
-							<textarea class="inputBox" name="applyContent" id="applyContent" rows="3" cols="40" style="width:1000px;overflow:visible"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td><label for="applyFilename">첨부파일</label></td>
-							<td>
-								<input data-maxsize="2" data-maxupload="1" id="applyFilename" name="applyfilename" type="file" /><br>
-								<span class="file_note">※ 등록 가능 확장자 : pdf,docx,pptx,xlsx,jpg,gif,png / 최대 2MB</span>
-							</td>
-						</tr>
-						<tr style="text-align: center;">
-							<th colspan="2">
-								<input type="submit" value="등록하기">
-							</th>
-						</tr>
-					</table>
+
+<section id="content-wrapper">
+	<div class="area">
+		<h1 class="comm-content-tit">가맹신청/문의</h1>
+		<form action="/insertApply.do" method="post" enctype="multipart/form-data">
+			<div class="common-tbl-box">
+				<table class="comm-tbl type2">
+					<tr>
+						<td><label for="applyName">이름</label></td>
+						<td><input class="inputBox short" type="text" id="applyName" name="applyName" maxlength="16" style="width:1000px" placeholder="이름을 입력해주세요"></td>
+					</tr>
+					<tr>
+						<td><label for="applyPhone">연락처</label></td>
+						<td><input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="16" style="width:1000px"placeholder="연락 가능한 전화번호를 입력해주세요"></td>
+					</tr>
+					<tr>
+				    	<td>
+				        	<label for="email">E-Mail</label>
+				        </td>
+				       	<td>
+				        	<input class="inputBox" type="text" id="applyEmail" name="applyEmail"  style="width:50%" maxlength="20" placeholder="이메일">@
+				               
+				            <input type="text" id="applyEmail2" name="applyEmail2" style="width:20%" maxlength="20">
+				               
+				            <select name="emailEx" id="emailEx" style="width:20%">
+					            <option value="">직접입력</option>
+					            <option value="naver.com">naver.com</option>
+					            <option value="hanmail.net">hanmail.net</option>
+					            <option value="gmail.com">gmail.com</option>
+				       		</select>
+				                <button type="button" id="emailChk">중복확인안돼</button>
+				    	</td>            
+					</tr>
+					<tr>
+						<td><label for="applyArea">지역</label></td>
+						<td>
+							<select class="inputBox" name="applyArea" id="applyArea" style="width:50%">
+								<option value="">시/도</option>
+								<option value="서울특별시">서울특별시</option>
+								<option value="경기도">경기도</option>
+								<option value="인천광역시">인천광역시</option>
+								<option value="대전광역시">대전광역시</option>
+								<option value="세종특별자치시">세종특별자치시</option>
+								<option value="충청남도">충청남도</option>
+								<option value="경상남도">경상남도</option>
+								<option value="울산광역시">울산광역시</option>
+								<option value="부산광역시">부산광역시</option>
+								<option value="대구광역시">대구광역시</option>
+								<option value="제주특별자치도">제주특별자치도</option>
+								<option value="전라북도">전라북도</option>
+								<option value="충청북도">충청북도</option>
+								<option value="광주광역시">광주광역시</option>
+								<option value="전라남도">전라남도</option>
+								<option value="경상북도">경상북도</option>
+								<option value="강원도">강원도</option>
+							</select>
+							<select name="applyArea2" id="applyArea2" style="width:50%">
+								<option value="">시/군/구</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td><label for="applyTitle">제목</label></td>
+						<td><input class="inputBox" type="text" id="applyTitle" name="applyTitle" maxlength="16" style="width:1000px" placeholder="제목을 입력해주세요"></td>
+					</tr>
+					<tr>
+						<td><label for="applyContent">내용</label></td>
+						<td>
+						<textarea class="inputBox" name="applyContent" id="applyContent" rows="3" cols="40" style="width:1000px;overflow:visible"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td><label for="applyFilename">첨부파일</label></td>
+						<td>
+							<input data-maxsize="2" data-maxupload="1" id="applyFilename" name="applyfilename" type="file" /><br>
+							<span class="file_note">※ 등록 가능 확장자 : pdf,docx,pptx,xlsx,jpg,gif,png / 최대 2MB</span>
+						</td>
+					</tr>
+					<!-- <tr style="text-align: center;">
+						<th colspan="2">
+							<input type="submit" value="등록하기">
+						</th>
+					</tr> -->
+				</table>
+				<div class="common-tbl-btn-group">
+					<button type="submit" class="small">등록하기</button>
 				</div>
-			</form>
-		</div>
-	</section>
+			</div>
+		</form>
+	</div>
+</section>
+	
 <script>
 //이메일 작성
 	$("#emailEx").change(function(){

@@ -39,12 +39,14 @@
 	.store_search_wrapper .store_map .store_map_layer .head .btn_close{background:url(../images/common/icon_close01.png) 50% 50% no-repeat; width:54px; height:54px; position:absolute; right:0; top:0; overflow:hidden; text-indent:-9999px; font-size:0; line-height:0}
 	.store_search_wrapper .store_map .store_map_layer .info{margin:0 24px; border-bottom:1px solid #dddddd; height:133px}
 	.store_search_wrapper .store_map .store_map_layer .info dl{overflow:hidden; padding-top:23px;}
-	.store_search_wrapper .store_map .store_map_layer .info dt{color:#292929; font-size:13px; float:left; height:21px; padding-left:2px; position:relative; margin-bottom:4px; letter-spacing:-0.04em}
 	.store_search_wrapper .store_map .store_map_layer .info dt:before{content:''; width:2px; height:2px; display:inline-block; vertical-align:middle; background-color:#696969; margin-right:5px; position:relative; top:-1px}
-	.store_search_wrapper .store_map .store_map_layer .info dd{color:#999999; font-size:13px; line-height:21px; margin:0 0 4px 76px; position:relative; top:-3px; letter-spacing:-0.03em; min-height:21px;}
 	.store_search_wrapper .store_map .store_map_layer .foot{text-align: center; padding-top:17px;}
 	.store_search_wrapper .store_map .store_map_layer .foot a{display:inline-block; color:#292929; font-size:16px; font-weight:300; letter-spacing:-0.045em;}
 	.store_search_wrapper .store_map .store_map_layer .foot a:after{content:''; width:25px; height:25px; background:url(../images/common/icon_more.png) 0 0 no-repeat; display:inline-block; vertical-align:middle; margin-left:10px; position:relative; top:-2px;}
+	.store_map_layer .foot {text-align: center;padding-top: 17px;}
+	.store_map_layer .info dt { color: #292929; font-size: 16px;float: left;height: 21px;padding-left: 2px;position: relative;margin-bottom: 4px;letter-spacing: -0.04em;}
+	.store_map_layer .info dd {color: #999999; font-size: 14px;line-height: 21px;margin: 0 0 4px 76px;position: relative;top: -3px;letter-spacing: -0.03em;min-height: 21px;}
+	.store_map_layer .foot a {display: inline-block;color: #292929;font-size: 16px;font-weight: 300;letter-spacing: -0.045em;}
 	
 	
 	/* 써브웨이 ::: 매장찾기 - 신규매장안내 */
@@ -110,11 +112,8 @@
 	.store_search_wrapper .store_map .store_map_layer .info dd{color:#999999; font-size:13px; line-height:21px; margin:0 0 4px 76px; position:relative; top:-3px; letter-spacing:-0.03em; min-height:21px;}
 	.store_search_wrapper .store_map .store_map_layer .foot{text-align: center; padding-top:17px;}
 	.store_search_wrapper .store_map .store_map_layer .foot a{display:inline-block; color:#292929; font-size:16px; font-weight:300; letter-spacing:-0.045em;}
-	.store_search_wrapper .store_map .store_map_layer .foot a:after{content:''; width:25px; height:25px; background:url(../images/common/icon_more.png) 0 0 no-repeat; display:inline-block; vertical-align:middle; margin-left:10px; position:relative; top:-2px;}
-
-	
-
- </style>
+	 .store_map_layer .foot a:after { width: 25px;   height: 25px;  margin-left: 10px; top: -2px;}
+	</style>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>간단한 지도 표시하기</title>
@@ -188,8 +187,8 @@ function mapXyInfo (data) {
 						"		</dl>",
 						"	</div>",
 						"	<div class='foot'>",
-						"		",
-						"	</div>",
+						"		<a href='#' target='blank' style='font-weight:bold' onclick='detailMarket2("+data.mgrNo+")'>주문하기<img src='../resources/img/icon_more.png' style='margin-left:10px;margin-bottom:3px'>",
+						"	</a></div>",
 						"</div>"
 						].join('');
 					

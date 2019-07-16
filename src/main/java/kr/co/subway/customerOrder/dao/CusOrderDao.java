@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.customerOrder.vo.Bucket;
+import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
+import kr.co.subway.manager.vo.Mgr;
 
 @Repository("cusOrderDao")
 public class CusOrderDao {
@@ -22,8 +24,8 @@ public class CusOrderDao {
 		return sqlSession.insert("bucket.insertBucket",buc);
 	}
 
-	public List<Bucket> allOrderList(int customerIdx) {
-		return sqlSession.selectList("bucket.selectAllBucket", customerIdx);
+	public List<Bucket> allOrderList(String bucCustomerIdx) {
+		return sqlSession.selectList("bucket.selectAllBucket", bucCustomerIdx);
 	}
 
 	public IngreVo selectCostMain(IngreVo ingre) {
@@ -44,5 +46,14 @@ public class CusOrderDao {
 	
 	public int tempOrderDelete(int idx) {
 		return sqlSession.delete("bucket.tempOrderDelete",idx);
+	}
+	
+	public Mgr mgrSelectOne(int mgrNo) {
+		return sqlSession.selectOne("bucket.mgrSelectOne", mgrNo); 
+	}
+	
+	public int updateQuantity(UpdateQuantity uq) {
+		
+		return sqlSession.update("bucket.updateQuantity", uq);
 	}
 }

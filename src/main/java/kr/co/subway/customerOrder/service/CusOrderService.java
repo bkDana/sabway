@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.subway.customerOrder.dao.CusOrderDao;
 import kr.co.subway.customerOrder.vo.Bucket;
+import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
+import kr.co.subway.manager.vo.Mgr;
 
 @Service("cusOrderService")
 public class CusOrderService {
@@ -28,7 +30,7 @@ public class CusOrderService {
 		
 	}
 
-	public ArrayList<Bucket> allOrderList(int customerIdx) {
+	public ArrayList<Bucket> allOrderList(String customerIdx) {
 		List<Bucket> list = cusOrderDao.allOrderList(customerIdx);
 		return (ArrayList<Bucket>)list;
 	}
@@ -56,5 +58,13 @@ public class CusOrderService {
 	@Transactional
 	public int tempOrderDelete(int idx) {
 		return cusOrderDao.tempOrderDelete(idx); 
+	}
+	
+	public Mgr mgrSelectOne(int mgrNo) {
+		return cusOrderDao.mgrSelectOne(mgrNo); 
+	}
+	
+	public int updateQuantity(UpdateQuantity uq) {
+		return cusOrderDao.updateQuantity(uq);
 	}
 }

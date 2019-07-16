@@ -18,6 +18,24 @@
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
 <script type="text/javascript" src="/resources/js/nav.js"></script><!-- nav.js -->
 
+<script>
+	$(document).ready(function(){
+		if(!document.cookie){
+			setCookie();
+			console.log("쿠키생성");
+		}else{
+			console.log("쿠키있음");			
+		}
+		
+	});
+	var setCookie = function setCookie(){
+		var cookieDate = new Date();
+		var date = cookieDate.getFullYear()+''+(cookieDate.getMonth()+1)+''+cookieDate.getDate()+''+cookieDate.getHours()+''+cookieDate.getMinutes()+''+cookieDate.getSeconds();
+		document.cookie = "noneCustomer="+date;
+	}
+	
+</script>
+<script type="text/javascript" src="/resources/js/bucket.js"></script>
 <title>진짜 메인</title>
 </head>
 <body>
@@ -54,6 +72,7 @@
 		<div id="headerInnerWrap">
 			<!-- 로고 -->
 			<div class="header-logo">
+				<input type="hidden" id="sessionContainer" value="${sessionScope.customer.phone }">
 				<a href="/" class="sabway"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a>
 				<ul class="header-menu clearfix">
 					<!--
@@ -62,9 +81,7 @@
 					<li><a class="header-btn">고객센터</a></li>
 					-->
 					<li><a href="/admin.do" class="header-btn">관리자</a></li>
-					<c:if test="${not empty sessionScope.customer}">
-						<li><a class="header-btn"><img src="/resources/img/shopping-cart.png" width="20px"> 1</a></li><!-- 장바구니 개수 넣어주세요 -->
-					</c:if>
+					<li><a class="header-btn" id="bucket" onclick="loadBucket()"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
 				</ul>
 			</div>
 			<!-- 헤더 상단 -->
@@ -86,10 +103,10 @@
 							</div>
 						</li>
 						<li class="gnb02">
-							<a href="/cusOrder.do">온라인 주문</a>
+							<a href="/findStore.do?status=11">온라인 주문</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="/cusOrder.do">주문하기</a></li>
+									<li><a href="/findStore.do?status=11">주문하기</a></li>
 									<li><a href="#">단체메뉴 이용방법</a></li>
 								</ul>
 							</div>
@@ -111,7 +128,7 @@
 									<li><a href="#">써브웨이 역사</a></li>
 									<li><a href="#">써브웨이 약속</a></li>
 									<li><a href="#">샌드위치 아티스트 지원</a></li>
-									<li><a href="/findStore.do">매장찾기</a></li>
+									<li><a href="/findStore.do?status=22">매장찾기</a></li>
 								</ul>
 							</div>
 						</li>
@@ -132,3 +149,4 @@
 			</div>
 		</div>
 	</header>
+

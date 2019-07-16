@@ -3,7 +3,7 @@
 /* ****************** 공통 컨텐츠 클래스 ********************** */
 #content-wrapper{padding:100px 0; background-color:#f6f6f6;}
 .comm-content-tit{position:relative; font-size:26px; color:#2b2b2b; text-align:center; font-weight:500; padding:20px 0; margin-bottom:50px;}
-.comm-content-tit:after{display:block; content:""; width:50px; height:4px; background-color:rgba(254,67,30); position:absolute; bottom:0; left:50%; margin-left:-30px;}
+.comm-content-tit:after{display:block; content:""; width:50px; height:4px; background-color:#009223; position:absolute; bottom:0; left:50%; margin-left:-30px;}
 
 
 /* 게시판용  :: 지영*/
@@ -35,6 +35,7 @@
 /* ****************** 봉사활동 등록 폼 ********************** */
 .common-tbl-box{padding:70px 50px; background-color:#f8f8f8;}
 .comm-tbl{width:100%; max-width:800px; margin:0 auto; background-color:#fff;}
+.comm-tbl.login-tbl{max-width:600px;}
 .comm-tbl th, .comm-tbl td{border:1px solid #ddd; padding:15px; text-align:left; font-weight:normal; line-height:20px;}
 .comm-tbl tr:first-child th, .comm-tbl tr:first-child td{border-top:2px solid #009223;}
 .comm-tbl th{font-size:17px; line-height:20px; font-weight:500;}
@@ -50,6 +51,9 @@
 .comm-tbl.type2 th{text-align:center; font-size:16px; border-top:2px solid rgba(254,67,30);}
 .comm-tbl.type2 td{color:#2b2b2b; font-size:14px; text-align:center;}
 .comm-tbl.type2 tr:hover td{background-color:rgba(254,67,30,0.05);}
+/* 회원가입, 가맹점신청  :보경 */
+
+
 
 /* 게시판용  :: 지영*/
 .comm-tbl.board{width:100%; max-width:none; background-color:#f8f8f8; border-top:4px solid #009223;}
@@ -84,7 +88,7 @@
 .common-tbl-btn-group > button.btn-style1{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style2{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style3{background-color:#888;}
-.common-tbl-btn-group > button.small{width:100px; height:35px; font-size:15px;}
+.common-tbl-btn-group > button.small{background-color:#009223;width:100px; height:35px; font-size:15px;}
 .common-tbl-btn-group > button.supersmall{width:55px; height:30px; font-size:14px;}
 .comm-tbl .file-del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#888; color:#fff; margin-left:5px;}
 
@@ -143,46 +147,6 @@
 .modal-inner-con{padding:30px; }
 .modal-inner{overflow-y:auto; overflow-x:hidden; border:1px solid #ddd; }
 
-
-/* ****************** 전국 보호소 찾기 ********************** */
-#findShelterBox{}
-.find-shelter-left-box{float:left; width:800px;}
-.find-shelter-right-box{float:right; width:390px;}
-.find-shelter-right-box .map{margin:0 auto; width:218px; height:419px; background:url(/img/map_bg.png) no-repeat; position:relative;}
-.find-shelter-right-box .map > a{display:inline-block; width:18px; height:22px; background:url(/img/map_icon_2.png) no-repeat; background-position:0 -22px; position:absolute;}
-.find-shelter-right-box .map > a.on, .find-shelter-right-box .map > a:hover{background-position:0 0;}
-.find-shelter-right-box .map > a.on .loc-name, .find-shelter-right-box .map > a:hover .loc-name{display:block;}
-.find-shelter-right-box .map > a.loc1{left:30px; top:114px;} /*인천*/
-.find-shelter-right-box .map > a.loc2{left:51px; top:108px;} /*서울*/
-.find-shelter-right-box .map > a.loc3{left:53px; top:79px;} /*경기도*/
-.find-shelter-right-box .map > a.loc4{left:131px; top:102px;} /*강원도*/
-.find-shelter-right-box .map > a.loc5{left:35px; top:188px;} /*충청남도*/
-.find-shelter-right-box .map > a.loc6{left:72px; top:202px;} /*대전*/
-.find-shelter-right-box .map > a.loc7{left:91px; top:171px;} /*충청북도*/
-.find-shelter-right-box .map > a.loc8{right:39px; top:204px;} /*경상북도*/
-.find-shelter-right-box .map > a.loc9{left:55px; bottom:150px;} /*전라북도*/
-.find-shelter-right-box .map > a.loc10{left:30px; bottom:106px;} /*광주*/
-.find-shelter-right-box .map > a.loc11{left:60px; bottom:87px;} /*전라남도*/
-.find-shelter-right-box .map > a.loc12{left:124px; bottom:115px;} /*경상남도*/
-.find-shelter-right-box .map > a.loc13{left:28px; bottom:14px;} /*제주도*/
-.find-shelter-right-box .map > a.loc14{right:25px; bottom:105px;} /*부산*/
-.find-shelter-right-box .map > a.loc15{right:59px; bottom:152px;} /*대구*/
-.find-shelter-right-box .map > a.loc16{left:65px; top:180px;} /*세종시*/
-.find-shelter-right-box .map > a .loc-name{position:absolute; top:-51px; left:9px; display:none; width:74px; height:49px; background:url(/img/map_txt_2.png) no-repeat; text-align:center; line-height:25px; font-size:12px; color:#3e3e3e; font-weight:500; z-index:9;}
-.find-shelter-right-box .map > a.loc1 .loc-name,
-.find-shelter-right-box .map > a.loc3 .loc-name,
-.find-shelter-right-box .map > a.loc9 .loc-name,
-.find-shelter-right-box .map > a.loc10 .loc-name,
-.find-shelter-right-box .map > a.loc11 .loc-name{background:url(/img/map_txt_3.png) no-repeat; left:-65px;}
-.find-shelter-right-box .map > a.loc6 .loc-name,
-.find-shelter-right-box .map > a.loc12 .loc-name,
-.find-shelter-right-box .map > a.loc15 .loc-name{background:url(/img/map_txt_4.png) no-repeat; background-size:contain; left:13px; top:7px; width:70px; height:45px;}
-.find-shelter-right-box .map > a.loc12 .loc-name{top:15px;}
-.find-shelter-right-box .map > a.loc6 .loc-name > span,
-.find-shelter-right-box .map > a.loc12 .loc-name > span,
-.find-shelter-right-box .map > a.loc15 .loc-name > span{margin-top:37px;}
-.find-shelter-right-box .map > a .loc-name > span{display:inline-block; font-weight:normal; color:#7f7f7f;}
-
 /* ****************** 마이 페이지 ********************** */
 .mypage-tit{font-size:18px; line-height:24px; color:#333; font-weight:400;}
 .mypage-tit > b{font-size:20px; font-weight:600;}
@@ -200,16 +164,20 @@
 
 /* ****************** 로그인 ********************** */
 .login-inner{max-width:65%; margin:0 auto 30px;}
-.login-inner .login-tbl-box{float:left; width:72%;}
+.login-inner .login-tbl-box{float:left; width:70%; margin-left:15%;}
 .login-inner .login-tbl-box .login-tbl{max-width:none;}
 .comm-tbl.login-tbl th, .comm-tbl.login-tbl td{border-left:0; border-right:0;}
-.login-inner .login-btn-box{float:right; width:23%;}
+.login-inner .login-btn-box{float:right; width:23%;text-align:center;}
 .login-inner .login-btn-box .login-btn{display:block; width:100%; height:134px; color:#fff; font-size:20px; border-radius:5px; background-color:rgba(254,67,30);}
 .login-inner .login-btn-box.type2{float:none; width:auto; padding-top:20px; text-align:center;}
 .login-inner .login-btn-box.type2 .login-btn{max-width:50%; height:50px; margin:0 auto;}
 .login-util-box{text-align:center;}
 .login-util-box > span{display:inline-block; vertical-align:middle; margin:0 15px;}
 .login-util-box > span a{display:inline-block; padding:5px; font-size:16px; line-height:20px; color:#2d2d2d;}
+/* 
+.login-inner .login-btn-box > button{width:100px; height:50px; border-radius:50px; font-size:17px; color:#fff; margin:0 10px;}
+.login-inner .login-btn-box > button.btn-style1{background-color:#009223;}
+.login-inner .login-btn-box > button.btn-style3{background-color:#888;} */
 
 /* ****************** 이용약관 ********************** */
 .terms-tit{font-size: 18px;margin-bottom: 20px;font-weight:500;}
@@ -243,6 +211,7 @@
 .like-img-box{margin-left:850px; margin-bottom:10px; width:100px; height:50px; }
 .like-img{width:100%; height:100%; cursor:pointer;}
 .like-inner-box{float: left; width:50%; height:100%; color:#ffce32;}
+/* ****************** order VIEW CSS ****************** */
 .img-box{width:200px; height:200px; float:left; border:1px solid #ffce32; cursor:pointer;}
 .fix-img img{width:60%; height:60%; margin-top: 40px; margin-left:40px;}
 .label{text-align: center; font-size:22px; display:none; line-height: 200px; color:#ffce32;}
@@ -254,3 +223,5 @@
 .bread p{line-height:100px;}
 .selects{border:1px solid #ffce32;}
 .select-vegi{color:#009223;}
+.quantityChange.type1{width:20px; height:20px; font-size: 20px; color:#009223; line-height:18px;}
+.quantityChange.type2{width:20px; height:20px; font-size: 17px; color:#009223; line-height:20px;}

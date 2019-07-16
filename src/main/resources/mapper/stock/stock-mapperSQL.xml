@@ -73,17 +73,45 @@
   			stock_history_tbl
   		values(stock_history_seq.nextval,#{hStockIdx},#{hContent},sysdate)
   	</insert>
-  	<select id="stockHistory" parameterType="_int" resultType="history">
+  	<select id="totalStock" parameterType="search" resultType="_int">
   		select
-			h_idx as hIdx,
-			h_stock_idx as hStockIdx,
-			h_content as hContent,
-			TO_CHAR(h_date,'YYYY-MM-DD HH24:mi:ss') as hDate
+			count(*) cnt
 		from
 			stock_history_tbl
 		where
-			h_stock_idx = #{no}
-		order by
-			h_date desc
+			h_stock_idx = #{state}
   	</select>
+  	<select id="stockHistory" parameterType="search" resultType="history">
+  		select 
+  			*
+	  	from ( select 
+	  				rownum rnum,
+	  				s.* 
+	  			from (
+			  		select
+						h_idx as hIdx,
+						h_stock_idx as hStockIdx,
+						h_content as hContent,
+						TO_CHAR(h_date,'YYYY-MM-DD HH24:mi:ss') as hDate
+					from
+						stock_history_tbl
+					where
+						h_stock_idx = #{state}
+					order by
+						h_date desc
+					)s
+			)
+		where 
+			rnum between #{start} and #{end}
+  	</select>
+  	<select id="ingreInfo" parameterType="search" resultType="ingre">
+  		select
+			ingre_label as ingreLabel,
+			ingre_filepath as ingreFilepath
+		from
+			m_stock_tbl, ingredients
+		where 
+			ITEM_IDX = INGRE_IDX 
+			and M_STOCK_IDX = #{state}
+	</select>
 </mapper>
