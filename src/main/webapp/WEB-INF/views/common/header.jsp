@@ -117,7 +117,7 @@
 									<li><a href="#">써브웨이 역사</a></li>
 									<li><a href="#">써브웨이 약속</a></li>
 									<li><a href="#">샌드위치 아티스트 지원</a></li>
-									<li><a href="/findStore.do">매장찾기</a></li>
+									<li><a href="/findStore.do?status=22">매장찾기</a></li>
 								</ul>
 							</div>
 						</li>

@@ -43,6 +43,10 @@
 	.store_search_wrapper .store_map .store_map_layer .foot{text-align: center; padding-top:17px;}
 	.store_search_wrapper .store_map .store_map_layer .foot a{display:inline-block; color:#292929; font-size:16px; font-weight:300; letter-spacing:-0.045em;}
 	.store_search_wrapper .store_map .store_map_layer .foot a:after{content:''; width:25px; height:25px; background:url(../images/common/icon_more.png) 0 0 no-repeat; display:inline-block; vertical-align:middle; margin-left:10px; position:relative; top:-2px;}
+	.store_map_layer .foot {text-align: center;padding-top: 17px;}
+	.store_map_layer .info dt { color: #292929; font-size: 16px;float: left;height: 21px;padding-left: 2px;position: relative;margin-bottom: 4px;letter-spacing: -0.04em;}
+	.store_map_layer .info dd {color: #999999; font-size: 14px;line-height: 21px;margin: 0 0 4px 76px;position: relative;top: -3px;letter-spacing: -0.03em;min-height: 21px;}
+	.store_map_layer .foot a {display: inline-block;color: #292929;font-size: 16px;font-weight: 300;letter-spacing: -0.045em;}
 	
 	
 	/* 써브웨이 ::: 매장찾기 - 신규매장안내 */
@@ -183,7 +187,7 @@ function mapXyInfo (data) {
 						"		</dl>",
 						"	</div>",
 						"	<div class='foot'>",
-						"		<a href='#' target='blank'>주문하기</a><img src='../resources/img/icon_more.png' style='margin-left:10px;margin-bottom:3px'>",
+						"		<a href='#' target='blank' style='font-weight:bold'>주문하기</a><img src='../resources/img/icon_more.png' style='margin-left:10px;margin-bottom:3px'>",
 						"	</div>",
 						"</div>"
 						].join('');
