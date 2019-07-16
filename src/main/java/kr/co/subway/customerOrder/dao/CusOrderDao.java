@@ -23,8 +23,8 @@ public class CusOrderDao {
 		return sqlSession.insert("bucket.insertBucket",buc);
 	}
 
-	public List<Bucket> allOrderList(int customerIdx) {
-		return sqlSession.selectList("bucket.selectAllBucket", customerIdx);
+	public List<Bucket> allOrderList(String bucCustomerIdx) {
+		return sqlSession.selectList("bucket.selectAllBucket", bucCustomerIdx);
 	}
 
 	public IngreVo selectCostMain(IngreVo ingre) {

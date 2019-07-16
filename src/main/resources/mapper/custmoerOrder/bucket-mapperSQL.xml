@@ -52,8 +52,9 @@
  			${bucBranch}
  			)	
  	</insert>
- 	<select id="selectAllBucket" parameterType="_int" resultType="bucket">
+ 	<select id="selectAllBucket" parameterType="String" resultType="bucket">
  		select
+ 			buc_idx as bucIdx,
  			buc_bread as bucBread,
  			buc_main as bucMain,
  			buc_vegi as bucVegi,

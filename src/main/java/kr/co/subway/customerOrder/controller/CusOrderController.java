@@ -3,6 +3,7 @@ package kr.co.subway.customerOrder.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -80,9 +81,17 @@ public class CusOrderController {
 				
 	@RequestMapping("/loadBucket.do")
 	public ModelAndView loadBucket(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+		String customerIdx = "-1";
+		HttpSession session = request.getSession(false);
 		Customer c = (Customer)session.getAttribute("customer");
-		int customerIdx = c.getCustomerNo();
+		if(c != null) {
+			customerIdx = String.valueOf(c.getCustomerNo());
+		} else {
+			Cookie[]getCookie = request.getCookies();
+			customerIdx = getCookie[2].getValue();
+			
+		}
+
 		ArrayList<Bucket> list = cusOrderService.allOrderList(customerIdx);
 		
 		ModelAndView mav = new ModelAndView();
@@ -90,7 +99,8 @@ public class CusOrderController {
 			mav.addObject("list",list);
 			mav.setViewName("/customerOrder/bucket");	
 		} else {
-			mav.setViewName("/common/error");
+			mav.addObject("list",list);
+			mav.setViewName("/customerOrder/bucket");	
 		}
 		return mav;
 	}
