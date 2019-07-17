@@ -45,4 +45,10 @@ public class SalesStaticsService {
 		System.out.println(list.size());
 		return list;
 	}
+
+	//해당 월 메뉴 판매 현황
+	public ArrayList<SalesStaticsGrpVo> getMonthTotalMenu(String orderMonth) {
+		ArrayList<SalesStaticsGrpVo> list = (ArrayList<SalesStaticsGrpVo>)dao.getMonthTotalMenu(orderMonth);
+		return null;
+	}
 }

@@ -28,9 +28,13 @@
 	</select>
 	
 	
-	<!-- 해당 년도 메뉴 매출(total에서 나머지 빼기)  -->
-	<select id="getTotalMenu" resultType="graph">
+	<!-- 해당 년도 메뉴 매출 and 해당 월 메뉴 매출 -->
+	<select id="getTotalMenu" parameterType="string" resultType="graph">
 		select * from (select rownum as rnum, b.* from (select nvl(buc_main,'total') as ingredients, sum(buc_cost*buc_quantity) as totalCost from bucket
-		 where substr(buc_reg_date,1,2)=to_char(sysdate,'yy') group by rollup(buc_main) order by totalCost desc) b)
+		 where substr(buc_reg_date,1,2)=to_char(sysdate,'yy') 
+		 <if test="orderMonth != null and orderMonth !=''">
+		 	 and substr(buc_reg_date,4,2)=#{orderMonth} 
+		 </if>
+		 group by rollup(buc_main) order by totalCost desc) b)
 	</select>
 </mapper>
