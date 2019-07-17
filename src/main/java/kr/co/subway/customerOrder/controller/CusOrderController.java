@@ -104,7 +104,7 @@ public class CusOrderController {
 			
 		}
 
-		ArrayList<Bucket> list = cusOrderService.allOrderList(customerIdx);
+		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx);
 		
 		ModelAndView mav = new ModelAndView();
 		if(!list.isEmpty()) {

@@ -19,10 +19,7 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">
-			※ 매장관리 > 가맹점 목록<br><br>
-			<button style="font-size:15px;" id="adminLink">목록으로 이동</button>
-		</div>
+		<div class="sub-menu">※ 매장관리 > 가맹점 신청 목록</div>
 		<h1 class="comm-content-tit">신청 목록</h1>
 		<table class="comm-tbl">
 			<tr>
@@ -63,56 +60,20 @@
 				</tr>
 			</c:if>
 		</table>
-		<div class="pageNavi">${pd.pageNavi }</div>
-		<br><br><hr>
-	</div>
-	<div class="area">
-		<h1 class="comm-content-tit">처리된 목록</h1>
-		<table class="comm-tbl" name="tr">
-			<tr>
-				<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
-			</tr>
-			
-<%-- 			<c:forEach items="${cpd.applyList }" var="cpt">
-				<tr>
-					<td>${cpt.applyName }</td>
-					<td>${cpt.applyTitle }</td>
-					<td>${cpt.applyPhone }</td>
-					<td>${cpt.applyArea }</td>
-					<td>${cpt.applyDate }</td>
-					<td>
-						<!-- 상태값을 가져와서 승인/거절로 출력 -->
-						<c:if test="${cpt.applyStatus eq 1 }">
-							<td>승인</td>
-						</c:if>
-						<c:if test="${cpt.applyStatus eq 2 }">
-							<td>거절</td>
-						</c:if>
-					</td>
-				</tr>
-			</c:forEach>
-			<c:if test="${cpd.totalCount <= 0 }">
-				<tr>
-					<td>처리된 목록이 없습니다.</td>
-				</tr>
-			</c:if> --%>
-		</table>
-		<div class="pageNavi">${cpd.pageNavi }</div>
+		<div class="pageNavi">
+			${pd.pageNavi }
+		</div>
+		<div class="common-tbl-btn-group">
+			<button class="btn-style2" style="font-size:15px;" id="completionLink">처리된 목록</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="btn-style2" style="font-size:15px;" id="adminLink">목록으로</button>
+		</div>
 	</div>
 </section>
 <script type="text/javascript">
-	$(document).ready(function(){
-		var currentPage="";
-		$.ajax({
-			url:"/applyCompletion.do",
-			data:{currentPage:currentPage},
-			success:function(data){
-				for(var i=0;i<10;i++){
-					$('[name=tr]').append("<tr><td>"+data.applyName+"</td>"+"<td>"+data.applyTitle+"</td><td>"+data.applyPhone+"</td><td>"+data.applyArea+"</td><td>"+data.applyDate+"</td><td>"+data.status+"</td></tr>");
-				}
-				console.log(data);
-			}
-		});
+	//처리된 목록으로 이동
+	$('#completionLink').click(function(){
+		location.href="applyCompletion.do?currentPage=''";
 	});
 	//승인 클릭 시 applyName과 applyArea를 enrollMgr.do에 전달
 	//MgrService의 enrollMgr 메소드에서 ApplyDao의 applyManagerUpdate 메소드 태워서 승인(applyStatus의 값 1로 변경) 처리
@@ -147,6 +108,7 @@
 			}
 		}
 	});
+	//목록으로 이동
 	$("#adminLink").click(function(){
 		location.href="/admin.do";
 	});
