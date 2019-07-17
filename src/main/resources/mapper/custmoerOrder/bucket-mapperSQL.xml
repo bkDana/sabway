@@ -55,6 +55,8 @@
  			b.buc_branch =m.mgr_no
  		where
  			b.buc_customer_idx = #{bucCustomerIdx}
+ 		and
+ 			b.buc_cuso_order_no = 0	
     </select>
  	<select id="ingreSelectAll" resultType="ingre">
  		select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, 
@@ -79,7 +81,7 @@
 		update
 			bucket
 		set
-			buc_cuso_order_no = #{bucCusoIdx}
+			buc_cuso_order_no = #{bucCusoOrderNo}
 		where
 			buc_idx = #{bucIdx}	
 				

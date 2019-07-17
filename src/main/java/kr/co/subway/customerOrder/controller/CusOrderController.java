@@ -10,8 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +22,6 @@ import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
-import kr.co.subway.customerOrder.vo.Item;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -139,18 +137,15 @@ public class CusOrderController {
 		CusOrder cuso = new CusOrder(0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoBranchName, null);
 		int result = cusOrderService.insertCusOrder(cuso);
 		if(result>0) {
-			System.out.println("임시저장 성공");
+			System.out.println("주문정보 저장 성공");
 		}else{
-			System.out.println("임시저장 실패");
+			System.out.println("주문정보 저장 실패");
 		}
 		for(Bucket b: list) {
 			System.out.println(b.getBucIdx());
-<<<<<<< HEAD
 			System.out.println(cusoOrderNo);
 			b.setBucCusoOrderNo(cusoOrderNo);
-=======
-			b.setBucCusoIdx(cusoOrderNo);
->>>>>>> parent of 296863d... item 삭제
+
 			int result1 = cusOrderService.updateOrder(b);
 			if(result1>0) {
 				System.out.println("버킷 업데이트 성공");
