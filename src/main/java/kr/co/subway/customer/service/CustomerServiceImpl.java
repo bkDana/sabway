@@ -89,7 +89,6 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
    public Customer idAndEmailCheck(Customer customerVo) {
 		return customerdao.idAndEmailCheck(customerVo);
-		 
    }
 
 	@Override
