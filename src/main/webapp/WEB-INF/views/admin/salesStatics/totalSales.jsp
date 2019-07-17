@@ -262,7 +262,8 @@
 			        xAxis: {
 			            categories: name,
 			            crosshair: true
-			        },
+			        }, .
+			        
 			        yAxis: {
 			            min: 0,
 			            title: {
