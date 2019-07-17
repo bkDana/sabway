@@ -25,6 +25,7 @@ import kr.co.subway.manager.service.AddrCode;
 import kr.co.subway.manager.service.AddrType;
 import kr.co.subway.manager.service.MgrService;
 import kr.co.subway.manager.service.RandomTel;
+import kr.co.subway.manager.service.SubStr;
 import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.manager.vo.MgrPageData;
 import kr.co.subway.manager.vo.PageNo;
@@ -40,6 +41,8 @@ public class MgrController {
 	RandomTel randomtel;
 	@Resource(name="addrcode")
 	AddrCode addrcode;
+	@Resource(name="substr")
+	SubStr substr;
 	@RequestMapping(value="/enrollMgr.do")
 	//랜덤 전화번호, 지역별 번호, 지역별 코드 설정
 	public String enrollMgr(@RequestParam String applyArea,@RequestParam String applyName,@RequestParam int applyNo,Model model) {
@@ -48,14 +51,19 @@ public class MgrController {
 		//applyArea : 지역 정보를 알아보기 위함
 		//applyName : 가맹점 등록에 사용할 목적
 		System.out.println(applyArea);
+		System.out.println(applyName);
+		System.out.println(applyNo);
 		String ranTel = randomtel.randomTel();
 		String addrType = addrtype.addrType(applyArea);
 		String mgrTel = addrcode.addrCode(ranTel,addrType);
+		String addrSubStr = substr.subStr(applyArea);
+		System.out.println(addrSubStr);
 		//가맹점 정보를 가져와서 이름 체크
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
 		for(int y=0;y<list.size();y++) {
-			if(list.get(y).getMgrAddr().contains(applyArea)) {
+			if(list.get(y).getMgrAddr().contains(addrSubStr)) {
 				i++;
+				System.out.println(i);
 			}
 		}
 		//이름 중복시 1호점/id +1
@@ -91,16 +99,18 @@ public class MgrController {
 	}
 	//관리자 로그인
 	@RequestMapping("/adminLogin.do")
-	public String adminLogin(HttpServletRequest request, @RequestParam String mgrId){
+	public String adminLogin(HttpServletRequest request, @RequestParam String mgrId, @RequestParam String mgrPw){
 		HttpSession session = request.getSession();
 		Mgr mgr = new Mgr();
-		mgr = mgrservice.login(mgrId);
+		mgr.setMgrId(mgrId);
+		mgr.setMgrPw(mgrPw);
+		mgr = mgrservice.login(mgr);
 		String view = "";
 		if(mgr != null) {
 			session.setAttribute("mgr", mgr);
 			view = "admin/index";
 		}else {
-			view = "main";
+			view = "manager/mgrLogoutFail";
 		}
 		return view;
 	}

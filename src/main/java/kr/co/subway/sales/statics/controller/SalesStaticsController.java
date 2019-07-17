@@ -27,7 +27,7 @@ public class SalesStaticsController {
 	public String goTotalSales() {
 		return "admin/salesStatics/totalSales";
 	}
-
+	//막대차트 부분
 	//전체 매출 가져오기
 	@ResponseBody
 	@RequestMapping("/totalSales.do")
@@ -79,6 +79,46 @@ public class SalesStaticsController {
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}
+	
+	//파이차트 부분
+	//해당년도 전체 메뉴 판매 현황
+	@ResponseBody
+	@RequestMapping("/totalMenu.do")
+	public void getTotalMenu(HttpServletResponse response) throws JsonIOException, IOException {
+		ArrayList<SalesStaticsGrpVo> list = service.getTotalMenu();
+		/*int cost=0;
+		for(int i=1;i<6;i++) {
+			System.out.println(list.get(i).getRnum());
+			cost += list.get(i).getTotalCost();
+			System.out.println(cost);
+		}
+		long etc = list.get(0).getTotalCost() - cost;
+		System.out.println(etc);*/
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+	}
+	
+	//해당 월 메뉴 판매 현황
+	@ResponseBody
+	@RequestMapping("/monthTotalMenu.do")
+	public void getMonthTotalMenu(String month,HttpServletResponse response) throws JsonIOException, IOException {
+		String orderMonth = month.substring(0,month.length()-1);
+		System.out.println("선택된 월"+orderMonth);
+		ArrayList<SalesStaticsGrpVo> list = (ArrayList<SalesStaticsGrpVo>)service.getMonthTotalMenu(orderMonth);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//매출 가져오기
 	/*@RequestMapping("/totalSales.do")

@@ -26,16 +26,18 @@
 		var i = index;
 	    new daum.Postcode({
 	        oncomplete: function(data) {
-	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-	            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-	            if(data.userSelectedType == "R"){//도로명
-		            $("[name=mgrAddr]").val(data.roadAddress);
-	            }else{//지번
-				    $("[name=mgrAddr]").val(data.jibunAddress);
-	            }
-				    $("[name=mgrPost]").val(data.zonecode);
-	            	$("[name=mgrAddrCode]").val(data.sigunguCode);
-	            	$("[name=mgrName]").val('SabWay '+data.bname+" "+i+'호점');
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+            if(data.userSelectedType == "R"){//도로명
+	            $("[name=mgrAddr]").val(data.roadAddress);
+            }else{//지번
+			    $("[name=mgrAddr]").val(data.jibunAddress);
+            }
+			    $("[name=mgrPost]").val(data.zonecode);
+            	$("[name=mgrAddrCode]").val(data.sigunguCode);
+            	$("[name=mgrAddrCode]").val(data.sigunguCode);
+            	$("[name=mgrId]").val('manager'+data.sigunguCode+i);
+            	$("[name=mgrName]").val('SabWay '+data.bname+" "+data.roadname+" "+i+'호점');
 	        }
 	    }).open({
 		    popupName : 'postCodePopup',//중복 생성 방지
@@ -60,13 +62,12 @@
 				<table class="comm-tbl">
 					<tr>
 						<th>이름</th>
-						<!-- 아이디 뒤에 정해놓은 지역코드 + -->
 						<td><input type="text" name="mgrBossName" value="${applyName }" readonly></td>
 					</tr>
 					<tr>
 						<th>아이디</th>
 						<!-- 아이디 뒤에 정해놓은 지역코드 + -->
-						<td><input type="text" name="mgrId" value="manager${i }" readonly></td>
+						<td><input type="text" name="mgrId" readonly></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
@@ -79,6 +80,7 @@
 					</tr>
 					<tr>
 						<th>전화번호</th>
+						<!-- sabway + 받아온 동 + 도로명 + 1부터 중복마다 1씩증가 -->
 						<td><input type="text" name="mgrTel" value="${mgrTel }" readonly></td>
 					</tr>
 					<tr>

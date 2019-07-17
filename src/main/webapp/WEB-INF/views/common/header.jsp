@@ -72,7 +72,8 @@
 		<div id="headerInnerWrap">
 			<!-- 로고 -->
 			<div class="header-logo">
-				<input type="hidden" id="sessionContainer" value="${sessionScope.customer }">
+				<input type="hidden" id="sessionPhone" value="${sessionScope.customer.phone }">
+				<input type="hidden" id="sessionId" value="${sessionScope.customer.customerId }">
 				<a href="/" class="sabway"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a>
 				<ul class="header-menu clearfix">
 					<!--
@@ -80,8 +81,19 @@
 					<li><a class="header-btn">가맹신청 · 문의</a></li>
 					<li><a class="header-btn">고객센터</a></li>
 					-->
-					<li><a href="/admin.do" class="header-btn">관리자</a></li>
-					<li><a class="header-btn" id="bucket"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
+					<c:choose>
+						<c:when test="${not empty sessionScope.customer }">
+							[${sessionScope.customer.customerName }]<br>
+							<li><a href="/logout.do" class="header-btn">로그아웃</a></li>
+							<li><a href="/mypage.do" class="header-btn">회원정보</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="/index.do" class="header-btn">로그인</a></li>
+						</c:otherwise>
+					</c:choose>
+					
+					<li><a href="/loginAdmin.do" class="header-btn">관리자</a></li>
+					<li><a class="header-btn" id="bucket" onclick="loadBucket()"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
 				</ul>
 			</div>
 			<!-- 헤더 상단 -->

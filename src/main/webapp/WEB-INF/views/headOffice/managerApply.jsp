@@ -6,17 +6,27 @@
 <script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
 <title>가맹점 신청</title>
 </head>
-
+<style>
+	.pageNavi{
+		color:black;
+		text-align:center;
+		margin-top:35px;
+		font-size: 15px;
+		font-weight: bold;
+	}
+</style>
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 매장관리 > 가맹점 목록</div>
-			<table class="comm-tbl">
-				<tr>
-					<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
-				</tr>
-				<c:forEach items="${list }" var="apply">
+		<div class="sub-menu">※ 매장관리 > 가맹점 신청 목록</div>
+		<h1 class="comm-content-tit">신청 목록</h1>
+		<table class="comm-tbl">
+			<tr>
+				<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
+			</tr>
+			<c:if test="${pd.totalCount > 0 }">
+				<c:forEach items="${pd.applyList }" var="apply">
 					<!-- 가맹점 신청(status == 0)인 경우 출력 -->
 					<c:if test="${apply.applyStatus eq 0 }">
 						<tr>
@@ -43,38 +53,31 @@
 						</tr>
 					</c:if>
 				</c:forEach>
-			</table>
-			<br><br><hr>
-			<h1 class="comm-content-tit">처리한 목록</h1>
-			<table class="comm-tbl">
+			</c:if>
+			<c:if test="${pd.totalCount <= 0 }">
 				<tr>
-					<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
+					<td colspan="6" style="text-align:center;font-size:15px;">신청 목록이 없습니다.</td>
 				</tr>
-				<c:forEach items="${list }" var="apply">
-					<!-- 승인/거절(status==1or2) 되면 테이블 출력 위치 변경 -->
-					<c:if test="${apply.applyStatus eq 1 || apply.applyStatus eq 2 }">
-						<tr id="tr">
-							<td>${apply.applyName }</td>
-							<td>${apply.applyTitle }</td>
-							<td>${apply.applyPhone }</td>
-							<td>${apply.applyArea }</td>
-							<td>${apply.applyDate }</td>
-							<!-- 상태값을 가져와서 승인/거절로 출력 -->
-							<c:if test="${apply.applyStatus eq 1 }">
-								<td>승인</td>
-							</c:if>
-							<c:if test="${apply.applyStatus eq 2 }">
-								<td>거절</td>
-							</c:if>
-						</tr>
-					</c:if>
-				</c:forEach>
-			</table>
+			</c:if>
+		</table>
+		<c:if test="${pd.totalCount <= 0 }">
+			<div class="pageNavi">1</div>
+		</c:if>
+		<div class="pageNavi">
+			${pd.pageNavi }
+		</div>
+		<div class="common-tbl-btn-group">
+			<button class="btn-style2" style="font-size:15px;" id="completionLink">처리된 목록</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="btn-style2" style="font-size:15px;" id="adminLink">목록으로</button>
 		</div>
 	</div>
 </section>
-<!-- 페이지 전환 없이 승인/거부 -->
 <script type="text/javascript">
+	//처리된 목록으로 이동
+	$('#completionLink').click(function(){
+		location.href="applyCompletion.do?currentPage=''";
+	});
 	//승인 클릭 시 applyName과 applyArea를 enrollMgr.do에 전달
 	//MgrService의 enrollMgr 메소드에서 ApplyDao의 applyManagerUpdate 메소드 태워서 승인(applyStatus의 값 1로 변경) 처리
 	//승인
@@ -98,15 +101,19 @@
 					dataType : "json",
 					success : function(data){
 						if(data.result == 0){
-							location.href="/managerApply.do";
+							alert("수정 완료.");
 						}
 					},
 					error : function(){
-						alert("에러발생");
+						alert("에러발생. 다시 시도해주세요.");
 					}
 				});
 			}
 		}
+	});
+	//목록으로 이동
+	$("#adminLink").click(function(){
+		location.href="/admin.do";
 	});
 </script>
 

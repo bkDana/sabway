@@ -18,17 +18,14 @@ public class Mgr {
 	private String mgrAddrCode;
 	private String mgrBossName;
 	private Date mgrOpenDate;
-	private String latitude;
-	private String longitude;
 	private int totalCount;
-	
 	public Mgr() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Mgr(int rnum, int mgrNo, String mgrId, String mgrPw, String mgrName, String mgrTel, int mgrPost, String mgrAddr,
-			int mgrLevel, int mgrStatus, Date mgrEnrollDate, String mgrAddrCode, String mgrBossName, Date mgrOpenDate,
-			String latitude, String longitude, int totalCount) {
+	public Mgr(int rnum, int mgrNo, String mgrId, String mgrPw, String mgrName, String mgrTel, int mgrPost,
+			String mgrAddr, int mgrLevel, int mgrStatus, Date mgrEnrollDate, String mgrAddrCode, String mgrBossName,
+			Date mgrOpenDate, int totalCount) {
 		super();
 		this.rnum = rnum;
 		this.mgrNo = mgrNo;
@@ -44,11 +41,8 @@ public class Mgr {
 		this.mgrAddrCode = mgrAddrCode;
 		this.mgrBossName = mgrBossName;
 		this.mgrOpenDate = mgrOpenDate;
-		this.latitude = latitude;
-		this.longitude = longitude;
 		this.totalCount = totalCount;
 	}
-	
 	public int getRnum() {
 		return rnum;
 	}
@@ -132,18 +126,6 @@ public class Mgr {
 	}
 	public void setMgrOpenDate(Date mgrOpenDate) {
 		this.mgrOpenDate = mgrOpenDate;
-	}
-	public String getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-	public String getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
 	}
 	public int getTotalCount() {
 		return totalCount;

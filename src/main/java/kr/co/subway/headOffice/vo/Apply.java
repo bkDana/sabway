@@ -3,6 +3,7 @@ package kr.co.subway.headOffice.vo;
 import java.sql.Date;
 
 public class Apply {
+	private int rnum;
 	private int applyNo;
 	private String applyName;
 	private String applyPhone;
@@ -20,10 +21,11 @@ public class Apply {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Apply(int applyNo, String applyName, String applyPhone, String applyEmail, String applyEmail2,
+	public Apply(int rnum, int applyNo, String applyName, String applyPhone, String applyEmail, String applyEmail2,
 			String applyArea, String applyArea2, String applyTitle, String applyContent, String applyFilename,
 			String applyFilepath, int applyStatus, Date applyDate) {
 		super();
+		this.rnum = rnum;
 		this.applyNo = applyNo;
 		this.applyName = applyName;
 		this.applyPhone = applyPhone;
@@ -37,6 +39,12 @@ public class Apply {
 		this.applyFilepath = applyFilepath;
 		this.applyStatus = applyStatus;
 		this.applyDate = applyDate;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getApplyNo() {
 		return applyNo;
@@ -116,5 +124,5 @@ public class Apply {
 	public void setApplyDate(Date applyDate) {
 		this.applyDate = applyDate;
 	}
-	
+
 }

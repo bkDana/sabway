@@ -11,6 +11,7 @@
 			<c:choose>
 				<c:when test="${not empty sessionScope.customer }">
 					[${sessionScope.customer.customerName }]<br>
+					<a href="/mypage.do">회원정보</a>
 					<a href="/logout.do">로그아웃</a>
 				</c:when>
 				<c:otherwise>
@@ -37,13 +38,8 @@
 								<button type="submit" class="btn-style1">로그인</button>
 								<button type="button" class="btn-style3" onclick="location.href='/enrollPage.do'">회원가입</button>
 
-								<div class="common-tbl-btn-group">
-									<button type="submit" class="btn-style1">로그인</button>
-									<button type="button" class="btn-style3" onclick="location.href='/enrollPage.do'">회원가입</button>
-								</div>
-
 							</div>
-							<div >
+							<div style="text-align: center;">
 								<button type="button" class="btn-style1" onclick="location.href='/findIdPage.do'">아이디 찾기</button>
 								<button type="button" class="btn-style3" onclick="location.href='/findPwPage.do'">비번 찾기</button>
 							</div>

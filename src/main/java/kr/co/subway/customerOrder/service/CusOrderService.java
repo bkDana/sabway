@@ -30,8 +30,8 @@ public class CusOrderService {
 		
 	}
 
-	public ArrayList<Bucket> allOrderList(int customerIdx) {
-		List<Bucket> list = cusOrderDao.allOrderList(customerIdx);
+	public ArrayList<Bucket> loadBucketList(String customerIdx) {
+		List<Bucket> list = cusOrderDao.loadBucketList(customerIdx);
 		return (ArrayList<Bucket>)list;
 	}
 
@@ -43,12 +43,6 @@ public class CusOrderService {
 	@Transactional
 	public int tempOrderInsert(Bucket b) {
 		return cusOrderDao.tempOrderInsert(b); 
-	}
-	
-	@Transactional(value="transactionManager")
-	public int insertBucket(Bucket b) {
-		int result = cusOrderDao.insertBucket(b);
-		return result;
 	}
 	
 	public int tempOrderSelect() {
@@ -64,7 +58,14 @@ public class CusOrderService {
 		return cusOrderDao.mgrSelectOne(mgrNo); 
 	}
 	
+	@Transactional
 	public int updateQuantity(UpdateQuantity uq) {
 		return cusOrderDao.updateQuantity(uq);
+	}
+
+	@Transactional
+	public int updateOrder(Bucket b) {
+		return cusOrderDao.updateOrder(b);
+		
 	}
 }

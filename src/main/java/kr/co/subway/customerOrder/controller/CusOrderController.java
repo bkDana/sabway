@@ -3,12 +3,15 @@ package kr.co.subway.customerOrder.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +22,7 @@ import com.google.gson.Gson;
 import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
 import kr.co.subway.customerOrder.vo.Bucket;
+import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -92,20 +96,51 @@ public class CusOrderController {
 	}			
 	@RequestMapping("/loadBucket.do")
 	public ModelAndView loadBucket(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+		String customerIdx = "-1";
+		HttpSession session = request.getSession(false);
 		Customer c = (Customer)session.getAttribute("customer");
-		int customerIdx = c.getCustomerNo();
-		ArrayList<Bucket> list = cusOrderService.allOrderList(customerIdx);
+		if(c != null) {
+			customerIdx = String.valueOf(c.getCustomerNo());
+		} else {
+			Cookie[]getCookie = request.getCookies();
+			customerIdx = getCookie[2].getValue();
+			
+		}
+
+		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx);
 		
 		ModelAndView mav = new ModelAndView();
-		if(!list.isEmpty()) {
-			mav.addObject("list",list);
-			mav.setViewName("/customerOrder/bucket");	
-		} else {
-			mav.setViewName("/common/error");
-		}
+		
+		mav.addObject("list",list);
+		mav.setViewName("/customerOrder/bucket");	
+
 		return mav;
 	}
 	
+	//주문정보, 아이템을 추가하는 메소드
+	@RequestMapping("/insertItem.do")
+	public String insertItem(HttpServletRequest request, @RequestParam String cusoOrderState,int cusoTotalCost,
+			String cusoPhone, String cusoMemberNo, String cusoOrderNo, String cusoBranchName) {
+		//test
+		System.out.println(cusoMemberNo);
+		
+		String customerIdx = "-1";
+		HttpSession session = request.getSession(false);
+		Customer c = (Customer)session.getAttribute("customer");
+		if(c != null) {
+			customerIdx = String.valueOf(c.getCustomerNo());
+		} else {
+			Cookie[]getCookie = request.getCookies();
+			customerIdx = getCookie[2].getValue();
+		}
+		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //아이템에 쓸 정보
+		for(Bucket b: list) {
+			b.setBucCusoIdx(cusoOrderNo);
+			cusOrderService.updateOrder(b);
+		}
+		
+		return"/customerOrder/testSuccess";
+	}
+	//새로운 주문을 추가하는 메소드
 	
 }

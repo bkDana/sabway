@@ -23,7 +23,8 @@ import com.google.gson.Gson;
 import kr.co.subway.headOffice.service.ApplyService;
 import kr.co.subway.headOffice.service.MenuService;
 import kr.co.subway.headOffice.vo.Apply;
-import kr.co.subway.headOffice.vo.Menu;
+import kr.co.subway.headOffice.vo.ApplyPageData;
+import kr.co.subway.headOffice.vo.CompletionPageData;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import net.sf.json.JSONObject;
 
@@ -71,13 +72,20 @@ public class HeadOfficeController {
 	}
 	//가맹점 신청목록
 	@RequestMapping(value="/managerApply.do")
-	public ModelAndView applyList() {
-		ArrayList<Apply> list = (ArrayList<Apply>) applyService.applyList();
+	public ModelAndView applyList(@RequestParam String currentPage) {
+		//페이징
+		int currentPage1;
+		try {
+			currentPage1 = Integer.parseInt(currentPage);
+		}catch(Exception e) {
+			currentPage1 = 1;
+		}
+		ApplyPageData pd = applyService.applyPaging(currentPage1);
 		ModelAndView mav = new ModelAndView();
-		if(!list.isEmpty()) {
-			mav.addObject("list",list);
+		try {
+			mav.addObject("pd",pd);
 			mav.setViewName("headOffice/managerApply");
-		}else {
+		}catch(Exception e) {
 			mav.setViewName("redirect:/");
 		}
 		return mav;
@@ -155,12 +163,26 @@ public class HeadOfficeController {
 			return "headOffice/insertFailed";
 		}
 	}
-	
-	
-	
-	
-	
-	
+	//처리한 가맹점 목록 가져오기
+	@RequestMapping(value="/applyCompletion.do")
+	public ModelAndView applyCompletion(@RequestParam String currentPage) {
+		//페이징
+		int currentPage1;
+		try {
+			currentPage1 = Integer.parseInt(currentPage);
+		}catch(Exception e) {
+			currentPage1 = 1;
+		}
+		CompletionPageData cpd = applyService.completionPaging(currentPage1);
+		ModelAndView mav = new ModelAndView();
+		try {
+			mav.addObject("cpd",cpd);
+			mav.setViewName("headOffice/applyCompletion");
+		}catch(Exception e) {
+			mav.setViewName("redirect:/");
+		}
+		return mav;
+	}
 	
 
 	

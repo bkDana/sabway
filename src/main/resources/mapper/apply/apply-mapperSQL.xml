@@ -47,11 +47,54 @@
          ,#{applyFilepath}
          ,#{applyStatus}
          ,SYSDATE
-      
-      
-      
-      
-      
-      )
+         )
    </insert>
+   <select id="applyTotalCount" resultType="_int">
+   		select count(*) from apply where apply_status = 0
+   </select>
+   <select id="completionTotalCount" resultType="_int">
+   		select count(*) from apply where apply_status != 0
+   </select>
+   <select id="applyPaging" parameterType="apb" resultType="apply">
+   		select rnum
+   		,apply_no as applyNo
+   		,apply_name as applyName
+		,apply_phone as applyPhone
+		,apply_email as applyEmail
+		,apply_area as applyArea
+		,apply_title as applyTitle
+		,apply_content as applyContent
+		,apply_filename as applyFilename
+		,apply_filepath as applyFilepath
+		,apply_status as applyStatus
+		,apply_date as applyDate
+		from
+		(select rownum as rnum, m.* from 
+			(select * from apply where apply_status = 0
+			order by apply_date desc) m)
+		<if test="start!=0">
+			where rnum between #{start} and #{end}
+		</if>
+   </select>
+      <select id="completionPaging" parameterType="apb" resultType="apply">
+   		select rnum
+   		,apply_no as applyNo
+   		,apply_name as applyName
+		,apply_phone as applyPhone
+		,apply_email as applyEmail
+		,apply_area as applyArea
+		,apply_title as applyTitle
+		,apply_content as applyContent
+		,apply_filename as applyFilename
+		,apply_filepath as applyFilepath
+		,apply_status as applyStatus
+		,apply_date as applyDate
+		from
+		(select rownum as rnum, m.* from 
+			(select * from apply where apply_status != 0
+			order by apply_date desc) m)
+		<if test="start!=0">
+			where rnum between #{start} and #{end}
+		</if>
+   </select>
 </mapper>

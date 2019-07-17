@@ -24,8 +24,8 @@ public class CusOrderDao {
 		return sqlSession.insert("bucket.insertBucket",buc);
 	}
 
-	public List<Bucket> allOrderList(int customerIdx) {
-		return sqlSession.selectList("bucket.selectAllBucket", customerIdx);
+	public List<Bucket> loadBucketList(String bucCustomerIdx) {
+		return sqlSession.selectList("bucket.loadBucketList", bucCustomerIdx);
 	}
 
 	public IngreVo selectCostMain(IngreVo ingre) {
@@ -36,10 +36,7 @@ public class CusOrderDao {
 		return sqlSession.insert("bucket.tempOrderInsert", b);
 	}
 
-	public int insertBucket(Bucket b) {
-		return sqlSession.insert("bucket.insertBucket",b);
-	}
-	
+
 	public int tempOrderSelect() {
 		return sqlSession.selectOne("bucket.tempOrderSelect");
 	}
@@ -55,5 +52,9 @@ public class CusOrderDao {
 	public int updateQuantity(UpdateQuantity uq) {
 		
 		return sqlSession.update("bucket.updateQuantity", uq);
+	}
+
+	public int updateOrder(Bucket b) {
+		return sqlSession.update("bucket.updateOrderNo", b);
 	}
 }
