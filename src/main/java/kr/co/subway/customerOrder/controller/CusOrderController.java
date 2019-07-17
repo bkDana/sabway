@@ -23,7 +23,7 @@ import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
-import kr.co.subway.customerOrder.vo.Item;
+
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -145,6 +145,7 @@ public class CusOrderController {
 		}
 		for(Bucket b: list) {
 			System.out.println(b.getBucIdx());
+			System.out.println(cusoOrderNo);
 			b.setBucCusoIdx(cusoOrderNo);
 			int result1 = cusOrderService.updateOrder(b);
 			if(result1>0) {
