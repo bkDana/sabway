@@ -31,8 +31,8 @@
 		</c:forEach>
 			<div class="hiddenOrder">
 				<form action="/insertItem.do" method="post">
-					<input type="hidden" name="cusoOrderState" value="0">
-					<input type="hidden" name="cusoTotalCost" value=0>
+
+					<input type="hidden" name="cusoTotalCost" value="">
 					<input type="hidden" name="cusoPhone" value="">
 					<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
 					<input type="hidden" name="cusoOrderNo" value="">

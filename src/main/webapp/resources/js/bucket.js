@@ -432,12 +432,12 @@ $(document).ready(function(){
     	 * 2.item테이블에 주문 '(아이템vo)'들 등록(주문 내역에 사용됨) --  여러번 호출됨
     	 * 3.cusOrder 테이블에 (주문 관련 정보vo) 등록
     	 */
-    	$('#cusoTotalCost').val(totalCost);
-    	$('#cusoPhone').val(sessionPhone);
+    	$('input[name=cusoTotalCost]').val(totalCost);
+    	$('input[name=cusoPhone]').val(sessionPhone);
     	var d = new Date();
 		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-    	$('#cusoOrderNo').val(date);
-    	$("#insertItem").click();
+    	$('input[name=cusoOrderNo]').val(date);
+    	$("input[name=insertItem]").click();
     });
     
 });

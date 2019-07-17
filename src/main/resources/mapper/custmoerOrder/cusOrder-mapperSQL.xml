@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cusOrder">
-  
+  <insert id="insertCuso" parameterType="cuso">
+  	insert into
+  		cusorder
+  	values
+  		(
+  		seq_cuso_idx.nextval,
+  		#{cusoOrderState},
+  		#{cusoTOtalCost},
+  		#{cusoPhone},
+  		#{cusoMemberNo},
+  		#{cusoOrderNo},
+  		#{cusoBranchName},
+  		sysdate
+  		)	
+  </insert>
 </mapper>
