@@ -11,7 +11,7 @@
 		color:black;
 		text-align:center;
 		margin-top:35px;
-		font-size: 20px;
+		font-size: 15px;
 		font-weight: bold;
 	}
 </style>
@@ -25,6 +25,7 @@
 			<tr>
 				<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
 			</tr>
+			<c:if test="${cpd.totalCount > 0 }">
 				<c:forEach items="${cpd.applyList }" var="apply">
 					<!-- 가맹점 신청(status == 1or2)인 경우 출력 -->
 					<c:if test="${apply.applyStatus eq 1 || apply.applyStatus eq 2 }">
@@ -48,12 +49,16 @@
 						</tr>
 					</c:if>
 				</c:forEach>
+			</c:if>
 			<c:if test="${cpd.totalCount <= 0 }">
 				<tr>
 					<td>신청 목록이 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
+		<c:if test="${cpd.totalCount <= 0 }">
+			<div class="pageNavi">1</div>
+		</c:if>
 		<div class="pageNavi">
 			${cpd.pageNavi }
 		</div>

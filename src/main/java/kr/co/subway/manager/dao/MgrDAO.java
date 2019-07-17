@@ -41,8 +41,8 @@ public class MgrDAO {
 			return session.selectList("mgr.newStoreList");
 		}
 	//로그인
-	public Mgr login(String mgrId) {
-		return session.selectOne("mgr.login", mgrId);
+	public Mgr login(Mgr mgr) {
+		return session.selectOne("mgr.login", mgr);
 	}
 	//가맹점 상태변경
 	public int mgrUpdate(Mgr mgr) {

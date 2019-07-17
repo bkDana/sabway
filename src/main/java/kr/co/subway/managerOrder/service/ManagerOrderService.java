@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.subway.common.CommonFunc;
 import kr.co.subway.common.SearchVO;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.managerOrder.dao.ManagerOrderDao;
@@ -24,11 +25,11 @@ public class ManagerOrderService {
 
 	public ManagerOrderListVO selectList(SearchVO search) {
 		int reqPage = search.getReqPage();
-		int total = 0;
-		total = dao.totalCount(search);
+		int total = dao.totalCount(search);
 		
 		int pageNum = 10;
-		int totalPage = (total%pageNum==0)?(total/pageNum):(total/pageNum)+1;
+		
+		//int totalPage = (total%pageNum==0)?(total/pageNum):(total/pageNum)+1;
 		search.setStart((reqPage*pageNum-pageNum)+1);
 		search.setEnd(reqPage*pageNum);
 		/* 리스트 */
@@ -59,7 +60,7 @@ public class ManagerOrderService {
 		 */
 		
 		/* 새 거 */
-		int totalNavi = 10;
+		/*int totalNavi = 10;
 		String pageNavi = "";
 		int pageNo = ((reqPage-1)/totalNavi)*totalNavi+1;
 		if(reqPage != 1) {
@@ -77,10 +78,10 @@ public class ManagerOrderService {
 		}
 		if(reqPage!=totalPage && totalPage!=0) {
 			pageNavi += "<a class='paging-arrow next-arrrow' href='javascript:list("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
-		}
+		}*/
 		
 		
-		ManagerOrderListVO list = new ManagerOrderListVO(orderList, pageNavi);
+		ManagerOrderListVO list = new ManagerOrderListVO(orderList, new CommonFunc().getPageNavi(total, reqPage, pageNum, 10));
 		return list;
 	}
 

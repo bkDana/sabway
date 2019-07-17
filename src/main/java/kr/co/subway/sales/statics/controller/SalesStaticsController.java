@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
+import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.sales.statics.service.SalesStaticsService;
 import kr.co.subway.sales.statics.vo.SalesStaticsGrpVo;
 
@@ -80,24 +81,74 @@ public class SalesStaticsController {
 		new Gson().toJson(list,response.getWriter());
 	}
 	
+	///////////////////////////////////////// bucket table에서 정보 가져옴 //////////////////
 	//파이차트 부분
 	//해당년도 전체 메뉴 판매 현황
 	@ResponseBody
 	@RequestMapping("/totalMenu.do")
 	public void getTotalMenu(HttpServletResponse response) throws JsonIOException, IOException {
 		ArrayList<SalesStaticsGrpVo> list = service.getTotalMenu();
-		int cost=0;
-		for(int i=1;i<6;i++) {
-			System.out.println(list.get(i).getRnum());
-			cost += list.get(i).getTotalCost();
-			System.out.println(cost);
-		}
-		long etc = list.get(0).getTotalCost() - cost;
-		System.out.println(etc);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}
+	
+	//해당 월 메뉴 판매 현황
+	@ResponseBody
+	@RequestMapping("/monthTotalMenu.do")
+	public void getMonthTotalMenu(String month,HttpServletResponse response) throws JsonIOException, IOException {
+		String orderMonth = month.substring(0,month.length()-1);
+		System.out.println("선택된 월: "+orderMonth);
+		SalesStaticsGrpVo ssg = new SalesStaticsGrpVo();
+		ssg.setOrderMonth(orderMonth);
+		ArrayList<SalesStaticsGrpVo> list = (ArrayList<SalesStaticsGrpVo>)service.getMonthTotalMenu(ssg);
+		//System.out.println("controller list size(): "+list.size());
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+	}
+	
+	//지점 당월 메뉴 매출순위
+	@ResponseBody
+	@RequestMapping("/branchMenuSales.do")
+	public void getBranchMenuSales(String branchName,HttpServletResponse response) throws JsonIOException, IOException {
+		System.out.println("지점명 : "+branchName);
+		SalesStaticsGrpVo ssg = new SalesStaticsGrpVo();
+		ssg.setCusoBranch(branchName);
+		ArrayList<SalesStaticsGrpVo> list = service.getBranchMenuSales(ssg);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+	}
+	
+	//지점 선택한 월 메뉴 매출 순위
+	@ResponseBody
+	@RequestMapping("/monthBranchMenuSales.do")
+	public void getMonthBranchMenuSales(String month, String branchName,HttpServletResponse response) throws JsonIOException, IOException {
+		String orderMonth = month.substring(0,month.length()-1);
+		System.out.println(orderMonth);
+		System.out.println("지점명 : "+branchName);
+		SalesStaticsGrpVo ssg = new SalesStaticsGrpVo();
+		ssg.setCusoBranch(branchName);
+		ssg.setOrderMonth(orderMonth);
+		ArrayList<SalesStaticsGrpVo> list = service.getBranchMenuSales(ssg);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+	}
+	
+	////////////////////////////////////////////////////////////////////
+	//지점 매니저일 경우
+	//해당 지점 매출통계 페이지로 가기
+	@RequestMapping("/goBranchSales2.do")
+	public String goBranchSales2() {
+		return "admin/salesStatics/branchSales2";
+	}
+	
+	
+	
+	
+	
 	
 	
 	//매출 가져오기

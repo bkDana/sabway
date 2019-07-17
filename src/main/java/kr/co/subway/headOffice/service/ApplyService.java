@@ -72,7 +72,7 @@ public class ApplyService {
 		int i = 1;
 		while(!(i++>pageNaviSize||pageNo>totalPage)) {
 			if(currentPage1 == pageNo) {
-				pageNavi += "&nbsp;<span style='color:black;font-size:25px;'>"+pageNo+"</span>&nbsp;";
+				pageNavi += "&nbsp;<span style='color:black;font-size:20px;'>"+pageNo+"</span>&nbsp;";
 			}else {
 				pageNavi += "&nbsp;<a href='/managerApply.do?currentPage="+pageNo+"'>"+pageNo+"<a/>&nbsp;";
 			}
@@ -101,7 +101,7 @@ public class ApplyService {
 		int i = 1;
 		while(!(i++>pageNaviSize||pageNo>totalPage)) {
 			if(currentPage1 == pageNo) {
-				pageNavi += "&nbsp;<span style='color:black;font-size:25px;'>"+pageNo+"</span>&nbsp;";
+				pageNavi += "&nbsp;<span style='color:black;font-size:20px;'>"+pageNo+"</span>&nbsp;";
 			}else {
 				pageNavi += "&nbsp;<a href='/applyCompletion.do?currentPage="+pageNo+"'>"+pageNo+"<a/>&nbsp;";
 			}

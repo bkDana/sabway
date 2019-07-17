@@ -11,22 +11,14 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 매출통계 > 지점별 매출 통계</div>
+		<div class="sub-menu">※ 매출통계 > ${sessionScope.mgr.mgrName} 매출 통계</div>
 		
-		<!-- <form action="지점명 가져와" method="post"> -->
-		<div class="board-search-box branch">
-			지점명 : <input type="text" name="searchBranch"> <button type="button" class="bbs-search-btn" title="검색" id="search">검색</button>
-			<select name="cusoBranch" id="selBranch">
-				<option value=""></option>
-			</select>
-		</div>
-		<!-- </form> -->
 		
-		<div id="graph1" style="width: 700px; height: 400px; margin: 20px auto; display:inline-block;float:left;"></div>
+		<div id="graph1" style="width: 700px; height: 400px; margin: 20px auto; display:inline-block;float:left;">${sessionScope.mgrName }</div>
 		<div id="graph2" style="width: 700px; height: 400px; margin: 20px auto; display:inline-block;float:left;"></div><br><br><br>
 		
-		<div id="graph3" style="width: 700px; height: 400px; margin: 20px auto; display:inline-block;float:left;"></div>
-		<div id="graph4" style="width: 700px; height: 400px; margin: 20px auto; display:inline-block;float:left;"></div>
+		<!-- <div id="graph3" style="width: 700px; height: 400px; margin: 20px auto; display:inline-block;float:left;"></div>
+		<div id="graph4" style="width: 700px; height: 400px; margin: 20px auto; display:inline-block;float:left;"></div> -->
 	
 	
 	
@@ -35,87 +27,21 @@
 	var year = year1.getFullYear();
 	var month1 = year1.getMonth()+1;	
 	
-	//지점 검색했을시 해당 지점들 가져와서 select에 넣어주기
-	$("#search").click(function(){
-		var branch = $("input[name=searchBranch]").val();
-		console.log(branch);
-		$.ajax({
-			url : "/salesStatics/getBranch.do",
-			data: {cusoBranch:branch},
-			success:function(data){
-				console.log(data);
-				var select = $("#selBranch");
-				select.find("option").remove();
-				select.append("<option value=''>-- 지점명 --</option>");
-				for(var i=0;i<data.length;i++){
-					select.append("<option value='"+data[i].mgrName+"'>"+data[i].mgrName+"</option>");
-				}
-			},
-			error:function(){
-				console.log("아작스 실패!지점명 못가져옴");
-			}
-		});
-	});
-	$("input[name=searchBranch]").keyup(function(event){
-		console.log("먹냐");
-		if(event.keyCode==13){	//keyCode = 13 : 엔터키
-			var branch = $("input[name=searchBranch]").val();
-			console.log(branch);
-			$.ajax({
-				url : "/salesStatics/getBranch.do",
-				data: {cusoBranch:branch},
-				success:function(data){
-					console.log(data);
-					var select = $("#selBranch");
-					select.find("option").remove();
-					select.append("<option value=''>-- 지점명 --</option>");
-					for(var i=0;i<data.length;i++){
-						select.append("<option value='"+data[i].mgrName+"'>"+data[i].mgrName+"</option>");
-					}
-				},
-				error:function(){
-					console.log("아작스 실패!지점명 못가져옴");
-				}
-			});
-		}
-	});
-	$("input[name=searchBranch]").blur(function(){	//입력하고 input창 벗어나서 마우스 클릭하면
-		console.log("먹냐");
-		var branch = $("input[name=searchBranch]").val();
-		console.log(branch);
-		$.ajax({
-			url : "/salesStatics/getBranch.do",
-			data: {cusoBranch:branch},
-			success:function(data){
-				console.log(data);
-				var select = $("#selBranch");
-				select.find("option").remove();
-				select.append("<option value=''>-- 지점명 --</option>");
-				for(var i=0;i<data.length;i++){
-					select.append("<option value='"+data[i].mgrName+"'>"+data[i].mgrName+"</option>");
-				}
-			},
-			error:function(){
-				console.log("아작스 실패!지점명 못가져옴");
-			}
-		});
-	});
-	
 	
 	//지점 셀렉했을 시 지점 매출현황 가져오기
-	$("#selBranch").change(function(){
+	/* $("#selBranch").change(function(){
 		getBranchSales();
 		getBranchMenuSales();
-	});
+	}); */
 	
 	//지점 매출현황 가져오기
-	function getBranchSales(){
-		var branchName = $("#selBranch").val();
-		console.log(branchName);
+	function getBranchSales2(){
+		var branchName = '${sessionScope.mgr.mgrName}';
+		console.log("지점명 : "+branchName);
 		$.ajax({
 			url : "/salesStatics/getBranchSales.do",
-			data : {branchName:branchName},
 			dataType: "json",
+			data: {branchName:branchName},
 			success : function(cost){
 				//console.log(cost);
 				var arr = new Array();
@@ -186,7 +112,7 @@
 			            		events:{
 			            			click:function(){
 			            				console.log("막대그래프 클릭~!")	//event.point : 클릭한 값에 대한 정보
-			            				getMonthBranchMenuSales(event.point.category)	//해당 월 보내주기
+			            				getMonthBranchMenuSales2(event.point.category)	//해당 월 보내주기
 			            			}
 			            		}
 			            	}
@@ -205,11 +131,12 @@
 	}
 
 	//해당 지점 당월 메뉴 매출순위(파이차트)
-	function getBranchMenuSales(){
-		var branchName = $("#selBranch").val();
+	function getBranchMenuSales2(){
+		var branchName = '${sessionScope.mgr.mgrName}';
+		console.log("지점명 : "+branchName);
 		$.ajax({
 			url:"/salesStatics/branchMenuSales.do",
-			data:{branchName:branchName},
+			data: {branchName:branchName},
 			dataType:'json',
 			success : function(cost){ 
 				console.log(cost);
@@ -265,8 +192,9 @@
 	}
 	
 	//해당 월 메뉴 매출순위(파이차트)
-	function getMonthBranchMenuSales(month){
-		var branchName = $("#selBranch").val();
+	function getMonthBranchMenuSales2(month){
+		var branchName = '${sessionScope.mgr.mgrName}';
+		console.log("지점명 : "+branchName);
 		$.ajax({
 			url:"/salesStatics/monthBranchMenuSales.do",
 			data: {month:month,branchName:branchName},
@@ -285,17 +213,6 @@
 				}
 				console.log("기타 메뉴 매출액 : "+etc);
 				arr.push({name:'기타', y:etc});
-				/* var arr = new Array();
-				for(var i=1;i<13;i++){
-        			if(cost[i].cusoBranch=='total'){
-        				if(Number(cost[i].orderMonth)==i){
-        					//console.log(cost[i].totalCo3st);
-        					console.log("파이차트 로그");
-        					arr.push({name:cost[i].orderMonth+'월', y:cost[i].totalCost});
-        					console.log(arr);
-        				}
-        			}
-				} */
 				//console.log(arr);
 				Highcharts.chart('graph2', {
 			        chart: {
@@ -337,6 +254,8 @@
 	
 	
 	$(document).ready(function(){
+		getBranchSales2();
+		getBranchMenuSales2();
 		
 		//그래프 디자인 설정
 		Highcharts.setOptions({

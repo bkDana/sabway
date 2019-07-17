@@ -39,6 +39,16 @@ public class SalesStaticsDao {
 	public List getTotalMenu() {
 		return sqlSession.selectList("sales.getTotalMenu");
 	}
+
+	//해당 월 메뉴 판매 현황
+	public List getMonthTotalMenu(SalesStaticsGrpVo ssg) {
+		return sqlSession.selectList("sales.getTotalMenu",ssg);
+	}
+
+	//지점 당월 메뉴 판매, 선택한 월
+	public List getBranchMenuSales(SalesStaticsGrpVo ssg) {
+		return sqlSession.selectList("sales.getBranchMenuSales",ssg);
+	}
 	
 	
 

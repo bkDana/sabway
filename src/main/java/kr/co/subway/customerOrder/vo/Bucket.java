@@ -6,7 +6,7 @@ import java.sql.Date;
 public class Bucket {
 	private int bucIdx;
 	private String bucCustomerIdx;
-	private String bucCusoIdx;
+	private String bucCusoOrderNo;
 	private String bucBread;
 	private String bucMain;
 	private String bucVegi;
@@ -27,14 +27,14 @@ public class Bucket {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Bucket(int bucIdx, String bucCustomerIdx, String bucCusoIdx, String bucBread, String bucMain, String bucVegi,
-			String bucCheese, String bucSource, String bucTopping, String bucSide, String bucIsSalad,
+	public Bucket(int bucIdx, String bucCustomerIdx, String bucCusoOrderNo, String bucBread, String bucMain,
+			String bucVegi, String bucCheese, String bucSource, String bucTopping, String bucSide, String bucIsSalad,
 			String bucIsOvened, String bucSet, int bucCost, double bucDiscntRate, int bucKcal, int bucQuantity,
 			Date bucRegDate, String bucBranch) {
 		super();
 		this.bucIdx = bucIdx;
 		this.bucCustomerIdx = bucCustomerIdx;
-		this.bucCusoIdx = bucCusoIdx;
+		this.bucCusoOrderNo = bucCusoOrderNo;
 		this.bucBread = bucBread;
 		this.bucMain = bucMain;
 		this.bucVegi = bucVegi;
@@ -64,11 +64,11 @@ public class Bucket {
 	public void setBucCustomerIdx(String bucCustomerIdx) {
 		this.bucCustomerIdx = bucCustomerIdx;
 	}
-	public String getBucCusoIdx() {
-		return bucCusoIdx;
+	public String getBucCusoOrderNo() {
+		return bucCusoOrderNo;
 	}
-	public void setBucCusoIdx(String bucCusoIdx) {
-		this.bucCusoIdx = bucCusoIdx;
+	public void setBucCusoOrderNo(String bucCusoOrderNo) {
+		this.bucCusoOrderNo = bucCusoOrderNo;
 	}
 	public String getBucBread() {
 		return bucBread;

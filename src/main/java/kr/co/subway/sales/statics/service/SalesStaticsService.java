@@ -45,4 +45,17 @@ public class SalesStaticsService {
 		System.out.println(list.size());
 		return list;
 	}
+
+	//해당 월 메뉴 판매 현황
+	public ArrayList<SalesStaticsGrpVo> getMonthTotalMenu(SalesStaticsGrpVo ssg) {
+		System.out.println("dao 선택 월 : "+ssg.getOrderMonth());
+		ArrayList<SalesStaticsGrpVo> list = (ArrayList<SalesStaticsGrpVo>)dao.getMonthTotalMenu(ssg);
+		return list;
+	}
+
+	//지점 당월 메뉴 판매현황, 선택한 월
+	public ArrayList<SalesStaticsGrpVo> getBranchMenuSales(SalesStaticsGrpVo ssg) {
+		ArrayList<SalesStaticsGrpVo> list = (ArrayList<SalesStaticsGrpVo>)dao.getBranchMenuSales(ssg);
+		return list;
+	}
 }

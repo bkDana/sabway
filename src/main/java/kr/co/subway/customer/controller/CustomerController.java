@@ -44,7 +44,9 @@ public class CustomerController {
 	@Qualifier(value = "customerService")
 	private CustomerService customerService;
 
+
 	// private MailSendService mailsender;
+
 
 	@RequestMapping(value = "/login.do")
 	public String customerLogin(HttpServletRequest request, HttpServletResponse response) {
@@ -518,6 +520,22 @@ public class CustomerController {
 			System.out.println(searchKeyword.get(i).getCustomerId());
 		}
 		return new Gson().toJson(searchKeyword);
+	}
+	
+	@RequestMapping(value = "/mypageIntro.do")
+	public String mypageIntro(HttpSession session) {
+		return "customer/myPage";
+	}
+
+	// 회원정보 페이지 이동
+	@RequestMapping(value = "/customerProfile.do")
+	public String customerProfile(HttpSession session) {
+		Customer vo = (Customer) session.getAttribute("customer");
+		Customer c = customerService.selectOneCustomerEnroll(vo);
+		Model model = new ExtendedModelMap();
+		model.addAttribute("customer", c);
+		return "customer/customerProfile";
+
 	}
 
 }

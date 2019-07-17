@@ -3,7 +3,7 @@ package kr.co.subway.customerOrder.vo;
 
 public class Item {
 	private int itemIdx;
-	private int cusiIdx;		// 해당 주문내역 번호
+	private int cusoOrderNo;		// 해당 주문내역 번호
 	private int itemBread;
 	private int itemMain;		// 메인메뉴
 	private int itemVegi;
@@ -21,12 +21,12 @@ public class Item {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Item(int itemIdx, int cusiIdx, int itemBread, int itemMain, int itemVegi, int itemCheese,
-			int itemSource, int itemTopping, int itemSide, int itemIsSalad, int itemIsOvened, int itemIsSet,
-			int itemQuantity, double itemDiscntRate, int itemDiscntCost) {
+	public Item(int itemIdx, int cusoOrderNo, int itemBread, int itemMain, int itemVegi, int itemCheese, int itemSource,
+			int itemTopping, int itemSide, int itemIsSalad, int itemIsOvened, int itemIsSet, int itemQuantity,
+			double itemDiscntRate, int itemDiscntCost) {
 		super();
 		this.itemIdx = itemIdx;
-		this.cusiIdx = cusiIdx;
+		this.cusoOrderNo = cusoOrderNo;
 		this.itemBread = itemBread;
 		this.itemMain = itemMain;
 		this.itemVegi = itemVegi;
@@ -47,11 +47,11 @@ public class Item {
 	public void setItemIdx(int itemIdx) {
 		this.itemIdx = itemIdx;
 	}
-	public int getCusiIdx() {
-		return cusiIdx;
+	public int getCusoOrderNo() {
+		return cusoOrderNo;
 	}
-	public void setCusiIdx(int cusiIdx) {
-		this.cusiIdx = cusiIdx;
+	public void setCusoOrderNo(int cusoOrderNo) {
+		this.cusoOrderNo = cusoOrderNo;
 	}
 	public int getItemBread() {
 		return itemBread;
@@ -131,6 +131,5 @@ public class Item {
 	public void setItemDiscntCost(int itemDiscntCost) {
 		this.itemDiscntCost = itemDiscntCost;
 	}
-	
 	
 }
