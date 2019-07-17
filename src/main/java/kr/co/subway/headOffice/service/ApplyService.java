@@ -45,7 +45,7 @@ public class ApplyService {
 		applyVo.setApplyStatus(0);
 		
 		//지역
-		applyVo.setApplyArea(applyVo.getApplyArea()+applyVo.getApplyArea2());
+		applyVo.setApplyArea(applyVo.getApplyArea()+" "+applyVo.getApplyArea2());
 		
 		//이메일
 		applyVo.setApplyEmail(applyVo.getApplyEmail()+'@'+applyVo.getApplyEmail2());
