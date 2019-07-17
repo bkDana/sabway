@@ -11,6 +11,7 @@
 			<c:choose>
 				<c:when test="${not empty sessionScope.customer }">
 					[${sessionScope.customer.customerName }]<br>
+					<a href="/mypage.do">회원정보</a>
 					<a href="/logout.do">로그아웃</a>
 				</c:when>
 				<c:otherwise>

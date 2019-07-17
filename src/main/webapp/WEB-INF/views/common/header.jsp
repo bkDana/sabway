@@ -81,6 +81,17 @@
 					<li><a class="header-btn">가맹신청 · 문의</a></li>
 					<li><a class="header-btn">고객센터</a></li>
 					-->
+					<c:choose>
+						<c:when test="${not empty sessionScope.customer }">
+							[${sessionScope.customer.customerName }]<br>
+							<li><a href="/logout.do" class="header-btn">로그아웃</a></li>
+							<li><a href="/mypage.do" class="header-btn">회원정보</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="/index.do" class="header-btn">로그인</a></li>
+						</c:otherwise>
+					</c:choose>
+					
 					<li><a href="/admin.do" class="header-btn">관리자</a></li>
 					<li><a class="header-btn" id="bucket" onclick="loadBucket()"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
 				</ul>

@@ -121,7 +121,7 @@
 		<div class="common-tbl-btn-group" name="moreDiv">
 			<c:if test="${total > 10}">
 				<hr>
-				<button type="button" class="btn-style2 insert-review" name="more">더보기</button>
+				<button type="button" class="btn-style2" name="more">더보기</button>
 				<hr>
 			</c:if>
 			<input type="hidden" value="${mgrSize }" name="mgrSize">
