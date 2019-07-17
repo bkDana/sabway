@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bucket">
- 	<insert id="insertBucket" parameterType="bucket">
- 		insert into
- 			bucket
- 		values
- 			(
- 			seq_buc_idx.nextval,
- 			#{bucCusoIdx},
- 			#{bucBread},
- 			#{bucMain},
- 			#{bucVegi},
- 			#{bucCheese},
- 			#{bucSource},
- 			#{bucTopping},
- 			#{bucSide},
- 			#{bucIsSalad},
- 			#{bucIsOvened},
- 			#{bucSet},
- 			#{bucCost},
- 			#{bucDiscntRate},
- 			#{bucKcal},
- 			#{bucQuantity},
- 			default,
- 			#{bucCustomerIdx}
- 			)	
- 	</insert>
 	<insert id="tempOrderInsert" parameterType="bucket">
  		insert into
  			bucket
@@ -52,7 +27,7 @@
  			${bucBranch}
  			)	
  	</insert>
- 	<select id="selectAllBucket" parameterType="String" resultType="bucket">
+ 	<select id="loadBucketList" parameterType="String" resultType="bucket">
  		select
  			buc_idx as bucIdx,
  			buc_bread as bucBread,
