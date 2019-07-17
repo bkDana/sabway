@@ -81,7 +81,7 @@
 				console.log(cost);
 				for(var i=1;i<13;i++){
         			if(cost[i].cusoBranch=='total'){
-        				//console.log(cost[i]);
+        				console.log(cost[i]);
         				console.log(cost[i].orderMonth);
         				if(Number(cost[i].orderMonth)==i){
         					//console.log(cost[i].totalCost);
@@ -170,16 +170,16 @@
 			url:"/salesStatics/totalMenu.do",
 			dataType:'json',
 			success : function(cost){ 
-				console.log(cost);
+				//console.log(cost);
 				var money=0;
 				var arr = new Array();
 				for(var i=1;i<6;i++){
 					money += cost[i].totalCost;
-					console.log(i+"위 메뉴 매출 금액 : "+money);
+					//console.log(i+"위 메뉴 매출 금액 : "+money);
 					arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})
 				}
 				var etc = cost[0].totalCost - money;
-				console.log("기타 메뉴 매출액 : "+etc);
+				//console.log("기타 메뉴 매출액 : "+etc);
 				arr.push({name:'기타', y:etc});
 				Highcharts.chart('graph2', {
 			        chart: {
@@ -262,7 +262,7 @@
 			        xAxis: {
 			            categories: name,
 			            crosshair: true
-			        }, .
+			        },
 			        
 			        yAxis: {
 			            min: 0,
@@ -293,8 +293,9 @@
 		});
 	}
 	
-	//선택한 월 매뉴 매출순위(파이차트)
+	//선택한 월 메뉴 매출순위(파이차트)
 	function MonthtotalMenuPie(month){
+		console.log(month);
 		$.ajax({
 			url:"/salesStatics/monthTotalMenu.do",
 			data:{month:month},
@@ -303,12 +304,14 @@
 				console.log(cost);
 				var money=0;
 				var arr = new Array();
-				for(var i=1;i<6;i++){
-					money += cost[i].totalCost;
-					console.log(i+"위 메뉴 매출 금액 : "+money);
-					arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})
+				if(cost.length>0){
+					for(var i=1;i<6;i++){
+						money += cost[i].totalCost;
+						console.log(i+"위 메뉴 매출 금액 : "+money);
+						arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})
+					}
+					var etc = cost[0].totalCost - money;
 				}
-				var etc = cost[0].totalCost - money;
 				console.log("기타 메뉴 매출액 : "+etc);
 				arr.push({name:'기타', y:etc});
 				Highcharts.chart('graph4', {
@@ -316,7 +319,7 @@
 			            type: 'pie'
 			        },
 			        title: {
-			            text: year+'년도'+month+' 메뉴 매출 현황',
+			            text: month+' 메뉴 매출 현황',
 			        },
 			        tooltip: {
 			            headerFormat: '<span style="font-size:10px">{point.key}</span><table class="comm-tbl" style="width:150px;">',
