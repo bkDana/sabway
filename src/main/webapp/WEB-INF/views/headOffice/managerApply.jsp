@@ -30,7 +30,7 @@
 					<!-- 가맹점 신청(status == 0)인 경우 출력 -->
 					<c:if test="${apply.applyStatus eq 0 }">
 						<tr>
-							<td style="display:none;" name="applyNo">${apply.applyNo }1</td>
+							<td style="display:none;" name="applyNo">${apply.applyNo }</td>
 							<td name="applyName">${apply.applyName }</td>
 							<!-- 해달 게시글 상세보기 -->
 							<td><a href="/applyView.do?applyNo=${apply.applyNo }">${apply.applyTitle }</a></td>
