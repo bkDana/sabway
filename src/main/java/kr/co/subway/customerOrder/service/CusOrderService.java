@@ -69,8 +69,15 @@ public class CusOrderService {
 		return cusOrderDao.updateOrder(b);
 		
 	}
+	//주문 목록 가져오기
 	public List<CusOrder> cusOrderList(){
 		List<CusOrder> list = cusOrderDao.cusOrderList();
 		return list;
+	}
+	//주문 상태 변경
+	@Transactional
+	public int orderStateUpdate(CusOrder cuso) {
+		int result = cusOrderDao.orderStateUpdate(cuso);
+		return result;
 	}
 }

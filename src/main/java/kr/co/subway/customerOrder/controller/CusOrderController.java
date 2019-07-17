@@ -3,6 +3,7 @@ package kr.co.subway.customerOrder.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -165,7 +166,7 @@ public class CusOrderController {
 	
 	
 	
-	//주문 목록 가져오기
+	//회원 주문 목록 가져오기
 	@RequestMapping("/cusOrderList.do")
 	public ModelAndView cusOrderList() {
 		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderService.cusOrderList();
@@ -178,4 +179,28 @@ public class CusOrderController {
 		}
 		return mav; 
 	}
+	//주문 상태 변경
+	@RequestMapping("/orderStateUpdate.do")
+	public String orderStateUpdate(CusOrder cuso) {
+		int result = cusOrderService.orderStateUpdate(cuso);
+		String view = "";
+		if(result > 0) {
+			view = "redirect:/cusOrderList.do";
+		}
+		return view;
+	}
+	//비회원 주문 목록
+	@RequestMapping("/noneCtm.do")
+	public ModelAndView noneCtm(CusOrder cuso) {
+		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderService.cusOrderList();
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list",list);
+			mav.setViewName("customerOrder/noneCTM");
+		}else {
+			mav.setViewName("/");
+		}
+		return mav; 
+	}
+	
 }
