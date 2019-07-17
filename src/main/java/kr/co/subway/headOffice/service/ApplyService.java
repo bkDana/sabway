@@ -45,7 +45,7 @@ public class ApplyService {
 		applyVo.setApplyStatus(0);
 		
 		//지역
-		applyVo.setApplyArea(applyVo.getApplyArea()+applyVo.getApplyArea2());
+		applyVo.setApplyArea(applyVo.getApplyArea()+" "+applyVo.getApplyArea2());
 		
 		//이메일
 		applyVo.setApplyEmail(applyVo.getApplyEmail()+'@'+applyVo.getApplyEmail2());
@@ -72,7 +72,7 @@ public class ApplyService {
 		int i = 1;
 		while(!(i++>pageNaviSize||pageNo>totalPage)) {
 			if(currentPage1 == pageNo) {
-				pageNavi += "&nbsp;<span style='color:black;font-size:25px;'>"+pageNo+"</span>&nbsp;";
+				pageNavi += "&nbsp;<span style='color:black;font-size:20px;'>"+pageNo+"</span>&nbsp;";
 			}else {
 				pageNavi += "&nbsp;<a href='/managerApply.do?currentPage="+pageNo+"'>"+pageNo+"<a/>&nbsp;";
 			}
@@ -96,19 +96,19 @@ public class ApplyService {
 		ArrayList<Apply> applyList = (ArrayList<Apply>)applyDao.completionPaging(pb);
 		int pageNo = ((currentPage1-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage1 != 1) {
-			pageNavi += "<a href='/managerApply.do?currentPage="+(currentPage1-1)+"'>이전</a>&nbsp;";
+			pageNavi += "<a href='/applyCompletion.do?currentPage="+(currentPage1-1)+"'>이전</a>&nbsp;";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize||pageNo>totalPage)) {
 			if(currentPage1 == pageNo) {
-				pageNavi += "&nbsp;<span style='color:black;font-size:25px;'>"+pageNo+"</span>&nbsp;";
+				pageNavi += "&nbsp;<span style='color:black;font-size:20px;'>"+pageNo+"</span>&nbsp;";
 			}else {
-				pageNavi += "&nbsp;<a href='/managerApply.do?currentPage="+pageNo+"'>"+pageNo+"<a/>&nbsp;";
+				pageNavi += "&nbsp;<a href='/applyCompletion.do?currentPage="+pageNo+"'>"+pageNo+"<a/>&nbsp;";
 			}
 			pageNo++;
 		}
 		if(currentPage1 < totalPage) {
-			pageNavi += "&nbsp;<a href='/managerApply.do?currentPage="+(currentPage1+1)+"'>다음</a>";
+			pageNavi += "&nbsp;<a href='/applyCompletion.do?currentPage="+(currentPage1+1)+"'>다음</a>";
 		}
 		return new CompletionPageData(applyList,pageNavi,totalCount);
 	}

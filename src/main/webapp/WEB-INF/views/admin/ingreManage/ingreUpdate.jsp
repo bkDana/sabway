@@ -34,6 +34,7 @@
 								<option value="소스">소스</option>
 								<option value="사이드메뉴">사이드메뉴</option>
 								<option value="세트메뉴">세트메뉴</option>
+								<option value="샐러드">샐러드</option>
 							</select>
 						</td>
 					</tr>

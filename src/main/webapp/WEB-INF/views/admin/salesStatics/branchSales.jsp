@@ -27,13 +27,13 @@
 		
 		<div id="graph3" style="width: 700px; height: 400px; margin: 20px auto; display:inline-block;float:left;"></div>
 		<div id="graph4" style="width: 700px; height: 400px; margin: 20px auto; display:inline-block;float:left;"></div>
-		<div id="container2" style="width: 700px; height: 400px; margin: 20px auto; display:inline-block;float:left;"></div>
 	
 	
 	
 <script>
 	var year1 = new Date();
 	var year = year1.getFullYear();
+	var month1 = year1.getMonth()+1;	
 	
 	//지점 검색했을시 해당 지점들 가져와서 select에 넣어주기
 	$("#search").click(function(){
@@ -186,7 +186,7 @@
 			            		events:{
 			            			click:function(){
 			            				console.log("막대그래프 클릭~!")	//event.point : 클릭한 값에 대한 정보
-			            				getBranchSales(event.point.category)	//해당 월 보내주기
+			            				getMonthBranchMenuSales(event.point.category)	//해당 월 보내주기
 			            			}
 			            		}
 			            	}
@@ -204,14 +204,88 @@
 		});
 	}
 
-	//전체 매뉴 매출순위(파이차트)
+	//해당 지점 당월 메뉴 매출순위(파이차트)
 	function getBranchMenuSales(){
 		var branchName = $("#selBranch").val();
 		$.ajax({
-			url:"/salesStatics/totalSales.do",
+			url:"/salesStatics/branchMenuSales.do",
+			data:{branchName:branchName},
 			dataType:'json',
 			success : function(cost){ 
+				console.log(cost);
+				var money=0;
 				var arr = new Array();
+				if(cost.length>0){
+					for(var i=1;i<6;i++){
+						money += cost[i].totalCost;
+						console.log(i+"위 메뉴 매출 금액 : "+money);
+						arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})
+					}
+					var etc = cost[0].totalCost - money;
+				}
+				console.log("기타 메뉴 매출액 : "+etc);
+				arr.push({name:'기타', y:etc});
+				//console.log(arr);
+				Highcharts.chart('graph2', {
+			        chart: {
+			            type: 'pie'
+			        },
+			        title: {
+			            text: branchName+' '+month1+'월 메뉴 매출 현황',
+			        },
+			        tooltip: {
+			            headerFormat: '<span style="font-size:10px">{point.key}</span><table class="comm-tbl" style="width:150px;">',
+			            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			                '<td style="padding:0"><b>{point.y} 원</b></td></tr>',
+			            footerFormat: '</table>',
+			            shared: true,
+			            useHTML: true
+			        },
+			        plotOptions: {
+			            pie: {
+			            	allowPointSelect: true,
+			                cursor: 'pointer',
+			                dataLabels: {
+			                    enabled: true,
+			                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+			                    style: {
+			                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+			                    }
+			                }
+			            },
+			        },
+			        series: [{
+			        	name:"매출",
+			        	colorByPoint:true,
+			        	data: arr
+			        }]
+			    });
+			}
+		});
+	}
+	
+	//해당 월 메뉴 매출순위(파이차트)
+	function getMonthBranchMenuSales(month){
+		var branchName = $("#selBranch").val();
+		$.ajax({
+			url:"/salesStatics/monthBranchMenuSales.do",
+			data: {month:month,branchName:branchName},
+			dataType:'json',
+			success : function(cost){ 
+				console.log(cost);
+				var money=0;
+				var arr = new Array();
+				if(cost.length>0){
+					for(var i=1;i<6;i++){
+						money += cost[i].totalCost;
+						console.log(i+"위 메뉴 매출 금액 : "+money);
+						arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})
+					}
+					var etc = cost[0].totalCost - money;
+				}
+				console.log("기타 메뉴 매출액 : "+etc);
+				arr.push({name:'기타', y:etc});
+				/* var arr = new Array();
 				for(var i=1;i<13;i++){
         			if(cost[i].cusoBranch=='total'){
         				if(Number(cost[i].orderMonth)==i){
@@ -221,17 +295,14 @@
         					console.log(arr);
         				}
         			}
-				}
+				} */
 				//console.log(arr);
-				for(var i=0;i<cost.length;i++){
-					//console.log("지점명 : "+cost[i].cusoBranch+" 판매금액 : "+cost[i].totalCost+" 판매 일자 : "+cost[i].orderMonth+"<br>");
-				}
 				Highcharts.chart('graph2', {
 			        chart: {
 			            type: 'pie'
 			        },
 			        title: {
-			            text: branchName+' 메뉴 매출 현황',
+			            text: branchName+' '+month+' 메뉴 매출 현황',
 			        },
 			        tooltip: {
 			            headerFormat: '<span style="font-size:10px">{point.key}</span><table class="comm-tbl" style="width:150px;">',

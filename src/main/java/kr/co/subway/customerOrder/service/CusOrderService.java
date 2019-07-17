@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.subway.customerOrder.dao.CusOrderDao;
 import kr.co.subway.customerOrder.vo.Bucket;
+import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -24,14 +25,14 @@ public class CusOrderService {
 	}
 	 
 	@Transactional(value="transactionManager")
-	public int insertCusOrder(Bucket buc) {
-		int result = cusOrderDao.insertMember(buc);
+	public int insertCusOrder(CusOrder cuso) {
+		int result = cusOrderDao.insertCusOrder(cuso);
 		return result;
 		
 	}
 
-	public ArrayList<Bucket> allOrderList(String customerIdx) {
-		List<Bucket> list = cusOrderDao.allOrderList(customerIdx);
+	public ArrayList<Bucket> loadBucketList(String customerIdx) {
+		List<Bucket> list = cusOrderDao.loadBucketList(customerIdx);
 		return (ArrayList<Bucket>)list;
 	}
 
@@ -43,12 +44,6 @@ public class CusOrderService {
 	@Transactional
 	public int tempOrderInsert(Bucket b) {
 		return cusOrderDao.tempOrderInsert(b); 
-	}
-	
-	@Transactional(value="transactionManager")
-	public int insertBucket(Bucket b) {
-		int result = cusOrderDao.insertBucket(b);
-		return result;
 	}
 	
 	public int tempOrderSelect() {
@@ -64,7 +59,18 @@ public class CusOrderService {
 		return cusOrderDao.mgrSelectOne(mgrNo); 
 	}
 	
+	@Transactional
 	public int updateQuantity(UpdateQuantity uq) {
 		return cusOrderDao.updateQuantity(uq);
+	}
+
+	@Transactional
+	public int updateOrder(Bucket b) {
+		return cusOrderDao.updateOrder(b);
+		
+	}
+	public List<CusOrder> cusOrderList(){
+		List<CusOrder> list = cusOrderDao.cusOrderList();
+		return list;
 	}
 }

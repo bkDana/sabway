@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.customerOrder.vo.Bucket;
+import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -19,13 +20,9 @@ public class CusOrderDao {
 	public List ingreSelectAll() {
 		return sqlSession.selectList("bucket.ingreSelectAll");
 	}
-			
-	public int insertMember(Bucket buc) {
-		return sqlSession.insert("bucket.insertBucket",buc);
-	}
 
-	public List<Bucket> allOrderList(String bucCustomerIdx) {
-		return sqlSession.selectList("bucket.selectAllBucket", bucCustomerIdx);
+	public List<Bucket> loadBucketList(String bucCustomerIdx) {
+		return sqlSession.selectList("bucket.loadBucketList", bucCustomerIdx);
 	}
 
 	public IngreVo selectCostMain(IngreVo ingre) {
@@ -36,10 +33,7 @@ public class CusOrderDao {
 		return sqlSession.insert("bucket.tempOrderInsert", b);
 	}
 
-	public int insertBucket(Bucket b) {
-		return sqlSession.insert("bucket.insertBucket",b);
-	}
-	
+
 	public int tempOrderSelect() {
 		return sqlSession.selectOne("bucket.tempOrderSelect");
 	}
@@ -55,5 +49,15 @@ public class CusOrderDao {
 	public int updateQuantity(UpdateQuantity uq) {
 		
 		return sqlSession.update("bucket.updateQuantity", uq);
+	}
+
+	public int updateOrder(Bucket b) {
+		return sqlSession.update("bucket.updateOrderNo", b);
+	}
+	public List<CusOrder> cusOrderList(){
+		return sqlSession.selectList("cusOrder.cusOrderList");
+	}
+	public int insertCusOrder(CusOrder cuso) {
+		return sqlSession.insert("cusOrder.insertCuso",cuso);
 	}
 }

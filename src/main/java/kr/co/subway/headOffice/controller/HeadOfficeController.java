@@ -74,7 +74,6 @@ public class HeadOfficeController {
 	@RequestMapping(value="/managerApply.do")
 	public ModelAndView applyList(@RequestParam String currentPage) {
 		//페이징
-		ArrayList<Apply> list = (ArrayList<Apply>) applyService.applyList();
 		int currentPage1;
 		try {
 			currentPage1 = Integer.parseInt(currentPage);
@@ -82,12 +81,11 @@ public class HeadOfficeController {
 			currentPage1 = 1;
 		}
 		ApplyPageData pd = applyService.applyPaging(currentPage1);
-		String pageNavi = pd.getPageNavi();
 		ModelAndView mav = new ModelAndView();
-		if(!list.isEmpty()) {
+		try {
 			mav.addObject("pd",pd);
 			mav.setViewName("headOffice/managerApply");
-		}else {
+		}catch(Exception e) {
 			mav.setViewName("redirect:/");
 		}
 		return mav;
@@ -166,11 +164,9 @@ public class HeadOfficeController {
 		}
 	}
 	//처리한 가맹점 목록 가져오기
-	@ResponseBody
-	@RequestMapping(value="/applyCompletion.do",produces="text/plain;charset=utf-8")
-	public String applyCompletion(@RequestParam String currentPage) {
+	@RequestMapping(value="/applyCompletion.do")
+	public ModelAndView applyCompletion(@RequestParam String currentPage) {
 		//페이징
-		ArrayList<Apply> list = (ArrayList<Apply>) applyService.applyList();
 		int currentPage1;
 		try {
 			currentPage1 = Integer.parseInt(currentPage);
@@ -178,8 +174,14 @@ public class HeadOfficeController {
 			currentPage1 = 1;
 		}
 		CompletionPageData cpd = applyService.completionPaging(currentPage1);
-		String pageNavi = cpd.getPageNavi();
-		return new Gson().toJson(cpd);
+		ModelAndView mav = new ModelAndView();
+		try {
+			mav.addObject("cpd",cpd);
+			mav.setViewName("headOffice/applyCompletion");
+		}catch(Exception e) {
+			mav.setViewName("redirect:/");
+		}
+		return mav;
 	}
 	
 

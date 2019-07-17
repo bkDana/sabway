@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bucket">
- 	<insert id="insertBucket" parameterType="bucket">
- 		insert into
- 			bucket
- 		values
- 			(
- 			seq_buc_idx.nextval,
- 			#{bucCusoIdx},
- 			#{bucBread},
- 			#{bucMain},
- 			#{bucVegi},
- 			#{bucCheese},
- 			#{bucSource},
- 			#{bucTopping},
- 			#{bucSide},
- 			#{bucIsSalad},
- 			#{bucIsOvened},
- 			#{bucSet},
- 			#{bucCost},
- 			#{bucDiscntRate},
- 			#{bucKcal},
- 			#{bucQuantity},
- 			default,
- 			#{bucCustomerIdx}
- 			)	
- 	</insert>
 	<insert id="tempOrderInsert" parameterType="bucket">
  		insert into
  			bucket
@@ -52,28 +27,34 @@
  			#{bucCusoOrderNo}
  			)	
  	</insert>
- 	<select id="selectAllBucket" parameterType="String" resultType="bucket">
+ 	<select id="loadBucketList" parameterType="String" resultType="bucket">
  		select
- 			buc_idx as bucIdx,
- 			buc_bread as bucBread,
- 			buc_main as bucMain,
- 			buc_vegi as bucVegi,
- 			buc_cheese as bucCheese,
- 			buc_source as bucSource,
- 			buc_topping as bucTopping,
- 			buc_side as bucSide,
- 			buc_is_salad as bucIsSalad,
- 			buc_is_ovened as bucIsOvened,
- 			buc_set as bucSet,
- 			buc_cost as bucCost,
- 			buc_discnt_rate as bucDiscntRate,
- 			buc_kcal as bucKcal,
- 			buc_quantity as bucQuantity,
- 			buc_reg_date as bucRegDate,
- 			buc_customer_idx as bucCustomerIdx
- 		from bucket
+ 			b.buc_idx as bucIdx,
+ 			b.buc_bread as bucBread,
+ 			b.buc_main as bucMain,
+ 			b.buc_vegi as bucVegi,
+ 			b.buc_cheese as bucCheese,
+ 			b.buc_source as bucSource,
+ 			b.buc_topping as bucTopping,
+ 			b.buc_side as bucSide,
+ 			b.buc_is_salad as bucIsSalad,
+ 			b.buc_is_ovened as bucIsOvened,
+ 			b.buc_set as bucSet,
+ 			b.buc_cost as bucCost,
+ 			b.buc_discnt_rate as bucDiscntRate,
+ 			b.buc_kcal as bucKcal,
+ 			b.buc_quantity as bucQuantity,
+ 			b.buc_reg_date as bucRegDate,
+ 			b.buc_customer_idx as bucCustomerIdx,
+ 			m.mgr_name as bucBranch
+ 		from 
+ 			bucket b
+ 		join 
+ 			manager m
+ 		on
+ 			b.buc_branch =m.mgr_no
  		where
- 			buc_customer_idx = #{bucCustomerIdx}
+ 			b.buc_customer_idx = #{bucCustomerIdx}
     </select>
  	<select id="ingreSelectAll" resultType="ingre">
  		select ingre_idx as ingreIdx, ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, 
@@ -93,5 +74,14 @@
 	</select>
 	<update id="updateQuantity" parameterType="kr.co.subway.customerOrder.vo.UpdateQuantity">
 		update bucket set buc_quantity = #{val} where buc_idx = #{bucIdx}
+	</update>
+	<update id="updateOrderNo" parameterType="bucket">
+		update
+			bucket
+		set
+			buc_cuso_order_no = #{bucCusoIdx}
+		where
+			buc_idx = #{bucIdx}	
+				
 	</update>
 </mapper>
