@@ -8,6 +8,7 @@ $(document).ready(function() {
 
 	var cost = Number(0);
 	var kcal = Number(0);
+	var oneStatus = 0;
 	var breadCheck=0;
 	function delay(gap){ /* gap is in millisecs */ 
 	  var then,now; 
@@ -17,11 +18,27 @@ $(document).ready(function() {
 	    now=new Date().getTime();  // 현재시간을 읽어 함수를 불러들인 시간과의 차를 이용하여 처리 
 	  } 
 	} 
+	
+	$('.prev-btn').click(function(){
+		var stepIdx = $('.prev-btn').index(this);
+		$(".step").eq(stepIdx).trigger("click");
+	});
+	$('.next-btn').click(function(){
+		var stepIdx = $('.next-btn').index(this)+1;
+		$(".step").eq(stepIdx).trigger("click");
+	});
+	
+	
 	$('.select-many').click(function(){
-		if($(this).hasClass("selects")){
+		if($(this).hasClass("selected")){
 			$(this).bind("mouseleave",function(){
 				$(this).find('img').css("display","block");
 				$(this).find('p').css("display","none");
+				if(breadCheck==1){
+					$(this).find('pre').eq(0).css("display","block");				
+				}else{
+					$(this).find('pre').eq(1).css("display","block");
+				}
 				$(this).find('button').css("display","none");
 				$(this).css("background-color","#fff");
 			});
@@ -29,20 +46,27 @@ $(document).ready(function() {
 			$(this).unbind("mouseleave");
 		}
 			
-		$(this).toggleClass("selects");
+		$(this).toggleClass("selected");
 	});
 	$('.img-box').mouseover(function(){
-		if($(this).hasClass("selects")===false){
+		if($(this).hasClass("selected")===false){
 			$(this).find('img').css("display","none");
 			$(this).find('p').css("display","block");
+			if(breadCheck==1){
+				$(this).find('pre').eq(0).css("display","block");				
+			}else{
+				$(this).find('pre').eq(1).css("display","block");
+			}
 			$(this).find('button').css("display","block");
 			$(this).css("background-color","#009223");
 		}
 	});
 	leavefn = $('.img-box').mouseleave(function(){
-		if($(this).hasClass("selects")===false){
+		if($(this).hasClass("selected")===false){
 			$(this).find('img').css("display","block");
 			$(this).find('p').css("display","none");
+			$(this).find('pre').eq(0).css("display","none");
+			$(this).find('pre').eq(1).css("display","none");
 			$(this).find('button').css("display","none");
 			$(this).css("background-color","#fff");
 		}
@@ -50,20 +74,92 @@ $(document).ready(function() {
 	$('.bread').find('button').mouseover(function(){
 		$(this).css("color","#009223");
 	});
-	$('.bread').find('button').mouseleave(function(event){
+	btnleavefn = $('.bread').find('button').mouseleave(function(){
 		$(this).css("color","#fff");
 	});
+	
 	$('.type').click(function(){
 		var typeIdx = $('.type').index(this)+1;
 		if(typeIdx==1){
-			$('.next-step').css("display","none");
+			if($(this).hasClass("selected")){
+				$(this).bind("mouseleave",function(){
+					$(this).find('img').css("display","block");
+					$(this).find('p').css("display","none");
+					if(breadCheck==1){
+						$(this).find('pre').eq(0).css("display","block");				
+					}else{
+						$(this).find('pre').eq(1).css("display","block");
+					}
+					$(this).find('button').css("display","none");
+					$(this).css("background-color","#fff");
+				});
+			}else{
+				$(this).unbind("mouseleave");
+				if($('.type').eq(1).hasClass("selected")){
+					$('.type').eq(1).removeClass("selected");
+					$('.type').eq(1).find('img').css("display","block");
+					$('.type').eq(1).find('p').css("display","none");
+					$('.type').eq(1).find('button').css("display","none");
+					$('.type').eq(1).css("background-color","#fff");
+					$('.type').eq(1).bind("mouseleave",function(){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						if(breadCheck==1){
+							$(this).find('pre').eq(0).css("display","block");				
+						}else{
+							$(this).find('pre').eq(1).css("display","block");
+						}
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
+					});
+				}
+			}
+			$(this).toggleClass("selected");
 			$('.bread').css("display","block");
 			$('input[name=bucIsSalad]').val("샌드위치");
-			$(".step").eq(1).trigger("click");
+			$('.salad').css("display","none");
 		}else if(typeIdx==2){
+			if($(this).hasClass("selected")){
+				$(this).bind("mouseleave",function(){
+					$(this).find('img').css("display","block");
+					$(this).find('p').css("display","none");
+					if(breadCheck==1){
+						$(this).find('pre').eq(0).css("display","block");				
+					}else{
+						$(this).find('pre').eq(1).css("display","block");
+					}
+					$(this).find('button').css("display","none");
+					$(this).css("background-color","#fff");
+				});
+			}else{
+				$(this).unbind("mouseleave");
+				if($('.type').eq(0).hasClass("selected")){
+					$('.type').eq(0).removeClass("selected");
+					$('.type').eq(0).find('img').css("display","block");
+					$('.type').eq(0).find('p').css("display","none");
+					$('.type').eq(0).find('button').css("display","none");
+					$('.type').eq(0).css("background-color","#fff");
+					$('.type').eq(0).bind("mouseleave",function(){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						if(breadCheck==1){
+							$(this).find('pre').eq(0).css("display","block");				
+						}else{
+							$(this).find('pre').eq(1).css("display","block");
+						}
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
+					});
+				}
+			}
+				
+			$(this).toggleClass("selected");
 			$('input[name=bucIsSalad]').val("샐러드");
 			$('input[name=bucBread]').val("선택안함");
-			$(".step").eq(2).trigger("click");
+			$('.salad').css("display","block");
+			$('.main').css("display","none");
+			$('.bread').css("display","none");
+			breadCheck=1;
 		}
 	});
 	$('.bread-amount').click(function(){
@@ -84,7 +180,6 @@ $(document).ready(function() {
 		console.log(kcal);
 		$('input[name=bucBread]').val(str);
 		console.log(str);
-		$(".step").eq(2).trigger("click");
 	});
 	$('.main').click(function(){
 		var str = $(this).find('p').text();
@@ -119,7 +214,7 @@ $(document).ready(function() {
 	$('.topping-check').click(function(){
 		var str = "";
 		for(var i = 1; i<$('.topping').length;i++){
-			if($('.topping').eq(i).hasClass("selects")){
+			if($('.topping').eq(i).hasClass("selected")){
 				str += '1';
 				if(breadCheck==1){
 					cost += Number($('.topping').eq(i).find('input').eq(1).val())*1;
@@ -140,8 +235,8 @@ $(document).ready(function() {
 	});
 	$('.topping.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.topping').length;i++){
-			if($('.topping').eq(i).hasClass("selects")){
-				$('.topping').eq(i).removeClass("selects");
+			if($('.topping').eq(i).hasClass("selected")){
+				$('.topping').eq(i).removeClass("selected");
 				$('.topping').eq(i).find('img').css("display","block");
 				$('.topping').eq(i).find('p').css("display","none");
 				$('.topping').eq(i).find('button').css("display","none");
@@ -163,7 +258,7 @@ $(document).ready(function() {
 	});
 	
 	$('.vegi').click(function(){
-		if($(this).hasClass("selects")){
+		if($(this).hasClass("selected")){
 			$(this).bind("mouseleave",function(){
 				$(this).find('img').css("display","block");
 				$(this).find('p').css("display","none");
@@ -173,11 +268,11 @@ $(document).ready(function() {
 		}else{
 			$(this).unbind("mouseleave");
 		}
-		$(this).toggleClass("selects");
+		$(this).toggleClass("selected");
 	})
 	$('.vegi-amount').click(function(){
-		if($(this).parent().parent().hasClass("selects")===false){
-			$(this).parent().parent().addClass("selects")
+		if($(this).parent().parent().hasClass("selected")===false){
+			$(this).parent().parent().addClass("selected")
 		}
 		var idx = $(this).parent().find("button").index(this);
 		for(var i = 0; i<4; i++){
@@ -193,7 +288,7 @@ $(document).ready(function() {
 	$('.vegi-check').click(function(){
 		var str = "";
 		for(var i = 0; i<$('.vegi').length;i++){
-			if($('.vegi').eq(i).hasClass("selects")){
+			if($('.vegi').eq(i).hasClass("selected")){
 				for(var k=0; k<4; k++){
 					if($('.vegi').eq(i).find("button").eq(k).hasClass("select-vegi")){
 						str += k;
@@ -213,8 +308,8 @@ $(document).ready(function() {
 	
 	$('.source.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.source').length;i++){
-			if($('.source').eq(i).hasClass("selects")){
-				$('.source').eq(i).removeClass("selects");
+			if($('.source').eq(i).hasClass("selected")){
+				$('.source').eq(i).removeClass("selected");
 				$('.source').eq(i).find('img').css("display","block");
 				$('.source').eq(i).find('p').css("display","none");
 				$('.source').eq(i).find('button').css("display","none");
@@ -251,7 +346,7 @@ $(document).ready(function() {
 	$('.source-check').click(function(){
 		var str = "";
 		for(var i = 1; i<$('.source').length;i++){
-			if($('.source').eq(i).hasClass("selects")){
+			if($('.source').eq(i).hasClass("selected")){
 				str += '1';
 				if(breadCheck==1){
 					kcal += Number($('.source').eq(i).find('input').eq(0).val())*1;
@@ -286,7 +381,7 @@ $(document).ready(function() {
 	$('.order-check').click(function(){
 		var str='';
 		for(var i = 1; i<$('.sidemenu').length;i++){
-			if($('.sidemenu').eq(i).hasClass("selects")){
+			if($('.sidemenu').eq(i).hasClass("selected")){
 				console.log("해즈클래스");
 				str += "1";
 				cost += Number($('.sidemenu').eq(i).find('input').eq(1).val());
@@ -364,8 +459,8 @@ $(document).ready(function() {
 		}
 	$('.sidemenu.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.sidemenu').length;i++){
-			if($('.sidemenu').eq(i).hasClass("selects")){
-				$('.sidemenu').eq(i).removeClass("selects");
+			if($('.sidemenu').eq(i).hasClass("selected")){
+				$('.sidemenu').eq(i).removeClass("selected");
 				$('.sidemenu').eq(i).find('img').css("display","block");
 				$('.sidemenu').eq(i).find('p').css("display","none");
 				$('.sidemenu').eq(i).find('button').css("display","none");
@@ -424,8 +519,8 @@ $(document).ready(function() {
 	});
     $('.add-order').click(function() {
     	for(var i = 0; i<$('.img-box').length;i++){
-    		if($('.img-box').eq(i).hasClass("selects")){
-    			$('.img-box').eq(i).removeClass("selects");
+    		if($('.img-box').eq(i).hasClass("selected")){
+    			$('.img-box').eq(i).removeClass("selected");
     			$('.img-box').eq(i).find('img').css("display","block");
     			$('.img-box').eq(i).find('p').css("display","none");
     			$('.img-box').eq(i).find('button').css("display","none");
