@@ -110,7 +110,7 @@ public class MgrController {
 			session.setAttribute("mgr", mgr);
 			view = "admin/index";
 		}else {
-			view = "main";
+			view = "manager/mgrLogoutFail";
 		}
 		return view;
 	}

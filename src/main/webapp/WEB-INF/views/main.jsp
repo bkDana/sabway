@@ -18,18 +18,6 @@
 		<c:otherwise>
 			<fieldset>
 				<a href="/index.do">로그인!!</a>		
-				<c:choose>
-						<c:when test="${empty sessionScope.mgr.mgrId }">
-							<a href="/loginAdmin.do" style="float:right;margin-right:60px;">관리자 로그인</a>
-						</c:when>
-						<c:otherwise>
-							<div style="float:right;margin-right:60px;">
-								<a href="/adminPage.do">${sessionScope.mgr.mgrName }</a>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="/adminLogout.do">로그아웃</a>
-							</div>
-						</c:otherwise>
-				</c:choose>		
 			</fieldset>
 		</c:otherwise>
 	</c:choose>
