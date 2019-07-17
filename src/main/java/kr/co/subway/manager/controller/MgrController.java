@@ -99,10 +99,12 @@ public class MgrController {
 	}
 	//관리자 로그인
 	@RequestMapping("/adminLogin.do")
-	public String adminLogin(HttpServletRequest request, @RequestParam String mgrId){
+	public String adminLogin(HttpServletRequest request, @RequestParam String mgrId, @RequestParam String mgrPw){
 		HttpSession session = request.getSession();
 		Mgr mgr = new Mgr();
-		mgr = mgrservice.login(mgrId);
+		mgr.setMgrId(mgrId);
+		mgr.setMgrPw(mgrPw);
+		mgr = mgrservice.login(mgr);
 		String view = "";
 		if(mgr != null) {
 			session.setAttribute("mgr", mgr);
