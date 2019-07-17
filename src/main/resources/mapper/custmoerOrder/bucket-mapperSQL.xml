@@ -7,7 +7,6 @@
  		values
  			(
  			seq_buc_idx.nextval,
- 			#{bucCusoIdx},
  			#{bucBread},
  			#{bucMain},
  			#{bucVegi},
@@ -24,7 +23,8 @@
  			#{bucQuantity},
  			default,
  			#{bucCustomerIdx},
- 			${bucBranch}
+ 			#{bucBranch},
+ 			#{bucCusoOrderNo}
  			)	
  	</insert>
  	<select id="loadBucketList" parameterType="String" resultType="bucket">

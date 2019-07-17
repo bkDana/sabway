@@ -6,17 +6,17 @@ public class CusOrder {
 	private int cusoIdx;		//자동
 	private int cusoOrderState; //주문상태 default 0
 	private int cusoTotalCost;
-	private int cusoPhone;
+	private String cusoPhone;
 	private String cusoMemberNo;	//회원 번호(외래키)
 	private String cusoOrderNo;//고객용 주문번호
-	private String cusoBranchName;	//지점 번호(Manager - mgrName으로 받아야함)
+	private String cusoBranch;	//지점 번호(Manager - mgrName으로 받아야함)
 	private Date cusoOrderDate;
 	public CusOrder() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CusOrder(int cusoIdx, int cusoOrderState, int cusoTotalCost, int cusoPhone, String cusoMemberNo,
-			String cusoOrderNo, String cusoBranchName, Date cusoOrderDate) {
+	public CusOrder(int cusoIdx, int cusoOrderState, int cusoTotalCost, String cusoPhone, String cusoMemberNo,
+			String cusoOrderNo, String cusoBranch, Date cusoOrderDate) {
 		super();
 		this.cusoIdx = cusoIdx;
 		this.cusoOrderState = cusoOrderState;
@@ -24,7 +24,7 @@ public class CusOrder {
 		this.cusoPhone = cusoPhone;
 		this.cusoMemberNo = cusoMemberNo;
 		this.cusoOrderNo = cusoOrderNo;
-		this.cusoBranchName = cusoBranchName;
+		this.cusoBranch = cusoBranch;
 		this.cusoOrderDate = cusoOrderDate;
 	}
 	public int getCusoIdx() {
@@ -45,10 +45,10 @@ public class CusOrder {
 	public void setCusoTotalCost(int cusoTotalCost) {
 		this.cusoTotalCost = cusoTotalCost;
 	}
-	public int getCusoPhone() {
+	public String getCusoPhone() {
 		return cusoPhone;
 	}
-	public void setCusoPhone(int cusoPhone) {
+	public void setCusoPhone(String cusoPhone) {
 		this.cusoPhone = cusoPhone;
 	}
 	public String getCusoMemberNo() {
@@ -63,11 +63,11 @@ public class CusOrder {
 	public void setCusoOrderNo(String cusoOrderNo) {
 		this.cusoOrderNo = cusoOrderNo;
 	}
-	public String getCusoBranchName() {
-		return cusoBranchName;
+	public String getCusoBranch() {
+		return cusoBranch;
 	}
-	public void setCusoBranchName(String cusoBranchName) {
-		this.cusoBranchName = cusoBranchName;
+	public void setCusoBranch(String cusoBranch) {
+		this.cusoBranch = cusoBranch;
 	}
 	public Date getCusoOrderDate() {
 		return cusoOrderDate;

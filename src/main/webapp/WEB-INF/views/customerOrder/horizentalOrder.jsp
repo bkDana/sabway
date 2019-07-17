@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%-- Header --%>
 <link rel="stylesheet" type="text/css" href="/resources/css/formwizard.css?after" />
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
@@ -26,190 +28,315 @@ var myform=new formtowizard({
 		<form id="feedbackform" name="feedbackform" method="post">
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
-				<div class="type img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/sandwich/sandwich_fl04.jpg">
-					<p class="label">샌드위치</p>
+				<div class="common-tbl-btn-group prev-btn-box outline-box">
 				</div>
-				<div class="type img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/salad/salad_fl04.jpg">
-					<p class="label">샐러드</p>
+				<div class="content-outlin-box">
+					<div class="type img-box select-one fix-img" style="background-color:white;" >
+						<img src="/resources/img/sandwich/sandwich_fl04.jpg">
+						<p class="label">샌드위치</p>
+					</div>
+					<div class="type img-box select-one fix-img" style="background-color:white;" >
+						<img src="/resources/img/salad/salad_fl04.jpg">
+						<p class="label">샐러드</p>
+					</div>
 				</div>
-
+				<div class="common-tbl-btn-group next-btn-box outline-box">
+					<button type="button" class="btn-style2 next-btn">다음</button>
+				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>빵</legend>
-				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
-					<c:if test="${ingre.ingreType eq '빵' and ingre.ingreActive eq '1'}">
-						<div class="bread img-box select-one">
-							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
-							<p class="label">${ingre.ingreLabel }</p>
-							<div class="button-box">
-								<button type="button" class="bread-amount">15cm</button>
-								<button type="button" class="bread-amount">30cm</button>
+				<div class="common-tbl-btn-group prev-btn-box outline-box">
+					<button type="button" class="btn-style2 prev-btn">이전</button>
+				</div>
+				<div class="content-outlin-box">
+					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
+						<c:if test="${ingre.ingreType eq '빵' and ingre.ingreActive eq '1'}">
+							<div class="bread img-box select-one">
+								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
+								<p class="label">${ingre.ingreLabel }</p>
+								<div class="button-box">
+									<button type="button" class="bread-amount">15cm</button>
+									<button type="button" class="bread-amount">30cm</button>
+								</div>
+								<input type="hidden" value="${ingre.ingreKcal }">
 							</div>
-							<input type="hidden" value="${ingre.ingreKcal }">
-							<input type="hidden" value="${ingre.ingreCost15 }">
-							<input type="hidden" value="${ingre.ingreCost30 }">
-						</div>
-					</c:if>
-				</c:forEach>
+						</c:if>
+					</c:forEach>
+				</div>
+				<div class="common-tbl-btn-group next-btn-box outline-box">
+					<button type="button" class="btn-style2 next-btn">다음</button>
+				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>메인재료</legend>
-				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
-					<c:if test="${ingre.ingreType eq '메인재료' and ingre.ingreActive eq '1' }">
-<%-- 						<label for="${ingre.ingreLabel }"><img src="/resources/upload/ingredients/${ingre.ingreFilepath }"></label>  --%>
-<%-- 						<input type="radio" class="hide" id="${ingre.ingreLabel }" name="isMain${status.conunt }" value="1"> --%>
-						<div class="main img-box select-one">
-							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
-							<p class="label">${ingre.ingreLabel }</p>
-							<input type="hidden" value="${ingre.ingreKcal }">
-							<c:set var="discnt" value="${ingre.ingreDiscntRate}"/>
-							<c:if test="${discnt ne 0 }">
-								<input type="hidden" value="${ingre.ingreCost15*(100-discnt)/100 }">
-								<input type="hidden" value="${ingre.ingreCost30*(100-discnt)/100 }">
-							</c:if>
-							<c:if test="${ingre.ingreDiscntRate eq 0 }">
-								<input type="hidden" value="${ingre.ingreCost15 }">
-								<input type="hidden" value="${ingre.ingreCost30 }">
-							</c:if>
-							<input type="hidden" value="${ingre.ingreRecomSauce }">
-						</div>
-					</c:if>
-				</c:forEach>
+				<div class="common-tbl-btn-group prev-btn-box outline-box">
+					<button type="button" class="btn-style2 prev-btn">이전</button>
+				</div>
+				<div class="content-outlin-box">
+					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
+						<c:if test="${ingre.ingreType eq '메인재료' and ingre.ingreActive eq '1' }">
+	<%-- 						<label for="${ingre.ingreLabel }"><img src="/resources/upload/ingredients/${ingre.ingreFilepath }"></label>  --%>
+	<%-- 						<input type="radio" class="hide" id="${ingre.ingreLabel }" name="isMain${status.conunt }" value="1"> --%>
+							<div class="main img-box select-one">
+								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
+								<p class="label">${ingre.ingreLabel }</p>
+								<input type="hidden" value="${ingre.ingreKcal }">
+								<c:set var="discnt" value="${ingre.ingreDiscntRate}"/>
+								<c:if test="${discnt ne 0 }">
+									
+									<c:set var="cost15str" value="${ingre.ingreCost15*(100-discnt)/10000}"/>
+									<c:set var="parseCost15" value="${fn:substringBefore(cost15str,'.') }"/>
+									<c:set var="cost15" value="${parseCost15 }"/>
+									
+									<c:set var="cost30str" value="${ingre.ingreCost30*(100-discnt)/10000}"/>
+									<c:set var="parseCost30" value="${fn:substringBefore(cost30str,'.') }"/>
+									<c:set var="cost30" value="${parseCost30 }"/>
+									<pre class="label half">15cm : <fmt:formatNumber value="${cost15*100 }" type="number"/>원</pre>
+									<pre class="label full">30cm : <fmt:formatNumber value="${cost30*100 }" type="number"/>원</pre>
+									<input type="hidden" value="${cost15*100 }">
+									<input type="hidden" value="${cost30*100 }">
+								</c:if>
+								<c:if test="${ingre.ingreDiscntRate eq 0 }">
+									<pre class="label half">15cm : <fmt:formatNumber value="${ingre.ingreCost15 }" type="number"/>원</pre>
+									<pre class="label full">30cm : <fmt:formatNumber value="${ingre.ingreCost30 }" type="number"/>원</pre>
+									<input type="hidden" value="${ingre.ingreCost15 }">
+									<input type="hidden" value="${ingre.ingreCost30 }">
+								</c:if>
+								<input type="hidden" value="${ingre.ingreRecomSauce }">
+							</div>
+						</c:if>
+					</c:forEach>
+					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
+						<c:if test="${ingre.ingreType eq '샐러드' and ingre.ingreActive eq '1' }">
+	<%-- 						<label for="${ingre.ingreLabel }"><img src="/resources/upload/ingredients/${ingre.ingreFilepath }"></label>  --%>
+	<%-- 						<input type="radio" class="hide" id="${ingre.ingreLabel }" name="isMain${status.conunt }" value="1"> --%>
+							<div class="salad img-box select-one">
+								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
+								<p class="label">${ingre.ingreLabel }</p>
+								<input type="hidden" value="${ingre.ingreKcal }">
+								<c:set var="discnt" value="${ingre.ingreDiscntRate}"/>
+								<c:if test="${discnt ne 0 }">
+									
+									<c:set var="cost15str" value="${ingre.ingreCost15*(100-discnt)/10000}"/>
+									<c:set var="parseCost15" value="${fn:substringBefore(cost15str,'.') }"/>
+									<c:set var="cost15" value="${parseCost15 }"/>
+									
+									<pre class="label half"><fmt:formatNumber value="${cost15*100 }" type="number"/>원</pre>
+									<pre class="label full"><fmt:formatNumber value="${cost15*100 }" type="number"/>원</pre>
+									<input type="hidden" value="${cost15*100 }">
+									<input type="hidden" value="${cost15*100 }">
+								</c:if>
+								<c:if test="${ingre.ingreDiscntRate eq 0 }">
+									<pre class="label half"><fmt:formatNumber value="${ingre.ingreCost15 }" type="number"/>원</pre>
+									<pre class="label full"><fmt:formatNumber value="${ingre.ingreCost30 }" type="number"/>원</pre>
+									<input type="hidden" value="${ingre.ingreCost15 }">
+									<input type="hidden" value="${ingre.ingreCost15 }">
+								</c:if>
+								
+								<input type="hidden" value="${ingre.ingreRecomSauce }">
+							</div>
+						</c:if>
+					</c:forEach>
+				</div>
+				<div class="common-tbl-btn-group next-btn-box outline-box">
+					<button type="button" class="btn-style2 next-btn">다음</button>
+				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>치즈</legend>
-				<div class="cheeze img-box select-none fix-img" style="background-color:white; clear:both;" >
-					<img src="/resources/img/cancelyellow.png">
-					<p class="label">선택안함</p>
-					<input type="hidden" value="0">
+				<div class="common-tbl-btn-group prev-btn-box outline-box">
+					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
-				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
-					<c:if test="${ingre.ingreType eq '치즈' and ingre.ingreActive eq '1' }">
-						<div class="cheeze img-box select-one">
-							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
-							<p class="label">${ingre.ingreLabel }</p>
-							<input type="hidden" value="${ingre.ingreKcal }">
-						</div>
-					</c:if>
-				</c:forEach>
+				<div class="content-outlin-box">
+					<div class="cheeze img-box select-none fix-img" style="background-color:white; clear:both;" >
+						<img src="/resources/img/cancelyellow.png">
+						<p class="label">선택안함</p>
+						<input type="hidden" value="0">
+					</div>
+					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
+						<c:if test="${ingre.ingreType eq '치즈' and ingre.ingreActive eq '1' }">
+							<div class="cheeze img-box select-one">
+								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
+								<p class="label">${ingre.ingreLabel }</p>
+								<input type="hidden" value="${ingre.ingreKcal }">
+							</div>
+						</c:if>
+					</c:forEach>
+				</div>
+				<div class="common-tbl-btn-group next-btn-box outline-box">
+					<button type="button" class="btn-style2 next-btn">다음</button>
+				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>추가토핑</legend>
-				<div class="topping img-box select-none fix-img" style="background-color:white; clear:both;" >
-					<img src="/resources/img/cancelyellow.png">
-					<p class="label">선택안함</p>
-					<input type="hidden" value="0">
-					<input type="hidden" value="0">
-					<input type="hidden" value="0">
+				<div class="common-tbl-btn-group prev-btn-box outline-box">
+					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
-				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
-					<c:if test="${ingre.ingreType eq '추가토핑' and ingre.ingreActive eq '1' }">
-						<div class="topping img-box select-many">
-							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
-							<p class="label">${ingre.ingreLabel }</p>
-							<input type="hidden" value="${ingre.ingreKcal }">
-							<input type="hidden" value="${ingre.ingreCost15 }">
-							<input type="hidden" value="${ingre.ingreCost30 }">
-						</div>
-					</c:if>
-				</c:forEach>
-				<div class="common-tbl-btn-group">
-					<button type="button" class="btn-style2 topping-check" style="clear:both;">토핑 선택완료</button>
+				<div class="content-outlin-box">
+					<div class="topping img-box select-none fix-img" style="background-color:white; clear:both;" >
+						<img src="/resources/img/cancelyellow.png">
+						<p class="label">선택안함</p>
+						<input type="hidden" value="0">
+						<input type="hidden" value="0">
+						<input type="hidden" value="0">
+					</div>
+					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
+						<c:if test="${ingre.ingreType eq '추가토핑' and ingre.ingreActive eq '1' }">
+							<div class="topping img-box select-many">
+								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
+								<p class="label">${ingre.ingreLabel }</p>
+								<input type="hidden" value="${ingre.ingreKcal }">
+								<input type="hidden" value="${ingre.ingreCost15 }">
+								<input type="hidden" value="${ingre.ingreCost30 }">
+								<pre class="label half">15cm : ${ingre.ingreCost15 }원</pre>
+								<pre class="label full">30cm : ${ingre.ingreCost30 }원</pre>
+							</div>
+						</c:if>
+					</c:forEach>
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 topping-check" style="clear:both;">토핑 선택완료</button>
+					</div>
+				</div>
+				<div class="common-tbl-btn-group next-btn-box outline-box">
+					<button type="button" class="btn-style2 next-btn">다음</button>
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>오븐</legend>
-				<div class="oven img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/checkedyellow.png">
-					<p class="label">오븐 사용</p>
+				<div class="common-tbl-btn-group prev-btn-box outline-box">
+					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
-				<div class="oven img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/cancelyellow.png">
-					<p class="label">오븐 미사용</p>
+				<div class="content-outlin-box">
+					<div class="oven img-box select-one fix-img" style="background-color:white;" >
+						<img src="/resources/img/checkedyellow.png">
+						<p class="label">오븐 사용</p>
+					</div>
+					<div class="oven img-box select-one fix-img" style="background-color:white;" >
+						<img src="/resources/img/cancelyellow.png">
+						<p class="label">오븐 미사용</p>
+					</div>
+				</div>
+				<div class="common-tbl-btn-group next-btn-box outline-box">
+					<button type="button" class="btn-style2 next-btn">다음</button>
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>채소</legend>
 				<p>아무것도 선택하지 않으시면 모두 보통으로 들어갑니다.</p>
-				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
-					<c:if test="${ingre.ingreType eq '채소' and ingre.ingreActive eq '1' }">
-						<div class="vegi img-box">
-							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
-							<p class="label">${ingre.ingreLabel }</p>
-							<div class="button-box">
-								<button type="button" class="vegi-amount">없음</button>
-								<button type="button" class="vegi-amount">적게</button>
-								<button type="button" class="vegi-amount select-vegi">보통</button>
-								<button type="button" class="vegi-amount">많이</button>
+				<div class="common-tbl-btn-group prev-btn-box outline-box">
+					<button type="button" class="btn-style2 prev-btn">이전</button>
+				</div>
+				<div class="content-outlin-box">
+					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
+						<c:if test="${ingre.ingreType eq '채소' and ingre.ingreActive eq '1' }">
+							<div class="vegi img-box">
+								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
+								<p class="label">${ingre.ingreLabel }</p>
+								<div class="button-box">
+									<button type="button" class="vegi-amount">없음</button>
+									<button type="button" class="vegi-amount">적게</button>
+									<button type="button" class="vegi-amount select-vegi">보통</button>
+									<button type="button" class="vegi-amount">많이</button>
+								</div>
+								<input type="hidden" value="${ingre.ingreKcal }">
 							</div>
-							<input type="hidden" value="${ingre.ingreKcal }">
-						</div>
-					</c:if>
-				</c:forEach>
-				<div class="common-tbl-btn-group">
-					<button type="button" class="btn-style2 vegi-check" style="clear:both;">채소 선택완료</button>
+						</c:if>
+					</c:forEach>
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 vegi-check" style="clear:both;">채소 선택완료</button>
+					</div>
+				</div>
+				<div class="common-tbl-btn-group next-btn-box outline-box">
+					<button type="button" class="btn-style2 next-btn">다음</button>
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>소스</legend>
-				<div class="source img-box select-none fix-img" style="background-color:white; clear:both;" >
-					<img src="/resources/img/cancelyellow.png">
-					<p class="label">선택안함</p>
-					<input type="hidden" value="0">
+				<div class="common-tbl-btn-group prev-btn-box outline-box">
+					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
-				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
-					<c:if test="${ingre.ingreType eq '소스' and ingre.ingreActive eq '1' }">
-						<div class="source img-box select-many">
-							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
-							<p class="label">${ingre.ingreLabel }</p>
-							<input type="hidden" value="${ingre.ingreKcal }">
-						</div>
-					</c:if>
-				</c:forEach>
-				<div class="common-tbl-btn-group">
-					<button type="button" class="btn-style2 source-recom" style="clear:both;">추천소스 적용</button>
-					<button type="button" class="btn-style2 source-check" style="clear:both;">소스 선택완료</button>
+				<div class="content-outlin-box">
+					<div class="source img-box select-none fix-img" style="background-color:white; clear:both;" >
+						<img src="/resources/img/cancelyellow.png">
+						<p class="label">선택안함</p>
+						<input type="hidden" value="0">
+					</div>
+					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
+						<c:if test="${ingre.ingreType eq '소스' and ingre.ingreActive eq '1' }">
+							<div class="source img-box select-many">
+								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
+								<p class="label">${ingre.ingreLabel }</p>
+								<input type="hidden" value="${ingre.ingreKcal }">
+							</div>
+						</c:if>
+					</c:forEach>
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 source-recom" style="clear:both;">추천소스 적용</button>
+						<button type="button" class="btn-style2 source-check" style="clear:both;">소스 선택완료</button>
+					</div>
+				</div>
+				<div class="common-tbl-btn-group next-btn-box outline-box">
+					<button type="button" class="btn-style2 next-btn">다음</button>
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>세트메뉴</legend>
-				<div class="set img-box select-one fix-img" style="background-color:white;" >
-					<img src="/resources/img/checkedgreen.png">
-					<p class="label">단품</p>
-					<input type="hidden" value="0">
-					<input type="hidden" value="0">
+				<div class="common-tbl-btn-group prev-btn-box outline-box">
+					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
-				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
-					<c:if test="${ingre.ingreType eq '세트메뉴' and ingre.ingreActive eq '1' }">
-						<div class="set img-box select-one" style="background-color:white;">
-							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
-							<p class="label">${ingre.ingreLabel }</p>
-							<input type="hidden" value="${ingre.ingreKcal }">
-							<input type="hidden" value="${ingre.ingreCost15 }">
-						</div>
-					</c:if>
-				</c:forEach>
+				<div class="content-outlin-box">
+					<div class="set img-box select-one fix-img" style="background-color:white;" >
+						<img src="/resources/img/checkedgreen.png">
+						<p class="label">단품</p>
+						<input type="hidden" value="0">
+						<input type="hidden" value="0">
+					</div>
+					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
+						<c:if test="${ingre.ingreType eq '세트메뉴' and ingre.ingreActive eq '1' }">
+							<div class="set img-box select-one" style="background-color:white;">
+								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
+								<p class="label">${ingre.ingreLabel }</p>
+								<input type="hidden" value="${ingre.ingreKcal }">
+								<input type="hidden" value="${ingre.ingreCost15 }">
+								<pre class="label half">${ingre.ingreCost15 }원</pre>
+								<pre class="label full">${ingre.ingreCost15 }원</pre>
+							</div>
+						</c:if>
+					</c:forEach>
+				</div>
+				<div class="common-tbl-btn-group next-btn-box outline-box">
+					<button type="button" class="btn-style2 next-btn">다음</button>
+				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
 				<legend>사이드메뉴</legend>
-				<div class="sidemenu img-box select-none fix-img" style="background-color:white; clear:both;" >
-					<img src="/resources/img/cancelyellow.png">
-					<p class="label">선택안함</p>
+				<div class="common-tbl-btn-group prev-btn-box outline-box">
+					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
-				<c:forEach items="${ingreList }" var="ingre" varStatus="status">
-					<c:if test="${ingre.ingreType eq '사이드메뉴' and ingre.ingreActive eq '1' }">
-						<div class="sidemenu img-box select-many">
-							<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
-							<p class="label">${ingre.ingreLabel }</p>
-							<input type="hidden" value="${ingre.ingreKcal }">
-							<input type="hidden" value="${ingre.ingreCost15 }">
-						</div>
-					</c:if>
-				</c:forEach>
-				<div class="common-tbl-btn-group">
-					<button type="button" class="btn-style2 order-check" style="clear:both;">카트에 담기</button>
+				<div class="content-outlin-box">
+					<div class="sidemenu img-box select-none fix-img" style="background-color:white; clear:both;" >
+						<img src="/resources/img/cancelyellow.png">
+						<p class="label">선택안함</p>
+					</div>
+					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
+						<c:if test="${ingre.ingreType eq '사이드메뉴' and ingre.ingreActive eq '1' }">
+							<div class="sidemenu img-box select-many">
+								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
+								<p class="label">${ingre.ingreLabel }</p>
+								<input type="hidden" value="${ingre.ingreKcal }">
+								<input type="hidden" value="${ingre.ingreCost15 }">
+								<pre class="label half">${ingre.ingreCost15 }원</pre>
+								<pre class="label full">${ingre.ingreCost15 }원</pre>
+							</div>
+						</c:if>
+					</c:forEach>
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 order-check" style="clear:both;">카트에 담기</button>
+					</div>
+				</div>
+				<div class="common-tbl-btn-group next-btn-box outline-box">
+					<button type="button" class="btn-style2 next-btn">다음</button>
 				</div>
 			</fieldset>
 		
