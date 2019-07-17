@@ -20,10 +20,6 @@ public class CusOrderDao {
 	public List ingreSelectAll() {
 		return sqlSession.selectList("bucket.ingreSelectAll");
 	}
-			
-	public int insertMember(Bucket buc) {
-		return sqlSession.insert("bucket.insertBucket",buc);
-	}
 
 	public List<Bucket> loadBucketList(String bucCustomerIdx) {
 		return sqlSession.selectList("bucket.loadBucketList", bucCustomerIdx);
@@ -60,5 +56,8 @@ public class CusOrderDao {
 	}
 	public List<CusOrder> cusOrderList(){
 		return sqlSession.selectList("cusOrder.cusOrderList");
+	}
+	public int insertCusOrder(CusOrder cuso) {
+		return sqlSession.insert("cusOrder.insertCuso",cuso);
 	}
 }

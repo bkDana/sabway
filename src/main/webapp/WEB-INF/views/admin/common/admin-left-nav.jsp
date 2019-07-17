@@ -2,16 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="left-menu">
-	<%-- 재고관리 --%>
-	<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){ %>
-	<ul>
-		<li><a href="/managerOrder/orderList.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("orderList.jsp")){%>on<%}%>">발주 리스트</a></li>
-		<c:if test="${sessionScope.mgr.mgrLevel eq 0 }">
-			<li><a href="/managerOrder/orderRegister.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("orderRegister.jsp")){%>on<%}%>">발주서 작성</a></li>
-			<li><a href="/managerOrder/stockList.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("stockList.jsp")){%>on<%}%>">재고현황</a></li>
-		</c:if>
-	</ul>
-	<%}%>
 	
 	<!-- 메뉴관리 -->
 	<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")){ %>
@@ -23,8 +13,29 @@
 		</ul>
 	<%}%>
 	
+	<%-- 재고관리 --%>
+	<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){ %>
+	<ul>
+		<li><a href="/managerOrder/orderList.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("orderList.jsp")){%>on<%}%>">발주 리스트</a></li>
+		<c:if test="${sessionScope.mgr.mgrLevel eq 0 }">
+			<li><a href="/managerOrder/orderRegister.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("orderRegister.jsp")){%>on<%}%>">발주서 작성</a></li>
+			<li><a href="/managerOrder/stockList.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("stockList.jsp")){%>on<%}%>">재고현황</a></li>
+		</c:if>
+	</ul>
+	<%}%>
+	
+	<%-- 게시판 관리 --%>
+	<%if(request.getRequestURL().toString().split("/")[6].equals("board")){ %>
+	<ul>
+		<%-- <c:if test="${sessionScope.mgr.mgrLevel eq 1 }"> --%>
+			<li><a href="/board/noticeList.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("notice")){%>on<%}%>">공지사항</a></li>
+			<li><a href="/board/qnaList.do?currentPage=1" class="<%if(request.getRequestURL().toString().split("/")[7].equals("qna")){%>on<%}%>">1:1 문의</a></li>
+			<li><a href="/board/reviewList.do?currentPage=1" class="<%if(request.getRequestURL().toString().split("/")[7].equals("review")){%>on<%}%>">후기</a></li>	
+		<%-- </c:if> --%>
+	</ul>
+	<%}%>
+	
 	<!-- 매출 통계 -->
-	<!-- 메뉴관리 -->
 	<%if(request.getRequestURL().toString().split("/")[6].equals("salesStatics")){ %>
 		<ul>
 			<li><a href="/salesStatics/goTotalSales.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("totalSales.jsp")){%>on<%}%>">전체 매출 통계</a></li>

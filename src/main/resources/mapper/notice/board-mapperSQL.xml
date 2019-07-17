@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board">
+	<select id="totalCount" parameterType="search" resultType="_int">
+		select 
+			count(*) cnt 
+		from 
+			notice
+		<if test="searchType != null and searchType != ''">
+			<if test="searchType.equals('title')">
+				where LOWER(notice_title) like LOWER('%'||#{searchVal}||'%')
+			</if>
+			<if test="searchType.equals('content')">
+				where LOWER(notice_content) like LOWER('%'||#{searchVal}||'%')
+			</if>	
+		</if>	
+	</select>
+	<select id="boardList" parameterType="search" resultType="notice">
+		select
+			*
+		from
+			(select
+				rownum rnum,
+				n.*
+			from 
+				(select 
+					notice_no as noticeNo, 
+					notice_category as noticeCategory, 
+					notice_title as noticeTitle, 
+					filepath, 
+					notice_date as noticeDate
+				from 
+					notice 
+				<if test="searchType != null and searchType != ''">
+					<if test="searchType.equals('title')">
+						where LOWER(notice_title) like LOWER('%'||#{searchVal}||'%')
+					</if>
+					<if test="searchType.equals('content')">
+						where LOWER(notice_content) like LOWER('%'||#{searchVal}||'%')
+					</if>	
+				</if>	
+				order by 
+					notice_no 
+					<choose>
+	  				<when test="orderBy!=null and orderBy!=''">
+	  					<if test="orderBy.equals('new')">desc</if>
+	  					<if test="orderBy.equals('old')"></if>
+	  				</when>
+	  				<otherwise>
+	  					desc
+	  				</otherwise>
+		  		</choose>
+				) n
+			)
+		where
+			rnum between #{start} and #{end}
+			
+	</select>
+	
+
+	<select id="noticeSelectOne" parameterType="_int" resultType="notice">
+		select notice_no as noticeNo, notice_category as noticeCategory, notice_title as noticeTitle, 
+		notice_content as noticeContent, filename, filepath, notice_date as noticeDate from notice where notice_no=#{noticeNo}
+	</select>
+	<insert id="noticeInsert" parameterType="notice">
+		insert into notice values(seq_notice_no.nextval,#{noticeCategory},#{noticeTitle}, #{noticeContent}, #{filename},#{filepath},sysdate)
+	</insert>
+	<update id="noticeUpdate" parameterType="notice">
+		update notice set notice_category=#{noticeCategory},notice_title=#{noticeTitle},notice_content=#{noticeContent},filename=#{filename},filepath=#{filepath},notice_date=sysdate where notice_no=#{noticeNo}
+	</update>
+	<delete id="noticeDelete" parameterType="_int">
+		delete from notice where notice_no=#{noticeNo}
+	</delete>
+	
+	<select id="noticeSelectPaging" parameterType="pb" resultType="notice">
+		select notice_no as noticeNo, notice_category as noticeCategory, notice_title as noticeTitle, 
+		notice_content as noticeContent, filename, filepath, notice_date as noticeDate from 
+		(select rownum as rnum, m.* from (select * from notice order by notice_date desc) m)
+		where rnum between #{start} and #{end}
+	</select>
+	<!-- 아래부터 QNA관련 쿼리 -->
+	<select id="qnaSelectAll" resultType="qna">
+		select qna_no as qnaNo, qna_category as qnaCategory, qna_writer as qnaWriter, qna_title as qnaTitle, 
+		qna_content as qnaContent, filename, filepath, qna_date as qnaDate from qna order by qna_no desc
+	</select>
+	<select id="qnaSelectOne" parameterType="_int" resultType="qna">
+		select qna_no as qnaNo, qna_category as qnaCategory, qna_writer as qnaWriter, qna_title as qnaTitle, 
+		qna_content as qnaContent, filename, filepath, qna_date as qnaDate from qna where qna_no=#{qnaNo}
+	</select>
+	<insert id="qnaInsert" parameterType="qna">
+		insert into qna values(seq_qna_no.nextval,#{qnaCategory},#{qnaWriter},#{qnaTitle}, #{qnaContent}, #{filename},#{filepath},sysdate)
+	</insert>
+	<update id="qnaUpdate" parameterType="qna">
+		update qna set qna_category=#{qnaCategory},qna_title=#{qnaTitle},qna_content=#{qnaContent},filename=#{filename},filepath=#{filepath},qna_date=sysdate where qna_no=#{qnaNo}
+	</update>
+	<delete id="qnaDelete" parameterType="_int">
+		delete from qna where qna_no=#{qnaNo}
+	</delete>
+	<select id="qnaTotalCount" resultType="_int">
+		select count(*) cnt from qna	
+	</select>
+	<select id="qnaSelectPaging" parameterType="pb" resultType="qna">
+		select qna_no as qnaNo, qna_category as qnaCategory, qna_writer as qnaWriter, qna_title as qnaTitle, 
+		qna_content as qnaContent, filename, filepath, qna_date as qnaDate from 
+		(select rownum as rnum, m.* from (select * from qna order by qna_date desc) m)
+		where rnum between #{start} and #{end}
+	</select>
+	<!-- 아래부터 리뷰관련 -->
+	<insert id="reviewInsert" parameterType="review">
+		insert into review values(seq_review_no.nextval,#{reviewTitle},#{reviewWriter},'남자','911220',#{reviewItem},#{reviewStarItem},#{reviewBranch},
+		#{reviewStarBranch},#{reviewContent},#{reviewHashtag},0,#{filename},#{filepath},sysdate)
+	</insert>
+	<select id="reviewTotalCount" resultType="_int">
+		select count(*) cnt from review	
+	</select>
+	<select id="reviewSelectPaging" parameterType="pb" resultType="review">
+		select review_no as reviewNo, review_title as reviewTitle, review_writer as reviewWriter, review_gender as reviewGender, review_birthday as reviewBirthday, 
+		review_item as reviewItem, review_star_item as reviewStarItem, review_branch as reviewBranch, review_star_branch as reviewStarBranch,
+		review_content as reviewContent, review_hashtag as reviewHashtag, filename, filepath, review_date as reviewDate from 
+		(select rownum as rnum, m.* from (select * from review order by review_date desc) m)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="reviewSelectAll" resultType="review">
+		select review_no as reviewNo, review_title as reviewTitle, review_writer as reviewWriter, review_gender as reviewGender, review_birthday as reviewBirthday, 
+		review_item as reviewItem, review_star_item as reviewStarItem, review_branch as reviewBranch, review_star_branch as reviewStarBranch,
+		review_content as reviewContent, review_hashtag as reviewHashtag, filename, filepath, review_date as reviewDate from review order by review_no desc
+	</select>
+	<select id="reviewSelectOne" parameterType="_int" resultType="review">
+		select review_no as reviewNo, review_title as reviewTitle, review_writer as reviewWriter, review_gender as reviewGender, review_birthday as reviewBirthday, 
+		review_item as reviewItem, review_star_item as reviewStarItem, review_branch as reviewBranch, review_star_branch as reviewStarBranch, review_like as reviewLike,
+		review_content as reviewContent, review_hashtag as reviewHashtag, filename, filepath, review_date as reviewDate from review where review_no=#{reviewNo}
+	</select>
+	<update id="reviewUpdate" parameterType="review">
+		update review set review_no=#{reviewNo}, review_title = #{reviewTitle}, review_writer = #{reviewWriter}, review_gender = #{reviewGender}, 
+		review_birthday = #{reviewBirthday}, review_item = #{reviewItem}, review_star_item = #{reviewStarItem}, review_branch = #{reviewBranch}, 
+		review_star_branch = #{reviewStarBranch}, review_content = #{reviewContent}, review_hashtag = #{reviewHashtag}, filename=#{filename}, filepath=#{filepath}, 
+		review_date = sysdate where review_no=#{reviewNo}
+	</update>
+	<delete id="reviewDelete" parameterType="_int">
+		delete from review where review_no=#{reviewNo}
+	</delete>
+	<update id="likeUpInsert" parameterType="_int">
+		update review set review_like = ((select review_like from review where review_no=#{reviewNo})+1) where review_no=#{reviewNo}
+	</update>
+	<update id="likeDownInsert" parameterType="_int">
+		update review set review_like = ((select review_like from review where review_no=#{reviewNo})-1) where review_no=#{reviewNo}
+	</update>
+</mapper>

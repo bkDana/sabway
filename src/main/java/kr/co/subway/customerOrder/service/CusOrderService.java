@@ -25,8 +25,8 @@ public class CusOrderService {
 	}
 	 
 	@Transactional(value="transactionManager")
-	public int insertCusOrder(Bucket buc) {
-		int result = cusOrderDao.insertMember(buc);
+	public int insertCusOrder(CusOrder cuso) {
+		int result = cusOrderDao.insertCusOrder(cuso);
 		return result;
 		
 	}

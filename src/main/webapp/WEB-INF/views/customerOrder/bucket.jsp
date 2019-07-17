@@ -27,19 +27,21 @@
 				<input type="hidden" class="hiddenSet" name="itemIsSet" value="${bucket.bucSet }">
 				<input type="hidden" class="hiddenSide" name="itemSide" value="${bucket.bucSide }">
 				<!-- <input type="hidden" class="hiddenCusoIdx" name="itemCusoIdx" value=""> -->
+				<c:if test="${status.index eq 0 }">
+					<div class="hiddenOrder">
+						<form action="/insertItem.do" method="post">
+							<input type="hidden" name="cusoTotalCost" value="">
+							<input type="hidden" name="cusoPhone" value="">
+							<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
+							<input type="hidden" name="cusoOrderNo" value="">
+							<input type="hidden" name="cusoBranchName" value="${bucket.bucBranch }">
+							<input type="submit" id="insertItem" style="display:none">
+						</form>
+		 			</div> 
+				</c:if>
 			</div>
 		</c:forEach>
-			<div class="hiddenOrder">
-				<form action="/insertItem.do" method="post">
-					<input type="hidden" name="cusoOrderState" value="0">
-					<input type="hidden" name="cusoTotalCost" value=0>
-					<input type="hidden" name="cusoPhone" value="">
-					<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
-					<input type="hidden" name="cusoOrderNo" value="">
-					<input type="hidden" name="cusoBranchName" value="${bucket.bucBranch }">
-					<input type="submit" id="insertItem" style="display:none">
-				</form>
- 			</div> 
+			
 		<table class="comm-tbl type2">
 			<tr>
 				<th>주문 일시</th><th>지점명</th><th>메뉴</th><th>수량</th><th>가격</th><th>나만의 메뉴</th><th>상품삭제</th>
