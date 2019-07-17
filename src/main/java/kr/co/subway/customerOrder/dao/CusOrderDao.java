@@ -56,6 +56,6 @@ public class CusOrderDao {
 	}
 
 	public int insertCusOrder(CusOrder cuso) {
-		return sqlSession.insert("cuso.insertCuso",cuso);
+		return sqlSession.insert("cusOrder.insertCuso",cuso);
 	}
 }

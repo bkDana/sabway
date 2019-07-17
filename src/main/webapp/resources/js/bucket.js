@@ -437,7 +437,7 @@ $(document).ready(function(){
     	var d = new Date();
 		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
     	$('input[name=cusoOrderNo]').val(date);
-    	$("input[name=insertItem]").click();
+    	$("#insertItem").click();
     });
     
 });

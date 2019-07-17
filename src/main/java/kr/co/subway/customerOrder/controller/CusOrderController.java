@@ -137,7 +137,12 @@ public class CusOrderController {
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //아이템에 쓸 정보
 		int cusoTCost = Integer.parseInt(cusoTotalCost);
 		CusOrder cuso = new CusOrder(0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoBranchName, null);
-		cusOrderService.insertCusOrder(cuso);
+		int result = cusOrderService.insertCusOrder(cuso);
+		if(result>0) {
+			System.out.println("임시저장 성공");
+		}else{
+			System.out.println("임시저장 실패");
+		}
 		for(Bucket b: list) {
 			System.out.println(b.getBucIdx());
 			b.setBucCusoIdx(cusoOrderNo);
