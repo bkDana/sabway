@@ -468,7 +468,7 @@ public class CustomerController {
       }
           System.out.println("암호화 이전"+customerVo.getCustomerPw());
           try {
-         customer.setCustomerPw(new SHA256Util().encData(customerVo.getCustomerPw()));
+         customerVo.setCustomerPw(new SHA256Util().encData(customerVo.getCustomerPw()));
       } catch (Exception e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
