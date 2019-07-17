@@ -146,13 +146,12 @@ public class CusOrderController {
 		for(Bucket b: list) {
 			System.out.println(b.getBucIdx());
 			b.setBucCusoIdx(cusoOrderNo);
-			Item item = new Item();
-//			int result = cusOrderService.updateOrder(b);
-//			if(result>0) {
-//				System.out.println("임시저장 성공");
-//			}else{
-//				System.out.println("임시저장 실패");
-//			}
+			int result1 = cusOrderService.updateOrder(b);
+			if(result1>0) {
+				System.out.println("버킷 업데이트 성공");
+			}else{
+				System.out.println("버킷 업데이트 실패");
+			}
 		}
 		ArrayList<Bucket> listAfter = cusOrderService.loadBucketList(customerIdx); //테스트
 		ModelAndView mav = new ModelAndView();
