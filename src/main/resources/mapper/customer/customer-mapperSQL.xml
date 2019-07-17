@@ -7,6 +7,7 @@
           customer_id as customerId,
           customer_pw as customerPw,
           customer_name as customerName,
+          customer_nickname as customerNick,
           phone as phone,
           birthday as birthday,
           email as email,
