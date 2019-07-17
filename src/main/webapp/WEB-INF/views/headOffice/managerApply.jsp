@@ -11,7 +11,7 @@
 		color:black;
 		text-align:center;
 		margin-top:35px;
-		font-size: 20px;
+		font-size: 15px;
 		font-weight: bold;
 	}
 </style>
@@ -56,10 +56,13 @@
 			</c:if>
 			<c:if test="${pd.totalCount <= 0 }">
 				<tr>
-					<td>신청 목록이 없습니다.</td>
+					<td colspan="6" style="text-align:center;font-size:15px;">신청 목록이 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
+		<c:if test="${pd.totalCount <= 0 }">
+			<div class="pageNavi">1</div>
+		</c:if>
 		<div class="pageNavi">
 			${pd.pageNavi }
 		</div>
