@@ -32,7 +32,6 @@
  		values
  			(
  			seq_buc_idx.nextval,
- 			#{bucCusoIdx},
  			#{bucBread},
  			#{bucMain},
  			#{bucVegi},
@@ -49,7 +48,8 @@
  			#{bucQuantity},
  			default,
  			#{bucCustomerIdx},
- 			${bucBranch}
+ 			#{bucBranch},
+ 			#{bucCusoOrderNo}
  			)	
  	</insert>
  	<select id="selectAllBucket" parameterType="String" resultType="bucket">
@@ -70,7 +70,7 @@
  			buc_kcal as bucKcal,
  			buc_quantity as bucQuantity,
  			buc_reg_date as bucRegDate,
- 			buc_customer_idx asbucCustomerIdx
+ 			buc_customer_idx as bucCustomerIdx
  		from bucket
  		where
  			buc_customer_idx = #{bucCustomerIdx}
