@@ -23,7 +23,7 @@ import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
-
+import kr.co.subway.customerOrder.vo.Item;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -145,8 +145,12 @@ public class CusOrderController {
 		}
 		for(Bucket b: list) {
 			System.out.println(b.getBucIdx());
+<<<<<<< HEAD
 			System.out.println(cusoOrderNo);
 			b.setBucCusoOrderNo(cusoOrderNo);
+=======
+			b.setBucCusoIdx(cusoOrderNo);
+>>>>>>> parent of 296863d... item 삭제
 			int result1 = cusOrderService.updateOrder(b);
 			if(result1>0) {
 				System.out.println("버킷 업데이트 성공");
