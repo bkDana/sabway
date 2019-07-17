@@ -307,9 +307,6 @@ public class MgrController {
 			currentPage1=1;
 		}
 		StorePageNaviData pd = mgrservice.StoreSelectPaging(currentPage1);
-		// 전체매점 리스트
-		//ArrayList<Mgr> listS = (ArrayList<Mgr>) mgrservice.mgrList();
-
 		
 		
 		// 페이징		

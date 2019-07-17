@@ -145,5 +145,40 @@
            set customer_pw = #{customerPw}
            where customer_id = #{customerId} and email = #{email}
     </update>
+    
+    <!-- 회원정보수정 -->
+    <update id="cusUpdate" parameterType="customer">
+    	update customer
+    		set customer_pw = #{customerPw},
+    		customer_nickname = #{customerNick},
+    		email = #{email},
+    		phone = #{phone}
+    		where customer_id = #{customerId}
+    </update>
+    
+    <!-- 회원탈퇴 -->
+    <update id="cusDelete" parameterType="customer">
+    	update customer
+    		set customer_state = 2
+    		where customer_no = #{customerNo}
+    </update>
 	
+	<select id="customerKeyword" parameterType="string" resultType="customer">
+		select
+    	rnum 
+    	,customer_no as customerNo
+    	,customer_id as customerId
+    	,customer_name as customerName
+    	,customer_nickname as customerNick
+    	,phone as phone
+    	,birthday as birthday
+    	,email as email
+    	,gender as gender
+    	,customer_state as customerState
+    	,reg_date as regDate
+    	,lastlog_date as lastLogDate
+    	from (select rownum as rnum, m.* from (select * from customer
+			where customer_id like '%'||#{keyword}||'%'
+		order by reg_date desc) m)
+	</select>
 </mapper>
