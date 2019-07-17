@@ -17,12 +17,36 @@
 	    color: #fff;
 	    margin-left: 5px;
 	}
+		/* form ::: search */
+	.form_searchM{border:2px solid #dddddd; height:41px;width:15%; display:block; vertical-align:middle; position:relative; padding-right:42px }
+	.form_searchM input{border:0; height:41px; width:100%; text-indent:14px; color:#292929; font-size:16px;}
+	.form_searchM input::placeholder{color:#bbbbbb; font-size:16px;font-family:font_ns, sans-serif;}
+	.form_searchM .btn_searchM{background:url(http://subway.co.kr/images/common/icon_search.png) 50% 50% no-repeat; width:41px; height:41px; position:absolute; right:0; top:0}
+	.form_searchM .btn_searchM:after{content:''; position:absolute; left:-2px; top:13px; width:2px; height:16px; background-color:#e5e5e5;}
 </style>
 	<div class="area">
 	<div class="sub-menu">※ 회원관리 &gt; 회원리스트</div>
-		<table border="1" class="comm-tbl type2">
+	<form action="/customerKeyword.do" method="post">
+		<div>
+			<select id="cusStatus">
+				<option value="1">전체</option>
+				<option value="2">회원</option>
+				<option value="3">휴면</option>
+				<option value="4">탈퇴</option>
+			</select>
+			<select id="cusStatus">
+				<option value="1">아이디</option>
+				<option value="0">이름</option>
+			</select>
+		</div>
+		<div class="form_searchM">
+			<input id="keyword" name="keyword" maxlength="30" placeholder="회원검색" type="text" value="" onkeypress="if(event.keyCode == 13){ searchBtn(); return; }">
+			<button class="btn_searchM" onclick="searchBtn();"></button>
+		</div>
+	</form>
+		<table border="1" class="comm-tbl type2" id="searchViewTbl">
 			<tr>
-				<th>회원번호</th>
+				<th>번호</th>
 				<th>아이디</th>
 				<th>이름</th>
 				<th>닉네임</th>
@@ -36,7 +60,8 @@
 				<th></th>
 			</tr>
 			<c:forEach items="${list }" var="c">
-				<tr>
+				<input type="hidden" value="${c.customerNo }">
+				<tr class="cusTr">
 					<td>${c.rnum}</td>
 					<td>${c.customerId}</td>
 					<td>${c.customerName}</td>
@@ -77,12 +102,36 @@
 	</div>
 </section>
 <script>
-
+	$(document).ready(function(){
+		$("#cusStatus").change(function(){
+			var status = $(this).val();
+			console.log(status);
+			
+		});
+	});
+	function searchBtn(){
+			var keyword = $("#keyword").val();
+			console.log(keyword)
+			$.ajax({
+				url : "/customerKeyword.do",
+				data : {
+					keyword : keyword
+				},
+				dataType : "json",
+				success : function(data){
+					$(".cusTr").remove();
+					for(var i=0; i<data.length; i++){
+						$("#searchViewTbl").append("<tr style='height:60px' class='searchTr'><td style='color:#ffc300;font-weight: bold;>"+data.length[i].rnum+"</td></tr>")
+					}
+				}
+			});
+		}
+	
 	//회원 탈퇴시키기
 	$('.del-btn').click(function(){
 		if(confirm("해당 회원을 탈퇴 시키겠습니까?!?!?")){
 			var customerNo =
-				$(this).parent().parent().children(':eq(0)').html();
+				$(this).parent().parent().prev().val();
 			
 			$.ajax({
 				type:"GET",
@@ -106,7 +155,7 @@
 	$('.del-btn2').click(function(){
 		if(confirm("해당 회원을 해제 시키겠습니까?!?!?")){
 			var customerNo =
-				$(this).parent().parent().children(':eq(0)').html();
+				$(this).parent().parent().prev().val();
 			
 			$.ajax({
 				type:"GET",

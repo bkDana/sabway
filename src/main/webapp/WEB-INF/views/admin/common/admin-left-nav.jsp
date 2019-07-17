@@ -40,7 +40,8 @@
 		<ul>
 			<li><a href="/salesStatics/goTotalSales.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("totalSales.jsp")){%>on<%}%>">전체 매출 통계</a></li>
 			<li><a href="/salesStatics/goBranchSales.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("branchSales.jsp")){%>on<%}%>">지점별 매출 통계</a></li>
-			<li><a href="/salesStatics/goMenuSales.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("menuSales.jsp")){%>on<%}%>">메뉴별 매출 통계</a></li>
+			<li><a href="/salesStatics/goBranchSales2.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("branchSales2.jsp")){%>on<%}%>">지점 매니저일경우 지점 매출 통계</a></li>
+			<%-- <li><a href="/salesStatics/goMenuSales.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("menuSales.jsp")){%>on<%}%>">메뉴별 매출 통계</a></li> --%>
 		</ul>
 	<%}%>
 	
