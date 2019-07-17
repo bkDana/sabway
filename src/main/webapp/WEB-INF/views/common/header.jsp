@@ -72,7 +72,8 @@
 		<div id="headerInnerWrap">
 			<!-- 로고 -->
 			<div class="header-logo">
-				<input type="hidden" id="sessionContainer" value="${sessionScope.customer.phone }">
+				<input type="hidden" id="sessionPhone" value="${sessionScope.customer.phone }">
+				<input type="hidden" id="sessionId" value="${sessionScope.customer.customerId }">
 				<a href="/" class="sabway"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a>
 				<ul class="header-menu clearfix">
 					<!--

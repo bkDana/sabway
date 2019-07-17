@@ -86,18 +86,38 @@ public class SalesStaticsController {
 	@RequestMapping("/totalMenu.do")
 	public void getTotalMenu(HttpServletResponse response) throws JsonIOException, IOException {
 		ArrayList<SalesStaticsGrpVo> list = service.getTotalMenu();
-		int cost=0;
+		/*int cost=0;
 		for(int i=1;i<6;i++) {
 			System.out.println(list.get(i).getRnum());
 			cost += list.get(i).getTotalCost();
 			System.out.println(cost);
 		}
 		long etc = list.get(0).getTotalCost() - cost;
-		System.out.println(etc);
+		System.out.println(etc);*/
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}
+	
+	//해당 월 메뉴 판매 현황
+	@ResponseBody
+	@RequestMapping("/monthTotalMenu.do")
+	public void getMonthTotalMenu(String month,HttpServletResponse response) throws JsonIOException, IOException {
+		String orderMonth = month.substring(0,month.length()-1);
+		System.out.println("선택된 월"+orderMonth);
+		ArrayList<SalesStaticsGrpVo> list = (ArrayList<SalesStaticsGrpVo>)service.getMonthTotalMenu(orderMonth);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//매출 가져오기

@@ -39,6 +39,11 @@ public class SalesStaticsDao {
 	public List getTotalMenu() {
 		return sqlSession.selectList("sales.getTotalMenu");
 	}
+
+	//해당 월 메뉴 판매 현황
+	public List getMonthTotalMenu(String orderMonth) {
+		return sqlSession.selectList("sales.getTotalMenu",orderMonth);
+	}
 	
 	
 

@@ -16,19 +16,22 @@
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<div class="hiddenInfo">
-				<input type="hidden" class="hiddenBucCustomerIdx" name="customerNo" value="${bucket.bucCustomerIdx }">
-				<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
- 				<input type="hidden" class="hiddenBread" value="${bucket.bucBread }">
-				<input type="hidden" class="hiddenMain" value="${bucket.bucMain }">
-				<input type="hidden" class="hiddenVegi" value="${bucket.bucVegi }">
-				<input type="hidden" class="hiddenCheese" value="${bucket.bucCheese }">
-				<input type="hidden" class="hiddenTopping" value="${bucket.bucTopping }">
-				<input type="hidden" class="hiddenSource" value="${bucket.bucSource }">
-				<input type="hidden" class="hiddenIsSalad" value="${bucket.bucIsSalad }">
-				<input type="hidden" class="hiddenIsOvened" value="${bucket.bucIsOvened }">
-				<input type="hidden" class="hiddenSet" value="${bucket.bucSet }">
-				<input type="hidden" class="hiddenSide" value="${bucket.bucSide }">
-				<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
+				<form class="insertItem" action="/insertItem.do" method="post">
+					<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
+					<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
+					<input type="hidden" class="hiddenBucCustomerIdx" name="customerNo" value="${bucket.bucCustomerIdx }">
+	 				<input type="hidden" class="hiddenBread" name="itemBraed" value="${bucket.bucBread }">
+					<input type="hidden" class="hiddenMain" name="itemMain" value="${bucket.bucMain }">
+					<input type="hidden" class="hiddenVegi" name="itemVegi" value="${bucket.bucVegi }">
+					<input type="hidden" class="hiddenCheese" name="itemCheese" value="${bucket.bucCheese }">
+					<input type="hidden" class="hiddenTopping" name="itemTopping" value="${bucket.bucTopping }">
+					<input type="hidden" class="hiddenSource" name="itemSource" value="${bucket.bucSource }">
+					<input type="hidden" class="hiddenIsSalad" name="itemIsSalad" value="${bucket.bucIsSalad }">
+					<input type="hidden" class="hiddenIsOvened" name="itemIsOvened" value="${bucket.bucIsOvened }">
+					<input type="hidden" class="hiddenSet" name="itemIsSet" value="${bucket.bucSet }">
+					<input type="hidden" class="hiddenSide" name="itemSide" value="${bucket.bucSide }">
+					<input type="hidden" class="hiddenCusoIdx" name="itemCusoIdx" value="">
+				</form>	
 			</div>
 			<tr>
 				<td>${bucket.bucRegDate }</td>
