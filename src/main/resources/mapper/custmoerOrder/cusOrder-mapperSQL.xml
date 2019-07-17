@@ -23,7 +23,7 @@
   		#{cusoPhone},
   		#{cusoMemberNo},
   		#{cusoOrderNo},
-  		#{cusoBranchName},
+  		#{cusoBranch},
   		sysdate
   		)	
   </insert>
