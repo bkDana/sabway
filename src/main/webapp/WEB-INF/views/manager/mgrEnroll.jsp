@@ -35,6 +35,8 @@
             }
 			    $("[name=mgrPost]").val(data.zonecode);
             	$("[name=mgrAddrCode]").val(data.sigunguCode);
+            	$("[name=mgrAddrCode]").val(data.sigunguCode);
+            	$("[name=mgrId]").val('manager'+data.sigunguCode+i);
             	$("[name=mgrName]").val('SabWay '+data.bname+" "+data.roadname+" "+i+'호점');
 	        }
 	    }).open({
@@ -60,13 +62,12 @@
 				<table class="comm-tbl">
 					<tr>
 						<th>이름</th>
-						<!-- 아이디 뒤에 정해놓은 지역코드 + -->
 						<td><input type="text" name="mgrBossName" value="${applyName }" readonly></td>
 					</tr>
 					<tr>
 						<th>아이디</th>
 						<!-- 아이디 뒤에 정해놓은 지역코드 + -->
-						<td><input type="text" name="mgrId" value="manager${i }" readonly></td>
+						<td><input type="text" name="mgrId" readonly></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
@@ -79,6 +80,7 @@
 					</tr>
 					<tr>
 						<th>전화번호</th>
+						<!-- sabway + 받아온 동 + 도로명 + 1부터 중복마다 1씩증가 -->
 						<td><input type="text" name="mgrTel" value="${mgrTel }" readonly></td>
 					</tr>
 					<tr>

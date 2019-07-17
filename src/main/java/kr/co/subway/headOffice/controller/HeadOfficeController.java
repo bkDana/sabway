@@ -82,10 +82,10 @@ public class HeadOfficeController {
 		}
 		ApplyPageData pd = applyService.applyPaging(currentPage1);
 		ModelAndView mav = new ModelAndView();
-		if(!pd.getApplyList().isEmpty()) {
+		try {
 			mav.addObject("pd",pd);
 			mav.setViewName("headOffice/managerApply");
-		}else {
+		}catch(Exception e) {
 			mav.setViewName("redirect:/");
 		}
 		return mav;
@@ -175,11 +175,11 @@ public class HeadOfficeController {
 		}
 		CompletionPageData cpd = applyService.completionPaging(currentPage1);
 		ModelAndView mav = new ModelAndView();
-		if(!cpd.getApplyList().isEmpty()) {
+		try {
 			mav.addObject("cpd",cpd);
 			mav.setViewName("headOffice/applyCompletion");
-		}else {
-			mav.setViewName("index");
+		}catch(Exception e) {
+			mav.setViewName("redirect:/");
 		}
 		return mav;
 	}

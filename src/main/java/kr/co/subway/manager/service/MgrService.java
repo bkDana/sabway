@@ -129,8 +129,8 @@ public class MgrService {
 		return list;
 	}
 	//관리자 로그인
-	public Mgr login(String mgrId) {
-		Mgr mgr = mgrdao.login(mgrId);
+	public Mgr login(Mgr mgr) {
+		mgr = mgrdao.login(mgr);
 		return mgr;
 	}
 	//가맹점 상태 변경(update)

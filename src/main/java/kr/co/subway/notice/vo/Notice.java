@@ -3,6 +3,7 @@ package kr.co.subway.notice.vo;
 import java.sql.Date;
 
 public class Notice {
+	private int rnum;
 	private int noticeNo;
 	private String noticeCategory;
 	private String noticeTitle;
@@ -10,9 +11,9 @@ public class Notice {
 	private String filename;
 	private String filepath;
 	private Date noticeDate;
+	
 	public Notice() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Notice(int noticeNo, String noticeCategory, String noticeTitle, String noticeContent, String filename,
 			String filepath, Date noticeDate) {
@@ -24,6 +25,15 @@ public class Notice {
 		this.filename = filename;
 		this.filepath = filepath;
 		this.noticeDate = noticeDate;
+	}
+	
+	
+	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getNoticeNo() {
 		return noticeNo;

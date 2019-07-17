@@ -96,11 +96,6 @@
 		</div>
 	</div>
 </section>
-<!-- 
-<form action="/managerOrder/orderList.do" method="post" name="movePage">
-	<input type="hidden" name="reqPage">
-</form>
- -->
 
 <script>
 	
@@ -123,7 +118,6 @@
 	$('select#order').change(function(){
 		$('input[name=orderBy]').val($(this).val());
 		search.submit();
-		console.log('d');
 	});
 	
 	/* 페이지 이동 */

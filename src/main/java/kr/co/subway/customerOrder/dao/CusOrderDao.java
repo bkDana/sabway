@@ -53,4 +53,8 @@ public class CusOrderDao {
 		
 		return sqlSession.update("bucket.updateQuantity", uq);
 	}
+
+	public int updateOrder(Bucket b) {
+		return sqlSession.update("bucket.updateOrderNo", b);
+	}
 }

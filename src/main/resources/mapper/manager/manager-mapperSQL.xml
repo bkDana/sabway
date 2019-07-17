@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mgr">
 	<insert id="enrollMgr" parameterType="mgr">
-		insert into manager values(seq_mgr_no.nextval,#{mgrId}, #{mgrPw}, #{mgrName}, #{mgrTel}, #{mgrPost}, #{mgrAddr}, #{mgrLevel}, #{mgrStatus}, sysdate, #{mgrAddrCode}, #{mgrBossName}, sysdate)
+		insert into manager values(seq_mgr_no.nextval,#{mgrId}, #{mgrPw}, #{mgrName}, #{mgrTel}, #{mgrPost}, #{mgrAddr}, #{mgrLevel}, #{mgrStatus}, sysdate, #{mgrAddrCode}, #{mgrBossName}, sysdate,0)
 	</insert>
 	<select id="mgrList" resultType="mgr">
 		select mgr_no as mgrNo
@@ -87,7 +87,7 @@
 		</if>
 	</select>
 	
-	<select id="login" parameterType="string" resultType="mgr">
+	<select id="login" parameterType="mgr" resultType="mgr">
 		select mgr_no as mgrNo
 		,mgr_id as mgrId
 		,mgr_pw as mgrPw
@@ -102,7 +102,7 @@
 		,mgr_boss_name as mgrBossName
 		,mgr_open_date as mgrOpenDate
 		from manager
-		where mgr_id = #{mgrId}
+		where mgr_id = #{mgrId} and mgr_pw = #{mgrPw}
 	</select>
 	<update id="mgrUpdate" parameterType="mgr">
 		update manager set mgr_status = #{mgrStatus} where mgr_name = #{mgrName}
