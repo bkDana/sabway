@@ -468,13 +468,13 @@ public class CustomerController {
       }
           System.out.println("암호화 이전"+customerVo.getCustomerPw());
           try {
-         customer.setCustomerPw(new SHA256Util().encData(customerVo.getCustomerPw()));
+         customerVo.setCustomerPw(new SHA256Util().encData(customerVo.getCustomerPw()));
       } catch (Exception e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
-          System.out.println("암호화 다음"+customer.getCustomerPw());
-          int result = customerService.pwUpdate(customer);
+          System.out.println("암호화 다음"+customerVo.getCustomerPw());
+          int result = customerService.pwUpdate(customerVo);
           if(result>0) {
              request.setAttribute("msg", "비밀번호 변경 메일을 확인해주세요");
              request.setAttribute("loc", "/index.do");
