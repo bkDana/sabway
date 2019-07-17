@@ -163,4 +163,19 @@ public class CusOrderController {
 	}
 	//새로운 주문을 추가하는 메소드
 	
+	
+	
+	//주문 목록 가져오기
+	@RequestMapping("/cusOrderList.do")
+	public ModelAndView cusOrderList() {
+		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderService.cusOrderList();
+		ModelAndView mav = new ModelAndView();
+		if(!list.isEmpty()) {
+			mav.addObject("list",list);
+			mav.setViewName("customerOrder/cusOrderList");
+		}else {
+			mav.setViewName("/");
+		}
+		return mav; 
+	}
 }

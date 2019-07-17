@@ -69,4 +69,8 @@ public class CusOrderService {
 		return cusOrderDao.updateOrder(b);
 		
 	}
+	public List<CusOrder> cusOrderList(){
+		List<CusOrder> list = cusOrderDao.cusOrderList();
+		return list;
+	}
 }

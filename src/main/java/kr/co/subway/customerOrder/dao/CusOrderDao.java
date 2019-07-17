@@ -54,7 +54,9 @@ public class CusOrderDao {
 	public int updateOrder(Bucket b) {
 		return sqlSession.update("bucket.updateOrderNo", b);
 	}
-
+	public List<CusOrder> cusOrderList(){
+		return sqlSession.selectList("cusOrder.cusOrderList");
+	}
 	public int insertCusOrder(CusOrder cuso) {
 		return sqlSession.insert("cusOrder.insertCuso",cuso);
 	}
