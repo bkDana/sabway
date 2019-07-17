@@ -33,7 +33,6 @@
 			</fieldset>
 		</c:otherwise>
 	</c:choose>
-		<h1>온라인 주문</h1><img src="/resources/img/img_recipe_b02.jpg" onclick="location.href='/cusOrder.do';" style="cursor:pointer;"><br>
 	</div>
 </section>
 
