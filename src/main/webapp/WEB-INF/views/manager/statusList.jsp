@@ -159,10 +159,6 @@
 	</div>
 </section>
 
-
-	<!-- 버튼 show/hide 조건 설정 제대로 해야함 -->
-
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		//상태변경(오픈)

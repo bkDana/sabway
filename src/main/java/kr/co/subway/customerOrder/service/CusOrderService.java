@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.subway.customerOrder.dao.CusOrderDao;
 import kr.co.subway.customerOrder.vo.Bucket;
+import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -67,5 +68,9 @@ public class CusOrderService {
 	public int updateOrder(Bucket b) {
 		return cusOrderDao.updateOrder(b);
 		
+	}
+	public List<CusOrder> cusOrderList(){
+		List<CusOrder> list = cusOrderDao.cusOrderList();
+		return list;
 	}
 }
