@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
+import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.sales.statics.service.SalesStaticsService;
 import kr.co.subway.sales.statics.vo.SalesStaticsGrpVo;
 
@@ -137,9 +138,12 @@ public class SalesStaticsController {
 	}
 	
 	////////////////////////////////////////////////////////////////////
-	//
-	
-	
+	//지점 매니저일 경우
+	//해당 지점 매출통계 페이지로 가기
+	@RequestMapping("/goBranchSales2.do")
+	public String goBranchSales2() {
+		return "admin/salesStatics/branchSales2";
+	}
 	
 	
 	
