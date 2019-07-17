@@ -6,7 +6,7 @@ var getCookie = function(name) {
 	};
 
 $(document).ready(function(){
-	/* 주문삭제용 */
+	/* 장바구니 1열 삭제용 */
 	function deleteOrder(idx){
 		var delIdx = $('.hiddenBucIdx').val();
 		$.ajax({
@@ -25,9 +25,13 @@ $(document).ready(function(){
 	for(var i = 0; i<$('.cost').length; i++){
 		totalCost += Number($('.cost').html());
 	};
-    var sessionPhone = $('#sessionContainer').val(); // 결재할 때 쓰임
+    var sessionPhone = $('#sessionPhone').val(); // 결재할 때 쓰임
     if(!$('#sessionContainer').val()) {
     	sessionPhone = "010-2222-3333";
+    }
+    var sessionId = $('#sessionId').val();
+    if(!$('#sessionId').val()) {
+    	sessionId = "비회원";
     }
     var cookieVal = getCookie('noneCustomer');	// 헤더에서 쓰임
     console.log(sessionPhone);
@@ -402,8 +406,9 @@ $(document).ready(function(){
 		IMP.request_pay({
 			pay_method : 'card',
 			merchant_uid : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+$('.hiddenInfo').eq(0).find('.hiddenIsSalad').val()+date,				//거래ID - 유니크 주려고 날짜까지 넣음
-			name : $('#main').html()+"외",						//결재명
-			amount : 1,									//결재 금액
+			name : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+$('.hiddenInfo').eq(0).find('.hiddenIsSalad').val()+" 외",						//결재명
+			buyer_name : sessionId,
+			amount : 100,									//결재 금액
 			buyer_tel : sessionPhone
 			
 		},function(response){
@@ -412,13 +417,16 @@ $(document).ready(function(){
 				var info1 = "고유 ID : "+response.imp_uid;
 				var info2 = "결재 금액 : "+response.paid_amount;
 				var info3 = "카드 승인 번호 : "+response.apply_num;
-				$("#paymentResult").html(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
+				console.log(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3)
+				$(".insertItem").submit();
 			} else {
-				$("#patmentResult").html('에러 내용 : '+response.error_mgs+date);
+				alert('에러 내용 : '+response.error_mgs+date);
 			}
 		});
 	});
-
+    $( ".insertItem" ).submit(function( event ) {
+    	location.href="/insertItem.do";
+    });
     
 });
 

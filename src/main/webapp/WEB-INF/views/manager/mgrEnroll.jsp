@@ -26,16 +26,16 @@
 		var i = index;
 	    new daum.Postcode({
 	        oncomplete: function(data) {
-	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-	            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-	            if(data.userSelectedType == "R"){//도로명
-		            $("[name=mgrAddr]").val(data.roadAddress);
-	            }else{//지번
-				    $("[name=mgrAddr]").val(data.jibunAddress);
-	            }
-				    $("[name=mgrPost]").val(data.zonecode);
-	            	$("[name=mgrAddrCode]").val(data.sigunguCode);
-	            	$("[name=mgrName]").val('SabWay '+data.bname+" "+i+'호점');
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+            if(data.userSelectedType == "R"){//도로명
+	            $("[name=mgrAddr]").val(data.roadAddress);
+            }else{//지번
+			    $("[name=mgrAddr]").val(data.jibunAddress);
+            }
+			    $("[name=mgrPost]").val(data.zonecode);
+            	$("[name=mgrAddrCode]").val(data.sigunguCode);
+            	$("[name=mgrName]").val('SabWay '+data.bname+" "+data.roadname+" "+i+'호점');
 	        }
 	    }).open({
 		    popupName : 'postCodePopup',//중복 생성 방지

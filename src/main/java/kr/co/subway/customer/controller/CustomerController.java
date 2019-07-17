@@ -2,7 +2,6 @@ package kr.co.subway.customer.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,10 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.builder.MapperBuilderAssistant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ExtendedModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -468,7 +468,7 @@ public class CustomerController {
       }
           System.out.println("암호화 이전"+customerVo.getCustomerPw());
           try {
-         customer.setCustomerPw(new SHA256Util().encData(customerVo.getCustomerPw()));
+         customerVo.setCustomerPw(new SHA256Util().encData(customerVo.getCustomerPw()));
       } catch (Exception e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
@@ -484,7 +484,16 @@ public class CustomerController {
           }
       }return view;
    }
-
+   
+   //회원정보 페이지 이동
+   @RequestMapping(value="/mypage.do")
+   public String mypage(HttpSession session) {
+	   Customer vo = (Customer)session.getAttribute("customer");
+	   Customer c = customerService.selectOneCustomerEnroll(vo);
+	   Model model = new ExtendedModelMap();
+	   model.addAttribute("customer",c);
+      return "customer/mypage";
+   }
    
    
    
