@@ -10,31 +10,44 @@
 	<div class="area">
 		<strong style="font-size:40px;">내 주문 </strong>
 		<br><br>
+		<c:forEach items="${list }" var="bucket" varStatus="status">
+			<div class="hiddenInfo">
+				<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
+				<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
+				<input type="hidden" class="hidenBranchName" value="${bucket.bucBranch }">
+				<input type="hidden" class="hiddenBucCustomerIdx" name="customerNo" value="${bucket.bucCustomerIdx }">
+ 				<input type="hidden" class="hiddenBread" name="itemBraed" value="${bucket.bucBread }">
+				<input type="hidden" class="hiddenMain" name="itemMain" value="${bucket.bucMain }">
+				<input type="hidden" class="hiddenVegi" name="itemVegi" value="${bucket.bucVegi }">
+				<input type="hidden" class="hiddenCheese" name="itemCheese" value="${bucket.bucCheese }">
+				<input type="hidden" class="hiddenTopping" name="itemTopping" value="${bucket.bucTopping }">
+				<input type="hidden" class="hiddenSource" name="itemSource" value="${bucket.bucSource }">
+				<input type="hidden" class="hiddenIsSalad" name="itemIsSalad" value="${bucket.bucIsSalad }">
+				<input type="hidden" class="hiddenIsOvened" name="itemIsOvened" value="${bucket.bucIsOvened }">
+				<input type="hidden" class="hiddenSet" name="itemIsSet" value="${bucket.bucSet }">
+				<input type="hidden" class="hiddenSide" name="itemSide" value="${bucket.bucSide }">
+				<!-- <input type="hidden" class="hiddenCusoIdx" name="itemCusoIdx" value=""> -->
+			</div>
+		</c:forEach>
+			<div class="hiddenOrder">
+				<form action="/insertItem.do" method="post">
+					<input type="hidden" name="cusoOrderState" value="0">
+					<input type="hidden" name="cusoTotalCost" value=0>
+					<input type="hidden" name="cusoPhone" value="">
+					<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
+					<input type="hidden" name="cusoOrderNo" value="">
+					<input type="hidden" name="cusoBranchName" value="${bucket.bucBranch }">
+					<input type="submit" id="insertItem" style="display:none">
+				</form>
+ 			</div> 
 		<table class="comm-tbl type2">
 			<tr>
-				<th>주문 일시</th><th>메뉴</th><th>수량</th><th>가격</th><th>나만의 메뉴</th><th>상품삭제</th>
+				<th>주문 일시</th><th>지점명</th><th>메뉴</th><th>수량</th><th>가격</th><th>나만의 메뉴</th><th>상품삭제</th>
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
-			<div class="hiddenInfo">
-				<form class="insertItem" action="/insertItem.do" method="post">
-					<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
-					<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
-					<input type="hidden" class="hiddenBucCustomerIdx" name="customerNo" value="${bucket.bucCustomerIdx }">
-	 				<input type="hidden" class="hiddenBread" name="itemBraed" value="${bucket.bucBread }">
-					<input type="hidden" class="hiddenMain" name="itemMain" value="${bucket.bucMain }">
-					<input type="hidden" class="hiddenVegi" name="itemVegi" value="${bucket.bucVegi }">
-					<input type="hidden" class="hiddenCheese" name="itemCheese" value="${bucket.bucCheese }">
-					<input type="hidden" class="hiddenTopping" name="itemTopping" value="${bucket.bucTopping }">
-					<input type="hidden" class="hiddenSource" name="itemSource" value="${bucket.bucSource }">
-					<input type="hidden" class="hiddenIsSalad" name="itemIsSalad" value="${bucket.bucIsSalad }">
-					<input type="hidden" class="hiddenIsOvened" name="itemIsOvened" value="${bucket.bucIsOvened }">
-					<input type="hidden" class="hiddenSet" name="itemIsSet" value="${bucket.bucSet }">
-					<input type="hidden" class="hiddenSide" name="itemSide" value="${bucket.bucSide }">
-					<input type="hidden" class="hiddenCusoIdx" name="itemCusoIdx" value="">
-				</form>	
-			</div>
 			<tr>
 				<td>${bucket.bucRegDate }</td>
+				<td>${bucket.bucBranch }</td>
 				<td class="bucketOption">
 						<span id="bread">빵 : ${bucket.bucBread }</span><br>
 						<span id="main">메인재료 : ${bucket.bucMain }&nbsp;${bucket.bucIsSalad }</span><br>
@@ -53,9 +66,10 @@
 			</tr>
 			</c:forEach>
 			<tr>
-				<td colspan="6">
+				<td colspan="7">
 					<div class="common-tbl-btn-group">
-						<!-- <button type="button" class="btn-style2 add-order">추가 주문</button> -->
+						<strong style="float:left;">* '나만의 메뉴'를 등록하시면 이후 옵션 선택없이 빠른 주문이 가능합니다</strong><br>
+						<button type="submit" id="sbmTest" class="btn-style2">컨트롤러테스트</button>
 						<button type="submit" id="sbmOrder" class="btn-style2">주문하기</button>
 					</div>
 				</td>

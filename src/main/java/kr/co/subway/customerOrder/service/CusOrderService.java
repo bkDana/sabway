@@ -58,7 +58,14 @@ public class CusOrderService {
 		return cusOrderDao.mgrSelectOne(mgrNo); 
 	}
 	
+	@Transactional
 	public int updateQuantity(UpdateQuantity uq) {
 		return cusOrderDao.updateQuantity(uq);
+	}
+
+	@Transactional
+	public int updateOrder(Bucket b) {
+		return cusOrderDao.updateOrder(b);
+		
 	}
 }
