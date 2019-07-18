@@ -199,6 +199,9 @@
 	    font-weight: 300;
 	    letter-spacing: -0.045em;
 	}
+	.addrFont{
+		font-size: 15px;
+	}
 </style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -261,7 +264,7 @@
 											<c:if test="${m.mgrStatus == '1' }">
 												<li>
 													
-													<div class="region">${m.mgrAddr }<strong>${m.mgrName }</strong></div>
+													<div class="region"><strong>${m.mgrName }</strong><br><a class="addrFont">${m.mgrAddr }</a></div>
 														
 													<div class="state coming">Coming Soon</div>
 													
@@ -275,7 +278,7 @@
 												<c:if test="${num == status.index}">
 													<li>
 															
-														<div class="region">${m.mgrAddr }<strong>${m.mgrName }</strong></div>
+														<div class="region"><strong>${m.mgrName }</strong><br><a class="addrFont">${m.mgrAddr }</a></div>
 																
 														<div class="state open" id="date">open<strong> ${m.mgrOpenDate }</strong></div>
 										
@@ -359,7 +362,6 @@
 	function searchBtn(){
 	    var keyword = $("#keyword").val();
 	    $("#uiResultList").html("");
-
 	    
 	    if(keyword.length < 2){
 	    	alert("두글자 이상");
@@ -384,9 +386,9 @@
 				}
 				
 				for(var i=0; i<data.length; i++){
-					$("#uiResultList").append("<li id='searchData"+i+"'><a href='#' onclick='detailMarket("+i+");'><span><strong>"+data[i].mgrAddr+"</strong></span>"+"<br><span class='uiResultSpan'>"+data[i].mgrName+"</span><br><span class='uiResultSpan'>"+data[i].mgrTel+"</span></a></li>");
+					$("#uiResultList").append("<li id='searchData"+i+"'><a href='#' onclick='detailMarket("+i+");'><span><strong>"+data[i].mgrName+"</strong></span>"+"<br><span class='uiResultSpan'>"+data[i].mgrAddr+"</span><br><span class='uiResultSpan'>"+data[i].mgrTel+"</span></a></li>");
+
 				}
-				
 				mapXyInfo(data[0]);
 			}
 		});

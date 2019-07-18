@@ -16,7 +16,7 @@
 
 <!-- script -->
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
-<script type="text/javascript" src="/resources/js/nav.js"></script><!-- nav.js -->
+<!--<script type="text/javascript" src="/resources/js/nav.js"></script> nav.js 메뉴가 허전해서 뺐어요...-->
 
 <script>
 	$(document).ready(function(){
@@ -83,9 +83,9 @@
 					-->
 					<c:choose>
 						<c:when test="${not empty sessionScope.customer }">
-							[${sessionScope.customer.customerName }]<br>
+							
 							<li><a href="/logout.do" class="header-btn">로그아웃</a></li>
-							<li><a href="/mypage.do" class="header-btn">회원정보</a></li>
+							<li><a href="/mypageIntro.do" class="header-btn">마이페이지</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="/index.do" class="header-btn">로그인</a></li>
@@ -119,7 +119,7 @@
 							<div class="gnb-2dep">
 								<ul>
 									<li><a href="/findStore.do?status=11">주문하기</a></li>
-									<li><a href="#">단체메뉴 이용방법</a></li>
+									<!-- <li><a href="#">단체메뉴 이용방법</a></li> -->
 								</ul>
 							</div>
 						</li>
@@ -134,25 +134,25 @@
 							</div>
 						</li>
 						<li class="gnb04">
-							<a href="#">써브웨이</a>
+							<a href="/findStore.do?status=22">매장찾기</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="#">써브웨이 역사</a></li>
+									<!-- <li><a href="#">써브웨이 역사</a></li>
 									<li><a href="#">써브웨이 약속</a></li>
-									<li><a href="#">샌드위치 아티스트 지원</a></li>
+									<li><a href="#">샌드위치 아티스트 지원</a></li> -->
 									<li><a href="/findStore.do?status=22">매장찾기</a></li>
 								</ul>
 							</div>
 						</li>
 						<li class="gnb05">
-							<a href="#">가맹점</a>
+							<a href="/applyPage.do">가맹점</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="#">써브웨이 프랜차이즈</a></li>
-									<li><a href="#">가맹관련 FAQ</a></li>
+									<!-- <li><a href="#">써브웨이 프랜차이즈</a></li>
+									<li><a href="#">가맹관련 FAQ</a></li> -->
 									<li><a href="/applyPage.do">가맹신청/문의</a></li>
-									<li><a href="#">지사안내</a></li>
-									<li><a href="#">사업설명회</a></li>
+									<!-- <li><a href="#">지사안내</a></li>
+									<li><a href="#">사업설명회</a></li> -->
 								</ul>
 							</div>
 						</li>

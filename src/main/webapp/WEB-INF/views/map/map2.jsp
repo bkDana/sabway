@@ -170,7 +170,6 @@ function mapXyInfo (data) {
 	              
 					x = item.x;
 					y = item.y;
-					
 					contentString = [
 						"<div class='store_map_layer'>",
 						"	<div class='head'>",
@@ -180,14 +179,14 @@ function mapXyInfo (data) {
 						"		<dl>",
 						"			<dt>주소</dt>",
 						"			<dd id='ui_storeInfoLayer_addr'>",
-						data.mgrAddr+" "+data.mgrAddrCode,
+						data.mgrAddr,
 						"			</dd>",
 						"			<dt>연락처</dt>",
 						"			<dd>"+data.mgrTel+"</dd>",
 						"		</dl>",
 						"	</div>",
 						"	<div class='foot'>",
-						"		<a href='#' target='blank' style='font-weight:bold' onclick='detailMarket2("+data.mgrNo+")'>주문하기<img src='../resources/img/icon_more.png' style='margin-left:10px;margin-bottom:3px'>",
+						"		<a href='#' style='font-weight:bold' onclick='detailMarket2("+data.mgrNo+")'>주문하기<img src='../resources/img/icon_more.png' style='margin-left:10px;margin-bottom:3px'>",
 						"	</a></div>",
 						"</div>"
 						].join('');
@@ -221,14 +220,19 @@ function mapDoing(){
 	
 }
 
-var data = {
-				mgrName : '써브웨이 시청점',
+
+	$(document).ready(function(){
+		var data = {
+				mgrName : 'Sabway 시청점',
 				mgrAddr : '서울 중구 세종대로 68 태평로2가 69-13 천일빌딩',
 				mgrAddrCode : '04526',
+				mgrNo : '1',
 				mgrTel : '02-777-9200'
 				
 			} 
-mapXyInfo(data);
+		
+		mapXyInfo(data);
+	})
 
 </script>
 </body>
