@@ -87,7 +87,7 @@ public class CusOrderService {
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (currentPage1-1)*numPerPage+1;
 		int end = currentPage1*numPerPage;
-		CusOrderPageBound pb = new CusOrderPageBound(start,end);
+		CusOrderPageBound pb = new CusOrderPageBound(start,end,null,null);
 		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderDao.cusOrderList(pb);
 		int pageNo = ((currentPage1-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage1 != 1) {
@@ -114,6 +114,64 @@ public class CusOrderService {
 		int result = cusOrderDao.orderStateUpdate(cuso);
 		return result;
 	}
+	//체크박스의 값에 맞는 리스트 가져오기
+	public CusOrderPageData checkedCusoOrderList(int currentPage1,String cusoMemberNo){
+		String pageNavi = "";
+		int numPerPage = 10;
+		int pageNaviSize = 5;
+		int totalCount = cusOrderDao.checkedTotalCount(cusoMemberNo);
+		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
+		int start = (currentPage1-1)*numPerPage+1;
+		int end = currentPage1*numPerPage;
+		CusOrderPageBound pb = new CusOrderPageBound(start,end,cusoMemberNo,null);
+		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderDao.checkedCusoOrderList(pb);
+		int pageNo = ((currentPage1-1)/pageNaviSize)*pageNaviSize+1;
+		if(currentPage1 != 1) {
+			pageNavi += "<a href='/cusOrderList.do?currentPage="+(currentPage1-1)+"&cusoMemberNo="+cusoMemberNo+"'>이전</a>&nbsp;";
+		}
+		int i = 1;
+		while(!(i++>pageNaviSize||pageNo>totalPage)) {
+			if(currentPage1 == pageNo) {
+				pageNavi += "&nbsp;<span style='color:black;font-size:20px;'>"+pageNo+"</span>&nbsp;";
+			}else {
+				pageNavi += "&nbsp;<a href='/cusOrderList.do?currentPage="+pageNo+"&cusoMemberNo="+cusoMemberNo+"'>"+pageNo+"<a/>&nbsp;";
+			}
+			pageNo++;
+		}
+		if(currentPage1 < totalPage) {
+			pageNavi += "&nbsp;<a href='/cusOrderList.do?currentPage="+(currentPage1+1)+"&cusoMemberNo="+cusoMemberNo+"'>다음</a>";
+		}
+		return new CusOrderPageData(list,pageNavi,totalCount);
+	}
+	//검색어와 일치하는 리스트
+	public CusOrderPageData orderSearchKeyword(int currentPage1,String keyword){
+		String pageNavi = "";
+		int numPerPage = 10;
+		int pageNaviSize = 5;
+		int totalCount = cusOrderDao.searchKeywordTotalCount(keyword);
+		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
+		int start = (currentPage1-1)*numPerPage+1;
+		int end = currentPage1*numPerPage;
+		CusOrderPageBound pb = new CusOrderPageBound(start,end,null,keyword);
+		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderDao.orderSearchKeyword(pb);
+		int pageNo = ((currentPage1-1)/pageNaviSize)*pageNaviSize+1;
+		if(currentPage1 != 1) {
+			pageNavi += "<a href='/cusOrderList.do?currentPage="+(currentPage1-1)+"&keyword="+keyword+"'>이전</a>&nbsp;";
+		}
+		int i = 1;
+		while(!(i++>pageNaviSize||pageNo>totalPage)) {
+			if(currentPage1 == pageNo) {
+				pageNavi += "&nbsp;<span style='color:black;font-size:20px;'>"+pageNo+"</span>&nbsp;";
+			}else {
+				pageNavi += "&nbsp;<a href='/cusOrderList.do?currentPage="+pageNo+"&keyword="+keyword+"'>"+pageNo+"<a/>&nbsp;";
+			}
+			pageNo++;
+		}
+		if(currentPage1 < totalPage) {
+			pageNavi += "&nbsp;<a href='/cusOrderList.do?currentPage="+(currentPage1+1)+"&keyword="+keyword+"'>다음</a>";
+		}
+		return new CusOrderPageData(list,pageNavi,totalCount);
+	}
 
 	public ArrayList<CusOrder> loadOrderList(String customerIdx) {
 		return (ArrayList<CusOrder>)cusOrderDao.loadOrderList(customerIdx);
@@ -127,5 +185,4 @@ public class CusOrderService {
 		return (ArrayList<MyMenu>)cusOrderDao.selectMyMenuList(customerNo);
 	}
 
-	
 }
