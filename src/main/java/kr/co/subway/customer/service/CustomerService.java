@@ -3,6 +3,7 @@ package kr.co.subway.customer.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.co.subway.customer.vo.CustPageNaviData;
 import kr.co.subway.customer.vo.Customer;
 
 public interface CustomerService {
@@ -21,5 +22,6 @@ public interface CustomerService {
 	public int pwUpdate(Customer customerVo);				//비번찾기(비번업뎃)
 	public int cusUpdateEnroll(Customer vo);						//회원정보수정
 	public int cusDelete(Customer vo);						//회원탈퇴
-	public List<Customer> customerKeyword(String keyword);
+	public List<Customer> customerKeyword(String keyword, String cusIdName, String cusStatusMember);
+	public CustPageNaviData customerList(String keyword, String cusIdName, String cusStatusMember);
 }
