@@ -195,18 +195,42 @@ public class CusOrderController {
 		}
 		return view;
 	}
-//	//비회원 주문 목록
-//	@RequestMapping("/noneCtm.do")
-//	public ModelAndView noneCtm(CusOrder cuso) {
-//		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderService.cusOrderList();
-//		ModelAndView mav = new ModelAndView();
-//		if(!list.isEmpty()) {
-//			mav.addObject("list",list);
-//			mav.setViewName("customerOrder/noneCTM");
-//		}else {
-//			mav.setViewName("redirect:/");
-//		}
-//		return mav; 
-//	}
-	
+	//체크박스의 값에 맞는 리스트 가져오기
+	@RequestMapping("/checkedCusoOrderList.do")
+	public ModelAndView checkedCusoOrderList(@RequestParam String currentPage,@RequestParam String cusoMemberNo) {
+		int currentPage1;
+		try {
+			currentPage1 = Integer.parseInt(currentPage);
+		}catch(Exception e) {
+			currentPage1 = 1;
+		}
+		CusOrderPageData pd = cusOrderService.checkedCusoOrderList(currentPage1,cusoMemberNo);
+		ModelAndView mav = new ModelAndView();
+		try {
+			mav.addObject("pd",pd);
+			mav.setViewName("customerOrder/cusOrderList");
+		}catch(Exception e) {
+			mav.setViewName("redirect:/");
+		}
+		return mav; 
+	}
+	//검색어와 일치하는 리스트 가져오기
+	@RequestMapping("/orderSearchKeyword.do")
+	public ModelAndView searchKeyword(@RequestParam String currentPage,@RequestParam String keyword) {
+		int currentPage1;
+		try {
+			currentPage1 = Integer.parseInt(currentPage);
+		}catch(Exception e) {
+			currentPage1 = 1;
+		}
+		CusOrderPageData pd = cusOrderService.orderSearchKeyword(currentPage1,keyword);
+		ModelAndView mav = new ModelAndView();
+		try {
+			mav.addObject("pd",pd);
+			mav.setViewName("customerOrder/cusOrderList");
+		}catch(Exception e) {
+			mav.setViewName("redirect:/");
+		}
+		return mav; 
+	}
 }

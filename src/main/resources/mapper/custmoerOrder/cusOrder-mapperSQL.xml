@@ -40,4 +40,60 @@
    <select id="totalCount" resultType="_int">
    		select count(*) from cusorder
    </select>
+  <select id="checkedCusoOrderList" parameterType="cpb" resultType="cuso">
+		select rnum
+		,cuso_idx as cusoIdx<!-- 자동 -->
+		,cuso_order_state as cusoOrderState<!--  //주문상태 default 0 -->
+		,cuso_total_cost as cusoTotalCost
+		,cuso_phone as cusoPhone
+		,cuso_member_no as cusoMemberNo<!-- //회원 번호(외래키) -->
+		,cuso_order_no as cusoOrderNo<!-- //고객용 주문번호 -->
+		,cuso_branch as cusoBranch<!-- //지점 번호(Manager - mgrName으로 받아야함) -->
+		,cuso_order_date as cusoOrderDate
+		from
+		(select rownum as rnum, c.* from 
+			(select * from cusorder
+			<if test="cusoMemberNo == 0">
+				where cuso_member_no = 0 
+			</if>
+			<if test="cusoMemberNo == -1">
+				where cuso_member_no != 0
+			</if>
+			order by cuso_order_date desc) c)
+		<if test="start!=0">
+			where rnum between #{start} and #{end}
+		</if>
+  </select>
+   <select id="checkedTotalCount" parameterType="map" resultType="_int">
+   		<if test='cusoMemberNo.equals("-1")'>
+	   		select count(*) from cusorder where cuso_member_no != 0
+   		</if>
+   		<if test='cusoMemberNo.equals("0")'>
+	   		select count(*) from cusorder where cuso_member_no = 0
+   		</if>
+   		<if test='cusoMemberNo.equals("-2")'>
+	   		select count(*) from cusorder
+   		</if>
+   </select>
+    <select id="orderSearchKeyword" parameterType="cpb" resultType="cuso">
+  		select rnum
+  			,cuso_idx as cusoIdx<!-- 자동 -->
+			,cuso_order_state as cusoOrderState<!--  //주문상태 default 0 -->
+			,cuso_total_cost as cusoTotalCost
+			,cuso_phone as cusoPhone
+			,cuso_member_no as cusoMemberNo<!-- //회원 번호(외래키) -->
+			,cuso_order_no as cusoOrderNo<!-- //고객용 주문번호 -->
+			,cuso_branch as cusoBranch<!-- //지점 번호(Manager - mgrName으로 받아야함) -->
+			,cuso_order_date as cusoOrderDate
+			from
+			(select rownum as rnum, c.* from 
+				(select * from cusorder where cuso_order_no = #{keyword}
+				order by cuso_order_date desc) c)
+			<if test="start!=0">
+				where rnum between #{start} and #{end}
+			</if>
+  	</select>
+   <select id="searchKeywordTotalCount" parameterType="map" resultType="_int">
+   		select count(*) from cusorder where cuso_order_no = #{keyword}
+   </select>
 </mapper>
