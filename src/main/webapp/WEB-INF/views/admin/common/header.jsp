@@ -59,7 +59,7 @@
 								<ul>
 									<li><a href="/managerList.do">가맹점 리스트</a></li>
 									<li><a href="/mgrEnroll.do">가맹점 회원 등록</a></li>
-									<li><a href="/managerApply.do">가맹점 신청 리스트</a></li>
+									<li><a href="/managerApply.do?currentPage=''">가맹점 신청 리스트</a></li>
 								</ul>
 							</div>
 						</li>
