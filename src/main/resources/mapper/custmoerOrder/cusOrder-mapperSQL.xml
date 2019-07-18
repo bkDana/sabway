@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cusOrder">
-  	<select id="cusOrderList" resultType="cuso">
-  		select cuso_idx as cusoIdx<!-- 자동 -->
+  	<select id="cusOrderList" parameterType="cpb" resultType="cuso">
+  		select rnum
+  			,cuso_idx as cusoIdx<!-- 자동 -->
 			,cuso_order_state as cusoOrderState<!--  //주문상태 default 0 -->
 			,cuso_total_cost as cusoTotalCost
 			,cuso_phone as cusoPhone
@@ -10,24 +11,46 @@
 			,cuso_order_no as cusoOrderNo<!-- //고객용 주문번호 -->
 			,cuso_branch as cusoBranch<!-- //지점 번호(Manager - mgrName으로 받아야함) -->
 			,cuso_order_date as cusoOrderDate
-			from cusorder
+			from
+			(select rownum as rnum, c.* from 
+				(select * from cusorder
+				order by cuso_order_date desc) c)
+			<if test="start!=0">
+				where rnum between #{start} and #{end}
+			</if>
   	</select>
-  <insert id="insertCuso" parameterType="cuso">
-  	insert into
-  		cusorder
-  	values
-  		(
-  		seq_cuso_idx.nextval,
-  		#{cusoOrderState},
-  		#{cusoTotalCost},
-  		#{cusoPhone},
-  		#{cusoMemberNo},
-  		#{cusoOrderNo},
-  		#{cusoBranch},
-  		sysdate
-  		)	
-  </insert>
-  <update id="orderStateUpdate" parameterType="cuso">
+  	<select id="oneCusOrderList" parameterType="String" resultType="cuso">
+  		select 
+  			c.cuso_idx as cusoIdx<!-- 자동 -->
+			,c.cuso_order_state as cusoOrderState<!--  //주문상태 default 0 -->
+			,c.cuso_total_cost as cusoTotalCost
+			,c.cuso_order_no as cusoOrderNo<!-- //고객용 주문번호 -->
+			,c.cuso_branch as cusoBranch<!-- //지점 번호(Manager - mgrName으로 받아야함) -->
+			,c.cuso_order_date as cusoOrderDate
+		from 
+			cusorder
+		where
+			cuso_member_no = #{cusoMemberNo}
+  	</select>
+	<insert id="insertCuso" parameterType="cuso">
+  		insert into
+	  		cusorder
+	  	values
+	  		(
+	  		seq_cuso_idx.nextval,
+	  		#{cusoOrderState},
+	  		#{cusoTotalCost},
+	  		#{cusoPhone},
+	  		#{cusoMemberNo},
+	  		#{cusoOrderNo},
+	  		#{cusoBranch},
+	  		sysdate
+	  		)	
+  	</insert>
+  	<update id="orderStateUpdate" parameterType="cuso">
 		update cusorder set cuso_order_state = #{cusoOrderState} where cuso_idx = #{cusoIdx}
   </update>
+   <select id="totalCount" resultType="_int">
+   		select count(*) from cusorder
+   </select>
 </mapper>
