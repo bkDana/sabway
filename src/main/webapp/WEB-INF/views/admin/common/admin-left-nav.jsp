@@ -9,7 +9,7 @@
 			<li><a href="/ingreManage/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("ingreRegisterForm.jsp")){%>on<%}%>">메뉴 등록</a></li>
 			<li><a href="/ingreManage/ingreList.do?reqPage=1" class="<%if(request.getRequestURL().toString().split("/")[7].equals("ingreList.jsp") || request.getRequestURL().toString().split("/")[7].equals("ingreUpdate.jsp")){%>on<%}%>">메뉴 관리</a></li>
 			<%-- <li><a href="#" class="<%if(request.getRequestURL().toString().split("/")[7].equals("#")){%>on<%}%>">이벤트 / 할인</a></li> --%>
-			<li><a href="/promotionSelect.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("SelectPromotion.jsp")){%>on<%}%>">이벤트 / 할인</a></li>
+			<li><a href="/promotionSelect.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[7].equals("SelectPromotion.jsp")){%>on<%}%>">이벤트 / 할인</a></li>
 		</ul>
 	<%}%>
 	
@@ -28,9 +28,9 @@
 	<%if(request.getRequestURL().toString().split("/")[6].equals("board")){ %>
 	<ul>
 		<%-- <c:if test="${sessionScope.mgr.mgrLevel eq 1 }"> --%>
-			<li><a href="/board/noticeList.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("notice")){%>on<%}%>">공지사항</a></li>
-			<li><a href="/board/qnaList.do?currentPage=1" class="<%if(request.getRequestURL().toString().split("/")[7].equals("qna")){%>on<%}%>">1:1 문의</a></li>
-			<li><a href="/board/reviewList.do?currentPage=1" class="<%if(request.getRequestURL().toString().split("/")[7].equals("review")){%>on<%}%>">후기</a></li>	
+			<li><a href="/board/boardList.do?type=notice" class="<%if(request.getRequestURL().toString().split("/")[7].equals("notice")){%>on<%}%>">공지사항/이벤트</a></li>
+			<li><a href="/board/boardList.do?type=qna" class="<%if(request.getRequestURL().toString().split("/")[7].equals("qna")){%>on<%}%>">Q&A/신고</a></li>
+			<li><a href="/board/boardList.do?type=review" class="<%if(request.getRequestURL().toString().split("/")[7].equals("review")){%>on<%}%>">리뷰</a></li>	
 		<%-- </c:if> --%>
 	</ul>
 	<%}%>

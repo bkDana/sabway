@@ -1,19 +1,17 @@
-package kr.co.subway.customerOrder.vo;
+package kr.co.subway.headOffice.vo;
 
-public class CusOrderPageBound {
+public class ApplyMenuPageBound {
 	private int start;
 	private int end;
-	private String cusoMemberNo;
 	private String keyword;
-	public CusOrderPageBound() {
+	public ApplyMenuPageBound() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CusOrderPageBound(int start, int end, String cusoMemberNo, String keyword) {
+	public ApplyMenuPageBound(int start, int end, String keyword) {
 		super();
 		this.start = start;
 		this.end = end;
-		this.cusoMemberNo = cusoMemberNo;
 		this.keyword = keyword;
 	}
 	public int getStart() {
@@ -28,17 +26,11 @@ public class CusOrderPageBound {
 	public void setEnd(int end) {
 		this.end = end;
 	}
-	public String getCusoMemberNo() {
-		return cusoMemberNo;
-	}
-	public void setCusoMemberNo(String cusoMemberNo) {
-		this.cusoMemberNo = cusoMemberNo;
-	}
 	public String getKeyword() {
 		return keyword;
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
+	
 }

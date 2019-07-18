@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +22,7 @@ import kr.co.subway.customerOrder.service.CusOrderService;
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.CusOrderPageData;
+import kr.co.subway.customerOrder.vo.MyMenu;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -104,7 +104,6 @@ public class CusOrderController {
 		} else {
 			Cookie[]getCookie = request.getCookies();
 			customerIdx = getCookie[1].getValue();
-			
 		}
 
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx);
@@ -117,13 +116,11 @@ public class CusOrderController {
 		return mav;
 	}
 	
-	//주문정보, 아이템을 추가하는 메소드
+	//주문정보, 버킷에 주문번호 추가하는 메소드
 	@RequestMapping("/insertItem.do")
 	public String insertItem(HttpServletRequest request, String cusoOrderState,String cusoTotalCost,
 			String cusoPhone, String cusoMemberNo, String cusoOrderNo, String cusoBranchName) {
-		//test
-		System.out.println(cusoMemberNo);
-		
+		/* 회원 비회원 구분 */
 		String customerIdx = "-1";
 		HttpSession session = request.getSession(false);
 		Customer c = (Customer)session.getAttribute("customer");
@@ -133,10 +130,11 @@ public class CusOrderController {
 			Cookie[]getCookie = request.getCookies();
 			customerIdx = getCookie[1].getValue();
 		}
-		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //아이템에 쓸 정보
+		
+		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //버킷에 쓸 정보
 		int cusoTCost = Integer.parseInt(cusoTotalCost);
 		CusOrder cuso = new CusOrder(0,0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoBranchName, null);
-		int result = cusOrderService.insertCusOrder(cuso);
+		int result = cusOrderService.insertCusOrder(cuso); // cusorder에 데이터 추가하기
 		if(result>0) {
 			for(Bucket b: list) {
 				System.out.println(b.getBucIdx());
@@ -158,20 +156,18 @@ public class CusOrderController {
 		}
 		
 	}
+	
 	//내 주문목록 가져오기(회원용)
 	@RequestMapping("/loadOrderList.do")
 	public ModelAndView loadOrderList(HttpServletRequest request) {
-		String customerIdx = "-1";
-		HttpSession session = request.getSession(false);
-		Customer c = (Customer)session.getAttribute("customer");
-		if(c != null) {
-			customerIdx = String.valueOf(c.getCustomerNo());
-		} else {
-			Cookie[]getCookie = request.getCookies();
-			customerIdx = getCookie[1].getValue();
-		}
-		ArrayList<CusOrder> orderList = cusOrderService.loadOrderList(customerIdx); // customerIdx = cusoMemberNo
 		ModelAndView mav = new ModelAndView();
+		String customerIdx = "-1";
+		HttpSession session = request.getSession();
+		Customer c = (Customer)session.getAttribute("customer");
+		customerIdx = String.valueOf(c.getCustomerNo());
+
+		ArrayList<CusOrder> orderList = cusOrderService.loadOrderList(customerIdx); // customerIdx = cusoMemberNo
+		
 		if(!orderList.isEmpty()) {
 			mav.addObject("list",orderList);
 			mav.setViewName("customerOrder/oneCusOrder");
@@ -181,6 +177,44 @@ public class CusOrderController {
 		return mav; 
 	}
 	
+	//나만의 메뉴 생성
+	@ResponseBody
+	@RequestMapping("/insertMyMenu.do")
+	public void insertMyMenu(HttpServletResponse response, MyMenu mm) {
+		mm.setMmIdx(0);
+		System.out.println(mm.getMmMenuLabel());
+		int result = cusOrderService.insertMyMenu(mm);
+	//			System.out.println("controller updateIngreActive() result : "+result);
+		response.setContentType("text/html;charset=utf-8");
+
+		new Gson().toJson(String.valueOf(result));
+		if(result>0) {
+			System.out.println("임시저장 성공");
+		}else{
+			System.out.println("임시저장 실패");
+		}
+	}
+	
+	//나만의 메뉴 목록 불러오기(회원용)
+	@RequestMapping("/loadMyMenu.do")
+	public ModelAndView loadMyMenu(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		Customer c = (Customer)session.getAttribute("customer");
+		String customerNo = String.valueOf(c.getCustomerNo());
+		ArrayList<MyMenu> menuList = cusOrderService.selectMyMenuList(customerNo);
+//		for(MyMenu mm:menuList) {
+//			System.out.println(mm.getMmMenuLabel() + " / " + mm.getMmCustomerNo() + " / " + mm.getMmBucIdx());
+//		}
+		ArrayList<Bucket> list = (ArrayList<Bucket>) cusOrderService.loadMenuList(menuList);
+		if(!list.isEmpty()) {
+			mav.addObject("list",list);
+			mav.setViewName("customerOrder/myMenuList");
+		}else {
+			mav.setViewName("common/error");
+		}
+		return mav; 
+	}
 	
 	//회원 주문 목록 가져오기(관리자용)
 	@RequestMapping("/cusOrderList.do")
@@ -211,18 +245,55 @@ public class CusOrderController {
 		}
 		return view;
 	}
-//	//비회원 주문 목록
-//	@RequestMapping("/noneCtm.do")
-//	public ModelAndView noneCtm(CusOrder cuso) {
-//		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderService.cusOrderList();
-//		ModelAndView mav = new ModelAndView();
-//		if(!list.isEmpty()) {
-//			mav.addObject("list",list);
-//			mav.setViewName("customerOrder/noneCTM");
-//		}else {
-//			mav.setViewName("redirect:/");
-//		}
-//		return mav; 
-//	}
+	//체크박스의 값에 맞는 리스트 가져오기
+	@RequestMapping("/checkedCusoOrderList.do")
+	public ModelAndView checkedCusoOrderList(@RequestParam String currentPage,@RequestParam String cusoMemberNo) {
+		int currentPage1;
+		try {
+			currentPage1 = Integer.parseInt(currentPage);
+		}catch(Exception e) {
+			currentPage1 = 1;
+		}
+		CusOrderPageData pd = cusOrderService.checkedCusoOrderList(currentPage1,cusoMemberNo);
+		ModelAndView mav = new ModelAndView();
+		try {
+			mav.addObject("pd",pd);
+			mav.setViewName("customerOrder/cusOrderList");
+		}catch(Exception e) {
+			mav.setViewName("redirect:/");
+		}
+		return mav; 
+	}
+	//검색어와 일치하는 리스트 가져오기
+	@RequestMapping("/orderSearchKeyword.do")
+	public ModelAndView searchKeyword(@RequestParam String currentPage,@RequestParam String keyword) {
+		int currentPage1;
+		try {
+			currentPage1 = Integer.parseInt(currentPage);
+		}catch(Exception e) {
+			currentPage1 = 1;
+		}
+		CusOrderPageData pd = cusOrderService.orderSearchKeyword(currentPage1,keyword);
+		ModelAndView mav = new ModelAndView();
+		try {
+			mav.addObject("pd",pd);
+			mav.setViewName("customerOrder/cusOrderList");
+		}catch(Exception e) {
+			mav.setViewName("redirect:/");
+		}
+		return mav; 
+	}
 	
+	@ResponseBody
+	@RequestMapping("/myMenuDelete.do")
+	public void myMenuDelete(HttpServletResponse response, @RequestParam String delIdx){
+		int idx = Integer.parseInt(delIdx);
+		int result = cusOrderService.myMemuDelete(idx);
+		
+		if(result>0) {
+			System.out.println("나만의메뉴 삭제 성공");
+		}else{
+			System.out.println("나만의메뉴 삭제실패");
+		}
+	}
 }

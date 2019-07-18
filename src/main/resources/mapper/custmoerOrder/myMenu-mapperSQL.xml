@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mymenu">
+	<insert id="insertMyMenu" parameterType="mymenu">
+		insert into
+			mymenu
+		values
+			(
+			seq_mm_idx.nextval,
+			#{mmCustomerNo},
+			#{mmBucIdx},
+			#{mmMenuLabel}
+			)	
+	</insert>
+	<select id="selectMyMenuList" parameterType="String" resultType="mymenu">
+		select
+		distinct
+			mm_menu_label as mmMenuLabel,
+			mm_customer_no as mmCustomerNo,
+			mm_buc_idx as mmBucIdx
+		from
+			mymenu
+		where
+			mm_customer_no = #{mmCustomerNo}		
+	</select>
+	<delete id="myMenuDelete" parameterType="_int">
+		delete
+		from
+			mymenu
+		where
+			mm_buc_idx = #{mmBucIdx}	
+	</delete>
+</mapper>

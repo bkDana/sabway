@@ -9,6 +9,8 @@ public class CommonFunc {
 		int pageNo = ((reqPage-1)/totalNavi)*totalNavi+1;
 		if(reqPage != 1) {
 			pageNavi += "<a class='paging-arrow prev-arrow' href='javascript:list("+(reqPage-1)+");'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";	
+		}else {
+			pageNavi += "<a class='paging-arrow prev-arrow'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";	
 		}
 		
 		int i = 1;
@@ -22,6 +24,8 @@ public class CommonFunc {
 		}
 		if(reqPage!=totalPage && totalPage!=0) {
 			pageNavi += "<a class='paging-arrow next-arrow' href='javascript:list("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
+		}else {
+			pageNavi += "<a class='paging-arrow next-arrow'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		return pageNavi;
 	}

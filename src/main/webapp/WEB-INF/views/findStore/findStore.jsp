@@ -199,6 +199,9 @@
 	    font-weight: 300;
 	    letter-spacing: -0.045em;
 	}
+	.addrFont{
+		font-size: 15px;
+	}
 </style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -261,7 +264,7 @@
 											<c:if test="${m.mgrStatus == '1' }">
 												<li>
 													
-													<div class="region">${m.mgrAddr }<strong>${m.mgrName }</strong></div>
+													<div class="region"><strong>${m.mgrName }</strong><br><a class="addrFont">${m.mgrAddr }</a></div>
 														
 													<div class="state coming">Coming Soon</div>
 													
@@ -275,7 +278,7 @@
 												<c:if test="${num == status.index}">
 													<li>
 															
-														<div class="region">${m.mgrAddr }<strong>${m.mgrName }</strong></div>
+														<div class="region"><strong>${m.mgrName }</strong><br><a class="addrFont">${m.mgrAddr }</a></div>
 																
 														<div class="state open" id="date">open<strong> ${m.mgrOpenDate }</strong></div>
 										

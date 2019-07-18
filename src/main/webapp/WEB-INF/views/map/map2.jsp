@@ -179,7 +179,7 @@ function mapXyInfo (data) {
 						"		<dl>",
 						"			<dt>주소</dt>",
 						"			<dd id='ui_storeInfoLayer_addr'>",
-						data.mgrAddr+" "+data.mgrAddrCode,
+						data.mgrAddr,
 						"			</dd>",
 						"			<dt>연락처</dt>",
 						"			<dd>"+data.mgrTel+"</dd>",
