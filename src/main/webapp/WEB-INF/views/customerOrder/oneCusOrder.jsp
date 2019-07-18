@@ -21,7 +21,7 @@
 				<col width="11%">
 			</colgroup>	
 			<tr>
-				<th>No.</th><th>금액</th><th>연락처</th><th>회원번호</th><th>주문번호</th><th>지점명</th><th>주문 날짜</th><th>상태</th>
+				<th>No.</th><th>금액</th><th>주문번호</th><th>지점명</th><th>주문 날짜</th><th>상태</th>
 			</tr>
 			<c:forEach items="${list }" var="cusOrder" varStatus="i">
 				<input type="hidden" name="cusoIdx" value="${cusOrder.cusoIdx }">
@@ -32,14 +32,6 @@
 					<td>
 						<input type="hidden" name="cusoTotalCost" value="${cusOrder.cusoTotalCost }">
 						${cusOrder.cusoTotalCost }원
-					</td>
-					<td>
-						<input type="hidden" name="cusocusoPhone" value="${cusOrder.cusoPhone }">
-						${cusOrder.cusoPhone }
-					</td>
-					<td>
-						<input type="hidden" name="cusoMemberNo" value="${cusOrder.cusoMemberNo }">
-						${cusOrder.cusoMemberNo }
 					</td>
 					<td>
 						<input type="hidden" name="cusoOrderNo" value="${cusOrder.cusoOrderNo }">

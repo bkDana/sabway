@@ -8,28 +8,29 @@
 <%-- content --%>
 <section id="content-wrapper">
 	<div class="area">
-		<strong style="font-size:40px;">내 주문 </strong>
+		<strong style="font-size:40px;">나만의 메뉴 </strong>
 		<br><br>
 		<c:forEach items="${list }" var="bucket" varStatus="status">
-			<div class="hiddenInfo">			
-				<input type="hidden" class="hiddenVegi" value="${bucket.bucVegi }">
-				<input type="hidden" class="hiddenBread" value="${bucket.bucBread }">
-				<input type="hidden" class="hiddenCheese" value="${bucket.bucCheese }">
-				<input type="hidden" class="hiddenTopping" value="${bucket.bucTopping }">
-				<input type="hidden" class="hiddenSource" value="${bucket.bucSource }">
-				<input type="hidden" class="hiddenIsSalad" value="${bucket.bucIsSalad }">
-				<input type="hidden" class="hiddenIsOvened" value="${bucket.bucIsOvened }">
-				<input type="hidden" class="hiddenSet" value="${bucket.bucSet }">
-				<input type="hidden" class="hiddenSide" value="${bucket.bucSide }">
-				<input type="hidden" class="hiddenKcal" value="${bucket.bucKcal }">
-				<input type="hidden" class="hiddenQuantity" value="${bucket.bucQuantity }">
-				
+			<div class="hiddenInfo">
+				<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
 				<form action="/insertMyMenu.do" class="myMenu" method="post">
-					<input type="hidden" class="hiddenBucIdx" name="mmBucIdx" value="${bucket.bucIdx }">
-					<input type="hidden" class="hiddenBucCustomerIdx" name="mmCustomerNo" value="${bucket.bucCustomerIdx }">	 				
-					<input type="hidden" class="hiddenMain" name="mmMenuLabel" value="${bucket.bucMain } ${bucket.bucIsSalad }">
+					<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
+					<input type="hidden" class="hidenBranchName" value="${bucket.bucBranch }">
+					<input type="hidden" class="hiddenBucCustomerIdx" name="mmCustomerNo" value="${bucket.bucCustomerIdx }">
+	 				<input type="hidden" class="hiddenBread" name="mmBread" value="${bucket.bucBread }">
+					<input type="hidden" class="hiddenMain" name="mmMain" value="${bucket.bucMain }">
+					<input type="hidden" class="hiddenVegi" name="mmVegi" value="${bucket.bucVegi }">
+					<input type="hidden" class="hiddenCheese" name="mmCheese" value="${bucket.bucCheese }">
+					<input type="hidden" class="hiddenTopping" name="mmTopping" value="${bucket.bucTopping }">
+					<input type="hidden" class="hiddenSource" name="mmSource" value="${bucket.bucSource }">
+					<input type="hidden" class="hiddenIsSalad" name="mmIsSalad" value="${bucket.bucIsSalad }">
+					<input type="hidden" class="hiddenIsOvened" name="mmIsOvened" value="${bucket.bucIsOvened }">
+					<input type="hidden" class="hiddenSet" name="mmSet" value="${bucket.bucSet }">
+					<input type="hidden" class="hiddenSide" name="mmSide" value="${bucket.bucSide }">
+					<input type="hidden" class="hiddenKcal" name="mmKcal" value="${bucket.bucKcal }">
+					<input type="hidden" class="hiddenQuantity" name="mmQuantity" value="${bucket.bucQuantity }">
 					<!-- <input type="hidden" class="hiddenCusoIdx" name="itemCusoIdx" value=""> -->
-					<input type="submit" class="sbmMyMenu" style="display:none;">
+					<input type="submit" class="myMenu" style="display:none;">
 				</form>
 				
 				<c:if test="${status.index eq 0 }">
@@ -49,12 +50,11 @@
 			
 		<table class="comm-tbl type2">
 			<tr>
-				<th>주문 일시</th><th>지점명</th><th>메뉴</th><th>수량</th><th>가격</th><th>나만의 메뉴</th><th>상품삭제</th>
+				<th>지점명</th><th>메뉴</th><th>수량</th><th>가격</th><th>주문하기</th><th>메뉴삭제</th>
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<tr>
-				<td>${bucket.bucRegDate }</td>
-				<td>${bucket.bucBranch }</td>
+				<td>???</td>
 				<td class="bucketOption">
 						<span id="bread">빵 : ${bucket.bucBread }</span><br>
 						<span id="main">메인재료 : ${bucket.bucMain }&nbsp;${bucket.bucIsSalad }</span><br>
@@ -68,16 +68,14 @@
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
 				<td><span class="cost">${bucket.bucCost }</span>원</td>
-				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">나만의 메뉴 만들기</button></td>
-				<td><button type="button" onclick="deleteOrder(this)" style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
+				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">개별 주문하기</button></td>
+				<td><button type="button" onclick="deleteMenu(this)" style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
 			</tr>
 			</c:forEach>
 			<tr>
-				<td colspan="7">
+				<td colspan="6">
 					<div class="common-tbl-btn-group">
-						<strong style="float:left;">* '나만의 메뉴'를 등록하시면 이후 옵션 선택없이 빠른 주문이 가능합니다</strong><br>
-						<!-- <button type="submit" id="sbmTest" class="btn-style2">컨트롤러테스트</button> -->
-						<button type="submit" id="sbmOrder" class="btn-style2">주문하기</button>
+						<button type="submit" id="sbmOrder" class="btn-style2">모두 주문하기</button>
 					</div>
 				</td>
 			</tr>

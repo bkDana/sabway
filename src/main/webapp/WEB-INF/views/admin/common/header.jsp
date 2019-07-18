@@ -59,7 +59,7 @@
 								<ul>
 									<li><a href="/managerList.do">가맹점 리스트</a></li>
 									<li><a href="/mgrEnroll.do">가맹점 회원 등록</a></li>
-									<li><a href="/managerApply.do">가맹점 신청 리스트</a></li>
+									<li><a href="/managerApply.do?currentPage=''">가맹점 신청 리스트</a></li>
 								</ul>
 							</div>
 						</li>
@@ -83,7 +83,7 @@
 							</div>
 						</li>
 						<li class="gnb06">
-							<a href="/board/noticeList.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("board")){%>on<%}%>">게시판관리</a>
+							<a href="/board/boardList.do?type=notice" class="<%if(request.getRequestURL().toString().split("/")[6].equals("board")){%>on<%}%>">게시판관리</a>
 						</li>
 						<li class="gnb07">
 							<a href="/salesStatics/goTotalSales.do">매출통계</a>

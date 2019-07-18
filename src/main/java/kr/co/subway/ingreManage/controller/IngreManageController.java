@@ -123,16 +123,12 @@ public class IngreManageController {
 		IngrePageNaviData ip = ingreService.ingreList(reqPage1,searchType,searchVal);
 		ArrayList<IngreVo> list = ip.getIngreList();
 		String pageNavi = ip.getPageNavi();
-		if(!list.isEmpty()) {
-			mav.addObject("reqPage",reqPage1);
-			mav.addObject("ingreList",list);
-			mav.addObject("pageNavi",pageNavi);
-			mav.addObject("searchType",searchType);
-			mav.addObject("searchVal",searchVal);
-			mav.setViewName("admin/ingreManage/ingreList");
-		}else {
-			mav.setViewName("common/error");
-		}
+		mav.addObject("reqPage",reqPage1);
+		mav.addObject("ingreList",list);
+		mav.addObject("pageNavi",pageNavi);
+		mav.addObject("searchType",searchType);
+		mav.addObject("searchVal",searchVal);
+		mav.setViewName("admin/ingreManage/ingreList");
 		return mav;
 	}
 	
