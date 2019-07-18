@@ -72,10 +72,10 @@
 							</div>
 						</li>
 						<li class="gnb04">
-							<a href="/managerOrder/orderList.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){%>on<%}%>">재고관리</a>
+							<a href="/managerOrder/orderList.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){%>on<%}%>">재고관리</a>
 						</li>
 						<li class="gnb05">
-							<a href="/cusOrderList.do">주문관리</a>
+							<a href="/cusOrderList.do?currentPage=''">주문관리</a>
 							<div class="gnb-2dep">
 								<ul>
 									<li><a href="#">주문 리스트</a></li>
