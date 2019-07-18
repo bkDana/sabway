@@ -16,16 +16,16 @@
 				<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
 				<input type="hidden" class="hidenBranchName" value="${bucket.bucBranch }">
 				<input type="hidden" class="hiddenBucCustomerIdx" name="customerNo" value="${bucket.bucCustomerIdx }">
- 				<input type="hidden" class="hiddenBread" name="itemBraed" value="${bucket.bucBread }">
-				<input type="hidden" class="hiddenMain" name="itemMain" value="${bucket.bucMain }">
-				<input type="hidden" class="hiddenVegi" name="itemVegi" value="${bucket.bucVegi }">
-				<input type="hidden" class="hiddenCheese" name="itemCheese" value="${bucket.bucCheese }">
-				<input type="hidden" class="hiddenTopping" name="itemTopping" value="${bucket.bucTopping }">
-				<input type="hidden" class="hiddenSource" name="itemSource" value="${bucket.bucSource }">
-				<input type="hidden" class="hiddenIsSalad" name="itemIsSalad" value="${bucket.bucIsSalad }">
-				<input type="hidden" class="hiddenIsOvened" name="itemIsOvened" value="${bucket.bucIsOvened }">
-				<input type="hidden" class="hiddenSet" name="itemIsSet" value="${bucket.bucSet }">
-				<input type="hidden" class="hiddenSide" name="itemSide" value="${bucket.bucSide }">
+ 				<input type="hidden" class="hiddenBread" value="${bucket.bucBread }">
+				<input type="hidden" class="hiddenMain" value="${bucket.bucMain }">
+				<input type="hidden" class="hiddenVegi" value="${bucket.bucVegi }">
+				<input type="hidden" class="hiddenCheese" value="${bucket.bucCheese }">
+				<input type="hidden" class="hiddenTopping"value="${bucket.bucTopping }">
+				<input type="hidden" class="hiddenSource" value="${bucket.bucSource }">
+				<input type="hidden" class="hiddenIsSalad" value="${bucket.bucIsSalad }">
+				<input type="hidden" class="hiddenIsOvened" value="${bucket.bucIsOvened }">
+				<input type="hidden" class="hiddenSet" value="${bucket.bucSet }">
+				<input type="hidden" class="hiddenSide" value="${bucket.bucSide }">
 				<!-- <input type="hidden" class="hiddenCusoIdx" name="itemCusoIdx" value=""> -->
 				<c:if test="${status.index eq 0 }">
 					<div class="hiddenOrder">
@@ -62,7 +62,7 @@
 						<span id="side"></span>
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
-				<td><span class="cost">${bucket.bucCost }</span>￦</td>
+				<td><span class="cost">${bucket.bucCost }</span>원</td>
 				<td><button type="button" style="font-size:15px; font-weight:bolder; color:#009233;'">나만의 메뉴 만들기</button></td>
 				<td><button type="button" onclick="deleteOrder(this)" style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
 			</tr>
