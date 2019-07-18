@@ -3,7 +3,7 @@ package kr.co.subway.customerOrder.vo;
 
 import java.sql.Date;
 
-public class myMenu {
+public class MyMenu {
 	private int mmIdx;
 	private String mmCustomerIdx;
 	private String mmCusoOrderNo;
@@ -23,11 +23,11 @@ public class myMenu {
 	private int mmQuantity;
 	private Date mmRegDate;
 	private String mmBranch;
-	public myMenu() {
+	public MyMenu() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public myMenu(int mmIdx, String mmCustomerIdx, String mmCusoOrderNo, String mmBread, String mmMain, String mmVegi,
+	public MyMenu(int mmIdx, String mmCustomerIdx, String mmCusoOrderNo, String mmBread, String mmMain, String mmVegi,
 			String mmCheese, String mmSource, String mmTopping, String mmSide, String mmIsSalad, String mmIsOvened,
 			String mmSet, int mmCost, double mmDiscntRate, int mmKcal, int mmQuantity, Date mmRegDate,
 			String mmBranch) {
