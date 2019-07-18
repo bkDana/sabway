@@ -113,7 +113,7 @@ public class CusOrderDao {
 	}
 
 	public List loadMenuList(ArrayList<MyMenu> menuList) {//customerNo에서 menuList로 바꿔야함
-		ArrayList<Bucket> resultList = new ArrayList<>();
+		ArrayList<Bucket> resultList = new ArrayList<Bucket>();
 		for(MyMenu mm:menuList) {
 			Bucket b = sqlSession.selectOne("bucket.loadMyMenu",mm);
 			resultList.add(b);
