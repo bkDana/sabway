@@ -132,7 +132,7 @@ $(document).ready(function(){
 	<div class="area1">
 		<div class="section_subway_menu">
 			<div class="hd">
-				<h2>Subway's Menu</h2>
+				<h2>Sabway's Menu</h2>
 			</div>
 			<div id="mainTopBox" class="area">
 				<div id="mainAdoptBox">
