@@ -13,6 +13,7 @@
 		<c:forEach items="${list }" var="bucket" varStatus="status">
 			<div class="hiddenInfo">
 				<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
+				<input type="hidden" class="hiddenListIdx" value="${status.index }">
 				<form action="/insertMyMenu.do" class="myMenu" method="post">
 					<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
 					<input type="hidden" class="hidenBranchName" value="${bucket.bucBranch }">
