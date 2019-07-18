@@ -203,18 +203,18 @@ body { background-color:#fff; }
 
 /* ****************** Main :: 입양 리스트 영역 ********************** */
 #mainAdoptBox{margin-bottom:60px;}
-.main-adopt-box{padding:15px;}
-.main-adopt-list li{padding:0 20px;}
+.main-adopt-box{padding:15px;max-height:255px;}
+.main-adopt-list li{padding:0 20px;width:20%;display:inline-block;height:255px;}
 .main-adopt-list .img-thum{position:relative; width:100%; padding-top:100%; border:1px solid #ddd; overflow:hidden; border-radius:5px;}
 .main-adopt-list .img-thum > span{position:absolute; display:block; top:0; left:0; right:0; bottom:0; -webkit-transition:all 0.4s; -moz-transition:all 0.4s; -o-transition:all 0.4s; -ms-transition:all 0.4s; transition:all 0.4s}
 .main-adopt-list .img-thum > span img{width:100%;}
 .main-adopt-list .slick-arrow{position:absolute; top:50%; margin-top:-25px; width:50px; height:50px; font-size:0; z-index:99;}
-.main-adopt-list .slick-arrow.slick-prev{background:url(/img/main_arrow02.png) no-repeat; background-size:100% 100%; left:-50px;}
-.main-adopt-list .slick-arrow.slick-next{background:url(/img/main_arrow01.png) no-repeat; background-size:100% 100%; right:-50px; }
+.main-adopt-list .slick-arrow.slick-prev{background:url(/resources/img/main/left.png) no-repeat; background-size:100% 100%; left:-50px;}
+.main-adopt-list .slick-arrow.slick-next{background:url(/resources/img/main/right.png) no-repeat; background-size:100% 100%; right:-50px; }
 
 /* 입양 리스트 :: + 효과 */
 .main-adopt-list .best-prd-plus{position:absolute; top:50%; left:50%; margin:-51px 0 0 -51px; width:102px; height:102px; line-height:102px; text-align:center; overflow:hidden;  border-radius:100%; -moz-border-radius:100%; -webkit-border-radius:100%; -o-border-radius:100%;}
-.main-adopt-list .best-prd-plus img{display:inline-block; position:relative; top:22px; z-index:2; opacity:0;filter:Alpha(opacity=0); visibility:hidden; 
+.main-adopt-list .best-prd-plus img{display:inline-block; position:relative; top:9px; left:7px; z-index:2; opacity:0;filter:Alpha(opacity=0); visibility:hidden; 
 -webkit-transition:all 0.2s 0.0s; -moz-transition:all 0.2s 0.0s; -o-transition:all 0.2s 0.0s; -ms-transition:all 0.2s 0.0s; transition:all 0.2s 0.0s;
 -ms-transform:scale(0.5,0.5); -webkit-transform:scale(0.5,0.5); -moz-transform:scale(0.5,0.5); -o-transform:scale(0.5,0.5); transform:scale(0.5,0.5); vertical-align:middle;}
 
