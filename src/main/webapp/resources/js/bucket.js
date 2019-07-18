@@ -17,7 +17,7 @@ $(document).ready(function(){
 	        success : function(){
 	        	totalCost -= Number($(idx).parent().find('.cost').html());
 	            $(idx).parent().parent().remove();
-	        },
+	        }
 	    });
 	}
 	
@@ -29,13 +29,14 @@ $(document).ready(function(){
 	};
     var sessionPhone = $('#sessionPhone').val(); // 결재할 때 쓰임
     if(!$('#sessionPhone').val()) {
-    	sessionPhone = "010-2222-3333";
+    	sessionPhone = "010-0000-0000";
     }
     var sessionId = $('#sessionId').val();
     if(!$('#sessionId').val()) {
     	sessionId = "비회원";
     }
-    var cookieVal = getCookie('noneCustomer');	// 헤더에서 쓰임
+    var cookieVal = getCookie('noneCustomer');	// 헤더에서 쓰임.
+    
     console.log(sessionPhone);
     console.log(cookieVal);
     
@@ -427,16 +428,15 @@ $(document).ready(function(){
 		});
 	});
     $( "#sbmTest" ).click(function() {
-    	/*세 개 테이블을 고처야함
+    	/*
     	 * 1.주문테이블 중 해당사항들에 새로 만든 '주문번호' 업데이트
-    	 * 2.item테이블에 주문 '(아이템vo)'들 등록(주문 내역에 사용됨) --  여러번 호출됨
     	 * 3.cusOrder 테이블에 (주문 관련 정보vo) 등록
     	 */
     	$('input[name=cusoTotalCost]').val(totalCost);
     	$('input[name=cusoPhone]').val(sessionPhone);
     	var d = new Date();
 		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-    	$('input[name=cusoOrderNo]').val(date);
+    	$('input[name=cusoOrderNo]').val($('.hiddenInfo').eq(0).find('.hiddenMain').val()+date);
     	$("#insertItem").click();
     });
     

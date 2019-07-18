@@ -103,7 +103,7 @@ public class CusOrderController {
 			customerIdx = String.valueOf(c.getCustomerNo());
 		} else {
 			Cookie[]getCookie = request.getCookies();
-			customerIdx = getCookie[2].getValue();
+			customerIdx = getCookie[1].getValue();
 			
 		}
 
@@ -131,7 +131,7 @@ public class CusOrderController {
 			customerIdx = String.valueOf(c.getCustomerNo());
 		} else {
 			Cookie[]getCookie = request.getCookies();
-			customerIdx = getCookie[2].getValue();
+			customerIdx = getCookie[1].getValue();
 		}
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //아이템에 쓸 정보
 		int cusoTCost = Integer.parseInt(cusoTotalCost);
