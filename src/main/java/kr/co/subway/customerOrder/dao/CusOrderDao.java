@@ -1,8 +1,11 @@
 package kr.co.subway.customerOrder.dao;
 
 import java.util.HashMap;
+
 import java.util.ArrayList;
+
 import java.util.List;
+
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.CusOrderPageBound;
-import kr.co.subway.customerOrder.vo.CusOrderPageData;
+
 import kr.co.subway.customerOrder.vo.MyMenu;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
@@ -109,8 +112,17 @@ public class CusOrderDao {
 		return sqlSession.selectList("mymenu.selectMyMenuList",customerNo);
 	}
 
-	public List loadMenuList(String customerNo) {//customerNo에서 menuList로 바꿔야함
-		return sqlSession.selectList("mymenu.loadMyMenu",customerNo);
+	public List loadMenuList(ArrayList<MyMenu> menuList) {//customerNo에서 menuList로 바꿔야함
+		ArrayList<Bucket> resultList = new ArrayList<>();
+		for(MyMenu mm:menuList) {
+			Bucket b = sqlSession.selectOne("bucket.loadMyMenu",mm);
+			resultList.add(b);
+		}
+		return resultList;
+	}
+
+	public int myMenuDelete(int idx) {
+		return sqlSession.delete("mymenu.myMenuDelete",idx);
 	}
 
 }

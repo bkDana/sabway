@@ -12,6 +12,7 @@ public class SearchVO {
 	private String searchType;
 	private String searchVal;
 	private String orderBy;
+	private String type;//게시판 타입 나누기
 	
 	public SearchVO() {
 		super();
@@ -39,6 +40,7 @@ public class SearchVO {
 		this.searchType = searchType;
 		this.searchVal = searchVal;
 	}
+	
 	public int getReqPage() {
 		return reqPage;
 	}
@@ -105,6 +107,13 @@ public class SearchVO {
 	public void setOrderBy(String orderBy) {
 		this.orderBy = orderBy;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	
 	
 

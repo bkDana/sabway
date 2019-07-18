@@ -3,6 +3,7 @@ package kr.co.subway.notice.vo;
 import java.sql.Date;
 
 public class Qna {
+	private int rnum;
 	private int qnaNo;
 	private String qnaCategory;
 	private String qnaWriter;
@@ -10,6 +11,7 @@ public class Qna {
 	private String qnaContent;
 	private String filename;
 	private String filepath;
+	private String qnaComment;
 	private Date qnaDate;
 	public Qna() {
 		super();
@@ -26,6 +28,13 @@ public class Qna {
 		this.filename = filename;
 		this.filepath = filepath;
 		this.qnaDate = qnaDate;
+	}
+	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getQnaNo() {
 		return qnaNo;
@@ -75,5 +84,13 @@ public class Qna {
 	public void setQnaDate(Date qnaDate) {
 		this.qnaDate = qnaDate;
 	}
+	public String getQnaComment() {
+		return qnaComment;
+	}
+	public void setQnaComment(String qnaComment) {
+		this.qnaComment = qnaComment;
+	}
+	
+	
 	
 }

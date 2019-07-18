@@ -16,7 +16,7 @@
 	<%-- LEFT MENU --%>
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 게시판관리 > <a href="/board/noticeList.do">공지사항</a></div>
+		<div class="sub-menu">※ 게시판관리 > <a href="/board/boardList.do?type=notice">공지사항/이벤트</a></div>
 		<div class="common-tbl-box">
 			<table class="comm-tbl">
 			<colgroup>

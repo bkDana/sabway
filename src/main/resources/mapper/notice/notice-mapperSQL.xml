@@ -30,14 +30,14 @@
 	<!-- 아래부터 QNA관련 쿼리 -->
 	<select id="qnaSelectAll" resultType="qna">
 		select qna_no as qnaNo, qna_category as qnaCategory, qna_writer as qnaWriter, qna_title as qnaTitle, 
-		qna_content as qnaContent, filename, filepath, qna_date as qnaDate from qna order by qna_no desc
+		qna_content as qnaContent, filename, filepath, qna_date as qnaDate, qna_comment as qnaComment from qna order by qna_no desc
 	</select>
 	<select id="qnaSelectOne" parameterType="_int" resultType="qna">
 		select qna_no as qnaNo, qna_category as qnaCategory, qna_writer as qnaWriter, qna_title as qnaTitle, 
 		qna_content as qnaContent, filename, filepath, qna_date as qnaDate from qna where qna_no=#{qnaNo}
 	</select>
 	<insert id="qnaInsert" parameterType="qna">
-		insert into qna values(seq_qna_no.nextval,#{qnaCategory},#{qnaWriter},#{qnaTitle}, #{qnaContent}, #{filename},#{filepath},sysdate)
+		insert into qna values(seq_qna_no.nextval,#{qnaCategory},#{qnaWriter},#{qnaTitle}, #{qnaContent}, #{filename},#{filepath},sysdate,null)
 	</insert>
 	<update id="qnaUpdate" parameterType="qna">
 		update qna set qna_category=#{qnaCategory},qna_title=#{qnaTitle},qna_content=#{qnaContent},filename=#{filename},filepath=#{filepath},qna_date=sysdate where qna_no=#{qnaNo}
