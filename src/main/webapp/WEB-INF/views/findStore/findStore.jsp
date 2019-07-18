@@ -359,7 +359,6 @@
 	function searchBtn(){
 	    var keyword = $("#keyword").val();
 	    $("#uiResultList").html("");
-
 	    
 	    if(keyword.length < 2){
 	    	alert("두글자 이상");
@@ -384,9 +383,9 @@
 				}
 				
 				for(var i=0; i<data.length; i++){
-					$("#uiResultList").append("<li id='searchData"+i+"'><a href='#' onclick='detailMarket("+i+");'><span><strong>"+data[i].mgrAddr+"</strong></span>"+"<br><span class='uiResultSpan'>"+data[i].mgrName+"</span><br><span class='uiResultSpan'>"+data[i].mgrTel+"</span></a></li>");
+					$("#uiResultList").append("<li id='searchData"+i+"'><a href='#' onclick='detailMarket("+i+");'><span><strong>"+data[i].mgrName+"</strong></span>"+"<br><span class='uiResultSpan'>"+data[i].mgrAddr+"</span><br><span class='uiResultSpan'>"+data[i].mgrTel+"</span></a></li>");
+
 				}
-				
 				mapXyInfo(data[0]);
 			}
 		});

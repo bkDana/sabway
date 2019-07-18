@@ -3,6 +3,7 @@ package kr.co.subway.customer.dao;
 import java.util.List;
 
 import kr.co.subway.customer.vo.Customer;
+import kr.co.subway.notice.vo.PageBound;
 
 public interface CustomerDao {
 	public Customer selectOneCustomerEnroll (Customer vo);	//로그인
@@ -12,7 +13,8 @@ public interface CustomerDao {
 	public int insertCustomerEnroll(Customer vo);			//회원가입
 	public int updateLastLog(Customer c);					//마지막로깅
 	public int updateState(Customer c);						//상태변경
-	public List allCustomerList();							//회원리스트
+	public int custTotalCount(String customerState, String cusIdName, String keyword);
+	public List allCustomerList(PageBound pb, String customerState, String cusIdName, String keyword);	//회원리스트
 	public int adminCustomerDelete(int customerNo);			//회원탈퇴시키기
 	public int adminCustomerDeleteCancle(int customerNo);	//회원탈퇴해제시키기
 //	public void GetKey(String user_id, String key);

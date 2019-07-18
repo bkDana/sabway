@@ -24,7 +24,7 @@
 /* 매출통계 페이지 SEARCH BOX */
 .board-search-box.branch select{width:20%; max-width:150px; height:30px; border:2px solid #ddd; background-color:#fff; }
 .board-search-box.branch input{width:20%; max-width:150px; height:30px; border:2px solid #ddd; background-color:#fff; }
-.board-search-box.branch .bbs-search-btn{margin:0px; border:2px solid #ddd; border-left:0; min-width:40px; padding:0 5px; height:30px; margin-left:-4px; background:#fff; color:#666; cursor:pointer; vertical-align:top; font-size:14px;}
+.board-search-box.branch .bbs-search-btn{margin:0px; border:2px solid #ddd; min-width:40px; padding:0 5px; height:30px; margin-left:-4px; background:#fff; color:#666; cursor:pointer; vertical-align:top; font-size:14px;}
 
 /* ****************** 봉사활동 등록 폼 ********************** */
 .common-tbl-box{padding:70px 50px; background-color:#f8f8f8;}

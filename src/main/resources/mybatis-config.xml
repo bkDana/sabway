@@ -21,6 +21,8 @@
 		<typeAlias type="kr.co.subway.sales.statics.vo.SalesStaticsGrpVo" alias="graph"/>	<!-- 매출 통계 Vo -->
 		<typeAlias type="kr.co.subway.customerOrder.vo.Bucket" alias="bucket"/> <!-- 고객 주문 관련 장바구니 -->
 		<typeAlias type="kr.co.subway.customerOrder.vo.CusOrder" alias="cuso"/>
+		<typeAlias type="kr.co.subway.customerOrder.vo.MyMenu" alias="mymenu"/>
 		<typeAlias type="kr.co.subway.headOffice.vo.ApplyPageBound" alias="apb"/><!-- 가맹점 paging에 사용하는 클래스 -->
+		<typeAlias type="kr.co.subway.customerOrder.vo.CusOrderPageBound" alias="cpb"/><!-- 주문목록 paging에 사용하는 클래스 -->
 	</typeAliases>
 </configuration>
