@@ -2,6 +2,7 @@ package kr.co.subway.customerOrder.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -199,20 +200,23 @@ public class CusOrderController {
 	
 	//나만의 메뉴 목록 불러오기(회원용)
 	@RequestMapping("/loadMyMenu.do")
-	public ModelAndView loadMyMenu(HttpServletRequest request) {
+	public void loadMyMenu(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		String customerNo = "-1";
 		HttpSession session = request.getSession();
 		Customer c = (Customer)session.getAttribute("customer");
-		customerNo = String.valueOf(c.getCustomerNo());
-		ArrayList<MyMenu> mmList = cusOrderService.loadMenuList(customerNo);
-		if(!mmList.isEmpty()) {
-			mav.addObject("list",mmList);
-			mav.setViewName("customerOrder/myMenuList");
-		}else {
-			mav.setViewName("common/error");
+		String customerNo = String.valueOf(c.getCustomerNo());
+		ArrayList<MyMenu> menuList = cusOrderService.selectMyMenuList(customerNo);
+		for(MyMenu mm:menuList) {
+			System.out.println(mm.getMmMenuLabel() + " / " + mm.getMmCustomerNo() + " / " + mm.getMmBucIdx());
 		}
-		return mav; 
+//		List list = cusOrderService.loadMenuList(customerNo);
+//		if(!list.isEmpty()) {
+//			mav.addObject("list",list);
+//			mav.setViewName("customerOrder/myMenuList");
+//		}else {
+//			mav.setViewName("common/error");
+//		}
+		//return mav; 
 	}
 	
 	//회원 주문 목록 가져오기(관리자용)
