@@ -72,6 +72,7 @@ public class CusOrderDao {
 	//회원용 주문목록
 	public List<CusOrder> loadOrderList(String customerIdx) {
 		return sqlSession.selectList("cusOrder.oneCusOrderList",customerIdx);
+	}
 	//list 개수 가져오기
 	public int totalCount() {
 		return sqlSession.selectOne("cusOrder.totalCount");

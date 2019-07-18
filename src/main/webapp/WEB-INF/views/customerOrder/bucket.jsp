@@ -35,7 +35,7 @@
 							<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
 							<input type="hidden" name="cusoOrderNo" value="">
 							<input type="hidden" name="cusoBranchName" value="${bucket.bucBranch }">
-							<input type="submit" id="insertItem" style="display:none">
+							<input type="submit" id="insertOrder" style="display:none">
 						</form>
 		 			</div> 
 				</c:if>

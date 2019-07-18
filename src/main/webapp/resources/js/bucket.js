@@ -420,8 +420,15 @@ $(document).ready(function(){
 				var info1 = "고유 ID : "+response.imp_uid;
 				var info2 = "결재 금액 : "+response.paid_amount;
 				var info3 = "카드 승인 번호 : "+response.apply_num;
-				console.log(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3)
-				$("#insertItem").click();
+				console.log(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
+				
+				$('input[name=cusoTotalCost]').val(totalCost);
+		    	$('input[name=cusoPhone]').val(sessionPhone);
+		    	var d = new Date();
+				var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+		    	$('input[name=cusoOrderNo]').val($('.hiddenInfo').eq(0).find('.hiddenMain').val()+date);
+
+				$("#insertOrder").click();
 			} else {
 				alert('결재가 취소되었습니다');
 			}
