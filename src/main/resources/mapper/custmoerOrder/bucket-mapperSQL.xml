@@ -87,7 +87,7 @@
 				
 	</update>
 	
-	<!-- bucket이랑 조인연산해서 구체적정보 갖고옴 -->
+	<!-- myMenu 조인연산해서 구체적정보 갖고옴 -->
 	<select id="loadMyMenu" parameterType="kr.co.subway.customerOrder.vo.MyMenu" resultType="bucket">
 		select
 		distinct

@@ -23,5 +23,11 @@
 		where
 			mm_customer_no = #{mmCustomerNo}		
 	</select>
-	
+	<delete id="myMenuDelete" parameterType="_int">
+		delete
+		from
+			mymenu
+		where
+			mm_buc_idx = #{mmBucIdx}	
+	</delete>
 </mapper>

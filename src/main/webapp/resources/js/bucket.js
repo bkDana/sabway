@@ -10,12 +10,25 @@ $(document).ready(function(){
 	/* 장바구니 1열 삭제용 */
 	function deleteOrder(idx){
 		var delIdx = $('.hiddenBucIdx').val();
+		console.log(delIdx);
 		$.ajax({
 	    	url : "/tempOrderDelete.do",
 	        type : 'get',
 	        data : {delIdx:delIdx},
 	        success : function(){
 	        	totalCost -= Number($(idx).parent().find('.cost').html());
+	            $(idx).parent().parent().remove();
+	        }
+	    });
+	}
+	/* 나만의 메뉴 1열? 삭제 */
+	function deleteOrder(idx){
+		var delIdx = $('.hiddenBucIdx').val();
+		$.ajax({
+	    	url : "/myMenuDelete.do",
+	        type : 'get',
+	        data : {delIdx:delIdx},
+	        success : function(){
 	            $(idx).parent().parent().remove();
 	        }
 	    });

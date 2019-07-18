@@ -185,4 +185,8 @@ public class CusOrderService {
 		return (ArrayList<MyMenu>)cusOrderDao.selectMyMenuList(customerNo);
 	}
 
+	public int myMemuDelete(int idx) {
+		return cusOrderDao.myMenuDelete(idx);
+	}
+
 }

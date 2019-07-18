@@ -286,4 +286,17 @@ public class CusOrderController {
 		}
 		return mav; 
 	}
+	
+	@ResponseBody
+	@RequestMapping("/myMenuDelete.do")
+	public void myMenuDelete(HttpServletResponse response, @RequestParam String delIdx){
+		int idx = Integer.parseInt(delIdx);
+		int result = cusOrderService.myMemuDelete(idx);
+		
+		if(result>0) {
+			System.out.println("나만의메뉴 삭제 성공");
+		}else{
+			System.out.println("나만의메뉴 삭제실패");
+		}
+	}
 }

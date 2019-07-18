@@ -121,4 +121,8 @@ public class CusOrderDao {
 		return resultList;
 	}
 
+	public int myMenuDelete(int idx) {
+		return sqlSession.delete("mymenu.myMenuDelete",idx);
+	}
+
 }
