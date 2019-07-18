@@ -3,7 +3,6 @@ package kr.co.subway.customerOrder.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +22,7 @@ import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.customerOrder.service.CusOrderService;
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
+import kr.co.subway.customerOrder.vo.CusOrderPageData;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -135,8 +135,8 @@ public class CusOrderController {
 		}
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //아이템에 쓸 정보
 		int cusoTCost = Integer.parseInt(cusoTotalCost);
-		CusOrder cuso = new CusOrder(0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoBranchName, null);
-		int result = cusOrderService.insertCusOrder(cuso); // 주문 추가
+		CusOrder cuso = new CusOrder(0,0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoBranchName, null);
+		int result = cusOrderService.insertCusOrder(cuso);
 		if(result>0) {
 			for(Bucket b: list) {
 				System.out.println(b.getBucIdx());
@@ -184,14 +184,20 @@ public class CusOrderController {
 	
 	//회원 주문 목록 가져오기(관리자용)
 	@RequestMapping("/cusOrderList.do")
-	public ModelAndView cusOrderList() {
-		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderService.cusOrderList();
+	public ModelAndView cusOrderList(@RequestParam String currentPage) {
+		int currentPage1;
+		try {
+			currentPage1 = Integer.parseInt(currentPage);
+		}catch(Exception e) {
+			currentPage1 = 1;
+		}
+		CusOrderPageData pd = cusOrderService.cusOrderList(currentPage1);
 		ModelAndView mav = new ModelAndView();
-		if(!list.isEmpty()) {
-			mav.addObject("list",list);
+		try {
+			mav.addObject("pd",pd);
 			mav.setViewName("customerOrder/cusOrderList");
-		}else {
-			mav.setViewName("/");
+		}catch(Exception e) {
+			mav.setViewName("redirect:/");
 		}
 		return mav; 
 	}
@@ -201,22 +207,22 @@ public class CusOrderController {
 		int result = cusOrderService.orderStateUpdate(cuso);
 		String view = "";
 		if(result > 0) {
-			view = "redirect:/cusOrderList.do";
+			view = "redirect:/cusOrderList.do?currentPage=''";
 		}
 		return view;
 	}
-	//비회원 주문 목록
-	@RequestMapping("/noneCtm.do")
-	public ModelAndView noneCtm(CusOrder cuso) {
-		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderService.cusOrderList();
-		ModelAndView mav = new ModelAndView();
-		if(!list.isEmpty()) {
-			mav.addObject("list",list);
-			mav.setViewName("customerOrder/noneCTM");
-		}else {
-			mav.setViewName("/");
-		}
-		return mav; 
-	}
+//	//비회원 주문 목록
+//	@RequestMapping("/noneCtm.do")
+//	public ModelAndView noneCtm(CusOrder cuso) {
+//		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderService.cusOrderList();
+//		ModelAndView mav = new ModelAndView();
+//		if(!list.isEmpty()) {
+//			mav.addObject("list",list);
+//			mav.setViewName("customerOrder/noneCTM");
+//		}else {
+//			mav.setViewName("redirect:/");
+//		}
+//		return mav; 
+//	}
 	
 }

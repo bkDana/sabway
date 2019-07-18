@@ -3,6 +3,7 @@ package kr.co.subway.customerOrder.vo;
 import java.sql.Date;
 
 public class CusOrder {
+	private int rnum;
 	private int cusoIdx;		//자동
 	private int cusoOrderState; //주문상태 default 0
 	private int cusoTotalCost;
@@ -15,9 +16,10 @@ public class CusOrder {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CusOrder(int cusoIdx, int cusoOrderState, int cusoTotalCost, String cusoPhone, String cusoMemberNo,
+	public CusOrder(int rnum, int cusoIdx, int cusoOrderState, int cusoTotalCost, String cusoPhone, String cusoMemberNo,
 			String cusoOrderNo, String cusoBranch, Date cusoOrderDate) {
 		super();
+		this.rnum = rnum;
 		this.cusoIdx = cusoIdx;
 		this.cusoOrderState = cusoOrderState;
 		this.cusoTotalCost = cusoTotalCost;
@@ -26,6 +28,12 @@ public class CusOrder {
 		this.cusoOrderNo = cusoOrderNo;
 		this.cusoBranch = cusoBranch;
 		this.cusoOrderDate = cusoOrderDate;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getCusoIdx() {
 		return cusoIdx;
@@ -75,5 +83,5 @@ public class CusOrder {
 	public void setCusoOrderDate(Date cusoOrderDate) {
 		this.cusoOrderDate = cusoOrderDate;
 	}
-	
+
 }
