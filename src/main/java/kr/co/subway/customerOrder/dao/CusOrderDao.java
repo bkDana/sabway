@@ -11,6 +11,7 @@ import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.CusOrderPageBound;
 import kr.co.subway.customerOrder.vo.CusOrderPageData;
+import kr.co.subway.customerOrder.vo.MyMenu;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -76,5 +77,9 @@ public class CusOrderDao {
 	//list 개수 가져오기
 	public int totalCount() {
 		return sqlSession.selectOne("cusOrder.totalCount");
+	}
+
+	public int insertMyMenu(MyMenu mm) {
+		return sqlSession.insert("mymenu.insertMyMenu",mm);
 	}
 }
