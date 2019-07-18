@@ -10,6 +10,7 @@ $(document).ready(function() {
 	var kcal = Number(0);
 	var oneStatus = 0;
 	var breadCheck=0;
+	var typeIdx = 0;
 	function delay(gap){ /* gap is in millisecs */ 
 	  var then,now; 
 	  then=new Date().getTime(); 
@@ -21,11 +22,19 @@ $(document).ready(function() {
 	
 	$('.prev-btn').click(function(){
 		var stepIdx = $('.prev-btn').index(this);
-		$(".step").eq(stepIdx).trigger("click");
+		if((stepIdx)==1 && typeIdx==2){
+			$(".step").eq(0).trigger("click");
+		}else{
+			$(".step").eq(stepIdx).trigger("click");			
+		}
 	});
 	$('.next-btn').click(function(){
 		var stepIdx = $('.next-btn').index(this)+1;
-		$(".step").eq(stepIdx).trigger("click");
+		if((stepIdx-1)==0 && typeIdx==2){
+			$(".step").eq(2).trigger("click");
+		}else{
+			$(".step").eq(stepIdx).trigger("click");			
+		}
 	});
 	
 	
@@ -78,20 +87,66 @@ $(document).ready(function() {
 		$(this).css("color","#fff");
 	});
 	
+	$('.vegi').find('button').mouseover(function(){
+		$(this).css("color","#009223");
+	});
+	$('.vegi').find('button').mouseleave(function(){
+		$(this).css("color","#fff");
+	});
+	clearAllfn = function clearAllfn(current){
+		for(var all=current;all<$('.img-box').length;all++){
+			if($('.img-box').eq(all).hasClass("selected")){
+				$('.img-box').eq(all).removeClass("selected");
+				$('.img-box').eq(all).find('img').css("display","block");
+				$('.img-box').eq(all).find('p').css("display","none");
+				$('.img-box').eq(all).find('button').css("display","none");
+				$('.img-box').eq(all).find('pre').eq(0).css("display","none");
+				$('.img-box').eq(all).find('pre').eq(1).css("display","none");
+				$('.img-box').eq(all).css("background-color","#fff");
+				$('.img-box').eq(all).bind("mouseleave",function(){
+					if($(this).hasClass("selected")===false){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						$(this).find('pre').eq(0).css("display","none");
+						$(this).find('pre').eq(1).css("display","none");
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
+					}
+				});
+			}
+			if($('.img-box').eq(all).hasClass("vegi")){
+				$('.img-box').eq(all).find("button").eq(0).removeClass("select-vegi");
+				$('.img-box').eq(all).find("button").eq(1).removeClass("select-vegi");
+				$('.img-box').eq(all).find("button").eq(2).addClass("select-vegi");
+				$('.img-box').eq(all).find("button").eq(2).css("color","#009223");
+				$('.img-box').eq(all).find("button").eq(3).removeClass("select-vegi");
+			}
+		}
+	}
 	$('.type').click(function(){
-		var typeIdx = $('.type').index(this)+1;
+		if($(this).hasClass("selected")){
+			return;
+		}
+		clearAllfn(2);
+		typeIdx = $('.type').index(this)+1;
 		if(typeIdx==1){
+			for(var mv=0; mv<$('.main').length;mv++){
+				$('.main').eq(mv).css("display","block");
+			}
+			for(var mv=0; mv<$('.salad').length;mv++){
+				$('.salad').eq(mv).css("display","none");
+			}
 			if($(this).hasClass("selected")){
 				$(this).bind("mouseleave",function(){
-					$(this).find('img').css("display","block");
-					$(this).find('p').css("display","none");
-					if(breadCheck==1){
-						$(this).find('pre').eq(0).css("display","block");				
-					}else{
-						$(this).find('pre').eq(1).css("display","block");
+					if($(this).hasClass("selected")===false){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						$(this).find('pre').eq(0).css("display","none");
+						$(this).find('pre').eq(1).css("display","none");
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
 					}
-					$(this).find('button').css("display","none");
-					$(this).css("background-color","#fff");
+					
 				});
 			}else{
 				$(this).unbind("mouseleave");
@@ -102,15 +157,15 @@ $(document).ready(function() {
 					$('.type').eq(1).find('button').css("display","none");
 					$('.type').eq(1).css("background-color","#fff");
 					$('.type').eq(1).bind("mouseleave",function(){
-						$(this).find('img').css("display","block");
-						$(this).find('p').css("display","none");
-						if(breadCheck==1){
-							$(this).find('pre').eq(0).css("display","block");				
-						}else{
-							$(this).find('pre').eq(1).css("display","block");
+						if($(this).hasClass("selected")===false){
+							$(this).find('img').css("display","block");
+							$(this).find('p').css("display","none");
+							$(this).find('pre').eq(0).css("display","none");
+							$(this).find('pre').eq(1).css("display","none");
+							$(this).find('button').css("display","none");
+							$(this).css("background-color","#fff");
 						}
-						$(this).find('button').css("display","none");
-						$(this).css("background-color","#fff");
+						
 					});
 				}
 			}
@@ -119,17 +174,23 @@ $(document).ready(function() {
 			$('input[name=bucIsSalad]').val("샌드위치");
 			$('.salad').css("display","none");
 		}else if(typeIdx==2){
+			for(var mv=0; mv<$('.salad').length;mv++){
+				$('.salad').eq(mv).css("display","block");
+			}
+			for(var mv=0; mv<$('.main').length;mv++){
+				$('.main').eq(mv).css("display","none");
+			}
 			if($(this).hasClass("selected")){
 				$(this).bind("mouseleave",function(){
-					$(this).find('img').css("display","block");
-					$(this).find('p').css("display","none");
-					if(breadCheck==1){
-						$(this).find('pre').eq(0).css("display","block");				
-					}else{
-						$(this).find('pre').eq(1).css("display","block");
+					if($(this).hasClass("selected")===false){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						$(this).find('pre').eq(0).css("display","none");
+						$(this).find('pre').eq(1).css("display","none");
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
 					}
-					$(this).find('button').css("display","none");
-					$(this).css("background-color","#fff");
+					
 				});
 			}else{
 				$(this).unbind("mouseleave");
@@ -140,85 +201,106 @@ $(document).ready(function() {
 					$('.type').eq(0).find('button').css("display","none");
 					$('.type').eq(0).css("background-color","#fff");
 					$('.type').eq(0).bind("mouseleave",function(){
-						$(this).find('img').css("display","block");
-						$(this).find('p').css("display","none");
-						if(breadCheck==1){
-							$(this).find('pre').eq(0).css("display","block");				
-						}else{
-							$(this).find('pre').eq(1).css("display","block");
+						if($(this).hasClass("selected")===false){
+							$(this).find('img').css("display","block");
+							$(this).find('p').css("display","none");
+							$(this).find('pre').eq(0).css("display","none");
+							$(this).find('pre').eq(1).css("display","none");
+							$(this).find('button').css("display","none");
+							$(this).css("background-color","#fff");
 						}
-						$(this).find('button').css("display","none");
-						$(this).css("background-color","#fff");
+						
 					});
 				}
 			}
-				
+			
 			$(this).toggleClass("selected");
 			$('input[name=bucIsSalad]').val("샐러드");
 			$('input[name=bucBread]').val("선택안함");
 			$('.salad').css("display","block");
 			$('.main').css("display","none");
 			$('.bread').css("display","none");
-			breadCheck=1;
 		}
 	});
-	///////////////////////////////////////////////////////////////////////////////
-	$('.vegi').click(function(){
-		if($(this).hasClass("selected")){
-			$(this).bind("mouseleave",function(){
-				$(this).find('img').css("display","block");
-				$(this).find('p').css("display","none");
-				$(this).find('button').css("display","none");
-				$(this).css("background-color","#fff");
-			});
-		}else{
-			$(this).unbind("mouseleave");
-		}
-		$(this).toggleClass("selected");
-	});
-	$('.vegi-amount').click(function(){
-		if($(this).parent().parent().hasClass("selected")===false){
-			$(this).parent().parent().addClass("selected")
-		}
-		var idx = $(this).parent().find("button").index(this);
-		for(var i = 0; i<4; i++){
-			if(i!=idx){
-				$(this).parent().find("button").eq(i).removeClass("select-vegi");
-			}else{
-				$(this).parent().find("button").eq(i).addClass("select-vegi");
-			}
-		}
-		event.stopPropagation();
-	});
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	$('.bread-amount').click(function(){
-		var breadBtnIdx = $('.bread-amount').index(this);
-		for(var i=0;i<$('.bread').length;i++){
-
-			for(var k=0;k<$('.bread-amount').length;k++){
-				
-				if(k==breadBtnIdx && $('.bread').eq(i).find('.bread-amount').eq(k).hasClass("select-bread")){
-					$('.bread').eq(i).find('.bread-amount').eq(k).toggleClass("select-bread");
-					$('.bread').eq(i).find('.bread-amount').eq(k).bind("mouseleave",function(){
-						
-					});
-				}else if(k==breadBtnIdx && $('.bread').eq(i).find('.bread-amount').eq(k).hasClass("select-bread")===false){
-					
+		if($(this).hasClass("select-bread")){
+			return;
+		}
+		var breadParent = $(this).parent().parent();
+		var pareIdx = $('.bread').index(breadParent);
+		var first = 2+$('.bread').length;
+		clearAllfn(first);
+		
+		for(var t=0; t<$('.bread-amount').length; t++){
+			if($('.bread-amount').eq(t).hasClass("select-bread")){
+				if((t+1)%2 == 1) {
+					kcal -= Number($('.bread-amount').eq(t).parent().parent().find('input').eq(0).val())*1;
+				} else {
+					kcal -=  Number($('.bread-amount').eq(t).parent().parent().find('input').eq(0).val())*2;
 				}
 			}
 			
 		}
-		$(this).parent().parent().toggleClass('selected');
+		for(var i=0;i<$('.bread').length;i++){
+			$('.bread').eq(pareIdx).unbind("mouseleave");
+			$('.bread').eq(pareIdx).addClass("selected");
+			if(($('.bread-amount').index(this)+1)%2 == 1) {
+				$('.bread').eq(pareIdx).find("button").eq(1).removeClass("select-bread");
+				$('.bread').eq(pareIdx).find("button").eq(1).css("color","#fff");
+				$('.bread').eq(pareIdx).find("button").eq(1).bind("mouseleave",function(){
+					$(this).css("color","#fff");
+				});
+			} else {
+				$('.bread').eq(pareIdx).find("button").eq(0).removeClass("select-bread");
+				$('.bread').eq(pareIdx).find("button").eq(0).css("color","#fff");
+				$('.bread').eq(pareIdx).find("button").eq(0).bind("mouseleave",function(){
+					$(this).css("color","#fff");
+				});
+			}
+			//같은 img-box안에 버튼 눌럿을때 바인드 조건 걸어주기
+			$(this).addClass("select-bread");
+			$(this).unbind("mouseleave");
+			if($('.bread').eq(i).hasClass("selected") && i!=pareIdx){
+				$('.bread').eq(i).removeClass("selected");
+				$('.bread').eq(i).find("button").eq(0).removeClass("select-bread");
+				$('.bread').eq(i).find("button").eq(1).removeClass("select-bread");
+				$('.bread').eq(i).find('img').css("display","block");
+				$('.bread').eq(i).find('p').css("display","none");
+				$('.bread').eq(i).find('button').css("display","none");
+				$('.bread').eq(i).css("background-color","#fff");
+				$('.bread').eq(i).bind("mouseleave",function(){
+					if($(this).hasClass("selected")===false){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						$(this).find('pre').eq(0).css("display","none");
+						$(this).find('pre').eq(1).css("display","none");
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
+					}
+					
+				});
+				$('.bread').eq(i).find("button").eq(0).bind("mouseleave",function(){
+					$(this).css("color","#fff");
+				});
+				$('.bread').eq(i).find("button").eq(1).bind("mouseleave",function(){
+					$(this).css("color","#fff");
+				});
+			}
+		}
 		var breadIdx = $(this).parent().prev().text();
 		var amountIdx = -1;
 		if(($('.bread-amount').index(this)+1)%2 == 1) {
 			amountIdx = 15;
 			kcal += Number($(this).parent().parent().find('input').eq(0).val())*1;
 			breadCheck=1;
+			console.log("15짜리 찍엇어");
 		} else {
 			amountIdx = 30;
 			kcal +=  Number($(this).parent().parent().find('input').eq(0).val())*2;
 			breadCheck=2;
+			console.log("30짜리 찍엇어");
 		}
 		var str = breadIdx+','+amountIdx;
 		console.log(cost);
@@ -226,8 +308,49 @@ $(document).ready(function() {
 		$('input[name=bucBread]').val(str);
 		console.log(str);
 	});
+	
 	$('.main').click(function(){
+		if($(this).hasClass("selected")){
+			return;
+		}
 		var str = $(this).find('p').text();
+		var mainIdx = $('.main').index(this);
+		var first = 2+$('.bread').length+$('.main').length+$('.salad').length;
+		clearAllfn(first);
+		for(var i=0; i<$('.main').length;i++){
+			if(i!=mainIdx && $('.main').eq(i).hasClass("selected")){
+				$('.main').eq(i).removeClass("selected");
+				$('.main').eq(i).find('img').css("display","block");
+				$('.main').eq(i).find('p').css("display","none");
+				$('.main').eq(i).find('pre').eq(0).css("display","none");
+				$('.main').eq(i).find('pre').eq(1).css("display","none");
+				$('.main').eq(i).find('button').css("display","none");
+				$('.main').eq(i).css("background-color","#fff");
+			
+				$('.main').eq(i).bind("mouseleave",function(){
+					if($(this).hasClass("selected")===false){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						$(this).find('pre').eq(0).css("display","none");
+						$(this).find('pre').eq(1).css("display","none");
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
+					}
+					
+				});
+			
+				if(breadCheck==1){
+					cost -=  Number($('.main').eq(i).find('input').eq(1).val())*1;
+					kcal -=  Number($('.main').eq(i).find('input').eq(0).val())*1;
+				}else if(breadCheck==2){
+					cost -=  Number($('.main').eq(i).find('input').eq(2).val())*1;
+					kcal -=  Number($('.main').eq(i).find('input').eq(0).val())*2;
+				}
+			}
+		}
+		
+		
+		
 		if(breadCheck==1){
 			cost +=  Number($(this).find('input').eq(1).val())*1;
 			kcal +=  Number($(this).find('input').eq(0).val())*1;
@@ -237,25 +360,105 @@ $(document).ready(function() {
 		}
 		console.log(cost);
 		console.log(kcal);
-		console.log(Number($(this).find('input').eq(1).val()));
-		console.log(Number($(this).find('input').eq(2).val()));
+		$(this).unbind("mouseleave");
+		$(this).addClass("selected");
 		$('#recom-sauce').val($(this).find('input').eq(3).val());
 		$('#recom-main').val(str);
 		$('input[name=bucMain]').val(str);
-		$(".step").eq(3).trigger("click");
 	});
-	$('.cheeze').click(function(){
+	
+	$('.salad').click(function(){
+		if($(this).hasClass("selected")){
+			return;
+		}
 		var str = $(this).find('p').text();
+		var mainIdx = $('.salad').index(this);
+		var first = 2+$('.bread').length+$('.main').length+$('.salad').length;
+		clearAllfn(first);
+		for(var i=0; i<$('.salad').length;i++){
+			if(i!=mainIdx && $('.salad').eq(i).hasClass("selected")){
+				$('.salad').eq(i).removeClass("selected");
+				$('.salad').eq(i).find('img').css("display","block");
+				$('.salad').eq(i).find('p').css("display","none");
+				$('.salad').eq(i).find('pre').eq(0).css("display","none");	
+				$('.salad').eq(i).find('button').css("display","none");
+				$('.salad').eq(i).css("background-color","#fff");
+			
+				$('.salad').eq(i).bind("mouseleave",function(){
+					if($(this).hasClass("selected")===false){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						$(this).find('pre').eq(0).css("display","none");
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
+					}
+					
+				});
+			
+				cost -=  Number($('.salad').eq(i).find('input').eq(1).val())*1;
+				kcal -=  Number($('.salad').eq(i).find('input').eq(0).val())*1;
+				
+			}
+		}
+		
+		
+		cost +=  Number($(this).find('input').eq(1).val())*1;
+		kcal +=  Number($(this).find('input').eq(0).val())*1;
+	
+		console.log(cost);
+		console.log(kcal);
+		$(this).unbind("mouseleave");
+		$(this).addClass("selected");
+		$('#recom-sauce').val($(this).find('input').eq(3).val());
+		$('#recom-main').val(str);
+		$('input[name=bucMain]').val(str);
+	});
+	
+	$('.cheese').click(function(){
+		if($(this).hasClass("selected")){
+			return;
+		}
+		var str = $(this).find('p').text();
+		var mainIdx = $('.cheese').index(this);
+		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length;
+		clearAllfn(first);
+		for(var i=0; i<$('.cheese').length;i++){
+			if(i!=mainIdx && $('.cheese').eq(i).hasClass("selected")){
+				$('.cheese').eq(i).removeClass("selected");
+				$('.cheese').eq(i).find('img').css("display","block");
+				$('.cheese').eq(i).find('p').css("display","none");
+				$('.cheese').eq(i).find('pre').eq(0).css("display","none");	
+				$('.cheese').eq(i).find('button').css("display","none");
+				$('.cheese').eq(i).css("background-color","#fff");
+			
+				$('.cheese').eq(i).bind("mouseleave",function(){
+					if($(this).hasClass("selected")===false){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						$(this).find('pre').eq(0).css("display","none");
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
+					}
+				});
+				if(breadCheck==1){
+					kcal -=  Number($('.cheese').eq(i).find('input').eq(0).val())*1;
+				}else if(breadCheck==2){
+					kcal -=  Number($('.cheese').eq(i).find('input').eq(0).val())*2;
+				}
+				
+			}
+		}
 		if(breadCheck==1){
 			kcal +=  Number($(this).find('input').eq(0).val())*1;
 		}else if(breadCheck==2){
 			kcal +=  Number($(this).find('input').eq(0).val())*2;
 		}
-		console.log(cost);
 		console.log(kcal);
+		$(this).unbind("mouseleave");
+		$(this).addClass("selected");
 		$('input[name=bucCheese]').val(str);
-		$(".step").eq(4).trigger("click");
 	});
+	
 	$('.topping-check').click(function(){
 		var str = "";
 		for(var i = 1; i<$('.topping').length;i++){
@@ -285,10 +488,14 @@ $(document).ready(function() {
 				$('.topping').eq(i).find('img').css("display","block");
 				$('.topping').eq(i).find('p').css("display","none");
 				$('.topping').eq(i).find('button').css("display","none");
+				$('.topping').eq(i).find('pre').eq(0).css("display","none");
+				$('.topping').eq(i).find('pre').eq(1).css("display","none");
 				$('.topping').eq(i).css("background-color","#fff");
 				$('.topping').eq(i).bind("mouseleave",function(){
 					$(this).find('img').css("display","block");
 					$(this).find('p').css("display","none");
+					$(this).find('pre').eq(0).css("display","none");
+					$(this).find('pre').eq(1).css("display","none");
 					$(this).find('button').css("display","none");
 					$(this).css("background-color","#fff");
 				});
@@ -296,38 +503,60 @@ $(document).ready(function() {
 		}
 	});
 	$('.oven').click(function(){
-		var idx = $('.oven').index(this);
-		$('input[name=bucIsOvened]').val(idx);
-		//0이 오븐하는거임
-		$(".step").eq(6).trigger("click");
-	});
-	
-	$('.vegi').click(function(){
 		if($(this).hasClass("selected")){
-			$(this).bind("mouseleave",function(){
-				$(this).find('img').css("display","block");
-				$(this).find('p').css("display","none");
-				$(this).find('button').css("display","none");
-				$(this).css("background-color","#fff");
-			});
-		}else{
-			$(this).unbind("mouseleave");
+			return;
 		}
-		$(this).toggleClass("selected");
-	});
-	$('.vegi-amount').click(function(){
-		if($(this).parent().parent().hasClass("selected")===false){
-			$(this).parent().parent().addClass("selected")
-		}
-		var idx = $(this).parent().find("button").index(this);
-		for(var i = 0; i<4; i++){
-			if(i!=idx){
-				$(this).parent().find("button").eq(i).removeClass("select-vegi");
-			}else{
-				$(this).parent().find("button").eq(i).addClass("select-vegi");
+		var idx = $('.oven').index(this);
+		var mainIdx = $('.oven').index(this);
+		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length+$('.topping').length+2;
+		clearAllfn(first);
+		for(var i=0; i<2;i++){
+			if(i!=mainIdx && $('.oven').eq(i).hasClass("selected")){
+				$('.oven').eq(i).removeClass("selected");
+				$('.oven').eq(i).find('img').css("display","block");
+				$('.oven').eq(i).find('p').css("display","none");
+				$('.oven').eq(i).css("background-color","#fff");
+			
+				$('.oven').eq(i).bind("mouseleave",function(){
+					if($(this).hasClass("selected")===false){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						$(this).css("background-color","#fff");
+					}
+				});
 			}
 		}
-		event.stopPropagation();
+		$(this).unbind("mouseleave");
+		$(this).addClass("selected");
+		
+		$('input[name=bucIsOvened]').val(idx);
+		//0이 오븐하는거임
+	});
+	
+
+	$('.vegi-amount').click(function(){
+		if($(this).hasClass("select-vegi")){
+			return;
+		}
+		var vegiParent = $(this).parent().parent();
+		var pareIdx = $('.vegi').index(vegiParent);
+		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length+$('.topping').length+2+$('.vegi').length;
+		clearAllfn(first);
+		$('.vegi').eq(pareIdx).addClass("selected");	
+		$('.vegi').eq(pareIdx).unbind("mouseleave");
+		$(this).unbind("mouseleave");
+		$(this).addClass("select-vegi");
+			///////////////////////////////////////////////////////////////////////////////////////////////
+		for(var v = 0; v<4; v++){
+			if($('.vegi').eq(pareIdx).find("button").index(this)!=v) {
+				console.log($('.vegi').eq(pareIdx).find("button").index(this)+"vegi run?"+v);
+				$('.vegi').eq(pareIdx).find("button").eq(v).removeClass("select-vegi");
+				$('.vegi').eq(pareIdx).find("button").eq(v).css("color","#fff");
+				$('.vegi').eq(pareIdx).find("button").eq(v).bind("mouseleave",function(){
+					$(this).css("color","#fff");
+				});
+			}
+		}
 	});
 	
 	$('.vegi-check').click(function(){
@@ -337,15 +566,12 @@ $(document).ready(function() {
 				for(var k=0; k<4; k++){
 					if($('.vegi').eq(i).find("button").eq(k).hasClass("select-vegi")){
 						str += k;
-						kcal += Number($('.vegi').eq(i).find("input").val())*1;
 					}
 				}
 			}else{
 				str += '2';
 			}
 		}
-		console.log(cost);
-		console.log(kcal);
 		$('input[name=bucVegi]').val(str);
 		console.log($('input[name=bucVegi]').val());
 		$(".step").eq(7).trigger("click");
@@ -409,16 +635,65 @@ $(document).ready(function() {
 		$(".step").eq(8).trigger("click");
 	});
 	$('.set').click(function(){
-		var str = $(this).find('p').text();
 		if($(this).hasClass("selected")){
-			kcal += Number($(this).find('input').eq(0).val());
-			cost += Number($(this).find('input').eq(1).val());
+			return;
 		}
-		$(this).toggleClass("selected");
+		var str = $(this).find('p').text();
+		var mainIdx = $('.set').index(this);
+		var first = 2+$('.set').length+$('.main').length+$('.salad').length+$('.cheese').length;
+		clearAllfn(first);
+		for(var i=0; i<$('.set').length;i++){
+			if(i!=mainIdx && $('.set').eq(i).hasClass("selected")){
+				$('.set').eq(i).removeClass("selected");
+				$('.set').eq(i).find('img').css("display","block");
+				$('.set').eq(i).find('p').css("display","none");
+				$('.set').eq(i).find('pre').eq(0).css("display","none");	
+				$('.set').eq(i).find('button').css("display","none");
+				$('.set').eq(i).css("background-color","#fff");
+			
+				$('.set').eq(i).bind("mouseleave",function(){
+					if($(this).hasClass("selected")===false){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						$(this).find('pre').eq(0).css("display","none");
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
+					}
+				});
+				kcal -= Number($('.set').eq(i).find('input').eq(0).val());
+				cost -= Number($('.set').eq(i).find('input').eq(1).val());
+			}
+		}
+		kcal += Number($(this).find('input').eq(0).val());
+		cost += Number($(this).find('input').eq(1).val());
+		console.log(kcal);
+		$(this).unbind("mouseleave");
+		$(this).addClass("selected");
 		$('input[name=bucSet]').val(str);
-		$(".step").eq(9).trigger("click");
 	});
 
+	$('.sidemenu.img-box.select-none').click(function(){
+		for(var i = 1; i<$('.sidemenu').length;i++){
+			if($('.sidemenu').eq(i).hasClass("selected")){
+				$('.sidemenu').eq(i).removeClass("selected");
+				$('.sidemenu').eq(i).find('img').css("display","block");
+				$('.sidemenu').eq(i).find('p').css("display","none");
+				$('.sidemenu').eq(i).find('button').css("display","none");
+				$('.sidemenu').eq(i).find('pre').eq(0).css("display","none");
+				$('.sidemenu').eq(i).find('pre').eq(1).css("display","none");
+				$('.sidemenu').eq(i).css("background-color","#fff");
+				$('.sidemenu').eq(i).bind("mouseleave",function(){
+					$(this).find('img').css("display","block");
+					$(this).find('p').css("display","none");
+					$(this).find('button').css("display","none");
+					$(this).find('pre').eq(0).css("display","none");
+					$(this).find('pre').eq(1).css("display","none");
+					$(this).css("background-color","#fff");
+				});
+			}
+		}
+	});
+	
 	var getCookie = function(name) {
 		  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
 		  return value? value[2] : null;
@@ -467,11 +742,13 @@ $(document).ready(function() {
                 alert(data);
                 var orderCheckStr = "<tr>";
         		for(var i=0; i<10; i++){
-        			if(i!=8){
+        			if(i!=8 || i!=9){
         				orderCheckStr += "<td>"+$('.orderInput').eq(i).val()+"</td>";        				
-        			}else{
+        			}else if(i==8){
         				orderCheckStr += "<td><button class='quantityChange type1' type='button' onclick='quantityChange(0,this);'>-</button>&nbsp;&nbsp;&nbsp;<span>"
         					+$('.orderInput').eq(i).val()+"</span>&nbsp;&nbsp;&nbsp;<button class='quantityChange type2' type='button' onclick='quantityChange(1,this);'>+</button></td>";
+        			}else if(i==9){
+        				orderCheckStr += "<td>"+$('.orderInput').eq(i).val()+"원</td>";      
         			}
         			
         		}
@@ -502,23 +779,7 @@ $(document).ready(function() {
 	            },
 	        });
 		}
-	$('.sidemenu.img-box.select-none').click(function(){
-		for(var i = 1; i<$('.sidemenu').length;i++){
-			if($('.sidemenu').eq(i).hasClass("selected")){
-				$('.sidemenu').eq(i).removeClass("selected");
-				$('.sidemenu').eq(i).find('img').css("display","block");
-				$('.sidemenu').eq(i).find('p').css("display","none");
-				$('.sidemenu').eq(i).find('button').css("display","none");
-				$('.sidemenu').eq(i).css("background-color","#fff");
-				$('.sidemenu').eq(i).bind("mouseleave",function(){
-					$(this).find('img').css("display","block");
-					$(this).find('p').css("display","none");
-					$(this).find('button').css("display","none");
-					$(this).css("background-color","#fff");
-				});
-			}
-		}
-	});
+	
 	function deleteOrder(idx){
 		var delIdx = $(idx).next().val();
 		$.ajax({
@@ -530,54 +791,8 @@ $(document).ready(function() {
             },
         });
 	}
-	////추가
-//	jQuery.fn.serializeObject = function() {
-//
-//        var obj = null;
-//        try {
-//            // this[0].tagName이 form tag일 경우
-//            if(this[0].tagName && this[0].tagName.toUpperCase() == "FORM" ) {
-//            var arr = this.serializeArray();
-//                if(arr){
-//                    obj = {};    
-//                    jQuery.each(arr, function() {
-//                        // obj의 key값은 arr의 name, obj의 value는 value값
-//                        obj[this.name] = this.value;
-//                    });
-//                }
-//            }
-//        }catch(e) {
-//
-//            alert(e.message);
-//
-//        }
-//            return obj;
-//
-//        };
-        ///
-
-	/* bucCusoIdx(날짜정보로 만듦) */
-	$('#sbmOrder').click(function() {
-		var d = new Date();
-		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-		$('input[name=bucCusoIdx]').val(date);
-	});
     $('.add-order').click(function() {
-    	for(var i = 0; i<$('.img-box').length;i++){
-    		if($('.img-box').eq(i).hasClass("selected")){
-    			$('.img-box').eq(i).removeClass("selected");
-    			$('.img-box').eq(i).find('img').css("display","block");
-    			$('.img-box').eq(i).find('p').css("display","none");
-    			$('.img-box').eq(i).find('button').css("display","none");
-    			$('.img-box').eq(i).css("background-color","#fff");
-    			$('.img-box').eq(i).bind("mouseleave",function(){
-    				$(this).find('img').css("display","block");
-    				$(this).find('p').css("display","none");
-    				$(this).find('button').css("display","none");
-    				$(this).css("background-color","#fff");
-    			});
-    		}
-    	}
+    	clearAllfn(0);
     	for(var i=0; i<13; i++){
     			$('.orderInput').eq(i).val("");				
     	}

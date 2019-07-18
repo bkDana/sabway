@@ -103,8 +103,12 @@ public class CusOrderController {
 			customerIdx = String.valueOf(c.getCustomerNo());
 		} else {
 			Cookie[]getCookie = request.getCookies();
-			customerIdx = getCookie[2].getValue();
-			
+			customerIdx = getCookie[1].getValue();
+			String customerIdx1 = getCookie[0].getValue();
+			String customerIdx2 = getCookie[2].getValue();
+			System.out.println(customerIdx);
+			System.out.println(customerIdx1);
+			System.out.println(customerIdx2);
 		}
 
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx);
