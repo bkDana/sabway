@@ -115,7 +115,7 @@ public class CustomerServiceImpl implements CustomerService{
    
    public CustPageNaviData customerList(int reqPage,String keyword,String cusIdName,String cusStatusMember) {
 	   int numPerPage = 10;
-	   int total
+	   int totalC
 	   
 	   
 	   
