@@ -86,4 +86,32 @@
 			buc_idx = #{bucIdx}	
 				
 	</update>
+	
+	<!-- bucket이랑 조인연산해서 구체적정보 갖고옴 -->
+	<select id="loadMyMenu" parameterType="kr.co.subway.customerOrder.vo.MyMenu" resultType="bucket">
+		select
+		distinct
+			b.buc_bread as bucBread,
+ 			b.buc_main as bucMain,
+ 			b.buc_vegi as bucVegi,
+ 			b.buc_cheese as bucCheese,
+ 			b.buc_source as bucSource,
+ 			b.buc_topping as bucTopping,
+ 			b.buc_side as bucSide,
+ 			b.buc_is_salad as bucIsSalad,
+ 			b.buc_is_ovened as bucIsOvened,
+ 			b.buc_set as bucSet,
+ 			b.buc_cost as bucCost,
+ 			b.buc_discnt_rate as bucDiscntRate,
+ 			b.buc_kcal as bucKcal,
+ 			b.buc_quantity as bucQuantity
+ 		from
+ 			bucket b
+ 		join
+ 			myMenu m
+ 		on
+ 			m.mm_buc_idx = b.buc_idx	
+ 		where
+ 			m.mm_buc_idx = #{mmBucIdx}
+	</select>
 </mapper>

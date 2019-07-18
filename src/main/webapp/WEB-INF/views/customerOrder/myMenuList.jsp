@@ -50,12 +50,11 @@
 			
 		<table class="comm-tbl type2">
 			<tr>
-				<th>주문 일시</th><th>지점명</th><th>메뉴</th><th>수량</th><th>가격</th><th>나만의 메뉴</th><th>상품삭제</th>
+				<th>지점명</th><th>메뉴</th><th>수량</th><th>가격</th><th>주문하기</th><th>메뉴삭제</th>
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<tr>
-				<td>${bucket.bucRegDate }</td>
-				<td>${bucket.bucBranch }</td>
+				<td>???</td>
 				<td class="bucketOption">
 						<span id="bread">빵 : ${bucket.bucBread }</span><br>
 						<span id="main">메인재료 : ${bucket.bucMain }&nbsp;${bucket.bucIsSalad }</span><br>
@@ -69,16 +68,14 @@
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
 				<td><span class="cost">${bucket.bucCost }</span>원</td>
-				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">나만의 메뉴 만들기</button></td>
+				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">개별 주문하기</button></td>
 				<td><button type="button" onclick="deleteOrder(this)" style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
 			</tr>
 			</c:forEach>
 			<tr>
-				<td colspan="7">
+				<td colspan="6">
 					<div class="common-tbl-btn-group">
-						<strong style="float:left;">* '나만의 메뉴'를 등록하시면 이후 옵션 선택없이 빠른 주문이 가능합니다</strong><br>
-						<button type="submit" id="sbmTest" class="btn-style2">컨트롤러테스트</button>
-						<button type="submit" id="sbmOrder" class="btn-style2">주문하기</button>
+						<button type="submit" id="sbmOrder" class="btn-style2">모두 주문하기</button>
 					</div>
 				</td>
 			</tr>

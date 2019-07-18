@@ -177,8 +177,8 @@ public class CusOrderService {
 		return (ArrayList<CusOrder>)cusOrderDao.loadOrderList(customerIdx);
 	}
 
-	public List loadMenuList(String customerNo) {
-		return cusOrderDao.loadMenuList(customerNo);
+	public ArrayList<Bucket> loadMenuList(ArrayList<MyMenu> menuList) {
+		return (ArrayList<Bucket>) cusOrderDao.loadMenuList(menuList);
 	}
 
 	public ArrayList<MyMenu> selectMyMenuList(String customerNo) {
