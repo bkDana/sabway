@@ -14,6 +14,7 @@
 	</insert>
 	<select id="selectMyMenuList" parameterType="String" resultType="mymenu">
 		select
+		distinct
 			mm_menu_label as mmMenuLabel,
 			mm_customer_no as mmCustomerNo,
 			mm_buc_idx as mmBucIdx
@@ -22,4 +23,11 @@
 		where
 			mm_customer_no = #{mmCustomerNo}		
 	</select>
+	<delete id="myMenuDelete" parameterType="_int">
+		delete
+		from
+			mymenu
+		where
+			mm_buc_idx = #{mmBucIdx}	
+	</delete>
 </mapper>

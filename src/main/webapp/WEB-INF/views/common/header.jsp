@@ -83,9 +83,9 @@
 					-->
 					<c:choose>
 						<c:when test="${not empty sessionScope.customer }">
-							[${sessionScope.customer.customerName }]<br>
+							
 							<li><a href="/logout.do" class="header-btn">로그아웃</a></li>
-							<li><a href="/mypageIntro.do" class="header-btn">회원정보</a></li>
+							<li><a href="/mypageIntro.do" class="header-btn">마이페이지</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="/index.do" class="header-btn">로그인</a></li>

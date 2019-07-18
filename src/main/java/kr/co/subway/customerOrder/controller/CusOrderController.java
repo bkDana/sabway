@@ -2,7 +2,6 @@ package kr.co.subway.customerOrder.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -106,7 +105,6 @@ public class CusOrderController {
 		} else {
 			Cookie[]getCookie = request.getCookies();
 			customerIdx = getCookie[1].getValue();
-			
 		}
 
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx);
@@ -200,23 +198,23 @@ public class CusOrderController {
 	
 	//나만의 메뉴 목록 불러오기(회원용)
 	@RequestMapping("/loadMyMenu.do")
-	public void loadMyMenu(HttpServletRequest request) {
+	public ModelAndView loadMyMenu(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		Customer c = (Customer)session.getAttribute("customer");
 		String customerNo = String.valueOf(c.getCustomerNo());
 		ArrayList<MyMenu> menuList = cusOrderService.selectMyMenuList(customerNo);
-		for(MyMenu mm:menuList) {
-			System.out.println(mm.getMmMenuLabel() + " / " + mm.getMmCustomerNo() + " / " + mm.getMmBucIdx());
-		}
-//		List list = cusOrderService.loadMenuList(customerNo);
-//		if(!list.isEmpty()) {
-//			mav.addObject("list",list);
-//			mav.setViewName("customerOrder/myMenuList");
-//		}else {
-//			mav.setViewName("common/error");
+//		for(MyMenu mm:menuList) {
+//			System.out.println(mm.getMmMenuLabel() + " / " + mm.getMmCustomerNo() + " / " + mm.getMmBucIdx());
 //		}
-		//return mav; 
+		ArrayList<Bucket> list = (ArrayList<Bucket>) cusOrderService.loadMenuList(menuList);
+		if(!list.isEmpty()) {
+			mav.addObject("list",list);
+			mav.setViewName("customerOrder/myMenuList");
+		}else {
+			mav.setViewName("common/error");
+		}
+		return mav; 
 	}
 	
 	//회원 주문 목록 가져오기(관리자용)
@@ -293,6 +291,18 @@ public class CusOrderController {
 		CusOrder cusOrder = cusOrderService.cusOrderInfo(no);
 		model.addAttribute("cusOrder", cusOrder);
 		return "customerOrder/cusOrderInfo";
+	}
 		
+	@ResponseBody
+	@RequestMapping("/myMenuDelete.do")
+	public void myMenuDelete(HttpServletResponse response, @RequestParam String delIdx){
+		int idx = Integer.parseInt(delIdx);
+		int result = cusOrderService.myMemuDelete(idx);
+		
+		if(result>0) {
+			System.out.println("나만의메뉴 삭제 성공");
+		}else{
+			System.out.println("나만의메뉴 삭제실패");
+		}
 	}
 }

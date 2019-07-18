@@ -31,6 +31,9 @@ var myform=new formtowizard({
 				<div class="common-tbl-btn-group prev-btn-box outline-box">
 				</div>
 				<div class="content-outlin-box">
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 hidden-space-btn">숨기기</button><br>
+					</div>
 					<div class="type img-box select-one fix-img" style="background-color:white;" >
 						<img src="/resources/img/sandwich/sandwich_fl04.jpg">
 						<p class="label">샌드위치</p>
@@ -50,6 +53,9 @@ var myform=new formtowizard({
 					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
 				<div class="content-outlin-box">
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 hidden-space-btn">숨기기</button><br>
+					</div>
 					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 						<c:if test="${ingre.ingreType eq '빵' and ingre.ingreActive eq '1'}">
 							<div class="bread img-box select-one">
@@ -74,6 +80,9 @@ var myform=new formtowizard({
 					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
 				<div class="content-outlin-box">
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 hidden-space-btn">숨기기</button><br>
+					</div>				
 					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 						<c:if test="${ingre.ingreType eq '메인재료' and ingre.ingreActive eq '1' }">
 	<%-- 						<label for="${ingre.ingreLabel }"><img src="/resources/upload/ingredients/${ingre.ingreFilepath }"></label>  --%>
@@ -149,14 +158,17 @@ var myform=new formtowizard({
 					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
 				<div class="content-outlin-box">
-					<div class="cheeze img-box select-none fix-img" style="background-color:white; clear:both;" >
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 hidden-space-btn">숨기기</button><br>
+					</div>				
+					<div class="cheese img-box select-none fix-img" style="background-color:white; clear:both;" >
 						<img src="/resources/img/cancelyellow.png">
 						<p class="label">선택안함</p>
 						<input type="hidden" value="0">
 					</div>
 					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 						<c:if test="${ingre.ingreType eq '치즈' and ingre.ingreActive eq '1' }">
-							<div class="cheeze img-box select-one">
+							<div class="cheese img-box select-one">
 								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 								<p class="label">${ingre.ingreLabel }</p>
 								<input type="hidden" value="${ingre.ingreKcal }">
@@ -174,6 +186,9 @@ var myform=new formtowizard({
 					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
 				<div class="content-outlin-box">
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 hidden-space-btn">숨기기</button><br>
+					</div>				
 					<div class="topping img-box select-none fix-img" style="background-color:white; clear:both;" >
 						<img src="/resources/img/cancelyellow.png">
 						<p class="label">선택안함</p>
@@ -194,12 +209,9 @@ var myform=new formtowizard({
 							</div>
 						</c:if>
 					</c:forEach>
-					<div class="common-tbl-btn-group">
-						<button type="button" class="btn-style2 topping-check" style="clear:both;">토핑 선택완료</button>
-					</div>
 				</div>
 				<div class="common-tbl-btn-group next-btn-box outline-box">
-					<button type="button" class="btn-style2 next-btn">다음</button>
+					<button type="button" class="btn-style2 next-btn topping-check">다음</button>
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
@@ -208,6 +220,9 @@ var myform=new formtowizard({
 					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
 				<div class="content-outlin-box">
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 hidden-space-btn">숨기기</button><br>
+					</div>				
 					<div class="oven img-box select-one fix-img" style="background-color:white;" >
 						<img src="/resources/img/checkedyellow.png">
 						<p class="label">오븐 사용</p>
@@ -228,6 +243,9 @@ var myform=new formtowizard({
 					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
 				<div class="content-outlin-box">
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 hidden-space-btn">숨기기</button><br>
+					</div>				
 					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 						<c:if test="${ingre.ingreType eq '채소' and ingre.ingreActive eq '1' }">
 							<div class="vegi img-box">
@@ -243,12 +261,9 @@ var myform=new formtowizard({
 							</div>
 						</c:if>
 					</c:forEach>
-					<div class="common-tbl-btn-group">
-						<button type="button" class="btn-style2 vegi-check" style="clear:both;">채소 선택완료</button>
-					</div>
 				</div>
 				<div class="common-tbl-btn-group next-btn-box outline-box">
-					<button type="button" class="btn-style2 next-btn">다음</button>
+					<button type="button" class="btn-style2 vegi-check next-btn">다음</button>
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
@@ -256,7 +271,11 @@ var myform=new formtowizard({
 				<div class="common-tbl-btn-group prev-btn-box outline-box">
 					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
-				<div class="content-outlin-box">
+				<div class="content-outlin-box">		
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 source-recom">추천소스 적용</button><br>
+					</div>
+					<br>
 					<div class="source img-box select-none fix-img" style="background-color:white; clear:both;" >
 						<img src="/resources/img/cancelyellow.png">
 						<p class="label">선택안함</p>
@@ -271,13 +290,10 @@ var myform=new formtowizard({
 							</div>
 						</c:if>
 					</c:forEach>
-					<div class="common-tbl-btn-group">
-						<button type="button" class="btn-style2 source-recom" style="clear:both;">추천소스 적용</button>
-						<button type="button" class="btn-style2 source-check" style="clear:both;">소스 선택완료</button>
-					</div>
+					
 				</div>
 				<div class="common-tbl-btn-group next-btn-box outline-box">
-					<button type="button" class="btn-style2 next-btn">다음</button>
+					<button type="button" class="btn-style2 source-check next-btn">다음</button>
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
@@ -286,6 +302,9 @@ var myform=new formtowizard({
 					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
 				<div class="content-outlin-box">
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 hidden-space-btn">숨기기</button><br>
+					</div>				
 					<div class="set img-box select-one fix-img" style="background-color:white;" >
 						<img src="/resources/img/checkedgreen.png">
 						<p class="label">단품</p>
@@ -315,6 +334,9 @@ var myform=new formtowizard({
 					<button type="button" class="btn-style2 prev-btn">이전</button>
 				</div>
 				<div class="content-outlin-box">
+					<div class="common-tbl-btn-group">
+						<button type="button" class="btn-style2 hidden-space-btn">숨기기</button><br>
+					</div>				
 					<div class="sidemenu img-box select-none fix-img" style="background-color:white; clear:both;" >
 						<img src="/resources/img/cancelyellow.png">
 						<p class="label">선택안함</p>
@@ -331,12 +353,9 @@ var myform=new formtowizard({
 							</div>
 						</c:if>
 					</c:forEach>
-					<div class="common-tbl-btn-group">
-						<button type="button" class="btn-style2 order-check" style="clear:both;">카트에 담기</button>
-					</div>
 				</div>
 				<div class="common-tbl-btn-group next-btn-box outline-box">
-					<button type="button" class="btn-style2 next-btn">다음</button>
+					<button type="button" class="btn-style2 order-check">주문 확인</button>
 				</div>
 			</fieldset>
 		
@@ -380,14 +399,14 @@ var myform=new formtowizard({
 			<input type="hidden" name="bucTopping" class="orderInput">
 			<input type="hidden" name="bucVegi" class="orderInput">
 			<input type="hidden" name="bucSource" class="orderInput">
-			<input type="hidden" name="bucSet" class="orderInput">
+			<input type="hidden" name="bucSet" class="orderInput" value="단품">
 			<input type="hidden" name="bucSide" class="orderInput">
 			<input type="hidden" name="bucQuantity" class="orderInput">
 			<input type="hidden" name="bucCost" class="orderInput">
 			<input type="hidden" name="bucKcal" class="orderInput"> 
 			<input type="hidden" name="bucIsSalad" class="orderInput">
 			<input type="hidden" name="bucIsOvened" class="orderInput">
-			<input type="hidden" name="bucBranch" class="orderInput" value="${mgr.mgrNo }">
+			<input type="hidden" name="bucBranch" class="orderInput" value="${mgr.mgrName }">
 			<c:if test="${sessionScope.customer ne null }">
 				<input type="hidden" name="bucCustomerIdx" class="orderInput" value="${sessionScope.customer.customerNo}">
 			</c:if>

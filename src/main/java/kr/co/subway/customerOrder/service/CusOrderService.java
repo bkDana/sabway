@@ -178,8 +178,8 @@ public class CusOrderService {
 		return (ArrayList<CusOrder>)cusOrderDao.loadOrderList(customerIdx);
 	}
 
-	public List loadMenuList(String customerNo) {
-		return cusOrderDao.loadMenuList(customerNo);
+	public ArrayList<Bucket> loadMenuList(ArrayList<MyMenu> menuList) {
+		return (ArrayList<Bucket>) cusOrderDao.loadMenuList(menuList);
 	}
 
 	public ArrayList<MyMenu> selectMyMenuList(String customerNo) {
@@ -190,6 +190,10 @@ public class CusOrderService {
 		CusOrder cusOrder = cusOrderDao.cusOrderInfo(no);
 		cusOrder.setBucketList((ArrayList<Bucket>)cusOrderDao.cusOrderItem(no));
 		return cusOrder;
+	}
+	
+	public int myMemuDelete(int idx) {
+		return cusOrderDao.myMenuDelete(idx);
 	}
 
 }

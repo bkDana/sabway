@@ -24,6 +24,7 @@ import kr.co.subway.customerOrder.vo.CusOrderPageData;
 import kr.co.subway.headOffice.service.ApplyService;
 import kr.co.subway.headOffice.service.MenuService;
 import kr.co.subway.headOffice.vo.Apply;
+import kr.co.subway.headOffice.vo.ApplyMenuPageData;
 import kr.co.subway.headOffice.vo.ApplyPageData;
 import kr.co.subway.headOffice.vo.CompletionPageData;
 import kr.co.subway.ingreManage.vo.IngreVo;
@@ -45,7 +46,7 @@ public class HeadOfficeController {
 		}catch(Exception e) {
 			currentPage1 = 1;
 		}
-		ApplyPageData pd = menuservice.menuListPaging(currentPage1);
+		ApplyMenuPageData pd = menuservice.menuListPaging(currentPage1);
 		ModelAndView mav = new ModelAndView();
 		try {
 			mav.addObject("pd",pd);
@@ -194,7 +195,25 @@ public class HeadOfficeController {
 		}
 		return mav;
 	}
-	
+	//메뉴 목록 출력 및 할인 적용 페이지 이동
+	@RequestMapping(value="/searchPromotion.do")
+	public ModelAndView searchPromotion(String currentPage,String keyword) {
+		int currentPage1;
+		try {
+			currentPage1 = Integer.parseInt(currentPage);
+		}catch(Exception e) {
+			currentPage1 = 1;
+		}
+		ApplyMenuPageData pd = menuservice.searchPromotion(currentPage1,keyword);
+		ModelAndView mav = new ModelAndView();
+		try {
+			mav.addObject("pd",pd);
+			mav.setViewName("headOffice/SelectPromotion");
+		}catch(Exception e) {
+			mav.setViewName("redirect:/");
+		}
+		return mav;
+	}
 
 	
 }
