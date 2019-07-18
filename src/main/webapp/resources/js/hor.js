@@ -171,6 +171,14 @@ $(document).ready(function() {
 			}
 			$(this).toggleClass("selected");
 			$('.bread').css("display","block");
+			if($('.show-order').find('.show-order-type').length==0){
+				var showOrderStr = "<button type='button' class='btn-style4 show-order-type'>샌드위치</button>";
+				$('.show-order').append(showOrderStr);
+			}else{
+				$('.show-order').find('.show-order-type').eq(0).text("샌드위치");
+			}
+			
+			
 			$('input[name=bucIsSalad]').val("샌드위치");
 			$('.salad').css("display","none");
 		}else if(typeIdx==2){
@@ -213,7 +221,12 @@ $(document).ready(function() {
 					});
 				}
 			}
-			
+			if($('.show-order').find('.show-order-type').length==0){
+				var showOrderStr = "<button type='button' class='btn-style4 show-order-type'>샐러드</button>";
+				$('.show-order').append(showOrderStr);
+			}else{
+				$('.show-order').find('.show-order-type').eq(0).text("샐러드");
+			}
 			$(this).toggleClass("selected");
 			$('input[name=bucIsSalad]').val("샐러드");
 			$('input[name=bucBread]').val("선택안함");
@@ -302,6 +315,12 @@ $(document).ready(function() {
 			breadCheck=2;
 			console.log("30짜리 찍엇어");
 		}
+		if($('.show-order').find('.show-order-bread').length==0){
+			var showOrderStr = "<button type='button' class='btn-style4 show-order-bread'>"+breadIdx+"/"+amountIdx+"cm</button>";
+			$('.show-order').append(showOrderStr);
+		}else{
+			$('.show-order').find('.show-order-bread').eq(0).text(breadIdx+"/"+amountIdx+"cm");
+		}
 		var str = breadIdx+','+amountIdx;
 		console.log(cost);
 		console.log(kcal);
@@ -365,6 +384,16 @@ $(document).ready(function() {
 		$('#recom-sauce').val($(this).find('input').eq(3).val());
 		$('#recom-main').val(str);
 		$('input[name=bucMain]').val(str);
+		if($('.show-order').find('.show-order-main').length==0){
+			var showOrderStr = "<button type='button' class='btn-style4 show-order-main'>"+str+"</button>";
+			$('.show-order').append(showOrderStr);
+		}else{
+			$('.show-order').find('.show-order-main').eq(0).text(str);
+		}
+		
+		$('.show-cost').find('.show-cost-context').eq(0).remove();
+		var showCostStr = "<button type='button' class='btn-style4 show-cost-context'>"+cost+" 원</button>";
+		$('.show-cost').append(showCostStr);
 	});
 	
 	$('.salad').click(function(){
@@ -412,6 +441,17 @@ $(document).ready(function() {
 		$('#recom-sauce').val($(this).find('input').eq(3).val());
 		$('#recom-main').val(str);
 		$('input[name=bucMain]').val(str);
+		
+		if($('.show-order').find('.show-order-main').length==0){
+			var showOrderStr = "<button type='button' class='btn-style4 show-order-main'>"+str+"</button>";
+			$('.show-order').append(showOrderStr);
+		}else{
+			$('.show-order').find('.show-order-main').eq(0).text(str);
+		}
+		
+		$('.show-cost').find('.show-cost-context').eq(0).remove();
+		var showCostStr = "<button type='button' class='btn-style4 show-cost-context'>"+cost+" 원</button>";
+		$('.show-cost').append(showCostStr);
 	});
 	
 	$('.cheese').click(function(){
@@ -457,13 +497,25 @@ $(document).ready(function() {
 		$(this).unbind("mouseleave");
 		$(this).addClass("selected");
 		$('input[name=bucCheese]').val(str);
+		
+		if($('.show-order').find('.show-order-cheese').length==0){
+			var showOrderStr = "<button type='button' class='btn-style4 show-order-cheese'>"+str+"</button>";
+			$('.show-order').append(showOrderStr);
+		}else{
+			$('.show-order').find('.show-order-cheese').eq(0).text(str);
+		}
+		
 	});
 	
 	$('.topping-check').click(function(){
 		var str = "";
+		var strKorea = "";
+		var noCount = 0;
 		for(var i = 1; i<$('.topping').length;i++){
 			if($('.topping').eq(i).hasClass("selected")){
+				noCount++;
 				str += '1';
+				strKorea += $('.topping').eq(i).find('p').text()+",";
 				if(breadCheck==1){
 					cost += Number($('.topping').eq(i).find('input').eq(1).val())*1;
 					kcal += Number($('.topping').eq(i).find('input').eq(0).val())*1;
@@ -475,15 +527,36 @@ $(document).ready(function() {
 				str += '0'; 
 			}
 		}
+		
+		if(noCount == 0){
+			strKorea = "토핑 선택안함";
+		}else{
+			strKorea = strKorea.substr(0, strKorea.length -1);
+		}
 		console.log(cost);
 		console.log(kcal);
 		$('input[name=bucTopping]').val(str);
 		console.log($('input[name=bucTopping]').val());
+		
+		if($('.show-order').find('.show-order-topping').length==0){
+			var showOrderStr = "<button type='button' class='btn-style4 show-order-topping'>"+strKorea+"</button>";
+			$('.show-order').append(showOrderStr);
+		}else{
+			$('.show-order').find('.show-order-topping').eq(0).text(strKorea);
+		}
+		$('.show-cost-context').text(cost+" 원");
 		$(".step").eq(5).trigger("click");
 	});
 	$('.topping.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.topping').length;i++){
 			if($('.topping').eq(i).hasClass("selected")){
+				if(breadCheck==1){
+					cost -= Number($('.topping').eq(i).find('input').eq(1).val())*1;
+					kcal -= Number($('.topping').eq(i).find('input').eq(0).val())*1;
+				}else if(breadCheck==2){
+					cost -= Number($('.topping').eq(i).find('input').eq(2).val())*1;
+					kcal -= Number($('.topping').eq(i).find('input').eq(0).val())*2;
+				}
 				$('.topping').eq(i).removeClass("selected");
 				$('.topping').eq(i).find('img').css("display","block");
 				$('.topping').eq(i).find('p').css("display","none");
@@ -530,6 +603,7 @@ $(document).ready(function() {
 		$(this).addClass("selected");
 		
 		$('input[name=bucIsOvened]').val(idx);
+		
 		//0이 오븐하는거임
 	});
 	
@@ -559,6 +633,7 @@ $(document).ready(function() {
 		}
 	});
 	
+	////야채 한글로 보여줘야되냐...
 	$('.vegi-check').click(function(){
 		var str = "";
 		for(var i = 0; i<$('.vegi').length;i++){
@@ -574,12 +649,18 @@ $(document).ready(function() {
 		}
 		$('input[name=bucVegi]').val(str);
 		console.log($('input[name=bucVegi]').val());
+		
 		$(".step").eq(7).trigger("click");
 	});
 	
 	$('.source.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.source').length;i++){
 			if($('.source').eq(i).hasClass("selected")){
+				if(breadCheck==1){
+					kcal -= Number($('.source').eq(i).find('input').eq(0).val())*1;
+				}else if(breadCheck==2){
+					kcal -= Number($('.source').eq(i).find('input').eq(0).val())*2;
+				}
 				$('.source').eq(i).removeClass("selected");
 				$('.source').eq(i).find('img').css("display","block");
 				$('.source').eq(i).find('p').css("display","none");
@@ -616,9 +697,13 @@ $(document).ready(function() {
 	
 	$('.source-check').click(function(){
 		var str = "";
+		var strKorea = "";
+		var noCount = 0;
 		for(var i = 1; i<$('.source').length;i++){
 			if($('.source').eq(i).hasClass("selected")){
+				noCount++;
 				str += '1';
+				strKorea += $('.source').eq(i).find('p').text()+",";
 				if(breadCheck==1){
 					kcal += Number($('.source').eq(i).find('input').eq(0).val())*1;
 				}else if(breadCheck==2){
@@ -628,12 +713,25 @@ $(document).ready(function() {
 				str += '0';
 			}
 		}
-		console.log(cost);
+		if(noCount == 0){
+			strKorea = "소스 선택안함";
+		}else{
+			strKorea = strKorea.substr(0, strKorea.length -1);
+		}
 		console.log(kcal);
 		$('input[name=bucSource]').val(str);
 		console.log($('input[name=bucSource]').val());
+		
+		if($('.show-order').find('.show-order-source').length==0){
+			var showOrderStr = "<button type='button' class='btn-style4 show-order-source'>"+strKorea+"</button>";
+			$('.show-order').append(showOrderStr);
+		}else{
+			$('.show-order').find('.show-order-source').eq(0).text(strKorea);
+		}
+		
 		$(".step").eq(8).trigger("click");
 	});
+	
 	$('.set').click(function(){
 		if($(this).hasClass("selected")){
 			return;
@@ -669,12 +767,23 @@ $(document).ready(function() {
 		console.log(kcal);
 		$(this).unbind("mouseleave");
 		$(this).addClass("selected");
+		
+		if($('.show-order').find('.show-order-set').length==0){
+			var showOrderStr = "<button type='button' class='btn-style4 show-order-set'>"+str+"</button>";
+			$('.show-order').append(showOrderStr);
+		}else{
+			$('.show-order').find('.show-order-set').eq(0).text(str);
+		}
+		$('.show-cost-context').text(cost+" 원");
+		
 		$('input[name=bucSet]').val(str);
 	});
 
 	$('.sidemenu.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selected")){
+				cost -= Number($('.sidemenu').eq(i).find('input').eq(1).val());
+				kcal -= Number($('.sidemenu').eq(i).find('input').eq(0).val());
 				$('.sidemenu').eq(i).removeClass("selected");
 				$('.sidemenu').eq(i).find('img').css("display","block");
 				$('.sidemenu').eq(i).find('p').css("display","none");
@@ -700,10 +809,12 @@ $(document).ready(function() {
 		};
 	$('.order-check').click(function(){
 		var str='';
+		var strKorea = "";
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selected")){
 				console.log("해즈클래스");
 				str += "1";
+				strKorea += $('.sidemenu').eq(i).find('p').text()+",";
 				cost += Number($('.sidemenu').eq(i).find('input').eq(1).val());
 				kcal += Number($('.sidemenu').eq(i).find('input').eq(0).val());
 			}else{
@@ -711,9 +822,19 @@ $(document).ready(function() {
 				str += '0';
 			}
 		}
+		strKorea = strKorea.substr(0, strKorea.length -1);
 		console.log(cost);
 		console.log(kcal);
 		console.log(str);
+		
+		if($('.show-order').find('.show-order-sidemenu').length==0){
+			var showOrderStr = "<button type='button' class='btn-style4 show-order-sidemenu'>"+strKorea+"</button>";
+			$('.show-order').append(showOrderStr);
+		}else{
+			$('.show-order').find('.show-order-sidemenu').eq(0).text(strKorea);
+		}
+		$('.show-cost-context').text(cost+" 원");
+		
 		$('input[name=bucSide]').val(str);
 		$('input[name=bucCost]').val(cost);
 		$('input[name=bucKcal]').val(kcal);
@@ -741,16 +862,15 @@ $(document).ready(function() {
             success : function(data){
                 alert(data);
                 var orderCheckStr = "<tr>";
-        		for(var i=0; i<10; i++){
-        			if(i!=8 || i!=9){
-        				orderCheckStr += "<td>"+$('.orderInput').eq(i).val()+"</td>";        				
-        			}else if(i==8){
+        		for(var i=0; i<9; i++){
+        			if(i<7){
+        				orderCheckStr += "<td>"+$('.show-order').find('button').eq(i+1).text()+"</td>";        				
+        			}else if(i==7){
         				orderCheckStr += "<td><button class='quantityChange type1' type='button' onclick='quantityChange(0,this);'>-</button>&nbsp;&nbsp;&nbsp;<span>"
-        					+$('.orderInput').eq(i).val()+"</span>&nbsp;&nbsp;&nbsp;<button class='quantityChange type2' type='button' onclick='quantityChange(1,this);'>+</button></td>";
-        			}else if(i==9){
-        				orderCheckStr += "<td>"+$('.orderInput').eq(i).val()+"원</td>";      
+        					+$('.orderInput').eq(8).val()+"</span>&nbsp;&nbsp;&nbsp;<button class='quantityChange type2' type='button' onclick='quantityChange(1,this);'>+</button></td>";
+        			}else if(i==8){
+        				orderCheckStr += "<td>"+$('.orderInput').eq(9).val()+"원</td>";      
         			}
-        			
         		}
         		orderCheckStr += "<td><button type='button' onclick='deleteOrder(this)'>취소</button>";
         		orderCheckStr += "<input type='hidden' class='idxHidden' value='"+data+"'></td>";
@@ -782,6 +902,14 @@ $(document).ready(function() {
 	
 	function deleteOrder(idx){
 		var delIdx = $(idx).next().val();
+		var btnArrIdx = $('.show-order').find('button').length;
+		for(var i=0;i<btnArrIdx+1;i++){
+			if(i!=btnArrIdx){
+				$('.show-order').find('button').eq(i).remove();
+			}else{
+				$('.show-cost').find('button').eq(0).remove();
+			}
+		}
 		$.ajax({
         	url : "/tempOrderDelete.do",
             type : 'get',
@@ -796,13 +924,23 @@ $(document).ready(function() {
     	for(var i=0; i<13; i++){
     			$('.orderInput').eq(i).val("");				
     	}
-    	var offset = $("strong").eq(1).offset();
+    	var btnArrIdx = $('.show-order').find('button').length;
+    	for(var i=0;i<btnArrIdx+1;i++){
+			if(i!=btnArrIdx){
+				$('.show-order').find('button').eq(i).remove();
+			}else{
+				$('.show-cost').find('button').eq(0).remove();
+			}
+		}
+    	cost=0;
+    	kcal=0;
+    	var offset = $("strong").eq(0).offset();
         $('html, body').animate({scrollTop : offset.top}, 400);
     	$(".step").eq(0).trigger("click");
 	});
 	
-	$('.add-bucket').click(function() {
-		
+	$('.load-bucket').click(function() {
+		location.href="/loadBucket.do"
 	});
 
 

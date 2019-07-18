@@ -8,7 +8,7 @@
 @import url("/resources/css/font.css");	/* 나눔고딕 & 본고딕 */
 
 /* layout */
-body, table, th, td, button, select, input, textarea {
+body, table, th, td, button, select, input, textarea, pre {
 	font-family:'Noto Sans KR', "나눔고딕", NanumGothic, "Nanum Gothic","돋움", Dotum, Arial, sans-serif;
 	font-size:13px;
 	color:black;

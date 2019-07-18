@@ -18,14 +18,19 @@ var myform=new formtowizard({
 });
 </script>
 <%-- content--%>
-<section id="content-wrapper">
+<section id="content-wrapper" style="background-color: #fff;">
 	<div class="area">	
-	<strong style="font-size:40px; font-weight:bolder;">온라인 주문 예약</strong>
+	<h1 class="board-tit">온라인 주문 예약</h1>
 		<c:if test="${not empty sessionScope.customer}">
 			<a class="header-btn" style="margin-right:30px; float:right; cursor:pointer;"><img src="/resources/img/shopping-cart.png" width="30px"></a><!-- 장바구니 개수 넣어주세요 -->
 		</c:if>
 		<br><br><strong style="font-size:30px; font-weight:bolder;">${mgr.mgrName } 주문하기</strong>
 		<form id="feedbackform" name="feedbackform" method="post">
+			<div class="common-tbl-btn-group show-order">
+			</div>	
+			<div class="common-tbl-btn-group show-cost">
+				
+			</div>	
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
 				<div class="common-tbl-btn-group prev-btn-box outline-box">
@@ -354,24 +359,26 @@ var myform=new formtowizard({
 						</c:if>
 					</c:forEach>
 				</div>
-				<div class="common-tbl-btn-group next-btn-box outline-box">
-					<button type="button" class="btn-style2 order-check">주문 확인</button>
-				</div>
+				<div class="common-tbl-btn-group">
+					<button type="button" class="btn-style2 hidden-space-btn">숨기기</button><br>
+				</div>	
 			</fieldset>
-		
+			<div class="common-tbl-btn-group">
+					<button type="button" class="btn-style2 order-check">주문 확인</button>
+			</div>
+			<br><br><br><br>
 				<div class="common-tbl-box">
 					<table class="comm-tbl type2">
 						<colgroup>
-							<col width="9%">
-							<col width="9%">
-							<col width="9%">
-							<col width="9%">
-							<col width="9%">
-							<col width="9%">
-							<col width="9%">
-							<col width="9%">
-							<col width="9%">
-							<col width="9%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
 							<col width="10%">
 						</colgroup>
 						<tr>
@@ -379,7 +386,6 @@ var myform=new formtowizard({
 							<th>메인재료</th>
 							<th>치즈</th>
 							<th>추가토핑</th>
-							<th>채소</th>
 							<th>소스</th>
 							<th>세트</th>
 							<th>사이드</th>
@@ -390,7 +396,7 @@ var myform=new formtowizard({
 					</table>
 					<div class="common-tbl-btn-group">
 						<button type="button" id="sbmOrder" class="btn-style2 add-order">추가 주문</button>
-						<button type="button" id="sbmOrder" class="btn-style2">주문 완료</button>
+						<button type="button" id="sbmOrder" class="btn-style2 load-bucket">장바구니 가기</button>
 					</div>
 				</div>
 			<input type="hidden" name="bucBread" class="orderInput">
