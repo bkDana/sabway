@@ -3,6 +3,7 @@ package kr.co.subway.notice.vo;
 import java.sql.Date;
 
 public class Review {
+	private int rnum;
 	private int reviewNo;
 	private String reviewTitle;
 	private String reviewWriter;
@@ -42,6 +43,12 @@ public class Review {
 		this.filename = filename;
 		this.filepath = filepath;
 		this.reviewDate = reviewDate;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getReviewNo() {
 		return reviewNo;

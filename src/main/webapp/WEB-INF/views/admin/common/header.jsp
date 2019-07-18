@@ -83,7 +83,7 @@
 							</div>
 						</li>
 						<li class="gnb06">
-							<a href="/board/noticeList.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("board")){%>on<%}%>">게시판관리</a>
+							<a href="/board/boardList.do?type=notice" class="<%if(request.getRequestURL().toString().split("/")[6].equals("board")){%>on<%}%>">게시판관리</a>
 						</li>
 						<li class="gnb07">
 							<a href="/salesStatics/goTotalSales.do">매출통계</a>

@@ -6,13 +6,14 @@
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 <script type="text/javascript" src="/resources/js/admin-notice.js"></script>
 <script type="text/javascript" src="/resources/js/search.js"></script>
-<%-- Content --%>
 
+<%-- Content --%>
 <section id="content-wrapper" class="clearfix">
+
 	<%-- LEFT MENU --%>
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 게시판관리 > 공지사항/이벤트</div>
+		<div class="sub-menu">※ 게시판관리 > 리뷰</div>
 			
 		<div class="board-search-box order-search">
 			<form action="/board/boardList.do" method="post" name="search">
@@ -36,50 +37,54 @@
 				<option value="old">오래된...순</option>
 			</select>
 		</p>
-		<table class="comm-tbl type2">
-			<colgroup>
-				<col width="3%">
-				<col width="5%">
-				<col width="10%">
-				<col width="/">
-				<col width="10%">
-			</colgroup>
-			<tr>
-				<th><input type="checkbox" class="allcbox"></th>
-				<th>번호</th>
-				<th>카테고리</th>
-				<th>제목</th>
-				<th>작성일</th>
-			</tr>
-			<c:if test="${empty pd.noticeList }">
-				<tr><td colspan="5">검색 결과가 없습니다.</td></tr>
-			</c:if>
-			<c:forEach items="${pd.noticeList}" var="notice">
-				<tr class="normal">
-					<td><input type="checkbox" class="cbox" data-idx="${notice.noticeNo }"></td>
-					<td>${notice.rnum }</td>
-					<td>${notice.noticeCategory }</td>
-					<td class="move-one-notice" data-idx="${notice.noticeNo }">${notice.noticeTitle }</td>
-					<td>${notice.noticeDate }</td>
-				</tr>
-			</c:forEach>
+			<table class="comm-tbl type2">
+				<colgroup>
+					<col width="3%">
+					<col width="5%">
+					<col width="10%">
+					<col width="/">
+					<col width="10%">
+				</colgroup>
 			
-		</table>
-		<div class="common-tbl-btn-group" style="text-align: right;">
-			<button class="btn-style2 insert-notice">작성하기</button>
-			<button class="btn-style3" id="del-button">삭제</button>
+				<tr>
+					<th><input type="checkbox" class="allcbox"></th>
+					<th>번호</th>
+					<th>작성자</th>
+					<th>제목</th>
+					<th>작성일</th>
+				</tr>
+				<c:if test="${empty pd.reviewList }">
+					<tr><td colspan="5">검색 결과가 없습니다.</td></tr>
+				</c:if>
+				<c:forEach items="${pd.reviewList}" var="review">
+					<tr class="normal">
+						<td><input type="checkbox" class="cbox" data-idx="${review.reviewNo }"></td>
+						<td>${review.rnum }</td>
+						<th style="display:none;">${review.reviewNo }</th>
+						<td>${review.reviewWriter }</td>
+						<td class="move-one-review">${review.reviewTitle }</td>
+						<td>${review.reviewDate }</td>
+					</tr>
+				</c:forEach>
+			
+			</table>
+			
+			<!-- 관리자는 작성이 필요없지 않을까요? 
+			<div class="common-tbl-btn-group">
+				<button class="btn-style2 insert-review">리뷰 작성하기</button>
+			</div>
+			 -->
+			 
+			<div class="common-tbl-btn-group" style="text-align: right;">
+				<button class="btn-style3" id="del-button">삭제</button>
+			</div>
+			
+			<div class="paging">${pd.pageNavi }</div>
 		</div>
-		<div class="paging">${pd.pageNavi }</div>
-
-	</div>
 </section>
-
 <script>
 
 
-
-
 </script>
-
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

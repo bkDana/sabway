@@ -162,7 +162,7 @@
   <select id="selectIngreList" parameterType="ingre" resultType="ingre">
   	select 
   		ingre_label as ingreLabel, ingre_type as ingreType, ingre_cost15 as ingreCost15, ingre_cost30 as ingreCost30, ingre_discnt_rate as ingreDiscntRate, ingre_kcal as ingreKcal, ingre_filepath as ingreFilepath, ingre_description as ingreDescription
-  	from ingredients where ingre_Type=#{ingreType}
+  	from ingredients where ingre_Type=#{ingreType} and ingre_active = 1
   </select>
   
   <!-- select * from (select rownum as rnum, b.* from (select ba.no, m.name careNm, ba.id, ba.name,ba.phone, ba.visit_date, ba.visit_time, ba.apply_date, ba.status 
