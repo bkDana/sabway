@@ -2,13 +2,14 @@ package kr.co.subway.customer.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.javassist.compiler.ast.Keyword;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.subway.customer.vo.Customer;
+import kr.co.subway.notice.vo.PageBound;
 @Repository("customerDao")
 public class CustomerDaoImpl implements CustomerDao{
    @Autowired
@@ -50,8 +51,22 @@ public class CustomerDaoImpl implements CustomerDao{
       return sqlsession.update("customer.updateState",c);
    }
    @Override
-   public List allCustomerList() {
-      return sqlsession.selectList("customer.allCustomerList");
+   public int custTotalCount(String customerState, String cusIdName, String keyword) {
+	   Map<String, String> map = new HashMap<String, String>();
+	   map.put("customerState", customerState);
+	   map.put("cusIdName", cusIdName);
+	   map.put("keyword", keyword);
+	   return sqlsession.selectOne("customer.custTotalCount",map);
+   }
+   @Override
+   public List allCustomerList(PageBound pb, String customerState, String cusIdName, String keyword) {
+	    Map<String, String> map = new HashMap<String, String>();
+		map.put("start", Integer.toString(pb.getStart()));
+		map.put("end", Integer.toString(pb.getEnd()));
+		map.put("customerState", customerState);
+		map.put("cusIdName", cusIdName);
+		map.put("keyword", keyword);
+	   return sqlsession.selectList("customer.allCustomerList",map);
    }
    @Override
    public int adminCustomerDelete(int customerNo) {
@@ -96,5 +111,6 @@ public class CustomerDaoImpl implements CustomerDao{
       map.put("cusStatusMember", cusStatusMember);
       return sqlsession.selectList("customer.customerKeyword",map);
    }
+
    
 }

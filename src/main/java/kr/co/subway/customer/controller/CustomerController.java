@@ -233,44 +233,30 @@ public class CustomerController {
 
    // 회원리스트
    @RequestMapping(value="/allCustomerList.do")
-   public ModelAndView allCustomerList() {
-      ArrayList<Customer> list = customerService.allCustomerList();
-      ModelAndView mav = new ModelAndView();
-      
-      if(!list.isEmpty()) {
-         mav.addObject("list",list);
-         mav.setViewName("customer/allCustomerList");
-      }else {
-         mav.setViewName("customer/error");
-      }
-   return mav;   
+   public ModelAndView allCustomerList(String reqPage, String customerState, String cusIdName, String keyword) {
+	  System.out.println("controller reqPage : "+ reqPage+ " customerState : "+customerState+ " cusIdName : "+cusIdName+ " keyword : "+keyword);
+	  ModelAndView mav = new ModelAndView();
+	  int reqPage1;
+	  try {
+	  	  reqPage1 = Integer.parseInt(reqPage);
+	  }catch (Exception e) {
+		  reqPage1=1;
+	  }
+	  CustPageNaviData cp = customerService.allCustomerList(reqPage1, customerState, cusIdName, keyword);
+      ArrayList<Customer> list = cp.getCustList();
+      String pageNavi = cp.getPageNavi();
+	  mav.addObject("reqPage",reqPage1);
+      mav.addObject("list",list);
+      mav.addObject("customerState",customerState);
+	  mav.addObject("cusIdName",cusIdName);
+	  mav.addObject("keyword",keyword);
+	  mav.addObject("pageNavi",pageNavi);
+      mav.setViewName("customer/allCustomerList");
+      return mav;   
    }
-   
-   // 회원 리스트검색
-	@RequestMapping(value="/customerKeyword.do")
-	public ModelAndView customerKeyword(String reqPage, @RequestParam String keyword, @RequestParam String cusIdName, @RequestParam String cusStatusMember) {
-    	  
-		int reqPage1;
-		try {
-			reqPage1 = Integer.parseInt(reqPage);
-		} catch (Exception e) {
-			reqPage1 = 1;
-		}
-		CustPageNaviData cp = customerService.customerList(keyword, cusIdName, cusStatusMember);
-		//ArrayList<Customer> list = (ArrayList<Customer>) customerService.customerKeyword(keyword,cusIdName,cusStatusMember);
-		ArrayList<Customer> list = cp.getCustList();
-		
-		ModelAndView mav = new ModelAndView();
-		   if(!list.isEmpty()) {
-		      mav.addObject("list",list);
-		      mav.setViewName("customer/allCustomerList");
-		   }else {
-		      mav.setViewName("customer/error");
-		   }
-		return mav; 
-	}
 
    // 회원탈퇴시키기
+   @ResponseBody
    @RequestMapping(value = "/adminCustomerDelete.do", produces = "application/json")
    public void adminCustomerDelete(HttpServletRequest request, HttpServletResponse response,
          @RequestParam int customerNo) {
@@ -293,6 +279,7 @@ public class CustomerController {
    }
 
    // 회원탈퇴해제시키기
+   @ResponseBody
    @RequestMapping(value = "/adminCustomerDeleteCancle.do", produces = "application/json")
    public void adminCustomerDeleteCancle(HttpServletRequest request, HttpServletResponse response,
          @RequestParam int customerNo) {

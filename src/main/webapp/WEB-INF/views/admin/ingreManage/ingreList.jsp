@@ -48,6 +48,14 @@
 					<th>이미지</th>
 					<th>수정/삭제</th>
 				</tr>
+				<c:if test="${empty ingreList }">
+					<tr>
+						<td colspan="9">
+							검색하신 결과가 없습니다.
+						</td>
+					</tr>
+				</c:if>
+				<c:if test="${not empty ingreList }">
 				<c:forEach items="${ingreList}" var="list">
 					<tr>
 						<td>${list.rnum }</td>
@@ -96,10 +104,8 @@
 						</td>
 					</tr>
 				</c:forEach>
+				</c:if>
 			</table>
-			<script>
-				
-			</script>
 		
 		
 		<div class="paging">${pageNavi }</div>
