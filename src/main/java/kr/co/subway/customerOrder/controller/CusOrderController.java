@@ -103,7 +103,7 @@ public class CusOrderController {
 			customerIdx = String.valueOf(c.getCustomerNo());
 		} else {
 			Cookie[]getCookie = request.getCookies();
-			customerIdx = getCookie[2].getValue();
+			customerIdx = getCookie[1].getValue();
 			
 		}
 
