@@ -1,6 +1,7 @@
 package kr.co.subway.customerOrder.dao;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Repository;
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.CusOrderPageBound;
+import kr.co.subway.customerOrder.vo.CusOrderPageData;
+import kr.co.subway.customerOrder.vo.MyMenu;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -68,6 +71,11 @@ public class CusOrderDao {
 	public int orderStateUpdate(CusOrder cuso) {
 		return sqlSession.update("cusOrder.orderStateUpdate",cuso);
 	}
+	
+	//회원용 주문목록
+	public List<CusOrder> loadOrderList(String customerIdx) {
+		return sqlSession.selectList("cusOrder.oneCusOrderList",customerIdx);
+	}
 	//list 개수 가져오기
 	public int totalCount() {
 		return sqlSession.selectOne("cusOrder.totalCount");
@@ -91,5 +99,8 @@ public class CusOrderDao {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("keyword", keyword);	
 		return sqlSession.selectOne("cusOrder.searchKeywordTotalCount",map);
+	}
+	public int insertMyMenu(MyMenu mm) {
+		return sqlSession.insert("mymenu.insertMyMenu",mm);
 	}
 }

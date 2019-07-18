@@ -12,6 +12,7 @@ import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.CusOrderPageBound;
 import kr.co.subway.customerOrder.vo.CusOrderPageData;
+import kr.co.subway.customerOrder.vo.MyMenu;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.manager.vo.Mgr;
@@ -71,6 +72,12 @@ public class CusOrderService {
 		return cusOrderDao.updateOrder(b);
 		
 	}
+	
+	@Transactional
+	public int insertMyMenu(MyMenu mm) {
+		return cusOrderDao.insertMyMenu(mm);
+	}
+	
 	//주문 목록 가져오기
 	public CusOrderPageData cusOrderList(int currentPage1){
 		String pageNavi = "";
@@ -100,6 +107,7 @@ public class CusOrderService {
 		}
 		return new CusOrderPageData(list,pageNavi,totalCount);
 	}
+	
 	//주문 상태 변경
 	@Transactional
 	public int orderStateUpdate(CusOrder cuso) {
@@ -164,4 +172,14 @@ public class CusOrderService {
 		}
 		return new CusOrderPageData(list,pageNavi,totalCount);
 	}
+
+	public ArrayList<CusOrder> loadOrderList(String customerIdx) {
+		return (ArrayList<CusOrder>)cusOrderDao.loadOrderList(customerIdx);
+	}
+
+	public ArrayList<MyMenu> loadMenuList(String customerNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -97,8 +97,27 @@
            where customer_id = #{customerId}
     </update>
     
+    <!-- 회원 리스트 갯수 구하기 -->
+    <select id="custTotalCount" parameterType="map" resultType="_int">
+       select count(*) as cnt from customer 
+       <trim prefix="where" prefixOverrides="AND|OR">
+       <!-- 회원상태를 선택했을 경우 -->
+		<if test="customerState != '-1' and customerState != null">
+			customer_state=#{customerState}
+		</if>
+		<!-- 아이디로 찾는 경우 -->
+		<if test="cusIdName == 'id'">
+			and customer_id like '%'||#{keyword}||'%'
+		</if>
+		<!-- 이름으로 찾는 경우 -->
+		<if test="cusIdName == 'name'">
+			and customer_name like '%'||#{keyword}||'%'
+		</if>
+       </trim>
+    </select>
+    
     <!-- 회원 리스트  -->
-    <select id="allCustomerList" resultType="customer">
+    <select id="allCustomerList" parameterType="map" resultType="customer">
        select
        rnum 
        ,customer_no as customerNo
@@ -112,7 +131,22 @@
        ,customer_state as customerState
        ,reg_date as regDate
        ,lastlog_date as lastLogDate
-       from (select rownum as rnum, m.* from (select * from customer order by reg_date desc) m)
+       from (select rownum as rnum, m.* from (select * from customer
+       <trim prefix="where" prefixOverrides="AND|OR">
+       <!-- 회원상태를 선택했을 경우 -->
+		<if test="customerState != '-1' and customerState != null">
+			customer_state=#{customerState}
+		</if>
+		<!-- 아이디로 찾는 경우 -->
+		<if test="cusIdName == 'id'">
+			and customer_id like '%'||#{keyword}||'%'
+		</if>
+		<!-- 이름으로 찾는 경우 -->
+		<if test="cusIdName == 'name'">
+			and customer_name like '%'||#{keyword}||'%'
+		</if>
+       </trim>
+        order by reg_date desc) m) where rnum between #{start} and #{end}
     </select>
     
     <!-- 회원탈퇴시키기 -->
