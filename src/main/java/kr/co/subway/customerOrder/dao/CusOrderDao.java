@@ -103,4 +103,14 @@ public class CusOrderDao {
 	public int insertMyMenu(MyMenu mm) {
 		return sqlSession.insert("mymenu.insertMyMenu",mm);
 	}
+
+	// bucket조인용 리스트
+	public List<MyMenu> selectMyMenuList(String customerNo) {
+		return sqlSession.selectList("mymenu.selectMyMenuList",customerNo);
+	}
+
+	public List loadMenuList(String customerNo) {//customerNo에서 menuList로 바꿔야함
+		return sqlSession.selectList("mymenu.loadMyMenu",customerNo);
+	}
+
 }

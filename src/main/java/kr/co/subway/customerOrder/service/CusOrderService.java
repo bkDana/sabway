@@ -177,9 +177,12 @@ public class CusOrderService {
 		return (ArrayList<CusOrder>)cusOrderDao.loadOrderList(customerIdx);
 	}
 
-	public ArrayList<MyMenu> loadMenuList(String customerNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List loadMenuList(String customerNo) {
+		return cusOrderDao.loadMenuList(customerNo);
+	}
+
+	public ArrayList<MyMenu> selectMyMenuList(String customerNo) {
+		return (ArrayList<MyMenu>)cusOrderDao.selectMyMenuList(customerNo);
 	}
 
 }

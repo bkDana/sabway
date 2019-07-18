@@ -12,4 +12,14 @@
 			#{mmMenuLabel}
 			)	
 	</insert>
+	<select id="selectMyMenuList" parameterType="String" resultType="mymenu">
+		select
+			mm_menu_label as mmMenuLabel,
+			mm_customer_no as mmCustomerNo,
+			mm_buc_idx as mmBucIdx
+		from
+			mymenu
+		where
+			mm_customer_no = #{mmCustomerNo}		
+	</select>
 </mapper>
