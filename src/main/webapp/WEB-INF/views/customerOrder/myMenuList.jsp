@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- Header --%>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
+<script type="text/javascript" src="/resources/js/bucket.js"></script>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 <%-- content --%>
 <section id="content-wrapper">
 	<div class="area">
@@ -33,19 +35,16 @@
 					<!-- <input type="hidden" class="hiddenCusoIdx" name="itemCusoIdx" value=""> -->
 					<input type="submit" class="myMenu" style="display:none;">
 				</form>
-				
-				<c:if test="${status.index eq 0 }">
-					<div class="hiddenOrder">
-						<form action="/insertItem.do" method="post">
-							<input type="hidden" name="cusoTotalCost" value="">
-							<input type="hidden" name="cusoPhone" value="">
-							<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
-							<input type="hidden" name="cusoOrderNo" value="">
-							<input type="hidden" name="cusoBranchName" value="${bucket.bucBranch }">
-							<input type="submit" id="insertOrder" style="display:none;">
-						</form>
-		 			</div> 
-				</c:if>
+				<div class="hiddenOrder">
+					<form action="/insertItem.do" method="post">
+						<input type="hidden" name="cusoTotalCost" value="">
+						<input type="hidden" name="cusoPhone" value="">
+						<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
+						<input type="hidden" name="cusoOrderNo" value="">
+						<input type="hidden" name="cusoBranchName" value="${bucket.bucBranch }">
+						<input type="submit" id="insertOrder" style="display:none;">
+					</form>
+	 			</div> 
 			</div>
 		</c:forEach>
 			
@@ -70,7 +69,7 @@
 				<td>수량 : ${bucket.bucQuantity }</td>
 				<td><span class="cost">${bucket.bucCost }</span>원</td>
 				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">개별 주문하기</button></td>
-				<td><button type="button" onclick="deleteMenu(this)" style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
+				<td><button type="button" class="deleteMyMenu"  style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
 			</tr>
 			</c:forEach>
 			<tr>

@@ -26,7 +26,9 @@
 		}else{
 			console.log("쿠키있음");			
 		}
-		
+		$('#bucket').click(function() {
+			location.href="/loadBucket.do"
+		});
 	});
 	var setCookie = function setCookie(){
 		var cookieDate = new Date();
@@ -34,8 +36,9 @@
 		document.cookie = "noneCustomer="+date;
 	}
 	
+	
 </script>
-<script type="text/javascript" src="/resources/js/bucket.js"></script>
+
 <title>진짜 메인</title>
 </head>
 <body>
@@ -72,8 +75,7 @@
 		<div id="headerInnerWrap">
 			<!-- 로고 -->
 			<div class="header-logo">
-				<input type="hidden" id="sessionPhone" value="${sessionScope.customer.phone }">
-				<input type="hidden" id="sessionId" value="${sessionScope.customer.customerId }">
+				
 				<a href="/" class="sabway"><img src="/resources/img/logo_w.png" style="max-height:68px;"></a>
 				<ul class="header-menu clearfix">
 					<!--

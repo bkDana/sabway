@@ -186,6 +186,7 @@ public class CusOrderController {
 	public void insertMyMenu(HttpServletResponse response, MyMenu mm) {
 		mm.setMmIdx(0);
 		System.out.println(mm.getMmMenuLabel());
+		System.out.println(mm.getMmBucIdx());
 		int result = cusOrderService.insertMyMenu(mm);
 	//			System.out.println("controller updateIngreActive() result : "+result);
 		response.setContentType("text/html;charset=utf-8");
@@ -210,6 +211,9 @@ public class CusOrderController {
 //			System.out.println(mm.getMmMenuLabel() + " / " + mm.getMmCustomerNo() + " / " + mm.getMmBucIdx());
 //		}
 		ArrayList<Bucket> list = (ArrayList<Bucket>) cusOrderService.loadMenuList(menuList);
+		for(Bucket b:list) {
+			System.out.println(b.getBucIdx());
+		}
 		if(!list.isEmpty()) {
 			mav.addObject("list",list);
 			mav.setViewName("customerOrder/myMenuList");
@@ -287,6 +291,7 @@ public class CusOrderController {
 		return mav; 
 	}
 	
+	//나만의 메뉴 삭제
 	@ResponseBody
 	@RequestMapping("/myMenuDelete.do")
 	public void myMenuDelete(HttpServletResponse response, @RequestParam String delIdx){
