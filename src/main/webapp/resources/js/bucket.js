@@ -17,7 +17,7 @@ $(document).ready(function(){
 	        success : function(){
 	        	totalCost -= Number($(idx).parent().find('.cost').html());
 	            $(idx).parent().parent().remove();
-	        },
+	        }
 	    });
 	}
 	
@@ -35,7 +35,8 @@ $(document).ready(function(){
     if(!$('#sessionId').val()) {
     	sessionId = "비회원";
     }
-    var cookieVal = getCookie('noneCustomer');	// 헤더에서 쓰임
+    var cookieVal = getCookie('noneCustomer');	// 헤더에서 쓰임.
+    
     console.log(sessionPhone);
     console.log(cookieVal);
     

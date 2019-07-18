@@ -99,48 +99,48 @@
     
     <!-- 회원 리스트  -->
     <select id="allCustomerList" resultType="customer">
-    	select
-    	rnum 
-    	,customer_no as customerNo
-    	,customer_id as customerId
-    	,customer_name as customerName
-    	,customer_nickname as customerNick
-    	,phone as phone
-    	,birthday as birthday
-    	,email as email
-    	,gender as gender
-    	,customer_state as customerState
-    	,reg_date as regDate
-    	,lastlog_date as lastLogDate
-    	from (select rownum as rnum, m.* from (select * from customer order by reg_date desc) m)
+       select
+       rnum 
+       ,customer_no as customerNo
+       ,customer_id as customerId
+       ,customer_name as customerName
+       ,customer_nickname as customerNick
+       ,phone as phone
+       ,birthday as birthday
+       ,email as email
+       ,gender as gender
+       ,customer_state as customerState
+       ,reg_date as regDate
+       ,lastlog_date as lastLogDate
+       from (select rownum as rnum, m.* from (select * from customer order by reg_date desc) m)
     </select>
     
     <!-- 회원탈퇴시키기 -->
     <update id="adminCustomerDelete" parameterType="customer">
-    	update customer
-    		set customer_state = 2
-    		where customer_no = #{customerNo}
+       update customer
+          set customer_state = 2
+          where customer_no = #{customerNo}
     </update>
     
     <!-- 회원탈퇴해제시키기 -->
     <update id="adminCustomerDeleteCancle" parameterType="customer">
-    	update customer
-    		set customer_state = 1
-    		where customer_no = #{customerNo}
+       update customer
+          set customer_state = 1
+          where customer_no = #{customerNo}
     </update>
     
     <!-- 아이디 찾기 -->
-	<select id="findId" parameterType="customer" resultType="String">
-	   select rpad(subStr(customer_id,0,3),5,'*') from customer where customer_name=#{customerName} and phone =#{phone} and birthday =#{birthday}
-	</select>
-	
-	  <!-- 비번 찾기 (아이디,이메일 체크)-->
-	<select id="idAndEmailCheck" parameterType="customer" resultType="customer">
-	   select customer_id as customerId from customer where customer_id=#{customerId} and email =#{email}
-	</select>
-	
-	<!-- 비번 찾기(비번업뎃) -->
-	<update id="pwUpdate" parameterType="customer">
+   <select id="findId" parameterType="customer" resultType="String">
+      select rpad(subStr(customer_id,0,3),5,'*') from customer where customer_name=#{customerName} and phone =#{phone} and birthday =#{birthday}
+   </select>
+   
+     <!-- 비번 찾기 (아이디,이메일 체크)-->
+   <select id="idAndEmailCheck" parameterType="customer" resultType="customer">
+      select customer_id as customerId from customer where customer_id=#{customerId} and email =#{email}
+   </select>
+   
+   <!-- 비번 찾기(비번업뎃) -->
+   <update id="pwUpdate" parameterType="customer">
        update customer
            set customer_pw = #{customerPw}
            where customer_id = #{customerId} and email = #{email}
@@ -148,37 +148,61 @@
     
     <!-- 회원정보수정 -->
     <update id="cusUpdate" parameterType="customer">
-    	update customer
-    		set customer_pw = #{customerPw},
-    		customer_nickname = #{customerNick},
-    		email = #{email},
-    		phone = #{phone}
-    		where customer_id = #{customerId}
+       update customer
+          set customer_pw = #{customerPw},
+          customer_nickname = #{customerNick},
+          email = #{email},
+          phone = #{phone}
+          where customer_id = #{customerId}
     </update>
     
     <!-- 회원탈퇴 -->
     <update id="cusDelete" parameterType="customer">
-    	update customer
-    		set customer_state = 2
-    		where customer_no = #{customerNo}
+       update customer
+          set customer_state = 2
+          where customer_no = #{customerNo}
     </update>
-	
-	<select id="customerKeyword" parameterType="string" resultType="customer">
-		select
-    	rnum 
-    	,customer_no as customerNo
-    	,customer_id as customerId
-    	,customer_name as customerName
-    	,customer_nickname as customerNick
-    	,phone as phone
-    	,birthday as birthday
-    	,email as email
-    	,gender as gender
-    	,customer_state as customerState
-    	,reg_date as regDate
-    	,lastlog_date as lastLogDate
-    	from (select rownum as rnum, m.* from (select * from customer
-			where customer_id like '%'||#{keyword}||'%'
-		order by reg_date desc) m)
-	</select>
+   
+   <select id="customerKeyword" parameterType="map" resultType="customer">
+      select
+       rnum 
+       ,customer_no as customerNo
+       ,customer_id as customerId
+       ,customer_name as customerName
+       ,customer_nickname as customerNick
+       ,phone as phone
+       ,birthday as birthday
+       ,email as email
+       ,gender as gender
+       ,customer_state as customerState
+       ,reg_date as regDate
+       ,lastlog_date as lastLogDate
+       from (select rownum as rnum, m.* from (select * from customer
+       <if test="cusStatusMember == 3 and cusIdName == 1">
+         where customer_id like '%'||#{keyword}||'%'
+      </if>
+      <if test="cusStatusMember == 3 and cusIdName == 2">
+         where customer_name like '%'||#{keyword}||'%'
+      </if>
+      <if test="cusStatusMember == 1 and cusIdName == 1">
+         where customer_id like '%'||#{keyword}||'%' and customer_state = 1
+      </if>
+      <if test="cusStatusMember == 1 and cusIdName == 2">
+         where customer_name like '%'||#{keyword}||'%' and customer_state = 1
+      </if>
+      <if test="cusStatusMember == 0 and cusIdName == 1">
+         where customer_id like '%'||#{keyword}||'%' and customer_state = 0
+      </if>
+      <if test="cusStatusMember == 0 and cusIdName == 2">
+         where customer_name like '%'||#{keyword}||'%' and customer_state = 0
+      </if>
+      <if test="cusStatusMember == 2 and cusIdName == 1">
+         where customer_id like '%'||#{keyword}||'%' and customer_state = 2
+      </if>
+      <if test="cusStatusMember == 2 and cusIdName == 2">
+         where customer_name like '%'||#{keyword}||'%' and customer_state = 2
+      </if>
+      order by reg_date desc) m)
+   </select>
+
 </mapper>
