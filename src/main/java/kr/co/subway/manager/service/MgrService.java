@@ -151,7 +151,8 @@ public class MgrService {
 	}
 	//매장찾기 키워드 검색
 		public List<Mgr> searchStore(String keyword){
-			PageBound pb = new PageBound(0,0,keyword);
+			PageBound pb = new PageBound(0,0,"%"+keyword+"%");
+			
 			List<Mgr> list = mgrdao.searchStore(pb);
 			return list;
 		}

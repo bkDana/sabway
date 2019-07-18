@@ -7,22 +7,7 @@ var getCookie = function(name) {
 
 $(document).ready(function(){
 	var cusoOrderNo = 100;
-	/* 장바구니 1열 삭제용 */
-	function deleteBucket(idx){
-		var listIdx = $(idx).prev().index();
-		console.log(listIdx);
-		//var delIdx = 
-//		console.log(delIdx);
-//		$.ajax({
-//	    	url : "/tempOrderDelete.do",
-//	        type : 'get',
-//	        data : {delIdx:delIdx},
-//	        success : function(){
-//	        	totalCost -= Number($(idx).parent().find('.cost').html());
-//	            $(idx).parent().parent().remove();
-//	        }
-//	    });
-	}
+	
 	/* 나만의 메뉴 1열? 삭제 */
 	function deleteMenu(idx){
 		var delIdx = $('.hiddenBucIdx').eq(idx).val();
@@ -414,50 +399,38 @@ $(document).ready(function(){
 	    
     } //for using var 'i' ends
   
-   
-//    $( "#sbmTest" ).click(function() {
-//    	/*
-//    	 * 1.주문테이블 중 해당사항들에 새로 만든 '주문번호' 업데이트
-//    	 * 3.cusOrder 테이블에 (주문 관련 정보vo) 등록
-//    	 */
-//    	$('input[name=cusoTotalCost]').val(totalCost);
-//    	$('input[name=cusoPhone]').val(sessionPhone);
-//    	var d = new Date();
-//		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-//    	$('input[name=cusoOrderNo]').val($('.hiddenInfo').eq(0).find('.hiddenMain').val()+date);
-//    	$("#insertItem").click();
-//    });
     $('.deleteBucket').click(function(){
-    	var itemIndex = $('.deleteBucket').index(this);
-    	
+    	var listIdx = $('.deleteBucket').index(this);
+    	var delIdx = $('.hiddenBucIdx').eq(listIdx).val();
+    	console.log(delIdx);
     	var deleteMenu = confirm("선택하신 메뉴를 삭제하시겠습니까?");
     	if(deleteMenu) {
-//    		serialize()
-    		var form = $(".myMenu")[itemIndex];
-//    		console.log(queryString);
-    		var data = new FormData(form);
-    		console.log(data);
-            $.ajax({
-            	url : "/insertMyMenu.do",
-                type : 'post',
-                data : data,
-                enctype: 'multipart/form-data',
-                processData: false,
-                contentType: false,
-                cache: false,
-                dataType : 'text',
-//                error: function(xhr, status, error){
-//                    alert("error");
-//                },
-                success : function(){
-                    alert("나만의 메뉴 추가 완료되었습니다. '마이페이지 - 나만의 메뉴'에서 확인");
-                    $('.insertMyMenu').eq(itemIndex).html('추가 완료');
-                    $('.insertMyMenu').eq(itemIndex).css('color','grey').css('cursor','default').attr('disabled',true);
-                },
-                error : function() {
-                	alert("나만의 메뉴 추가 실패");
-                }
-            });
+    		$.ajax({
+    	    	url : "/tempOrderDelete.do",
+    	        type : 'get',
+    	        data : {delIdx:delIdx},
+    	        success : function(){
+    	            $('.deleteBucket').eq(listIdx).parent().parent().remove();
+    	        }
+    	    });
+    	}
+    });
+    
+    $('.deleteMyMenu').click(function(){
+    	var listIdx = $('.deleteMyMenu').index(this);
+    	var delIdx = $('.hiddenBucIdx').eq(listIdx).val();
+    	console.log(listIdx);
+    	console.log(delIdx);
+    	var deleteMenu = confirm("선택하신 메뉴를 삭제하시겠습니까?");
+    	if(deleteMenu) {
+    		$.ajax({
+    	    	url : "/myMenuDelete.do",
+    	        type : 'get',
+    	        data : {delIdx:delIdx},
+    	        success : function(){
+    	            $('.deleteMyMenu').eq(listIdx).parent().parent().remove();
+    	        }
+    	    });
     	}
     });
     $('.insertMyMenu').click(function(){
@@ -493,6 +466,43 @@ $(document).ready(function(){
             });
     	}
     });
+    
+    /* 아임포트 */
+    
+    $('#sbmOrder').click(function(){
+    	console.log(totalCost);
+		var d = new Date();
+		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+		IMP.init('imp25889583');
+		IMP.request_pay({
+			pay_method : 'card',
+			merchant_uid : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+$('.hiddenInfo').eq(0).find('.hiddenIsSalad').val()+date,				//거래ID - 유니크 주려고 날짜까지 넣음
+			name : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+$('.hiddenInfo').eq(0).find('.hiddenIsSalad').val()+" 외",						//결재명
+			buyer_name : sessionId,
+			buyer_email : '',
+			amount : totalCost,									//결재 금액
+			buyer_tel : sessionPhone
+			
+		},function(response){
+			if(response.success){
+				var msg = "결재가 완료되었습니다.";
+				var info1 = "고유 ID : "+response.imp_uid;
+				var info2 = "결재 금액 : "+response.paid_amount;
+				var info3 = "카드 승인 번호 : "+response.apply_num;
+				console.log(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
+				
+				$('input[name=cusoTotalCost]').val(totalCost);
+		    	$('input[name=cusoPhone]').val(sessionPhone);
+		    	var d = new Date();
+				var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+		    	$('input[name=cusoOrderNo]').val($('.hiddenInfo').eq(0).find('.hiddenMain').val()+date);
+
+				$("#insertOrder").click();
+			} else {
+				alert('결재가 취소되었습니다');
+			}
+		});
+	});
 });
 
 
