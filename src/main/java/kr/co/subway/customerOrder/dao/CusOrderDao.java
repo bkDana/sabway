@@ -13,6 +13,7 @@ import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.CusOrderPageBound;
 import kr.co.subway.customerOrder.vo.CusOrderPageData;
+import kr.co.subway.customerOrder.vo.Item;
 import kr.co.subway.customerOrder.vo.MyMenu;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
@@ -111,6 +112,14 @@ public class CusOrderDao {
 
 	public List loadMenuList(String customerNo) {//customerNo에서 menuList로 바꿔야함
 		return sqlSession.selectList("mymenu.loadMyMenu",customerNo);
+	}
+
+	public CusOrder cusOrderInfo(String no) {
+		return sqlSession.selectOne("cusOrder.cusOrderInfo",no);
+	}
+
+	public List cusOrderItem(String no) {
+		return sqlSession.selectList("cusOrder.cusOrderItem",no);
 	}
 
 }

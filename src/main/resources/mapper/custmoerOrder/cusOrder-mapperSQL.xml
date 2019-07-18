@@ -109,4 +109,43 @@
    <select id="searchKeywordTotalCount" parameterType="map" resultType="_int">
    		select count(*) from cusorder where cuso_order_no = #{keyword}
    </select>
+	<select id="cusOrderInfo" parameterType="string" resultType="cuso">
+		select
+  			cuso_idx as cusoIdx<!-- 자동 -->
+			,cuso_order_state as cusoOrderState<!--  //주문상태 default 0 -->
+			,cuso_total_cost as cusoTotalCost
+			,cuso_phone as cusoPhone
+			,cuso_member_no as cusoMemberNo<!-- //회원 번호(외래키) -->
+			,cuso_order_no as cusoOrderNo<!-- //고객용 주문번호 -->
+			,cuso_branch as cusoBranch<!-- //지점 번호(Manager - mgrName으로 받아야함) -->
+			,cuso_order_date as cusoOrderDate
+		from
+			cusorder 
+		where 
+			cuso_order_no = #{no}
+	</select>
+	<select id="cusOrderItem" parameterType="string" resultType="bucket">
+		select
+			buc_idx as bucIdx,
+ 			buc_bread as bucBread,
+ 			buc_main as bucMain,
+ 			buc_vegi as bucVegi,
+ 			buc_cheese as bucCheese,
+ 			buc_source as bucSource,
+ 			buc_topping as bucTopping,
+ 			buc_side as bucSide,
+ 			buc_is_salad as bucIsSalad,
+ 			buc_is_ovened as bucIsOvened,
+ 			buc_set as bucSet,
+ 			buc_cost as bucCost,
+ 			buc_discnt_rate as bucDiscntRate,
+ 			buc_kcal as bucKcal,
+ 			buc_quantity as bucQuantity,
+ 			buc_reg_date as bucRegDate,
+ 			buc_customer_idx as bucCustomerIdx
+ 		from 
+ 			bucket
+ 		where
+ 			buc_cuso_order_no = #{no}
+	</select>
 </mapper>
