@@ -162,8 +162,53 @@ $(document).ready(function() {
 			breadCheck=1;
 		}
 	});
+	///////////////////////////////////////////////////////////////////////////////
+	$('.vegi').click(function(){
+		if($(this).hasClass("selected")){
+			$(this).bind("mouseleave",function(){
+				$(this).find('img').css("display","block");
+				$(this).find('p').css("display","none");
+				$(this).find('button').css("display","none");
+				$(this).css("background-color","#fff");
+			});
+		}else{
+			$(this).unbind("mouseleave");
+		}
+		$(this).toggleClass("selected");
+	});
+	$('.vegi-amount').click(function(){
+		if($(this).parent().parent().hasClass("selected")===false){
+			$(this).parent().parent().addClass("selected")
+		}
+		var idx = $(this).parent().find("button").index(this);
+		for(var i = 0; i<4; i++){
+			if(i!=idx){
+				$(this).parent().find("button").eq(i).removeClass("select-vegi");
+			}else{
+				$(this).parent().find("button").eq(i).addClass("select-vegi");
+			}
+		}
+		event.stopPropagation();
+	});
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	$('.bread-amount').click(function(){
-		$(this).addClass('selected');
+		var breadBtnIdx = $('.bread-amount').index(this);
+		for(var i=0;i<$('.bread').length;i++){
+
+			for(var k=0;k<$('.bread-amount').length;k++){
+				
+				if(k==breadBtnIdx && $('.bread').eq(i).find('.bread-amount').eq(k).hasClass("select-bread")){
+					$('.bread').eq(i).find('.bread-amount').eq(k).toggleClass("select-bread");
+					$('.bread').eq(i).find('.bread-amount').eq(k).bind("mouseleave",function(){
+						
+					});
+				}else if(k==breadBtnIdx && $('.bread').eq(i).find('.bread-amount').eq(k).hasClass("select-bread")===false){
+					
+				}
+			}
+			
+		}
+		$(this).parent().parent().toggleClass('selected');
 		var breadIdx = $(this).parent().prev().text();
 		var amountIdx = -1;
 		if(($('.bread-amount').index(this)+1)%2 == 1) {
@@ -269,7 +314,7 @@ $(document).ready(function() {
 			$(this).unbind("mouseleave");
 		}
 		$(this).toggleClass("selected");
-	})
+	});
 	$('.vegi-amount').click(function(){
 		if($(this).parent().parent().hasClass("selected")===false){
 			$(this).parent().parent().addClass("selected")
