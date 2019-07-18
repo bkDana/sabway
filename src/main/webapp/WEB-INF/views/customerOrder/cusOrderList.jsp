@@ -113,7 +113,7 @@
 							</td>
 							<td>
 								<input type="hidden" name="cusoOrderNo" value="${cusOrder.cusoOrderNo }">
-								<a href="#">${cusOrder.cusoOrderNo }</a>
+								<a href="/cusOrderInfo.do?no=${cusOrder.cusoOrderNo }">${cusOrder.cusoOrderNo }</a>
 							</td>
 							<td>
 								<input type="hidden" name="cusoBranch" value="${cusOrder.cusoBranch }">
@@ -167,7 +167,7 @@
 							</td>
 							<td>
 								<input type="hidden" name="cusoOrderNo" value="${cusOrder.cusoOrderNo }">
-								<a href="#">${cusOrder.cusoOrderNo }</a>
+								<a href="/cusOrderInfo.do?no=${cusOrder.cusoOrderNo }">${cusOrder.cusoOrderNo }</a>
 							</td>
 							<td>
 								<input type="hidden" name="cusoBranch" value="${cusOrder.cusoBranch }">

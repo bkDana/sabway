@@ -15,7 +15,8 @@ import org.springframework.stereotype.Repository;
 import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.CusOrderPageBound;
-
+import kr.co.subway.customerOrder.vo.CusOrderPageData;
+import kr.co.subway.customerOrder.vo.Item;
 import kr.co.subway.customerOrder.vo.MyMenu;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
@@ -113,7 +114,7 @@ public class CusOrderDao {
 	}
 
 	public List loadMenuList(ArrayList<MyMenu> menuList) {//customerNo에서 menuList로 바꿔야함
-		ArrayList<Bucket> resultList = new ArrayList<>();
+		ArrayList<Bucket> resultList = new ArrayList<Bucket>();
 		for(MyMenu mm:menuList) {
 			Bucket b = sqlSession.selectOne("bucket.loadMyMenu",mm);
 			resultList.add(b);
@@ -123,6 +124,14 @@ public class CusOrderDao {
 
 	public int myMenuDelete(int idx) {
 		return sqlSession.delete("mymenu.myMenuDelete",idx);
+	}
+
+	public CusOrder cusOrderInfo(String no) {
+		return sqlSession.selectOne("cusOrder.cusOrderInfo",no);
+	}
+
+	public List cusOrderItem(String no) {
+		return sqlSession.selectList("cusOrder.cusOrderItem",no);
 	}
 
 }

@@ -396,10 +396,10 @@
 	 }
 	
 	//전체매장 select 필터
-	function applyArea(area,currPage){
+	function applyArea(area,currPage,type){
 		$.ajax({
 			url : "/allSearchKeyword.do",
-			data : {area:area,currentPage:currPage},
+			data : {area:area,currentPage:currPage,type:type},
 			dataType : "json",
 			success : function(data){
 					
@@ -430,12 +430,12 @@
 	$(document).ready(function(){
 		$("#applyArea").change(function(){
 			var area = $(this).val();
-			applyArea(area,'1');
+			applyArea(area,'1',1);
 		})
 		
 		$("#applyArea2").change(function(){
 			var area = $(this).val();
-			applyArea(area,1);
+			applyArea(area,1,2);
 		})
 		
 	})
