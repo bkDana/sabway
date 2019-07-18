@@ -21,5 +21,5 @@ public interface CustomerDao {
 	public int pwUpdate(Customer customerVo);				//비번찾기(비번업뎃)
 	public int cusUpdateEnroll(Customer vo);
 	public int cusDelete(Customer vo);						//회원탈퇴
-	public List<Customer> customerKeyword(String keyword);
+	public List<Customer> customerKeyword(String keyword, String cusIdName, String cusStatusMember);
 }
