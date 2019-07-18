@@ -80,4 +80,8 @@ public class CusOrderService {
 		int result = cusOrderDao.orderStateUpdate(cuso);
 		return result;
 	}
+
+	public ArrayList<CusOrder> loadOrderList(String customerIdx) {
+		return (ArrayList<CusOrder>)cusOrderDao.loadOrderList(customerIdx);
+	}
 }

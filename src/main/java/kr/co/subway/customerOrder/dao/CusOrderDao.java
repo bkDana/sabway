@@ -1,5 +1,6 @@
 package kr.co.subway.customerOrder.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -64,5 +65,10 @@ public class CusOrderDao {
 	//주문 상태 변경
 	public int orderStateUpdate(CusOrder cuso) {
 		return sqlSession.update("cusOrder.orderStateUpdate",cuso);
+	}
+	
+	//회원용 주문목록
+	public List<CusOrder> loadOrderList(String customerIdx) {
+		return sqlSession.selectList("cusOrder.oneCusOrderList",customerIdx);
 	}
 }
