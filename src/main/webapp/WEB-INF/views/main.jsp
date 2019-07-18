@@ -10,17 +10,7 @@
 <img src="/resources/img/main_event.jpg">
 <section id="content-wrapper">
 	<div class="area">
-	<c:choose>
-		<c:when test="${not empty sessionScope.customer }">
-			[${sessionScope.customer.customerName }]<br>
-			<a href="/logout.do">로그아웃</a>
-		</c:when>
-		<c:otherwise>
-			<fieldset>
-				<a href="/index.do">로그인!!</a>		
-			</fieldset>
-		</c:otherwise>
-	</c:choose>
+
 	</div>
 </section>
 
