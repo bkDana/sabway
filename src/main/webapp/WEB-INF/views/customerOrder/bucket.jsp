@@ -3,6 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- Header --%>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
+<script type="text/javascript" src="/resources/js/tempOrder.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
 <%-- content --%>
@@ -23,12 +24,16 @@
 				<input type="hidden" class="hiddenSide" value="${bucket.bucSide }">
 				<input type="hidden" class="hiddenKcal" value="${bucket.bucKcal }">
 				<input type="hidden" class="hiddenQuantity" value="${bucket.bucQuantity }">
-				
+
 				<form action="/insertMyMenu.do" class="myMenu" method="post">
 					<input type="hidden" class="hiddenBucIdx" name="mmBucIdx" value="${bucket.bucIdx }">
 					<input type="hidden" class="hiddenBucCustomerIdx" name="mmCustomerNo" value="${bucket.bucCustomerIdx }">	 				
 					<input type="hidden" class="hiddenMain" name="mmMenuLabel" value="${bucket.bucMain } ${bucket.bucIsSalad }">
 					<!-- <input type="hidden" class="hiddenCusoIdx" name="itemCusoIdx" value=""> -->
+					<input type="submit" class="sbmMyMenu" style="display:none;">
+				</form>
+				<form action="tempOrderDelete.do" class="myMenu" method="post">
+					<input type="hidden" class="hiddenBucIdx" name="bucIdx" value="${bucket.bucIdx }">
 					<input type="submit" class="sbmMyMenu" style="display:none;">
 				</form>
 				
@@ -69,7 +74,7 @@
 				<td>수량 : ${bucket.bucQuantity }</td>
 				<td><span class="cost">${bucket.bucCost }</span>원</td>
 				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">나만의 메뉴 만들기</button></td>
-				<td><button type="button" onclick="deleteOrder(this)" style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
+				<td><button type="button" class="deleteBucket" style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
 			</tr>
 			</c:forEach>
 			<tr>
