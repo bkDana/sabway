@@ -1,6 +1,7 @@
 package kr.co.subway.customer.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -90,10 +91,24 @@ public class CustomerServiceImpl implements CustomerService{
    public Customer idAndEmailCheck(Customer customerVo) {
 		return customerdao.idAndEmailCheck(customerVo);
    }
-
+	//비번찾기(비번변경)
 	@Override
 	public int pwUpdate(Customer customerVo) {
 		return customerdao.pwUpdate(customerVo);
 	}
-	
+	//회원정보수정
+	public int cusUpdateEnroll(Customer vo) {
+		vo.setPhone(vo.getPhone() + "-" + vo.getPhone1() + "-" +vo.getPhone2());
+		System.out.println(vo.getPhone());
+		return customerdao.cusUpdateEnroll(vo);
+	}
+	//회원탈퇴
+	public int cusDelete(Customer vo) {
+		return customerdao.cusDelete(vo);
+	}
+
+	@Override
+	public List<Customer> customerKeyword(String keyword) {
+		return customerdao.customerKeyword(keyword);
+	}
 }

@@ -8,8 +8,8 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 주문관리 > 주문 목록(회원)</div>
-		<h1 class="comm-content-tit">회원 주문 목록</h1>
+		<div class="sub-menu">※ 주문관리 > 주문 목록(비회원)</div>
+		<h1 class="comm-content-tit">비회원 주문 목록</h1>
 		<table class="comm-tbl" style="max-width:1200px">
 			<colgroup>
 				<col width="3%">
@@ -82,7 +82,7 @@
 			</c:forEach>
 		</table>
 		<div class="common-tbl-btn-group">
-			<button class="btn-style2" style="font-size:15px;" id="noneCtmLink">비회원 주문 목록</button>
+			<button class="btn-style2" style="font-size:15px;" id="ctmLink">회원 주문 목록</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<button class="btn-style2" style="font-size:15px;" id="adminLink">목록으로</button>
 		</div>
@@ -90,9 +90,9 @@
 </section>
 
 <script type="text/javascript">
-	//비회원 주문 목록으로 이동
-	$('#noneCtmLink').click(function(){
-		location.href="/noneCtm.do";
+	//회원 주문 목록으로 이동
+	$('#ctmLink').click(function(){
+		location.href="/cusOrderList.do";
 	});
 	//접수 완료 상태로 변경
 	$('[name=accept]').click(function(){

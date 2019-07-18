@@ -1,6 +1,7 @@
 package kr.co.subway.customer.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import kr.co.subway.customer.vo.Customer;
 
@@ -18,4 +19,7 @@ public interface CustomerService {
 	public String findId (Customer vo);						//아이디찾기
 	public Customer idAndEmailCheck(Customer customerVo);	//비번찾기
 	public int pwUpdate(Customer customerVo);				//비번찾기(비번업뎃)
+	public int cusUpdateEnroll(Customer vo);						//회원정보수정
+	public int cusDelete(Customer vo);						//회원탈퇴
+	public List<Customer> customerKeyword(String keyword);
 }

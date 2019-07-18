@@ -12,6 +12,7 @@ public class Customer {
 	private String phone;
 	private String phone1;
 	private String phone2;
+	private String phone3;
 	private String birthday;
 	private String email;
 	private String gender;
@@ -23,8 +24,8 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 	public Customer(int rnum, int customerNo, String customerId, String customerPw, String customerName,
-			String customerNick, String phone, String phone1, String phone2, String birthday, String email,
-			String gender, int customerState, Date regDate, Date lastLogDate) {
+			String customerNick, String phone, String phone1, String phone2, String phone3, String birthday,
+			String email, String gender, int customerState, Date regDate, Date lastLogDate) {
 		super();
 		this.rnum = rnum;
 		this.customerNo = customerNo;
@@ -35,6 +36,7 @@ public class Customer {
 		this.phone = phone;
 		this.phone1 = phone1;
 		this.phone2 = phone2;
+		this.phone3 = phone3;
 		this.birthday = birthday;
 		this.email = email;
 		this.gender = gender;
@@ -96,6 +98,12 @@ public class Customer {
 	public void setPhone2(String phone2) {
 		this.phone2 = phone2;
 	}
+	public String getPhone3() {
+		return phone3;
+	}
+	public void setPhone3(String phone3) {
+		this.phone3 = phone3;
+	}
 	public String getBirthday() {
 		return birthday;
 	}
@@ -132,5 +140,6 @@ public class Customer {
 	public void setLastLogDate(Date lastLogDate) {
 		this.lastLogDate = lastLogDate;
 	}
+	
 	
 }

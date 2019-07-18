@@ -54,10 +54,15 @@ public class CusOrderDao {
 	public int updateOrder(Bucket b) {
 		return sqlSession.update("bucket.updateOrderNo", b);
 	}
+	//주문 목록 가져오기
 	public List<CusOrder> cusOrderList(){
 		return sqlSession.selectList("cusOrder.cusOrderList");
 	}
 	public int insertCusOrder(CusOrder cuso) {
 		return sqlSession.insert("cusOrder.insertCuso",cuso);
+	}
+	//주문 상태 변경
+	public int orderStateUpdate(CusOrder cuso) {
+		return sqlSession.update("cusOrder.orderStateUpdate",cuso);
 	}
 }

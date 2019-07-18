@@ -77,4 +77,18 @@ public class CustomerDaoImpl implements CustomerDao{
 		return sqlsession.update("customer.pwUpdate",customerVo);
 	}
 	
+	//회원정보수정
+	@Override
+	public int cusUpdateEnroll(Customer vo) {
+		return sqlsession.update("customer.cusUpdate",vo);
+	}
+	@Override
+	public int cusDelete(Customer vo) {
+		return sqlsession.update("customer.cusDelete",vo);
+	}
+	@Override
+	public List<Customer> customerKeyword(String keyword) {
+		return sqlsession.selectList("customer.customerKeyword",keyword);
+	}
+	
 }
