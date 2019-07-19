@@ -4,22 +4,7 @@
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 <style>
-	input {
-		-webkit-box-shadow: 0 0 0 1000px white inset;
-		outline-style: none;
-		width:250px;
-		height:30px;
-		font-size:20px;
-	}
-	[name=searchBox]{
-		text-align:center;
-		margin-left: 20%;
-	}
-	select{
-		height:36px;
-		font-size:15px;
-	}
-	.onBtn,.offBtn{
+	.onBtn,.offBtn {
 		width:50px;
 	    border: none;
 	    color:#fff;
@@ -32,37 +17,57 @@
 	    cursor: pointer;
 	    height: 35px;
 	}
-	.onBtn{
+	.onBtn {
 		background-color: #f8585b;
 	}
-	.offBtn{
+	.offBtn {
 		background-color: #122322;
 	}
-	[name=searchBtn]{
-		background-color: gray;
-		width:50px;
-	    border: none;
-	    color:#fff;
-	    padding: 5px 0;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 15px;
-	    margin: 4px;
-	    cursor: pointer;
-	    height: 35px;
+	.pageNavi{
+		color:black;
+		text-align:center;
+		margin-top:35px;
+		font-size: 15px;
+		font-weight: bold;
 	}
-	[name=selectBox]{
-		width:100px;
-		margin-left: 10.6%;
-	}
+	/* form ::: search */
+   .form_searchM {border:2px solid #dddddd; height:41px;width:15%; display:block; vertical-align:middle; position:relative; padding-right:42px; }
+   .form_searchM input{border:0; height:41px; width:100%; text-indent:14px; color:#292929; font-size:16px;}
+   .form_searchM input::placeholder{color:#bbbbbb; font-size:16px;font-family:font_ns, sans-serif;}
+   .form_searchM .btn_searchM{background:url(http://subway.co.kr/images/common/icon_search.png) 50% 50% no-repeat; width:41px; height:41px; position:absolute; right:0; top:0;}
+   .form_searchM .btn_searchM:after{content:''; position:absolute; left:-2px; top:13px; width:2px; height:16px; background-color:#e5e5e5;}
 </style>
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
 		<div class="sub-menu">※ 매장관리 > 가맹점 목록</div>
-		<table class="comm-tbl" style="max-width:1200px">
+		<div class="board-search-box">
+	 		<select name="statusGroup">
+	 			<c:if test="${status == 1 || status == 2 || status == 3 }">
+			 		<option selected="selected" disabled="disabled" value="${status }">
+						<c:choose>
+							<c:when test="${status == 1 }">준비</c:when>
+							<c:when test="${status == 2 }">영업</c:when>
+							<c:when test="${status == 3 }">폐업</c:when>
+						</c:choose>
+					</option>
+	 			</c:if>
+				<c:if test="${status != 1 && status != 2 && status != 3  }">
+					<option selected="selected" disabled="disabled">상태분류</option>
+				</c:if>
+				<option id="open" value=2>영업</option>
+				<option id="prepare" value=1>준비</option>
+				<option id="close" value=3>폐업</option>
+			</select>&nbsp;
+			<select name="selectKeyword">
+				<option id="name">이름</option>
+				<option id="addr">주소</option>
+			</select>&nbsp;
+			<input type="text" maxlength="30" placeholder="가맹점 회원검색" value="${text }"style="height:34px; padding-left:5px;">
+			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button>
+		</div>
+		<table class="comm-tbl" style="max-width:100%">
 			<colgroup>
 				<col width="5%">
 				<col width="10%">
@@ -85,11 +90,11 @@
 				<th style="text-align:center;">상태</th>
 				<th style="text-align:center;">상태변경</th>
 			</tr>
-			<c:forEach items="${list }" var="mgr" varStatus="i">
+			<c:forEach items="${pd.list }" var="mgr" varStatus="i">
 				<c:if test="${mgr.mgrLevel != 1}">
 				<!-- 본점 제외하고 가맹점만 출력 -->
 					<tr>
-						<td style="text-align:center;">${i.count }</td>
+						<td style="text-align:center;">${mgr.rnum }</td>
 						<td style="text-align:center;">${mgr.mgrId }</td>
 						<td style="text-align:center;">${mgr.mgrBossName }</td>
 						<td style="text-align:center;">${mgr.mgrName }</td>
@@ -117,8 +122,22 @@
 					</tr>
 				</c:if>
 			</c:forEach>
+			<c:if test="${pd.totalCount <= 0 }">
+				<tr>
+					<td colspan="9">신청 목록이 없습니다.</td>
+				</tr>
+			</c:if>
 		</table>
-		<div class="common-tbl-btn-group" name="moreDiv">
+		<c:if test="${pd.totalCount <= 0 }">
+			<div class="pageNavi">1</div>
+		</c:if>
+		<div class="pageNavi">
+			${pd.pageNavi }
+		</div>
+		<div class="common-tbl-btn-group">
+			<button class="btn-style2" style="font-size:15px;" id="adminLink">목록으로</button>
+		</div>
+<%-- 		<div class="common-tbl-btn-group" name="moreDiv">
 			<c:if test="${total > 10}">
 				<hr>
 				<button type="button" class="btn-style2" name="more">더보기</button>
@@ -127,36 +146,53 @@
 			<input type="hidden" value="${mgrSize }" name="mgrSize">
 			<input type="hidden" value="${total }" name="totalCount">
 			<input type="hidden" value=${mpd.lastPage } name="pageName">
-		</div>
-		<br>
-		<span name="selectBox">
-			<select name="statusGroup">
-				<option selected="selected" disabled="disabled">
-					<c:choose>
-						<c:when test="${mpd.status == 1 }">준비</c:when>
-						<c:when test="${mpd.status == 2 }">영업</c:when>
-						<c:when test="${mpd.status == 3 }">폐업</c:when>
-						<c:otherwise>상태분류</c:otherwise>
-					</c:choose>
-				</option>
-				<option id="open">영업</option>
-				<option id="prepare">준비</option>
-				<option id="close">폐업</option>
-			</select>&nbsp;
-		</span>
-		<span name="searchBox">
-			<select name="selectKeyword">
-				<option id="name">이름</option>
-				<option id="addr">주소</option>
-			</select>&nbsp;
-			<input type="text" value="${mpd.text }">
-			<button type="button" name="searchBtn">검색</button>
-		</span>
-	</div>
+		</div> --%>
+	</div> 
 </section>
-
 <script type="text/javascript">
 	$(document).ready(function(){
+		//상태변경(오픈)
+		$(".onBtn").click(function(){
+			var mgrStatus = $(this).val();
+			var mgrName = $(this).parent().parent().children().eq(3).html();
+			if(confirm("변경하시겠습니까?")){
+				location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName+"&currentPage=''";
+			}
+		});
+		//상태변경(폐점)
+		$(".offBtn").click(function(){
+			var mgrStatus = $(this).val();
+			var mgrName = $(this).parent().parent().children().eq(3).html();
+			if(confirm("변경하시겠습니까?")){
+				location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName+"&currentPage=''";
+			}
+		});
+		//가맹점 검색
+		$("[name=searchBtn]").click(function(){
+			var keyword = $(this).prev().prev().val();
+			var text = $(this).prev().val();
+			var status1 = $(this).prev().prev().prev().val();			
+			if(status1 == null){
+				var status1 = -1;
+			}
+			location.href="/searchKeyword.do?keyword="+keyword+"&text="+text+"&status1="+status1+"&currentPage=''";
+		});
+ 		//상태별 분류
+		$("[name=statusGroup]").on("change",function(){
+			var status1 = $(this).val();
+			var keyword = $(this).next().val();
+			var text = $(this).next().next().val();
+			if(status1 == null){
+				var status1 = -1;
+			}
+			location.href="/searchKeyword.do?status1="+status1+"&keyword="+keyword+"&text="+text+"&currentPage=''";
+		});
+		
+	});
+
+
+
+/* 	$(document).ready(function(){
 		//상태변경(오픈)
 		$(".onBtn").click(function(){
 			var mgrStatus = $(this).val();
@@ -175,7 +211,7 @@
 		});
 		//가맹점 검색
 		$("[name=searchBtn]").click(function(){
-			var keyword = $(this).parent().children().eq(0).val();
+			var keyword = $(this).prev().prev().val();
 			var text = $(this).prev().val();
 			if(keyword == "이름"){
 				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
@@ -268,7 +304,7 @@
 				$("[name=moreDiv]").attr("style","display:none");
 			}
 		});
-	});
+	}); */
 </script>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />

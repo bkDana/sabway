@@ -324,9 +324,6 @@
 					<option value="전라북도">전라북도</option>
 					<option value="충청북도">충청북도</option>
 					<option value="광주광역시">광주광역시</option>
-					<option value="전라남도">전라남도</option>
-					<option value="경상북도">경상북도</option>
-					<option value="강원도">강원도</option>
 				</select>
 			</div>
 			<div class="form_select" style="width:196px;">
@@ -415,7 +412,6 @@
 						return;
 					}
 				for(var i=0; i<data.storeList.length; i++){
-					
 					$("#searchViewTbl").append("<tr style='height:60px' class='searchTr'><td style='color:#ffc300;font-weight: bold;'id='search"+i+"'>"+data.storeList[i].rnum+"</td><td>"+data.storeList[i].mgrName+"</td><td>"+data.storeList[i].mgrAddr+"</td><td>"+data.storeList[i].mgrBossName+"</td><td style='color:#bbbbbb'>"+data.storeList[i].mgrTel+"</td></tr>");
 					$("#uiResultCount").text(index);
 				}
@@ -429,11 +425,15 @@
 	
 	$(document).ready(function(){
 		$("#applyArea").change(function(){
+// 			var area1 = $(this).val();
 			var area = $(this).val();
+// 			var area2 = $("#applyArea2").val();
 			applyArea(area,'1',1);
+// 			applyArea(area1,area2,'1',1);
 		})
 		
 		$("#applyArea2").change(function(){
+// 			var area1 = $("#applyArea").val();
 			var area = $(this).val();
 			applyArea(area,1,2);
 		})

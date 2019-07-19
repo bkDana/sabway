@@ -20,7 +20,7 @@
 	      ,mgr_open_date as mgrOpenDate
 	      from manager
 	</select>
-	<select id="mpdList" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
+	<!-- <select id="mpdList" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
 		select mgr_no as mgrNo
 	      ,mgr_id as mgrId
 	      ,mgr_pw as mgrPw
@@ -37,8 +37,7 @@
 	      from 
 	        (select rownum as rnum, m.* from (select * from manager order by mgr_no) m)
 	      where rnum between #{firstPage} and #{lastPage}
-	</select>
-	
+	</select> -->
 	<select id="newStoreList" resultType="mgr">
 		select mgr_no as mgrNo
 		,mgr_id as mgrId
@@ -55,12 +54,9 @@
 		,mgr_open_date as mgrOpenDate
 		from manager 
 	</select>
-	
 	<select id="storeTotalCount" resultType="_int">
 		select count(*) cnt from manager	
 	</select>
-	
-	
 	<select id="storeSelectPaging" parameterType="pb" resultType="mgr">
 		select
 		rnum 
@@ -86,7 +82,6 @@
 		 where rnum between #{start} and #{end}
 		</if>
 	</select>
-	
 	<select id="login" parameterType="mgr" resultType="mgr">
 		select mgr_no as mgrNo
 		,mgr_id as mgrId
@@ -110,7 +105,6 @@
 	<update id="mgrOpenUpdate" parameterType="mgr">
 		update manager set mgr_status = #{mgrStatus}, mgr_open_date = sysdate where mgr_name = #{mgrName}
 	</update>
-	
 	<select id="searchBossName" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
 		select mgr_no as mgrNo
 		,mgr_id as mgrId
@@ -147,7 +141,7 @@
 	    (select rownum as rnum, m.* from (select * from manager where mgr_addr like '%'||#{text}||'%' order by mgr_no) m)
 	    where rnum between #{firstPage} and #{lastPage}
 	</select>	
-	<select id="selectStatus" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
+	<!-- <select id="selectStatus" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
 		select mgr_no as mgrNo
 		,mgr_id as mgrId
 		,mgr_pw as mgrPw
@@ -198,7 +192,7 @@
 		,mgr_open_date as mgrOpenDate
 		from manager
 		where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status}
-	</select>
+	</select> -->
 	<select id="searchStore" parameterType="string" resultType="mgr">
 		select
 		,mgr_no as mgrNo
@@ -216,7 +210,7 @@
 		,mgr_open_date as mgrOpenDate
 		from manager where mgr_addr like '%'||#{keyword}||'%' or mgr_name like '%'||#{keyword}||'%'
 	</select>
-	<select id="pageMore" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
+<!-- 	<select id="pageMore" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
 	   select mgr_no as mgrNo
 	      ,mgr_id as mgrId
 	      ,mgr_pw as mgrPw
@@ -233,19 +227,17 @@
 	      from 
 	        (select rownum as rnum, m.* from (select * from manager order by mgr_no) m)
 	      where rnum between #{firstPage} and #{lastPage}
-   </select>
+   </select> -->
    <select id="totalCount" resultType="_int">
-   		select count(*)      
-	      from manager
+   		select count(*) from manager
    </select>
-   
    <select id="allStoreTotalCount" parameterType="string" resultType="_int">
    		<!-- select count(*)      
 	      from manager where mgr_addr like '%'||#{keyword}||'%' or mgr_name like '%'||#{keyword}||'%' -->
 	       select count(*)      
 	      from manager where mgr_addr like #{keyword} or mgr_name like #{keyword}
    </select>
-   
+ <!--  
    <select id="addrTotalCount" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="_int">
    		select count(*)      
 	      from manager where mgr_addr = #{text}
@@ -356,5 +348,98 @@
 	      from 
 	        (select rownum as rnum, m.* from (select * from manager where mgr_addr = #{text} and mgr_status = #{status}) m)
 	      where rnum between #{firstPage} and #{lastPage}
+   </select> -->
+   <select id="mgrPaging" parameterType="mpb" resultType="mgr">
+   		select rnum
+   		  ,mgr_no as mgrNo
+	      ,mgr_id as mgrId
+	      ,mgr_pw as mgrPw
+	      ,mgr_name as mgrName
+	      ,mgr_tel as mgrTel
+	      ,mgr_post as mgrPost
+	      ,mgr_addr as mgrAddr
+	      ,mgr_level as mgrLevel
+	      ,mgr_status as mgrStatus
+	      ,mgr_enroll_date as mgrEnrollDate
+	      ,mgr_addr_code as mgrAddrCode
+	      ,mgr_boss_name as mgrBossName
+	      ,mgr_open_date as mgrOpenDate  
+	  	  from 
+	   	  (select rownum as rnum, m.* from (select * from manager 
+	   	  where mgr_level = 0
+	  	  order by mgr_no) m)
+		<if test="start!=0">
+			where rnum between #{start} and #{end}
+		</if>
+   </select>
+   <select id="searchTotalCount" parameterType="sk" resultType="_int">
+   		<if test="status == '-1'">
+   			<if test="keyword.equals('주소')">
+	   			select count(*) from manager where mgr_addr like '%'||#{text}||'%' and mgr_level = 0 
+	   		</if>
+   			<if test="keyword.equals('이름')">
+	   			select count(*) from manager where mgr_boss_name like '%'||#{text}||'%' and mgr_level = 0 
+	   		</if>
+   		</if>
+   		<if test="status != '-1'">
+	   		<choose>
+		   		<when test="text.equals('')">
+			   		select count(*) from manager where mgr_status = #{status} and mgr_level = 0 
+		   		</when>
+		   		<otherwise>
+			   		<if test="keyword.equals('주소')">
+			   			select count(*) from manager where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
+			   		</if>
+		   			<if test="keyword.equals('이름')">
+			   			select count(*) from manager where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
+			   		</if>
+		   		</otherwise>
+	   		</choose>
+   		</if>
+   </select>
+   <select id="searchKeyword" parameterType="mpb" resultType="mgr">
+   		select rnum
+   		  ,mgr_no as mgrNo
+	      ,mgr_id as mgrId
+	      ,mgr_pw as mgrPw
+	      ,mgr_name as mgrName
+	      ,mgr_tel as mgrTel
+	      ,mgr_post as mgrPost
+	      ,mgr_addr as mgrAddr
+	      ,mgr_level as mgrLevel
+	      ,mgr_status as mgrStatus
+	      ,mgr_enroll_date as mgrEnrollDate
+	      ,mgr_addr_code as mgrAddrCode
+	      ,mgr_boss_name as mgrBossName
+	      ,mgr_open_date as mgrOpenDate  
+	  	  from 
+	   	  (select rownum as rnum, m.* from (select * from manager 
+	   	<if test="status == '-1'">
+   			<if test="keyword.equals('주소')">
+	   			where mgr_addr like '%'||#{text}||'%' and mgr_level = 0 
+	   		</if>
+   			<if test="keyword.equals('이름')">
+	   			where mgr_boss_name like '%'||#{text}||'%' and mgr_level = 0 
+	   		</if>
+   		</if>
+   		<if test="status != '-1'">
+	   		<choose>
+	   			<when test="text.equals('')">
+			   		where mgr_status = #{status} and mgr_level = 0 
+	   			</when>
+	   			<otherwise>
+			   		<if test="keyword.equals('주소')">
+			   			where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
+			   		</if>
+		   			<if test="keyword.equals('이름')">
+			   			where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
+			   		</if>
+	   			</otherwise>
+	   		</choose>
+   		</if>
+	   	 order by mgr_no) m)
+		<if test="start!=0">
+			where rnum between #{start} and #{end}
+		</if>
    </select>
 </mapper>
