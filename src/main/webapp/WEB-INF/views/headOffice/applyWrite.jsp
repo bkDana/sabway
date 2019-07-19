@@ -4,99 +4,290 @@
 <style>
 	.inputBox{
 		float: left;
-	}
+	}/*  */
+#content-wrapper1{padding:100px 0; background-color:#f6f6f6;}
+.area1{ max-width:1900px; margin:0px auto; }
+/* 문의 ::: 가맹신청문의, 1:1문의 */
+.inquiry_wrapper{background-color:#fff; width:1028px; margin:0 auto; border:1px solid #e8e8e8; padding:0 70px 49px;}
+.inquiry_wrapper h2.subTitle{padding:72px 0 76px !important;}
+#content h2.subTitle{text-align: center;font-size: 40px;color: #292929;font-weight: 600; letter-spacing: -0.07em;}
+#content h3.h_title{font-size: 28px;color: #292929;font-weight: bold;letter-spacing: -0.05em;padding-bottom: 38px;}
+.inquiry_wrapper .board_write_wrapper .agree_info{overflow:hidden; border-bottom:1px solid #e8e8e8; padding:25px 0 13px 0;}
+.inquiry_wrapper .board_write_wrapper .agree_info >p{float:left; color:#666666; font-size:16px; font-weight:300; letter-spacing:-0.03em; text-indent:10px;}
+.inquiry_wrapper .board_write_wrapper .agree_info >p:after{content:''; background:url(/resources/img/main/icon_ess.png) 0 0 no-repeat; width:7px; height:6px; display:inline-block; vertical-align:middle; position:relative; margin-left:4px; top:-2px;}
+.inquiry_wrapper .board_write_wrapper .agree_info >.form_checkbox{float:right; top:-5px;}
+.inquiry_wrapper .inquiry_notice{background:#f6f6f6 url(/resources/img/main/icon_exc.png) 25px 50% no-repeat; margin:30px 0 100px; color:#999999; font-size:13px; padding:15px 0 19px 81px;}
+.inquiry_wrapper .inquiry_notice li{line-height:23px; letter-spacing:-0.015em;}
+.inquiry_wrapper .btns_wrapper{border-top:1px solid #e8e8e8; position:relative; left:-70px; margin-right:-140px; padding-top:40px;}
+.inquiry_wrapper .pd_agree_wrapper{overflow:hidden; margin-bottom:96px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree{float:left; width:490px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree:first-child{margin-right:48px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree h3{color:#666666; font-size:18px; font-weight:300; letter-spacing:-0.05em; padding-bottom:19px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper{border:2px solid #e5e5e5; height:150px; padding:13px 0 13px 17px; overflow:hidden; color:#bbbbbb; font-size:13px; line-height:21px; margin-bottom:14px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_inside>.mCSB_container{margin-right:17px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_scrollTools .mCSB_draggerRail{opacity:0 !important;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{width:5px !important; background-color:#dddddd !important;}
+.inquiry_wrapper .form_select{margin-right:7px;}
+.inquiry_wrapper .em{display:inline-block; vertical-align:middle; width:63px; text-align:center; color:#292929; font-size:15px;}
+
+/* form ::: checkbox */
+.form_checkbox{display:inline-block; cursor:pointer; overflow:hidden; position:relative; vertical-align:middle; color:#292929; font-size:16px; line-height:26px; letter-spacing:-0.05em;}
+.form_checkbox input[type="checkbox"]{height:0; opacity:0; width:0; position:absolute; left:-10px;}
+.form_checkbox .icon{width:26px; height:26px; border:2px solid #dddddd; border-radius:50px; display:inline-block; position:relative; vertical-align:middle; margin-right:10px;}
+.form_checkbox .icon:before{content:''; width:0; height:20px; background:url(/resources/img/main/icon_checkbox.png) 0 0 no-repeat; position:absolute; left:4px; top:0; transition-duration:0.2s;}
+.form_checkbox input[type="checkbox"]:checked+.icon:before{width:24px;}
+.form_checkbox em{color:#009223;}
+
+/* form ::: file */
+.form_file{border:2px solid #dddddd; position:relative; display:inline-block; cursor:pointer; padding-right:98px; box-sizing:border-box;}
+.form_file:before{content:''; position:absolute; right:96px; top:13px; width:2px; height:16px; background-color:#e8e8e8;}
+.form_file:after{content:'파일선택'; position:absolute; right:20px; top:0; z-index:1; cursor:pointer; line-height:41px; color:#009223; font-size:16px; font-weight:300; letter-spacing:-0.05em;}
+.form_file input[type="file"]{position:absolute; right:0; top:0; height:41px; width:98px; text-indent:-9999px;  opacity:0; z-index:3; cursor:pointer;}
+.form_file input[type="text"]{background-color:white;width:100%; height:41px; border:0; display:block; text-indent:13px;}
+
+/* form ::: textarea */
+.form_textarea{background-color:#f8f8f8; display:inline-block;}
+.form_textarea textarea{background-color:transparent; width:100%; border:0}
+
+/* form ::: text */
+.form_text{background-color:#f8f8f8; display:inline-block;}
+.form_text input{width:100%; border:0; background:transparent; height:45px; color:#292929; font-size:16px; text-indent:15px;}
+.form_text input::placeholder{color:#bbbbbb;}
+.form_text input:-ms-input-placeholder{color:#bbbbbb;}
+
+/* form ::: selectbox */
+.form_select{display:inline-block; vertical-align:middle; overflow:hidden; position:relative; border:2px solid #dddddd;}
+.form_select:before{content:''; position:absolute; right:13px; top:18px; width:12px; height:7px; background:url(/resources/img/main/icon_select_arr.png) 0 0 no-repeat; z-index:3;}
+.form_select select{width:100%; border:0; height:41px; line-height:41px; font-size:16px; color:#999999; position:relative; z-index:1; text-indent:9px;-webkit-appearance:none;}
+
+
+/* form ::: search */
+.form_search{border:2px solid #dddddd; height:41px; display:block; vertical-align:middle; position:relative; padding-right:42px;}
+.form_search input{border:0; height:41px; width:100%; text-indent:14px; color:#292929; font-size:16px;}
+.form_search input::placeholder{color:#bbbbbb; font-size:16px;font-family:font_ns, sans-serif;}
+.form_search .btn_search{background:url(/resources/img/main/icon_search.png) 50% 50% no-repeat; width:41px; height:41px; position:absolute; right:0; top:0;}
+.form_search .btn_search:after{content:''; position:absolute; left:-2px; top:13px; width:2px; height:16px; background-color:#e5e5e5;}
+
+/* board write */
+.board_write_wrapper{position:relative;}
+.board_write_wrapper .rt_note{color:#999999; font-size:16px; letter-spacing:-0.05em; position:absolute; right:0; top:-29px; background:url(/resources/img/main/icon_ess.png) 0 7px no-repeat; padding-left:10px;}
+.board_write_wrapper th{font-weight:300; color:#666666; font-size:16px; height:21px; padding-top:24px; border-bottom:1px solid #e8e8e8; text-align:left; vertical-align:top;}
+.board_write_wrapper td{height:45px; padding:12px 0; border-bottom:1px solid #e8e8e8;}
+.board_write_wrapper th .ess{background:url(/resources/img/main/icon_ess.png) 0 0 no-repeat; width:7px; height:6px; display:inline-block; vertical-align:middle; position:relative; margin-left:4px; top:-2px;}
+.board_write_wrapper td .file_note{font-size:13px; color:#999999; margin-left:25px;}
+/* button */
+.btns_wrapper{text-align:center;}
+.btns_wrapper .btn{margin:0 4px;}
+.btn{font-size:18px; font-weight:bold; text-align:center; display:inline-block; vertical-align:middle; border-radius:30px; transition-duration:0.2s;}
+.btn span{display:inline-block; vertical-align:middle; height:46px; line-height:46px;}
+.btn.bgc_white{background-color:#fff; border:2px solid #dddddd; color:#bbbbbb;}
+.btn.bgc_white:hover{border-color:#bbbbbb;}
+.btn.bgc_point{background-color:#009223; color:#fff;}
+.btn.bgc_point span{height:50px; line-height:50px; letter-spacing:-0.03em;}
+.btn.bgc_point:hover{background-color:#00811f;}
+.btn.i_reg:after{content:''; display:inline-block; vertical-align:middle; width:21px; height:16px; background:url(/resources/img/main/icon_reg.png) 0 0 no-repeat; margin-left:7px;}
+
 </style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<section id="content-wrapper">
-	<div class="area">
-		<h1 class="comm-content-tit">가맹신청/문의</h1>
-		<form action="/insertApply.do" method="post" enctype="multipart/form-data">
-			<div class="common-tbl-box">
-				<table class="comm-tbl type2">
-					<tr>
-						<td><label for="applyName">이름</label></td>
-						<td><input class="inputBox short" type="text" id="applyName" name="applyName" maxlength="16" style="width:1000px" placeholder="이름을 입력해주세요"></td>
-					</tr>
-					<tr>
-						<td><label for="applyPhone">연락처</label></td>
-						<td><input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="16" style="width:1000px"placeholder="연락 가능한 전화번호를 입력해주세요"></td>
-					</tr>
-					<tr>
-				    	<td>
-				        	<label for="email">E-Mail</label>
-				        </td>
-				       	<td>
-				        	<input class="inputBox" type="text" id="applyEmail" name="applyEmail"  style="width:50%" maxlength="20" placeholder="이메일">@
-				               
-				            <input type="text" id="applyEmail2" name="applyEmail2" style="width:20%" maxlength="20">
-				               
-				            <select name="emailEx" id="emailEx" style="width:20%">
-					            <option value="">직접입력</option>
-					            <option value="naver.com">naver.com</option>
-					            <option value="hanmail.net">hanmail.net</option>
-					            <option value="gmail.com">gmail.com</option>
-				       		</select>
-				                <button type="button" id="emailChk">중복확인안돼</button>
-				    	</td>            
-					</tr>
-					<tr>
-						<td><label for="applyArea">지역</label></td>
-						<td>
-							<select class="inputBox" name="applyArea" id="applyArea" style="width:50%">
-								<option value="">시/도</option>
-								<option value="서울특별시">서울특별시</option>
-								<option value="경기도">경기도</option>
-								<option value="인천광역시">인천광역시</option>
-								<option value="대전광역시">대전광역시</option>
-								<option value="세종특별자치시">세종특별자치시</option>
-								<option value="충청남도">충청남도</option>
-								<option value="경상남도">경상남도</option>
-								<option value="울산광역시">울산광역시</option>
-								<option value="부산광역시">부산광역시</option>
-								<option value="대구광역시">대구광역시</option>
-								<option value="제주특별자치도">제주특별자치도</option>
-								<option value="전라북도">전라북도</option>
-								<option value="충청북도">충청북도</option>
-								<option value="광주광역시">광주광역시</option>
-								<option value="전라남도">전라남도</option>
-								<option value="경상북도">경상북도</option>
-								<option value="강원도">강원도</option>
-							</select>
-							<select name="applyArea2" id="applyArea2" style="width:50%">
-								<option value="">시/군/구</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td><label for="applyTitle">제목</label></td>
-						<td><input class="inputBox" type="text" id="applyTitle" name="applyTitle" maxlength="16" style="width:1000px" placeholder="제목을 입력해주세요"></td>
-					</tr>
-					<tr>
-						<td><label for="applyContent">내용</label></td>
-						<td>
-						<textarea class="inputBox" name="applyContent" id="applyContent" rows="3" cols="40" style="width:1000px;overflow:visible"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td><label for="applyFilename">첨부파일</label></td>
-						<td>
-							<input data-maxsize="2" data-maxupload="1" id="applyFilename" name="applyfilename" type="file" /><br>
-							<span class="file_note">※ 등록 가능 확장자 : pdf,docx,pptx,xlsx,jpg,gif,png / 최대 2MB</span>
-						</td>
-					</tr>
-					<!-- <tr style="text-align: center;">
-						<th colspan="2">
-							<input type="submit" value="등록하기">
-						</th>
-					</tr> -->
-				</table>
-				<div class="common-tbl-btn-group">
-					<button type="submit" class="small">등록하기</button>
+<section id="content-wrapper1">
+	<div class="area1">
+		<div id="content">
+			<div class="inquiry_wrapper">
+				<h2 class="subTitle">가맹신청ㆍ문의</h2>
+				<div class="content">
+					<form action="/insertApply.do" method="post" enctype="multipart/form-data" id="frm">
+						<div class="pd_agree_wrapper">
+							<div class="pd_agree">
+								<h3>개인정보 수집 및 이용동의</h3>
+								<div class="scroll_wrapper mCustomScrollbar _mCS_1"><div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0"><div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+									'서브웨이인터내셔날 비브이' 의 광고를 담당하는 써브웨이 프랜차이즈 광고 기금 트러스트는 (이하 '회사') 는 문의 및 가맹신청 신청 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.<br><br>
+									ο 수집항목<br>
+									필수항목 : 이름, 이메일, 연락처<br>
+									선택항목 : 기타문의사항<br><br>
+									ο 개인정보 수집방법 : 홈페이지(문의 및 가맹신청)<br><br>
+									■ 개인정보의 수집 및 이용목적<br>
+									회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다.<br><br>
+									ο 신청자 관리<br>
+									서비스 이용에 따른 가입 의사 확인, 연령확인, 불만처리 등 민원처리, 고지사항 전달<br>
+									(민원처리를 위해 해당 매장 및 매장 담당 지사에 성함 및 연락처가 전달될 수 있음을 알려드립니다.)<br><br>
+									ο 마케팅 및 광고에 활용<br>
+									 이벤트 등 광고성 정보 전달, 접속 빈도 파악 또는 회원의 서비스 이용에 대한 통계<br><br>
+									■ 개인정보의 보유 및 이용기간<br>
+									원칙적으로, 개인정보 수집 및 이용목적이 달성된 후(회원 탈퇴 등)에는 귀하의 개인정보를 지체 없이 파기합니다. 단, 관계법령의 규정에 의하여 보존할 필요가 있는 경우 회사는 아래와 같이 관계법령에서 정한 일정한 기간 동안 회원정보를 보관합니다.<br><br>
+									계약 또는 청약철회 등에 관한 기록 : 5년 (전자상거래등에서의 소비자보호에 관한 법률)<br>
+									소비자의 불만 또는 분쟁처리에 관한 기록 : 3년 (전자상거래등에서의 소비자보호에 관한 법률)
+								</div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; display: block; height: 50px; max-height: 140px; top: 0px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+								<label class="form_checkbox">
+									<input name="agree1" type="checkbox">
+									<span class="icon"></span>개인정보수집 및 이용에 동의합니다. <em>(필수)</em>
+								</label>
+							</div>
+							<div class="pd_agree">
+								<h3>개인정보 위탁동의</h3>
+											<!-- 20180131 -->
+								<div class="scroll_wrapper mCustomScrollbar _mCS_2"><div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0" style="max-height: none;"><div id="mCSB_2_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+									개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.<br><br>
+									회사는 개인정보 취급방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.<br><br>
+									 ο 본 방침은 : 2018 년 1 월 31 일 부터 시행됩니다.<br><br>
+									써브웨이인터내셔날 비브이는 (이하 '회사'는) 고객님의 개인정보 를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.
+								</div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; display: block; height: 150px; max-height: 140px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+								<!--// 20180131 -->
+								<!-- checkbox -->
+								<label class="form_checkbox">
+									<input name="agree2" type="checkbox">
+									<span class="icon"></span>개인정보 위탁에 동의합니다. <em>(필수)</em>
+								</label>
+								<!--// checkbox -->
+							</div> <!-- 개인정보 위탕동의 div 끝 -->
+						</div>
+						<h3 class="h_title">문의 작성하기</h3>
+						<div class="board_write_wrapper">
+							<p class="rt_note">필수입력사항<span class="ess"></span></p>
+							<table>
+								<caption>문의 작성하기 테이블</caption>
+								<colgroup>
+									<col width="130px">
+									<col width="/">
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="col"><label for="applyName">이름</label><span class="ess"></span></th>
+										<td>
+											<span class="form_text" style="width:100%;">
+												<input class="inputBox short" type="text" id="applyName" name="applyName" maxlength="16" style="width:1000px" placeholder="이름을 입력해주세요">
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<th scope="col"><label for="applyPhone">연락처</label><span class="ess"></span></th>
+										<td>
+											<span class="form_text" style="width:100%;">
+												<input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="16" style="width:1000px"placeholder="연락 가능한 전화번호를 입력해주세요">
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<th scope="col"><label for="email">E-Mail</label><span class="ess"></span></th>
+										<td>
+											<span class="form_text" style="width:200px;">
+												<input class="inputBox" type="text" id="applyEmail" name="applyEmail" maxlength="20" placeholder="이메일"><!--   style="width:50%" -->
+											</span>
+											<span class="em">@</span>
+											<span class="form_text" style="width:200px;">
+												<input type="text" id="applyEmail2" name="applyEmail2" maxlength="20">
+											</span>
+											<div class="form_select" style="width:196px; margin-left:7px;">
+												<select name="emailEx" id="emailEx">
+													<option value="">직접입력</option>
+													<option value="naver.com">naver.com</option>
+													<option value="hanmail.net">hanmail.net</option>
+													<option value="hotmail.com">hotmail.com</option>
+													<option value="nate.com">nate.com</option>
+													<option value="empas.com">empas.com</option>
+													<option value="dreamwiz.com">dreamwiz.com</option>
+													<option value="lycos.co.kr">lycos.co.kr</option>
+													<option value="korea.com">korea.com</option>
+													<option value="gmail.com">gmail.com</option>
+													<option value="hanmir.com">hanmir.com</option>
+												</select>
+												<!-- <button type="button" id="emailChk">중복확인안돼</button> -->
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="col"><label for="applyArea">지역</label><span class="ess"></span></th>
+										<td>
+											<div class="form_select" style="width:196px;">
+												<select class="inputBox" name="applyArea" id="applyArea">
+													<option value="">시/도</option>
+													<option value="서울특별시">서울특별시</option>
+													<option value="경기도">경기도</option>
+													<option value="인천광역시">인천광역시</option>
+													<option value="대전광역시">대전광역시</option>
+													<option value="세종특별자치시">세종특별자치시</option>
+													<option value="충청남도">충청남도</option>
+													<option value="경상남도">경상남도</option>
+													<option value="울산광역시">울산광역시</option>
+													<option value="부산광역시">부산광역시</option>
+													<option value="대구광역시">대구광역시</option>
+													<option value="제주특별자치도">제주특별자치도</option>
+													<option value="전라북도">전라북도</option>
+													<option value="충청북도">충청북도</option>
+													<option value="광주광역시">광주광역시</option>
+													<option value="전라남도">전라남도</option>
+													<option value="경상북도">경상북도</option>
+													<option value="강원도">강원도</option>
+												</select>
+											</div>
+											<div class="form_select" id="select2" style="width:196px;">
+												<select name="applyArea2" id="applyArea2">
+													<option value="">시/군/구</option>
+												</select>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="col"><label for="applyTitle">제목</label><span class="ess"></span></th>
+										<td>
+											<span class="form_text" style="width:100%">
+												<input class="inputBox" type="text" id="applyTitle" name="applyTitle" maxlength="16" style="width:1000px" placeholder="제목을 입력해주세요">
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<th scope="col"><label for="applyContent">내용</label><span class="ess"></span></th>
+										<td>
+											<span class="form_textarea" style="width:100%">
+												<textarea class="inputBox" name="applyContent" id="applyContent" cols="5" maxlength="500" rows="10" style="height:230px;"></textarea>
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<th scope="col"><label for="applyFilename">첨부파일</label></th>
+										<td>
+											<label class="form_file" style="width:466px;">
+												<input data-maxsize="2" data-maxupload="1" id="applyFilename" name="applyfilename" type="file" onchange="formFile(this); return false;">
+												<input readonly="readonly" type="text">
+											</label>
+
+											<span class="file_note">※ 등록 가능 확장자 : pdf,docx,pptx,xlsx,jpg,gif,png / 최대 2MB</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div class="agree_info">
+								<p>신청·문의사항에 대한 답변은 메일로 발송됩니다.  동의하시겠습니까?</p>
+								<!-- checkbox -->
+								<label class="form_checkbox">
+									<input name="agree3" type="checkbox">
+									<span class="icon"></span>예, 동의합니다.
+								</label>
+								<!--// checkbox -->
+							</div>
+
+							<div class="inquiry_notice">
+								<ul>
+									<li>· 문의가 집중되거나 주말의 경우 답변이 지연될 수 있습니다. 최대한 빠르게 답변 드리도록 하겠습니다.</li>
+									<li>· 욕설, 비속어, 비방성 등의 부적절한 단어 포함되어 있는 경우, 답변 진행이 어려울 수 있습니다.</li>
+								</ul>
+							</div>
+						</div>
+						<div class="btns_wrapper">
+							<button type="reset" class="btn bgc_white" style="width:126px;"><span>취소</span></button>
+							<button type="submit" onclick="return check();" class="btn bgc_point i_reg" style="width:170px;"><span>등록하기</span></button>
+							<!-- <a class="btn bgc_white" href="#" onclick="view.cancel();return false;" style="width:126px;"><span>취소</span></a>
+							<a class="btn bgc_point i_reg" href="#" onclick="view.save();return false;" style="width:170px;"><span>등록하기</span></a> -->
+						</div>
+					</form>
 				</div>
-			</div>
-		</form>
+				
+			</div>	<!-- class="inquiry_wrapper -->
+		</div>	<!-- id="content -->
+		
+		
 	</div>
 </section>
 	
@@ -112,8 +303,16 @@
 	       $("#applyEmail2").val($("#emailEx").val());
 	    }
 	 });
- 
-
+	 
+	$("#btnSubmit").click(function(){
+		   
+	    if(isChk()){
+	         $("#applyForm").submit();
+	         
+	   }else{
+	      return false;
+	   }
+	})
 // 빈값 체크
 	function isEmpty(text){
 	   if(text != null && text != ""){
@@ -122,27 +321,68 @@
 	      return true;
 	   }
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//빈값 검사
+	function isChk(){
+	   if(isEmpty($("#applyName").val())){
+	      alert("이름을 작성해주세요.")
+	      return false;
+	   }
+	   if(isEmpty($("#applyPhone").val())){
+	      alert("휴대폰번호를 작성해주세요.")
+	      return false;
+	   }
+	   if(isEmpty($("#applyEmail").val())){
+	      alert("이메일을 작성해주세요.")
+	      return false;
+	   }
+	   if(isEmpty($("#applyEmail2").val())){
+	      alert("이메일을 작성해주세요.")
+	      return false;
+	   }
+	   if(isEmpty($("#applyArea").val())){
+	      alert("지역을 선택해주세요.")
+	      return false;
+	   }
+	   if(isEmpty($("#applyArea2").val())){
+	      alert("지역을 선택해주세요.")
+	      return false;
+	   }
+	   if(isEmpty($("#applyTitle").val())){
+	      alert("제목을 작성해주세요.")
+	      return false;
+	   }
+	   if(isEmpty($("#applyContent").val())){
+	      alert("내용을 작성해주세요.")
+	      return false;
+	   }
+	   return true;
+	}
+	
+/* 약관동의 체크 */
+function check(){
+	if(!$("input:checkbox[name=agree1]").is(":checked")) {
+		alert("개인정보수집 및 이용에 동의가 필요합니다.");
+		$("input:checkbox[name=agree1]").focus();
+		return false;
+	}
+	if(!$("input:checkbox[name=agree2]").is(":checked")) {
+		alert("개인정보 위탁에 동의가 필요합니다.");
+		$("input:checkbox[name=agree2]").focus();
+		return false;
+	}
+	if(!$("input:checkbox[name=agree3]").is(":checked")) {
+		alert("신청·문의사항에 대한 답변은 메일 발송에 따른 동의가 필요합니다.");
+		$("input:checkbox[name=agree3]").focus();
+		return false;
+	}
+}
+//첨부파일 표시
+function formFile(obj){// 첨부파일
+	var value = obj.value;
+	//var file = value.split('\');
+	//console.log(file[2]);
+	$(obj).next('input').val(value);
+}
 
 
 
@@ -509,8 +749,8 @@
 			
 		 	}
 		
-		})
-	})
+		});
+	});
 </script>			
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />

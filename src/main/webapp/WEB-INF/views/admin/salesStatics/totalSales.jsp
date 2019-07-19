@@ -254,7 +254,7 @@
 			             plotBorderWidth: 1,
 			        },
 			        title: {
-			            text: month+' Top10 매장 매출 현황(?)',
+			            text: month+' Top10 매장 매출 순위',
 			        },
 			        subtitle: {
 			            text: '서브 타이틀'

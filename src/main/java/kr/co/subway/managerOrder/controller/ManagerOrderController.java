@@ -149,9 +149,21 @@ public class ManagerOrderController {
 		new Gson().toJson(result,response.getWriter());
 	}
 	
+	/* 선택 업데이트 */
+	@ResponseBody
+	@RequestMapping(value="/managerOrder/allUpdate.do", produces="application/json;charset=utf-8")
+	public String allDelete(@RequestParam String idx, String st) {
+		//int result = 0;
+		String[] no = idx.split(",");
+		for(int i=0;i<no.length;i++) {
+			service.updateState(new ManagerOrderVO(no[i],Integer.parseInt(st)));
+		}
+		
+		return new Gson().toJson("완료");
+	}
+	
 	
 	//@Scheduled(cron="1 1 8 * * *")
-	//@Scheduled(cron="1 52 10 * * *")
 	@RequestMapping("/managerOrder/test.do")
 	public String deliveryEnd() {
 		

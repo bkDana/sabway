@@ -14,7 +14,6 @@ import kr.co.subway.managerOrder.vo.ManagerItemVO;
 import kr.co.subway.managerOrder.vo.ManagerOrderListVO;
 import kr.co.subway.managerOrder.vo.ManagerOrderVO;
 import kr.co.subway.managerOrder.vo.StockVO;
-import kr.co.subway.stock.vo.HistoryVO;
 
 
 @Service("ManagerOrderService")
@@ -26,60 +25,12 @@ public class ManagerOrderService {
 	public ManagerOrderListVO selectList(SearchVO search) {
 		int reqPage = search.getReqPage();
 		int total = dao.totalCount(search);
+		int pageNum = 15;
 		
-		int pageNum = 10;
-		
-		//int totalPage = (total%pageNum==0)?(total/pageNum):(total/pageNum)+1;
 		search.setStart((reqPage*pageNum-pageNum)+1);
 		search.setEnd(reqPage*pageNum);
 		/* 리스트 */
 		ArrayList<ManagerOrderVO> orderList = (ArrayList<ManagerOrderVO>)(dao.selectList(search));
-		
-		/* 페이지 네비 */
-		/* 기존 페이징
-		int totalNavi = 5;
-		String pageNavi = "";
-		int pageNo = ((reqPage-1)/totalNavi)*totalNavi+1;
-		if(pageNo != 1) {
-			pageNavi += "<a class='paging-arrow prev-arrow' href='javascript:list("+(reqPage-1)+");'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";	
-		}else {
-			
-		}
-		int i = 1;
-		while(!(i++>totalNavi || pageNo>totalPage)) {
-			if(reqPage == pageNo) {
-				pageNavi += "<a class='cur'>"+pageNo+"</a>";
-			}else {
-				pageNavi += "<a href='javascript:list("+pageNo+");'>"+pageNo+"</a>";
-			}
-			pageNo++;
-		}
-		if(pageNo <= totalPage) {
-			pageNavi += "<a class='paging-arrow next-arrrow' href='javascript:list("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
-		}
-		 */
-		
-		/* 새 거 */
-		/*int totalNavi = 10;
-		String pageNavi = "";
-		int pageNo = ((reqPage-1)/totalNavi)*totalNavi+1;
-		if(reqPage != 1) {
-			pageNavi += "<a class='paging-arrow prev-arrow' href='javascript:list("+(reqPage-1)+");'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";	
-		}
-		
-		int i = 1;
-		while(!(i++>totalNavi || pageNo>totalPage)) {
-			if(reqPage == pageNo) {
-				pageNavi += "<a class='cur'>"+pageNo+"</a>";
-			}else {
-				pageNavi += "<a href='javascript:list("+pageNo+");'>"+pageNo+"</a>";
-			}
-			pageNo++;
-		}
-		if(reqPage!=totalPage && totalPage!=0) {
-			pageNavi += "<a class='paging-arrow next-arrrow' href='javascript:list("+(reqPage+1)+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
-		}*/
-		
 		
 		ManagerOrderListVO list = new ManagerOrderListVO(orderList, new CommonFunc().getPageNavi(total, reqPage, pageNum, 10));
 		return list;
@@ -99,11 +50,7 @@ public class ManagerOrderService {
 		order.setItemList((ArrayList<ManagerItemVO>)(dao.selectItem(no)));
 		return order;
 	}
-/*
-	public ArrayList<String> selectType() {
-		return (ArrayList<String>)dao.selectType();
-	}
-*/
+
 	public ArrayList<IngreVo> selectIngre(String type) {
 		return (ArrayList<IngreVo>)dao.selectIngre(type);
 	}
