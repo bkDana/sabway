@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* ****************** 공통 컨텐츠 클래스 ********************** */
-#content-wrapper{padding:100px 0; background-color:#f6f6f6;}
+#content-wrapper{padding:100px 0; background-color:#fff;}
 .comm-content-tit{position:relative; font-size:26px; color:#2b2b2b; text-align:center; font-weight:500; padding:20px 0; margin-bottom:50px;}
 .comm-content-tit:after{display:block; content:""; width:50px; height:4px; background-color:#009223; position:absolute; bottom:0; left:50%; margin-left:-30px;}
 .comm-content-tit-small{position:relative; font-size:26px; color:#2b2b2b; text-align:center; font-weight:500; padding:20px 0; margin-bottom:50px;}
@@ -9,7 +9,7 @@
 
 
 /* 게시판용  :: 지영*/
-.board-tit{text-align: center;font-size: 40px;color: #292929;font-weight: bold;letter-spacing: -0.07em;padding: 60px 0 90px;}
+.board-tit{text-align: center;font-size: 30px;color: #292929;font-weight: bold;letter-spacing: -0.07em;padding: 60px 0 90px;}
 
 /* 공통 :: PAGING */
 /* .paging{width:100%; text-align:center; margin:30px 0;}

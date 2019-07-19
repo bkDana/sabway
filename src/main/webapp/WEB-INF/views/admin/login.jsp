@@ -49,7 +49,7 @@ input{
 	<div class="area">
 		<p style="text-align: center;"><a href="/"><img src="/resources/img/logo_w.png" width="100px" ></a></p>
 		<div class="" style="background-color: #eceef1;width: 460px;margin: 40px auto 10px;padding: 10px 30px 30px;overflow: hidden;position: relative;box-sizing: border-box;">
-			<p style="color: #32c5d2!important;margin: 20px 0 25px;text-align: center;font-size: 20px;font-weight: bold;">SUBWAY 매장관리자 사이트 로그인</p>
+			<p style="color: #32c5d2!important;margin: 20px 0 25px;text-align: center;font-size: 20px;font-weight: bold;">SABWAY 매장관리자 사이트 로그인</p>
 			<form action="/adminLogin.do" method="post">
 				<div class="">
 					<div class="">
@@ -69,7 +69,7 @@ input{
 				</div>
 			</form>	
 		</div>
-		<p style="text-align: center;margin: 0 auto 30px 0;padding: 10px;color: #7a8ca5;font-size: 13px;">© 2017 Doctor’s Associates Inc. SUBWAY® is a registered trademark of Doctor’s Associates Inc.. All rights reserved.</p>
+		<p style="text-align: center;margin: 0 auto 30px 0;padding: 10px;color: #7a8ca5;font-size: 13px;">© 2019 JungUm’s Associates Inc. SABWAY® is a registered trademark of JungUm’s Associates Inc.. All rights reserved.</p>
 	</div>
 </section>
 

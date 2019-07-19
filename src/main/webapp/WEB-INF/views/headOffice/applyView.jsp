@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- Header --%>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
+
+<%-- Header --%>
+<jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
+
+<!-- <script type="text/javascript" src="/resources/js/notice.js"></script>notice.js -->
 
 <%-- Content --%>
-<section id="content-wrapper">
+<section id="content-wrapper" class="clearfix">
+	<%-- LEFT MENU --%>
+	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="common-tbl-box">
+		<div class="sub-menu">※ 매장관리 > 가맹점 신청</div>
+		<!-- <div class="common-tbl-box"> -->
 			<table class="comm-tbl">
 				<tr>
 					<th style="text-align:center;">제목</th>
@@ -46,7 +51,7 @@
 					</tr>
 				</c:if>
 			</table>
-		</div>
+		<!-- </div> -->
 		<div class="common-tbl-btn-group">
 			<button type="button" class="btn-style2" id="applyListLink">목록으로</button>
 		</div>
@@ -58,4 +63,4 @@
 	</script>
 </section>
 <%-- Footer --%>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />

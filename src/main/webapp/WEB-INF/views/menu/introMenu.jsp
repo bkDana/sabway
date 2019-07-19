@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <%-- Content --%>
-<jsp:include page="/WEB-INF/views/common/sub.jsp" />
+
 
 <img src="/resources/img/img_visual_sandwich.jpg" class="sub-img">
 <div class="sub-menu-title">
@@ -39,7 +39,7 @@
 
 
 
-<section id="content-wrapper" >
+<section id="content-wrapper" style="background-color:#f6f6f6;">
 	
 	<div class="area" >
 		<c:if test='${param.no >= 5 }'>

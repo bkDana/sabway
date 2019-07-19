@@ -6,11 +6,12 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
 <script type="text/javascript" src="/resources/js/bucket.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+<jsp:include page="/WEB-INF/views/common/sub.jsp" /><!-- 서브메뉴 추가했습니다 -->
 <%-- content --%>
 <section id="content-wrapper">
 	<div class="area">
-		<strong style="font-size:40px;">나만의 메뉴 </strong>
+		<!-- <strong style="font-size:40px;">나만의 메뉴 </strong> -->
+		<h1 class="board-tit">나만의 메뉴</h1><!-- 이거 바꿈 -->
 		<br><br>
 		<c:forEach items="${list }" var="bucket" varStatus="status">
 			<div class="hiddenInfo">
