@@ -23,6 +23,19 @@
 	.offBtn {
 		background-color: #122322;
 	}
+	#adminLink{
+		background-color: gray;
+		width:70px;
+	    border: none;
+	    color:#fff;
+	    padding: 5px 0;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 15px;
+	    margin: 4px;
+	    cursor: pointer;
+	}
 	.pageNavi{
 		color:black;
 		text-align:center;
@@ -41,10 +54,13 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 매장관리 > 가맹점 목록</div>
+		<div class="sub-menu">
+			※ 매장관리 > 가맹점 목록<br>
+			<button class="btn-style2" style="font-size:15px;" id="adminLink">메인으로</button>
+		</div>
 		<div class="board-search-box">
 	 		<select name="statusGroup">
-	 			<c:if test="${status == 1 || status == 2 || status == 3 }">
+	 			<c:if test="${not empty status }">
 			 		<option selected="selected" disabled="disabled" value="${status }">
 						<c:choose>
 							<c:when test="${status == 1 }">준비</c:when>
@@ -53,7 +69,7 @@
 						</c:choose>
 					</option>
 	 			</c:if>
-				<c:if test="${status != 1 && status != 2 && status != 3  }">
+				<c:if test="${empty status }">
 					<option selected="selected" disabled="disabled">상태분류</option>
 				</c:if>
 				<option id="open" value=2>영업</option>
@@ -64,7 +80,7 @@
 				<option id="name">이름</option>
 				<option id="addr">주소</option>
 			</select>&nbsp;
-			<input type="text" maxlength="30" placeholder="가맹점 회원검색" value="${text }"style="height:34px; padding-left:5px;">
+			<input type="text" maxlength="30" placeholder="가맹점 검색" value="${text }"style="height:34px; padding-left:5px;">
 			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button>
 		</div>
 		<table class="comm-tbl" style="max-width:100%">
@@ -134,19 +150,6 @@
 		<div class="pageNavi">
 			${pd.pageNavi }
 		</div>
-		<div class="common-tbl-btn-group">
-			<button class="btn-style2" style="font-size:15px;" id="adminLink">목록으로</button>
-		</div>
-<%-- 		<div class="common-tbl-btn-group" name="moreDiv">
-			<c:if test="${total > 10}">
-				<hr>
-				<button type="button" class="btn-style2" name="more">더보기</button>
-				<hr>
-			</c:if>
-			<input type="hidden" value="${mgrSize }" name="mgrSize">
-			<input type="hidden" value="${total }" name="totalCount">
-			<input type="hidden" value=${mpd.lastPage } name="pageName">
-		</div> --%>
 	</div> 
 </section>
 <script type="text/javascript">
@@ -187,124 +190,11 @@
 			}
 			location.href="/searchKeyword.do?status1="+status1+"&keyword="+keyword+"&text="+text+"&currentPage=''";
 		});
-		
+		//메인페이지 이동 버튼
+		$("#adminLink").click(function(){
+			location.href="/admin.do";
+		});
 	});
-
-
-
-/* 	$(document).ready(function(){
-		//상태변경(오픈)
-		$(".onBtn").click(function(){
-			var mgrStatus = $(this).val();
-			var mgrName = $(this).parent().parent().children().eq(3).html();
-			if(confirm("변경하시겠습니까?")){
-				location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
-			}
-		});
-		//상태변경(폐점)
-		$(".offBtn").click(function(){
-			var mgrStatus = $(this).val();
-			var mgrName = $(this).parent().parent().children().eq(3).html();
-			if(confirm("변경하시겠습니까?")){
-				location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
-			}
-		});
-		//가맹점 검색
-		$("[name=searchBtn]").click(function(){
-			var keyword = $(this).prev().prev().val();
-			var text = $(this).prev().val();
-			if(keyword == "이름"){
-				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
-			}else if(keyword == "주소"){
-				location.href="/searchKeyword.do?keyword="+keyword+"&text="+text;
-			}
-		});
-		//상태별 분류
-		$("[name=statusGroup]").on("change",function(){
-			var keyword = $(this).val();
-			location.href="/selectStatus.do?keyword="+keyword;
-		});
-		//더보기
-		$("[name=more]").on("click",function(){
-			var mgrSize = $('[name=mgrSize]').val();
-			var total = Number($('[name=totalCount]').val());
-			var firstPage = Number($('[name=pageName]').val());
-			if(mgrSize > 10){
-				$.ajax({
-					url:"/mgrPageMore.do",
-					data:{firstPage:firstPage},
-					dataType:"json",
-					success:function(data){
-						var last = Number($('[name=pageName]').val())+10;
-						Number($('[name=pageName]').val(last));
-						for(var i=0;i<data.length;i++){
-							if(data[i].mgrStatus == 1){
-								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:green;'>"+"준비중"+"</td><td style='text-align:center;'><button type='button' class='onBtn' name='mgrStatus' value='2'>영업</button>&nbsp;<button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
-							}else if(data[i].mgrStatus == 2){
-								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:blue;'>"+"영업중"+"</td><td style='text-align:center;'><button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
-							}else if(data[i].mgrStatus == 3){
-								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:pink;'>"+"폐업"+"</td><td style='text-align:center;'><button type='button'></button></td></tr>";
-							}
-							$('table').append(str);
-						}
-						//상태변경(오픈)
-						$(".onBtn").click(function(){
-							var mgrStatus = $(this).val();
-							var mgrName = $(this).parent().parent().children().eq(3).html();
-							if(confirm("변경하시겠습니까?")){
-								location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
-							}
-						});
-						//상태변경(폐점)
-						$(".offBtn").click(function(){
-							var mgrStatus = $(this).val();
-							var mgrName = $(this).parent().parent().children().eq(3).html();
-							if(confirm("변경하시겠습니까?")){
-								location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
-							}
-						});
-					}
-				});		
-			}else{
-				$.ajax({
-					url:"/mgrPageMore.do",
-					data:{firstPage:firstPage},
-					dataType:"json",
-					success:function(data){
-						var last = Number($('[name=pageName]').val())+10;
-						Number($('[name=pageName]').val(last));
-						for(var i=0;i<data.length;i++){
-							if(data[i].mgrStatus == 1){
-								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:green;'>"+"준비중"+"</td><td style='text-align:center;'><button type='button' class='onBtn' name='mgrStatus' value='2'>영업</button>&nbsp;<button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
-							}else if(data[i].mgrStatus == 2){
-								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:blue;'>"+"영업중"+"</td><td style='text-align:center;'><button type='button' class='offBtn' name='mgrStatus' value='3'>폐업</button></td></tr>";
-							}else if(data[i].mgrStatus == 3){
-								var str = "<tr><td style='text-align:center;'>"+data[i].mgrNo+"</td><td style='text-align:center;'>"+data[i].mgrId+"</td><td style='text-align:center;'>"+data[i].mgrBossName+"</td><td style='text-align:center;'>"+data[i].mgrName+"</td><td style='text-align:center;'>"+data[i].mgrAddr+"</td><td style='text-align:center;'>"+data[i].mgrTel+"</td><td style='text-align:center;'>"+data[i].mgrEnrollDate+"</td><td style='text-align:center;color:pink;'>"+"폐업"+"</td><td style='text-align:center;'><button type='button'></button></td></tr>";
-							}
-							$('table').append(str);
-						}
-						//상태변경(오픈)
-						$(".onBtn").click(function(){
-							var mgrStatus = $(this).val();
-							var mgrName = $(this).parent().parent().children().eq(3).html();
-							if(confirm("변경하시겠습니까?")){
-								location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
-							}
-						});
-						//상태변경(폐점)
-						$(".offBtn").click(function(){
-							var mgrStatus = $(this).val();
-							var mgrName = $(this).parent().parent().children().eq(3).html();
-							if(confirm("변경하시겠습니까?")){
-								location.href="/mgrUpdate.do?mgrStatus="+mgrStatus+"&mgrName="+mgrName;
-							}
-						});
-					}
-				});		
-				$("[name=moreDiv]").attr("style","display:none");
-			}
-		});
-	}); */
 </script>
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
