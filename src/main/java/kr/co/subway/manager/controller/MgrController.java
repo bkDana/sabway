@@ -398,7 +398,7 @@ public class MgrController {
 //		String keyword = area.substring(0,2);
 		String keyword = area;
 		System.out.println(keyword);
-		
+		System.out.println("type : " + type);
 		if(type.equals("1")) {
 			keyword = keyword+"%";
 		}else if(type.equals("2")) {

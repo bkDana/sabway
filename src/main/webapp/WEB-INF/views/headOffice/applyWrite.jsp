@@ -97,7 +97,7 @@
 			<div class="inquiry_wrapper">
 				<h2 class="subTitle">가맹신청ㆍ문의</h2>
 				<div class="content">
-					<form action="/insertApply.do" method="post" enctype="multipart/form-data" id="frm">
+					<form id="applyForm" action="/insertApply.do" method="post" enctype="multipart/form-data" id="frm">
 						<div class="pd_agree_wrapper">
 							<div class="pd_agree">
 								<h3>개인정보 수집 및 이용동의</h3>
@@ -303,16 +303,7 @@
 	       $("#applyEmail2").val($("#emailEx").val());
 	    }
 	 });
-	 
-	$("#btnSubmit").click(function(){
-		   
-	    if(isChk()){
-	         $("#applyForm").submit();
-	         
-	   }else{
-	      return false;
-	   }
-	})
+
 // 빈값 체크
 	function isEmpty(text){
 	   if(text != null && text != ""){
@@ -375,6 +366,13 @@ function check(){
 		$("input:checkbox[name=agree3]").focus();
 		return false;
 	}
+	if(isChk()){
+        $("#applyForm").submit();
+        
+	  }else{
+	     return false;
+	  }
+	
 }
 //첨부파일 표시
 function formFile(obj){// 첨부파일
