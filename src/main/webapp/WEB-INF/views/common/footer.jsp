@@ -36,7 +36,7 @@
 	            <ul>
 	                <li><a href="#">이용약관</a></li>
 	                <li><a href="#"><strong>개인정보취급방침</strong></a></li>
-	                <li><a href="https://store.subway.co.kr/" target="_blank">점주관리자</a></li>
+	                <li><a href="/admin.do" target="_blank">점주관리자</a></li>
 	                <li><a class="eng" href="http://www.global.subway.com" target="_blank">Subway Listens</a></li>
 	            </ul>
 	        </div>

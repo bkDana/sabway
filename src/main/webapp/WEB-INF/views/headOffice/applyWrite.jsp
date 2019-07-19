@@ -734,7 +734,7 @@ function formFile(obj){// 첨부파일
 	});
 </script>			
 <%-- Footer --%>
-<jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 
 
