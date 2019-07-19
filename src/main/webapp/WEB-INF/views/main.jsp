@@ -303,7 +303,7 @@ $(document).ready(function(){
 				<!-- 서브웨이 약속 -->
 				<div class="history">
 					<p>SEARCH FOR BETTER<br>신선함을 위한 노력</p>
-					<a class="btn" href="#"><span>써브웨이 약속</span></a>
+					<a class="btn" href="/franchise.do"><span>써브웨이 약속</span></a>
 					<img src="/resources/img/main/img_subway_history.png">
 				</div>
 			</div>
