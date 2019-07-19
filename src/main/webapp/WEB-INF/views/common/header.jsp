@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/reset.css"> <!-- 태그 초기화 css(민주) -->
 <link rel="stylesheet" type="text/css" href="/resources/css/user-layout.css"> <!-- 레이아웃 css(민주) -->
 <link rel="stylesheet" type="text/css" href="/resources/css/content.css"> <!-- 컨텐츠 css(민주) -->
-
 <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
 
 <!-- script -->
@@ -89,14 +88,14 @@
 						<c:when test="${not empty sessionScope.customer }">
 							
 							<li><a href="/logout.do" class="header-btn">로그아웃</a></li>
-							<li><a href="/mypageIntro.do" class="header-btn">마이페이지</a></li>
+							<li><a href="/customerProfile.do" class="header-btn" <%if(p6.equals("customerProfile.jsp")||p6.equals("myMenuList.jsp")){ %>style="background-color:#009223;color:#fff;"<%}%> >마이페이지</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="/index.do" class="header-btn">로그인</a></li>
 						</c:otherwise>
 					</c:choose>
 					
-					<li><a href="/admin.do" class="header-btn">관리자</a></li>
+					<!-- <li><a href="/admin.do" class="header-btn">관리자</a></li> footer의 '점주관리자'에 연결해놓았음. -->
 					<li><a class="header-btn" id="bucket" onclick="loadBucket()"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
 				</ul>
 			</div>
@@ -154,7 +153,7 @@
 								<ul>
 									<!-- <li><a href="#">써브웨이 프랜차이즈</a></li>
 									<li><a href="#">가맹관련 FAQ</a></li> -->
-									<li><a href="/applyPage.do?currentPage=''">가맹신청/문의</a></li>
+									<li><a href="/applyPage.do?currentPage=''">가맹신청ㆍ문의</a></li>
 									<!-- <li><a href="#">지사안내</a></li>
 									<li><a href="#">사업설명회</a></li> -->
 								</ul>
@@ -165,4 +164,4 @@
 			</div>
 		</div>
 	</header>
-
+	

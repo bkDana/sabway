@@ -190,6 +190,7 @@ public class MgrController {
 	//신규가맹점 목록
 	@RequestMapping(value="/findStore.do")
 	public ModelAndView newStoreList(String currentPage, @RequestParam int status) {
+		System.out.println(status);
 		//신규매점 리스트
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.newStoreList();
 		int currentPage1;
@@ -203,7 +204,7 @@ public class MgrController {
 		
 		// 페이징		
 		String pageNavi = pd.getPageNavi();
-		
+		System.out.println(pageNavi);
 		ArrayList<Integer> listDate = new ArrayList<Integer>();
 		for(int i=0; i<list.size(); i++){
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
@@ -244,8 +245,7 @@ public class MgrController {
 	@ResponseBody
 	@RequestMapping(value="/allSearchKeyword.do",produces="application/json; charset=utf-8")
 	public String allSearchKeyword(String area, String currentPage, String type) {
-		
-		
+		String type2 = "";
 		System.out.println("갔다오냐"+area);
 		System.out.println(currentPage);
 //		String keyword = area.substring(0,2);
@@ -264,7 +264,7 @@ public class MgrController {
 		}catch (Exception e) {
 			currentPage1=1;
 		}
-		StorePageNaviData pd = mgrservice.allStoreSelectPaging(currentPage1,keyword,area);
+		StorePageNaviData pd = mgrservice.allStoreSelectPaging(currentPage1,keyword,area,type);
 		/*for(int i=0; i<allSearchKeyword.size(); i++){
 
 		}*/

@@ -425,15 +425,15 @@
 	
 	$(document).ready(function(){
 		$("#applyArea").change(function(){
-// 			var area1 = $(this).val();
+
 			var area = $(this).val();
-// 			var area2 = $("#applyArea2").val();
-			applyArea(area,'1',1);
-// 			applyArea(area1,area2,'1',1);
+
+			applyArea(area,1,1);
+
 		})
 		
 		$("#applyArea2").change(function(){
-// 			var area1 = $("#applyArea").val();
+
 			var area = $(this).val();
 			applyArea(area,1,2);
 		})

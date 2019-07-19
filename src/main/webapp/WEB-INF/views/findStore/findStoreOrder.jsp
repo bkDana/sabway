@@ -241,7 +241,7 @@
 <!-- Map -->
 
 <section id="content-wrapper" style="height: 100%; background-color:#fff;padding-top:50px;">
-<h1 class="comm-content-tit">주문할 매장 찾기</h1>
+<h1 class="board-tit">주문할 매장 찾기</h1>
    	<div class="store_search_wrapper" style="position:relative;">
    	
       <div class="store_search_layer" style="position:absolute; top:75px;">

@@ -126,7 +126,7 @@ public class CusOrderController {
 	}
 	
 	//주문정보, 버킷에 주문번호 추가하는 메소드
-	@RequestMapping("/insertItem.do")
+	@RequestMapping("/insertOrder.do")
 	public ModelAndView insertItem(HttpServletRequest request, String cusoOrderState, String cusoTotalCost,
 			String cusoPhone, String cusoMemberNo, String cusoCallBy, String cusoOrderNo, String cusoBranchName) {
 		ModelAndView mav = new ModelAndView();

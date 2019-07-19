@@ -12,9 +12,10 @@
  </style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/sub.jsp" /><!-- 서브메뉴 추가했습니다 -->
 <section id="content-wrapper">
 	<div class="area">
-	<h1 class="comm-content-tit">회원정보</h1>
+	<h1 class="board-tit">회원정보</h1><!-- 이거 바꿈 -->
 		<form id="updateForm" action="/cusUpdate.do" method="post">
 			<div class="common-tbl-box">
 		    	<input type="hidden" id="isChk" value="0">
@@ -200,4 +201,4 @@ $(document).ready(function(){
    });
 </script>
 <%-- Footer --%>
-<jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

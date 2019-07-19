@@ -6,16 +6,17 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
 <script type="text/javascript" src="/resources/js/bucket.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+<jsp:include page="/WEB-INF/views/common/sub.jsp" /><!-- 서브메뉴 추가했습니다 -->
 <%-- content --%>
 <section id="content-wrapper">
 	<div class="area">
-		<strong style="font-size:40px;">나만의 메뉴 </strong>
+		<!-- <strong style="font-size:40px;">나만의 메뉴 </strong> -->
+		<h1 class="board-tit">나만의 메뉴</h1><!-- 이거 바꿈 -->
 		<br><br>
 		<c:forEach items="${list }" var="bucket" varStatus="status">
 			<div class="hiddenInfo">
 				<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
-				<form action="/insertMyMenu.do" class="myMenu" method="post">
+				<form action="/insertFromMyMenu.do" class="myMenu" method="post">
 					<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
 					<input type="hidden" class="hidenBranchName" value="${bucket.bucBranch }">
 					<input type="hidden" class="hiddenBucCustomerIdx" name="mmCustomerNo" value="${bucket.bucCustomerIdx }">
@@ -35,7 +36,7 @@
 					<input type="submit" class="myMenu" style="display:none;">
 				</form>
 				<div class="hiddenOrder">
-					<form action="/insertItem.do" method="post">
+					<form action="/insertOrder.do" method="post">
 						<input type="hidden" name="cusoTotalCost" value="">
 						<input type="hidden" name="cusoPhone" value="">
 						<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
@@ -53,7 +54,7 @@
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<tr>
-				<td>???</td>
+				<td><button type="button" class="findBranch" style="font-size:15px; font-weight:bolder; color:grey;">지점 찾기</button></td>
 				<td class="bucketOption">
 						<span id="bread">빵 : ${bucket.bucBread }</span><br>
 						<span id="main">메인재료 : ${bucket.bucMain }&nbsp;${bucket.bucIsSalad }</span><br>
