@@ -14,6 +14,12 @@
 		font-size: 15px;
 		font-weight: bold;
 	}
+	/* form ::: search */
+   .form_searchM {border:2px solid #dddddd; height:41px;width:15%; display:block; vertical-align:middle; position:relative; padding-right:42px; }
+   .form_searchM input{border:0; height:41px; width:100%; text-indent:14px; color:#292929; font-size:16px;}
+   .form_searchM input::placeholder{color:#bbbbbb; font-size:16px;font-family:font_ns, sans-serif;}
+   .form_searchM .btn_searchM{background:url(http://subway.co.kr/images/common/icon_search.png) 50% 50% no-repeat; width:41px; height:41px; position:absolute; right:0; top:0;}
+   .form_searchM .btn_searchM:after{content:''; position:absolute; left:-2px; top:13px; width:2px; height:16px; background-color:#e5e5e5;}
 </style>
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
@@ -21,7 +27,7 @@
 	<div class="area">
 		<div class="sub-menu">※ 매장관리 > 가맹점 처리 목록</div>
 		<h1 class="comm-content-tit">처리된 목록</h1>
-		<table class="comm-tbl">
+		<table class="comm-tbl" style="max-width: 100%;">
 			<tr>
 				<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
 			</tr>

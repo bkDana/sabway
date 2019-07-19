@@ -23,6 +23,7 @@ public class Bucket {
 	private int bucQuantity;
 	private Date bucRegDate;
 	private String bucBranch;
+	private boolean bucChkMM;
 	public Bucket() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -30,7 +31,7 @@ public class Bucket {
 	public Bucket(int bucIdx, String bucCustomerIdx, String bucCusoOrderNo, String bucBread, String bucMain,
 			String bucVegi, String bucCheese, String bucSource, String bucTopping, String bucSide, String bucIsSalad,
 			String bucIsOvened, String bucSet, int bucCost, double bucDiscntRate, int bucKcal, int bucQuantity,
-			Date bucRegDate, String bucBranch) {
+			Date bucRegDate, String bucBranch, boolean bucChkMM) {
 		super();
 		this.bucIdx = bucIdx;
 		this.bucCustomerIdx = bucCustomerIdx;
@@ -51,6 +52,7 @@ public class Bucket {
 		this.bucQuantity = bucQuantity;
 		this.bucRegDate = bucRegDate;
 		this.bucBranch = bucBranch;
+		this.bucChkMM = bucChkMM;
 	}
 	public int getBucIdx() {
 		return bucIdx;
@@ -165,6 +167,12 @@ public class Bucket {
 	}
 	public void setBucBranch(String bucBranch) {
 		this.bucBranch = bucBranch;
+	}
+	public boolean getBucChkMM() {
+		return bucChkMM;
+	}
+	public void setBucChkMM(boolean bucChkMM) {
+		this.bucChkMM = bucChkMM;
 	}
 	
 }	

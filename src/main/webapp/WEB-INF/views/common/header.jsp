@@ -26,6 +26,8 @@
 		}else{
 			console.log("쿠키있음");			
 		}
+		
+		//장바구니
 		$('#bucket').click(function() {
 			location.href="/loadBucket.do"
 		});

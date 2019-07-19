@@ -26,7 +26,7 @@
 				<input type="hidden" class="hiddenSide" value="${bucket.bucSide }">
 				<input type="hidden" class="hiddenKcal" value="${bucket.bucKcal }">
 				<input type="hidden" class="hiddenQuantity" value="${bucket.bucQuantity }">
-
+				<input type="hidden" class="hiddenChkMM" value="${bucket.bucChkMM }">
 				<form action="/insertMyMenu.do" class="myMenu" method="post">
 					<input type="hidden" class="hiddenBucIdx" name="mmBucIdx" value="${bucket.bucIdx }">
 					<input type="hidden" class="hiddenBucCustomerIdx" name="mmCustomerNo" value="${bucket.bucCustomerIdx }">	 				
@@ -56,7 +56,7 @@
 			
 		<table class="comm-tbl type2">
 			<tr>
-				<th>주문 일시</th><th>지점명</th><th>메뉴</th><th>수량</th><th>가격</th><th>나만의 메뉴</th><th>상품삭제</th>
+				<th>담은 날짜</th><th>지점명</th><th>메뉴</th><th>수량</th><th>가격</th><th>나만의 메뉴</th><th>상품삭제</th>
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<tr>

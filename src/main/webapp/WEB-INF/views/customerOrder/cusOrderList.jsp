@@ -25,15 +25,9 @@
 	[name=take]{
 		background-color: #943442;
 	}
-	#searchOrder{
-		height:36px;
-		width:100px;
-		margin-left: 10.6%;
-	    text-align: center;
-	}
-	#searchBtn{
+	#adminLink{
 		background-color: gray;
-		width:50px;
+		width:70px;
 	    border: none;
 	    color:#fff;
 	    padding: 5px 0;
@@ -43,14 +37,6 @@
 	    font-size: 15px;
 	    margin: 4px;
 	    cursor: pointer;
-	    height: 35px;
-	}
-	#keyword {
-		-webkit-box-shadow: 0 0 0 1000px white inset;
-		outline-style: none;
-		width:250px;
-		height:30px;
-		font-size:20px;
 	}
 	.pageNavi{
 		color:black;
@@ -59,24 +45,34 @@
 		font-size: 15px;
 		font-weight: bold;
 	}
+	/* form ::: search */
+   .form_searchM {border:2px solid #dddddd; height:41px;width:15%; display:block; vertical-align:middle; position:relative; padding-right:42px; }
+   .form_searchM input{border:0; height:41px; width:100%; text-indent:14px; color:#292929; font-size:16px;}
+   .form_searchM input::placeholder{color:#bbbbbb; font-size:16px;font-family:font_ns, sans-serif;}
+   .form_searchM .btn_searchM{background:url(http://subway.co.kr/images/common/icon_search.png) 50% 50% no-repeat; width:41px; height:41px; position:absolute; right:0; top:0;}
+   .form_searchM .btn_searchM:after{content:''; position:absolute; left:-2px; top:13px; width:2px; height:16px; background-color:#e5e5e5;}
 </style>
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 주문관리 > 주문 목록(회원)</div>
+		<div class="sub-menu">
+			※ 주문관리 > 주문 목록<br>
+			<button class="btn-style2" style="font-size:15px;" id="adminLink">메인으로</button>
+		</div>
 		<h1 class="comm-content-tit">주문 목록</h1>
-		<!-- 비회원="0" , 회원="-1" , 전체="-2" -->
-		<label for="chkAll"><input type="checkbox" id="chkAll" class="chk" value="-2">전체회원</label>
-		<label for="chkMgr"><input type="checkbox" id="chkMgr" class="chk" value="-1">회원</label>
-		<label for="chkNoneCtm"><input type="checkbox" id="chkNoneCtm" class="chk" value="0">비회원</label>
-		<select id="searchOrder">
-			<option>주문번호</option>
-		</select>
-		<input type="text" id="keyword">
-		<button type="button" id="searchBtn">검색</button>
-		<br><br>
-		<table class="comm-tbl" style="max-width:1200px">
+		<div class="board-search-box">
+			<!-- 비회원="0" , 회원="-1" , 전체="-2" -->
+			<label for="chkAll"><input type="checkbox" id="chkAll" class="chk" value="-2">전체회원</label>
+			<label for="chkMgr"><input type="checkbox" id="chkMgr" class="chk" value="-1">회원</label>
+			<label for="chkNoneCtm"><input type="checkbox" id="chkNoneCtm" class="chk" value="0">비회원</label>
+			<select name="statusGroup">
+				<option>주문번호</option>
+			</select>
+			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${text }"style="height:34px; padding-left:5px;">
+			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button>
+		</div>
+		<table class="comm-tbl" style="max-width:100%;">
 			<colgroup>
 				<col width="3%">
 				<col width="6%">
@@ -216,9 +212,6 @@
 		<div class="pageNavi">
 			${pd.pageNavi }
 		</div>
-		<div class="common-tbl-btn-group">
-			<button class="btn-style2" style="font-size:15px;" id="adminLink">목록으로</button>
-		</div>
 	</div>
 </section>
 
@@ -253,8 +246,8 @@
 		location.href="/checkedCusoOrderList.do?cusoMemberNo="+cusoMemberNo+"&currentPage=''";
 	});
 	//검색어에 일치하는 리스트
-	$('#searchBtn').click(function(){
-		var keyword = $("#keyword").val();
+	$('[name=searchBtn]').click(function(){
+		var keyword = $(this).prev().val();
 		location.href="/orderSearchKeyword.do?keyword="+keyword+"&currentPage=''";
 	});
 </script>

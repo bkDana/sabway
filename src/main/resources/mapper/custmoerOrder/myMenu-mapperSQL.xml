@@ -29,4 +29,13 @@
 		where
 			mm_buc_idx = #{mmBucIdx}	
 	</delete>
+	
+	<select id="selectOneMenu" parameterType="_int" resultType="mymenu">
+		select
+			mm_buc_idx as mmBucIdx
+		from
+			mymenu
+		where
+			mm_buc_idx = #{mmBucIdx}	
+	</select>
 </mapper>
