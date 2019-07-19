@@ -25,5 +25,7 @@
 		<typeAlias type="kr.co.subway.headOffice.vo.ApplyPageBound" alias="apb"/><!-- 가맹점 paging에 사용하는 클래스 -->
 		<typeAlias type="kr.co.subway.customerOrder.vo.CusOrderPageBound" alias="cpb"/><!-- 주문목록 paging에 사용하는 클래스 -->
 		<typeAlias type="kr.co.subway.headOffice.vo.ApplyMenuPageBound" alias="ampb"/><!-- 프로모션 페이지 paging에 사용하는 클래스 -->
+		<typeAlias type="kr.co.subway.manager.vo.MgrPageBound" alias="mpb"/><!-- 가맹점 리스트 paging에 사용하는 클래스 -->
+		<typeAlias type="kr.co.subway.manager.vo.SearchKeyword" alias="sk"/><!-- 검색용 클래스 (keyword,text,status) -->
 	</typeAliases>
 </configuration>

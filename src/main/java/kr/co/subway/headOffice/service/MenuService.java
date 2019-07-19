@@ -77,19 +77,19 @@ public class MenuService {
 		ArrayList<IngreVo> list = (ArrayList<IngreVo>) menudao.menuListPaging(pb);
 		int pageNo = ((currentPage1-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage1 != 1) {
-			pageNavi += "<a href='/promotionSelect.do?currentPage="+(currentPage1-1)+"'>이전</a>&nbsp;";
+			pageNavi += "<a href='/promotionSelect.do?currentPage="+(currentPage1-1)+"&keyword="+keyword+"'>이전</a>&nbsp;";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize||pageNo>totalPage)) {
 			if(currentPage1 == pageNo) {
 				pageNavi += "&nbsp;<span style='color:black;font-size:20px;'>"+pageNo+"</span>&nbsp;";
 			}else {
-				pageNavi += "&nbsp;<a href='/promotionSelect.do?currentPage="+pageNo+"'>"+pageNo+"<a/>&nbsp;";
+				pageNavi += "&nbsp;<a href='/promotionSelect.do?currentPage="+pageNo+"&keyword="+keyword+"'>"+pageNo+"<a/>&nbsp;";
 			}
 			pageNo++;
 		}
 		if(currentPage1 < totalPage) {
-			pageNavi += "&nbsp;<a href='/promotionSelect.do?currentPage="+(currentPage1+1)+"'>다음</a>";
+			pageNavi += "&nbsp;<a href='/promotionSelect.do?currentPage="+(currentPage1+1)+"&keyword="+keyword+"'>다음</a>";
 		}
 		return new ApplyMenuPageData(list,pageNavi,totalCount);
 	}
