@@ -24,20 +24,22 @@ var myform=new formtowizard({
 	<p class="sub-title">${mgr.mgrName }</p>
 		<form id="feedbackform" name="feedbackform" method="post">
 			<div class="common-tbl-box show-order-box">
-				<table class="comm-tbl type2">
+				<table class="comm-tbl type2 order-view-tbl">
 					<colgroup>
+						<col width="9%">
+						<col width="9%">
+						<col width="9%">
+						<col width="9%">
+						<col width="9%">
+						<col width="9%">
+						<col width="9%">
+						<col width="9%">
+						<col width="9%">
 						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
+						<col width="9%">
 					</colgroup>
 					<tr>
+					<th style="heigth:0px; padding:0px;"></th>
 					<th style="heigth:0px; padding:0px;"></th>
 					<th style="heigth:0px; padding:0px;"></th>
 					<th style="heigth:0px; padding:0px;"></th>
@@ -65,11 +67,9 @@ var myform=new formtowizard({
 					</tr>
 				</table>
 			</div>
-<!-- 			<div class="common-tbl-btn-group show-order"> -->
-<!-- 			</div>	 -->
-<!-- 			<div class="common-tbl-btn-group show-cost"> -->
-				
-<!-- 			</div>	 -->
+			<div class="common-tbl-btn-group show-cost">
+				<button type="button" class="btn-style4 show-total-cost">Total : 0 원</button>
+			</div>
 			<fieldset class="sectionwrap">
 				<legend>샌드위치/샐러드</legend>
 				<div class="common-tbl-btn-group prev-btn-box outline-box">
@@ -182,7 +182,7 @@ var myform=new formtowizard({
 								</c:if>
 								<c:if test="${ingre.ingreDiscntRate eq 0 }">
 									<pre class="label half"><fmt:formatNumber value="${ingre.ingreCost15 }" type="number"/>원</pre>
-									<pre class="label full"><fmt:formatNumber value="${ingre.ingreCost30 }" type="number"/>원</pre>
+									<pre class="label full"><fmt:formatNumber value="${ingre.ingreCost15 }" type="number"/>원</pre>
 									<input type="hidden" value="${ingre.ingreCost15 }">
 									<input type="hidden" value="${ingre.ingreCost15 }">
 								</c:if>
@@ -255,7 +255,7 @@ var myform=new formtowizard({
 					</c:forEach>
 				</div>
 				<div class="common-tbl-btn-group next-btn-box outline-box">
-					<button type="button" class="btn-style4 next-btn topping-check">다음</button>
+					<button type="button" class="btn-style4 next-btn topping-check many">다음</button>
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
@@ -307,7 +307,7 @@ var myform=new formtowizard({
 					</c:forEach>
 				</div>
 				<div class="common-tbl-btn-group next-btn-box outline-box">
-					<button type="button" class="btn-style4 vegi-check next-btn">다음</button>
+					<button type="button" class="btn-style4 vegi-check next-btn many">다음</button>
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
@@ -337,7 +337,7 @@ var myform=new formtowizard({
 					
 				</div>
 				<div class="common-tbl-btn-group next-btn-box outline-box">
-					<button type="button" class="btn-style4 source-check next-btn">다음</button>
+					<button type="button" class="btn-style4 source-check next-btn many">다음</button>
 				</div>
 			</fieldset>
 			<fieldset class="sectionwrap">
@@ -404,22 +404,22 @@ var myform=new formtowizard({
 			</fieldset>
 			<br><br>
 			<div class="common-tbl-btn-group">
-				<button type="button" id="sbmOrder" class="btn-style4 add-order">추가 주문</button>
+				<button type="button" id="sbmOrder" class="btn-style4" onclick="addOrderfn();">추가 주문</button>
 				<button type="button" id="sbmOrder" class="btn-style2 load-bucket">장바구니 가기</button>
 			</div>
+			<input type="hidden" name="bucIsSalad" class="orderInput">
 			<input type="hidden" name="bucBread" class="orderInput">
 			<input type="hidden" name="bucMain" class="orderInput">
 			<input type="hidden" name="bucCheese" class="orderInput">
 			<input type="hidden" name="bucTopping" class="orderInput">
+			<input type="hidden" name="bucIsOvened" class="orderInput">
 			<input type="hidden" name="bucVegi" class="orderInput">
 			<input type="hidden" name="bucSource" class="orderInput">
-			<input type="hidden" name="bucSet" class="orderInput" value="단품">
+			<input type="hidden" name="bucSet" class="orderInput">
 			<input type="hidden" name="bucSide" class="orderInput">
 			<input type="hidden" name="bucQuantity" class="orderInput">
 			<input type="hidden" name="bucCost" class="orderInput">
 			<input type="hidden" name="bucKcal" class="orderInput"> 
-			<input type="hidden" name="bucIsSalad" class="orderInput">
-			<input type="hidden" name="bucIsOvened" class="orderInput">
 			<input type="hidden" name="bucBranch" class="orderInput" value="${mgr.mgrName }">
 			<c:if test="${sessionScope.customer ne null }">
 				<input type="hidden" name="bucCustomerIdx" class="orderInput" value="${sessionScope.customer.customerNo}">

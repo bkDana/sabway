@@ -44,7 +44,17 @@
 	  		#{cusoMemberNo},
 	  		#{cusoOrderNo},
 	  		#{cusoBranch},
-	  		sysdate
+	  		sysdate,
+	  		<choose>
+	  		<when test='cusoCallBy.equals("비회원")'>
+	  			seq_cuso_call_by.nextval
+	  		</when>
+	  		<otherwise>
+				#{cusoCallBy}
+	  		</otherwise>
+	  		</choose>
+	  		
+	  		
 	  		)	
   	</insert>
   	<update id="orderStateUpdate" parameterType="cuso">
@@ -199,5 +209,14 @@
  			bucket
  		where
  			buc_cuso_order_no = #{no}
+	</select>
+	
+	<select id="selectOneCusOrder" parameterType="String" resultType="cuso">
+		select
+			cuso_call_by as cusoCallBy
+		from
+			cusorder
+		where
+			cuso_order_no = #{cusoOrderNo}	
 	</select>
 </mapper>

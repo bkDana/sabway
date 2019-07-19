@@ -39,9 +39,20 @@
 	<%if(request.getRequestURL().toString().split("/")[6].equals("salesStatics")){ %>
 		<ul>
 			<li><a href="/salesStatics/goTotalSales.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("totalSales.jsp")){%>on<%}%>">전체 매출 통계</a></li>
-			<li><a href="/salesStatics/goBranchSales.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("branchSales.jsp")){%>on<%}%>">지점별 매출 통계</a></li>
-			<li><a href="/salesStatics/goBranchSales2.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("branchSales2.jsp")){%>on<%}%>">지점 매니저일경우 지점 매출 통계</a></li>
+			<c:if test="${sessionScope.mgr.mgrLevel eq 1}">	<!-- 최고관리자 -->
+				<li><a href="/salesStatics/goBranchSales.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("branchSales.jsp")){%>on<%}%>">지점별 매출 통계</a></li>
+			</c:if>
+			<c:if test="${sessionScope.mgr.mgrLevel eq 0}"> <!-- 지점 매니저 -->
+			<li><a href="/salesStatics/goBranchSales2.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("branchSales2.jsp")){%>on<%}%>">${sessionScope.mgr.mgrName} 매출 통계</a></li>
+			</c:if>
 			<%-- <li><a href="/salesStatics/goMenuSales.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("menuSales.jsp")){%>on<%}%>">메뉴별 매출 통계</a></li> --%>
+		</ul>
+	<%}%>
+
+		<!-- 회원 관리 -->
+	<%if(request.getRequestURL().toString().split("/")[5].equals("customer")){ %>
+		<ul>
+			<li><a href="allCustomerList.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("allCustomerList.jsp")){%>on<%}%>">회원 리스트</a></li>
 		</ul>
 	<%}%>
 	

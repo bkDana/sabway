@@ -127,14 +127,20 @@ public class CusOrderController {
 	
 	//주문정보, 버킷에 주문번호 추가하는 메소드
 	@RequestMapping("/insertItem.do")
-	public String insertItem(HttpServletRequest request, String cusoOrderState,String cusoTotalCost,
-			String cusoPhone, String cusoMemberNo, String cusoOrderNo, String cusoBranchName) {
+	public ModelAndView insertItem(HttpServletRequest request, String cusoOrderState, String cusoTotalCost,
+			String cusoPhone, String cusoMemberNo, String cusoCallBy, String cusoOrderNo, String cusoBranchName) {
+		ModelAndView mav = new ModelAndView();
+		
 		/* 회원 비회원 구분 */
 		String customerIdx = "-1";
 		HttpSession session = request.getSession(false);
 		Customer c = (Customer)session.getAttribute("customer");
 		if(c != null) {
 			customerIdx = String.valueOf(c.getCustomerNo());
+			String customerId = c.getCustomerId();
+			if(!customerId.equals(cusoCallBy)) {
+	
+			}
 		} else {
 			Cookie[]getCookie = request.getCookies();
 			customerIdx = getCookie[1].getValue();
@@ -142,7 +148,7 @@ public class CusOrderController {
 		
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //버킷에 쓸 정보
 		int cusoTCost = Integer.parseInt(cusoTotalCost);
-		CusOrder cuso = new CusOrder(0,0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoBranchName, null);
+		CusOrder cuso = new CusOrder(0,0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoCallBy, cusoBranchName, null,null);
 		int result = cusOrderService.insertCusOrder(cuso); // cusorder에 데이터 추가하기
 		if(result>0) {
 			for(Bucket b: list) {
@@ -158,10 +164,14 @@ public class CusOrderController {
 					System.out.println("버킷 업데이트 실패");
 				}
 			}
-			return "/customerOrder/orderSuccess";
+			CusOrder tempCuso = cusOrderService.selectOneCusOrder(cusoOrderNo);
+			mav.addObject("tempCuso", tempCuso);
+			mav.setViewName("/customerOrder/orderSuccess");
+			return mav;
 		}else{
 			System.out.println("주문정보 저장 실패");
-			return "/customerOrder/orderFail";
+			mav.setViewName("/common/error");
+			return mav;
 		}
 		
 	}
@@ -301,7 +311,7 @@ public class CusOrderController {
 	
 	@RequestMapping("/cusOrderInfo.do")
 	public String cusOrderInfo(String no, Model model) {
-		//System.out.println(no);
+		/* 지영지영 추가 */
 		CusOrder cusOrder = cusOrderService.cusOrderInfo(no);
 		model.addAttribute("cusOrder", cusOrder);
 		return "customerOrder/cusOrderInfo";
