@@ -119,7 +119,7 @@ public class MgrController {
 	public String logout(HttpServletRequest request){
 		HttpSession session = request.getSession(false);
 		session.invalidate();
-		return "main";
+		return "redirect:/admin.do";
 	}
 	//가맹점 목록
 	@RequestMapping(value="/managerList.do")

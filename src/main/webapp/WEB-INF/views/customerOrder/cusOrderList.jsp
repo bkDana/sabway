@@ -4,6 +4,17 @@
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 <style>
+	.board-search-box{
+		position: static;
+	}
+	#link{
+		float:left;
+		position: static;
+	}
+	#mainLink{
+		font-size:20px;
+		color:black;
+	}
 	.comm-tbl th,.comm-tbl td{
 		text-align: center;
 	}
@@ -29,19 +40,6 @@
 	[name=take]{
 		background-color: #943442;
 	}
-	#adminLink{
-		background-color: gray;
-		width:70px;
-	    border: none;
-	    color:#fff;
-	    padding: 5px 0;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 15px;
-	    margin: 4px;
-	    cursor: pointer;
-	}
 	.pageNavi{
 		color:black;
 		text-align:center;
@@ -60,22 +58,22 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">
-			※ 주문관리 > 주문 목록<br>
-			<button class="btn-style2" style="font-size:15px;" id="adminLink">메인으로</button>
-		</div>
+		<div class="sub-menu">※ 주문관리 > 주문 목록</div>
 		<h1 class="comm-content-tit">주문 목록</h1>
 		<div class="board-search-box">
 			<!-- 비회원="0" , 회원="-1" , 전체="-2" -->
-			<label for="chkAll"><input type="checkbox" id="chkAll" class="chk" value="-2">전체회원</label>
-			<label for="chkMgr"><input type="checkbox" id="chkMgr" class="chk" value="-1">회원</label>
-			<label for="chkNoneCtm"><input type="checkbox" id="chkNoneCtm" class="chk" value="0">비회원</label>
+			<label for="chk0"><input type="checkbox" id="chk0" class="chk" value="-2">전체회원</label>
+			<label for="chk1"><input type="checkbox" id="chk1" class="chk" value="-1">회원</label>
+			<label for="chk2"><input type="checkbox" id="chk2" class="chk" value="0">비회원</label>
 			&nbsp;&nbsp;&nbsp;
 			<select name="statusGroup">
 				<option>주문번호</option>
 			</select>
 			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${keyword }"style="height:34px; padding-left:5px;">
-			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button>
+			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button><br>
+			<span id="link">
+				<a href="/admin.do" id="mainLink">메인으로</a>
+			</span>
 		</div>
 		<table class="comm-tbl" style="max-width:100%;">
 			<colgroup>
@@ -257,6 +255,12 @@
 			var keyword = $(this).prev().val();
 			location.href="/orderSearchKeyword.do?keyword="+keyword+"&currentPage=''";
 		});
+		//선택한 체크박스 유지되게
+		/* alert (${cusoMemberNo}); */
+		
+		$('.chk').eq('${cusoMemberNo}').prop('checked',true);	
+		
+		
 	});
 </script>
 <%-- Footer --%>
