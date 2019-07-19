@@ -239,9 +239,12 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <!-- Map -->
-<section id="content-wrapper" style="height: 133%">
-   	<div class="store_search_wrapper">
-      <div class="store_search_layer">
+
+<section id="content-wrapper" style="height: 100%; background-color:#fff;padding-top:50px;">
+<h1 class="comm-content-tit">주문할 매장 찾기</h1>
+   	<div class="store_search_wrapper" style="position:relative;">
+   	
+      <div class="store_search_layer" style="position:absolute; top:75px;">
          <h2>매장찾기</h2>
           <!-- 검색 -->
          <div class="form_search">

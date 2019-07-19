@@ -219,6 +219,7 @@ public class HeadOfficeController {
 		ApplyMenuPageData pd = menuservice.searchPromotion(currentPage1,keyword);
 		ModelAndView mav = new ModelAndView();
 		try {
+			mav.addObject("keyword",keyword);
 			mav.addObject("pd",pd);
 			mav.setViewName("headOffice/SelectPromotion");
 		}catch(Exception e) {

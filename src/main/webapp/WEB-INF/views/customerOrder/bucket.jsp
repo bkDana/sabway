@@ -9,8 +9,7 @@
 <%-- content --%>
 <section id="content-wrapper">
 	<div class="area">
-		<input type="hidden" id="sessionPhone" value="${sessionScope.customer.phone }">
-		<input type="hidden" id="sessionId" value="${sessionScope.customer.customerId }">
+
 		<strong style="font-size:40px;">내 주문 </strong>
 		<br><br>
 		<c:forEach items="${list }" var="bucket" varStatus="status">
@@ -47,6 +46,7 @@
 							<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
 							<input type="hidden" name="cusoOrderNo" value="">
 							<input type="hidden" name="cusoBranchName" value="${bucket.bucBranch }">
+							<input type="hidden" name="cusoCallBy" value="">
 							<input type="submit" id="insertOrder" style="display:none;">
 						</form>
 		 			</div> 
@@ -90,6 +90,8 @@
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" id="sessionPhone" value="${sessionScope.customer.phone }">
+		<input type="hidden" id="sessionId" value="${sessionScope.customer.customerId }">
 	</div>
 </section>
 
