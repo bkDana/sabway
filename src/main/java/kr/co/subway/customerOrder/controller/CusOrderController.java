@@ -127,14 +127,18 @@ public class CusOrderController {
 	
 	//주문정보, 버킷에 주문번호 추가하는 메소드
 	@RequestMapping("/insertItem.do")
-	public String insertItem(HttpServletRequest request, String cusoOrderState,String cusoTotalCost,
-			String cusoPhone, String cusoMemberNo, String cusoOrderNo, String cusoBranchName) {
+	public String insertItem(HttpServletRequest request, String cusoOrderState, String cusoTotalCost,
+			String cusoPhone, String cusoMemberNo, String cusoCallBy, String cusoOrderNo, String cusoBranchName) {
 		/* 회원 비회원 구분 */
 		String customerIdx = "-1";
 		HttpSession session = request.getSession(false);
 		Customer c = (Customer)session.getAttribute("customer");
 		if(c != null) {
 			customerIdx = String.valueOf(c.getCustomerNo());
+			String customerId = c.getCustomerId();
+			if(!customerId.equals(cusoCallBy)) {
+	
+			}
 		} else {
 			Cookie[]getCookie = request.getCookies();
 			customerIdx = getCookie[1].getValue();
@@ -142,7 +146,7 @@ public class CusOrderController {
 		
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //버킷에 쓸 정보
 		int cusoTCost = Integer.parseInt(cusoTotalCost);
-		CusOrder cuso = new CusOrder(0,0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoBranchName, null);
+		CusOrder cuso = new CusOrder(0,0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoCallBy, cusoBranchName, null,null);
 		int result = cusOrderService.insertCusOrder(cuso); // cusorder에 데이터 추가하기
 		if(result>0) {
 			for(Bucket b: list) {
@@ -161,7 +165,7 @@ public class CusOrderController {
 			return "/customerOrder/orderSuccess";
 		}else{
 			System.out.println("주문정보 저장 실패");
-			return "/customerOrder/orderFail";
+			return "/common/error";
 		}
 		
 	}
@@ -212,33 +216,26 @@ public class CusOrderController {
 		HttpSession session = request.getSession();
 		Customer c = (Customer)session.getAttribute("customer");
 		String customerNo = String.valueOf(c.getCustomerNo());
-		ArrayList<MyMenu> menuList = cusOrderService.selectMyMenuList(customerNo);
-//		for(MyMenu mm:menuList) {
-//			System.out.println(mm.getMmMenuLabel() + " / " + mm.getMmCustomerNo() + " / " + mm.getMmBucIdx());
-//		}
+		ArrayList<MyMenu> menuList = cusOrderService.selectMyMenuList(customerNo);//join용
 		ArrayList<Bucket> list = (ArrayList<Bucket>) cusOrderService.loadMenuList(menuList);
-		for(Bucket b:list) {
-			System.out.println(b.getBucIdx());
-		}
-		if(!list.isEmpty()) {
-			mav.addObject("list",list);
-			mav.setViewName("customerOrder/myMenuList");
-		}else {
-			mav.setViewName("common/error");
-		}
+
+		mav.addObject("list",list);
+		mav.setViewName("customerOrder/myMenuList");
 		return mav; 
 	}
 	
 	//회원 주문 목록 가져오기(관리자용)
 	@RequestMapping("/cusOrderList.do")
-	public ModelAndView cusOrderList(@RequestParam String currentPage) {
+	public ModelAndView cusOrderList(@RequestParam String currentPage,HttpSession session) {
+		Mgr mgr = (Mgr) session.getAttribute("mgr");
+		System.out.println("로그인 정보(이름) : "+mgr.getMgrBossName());
 		int currentPage1;
 		try {
 			currentPage1 = Integer.parseInt(currentPage);
 		}catch(Exception e) {
 			currentPage1 = 1;
 		}
-		CusOrderPageData pd = cusOrderService.cusOrderList(currentPage1);
+		CusOrderPageData pd = cusOrderService.cusOrderList(currentPage1,mgr);
 		ModelAndView mav = new ModelAndView();
 		try {
 			mav.addObject("pd",pd);
@@ -260,16 +257,19 @@ public class CusOrderController {
 	}
 	//체크박스의 값에 맞는 리스트 가져오기
 	@RequestMapping("/checkedCusoOrderList.do")
-	public ModelAndView checkedCusoOrderList(@RequestParam String currentPage,@RequestParam String cusoMemberNo) {
+	public ModelAndView checkedCusoOrderList(@RequestParam String currentPage,@RequestParam String cusoMemberNo,HttpSession session) {
+		Mgr mgr = (Mgr) session.getAttribute("mgr");
+		System.out.println("로그인 정보(이름) : "+mgr.getMgrBossName());
 		int currentPage1;
 		try {
 			currentPage1 = Integer.parseInt(currentPage);
 		}catch(Exception e) {
 			currentPage1 = 1;
 		}
-		CusOrderPageData pd = cusOrderService.checkedCusoOrderList(currentPage1,cusoMemberNo);
+		CusOrderPageData pd = cusOrderService.checkedCusoOrderList(currentPage1,cusoMemberNo,mgr);
 		ModelAndView mav = new ModelAndView();
 		try {
+			mav.addObject("cusoMemberNo",cusoMemberNo);
 			mav.addObject("pd",pd);
 			mav.setViewName("customerOrder/cusOrderList");
 		}catch(Exception e) {
@@ -279,16 +279,19 @@ public class CusOrderController {
 	}
 	//검색어와 일치하는 리스트 가져오기
 	@RequestMapping("/orderSearchKeyword.do")
-	public ModelAndView searchKeyword(@RequestParam String currentPage,@RequestParam String keyword) {
+	public ModelAndView searchKeyword(@RequestParam String currentPage,@RequestParam String keyword,HttpSession session) {
+		Mgr mgr = (Mgr) session.getAttribute("mgr");
+		System.out.println("로그인 정보(이름) : "+mgr.getMgrBossName());
 		int currentPage1;
 		try {
 			currentPage1 = Integer.parseInt(currentPage);
 		}catch(Exception e) {
 			currentPage1 = 1;
 		}
-		CusOrderPageData pd = cusOrderService.orderSearchKeyword(currentPage1,keyword);
+		CusOrderPageData pd = cusOrderService.orderSearchKeyword(currentPage1,keyword,mgr);
 		ModelAndView mav = new ModelAndView();
 		try {
+			mav.addObject("keyword",keyword);
 			mav.addObject("pd",pd);
 			mav.setViewName("customerOrder/cusOrderList");
 		}catch(Exception e) {

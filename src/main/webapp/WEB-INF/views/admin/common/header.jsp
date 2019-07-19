@@ -78,7 +78,7 @@
 							<a href="/cusOrderList.do?currentPage=''">주문관리</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="#">주문 리스트</a></li>
+									<li><a href="/cusOrderList.do?currentPage=''">주문 리스트</a></li>
 								</ul>
 							</div>
 						</li>

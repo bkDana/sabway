@@ -4,8 +4,11 @@
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 <style>
+	.comm-tbl th,.comm-tbl td{
+		text-align: center;
+	}
 	[name=cancle],[name=accept],[name=take]{
-		width:60px;
+		width:65px;
 	    border: none;
 	    color:#fff;
 	    padding: 5px 0;
@@ -13,6 +16,7 @@
 	    text-decoration: none;
 	    display: inline-block;
 	    font-size: 15px;
+	    margin: 4px;
 	    cursor: pointer;
 	    height: 20px;
 	}
@@ -66,10 +70,11 @@
 			<label for="chkAll"><input type="checkbox" id="chkAll" class="chk" value="-2">전체회원</label>
 			<label for="chkMgr"><input type="checkbox" id="chkMgr" class="chk" value="-1">회원</label>
 			<label for="chkNoneCtm"><input type="checkbox" id="chkNoneCtm" class="chk" value="0">비회원</label>
+			&nbsp;&nbsp;&nbsp;
 			<select name="statusGroup">
 				<option>주문번호</option>
 			</select>
-			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${text }"style="height:34px; padding-left:5px;">
+			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${keyword }"style="height:34px; padding-left:5px;">
 			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button>
 		</div>
 		<table class="comm-tbl" style="max-width:100%;">
@@ -89,6 +94,7 @@
 			</tr>
 			<c:forEach items="${pd.list }" var="cusOrder">
 				<input type="hidden" name="cusoIdx" value="${cusOrder.cusoIdx }">
+				<input type="hidden" name="mgrName" value="${sessionScope.mgr.mgrName }">
 				<c:choose>
 					<c:when test="${sessionScope.mgr.mgrName == cusOrder.cusoBranch || sessionScope.mgr.mgrLevel == 1}">
 						<tr>
@@ -134,7 +140,7 @@
 								<td>접수 전</td>
 								<td>
 									<a href="#" name="accept">접수 완료</a>
-									/
+									&nbsp;
 									<a href="#" name="cancle">취소</a>
 								</td>
 							</c:if>
@@ -202,7 +208,7 @@
 			</c:forEach>
 			<c:if test="${pd.totalCount <= 0 }">
 				<tr>
-					<td colspan="9">신청 목록이 없습니다.</td>
+					<td colspan="9">주문 목록이 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
@@ -216,39 +222,41 @@
 </section>
 
 <script type="text/javascript">
-	//접수 완료 상태로 변경
-	$('[name=accept]').click(function(){
-		var cusoOrderState = 1;
-		var cusoIdx = $(this).parent().parent().prev().val();
-		console.log(cusoIdx);
-		location.href="/orderStateUpdate.do?cusoOrderState="+cusoOrderState+"&cusoIdx="+cusoIdx;
-	});
-	//취소로 상태변경
-	$('[name=cancle]').click(function(){
-		var cusoOrderState = -1;
-		var cusoIdx = $(this).parent().parent().prev().val();
-		location.href="/orderStateUpdate.do?cusoOrderState="+cusoOrderState+"&cusoIdx="+cusoIdx;
-	});
-	//수령 완료 상태로 변경
-	$('[name=take]').click(function(){
-		var cusoOrderState = 2;
-		var cusoIdx = $(this).parent().parent().prev().val();
-		location.href="/orderStateUpdate.do?cusoOrderState="+cusoOrderState+"&cusoIdx="+cusoIdx;
-	});
-	//목록으로 이동
-	$("#adminLink").click(function(){
-		location.href="/admin.do";
-	});
-	/* 페이지 이동 전후로 선택한 박스 체크버튼 유지되는 것 해야됨 */
-	//선택한 checkbox의 리스트 가져오기
-	$('.chk').click(function(){
-		var cusoMemberNo = $(this).val();
-		location.href="/checkedCusoOrderList.do?cusoMemberNo="+cusoMemberNo+"&currentPage=''";
-	});
-	//검색어에 일치하는 리스트
-	$('[name=searchBtn]').click(function(){
-		var keyword = $(this).prev().val();
-		location.href="/orderSearchKeyword.do?keyword="+keyword+"&currentPage=''";
+	$(document).ready(function(){
+		//접수 완료 상태로 변경
+		$('[name=accept]').click(function(){
+			var cusoOrderState = 1;
+			var cusoIdx = $(this).parent().parent().prev().val();
+			console.log(cusoIdx);
+			location.href="/orderStateUpdate.do?cusoOrderState="+cusoOrderState+"&cusoIdx="+cusoIdx;
+		});
+		//취소로 상태변경
+		$('[name=cancle]').click(function(){
+			var cusoOrderState = -1;
+			var cusoIdx = $(this).parent().parent().prev().val();
+			location.href="/orderStateUpdate.do?cusoOrderState="+cusoOrderState+"&cusoIdx="+cusoIdx;
+		});
+		//수령 완료 상태로 변경
+		$('[name=take]').click(function(){
+			var cusoOrderState = 2;
+			var cusoIdx = $(this).parent().parent().prev().val();
+			location.href="/orderStateUpdate.do?cusoOrderState="+cusoOrderState+"&cusoIdx="+cusoIdx;
+		});
+		//목록으로 이동
+		$("#adminLink").click(function(){
+			location.href="/admin.do";
+		});
+		/* 페이지 이동 전후로 선택한 박스 체크버튼 유지되는 것 해야됨 */
+		//선택한 checkbox의 리스트 가져오기
+		$('.chk').click(function(){
+			var cusoMemberNo = $(this).val();
+			location.href="/checkedCusoOrderList.do?cusoMemberNo="+cusoMemberNo+"&currentPage=''";
+		});
+		//검색어에 일치하는 리스트
+		$('[name=searchBtn]').click(function(){
+			var keyword = $(this).prev().val();
+			location.href="/orderSearchKeyword.do?keyword="+keyword+"&currentPage=''";
+		});
 	});
 </script>
 <%-- Footer --%>
