@@ -58,10 +58,22 @@
 	  		)	
   	</insert>
   	<update id="orderStateUpdate" parameterType="cuso">
-		update cusorder set cuso_order_state = #{cusoOrderState} where cuso_idx = #{cusoIdx}
+		update cusorder set cuso_order_state = #{cusoOrderState} where cuso_idx = #{cusoIdx} 
   </update>
-   <select id="totalCount" resultType="_int">
-   		select count(*) from cusorder
+   <select id="totalCount" parameterType="mgr" resultType="_int">
+	   	<if test="mgrName != null">
+		   	<if test="mgrLevel != 1">
+		 		select count(*) from cusorder where cuso_branch = #{mgrName}
+		   	</if>
+		   	<if test="mgrLevel == 1">
+		 		select count(*) from cusorder
+		   	</if>
+	   	</if>
+	   	<if test="mgrName == null">
+		   	<if test="mgrLevel == 1">
+	 			select count(*) from cusorder
+	 		</if>
+	   	</if>
    </select>
   <select id="checkedCusoOrderList" parameterType="cpb" resultType="cuso">
 		select rnum
@@ -87,16 +99,44 @@
 			where rnum between #{start} and #{end}
 		</if>
   </select>
-   <select id="checkedTotalCount" parameterType="map" resultType="_int">
-   		<if test='cusoMemberNo.equals("-1")'>
-	   		select count(*) from cusorder where cuso_member_no != 0
-   		</if>
-   		<if test='cusoMemberNo.equals("0")'>
-	   		select count(*) from cusorder where cuso_member_no = 0
-   		</if>
-   		<if test='cusoMemberNo.equals("-2")'>
-	   		select count(*) from cusorder
-   		</if>
+   <select id="checkedTotalCount" parameterType="map" resultType="_int">	   	
+   		<if test="mgrName != null">
+		   	<if test="mgrLevel != 1">
+		   		<if test='cusoMemberNo.equals("-1")'>
+			   		select count(*) from cusorder where cuso_member_no != 0 and cuso_branch = #{mgrName}
+		   		</if>
+		   		<if test='cusoMemberNo.equals("0")'>
+			   		select count(*) from cusorder where cuso_member_no = 0 and cuso_branch = #{mgrName}
+		   		</if>
+		   		<if test='cusoMemberNo.equals("-2")'>
+			   		select count(*) from cusorder where cuso_branch = #{mgrName}
+		   		</if>
+		   	</if>
+		   	<if test="mgrLevel == 1">
+		   		<if test='cusoMemberNo.equals("-1")'>
+			   		select count(*) from cusorder where cuso_member_no != 0 
+		   		</if>
+		   		<if test='cusoMemberNo.equals("0")'>
+			   		select count(*) from cusorder where cuso_member_no = 0
+		   		</if>
+		   		<if test='cusoMemberNo.equals("-2")'>
+			   		select count(*) from cusorder
+		   		</if>
+		   	</if>
+	   	</if>
+	   	<if test="mgrName == null">
+		   	<if test="mgrLevel == 1">
+		   		<if test='cusoMemberNo.equals("-1")'>
+			   		select count(*) from cusorder where cuso_member_no != 0 and cuso_branch = #{mgrName}
+		   		</if>
+		   		<if test='cusoMemberNo.equals("0")'>
+			   		select count(*) from cusorder where cuso_member_no = 0 and cuso_branch = #{mgrName}
+		   		</if>
+		   		<if test='cusoMemberNo.equals("-2")'>
+			   		select count(*) from cusorder where cuso_branch = #{mgrName}
+		   		</if>
+	   		</if>
+	   	</if>
    </select>
     <select id="orderSearchKeyword" parameterType="cpb" resultType="cuso">
   		select rnum
@@ -117,7 +157,19 @@
 			</if>
   	</select>
    <select id="searchKeywordTotalCount" parameterType="map" resultType="_int">
-   		select count(*) from cusorder where cuso_order_no = #{keyword}
+   		<if test="mgrName != null">
+		   	<if test="mgrLevel != 1">
+			   	select count(*) from cusorder where cuso_order_no = #{keyword} and cuso_branch = #{mgrName}
+		   	</if>
+		   	<if test="mgrLevel == 1">
+   				select count(*) from cusorder where cuso_order_no = #{keyword}
+		   	</if>
+	   	</if>
+	   	<if test="mgrName == null">
+		   	<if test="mgrLevel == 1">
+		   		select count(*) from cusorder where cuso_order_no = #{keyword}
+	   		</if>
+	   	</if>
    </select>
 	<select id="cusOrderInfo" parameterType="string" resultType="cuso">
 		select

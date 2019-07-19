@@ -79,11 +79,11 @@ public class CusOrderService {
 	}
 	
 	//주문 목록 가져오기
-	public CusOrderPageData cusOrderList(int currentPage1){
+	public CusOrderPageData cusOrderList(int currentPage1,Mgr mgr){
 		String pageNavi = "";
 		int numPerPage = 10;
 		int pageNaviSize = 5;
-		int totalCount = cusOrderDao.totalCount();
+		int totalCount = cusOrderDao.totalCount(mgr);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (currentPage1-1)*numPerPage+1;
 		int end = currentPage1*numPerPage;
@@ -115,11 +115,11 @@ public class CusOrderService {
 		return result;
 	}
 	//체크박스의 값에 맞는 리스트 가져오기
-	public CusOrderPageData checkedCusoOrderList(int currentPage1,String cusoMemberNo){
+	public CusOrderPageData checkedCusoOrderList(int currentPage1,String cusoMemberNo,Mgr mgr){
 		String pageNavi = "";
 		int numPerPage = 10;
 		int pageNaviSize = 5;
-		int totalCount = cusOrderDao.checkedTotalCount(cusoMemberNo);
+		int totalCount = cusOrderDao.checkedTotalCount(cusoMemberNo,mgr);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (currentPage1-1)*numPerPage+1;
 		int end = currentPage1*numPerPage;
@@ -127,28 +127,28 @@ public class CusOrderService {
 		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderDao.checkedCusoOrderList(pb);
 		int pageNo = ((currentPage1-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage1 != 1) {
-			pageNavi += "<a href='/cusOrderList.do?currentPage="+(currentPage1-1)+"&cusoMemberNo="+cusoMemberNo+"'>이전</a>&nbsp;";
+			pageNavi += "<a href='/checkedCusoOrderList.do?currentPage="+(currentPage1-1)+"&cusoMemberNo="+cusoMemberNo+"'>이전</a>&nbsp;";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize||pageNo>totalPage)) {
 			if(currentPage1 == pageNo) {
 				pageNavi += "&nbsp;<span style='color:black;font-size:20px;'>"+pageNo+"</span>&nbsp;";
 			}else {
-				pageNavi += "&nbsp;<a href='/cusOrderList.do?currentPage="+pageNo+"&cusoMemberNo="+cusoMemberNo+"'>"+pageNo+"<a/>&nbsp;";
+				pageNavi += "&nbsp;<a href='/checkedCusoOrderList.do?currentPage="+pageNo+"&cusoMemberNo="+cusoMemberNo+"'>"+pageNo+"<a/>&nbsp;";
 			}
 			pageNo++;
 		}
 		if(currentPage1 < totalPage) {
-			pageNavi += "&nbsp;<a href='/cusOrderList.do?currentPage="+(currentPage1+1)+"&cusoMemberNo="+cusoMemberNo+"'>다음</a>";
+			pageNavi += "&nbsp;<a href='/checkedCusoOrderList.do?currentPage="+(currentPage1+1)+"&cusoMemberNo="+cusoMemberNo+"'>다음</a>";
 		}
 		return new CusOrderPageData(list,pageNavi,totalCount);
 	}
 	//검색어와 일치하는 리스트
-	public CusOrderPageData orderSearchKeyword(int currentPage1,String keyword){
+	public CusOrderPageData orderSearchKeyword(int currentPage1,String keyword,Mgr mgr){
 		String pageNavi = "";
 		int numPerPage = 10;
 		int pageNaviSize = 5;
-		int totalCount = cusOrderDao.searchKeywordTotalCount(keyword);
+		int totalCount = cusOrderDao.searchKeywordTotalCount(keyword,mgr);
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (currentPage1-1)*numPerPage+1;
 		int end = currentPage1*numPerPage;
@@ -156,19 +156,19 @@ public class CusOrderService {
 		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderDao.orderSearchKeyword(pb);
 		int pageNo = ((currentPage1-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage1 != 1) {
-			pageNavi += "<a href='/cusOrderList.do?currentPage="+(currentPage1-1)+"&keyword="+keyword+"'>이전</a>&nbsp;";
+			pageNavi += "<a href='/orderSearchKeyword.do?currentPage="+(currentPage1-1)+"&keyword="+keyword+"'>이전</a>&nbsp;";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize||pageNo>totalPage)) {
 			if(currentPage1 == pageNo) {
 				pageNavi += "&nbsp;<span style='color:black;font-size:20px;'>"+pageNo+"</span>&nbsp;";
 			}else {
-				pageNavi += "&nbsp;<a href='/cusOrderList.do?currentPage="+pageNo+"&keyword="+keyword+"'>"+pageNo+"<a/>&nbsp;";
+				pageNavi += "&nbsp;<a href='/orderSearchKeyword.do?currentPage="+pageNo+"&keyword="+keyword+"'>"+pageNo+"<a/>&nbsp;";
 			}
 			pageNo++;
 		}
 		if(currentPage1 < totalPage) {
-			pageNavi += "&nbsp;<a href='/cusOrderList.do?currentPage="+(currentPage1+1)+"&keyword="+keyword+"'>다음</a>";
+			pageNavi += "&nbsp;<a href='/orderSearchKeyword.do?currentPage="+(currentPage1+1)+"&keyword="+keyword+"'>다음</a>";
 		}
 		return new CusOrderPageData(list,pageNavi,totalCount);
 	}

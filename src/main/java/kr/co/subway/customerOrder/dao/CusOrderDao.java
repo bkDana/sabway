@@ -79,17 +79,19 @@ public class CusOrderDao {
 		return sqlSession.selectList("cusOrder.oneCusOrderList",customerIdx);
 	}
 	//list 개수 가져오기
-	public int totalCount() {
-		return sqlSession.selectOne("cusOrder.totalCount");
+	public int totalCount(Mgr mgr) {
+		return sqlSession.selectOne("cusOrder.totalCount",mgr);
 	}
 	//체크박스의 값에 맞는 리스트 가져오기
 	public List<CusOrder> checkedCusoOrderList(CusOrderPageBound pb){
 		return sqlSession.selectList("cusOrder.checkedCusoOrderList",pb);
 	}
 	//선택한 체크박스의 list 개수 가져오기
-	public int checkedTotalCount(String cusoMemberNo) {
-		Map<String, String> map = new HashMap<String, String>();
+	public int checkedTotalCount(String cusoMemberNo,Mgr mgr) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("cusoMemberNo", cusoMemberNo);	
+		map.put("mgrName", mgr.getMgrBossName());
+		map.put("mgrLevel", mgr.getMgrLevel());
 		return sqlSession.selectOne("cusOrder.checkedTotalCount",map);
 	}
 	//검색어와 일치하는 리스트 가져오기
@@ -97,9 +99,11 @@ public class CusOrderDao {
 		return sqlSession.selectList("cusOrder.orderSearchKeyword",pb);
 	}
 	//검색어와 일치하는 list 개수 가져오기
-	public int searchKeywordTotalCount(String keyword) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("keyword", keyword);	
+	public int searchKeywordTotalCount(String keyword,Mgr mgr) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", keyword);
+		map.put("mgrName", mgr.getMgrBossName());
+		map.put("mgrLevel", mgr.getMgrLevel());
 		return sqlSession.selectOne("cusOrder.searchKeywordTotalCount",map);
 	}
 	public int insertMyMenu(MyMenu mm) {
