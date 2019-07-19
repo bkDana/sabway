@@ -4,6 +4,17 @@
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 <style>
+	.board-search-box{
+		position: static;
+	}
+	#link{
+		float:left;
+		position: static;
+	}
+	#allList,#mainLink,#slash{
+		font-size:20px;
+		color:black;
+	}
 	.onBtn,.offBtn {
 		width:50px;
 	    border: none;
@@ -23,19 +34,6 @@
 	.offBtn {
 		background-color: #122322;
 	}
-	#adminLink{
-		background-color: gray;
-		width:70px;
-	    border: none;
-	    color:#fff;
-	    padding: 5px 0;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 15px;
-	    margin: 4px;
-	    cursor: pointer;
-	}
 	.pageNavi{
 		color:black;
 		text-align:center;
@@ -54,10 +52,8 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">
-			※ 매장관리 > 가맹점 목록<br>
-			<button class="btn-style2" style="font-size:15px;" id="adminLink">메인으로</button>
-		</div>
+		<div class="sub-menu">※ 매장관리 > 가맹점 목록<br></div>
+		<h1 class="comm-content-tit">가맹점</h1>
 		<div class="board-search-box">
 	 		<select name="statusGroup">
 	 			<c:if test="${status == 1 || status == 2 || status == 3 }">
@@ -81,7 +77,12 @@
 				<option id="addr">주소</option>
 			</select>&nbsp;
 			<input type="text" maxlength="30" placeholder="가맹점 검색" value="${text }"style="height:34px; padding-left:5px;">
-			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button>
+			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button><br>
+			<span id="link">
+				<a href="/admin.do" id="mainLink">메인으로</a>
+				<span id="slash">/</span>
+				<a href="/managerList.do?currentPage=''" id="allList">상품 전체보기</a>
+			</span>
 		</div>
 		<table class="comm-tbl" style="max-width:100%">
 			<colgroup>
@@ -189,10 +190,6 @@
 				var status1 = -1;
 			}
 			location.href="/searchKeyword.do?status1="+status1+"&keyword="+keyword+"&text="+text+"&currentPage=''";
-		});
-		//메인페이지 이동 버튼
-		$("#adminLink").click(function(){
-			location.href="/admin.do";
 		});
 	});
 </script>

@@ -273,9 +273,12 @@ public class CusOrderController {
 			currentPage1 = 1;
 		}
 		CusOrderPageData pd = cusOrderService.checkedCusoOrderList(currentPage1,cusoMemberNo,mgr);
+		//view의 checkbox 순서 - 전체보기 : eq(0), 회원 : eq(1), 비회원 : eq(2)
+		//db상 비회원은 0으로 설정, 처음에 값이 없어서 0이기 때문에 db값은 그대로 보내고 view에 전달하는 값에 +2해서 계산
+		int checkBoxNo = 2+Integer.parseInt(cusoMemberNo);
 		ModelAndView mav = new ModelAndView();
 		try {
-			mav.addObject("cusoMemberNo",cusoMemberNo);
+			mav.addObject("cusoMemberNo",checkBoxNo);
 			mav.addObject("pd",pd);
 			mav.setViewName("customerOrder/cusOrderList");
 		}catch(Exception e) {
