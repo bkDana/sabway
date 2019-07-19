@@ -12,7 +12,7 @@
 <section id="content-wrapper">
 	<div class="area">
 		<h1 class="comm-content-tit">가맹신청/문의</h1>
-		<form action="/insertApply.do" method="post" enctype="multipart/form-data">
+		<form id="applyForm" action="/insertApply.do" method="post" enctype="multipart/form-data">
 			<div class="common-tbl-box">
 				<table class="comm-tbl type2">
 					<tr>
@@ -21,7 +21,7 @@
 					</tr>
 					<tr>
 						<td><label for="applyPhone">연락처</label></td>
-						<td><input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="16" style="width:1000px"placeholder="연락 가능한 전화번호를 입력해주세요"></td>
+						<td><input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="11" style="width:1000px"placeholder="연락 가능한 전화번호를 입력해주세요"></td>
 					</tr>
 					<tr>
 				    	<td>
@@ -38,7 +38,6 @@
 					            <option value="hanmail.net">hanmail.net</option>
 					            <option value="gmail.com">gmail.com</option>
 				       		</select>
-				                <button type="button" id="emailChk">중복확인안돼</button>
 				    	</td>            
 					</tr>
 					<tr>
@@ -93,7 +92,7 @@
 					</tr> -->
 				</table>
 				<div class="common-tbl-btn-group">
-					<button type="submit" class="small">등록하기</button>
+					<button type="submit" class="small" id="btnSubmit">등록하기</button>
 				</div>
 			</div>
 		</form>
@@ -113,7 +112,15 @@
 	    }
 	 });
  
-
+	$("#btnSubmit").click(function(){
+		
+		 if(isChk()){
+	         $("#applyForm").submit();
+	         
+	   }else{
+		   return false;
+	   }
+	})
 // 빈값 체크
 	function isEmpty(text){
 	   if(text != null && text != ""){
@@ -123,23 +130,42 @@
 	   }
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//빈값 검사
+	function isChk(){
+		if(isEmpty($("#applyName").val())){
+			alert("이름을 작성해주세요.")
+			return false;
+		}
+		if(isEmpty($("#applyPhone").val())){
+			alert("휴대폰번호를 작성해주세요.")
+			return false;
+		}
+		if(isEmpty($("#applyEmail").val())){
+			alert("이메일을 작성해주세요.")
+			return false;
+		}
+		if(isEmpty($("#applyEmail2").val())){
+			alert("이메일을 작성해주세요.")
+			return false;
+		}
+		if(isEmpty($("#applyArea").val())){
+			alert("지역을 선택해주세요.")
+			return false;
+		}
+		if(isEmpty($("#applyArea2").val())){
+			alert("지역을 선택해주세요.")
+			return false;
+		}
+		if(isEmpty($("#applyTitle").val())){
+			alert("제목을 작성해주세요.")
+			return false;
+		}
+		if(isEmpty($("#applyContent").val())){
+			alert("내용을 작성해주세요.")
+			return false;
+		}
+		return true;
+}
 
 
 

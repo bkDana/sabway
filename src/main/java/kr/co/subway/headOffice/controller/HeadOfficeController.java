@@ -138,41 +138,53 @@ public class HeadOfficeController {
 	@RequestMapping(value="/insertApply.do",method=RequestMethod.POST)
 	public String insertApply(HttpServletRequest request, Apply applyVo, @RequestParam MultipartFile applyfilename) {
 		System.out.println(applyfilename);
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
+		if(applyfilename.equals("")) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
+			
+			String originName = applyfilename.getOriginalFilename();
+			
+			String onlyFileName = originName.substring(0, originName.indexOf('.'));
+			
+			String extension = originName.substring(originName.indexOf('.'));
+			
+			String filePath = onlyFileName + "_" + "1" + extension;
+			
+			String fullPath = savePath+"/"+filePath;
+			applyVo.setApplyFilename(originName);
+			applyVo.setApplyFilepath(filePath);
 		
-		String originName = applyfilename.getOriginalFilename();
-		
-		String onlyFileName = originName.substring(0, originName.indexOf('.'));
-		
-		String extension = originName.substring(originName.indexOf('.'));
-		
-		String filePath = onlyFileName + "_" + "1" + extension;
-		
-		String fullPath = savePath+"/"+filePath;
-		
-		applyVo.setApplyFilename(originName);
-		applyVo.setApplyFilepath(filePath);
-		
-		int result = applyService.insertApply(applyVo);
-		
-		if(!applyfilename.isEmpty()) {
-			try {
-				byte [] bytes = applyfilename.getBytes();
-				File f = new File(fullPath);
-				FileOutputStream fos = new FileOutputStream(f);
-				BufferedOutputStream bos = new BufferedOutputStream(fos);
-				bos.write(bytes);
-				bos.close();
-				System.out.println("파일업로드 성공했어!!");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			int result = applyService.insertApply(applyVo);
+			
+			if(!applyfilename.isEmpty()) {
+				try {
+					byte [] bytes = applyfilename.getBytes();
+					File f = new File(fullPath);
+					FileOutputStream fos = new FileOutputStream(f);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					bos.write(bytes);
+					bos.close();
+					System.out.println("파일업로드 성공했어!!");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-		}
-		if(result>0) {
-			return "headOffice/insertSuccess";
+			if(result>0) {
+				return "headOffice/insertSuccess";
+			}else {
+				return "headOffice/insertFailed";
+			}
 		}else {
-			return "headOffice/insertFailed";
+			String originName = "null";
+			String filePath ="null";
+			applyVo.setApplyFilename(originName);
+			applyVo.setApplyFilepath(filePath);
+			int result = applyService.insertApply(applyVo);
+			if(result>0) {
+				return "headOffice/insertSuccess";
+			}else {
+				return "headOffice/insertFailed";
+			}
 		}
 	}
 	//처리한 가맹점 목록 가져오기
