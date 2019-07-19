@@ -195,7 +195,7 @@
 	 	  where ingre_type = '메인재료' and ingre_label like '%'||#{keyword}||'%'
 	  </if>
   </select>
-  <!-- <select id="menuListPaging" parameterType="ampb" resultType="ingre">
+  <select id="menuListPaging" parameterType="ampb" resultType="ingre">
 	  	select rnum
 	  	,ingre_idx as ingreIdx
 	  	,ingre_label as ingreLabel
@@ -215,5 +215,5 @@
 		<if test="start!=0">
 			where rnum between #{start} and #{end}
 		</if>
-  </select> -->
+  </select>
 </mapper>
