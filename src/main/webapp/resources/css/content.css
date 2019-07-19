@@ -4,6 +4,8 @@
 #content-wrapper{padding:100px 0; background-color:#f6f6f6;}
 .comm-content-tit{position:relative; font-size:26px; color:#2b2b2b; text-align:center; font-weight:500; padding:20px 0; margin-bottom:50px;}
 .comm-content-tit:after{display:block; content:""; width:50px; height:4px; background-color:#009223; position:absolute; bottom:0; left:50%; margin-left:-30px;}
+.comm-content-tit-small{position:relative; font-size:26px; color:#2b2b2b; text-align:center; font-weight:500; padding:20px 0; margin-bottom:50px;}
+.comm-content-tit-small:after{display:block; content:""; width:50px; height:4px; background-color:#009223; position:absolute; bottom:0; left:50%; margin-left:-30px;}
 
 
 /* 게시판용  :: 지영*/
@@ -214,6 +216,8 @@
 .like-inner-box{float: left; width:50%; height:100%; color:#ffce32;}
 /* ****************** order VIEW CSS ****************** */
 /*.img-box{margin:0 auto; width:19.5%; height:200px; float:left; border:1px solid #ffce32; cursor:pointer;}*/
+
+/* ****************** 온라인 주문 페이지 용 ********************** */
 .img-box{margin:0 0.35%; margin-bottom:10px; width:19%; height:170px; float:left; border:1px solid #ddd; cursor:pointer; overflow:hidden; border-radius:5px;}
 .fix-img img{width:60%; height:60%; margin-top: 40px; margin-left:40px;}
 .label{text-align: center; font-size:17px; display:none; /*line-height: 200px; color:#ffce32;*/line-height: 170px; color:#fff; font-weight:500;}
@@ -233,3 +237,5 @@
 .outline-box{display: inline-block; width:150px;}
 .content-outlin-box{display: inline-block; margin:0 auto; width:890px;}
 .hidden-space-btn{display:none;}
+.formpaginate{display:none;}
+.show-order-box{padding:5px; background-color: #fff;}
