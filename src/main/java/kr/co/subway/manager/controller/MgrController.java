@@ -367,7 +367,8 @@ public class MgrController {
 		
 		System.out.println("갔다오냐"+area);
 		System.out.println(currentPage);
-		String keyword = area.substring(0,2);
+//		String keyword = area.substring(0,2);
+		String keyword = area;
 		System.out.println(keyword);
 		
 		if(type.equals("1")) {
