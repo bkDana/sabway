@@ -381,7 +381,6 @@ function formFile(obj){// 첨부파일
 	//console.log(file[2]);
 	$(obj).next('input').val(value);
 }
->>>>>>> 9e068e3add59c05eb0d22742e4df3eb2e573ea00
 
 
 
