@@ -111,7 +111,7 @@
 
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
 <!-- Content -->
 <section id="content-wrapper1" style="padding:0;background-color:#fff;">
 	<div class="area1">

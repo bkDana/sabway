@@ -117,7 +117,7 @@ body { background-color:#fff; }
 
 /* ****************** Header ********************** */
 #header{position:relative; width:100%; background-color: #fff;display:block;}
-#headerInner{position:relative; height:150px; padding:0 20px;}
+#headerInner{position:relative; height:145px; padding:0 20px;}
 
 
 #header .header-logo{display:block; text-align:center; }
@@ -152,7 +152,7 @@ body { background-color:#fff; }
 /* ****************** GNB ********************** */
 #gnbBg{display:none; position:absolute; left:0; top:0px; width:100%; min-width:1200px; height:330px; background:#fff; z-index:98;}
 #gnb{position:absolute; left:0; top:80px; width:100%; min-width:1200px; z-index:99;}
-#gnb > ul{text-align:center; }
+#gnb > ul{text-align:center;}
 #gnb > ul > li{position:relative; display:inline-block; min-width:180px;}
 #gnb > ul > li > a{position:relative; z-index:100; display:block; height:70px; line-height:70px; text-align:center; color:#292929; font-size:18px; font-weight:bold;}
 #gnb > ul > li > a.on{color:#009223;}

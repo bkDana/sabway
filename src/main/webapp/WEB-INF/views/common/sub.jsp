@@ -3,8 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%String[] pname = request.getRequestURL().toString().split("/");%>
 
-<!-- 메뉴 소개 : 서브 -->
+
 <%if(pname[5].equals("menu")){ %>
+<!-- 메뉴 소개 : 서브 -->
 <nav id="sub">
 	<div id="subBg"></div>
 	<ul class="clearfix">
@@ -20,20 +21,13 @@
 		<li>
 			<a href="/intro/menu.do?no=4" class="<c:if test='${param.no eq 4 }'>on</c:if>">사이드 · 음료</a>
 		</li>
-		<!-- 
-		<li>
-			<a href="/intro/menu.do?no=5">단체메뉴</a>
-		</li>
-		 -->
 		<li>
 			<a href="/intro/menu.do?no=5" class="<c:if test='${param.no >= 5 }'>on</c:if>">신선한 재료</a>
 		</li>
 	</ul>
 </nav>
-<%} %>
-
+<%}else if(pname[5].equals("notice")||pname[5].equals("qna")||pname[5].equals("review")){ %>
 <!-- 새소식(게시판) : 서브 -->
-<%if(pname[5].equals("notice")||pname[5].equals("qna")||pname[5].equals("review")){ %>
 <nav id="sub" class="basic-sub">
 	<div id="subBg"></div>
 	<ul class="clearfix">
@@ -48,11 +42,8 @@
 		</li>
 	</ul>
 </nav>
-<%} %>
-
-
+<%}else if(pname[6].equals("customerProfile.jsp")||pname[6].equals("myMenuList.jsp")){ %>
 <!-- 마이페이지 : 서브 -->
-<%if(pname[6].equals("customerProfile.jsp")||pname[6].equals("myMenuList.jsp")){ %>
 <nav id="sub" class="basic-sub">
 	<div id="subBg"></div>
 	<ul class="clearfix">
@@ -64,6 +55,18 @@
 		</li>
 		<li>
 			<a href="/loadMyMenu.do" class="<%if(pname[6].equals("myMenuList.jsp")){ %>on<%}%>">나만의 메뉴</a>
+		</li>
+	</ul>
+</nav>
+<%}else{ %>
+<nav id="sub" class="basic-sub">
+	<div id="subBg"></div>
+	<ul class="clearfix">
+		<li>
+			<a href="/franchise.do" class="<%if(pname[6].equals("franchise.jsp")){ %>on<%}%>">싸브웨이 프랜차이즈</a>
+		</li>
+		<li>
+			<a href="/applyPage.do?currentPage=" class="<%if(pname[6].equals("applyWrite.jsp")){ %>on<%}%>">가맹신청/문의 </a>
 		</li>
 	</ul>
 </nav>

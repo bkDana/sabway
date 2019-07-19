@@ -4,9 +4,8 @@
 <%-- Header --%>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
 <%-- Content --%>
-
 
 <img src="/resources/img/img_visual_sandwich.jpg" class="sub-img">
 <div class="sub-menu-title">
