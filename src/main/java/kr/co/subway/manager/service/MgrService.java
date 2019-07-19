@@ -67,26 +67,26 @@ public class MgrService {
 		
 		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage != 1) {
-			pageNavi += "<a href='/findStore.do?currentPage="+(currentPage-1)+"'>이전</a>";
+			pageNavi += "<a href='/findStore.do?status=22"+"&currentPage="+(currentPage-1)+"'>이전</a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
 			if(currentPage == pageNo) {
 				pageNavi += "<span>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a href='/findStore.do?currentPage="+pageNo+"'>"+pageNo+"</a>";
+				pageNavi += "<a href='/findStore.do?status=22"+"&currentPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		if(currentPage < totalPage) {
-			pageNavi +="<a href='/findStore.do?currentPage="+(currentPage+1)+"'>다음</a>";
+			pageNavi +="<a href='/findStore.do?status=22"+"&currentPage="+(currentPage+1)+"'>다음</a>";
 		}
 		
 		return new StorePageNaviData(storeList,pageNavi);
 	}
 	// 전체매장 select 필터 검색 페이징
 	@SuppressWarnings("unchecked")
-	public StorePageNaviData allStoreSelectPaging(int currentPage,String keyword,String area){
+	public StorePageNaviData allStoreSelectPaging(int currentPage,String keyword,String area, String type){
 			System.out.println(keyword);
 			String pageNavi = "";
 			int numPerPage = 10; // 출력될 개시판 개수
@@ -105,19 +105,19 @@ public class MgrService {
 			
 			int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
 			if(pageNo != 1) {
-				pageNavi += "<a onclick='applyArea(\""+area+"\",\""+(pageNo-1)+"\");'>이전</a>";
+				pageNavi += "<a onclick='applyArea(\""+area+"\",\""+(pageNo-1)+"\","+type+");'>이전</a>";
 			}
 			int i = 1;
 			while(!(i++>pageNaviSize || pageNo>totalPage)) {
 				if(currentPage == pageNo) {
 					pageNavi += "<span>"+pageNo+"</span>";
 				}else {
-					pageNavi += "<a href='javascript:applyArea(\""+area+"\",\""+pageNo+"\");'>"+pageNo+"</a>";
+					pageNavi += "<a href='javascript:applyArea(\""+area+"\",\""+pageNo+"\","+type+");'>"+pageNo+"</a>";
 				}
 				pageNo++;
 			}
 			if(pageNo < totalPage) {
-				pageNavi +="<a onclick='applyArea("+area+","+(pageNo+1)+")'>다음</a>";
+				pageNavi +="<a onclick='applyArea("+area+","+(pageNo+1)+"\","+type+")'>다음</a>";
 			}
 			
 			return new StorePageNaviData(storeList,pageNavi);

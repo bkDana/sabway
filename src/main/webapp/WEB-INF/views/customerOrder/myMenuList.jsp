@@ -16,7 +16,7 @@
 		<c:forEach items="${list }" var="bucket" varStatus="status">
 			<div class="hiddenInfo">
 				<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
-				<form action="/insertMyMenu.do" class="myMenu" method="post">
+				<form action="/insertFromMyMenu.do" class="myMenu" method="post">
 					<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
 					<input type="hidden" class="hidenBranchName" value="${bucket.bucBranch }">
 					<input type="hidden" class="hiddenBucCustomerIdx" name="mmCustomerNo" value="${bucket.bucCustomerIdx }">
@@ -36,7 +36,7 @@
 					<input type="submit" class="myMenu" style="display:none;">
 				</form>
 				<div class="hiddenOrder">
-					<form action="/insertItem.do" method="post">
+					<form action="/insertOrder.do" method="post">
 						<input type="hidden" name="cusoTotalCost" value="">
 						<input type="hidden" name="cusoPhone" value="">
 						<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
@@ -54,7 +54,7 @@
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<tr>
-				<td>???</td>
+				<td><button type="button" class="findBranch" style="font-size:15px; font-weight:bolder; color:grey;">지점 찾기</button></td>
 				<td class="bucketOption">
 						<span id="bread">빵 : ${bucket.bucBread }</span><br>
 						<span id="main">메인재료 : ${bucket.bucMain }&nbsp;${bucket.bucIsSalad }</span><br>

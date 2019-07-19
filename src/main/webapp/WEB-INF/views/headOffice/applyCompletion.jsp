@@ -7,6 +7,17 @@
 <title>가맹점 신청</title>
 </head>
 <style>
+	.board-search-box{
+		position: static;
+	}
+	#link{
+		float:left;
+		position: static;
+	}
+	#applyLink,#mainLink,#slash{
+		font-size:20px;
+		color:black;
+	}
 	.comm-tbl th,.comm-tbl td{
 		text-align: center;
 	}
@@ -30,6 +41,13 @@
 	<div class="area">
 		<div class="sub-menu">※ 매장관리 > 가맹점 처리 목록</div>
 		<h1 class="comm-content-tit">처리된 목록</h1>
+		<div class="board-search-box">
+			<span id="link">
+				<a href="/admin.do" id="mainLink">메인으로</a>
+				<span id="slash">/</span>
+				<a href="#" id="applyLink">신청 목록</a>
+			</span>
+		</div>
 		<table class="comm-tbl" style="max-width: 100%;">
 			<tr>
 				<th>신청자</th><th>제목</th><th>연락처</th><th>지역</th><th>신청일</th><th>승인여부</th>
@@ -71,21 +89,12 @@
 		<div class="pageNavi">
 			${cpd.pageNavi }
 		</div>
-		<div class="common-tbl-btn-group">
-			<button class="btn-style2" style="font-size:15px;" id="applyLink">신청 목록</button>
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<button class="btn-style2" style="font-size:15px;" id="adminLink">목록으로</button>
-		</div>
 	</div>
 </section>
 <script type="text/javascript">
 	//신청 목록으로 이동
 	$('#applyLink').click(function(){
 		location.href="managerApply.do?currentPage=''";
-	});
-	//목록으로 이동
-	$("#adminLink").click(function(){
-		location.href="/admin.do";
 	});
 </script>
 
