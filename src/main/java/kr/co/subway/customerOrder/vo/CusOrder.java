@@ -10,16 +10,18 @@ public class CusOrder {
 	private int cusoTotalCost;
 	private String cusoPhone;
 	private String cusoMemberNo;	//회원 번호(외래키)
-	private String cusoOrderNo;//고객용 주문번호
+	private String cusoOrderNo;
+	private String cusoCallBy;	//회원 비회원 가리기 -- 새로 추가함
 	private String cusoBranch;	//지점 번호(Manager - mgrName으로 받아야함)
 	private Date cusoOrderDate;
-	private ArrayList<Bucket> bucketList;
+	private ArrayList<Bucket> bucketList; //?
 	public CusOrder() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public CusOrder(int rnum, int cusoIdx, int cusoOrderState, int cusoTotalCost, String cusoPhone, String cusoMemberNo,
-			String cusoOrderNo, String cusoBranch, Date cusoOrderDate) {
+			String cusoOrderNo, String cusoCallBy, String cusoBranch, Date cusoOrderDate,
+			ArrayList<Bucket> bucketList) {
 		super();
 		this.rnum = rnum;
 		this.cusoIdx = cusoIdx;
@@ -28,8 +30,10 @@ public class CusOrder {
 		this.cusoPhone = cusoPhone;
 		this.cusoMemberNo = cusoMemberNo;
 		this.cusoOrderNo = cusoOrderNo;
+		this.cusoCallBy = cusoCallBy;
 		this.cusoBranch = cusoBranch;
 		this.cusoOrderDate = cusoOrderDate;
+		this.bucketList = bucketList;
 	}
 	public int getRnum() {
 		return rnum;
@@ -73,6 +77,12 @@ public class CusOrder {
 	public void setCusoOrderNo(String cusoOrderNo) {
 		this.cusoOrderNo = cusoOrderNo;
 	}
+	public String getCusoCallBy() {
+		return cusoCallBy;
+	}
+	public void setCusoCallBy(String cusoCallBy) {
+		this.cusoCallBy = cusoCallBy;
+	}
 	public String getCusoBranch() {
 		return cusoBranch;
 	}
@@ -91,7 +101,6 @@ public class CusOrder {
 	public void setBucketList(ArrayList<Bucket> bucketList) {
 		this.bucketList = bucketList;
 	}
-	
 	
 
 }

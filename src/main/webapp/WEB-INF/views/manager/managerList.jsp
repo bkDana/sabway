@@ -60,7 +60,7 @@
 		</div>
 		<div class="board-search-box">
 	 		<select name="statusGroup">
-	 			<c:if test="${not empty status }">
+	 			<c:if test="${status == 1 || status == 2 || status == 3 }">
 			 		<option selected="selected" disabled="disabled" value="${status }">
 						<c:choose>
 							<c:when test="${status == 1 }">준비</c:when>
@@ -69,7 +69,7 @@
 						</c:choose>
 					</option>
 	 			</c:if>
-				<c:if test="${empty status }">
+				<c:if test="${status != 1 && status != 2 && status != 3  }">
 					<option selected="selected" disabled="disabled">상태분류</option>
 				</c:if>
 				<option id="open" value=2>영업</option>
