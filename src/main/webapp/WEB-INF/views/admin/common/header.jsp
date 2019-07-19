@@ -54,10 +54,10 @@
 							</div>
 						</li>
 						<li class="gnb02">
-							<a href="/managerList.do">매장관리</a>
+							<a href="/managerList.do?currentPage=''">매장관리</a>
 							<div class="gnb-2dep">
 								<ul>
-									<li><a href="/managerList.do">가맹점 리스트</a></li>
+									<li><a href="/managerList.do?currentPage=''">가맹점 리스트</a></li>
 									<li><a href="/mgrEnroll.do">가맹점 회원 등록</a></li>
 									<li><a href="/managerApply.do?currentPage=''">가맹점 신청 리스트</a></li>
 								</ul>
