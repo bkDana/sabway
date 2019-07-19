@@ -75,7 +75,7 @@
 		,mgr_open_date as mgrOpenDate
 		from (select rownum as rnum, m.* from (select * from manager 
 		<if test="keyword != null and keyword != '' and keyword != 'null' ">
-			where mgr_addr like '%'||#{keyword}||'%' or mgr_name like '%'||#{keyword}||'%'
+			where mgr_addr like #{keyword} or mgr_name like #{keyword}
 		</if>
 		order by mgr_enroll_date desc) m)
 		<if test="start != 0">
@@ -232,8 +232,10 @@
    		select count(*) from manager
    </select>
    <select id="allStoreTotalCount" parameterType="string" resultType="_int">
-   		select count(*)      
-	      from manager where mgr_addr like '%'||#{keyword}||'%' or mgr_name like '%'||#{keyword}||'%'
+   		<!-- select count(*)      
+	      from manager where mgr_addr like '%'||#{keyword}||'%' or mgr_name like '%'||#{keyword}||'%' -->
+	       select count(*)      
+	      from manager where mgr_addr like #{keyword} or mgr_name like #{keyword}
    </select>
  <!--  
    <select id="addrTotalCount" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="_int">

@@ -88,6 +88,7 @@
 .common-tbl-btn-group > button.btn-style1{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style2{background-color:#009223;}
 .common-tbl-btn-group > button.btn-style3{background-color:#888;}
+.common-tbl-btn-group > button.btn-style4{background-color:#fff; color:#009223; border:1px solid #009223; vertical-align:top;}
 .common-tbl-btn-group > button.small{background-color:#009223;width:100px; height:35px; font-size:15px;}
 .common-tbl-btn-group > button.supersmall{width:55px; height:30px; font-size:14px;}
 .comm-tbl .file-del-btn{height:30px; padding:0 10px; border-radius:5px; background-color:#888; color:#fff; margin-left:5px;}
@@ -212,9 +213,10 @@
 .like-img{width:100%; height:100%; cursor:pointer;}
 .like-inner-box{float: left; width:50%; height:100%; color:#ffce32;}
 /* ****************** order VIEW CSS ****************** */
-.img-box{margin:0 auto; width:19.5%; height:200px; float:left; border:1px solid #ffce32; cursor:pointer;}
+/*.img-box{margin:0 auto; width:19.5%; height:200px; float:left; border:1px solid #ffce32; cursor:pointer;}*/
+.img-box{margin:0 0.35%; margin-bottom:10px; width:19%; height:170px; float:left; border:1px solid #ddd; cursor:pointer; overflow:hidden; border-radius:5px;}
 .fix-img img{width:60%; height:60%; margin-top: 40px; margin-left:40px;}
-.label{text-align: center; font-size:20px; display:none; line-height: 200px; color:#ffce32;}
+.label{text-align: center; font-size:17px; display:none; /*line-height: 200px; color:#ffce32;*/line-height: 170px; color:#fff; font-weight:500;}
 .vegi-amount{text-align: center; font-size:20px; display:none; color:white; width:70px; height:30px; float:left; background-color:#ffce32;}
 .vegi p{line-height:100px;}
 .button-box{width:160px;height:60px;line-height:100px; margin-left:20px;}
@@ -225,7 +227,9 @@
 .main pre, .topping pre, .set pre, .sidemenu pre, .salad pre{line-height:20px;}
 .selects{border:1px solid #ffce32;}
 .select-vegi{color:#009223;}
+.select-bread{color:#009223;}
 .quantityChange.type1{width:20px; height:20px; font-size: 20px; color:#009223; line-height:18px;}
 .quantityChange.type2{width:20px; height:20px; font-size: 17px; color:#009223; line-height:20px;}
 .outline-box{display: inline-block; width:150px;}
 .content-outlin-box{display: inline-block; margin:0 auto; width:890px;}
+.hidden-space-btn{display:none;}

@@ -390,11 +390,19 @@ public class MgrController {
 	//전체매장 select 필터 검색
 	@ResponseBody
 	@RequestMapping(value="/allSearchKeyword.do",produces="application/json; charset=utf-8")
-	public String allSearchKeyword(String area, String currentPage) {
+	public String allSearchKeyword(String area, String currentPage, String type) {
+		
+		
 		System.out.println("갔다오냐"+area);
 		System.out.println(currentPage);
 		String keyword = area.substring(0,2);
 		System.out.println(keyword);
+		
+		if(type.equals("1")) {
+			keyword = keyword+"%";
+		}else if(type.equals("2")) {
+			keyword ="% "+keyword+" %";
+		}
 		//ArrayList<Mgr> allSearchKeyword = (ArrayList<Mgr>) mgrservice.searchStore(keyword);
 		int currentPage1;
 		try {

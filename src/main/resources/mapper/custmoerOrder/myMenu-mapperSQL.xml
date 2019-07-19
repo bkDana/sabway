@@ -14,7 +14,6 @@
 	</insert>
 	<select id="selectMyMenuList" parameterType="String" resultType="mymenu">
 		select
-		distinct
 			mm_menu_label as mmMenuLabel,
 			mm_customer_no as mmCustomerNo,
 			mm_buc_idx as mmBucIdx

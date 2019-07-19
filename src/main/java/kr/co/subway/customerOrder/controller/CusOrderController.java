@@ -2,7 +2,6 @@ package kr.co.subway.customerOrder.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -106,7 +105,6 @@ public class CusOrderController {
 		} else {
 			Cookie[]getCookie = request.getCookies();
 			customerIdx = getCookie[1].getValue();
-			
 		}
 
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx);
@@ -186,6 +184,7 @@ public class CusOrderController {
 	public void insertMyMenu(HttpServletResponse response, MyMenu mm) {
 		mm.setMmIdx(0);
 		System.out.println(mm.getMmMenuLabel());
+		System.out.println(mm.getMmBucIdx());
 		int result = cusOrderService.insertMyMenu(mm);
 	//			System.out.println("controller updateIngreActive() result : "+result);
 		response.setContentType("text/html;charset=utf-8");
@@ -210,6 +209,9 @@ public class CusOrderController {
 //			System.out.println(mm.getMmMenuLabel() + " / " + mm.getMmCustomerNo() + " / " + mm.getMmBucIdx());
 //		}
 		ArrayList<Bucket> list = (ArrayList<Bucket>) cusOrderService.loadMenuList(menuList);
+		for(Bucket b:list) {
+			System.out.println(b.getBucIdx());
+		}
 		if(!list.isEmpty()) {
 			mav.addObject("list",list);
 			mav.setViewName("customerOrder/myMenuList");
@@ -287,6 +289,14 @@ public class CusOrderController {
 		return mav; 
 	}
 	
+	@RequestMapping("/cusOrderInfo.do")
+	public String cusOrderInfo(String no, Model model) {
+		//System.out.println(no);
+		CusOrder cusOrder = cusOrderService.cusOrderInfo(no);
+		model.addAttribute("cusOrder", cusOrder);
+		return "customerOrder/cusOrderInfo";
+	}
+		
 	@ResponseBody
 	@RequestMapping("/myMenuDelete.do")
 	public void myMenuDelete(HttpServletResponse response, @RequestParam String delIdx){

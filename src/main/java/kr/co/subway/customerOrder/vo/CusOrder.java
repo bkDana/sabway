@@ -1,6 +1,7 @@
 package kr.co.subway.customerOrder.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class CusOrder {
 	private int rnum;
@@ -12,6 +13,7 @@ public class CusOrder {
 	private String cusoOrderNo;//고객용 주문번호
 	private String cusoBranch;	//지점 번호(Manager - mgrName으로 받아야함)
 	private Date cusoOrderDate;
+	private ArrayList<Bucket> bucketList;
 	public CusOrder() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -83,5 +85,13 @@ public class CusOrder {
 	public void setCusoOrderDate(Date cusoOrderDate) {
 		this.cusoOrderDate = cusoOrderDate;
 	}
+	public ArrayList<Bucket> getBucketList() {
+		return bucketList;
+	}
+	public void setBucketList(ArrayList<Bucket> bucketList) {
+		this.bucketList = bucketList;
+	}
+	
+	
 
 }

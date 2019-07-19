@@ -2,28 +2,15 @@
 
 var getCookie = function(name) {
 	  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-	  return value? value[2] : null;			//현재 쿠키가 3개 생성되어 있음, 3번째가 커스텀 쿠키
+	  return value? value[2] : null;			//현재 쿠키가 3개 생성되어 있음, [2]번째가 커스텀 쿠키
 	};
 
 $(document).ready(function(){
 	var cusoOrderNo = 100;
-	/* 장바구니 1열 삭제용 */
-	function deleteOrder(idx){
-		var delIdx = $('.hiddenBucIdx').val();
-		console.log(delIdx);
-		$.ajax({
-	    	url : "/tempOrderDelete.do",
-	        type : 'get',
-	        data : {delIdx:delIdx},
-	        success : function(){
-	        	totalCost -= Number($(idx).parent().find('.cost').html());
-	            $(idx).parent().parent().remove();
-	        }
-	    });
-	}
+	
 	/* 나만의 메뉴 1열? 삭제 */
-	function deleteOrder(idx){
-		var delIdx = $('.hiddenBucIdx').val();
+	function deleteMenu(idx){
+		var delIdx = $('.hiddenBucIdx').eq(idx).val();
 		$.ajax({
 	    	url : "/myMenuDelete.do",
 	        type : 'get',
@@ -412,6 +399,74 @@ $(document).ready(function(){
 	    
     } //for using var 'i' ends
   
+    $('.deleteBucket').click(function(){
+    	var listIdx = $('.deleteBucket').index(this);
+    	var delIdx = $('.hiddenBucIdx').eq(listIdx).val();
+    	console.log(delIdx);
+    	var deleteMenu = confirm("선택하신 메뉴를 삭제하시겠습니까?");
+    	if(deleteMenu) {
+    		$.ajax({
+    	    	url : "/tempOrderDelete.do",
+    	        type : 'get',
+    	        data : {delIdx:delIdx},
+    	        success : function(){
+    	            $('.deleteBucket').eq(listIdx).parent().parent().remove();
+    	        }
+    	    });
+    	}
+    });
+    
+    $('.deleteMyMenu').click(function(){
+    	var listIdx = $('.deleteMyMenu').index(this);
+    	var delIdx = $('.hiddenBucIdx').eq(listIdx).val();
+    	console.log(listIdx);
+    	console.log(delIdx);
+    	var deleteMenu = confirm("선택하신 메뉴를 삭제하시겠습니까?");
+    	if(deleteMenu) {
+    		$.ajax({
+    	    	url : "/myMenuDelete.do",
+    	        type : 'get',
+    	        data : {delIdx:delIdx},
+    	        success : function(){
+    	            $('.deleteMyMenu').eq(listIdx).parent().parent().remove();
+    	        }
+    	    });
+    	}
+    });
+    $('.insertMyMenu').click(function(){
+    	var itemIndex = $('.insertMyMenu').index(this);
+    	
+    	var createMenu = confirm("선택하신 메뉴를 나만의 메뉴로 만드시겠습니까?");
+    	if(createMenu) {
+//    		serialize()
+    		var form = $(".myMenu")[itemIndex];
+//    		console.log(queryString);
+    		var data = new FormData(form);
+    		console.log(data);
+            $.ajax({
+            	url : "/insertMyMenu.do",
+                type : 'post',
+                data : data,
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                cache: false,
+                dataType : 'text',
+//                error: function(xhr, status, error){
+//                    alert("error");
+//                },
+                success : function(){
+                    alert("나만의 메뉴 추가 완료되었습니다. '마이페이지 - 나만의 메뉴'에서 확인");
+                    $('.insertMyMenu').eq(itemIndex).html('추가 완료');
+                    $('.insertMyMenu').eq(itemIndex).css('color','grey').css('cursor','default').attr('disabled',true);
+                },
+                error : function() {
+                	alert("나만의 메뉴 추가 실패");
+                }
+            });
+    	}
+    });
+    
     /* 아임포트 */
     
     $('#sbmOrder').click(function(){
@@ -448,51 +503,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-//    $( "#sbmTest" ).click(function() {
-//    	/*
-//    	 * 1.주문테이블 중 해당사항들에 새로 만든 '주문번호' 업데이트
-//    	 * 3.cusOrder 테이블에 (주문 관련 정보vo) 등록
-//    	 */
-//    	$('input[name=cusoTotalCost]').val(totalCost);
-//    	$('input[name=cusoPhone]').val(sessionPhone);
-//    	var d = new Date();
-//		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-//    	$('input[name=cusoOrderNo]').val($('.hiddenInfo').eq(0).find('.hiddenMain').val()+date);
-//    	$("#insertItem").click();
-//    });
-    $('.insertMyMenu').click(function(){
-    	var itemIndex = $('.insertMyMenu').index(this);
-    	console.log();
-    	var createMenu = confirm("선택하신 메뉴를 나만의 메뉴로 만드시겠습니까?");
-    	if(createMenu) {
-//    		serialize()
-    		var form = $(".myMenu")[itemIndex];
-//    		console.log(queryString);
-    		var data = new FormData(form);
-    		console.log(data);
-            $.ajax({
-            	url : "/insertMyMenu.do",
-                type : 'post',
-                data : data,
-                enctype: 'multipart/form-data',
-                processData: false,
-                contentType: false,
-                cache: false,
-                dataType : 'text',
-//                error: function(xhr, status, error){
-//                    alert("error");
-//                },
-                success : function(){
-                    alert("나만의 메뉴 추가 완료되었습니다. '마이페이지 - 나만의 메뉴'에서 확인");
-                    $('.insertMyMenu').eq(itemIndex).html('추가 완료');
-                    $('.insertMyMenu').eq(itemIndex).css('color','grey').css('cursor','default').attr('disabled',true);
-                },
-                error : function() {
-                	alert("나만의 메뉴 추가 실패");
-                }
-            });
-    	}
-    });
 });
 
 
