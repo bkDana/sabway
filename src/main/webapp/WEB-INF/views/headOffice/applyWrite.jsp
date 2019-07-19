@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	.inputBox{
-		float: left;
-	}/*  */
 #content-wrapper1{padding:100px 0; background-color:#f6f6f6;}
 .area1{ max-width:1900px; margin:0px auto; }
 /* 문의 ::: 가맹신청문의, 1:1문의 */
@@ -25,6 +22,7 @@
 .inquiry_wrapper .pd_agree_wrapper .pd_agree h3{color:#666666; font-size:18px; font-weight:300; letter-spacing:-0.05em; padding-bottom:19px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper{border:2px solid #e5e5e5; height:150px; padding:13px 0 13px 17px; overflow:auto; color:#bbbbbb; font-size:13px; line-height:21px; margin-bottom:14px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_inside>.mCSB_container{margin-right:17px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_inside>.mCSB_container:focus{outline:none;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_scrollTools .mCSB_draggerRail{opacity:0 !important;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{width:5px !important; background-color:#dddddd !important;}
 .inquiry_wrapper .form_select{margin-right:7px;}
@@ -143,7 +141,7 @@
 						<h3 class="h_title">문의 작성하기</h3>
 						<div class="board_write_wrapper">
 							<p class="rt_note">필수입력사항<span class="ess"></span></p>
-							<table>
+							<table style="width:1028px">
 								<caption>문의 작성하기 테이블</caption>
 								<colgroup>
 									<col width="130px">
@@ -154,7 +152,7 @@
 										<th scope="col"><label for="applyName">이름</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%;">
-												<input class="inputBox short" type="text" id="applyName" name="applyName" maxlength="16" style="width:1000px" placeholder="이름을 입력해주세요">
+												<input class="inputBox short" type="text" id="applyName" name="applyName" maxlength="16" placeholder="이름을 입력해주세요">
 											</span>
 										</td>
 									</tr>
@@ -162,7 +160,7 @@
 										<th scope="col"><label for="applyPhone">연락처</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%;">
-												<input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="16" style="width:1000px"placeholder="연락 가능한 전화번호를 입력해주세요">
+												<input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="16" placeholder="연락 가능한 전화번호를 입력해주세요">
 											</span>
 										</td>
 									</tr>
@@ -230,7 +228,7 @@
 										<th scope="col"><label for="applyTitle">제목</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input class="inputBox" type="text" id="applyTitle" name="applyTitle" maxlength="16" style="width:1000px" placeholder="제목을 입력해주세요">
+												<input class="inputBox" type="text" id="applyTitle" name="applyTitle" maxlength="16" placeholder="제목을 입력해주세요">
 											</span>
 										</td>
 									</tr>
