@@ -11,7 +11,10 @@
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
 		<div class="sub-menu">※ 재고관리 > 발주 리스트</div>
-		
+		<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
+			※ 희망배송일 오전 8시에 출고완료 상태인 발주건은 도착으로 자동 상태변경됩니다. 
+			수동으로 변경하기-> <a href="/managerOrder/test.do">수동으로 재고 추가</a>
+		</c:if>
 		<div class="board-search-box order-search">
 			<form action="/managerOrder/orderList.do" method="post" name="search">
 				<input type="hidden" name="reqPage" value="1">
@@ -46,10 +49,6 @@
 		</div>
 		<br>
 		<p class="order-list-comment">
-			<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
-			※ 희망배송일 오전 8시에 출고완료 상태인 발주건은 도착으로 자동 상태변경됩니다. 
-			수동으로 변경하기-> <a href="/managerOrder/test.do">수동으로 재고 추가</a>
-			</c:if>
 			<select id="order" data-val="${search.orderBy }">
 				<option value="new">최신등록순</option>
 				<option value="del">희망배송일순</option>
@@ -76,7 +75,10 @@
 			</c:if>
 			<c:forEach items="${list.orderList }" var="order">
 				<tr>
-					<td><input type="checkbox" class="cbox"></td><td>${order.rnum }</td>
+					<td>
+						<c:if test="${order.mOrderState eq 1}"><input type="checkbox" class="cbox" data-idx="${order.mOrderNo }"></c:if>
+					</td>
+					<td>${order.rnum }</td>
 					<c:if test="${sessionScope.mgr.mgrLevel eq 1 }"><td>${order.mgrName }</td></c:if>
 					<td>${order.mOrderDelDate }</td>
 					<td onclick="location.href='/managerOrder/orderView.do?no=${order.mOrderNo}';" style="cursor:pointer;">${order.mOrderTitle }</td><td>${order.mOrderDate }</td>
@@ -89,6 +91,15 @@
 				</tr>
 			</c:forEach>
 		</table>
+		
+		<div class="common-tbl-btn-group" style="text-align: right;">
+			<c:if test="${sessionScope.mgr.mgrLevel eq 0 }">
+				<button class="btn-style3" onclick="allUpdate(4);">취소</button>
+			</c:if>
+			<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
+				<button class="btn-style3" onclick="allUpdate(2);">출고</button>
+			</c:if>
+		</div>
 		
 		<!-- paging -->
 		<div class="paging">
@@ -134,6 +145,49 @@
 			$('.cbox').prop('checked',false);
 		}
 	});
+
+	
+	/* 선택 출고or취소 */
+	function allUpdate(st){
+		if(st==4){
+			if(!confirm('취소하시겠습니까?')){
+				return;
+			}
+		}
+		if(st==2){
+			if(!confirm('출고하시겠습니까?')){
+				return;
+			}
+		}
+		var idx = "";
+		$('.cbox:checked').each(function(){
+			idx += $(this).data('idx')+",";
+		});
+		
+		if(idx==""){
+			alert('선택된게 없어..');
+		}else{
+
+			$.ajax({
+				url : '/managerOrder/allUpdate.do',
+				data : {idx:idx,st:st},
+				type : 'post',
+				dataType : 'json',
+				success : function(res){
+					if(res=="완료"){
+						alert('상태 변경 완료');
+						window.location.reload();
+					}else{
+						alert('실패한거같은데');
+					}
+				},
+				error : function(){
+					console.log('실퍄');
+				}
+			});
+			
+		}
+	}
 </script>
 
 <%-- Footer --%>

@@ -209,4 +209,9 @@ public class CusOrderService {
 		return cusOrderDao.hideFromBList(idx);
 	}
 
+	//주문 하나 찾기(버킷 아님)
+	public CusOrder selectOneCusOrder(String cusoOrderNo) {
+		return cusOrderDao.selectOneCusOrder(cusoOrderNo);
+	}
+
 }

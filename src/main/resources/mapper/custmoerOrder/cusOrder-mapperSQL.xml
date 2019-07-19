@@ -210,4 +210,13 @@
  		where
  			buc_cuso_order_no = #{no}
 	</select>
+	
+	<select id="selectOneCusOrder" parameterType="String" resultType="cuso">
+		select
+			cuso_call_by as cusoCallBy
+		from
+			cusorder
+		where
+			cuso_order_no = #{cusoOrderNo}	
+	</select>
 </mapper>
