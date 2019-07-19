@@ -96,7 +96,7 @@
 						</c:otherwise>
 					</c:choose>
 					
-					<li><a href="/loginAdmin.do" class="header-btn">관리자</a></li>
+					<li><a href="/admin.do" class="header-btn">관리자</a></li>
 					<li><a class="header-btn" id="bucket" onclick="loadBucket()"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
 				</ul>
 			</div>
@@ -149,12 +149,12 @@
 							</div>
 						</li>
 						<li class="gnb05">
-							<a href="/applyPage.do">가맹점</a>
+							<a href="/applyPage.do?currentPage=''">가맹점</a>
 							<div class="gnb-2dep">
 								<ul>
 									<!-- <li><a href="#">써브웨이 프랜차이즈</a></li>
 									<li><a href="#">가맹관련 FAQ</a></li> -->
-									<li><a href="/applyPage.do">가맹신청/문의</a></li>
+									<li><a href="/applyPage.do?currentPage=''">가맹신청/문의</a></li>
 									<!-- <li><a href="#">지사안내</a></li>
 									<li><a href="#">사업설명회</a></li> -->
 								</ul>

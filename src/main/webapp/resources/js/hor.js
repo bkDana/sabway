@@ -1,16 +1,23 @@
 
 $(document).ready(function() {
 	$(".step").eq(0).trigger("click");
+//	var innerHtml = getCookie("cookieHtml");
+//	console.log(innerHtml);
+//	$('.show-order').eq(addStatus).html(innerHtml);
+	
 	var typeStatus = 0;
 });
 //// 정엄이가 쓴거
 //메인 재료 선택된 거에 따라서 추천 소스 보여주기
-
+	var canAdd = 0;
+	var totalCost = 0;
+	var addStatus = 0;
 	var cost = Number(0);
 	var kcal = Number(0);
 	var oneStatus = 0;
 	var breadCheck=0;
 	var typeIdx = 0;
+	var canMoveBucket = 0;
 	
 	function delay(gap){ /* gap is in millisecs */ 
 	  var then,now; 
@@ -31,13 +38,16 @@ $(document).ready(function() {
 	});
 	$('.next-btn').click(function(){
 		var stepIdx = $('.next-btn').index(this)+1;
+		if(!$('.orderInput').eq(stepIdx-1).val() && !$(this).hasClass("many")){
+			alert("단계별로 선택해주세요");
+			return;
+		}
 		if((stepIdx-1)==0 && typeIdx==2){
 			$(".step").eq(2).trigger("click");
 		}else{
 			$(".step").eq(stepIdx).trigger("click");			
 		}
 	});
-	
 	
 	$('.select-many').click(function(){
 		if($(this).hasClass("selected")){
@@ -128,8 +138,11 @@ $(document).ready(function() {
 		if($(this).hasClass("selected")){
 			return;
 		}
-		var showCostStr = "<td class='show-order-context'>"+cost+" 원</td>";
-		$('.show-order').append(showCostStr);
+		if($('.show-order').eq(addStatus).find('.show-order-context').length==0){
+			var showCostStr = "<td class='show-order-context'>"+cost+" 원</td>";
+			$('.show-order').eq(addStatus).append(showCostStr);
+		}
+		
 		clearAllfn(2);
 		typeIdx = $('.type').index(this)+1;
 		if(typeIdx==1){
@@ -174,11 +187,11 @@ $(document).ready(function() {
 			}
 			$(this).toggleClass("selected");
 			$('.bread').css("display","block");
-			if($('.show-order').find('.show-order-type').length==0){
+			if($('.show-order').eq(addStatus).find('.show-order-type').length==0){
 				var showOrderStr = "<td class='show-order-type'>샌드위치</button>";
-				$('.show-order').append(showOrderStr);
+				$('.show-order').eq(addStatus).append(showOrderStr);
 			}else{
-				$('.show-order').find('.show-order-type').eq(0).text("샌드위치");
+				$('.show-order').eq(addStatus).find('.show-order-type').eq(0).text("샌드위치");
 			}
 			
 			
@@ -225,11 +238,11 @@ $(document).ready(function() {
 				}
 			}
 			
-			if($('.show-order').find('.show-order-type').length==0){
-				var showOrderStr = "<td class='show-order-type'>샐러드</td>";
-				$('.show-order').append(showOrderStr);
+			if($('.show-order').eq(addStatus).find('.show-order-type').length==0){
+				var showOrderStr = "<td class='show-order-type'>샐러드</td><td class='show-order-bread'>선택안함</td>";
+				$('.show-order').eq(addStatus).append(showOrderStr);
 			}else{
-				$('.show-order').find('.show-order-type').eq(0).text("샐러드");
+				$('.show-order').eq(addStatus).find('.show-order-type').eq(0).text("샐러드");
 			}
 			
 			$(this).toggleClass("selected");
@@ -322,11 +335,11 @@ $(document).ready(function() {
 		}
 		
 		
-		if($('.show-order').find('.show-order-bread').length==0){
+		if($('.show-order').eq(addStatus).find('.show-order-bread').length==0){
 			var showOrderStr = "<td class='show-order-bread'>"+breadIdx+"/"+amountIdx+"cm</td>";
-			$('.show-order').append(showOrderStr);
+			$('.show-order').eq(addStatus).append(showOrderStr);
 		}else{
-			$('.show-order').find('.show-order-bread').eq(0).text(breadIdx+"/"+amountIdx+"cm");
+			$('.show-order').eq(addStatus).find('.show-order-bread').eq(0).text(breadIdx+"/"+amountIdx+"cm");
 		}
 		var str = breadIdx+','+amountIdx;
 		console.log(cost);
@@ -391,16 +404,14 @@ $(document).ready(function() {
 		$('#recom-sauce').val($(this).find('input').eq(3).val());
 		$('#recom-main').val(str);
 		$('input[name=bucMain]').val(str);
-		if($('.show-order').find('.show-order-main').length==0){
+		if($('.show-order').eq(addStatus).find('.show-order-main').length==0){
 			var showOrderStr = "<td class='show-order-main'>"+str+"</td>";
-			$('.show-order').append(showOrderStr);
+			$('.show-order').eq(addStatus).append(showOrderStr);
 		}else{
-			$('.show-order').find('.show-order-main').eq(0).text(str);
+			$('.show-order').eq(addStatus).find('.show-order-main').eq(0).text(str);
 		}
 		
-		$('.show-cost').find('.show-cost-context').eq(0).remove();
-		var showCostStr = "<button type='button' class='btn-style4 show-cost-context'>"+cost+" 원</button>";
-		$('.show-cost').append(showCostStr);
+		$('.show-order-context').eq(0).text(cost+" 원");
 	});
 	
 	$('.salad').click(function(){
@@ -449,17 +460,17 @@ $(document).ready(function() {
 		$('#recom-main').val(str);
 		$('input[name=bucMain]').val(str);
 		
-		if($('.show-order').find('.show-order-main').length==0){
+		if($('.show-order').eq(addStatus).find('.show-order-main').length==0){
 			var showOrderStr = "<td class='btn-style4 show-order-main'>"+str+"</td>";
-			$('.show-order').append(showOrderStr);
+			$('.show-order').eq(addStatus).append(showOrderStr);
 		}else{
-			$('.show-order').find('.show-order-main').eq(0).text(str);
+			$('.show-order').eq(addStatus).find('.show-order-main').eq(0).text(str);
 		}
 		
-		$('.show-cost-context').text(cost+" 원");
-//		$('.show-order').find('.show-order-context').eq(0).remove();
+		$('.show-order-context').eq(0).text(cost+" 원");
+//		$('.show-order').eq(addStatus).find('.show-order-context').eq(0).remove();
 //		var showCostStr = "<td class='show-order-context'>"+cost+" 원</td>";
-//		$('.show-order').prepend(showCostStr);
+//		$('.show-order').eq(addStatus).prepend(showCostStr);
 	});
 	
 	$('.cheese').click(function(){
@@ -506,11 +517,11 @@ $(document).ready(function() {
 		$(this).addClass("selected");
 		$('input[name=bucCheese]').val(str);
 		
-		if($('.show-order').find('.show-order-cheese').length==0){
-			var showOrderStr = "<button type='button' class='btn-style4 show-order-cheese'>"+str+"</button>";
-			$('.show-order').append(showOrderStr);
+		if($('.show-order').eq(addStatus).find('.show-order-cheese').length==0){
+			var showOrderStr = "<td class='show-order-cheese'>"+str+"</td>";
+			$('.show-order').eq(addStatus).append(showOrderStr);
 		}else{
-			$('.show-order').find('.show-order-cheese').eq(0).text(str);
+			$('.show-order').eq(addStatus).find('.show-order-cheese').eq(0).text(str);
 		}
 		
 	});
@@ -546,13 +557,13 @@ $(document).ready(function() {
 		$('input[name=bucTopping]').val(str);
 		console.log($('input[name=bucTopping]').val());
 		
-		if($('.show-order').find('.show-order-topping').length==0){
-			var showOrderStr = "<button type='button' class='btn-style4 show-order-topping'>"+strKorea+"</button>";
-			$('.show-order').append(showOrderStr);
+		if($('.show-order').eq(addStatus).find('.show-order-topping').length==0){
+			var showOrderStr = "<td class='show-order-topping'>"+strKorea+"</td>";
+			$('.show-order').eq(addStatus).append(showOrderStr);
 		}else{
-			$('.show-order').find('.show-order-topping').eq(0).text(strKorea);
+			$('.show-order').eq(addStatus).find('.show-order-topping').eq(0).text(strKorea);
 		}
-		$('.show-cost-context').text(cost+" 원");
+		$('.show-order-context').eq(0).text(cost+" 원");
 		$(".step").eq(5).trigger("click");
 	});
 	$('.topping.img-box.select-none').click(function(){
@@ -618,6 +629,7 @@ $(document).ready(function() {
 
 	$('.vegi-amount').click(function(){
 		if($(this).hasClass("select-vegi")){
+			
 			return;
 		}
 		var vegiParent = $(this).parent().parent();
@@ -730,11 +742,11 @@ $(document).ready(function() {
 		$('input[name=bucSource]').val(str);
 		console.log($('input[name=bucSource]').val());
 		
-		if($('.show-order').find('.show-order-source').length==0){
-			var showOrderStr = "<button type='button' class='btn-style4 show-order-source'>"+strKorea+"</button>";
-			$('.show-order').append(showOrderStr);
+		if($('.show-order').eq(addStatus).find('.show-order-source').length==0){
+			var showOrderStr = "<td class='show-order-source'>"+strKorea+"</td>";
+			$('.show-order').eq(addStatus).append(showOrderStr);
 		}else{
-			$('.show-order').find('.show-order-source').eq(0).text(strKorea);
+			$('.show-order').eq(addStatus).find('.show-order-source').eq(0).text(strKorea);
 		}
 		
 		$(".step").eq(8).trigger("click");
@@ -776,13 +788,13 @@ $(document).ready(function() {
 		$(this).unbind("mouseleave");
 		$(this).addClass("selected");
 		
-		if($('.show-order').find('.show-order-set').length==0){
-			var showOrderStr = "<button type='button' class='btn-style4 show-order-set'>"+str+"</button>";
-			$('.show-order').append(showOrderStr);
+		if($('.show-order').eq(addStatus).find('.show-order-set').length==0){
+			var showOrderStr = "<td class='show-order-set'>"+str+"</td>";
+			$('.show-order').eq(addStatus).append(showOrderStr);
 		}else{
-			$('.show-order').find('.show-order-set').eq(0).text(str);
+			$('.show-order').eq(addStatus).find('.show-order-set').eq(0).text(str);
 		}
-		$('.show-cost-context').text(cost+" 원");
+		$('.show-order-context').eq(0).text(cost+" 원");
 		
 		$('input[name=bucSet]').val(str);
 	});
@@ -810,17 +822,44 @@ $(document).ready(function() {
 			}
 		}
 	});
+	function getCookie(cname) {
+	    var name = cname + "=";
+	    var decodedCookie = decodeURIComponent(document.cookie);
+	    var ca = decodedCookie.split(';');
+	    for(var i = 0; i <ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) == ' ') {
+	            c = c.substring(1);
+	        }
+	        if (c.indexOf(name) == 0) {
+	            return c.substring(name.length, c.length);
+	        }
+	    }
+	    return "";
+	}
+
+	function delCookie(cookie_name) {
+	    set_cookie(cookie_name, "", 0 , 0);
+	}
+	var setCookiee = function setCookiee(data){
+		var cookieDate = new Date();
+		document.cookie = "cookieHtml="+data;
+	}
 	
-	var getCookie = function(name) {
-		  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-		  return value? value[2] : null;
-		};
 	$('.order-check').click(function(){
+		if(canAdd==1){
+			var plusIdx = $('.plusOption').length-1;
+			$(".plusOption").eq(plusIdx).trigger("click");
+			return;
+		}
+		
 		var str='';
 		var strKorea = "";
+		var noCount = 0;
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selected")){
 				console.log("해즈클래스");
+				noCount++;
 				str += "1";
 				strKorea += $('.sidemenu').eq(i).find('p').text()+",";
 				cost += Number($('.sidemenu').eq(i).find('input').eq(1).val());
@@ -830,23 +869,38 @@ $(document).ready(function() {
 				str += '0';
 			}
 		}
-		strKorea = strKorea.substr(0, strKorea.length -1);
+		if(noCount == 0){
+			strKorea = "사이드 선택안함";
+		}else{
+			strKorea = strKorea.substr(0, strKorea.length -1);
+		}
 		console.log(cost);
 		console.log(kcal);
 		console.log(str);
 		
-		if($('.show-order').find('.show-order-sidemenu').length==0){
-			var showOrderStr = "<button type='button' class='btn-style4 show-order-sidemenu'>"+strKorea+"</button>";
-			$('.show-order').append(showOrderStr);
+		if($('.show-order').eq(addStatus).find('.show-order-sidemenu').length==0){
+			var showOrderStr = "<td class='show-order-sidemenu'>"+strKorea+"</td>";
+			$('.show-order').eq(addStatus).append(showOrderStr);
 		}else{
-			$('.show-order').find('.show-order-sidemenu').eq(0).text(strKorea);
+			$('.show-order').eq(addStatus).find('.show-order-sidemenu').eq(0).text(strKorea);
 		}
-		$('.show-cost-context').text(cost+" 원");
+		$('.show-order-context').eq(0).text(cost+" 원");
 		
 		$('input[name=bucSide]').val(str);
 		$('input[name=bucCost]').val(cost);
 		$('input[name=bucKcal]').val(kcal);
 		$('input[name=bucQuantity]').val('1');
+		for(var i=0; i<13; i++){
+			if(!$('.orderInput').eq(i).val()){
+				alert("주문절차를 확인해주세요.");
+				clearAllfn(0);
+				$('.show-order').last().remove();
+				var newTr = "<tr class='show-order'></tr>";
+		    	$('.order-view-tbl').append(newTr);
+				$('.step').eq(0).trigger("click");
+				return;
+			}				
+    	}
 		var cookieVal = getCookie('noneCustomer');
 		$('#cookie').val(cookieVal);
 		console.log($('#cookie').val());
@@ -869,85 +923,113 @@ $(document).ready(function() {
 //            },
             success : function(data){
                 alert(data);
-                var orderCheckStr = "<tr>";
-        		for(var i=0; i<9; i++){
-        			if(i<7){
-        				orderCheckStr += "<td>"+$('.show-order').find('button').eq(i+1).text()+"</td>";        				
-        			}else if(i==7){
-        				orderCheckStr += "<td><button class='quantityChange type1' type='button' onclick='quantityChange(0,this);'>-</button>&nbsp;&nbsp;&nbsp;<span>"
-        					+$('.orderInput').eq(8).val()+"</span>&nbsp;&nbsp;&nbsp;<button class='quantityChange type2' type='button' onclick='quantityChange(1,this);'>+</button></td>";
-        			}else if(i==8){
-        				orderCheckStr += "<td>"+$('.orderInput').eq(9).val()+"원</td>";      
-        			}
-        		}
-        		orderCheckStr += "<td><button type='button' onclick='deleteOrder(this)'>취소</button>";
+                var orderCheckStr = "";
+                canMoveBucket = 1;
+//        		for(var i=0; i<9; i++){
+//        			if(i<7){
+//        				orderCheckStr += "<td>"+$('.show-order').eq(addStatus).find('button').eq(i+1).text()+"</td>";        				
+//        			}else if(i==7){
+//        				orderCheckStr += "<td><button class='quantityChange type1' type='button' onclick='quantityChange(0,this);'>-</button>&nbsp;&nbsp;&nbsp;<span>"
+//        					+$('.orderInput').eq(8).val()+"</span>&nbsp;&nbsp;&nbsp;<button class='quantityChange type2' type='button' onclick='quantityChange(1,this);'>+</button></td>";
+//        			}else if(i==8){
+//        				orderCheckStr += "<td>"+$('.orderInput').eq(9).val()+"원</td>";      
+//        			}
+//        		}
+                orderCheckStr += "<td><button class='quantityChange type1' type='button' onclick='quantityChange(0,this);'>-</button>&nbsp;&nbsp;&nbsp;<span>"
+                				+$('.orderInput').eq(10).val()+"</span>&nbsp;&nbsp;&nbsp;<button class='quantityChange type2 plusOption' type='button' onclick='quantityChange(1,this);'>+</button></td>";
+        		orderCheckStr += "<td><button type='button' style='font-size:18px;color:red;' onclick='deleteOrder(this)'>취소</button>";
         		orderCheckStr += "<input type='hidden' class='idxHidden' value='"+data+"'></td>";
-        		orderCheckStr += "</tr>";
         		
         		console.log(orderCheckStr);
-        		$('.comm-tbl.type2').append(orderCheckStr);
+        		$('.show-order').eq(addStatus).append(orderCheckStr);
+        		canAdd=1;
+        		totalCost += cost;
+        		$('.show-total-cost').eq(0).text("Total : "+totalCost+" 원");
             },
         });
+//        var cookieHtml = $('.show-order').eq(addStatus).html();
+//		setCookiee(cookieHtml);
 	});
 	
-		function quantityChange(changeIdx,btn){
-			var value = Number($(btn).parent().find('span').text());
-			var idx = $(btn).parent().next().next().find('input').val();
-			if(changeIdx==0){
-				value--;
-			}else{
-				value++;
+	
+	
+	function quantityChange(changeIdx,btn){
+		var value = Number($(btn).parent().find('span').text());
+		var idx = $(btn).parent().next().find('input').val();
+		var addCostStr = $(btn).parent().parent().find('td').eq(0).text();
+		var addCost = Number(addCostStr.substr(0, addCostStr.length-2));
+		console.log(addCost);
+		console.log(addCostStr);
+		if(changeIdx==0){
+			if(value==1){
+				return;
 			}
-			$.ajax({
-	        	url : "/updateQuantity.do",
-	            type : 'get',
-	            data : {value:value,idx:idx},
-	            success : function(){
-	            	$(btn).parent().find('span').text(value);
-	            },
-	        });
+			value--;
+			totalCost -= addCost;
+		}else{
+			value++;
+			totalCost += addCost;
 		}
+		$.ajax({
+        	url : "/updateQuantity.do",
+            type : 'get',
+            data : {value:value,idx:idx},
+            success : function(){
+            	$(btn).parent().find('span').text(value);
+            },
+        });
+		$('.show-total-cost').eq(0).text("Total : "+totalCost+" 원");
+//			var cookieHtml = $('.show-order').eq(addStatus).html();
+//    		setCookiee(cookieHtml);
+	}
 	
 	function deleteOrder(idx){
+		var delCostStr = $(idx).parent().parent().find('td').eq(0).text();
+		var delCost = Number(delCostStr.substr(0, delCostStr.length-2));
+		
+		clearAllfn(0);
 		var delIdx = $(idx).next().val();
-		var btnArrIdx = $('.show-order').find('button').length;
-		for(var i=0;i<btnArrIdx+1;i++){
-			if(i!=btnArrIdx){
-				$('.show-order').find('button').eq(i).remove();
-			}else{
-				$('.show-cost').find('button').eq(0).remove();
-			}
-		}
 		$.ajax({
         	url : "/tempOrderDelete.do",
             type : 'get',
             data : {delIdx:delIdx},
             success : function(){
                 $(idx).parent().parent().remove();
+                
             },
         });
+		var newTr = "<tr class='show-order'></tr>";
+    	$('.order-view-tbl').append(newTr);
+		totalCost -= delCost;
+		$('.show-total-cost').eq(0).text("Total : "+totalCost+" 원");
+		var offset = $("strong").eq(0).offset();
+        $('html, body').animate({scrollTop : offset.top}, 400);
+		$('.step').eq(0).trigger("click");
 	}
-    $('.add-order').click(function() {
+	function addOrderfn(){
+    	if(canMoveBucket==0){
+			return;
+		}
+    	canAdd=0;
     	clearAllfn(0);
     	for(var i=0; i<13; i++){
-    			$('.orderInput').eq(i).val("");				
+			$('.orderInput').eq(i).val("");				
     	}
-    	var btnArrIdx = $('.show-order').find('button').length;
-    	for(var i=0;i<btnArrIdx+1;i++){
-			if(i!=btnArrIdx){
-				$('.show-order').find('button').eq(i).remove();
-			}else{
-				$('.show-cost').find('button').eq(0).remove();
-			}
-		}
+    	var newTr = "<tr class='show-order'></tr>";
+    	$('.order-view-tbl').append(newTr);
+    	addStatus++;
     	cost=0;
     	kcal=0;
     	var offset = $("strong").eq(0).offset();
         $('html, body').animate({scrollTop : offset.top}, 400);
     	$(".step").eq(0).trigger("click");
-	});
+	}
 	
 	$('.load-bucket').click(function() {
+		if(canMoveBucket==0){
+			alert("주문내역이 없습니다.");
+			return;
+		}
 		location.href="/loadBucket.do"
 	});
 

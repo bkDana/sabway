@@ -5,6 +5,9 @@
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 <style>
+	.comm-tbl th,.comm-tbl td{
+		text-align: center;
+	}
 	.pageNavi{
 		color:black;
 		text-align:center;
@@ -45,17 +48,17 @@
 			<select name="statusGroup">
 				<option>상품명</option>
 			</select>
-			<input type="text" maxlength="30" placeholder="상품 검색" value="${text }"style="height:34px; padding-left:5px;">
+			<input type="text" maxlength="30" placeholder="상품 검색" value="${keyword }"style="height:34px; padding-left:5px;">
 			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button>
 		</div>
-		<table class="comm-tbl" style="max-width: 100%;">
+		<table class="comm-tbl" style="max-width:100%">
 			<tr>
-				<td>No.</td>
-				<td>상품명</td>
-				<td>15cm</td>
-				<td>30cm</td>
+				<th>No.</th>
+				<th>상품명</th>
+				<th>15cm</th>
+				<th>30cm</th>
 				<th>행사</th>
-				<td>할인 후 가격</td>
+				<th>할인 후 가격</th>
 			</tr>
 			<c:forEach items="${pd.list }" var="ingre" varStatus="i">
 				<input type="hidden" value="${ingre.ingreType }">
@@ -89,7 +92,7 @@
 			</c:forEach>
 			<c:if test="${pd.totalCount <= 0 }">
 				<tr>
-					<td colspan="9">검색 결과가 없습니다.</td>
+					<td colspan="9">상품 정보가 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
