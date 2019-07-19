@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	.inputBox{
-		float: left;
-	}/*  */
 #content-wrapper1{padding:100px 0; background-color:#f6f6f6;}
 .area1{ max-width:1900px; margin:0px auto; }
 /* 문의 ::: 가맹신청문의, 1:1문의 */
@@ -23,8 +20,9 @@
 .inquiry_wrapper .pd_agree_wrapper .pd_agree{float:left; width:490px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree:first-child{margin-right:48px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree h3{color:#666666; font-size:18px; font-weight:300; letter-spacing:-0.05em; padding-bottom:19px;}
-.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper{border:2px solid #e5e5e5; height:150px; padding:13px 0 13px 17px; overflow:hidden; color:#bbbbbb; font-size:13px; line-height:21px; margin-bottom:14px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper{border:2px solid #e5e5e5; height:150px; padding:13px 0 13px 17px; overflow:auto; color:#bbbbbb; font-size:13px; line-height:21px; margin-bottom:14px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_inside>.mCSB_container{margin-right:17px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_inside>.mCSB_container:focus{outline:none;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_scrollTools .mCSB_draggerRail{opacity:0 !important;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{width:5px !important; background-color:#dddddd !important;}
 .inquiry_wrapper .form_select{margin-right:7px;}
@@ -126,14 +124,12 @@
 							</div>
 							<div class="pd_agree">
 								<h3>개인정보 위탁동의</h3>
-											<!-- 20180131 -->
 								<div class="scroll_wrapper mCustomScrollbar _mCS_2"><div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0" style="max-height: none;"><div id="mCSB_2_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
 									개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.<br><br>
 									회사는 개인정보 취급방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.<br><br>
 									 ο 본 방침은 : 2018 년 1 월 31 일 부터 시행됩니다.<br><br>
 									써브웨이인터내셔날 비브이는 (이하 '회사'는) 고객님의 개인정보 를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.
 								</div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; display: block; height: 150px; max-height: 140px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
-								<!--// 20180131 -->
 								<!-- checkbox -->
 								<label class="form_checkbox">
 									<input name="agree2" type="checkbox">
@@ -145,7 +141,7 @@
 						<h3 class="h_title">문의 작성하기</h3>
 						<div class="board_write_wrapper">
 							<p class="rt_note">필수입력사항<span class="ess"></span></p>
-							<table>
+							<table style="width:1028px">
 								<caption>문의 작성하기 테이블</caption>
 								<colgroup>
 									<col width="130px">
@@ -156,7 +152,7 @@
 										<th scope="col"><label for="applyName">이름</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%;">
-												<input class="inputBox short" type="text" id="applyName" name="applyName" maxlength="16" style="width:1000px" placeholder="이름을 입력해주세요">
+												<input class="inputBox short" type="text" id="applyName" name="applyName" maxlength="16" placeholder="이름을 입력해주세요">
 											</span>
 										</td>
 									</tr>
@@ -164,7 +160,7 @@
 										<th scope="col"><label for="applyPhone">연락처</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%;">
-												<input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="16" style="width:1000px"placeholder="연락 가능한 전화번호를 입력해주세요">
+												<input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="16" placeholder="연락 가능한 전화번호를 입력해주세요">
 											</span>
 										</td>
 									</tr>
@@ -232,7 +228,7 @@
 										<th scope="col"><label for="applyTitle">제목</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input class="inputBox" type="text" id="applyTitle" name="applyTitle" maxlength="16" style="width:1000px" placeholder="제목을 입력해주세요">
+												<input class="inputBox" type="text" id="applyTitle" name="applyTitle" maxlength="16" placeholder="제목을 입력해주세요">
 											</span>
 										</td>
 									</tr>
@@ -278,8 +274,6 @@
 						<div class="btns_wrapper">
 							<button type="reset" class="btn bgc_white" style="width:126px;"><span>취소</span></button>
 							<button type="submit" onclick="return check();" class="btn bgc_point i_reg" style="width:170px;"><span>등록하기</span></button>
-							<!-- <a class="btn bgc_white" href="#" onclick="view.cancel();return false;" style="width:126px;"><span>취소</span></a>
-							<a class="btn bgc_point i_reg" href="#" onclick="view.save();return false;" style="width:170px;"><span>등록하기</span></a> -->
 						</div>
 					</form>
 				</div>
@@ -312,9 +306,20 @@
 	      return true;
 	   }
 	}
-//빈값 검사
-	function isChk(){
-	   if(isEmpty($("#applyName").val())){
+	
+/* 약관동의,빈값 체크 */
+function check(){
+	if(!$("input:checkbox[name=agree1]").is(":checked")) {
+		alert("개인정보수집 및 이용에 동의가 필요합니다.");
+		$("input:checkbox[name=agree1]").focus();
+		return false;
+	}
+	if(!$("input:checkbox[name=agree2]").is(":checked")) {
+		alert("개인정보 위탁에 동의가 필요합니다.");
+		$("input:checkbox[name=agree2]").focus();
+		return false;
+	}
+	if(isEmpty($("#applyName").val())){
 	      alert("이름을 작성해주세요.")
 	      return false;
 	   }
@@ -346,40 +351,18 @@
 	      alert("내용을 작성해주세요.")
 	      return false;
 	   }
-	   return true;
-	}
-	
-/* 약관동의 체크 */
-function check(){
-	if(!$("input:checkbox[name=agree1]").is(":checked")) {
-		alert("개인정보수집 및 이용에 동의가 필요합니다.");
-		$("input:checkbox[name=agree1]").focus();
-		return false;
-	}
-	if(!$("input:checkbox[name=agree2]").is(":checked")) {
-		alert("개인정보 위탁에 동의가 필요합니다.");
-		$("input:checkbox[name=agree2]").focus();
-		return false;
-	}
-	if(!$("input:checkbox[name=agree3]").is(":checked")) {
+	  if(!$("input:checkbox[name=agree3]").is(":checked")) {
 		alert("신청·문의사항에 대한 답변은 메일 발송에 따른 동의가 필요합니다.");
 		$("input:checkbox[name=agree3]").focus();
-		return false;
-	}
-	if(isChk()){
-        $("#applyForm").submit();
-        
-	  }else{
-	     return false;
+			return false;
 	  }
-	
 }
 //첨부파일 표시
 function formFile(obj){// 첨부파일
 	var value = obj.value;
-	//var file = value.split('\');
-	//console.log(file[2]);
-	$(obj).next('input').val(value);
+	var file = value.split('\\');
+	console.log(file[2]);
+	$(obj).next('input').val(file[2]);
 }
 
 
