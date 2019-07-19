@@ -68,17 +68,11 @@
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
 				<td><span class="cost">${bucket.bucCost }</span>원</td>
-				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">개별 주문하기</button></td>
+				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">주문하기</button></td>
 				<td><button type="button" class="deleteMyMenu"  style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
 			</tr>
 			</c:forEach>
-			<tr>
-				<td colspan="6">
-					<div class="common-tbl-btn-group">
-						<button type="submit" id="sbmOrder" class="btn-style2">모두 주문하기</button>
-					</div>
-				</td>
-			</tr>
+
 		</table>
 	</div>
 </section>

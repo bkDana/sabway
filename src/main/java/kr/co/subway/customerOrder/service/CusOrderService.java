@@ -196,4 +196,17 @@ public class CusOrderService {
 		return cusOrderDao.myMenuDelete(idx);
 	}
 
+	public boolean checkMM(int bucIdx) {
+		boolean result = false;
+		MyMenu mm = cusOrderDao.selectOneMenu(bucIdx);
+		if( (mm != null) && (mm.getMmBucIdx() == bucIdx) ) {
+			result = true;
+		}
+		return result;
+	}
+
+	public int hideFromBucketList(int idx) {
+		return cusOrderDao.hideFromBList(idx);
+	}
+
 }
