@@ -13,6 +13,9 @@ $(document).ready(function(){
 			$('.insertMyMenu').eq(i).css('color','grey').css('cursor','default').attr('disabled',true);
 		} 
 	}
+	if($('#sessionId').val() == "") {
+		console.log("비회원임");
+	}
 
 	var totalCost = Number(0); // 결재할 때 쓰임
 	
@@ -25,13 +28,14 @@ $(document).ready(function(){
     	sessionPhone = "010-0000-0000";
     }
     var sessionId = $('#sessionId').val();
-    if(!$('#sessionId').val()) {
+    if($('#sessionId').val() == "") {
     	sessionId = "비회원";
     }
     var cookieVal = getCookie('noneCustomer');	// 헤더에서 쓰임.
     
     console.log(sessionPhone);
     console.log(cookieVal);
+    console.log(sessionId);
     
     /* bucket.jsp로 이동 */
     $('#bucket').click(function() {
@@ -479,7 +483,7 @@ $(document).ready(function(){
 		IMP.request_pay({
 			pay_method : 'card',
 			merchant_uid : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+$('.hiddenInfo').eq(0).find('.hiddenIsSalad').val()+date,				//거래ID - 유니크 주려고 날짜까지 넣음
-			name : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+$('.hiddenInfo').eq(0).find('.hiddenIsSalad').val()+" 외",						//결재명
+			name : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+" 외",						//결재명
 			buyer_name : sessionId,
 			buyer_email : '',
 			amount : totalCost,									//결재 금액
@@ -492,7 +496,7 @@ $(document).ready(function(){
 				var info2 = "결재 금액 : "+response.paid_amount;
 				var info3 = "카드 승인 번호 : "+response.apply_num;
 				console.log(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
-				
+				$('input[name=cusoCallBy').val(sessionId);
 				$('input[name=cusoTotalCost]').val(totalCost);
 		    	$('input[name=cusoPhone]').val(sessionPhone);
 		    	var d = new Date();
