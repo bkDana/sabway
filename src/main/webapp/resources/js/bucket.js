@@ -6,21 +6,14 @@ var getCookie = function(name) {
 	};
 
 $(document).ready(function(){
-	var cusoOrderNo = 100;
-	
-	/* 나만의 메뉴 1열? 삭제 */
-	function deleteMenu(idx){
-		var delIdx = $('.hiddenBucIdx').eq(idx).val();
-		$.ajax({
-	    	url : "/myMenuDelete.do",
-	        type : 'get',
-	        data : {delIdx:delIdx},
-	        success : function(){
-	            $(idx).parent().parent().remove();
-	        }
-	    });
+	for(var i = 0; i<$('.hiddenChkMM').length; i++) {
+		var bool = $('.hiddenChkMM').eq(i).val();
+		if(bool == 'true') {
+			$('.insertMyMenu').eq(i).html('추가 완료');
+			$('.insertMyMenu').eq(i).css('color','grey').css('cursor','default').attr('disabled',true);
+		} 
 	}
-	
+
 	var totalCost = Number(0); // 결재할 때 쓰임
 	
 	for(var i = 0; i<$('.cost').length; i++){
@@ -401,18 +394,30 @@ $(document).ready(function(){
   
     $('.deleteBucket').click(function(){
     	var listIdx = $('.deleteBucket').index(this);
+    	var chkMM = $('.hiddenChkMM').eq(listIdx).val();
     	var delIdx = $('.hiddenBucIdx').eq(listIdx).val();
-    	console.log(delIdx);
     	var deleteMenu = confirm("선택하신 메뉴를 삭제하시겠습니까?");
+    	
     	if(deleteMenu) {
-    		$.ajax({
-    	    	url : "/tempOrderDelete.do",
-    	        type : 'get',
-    	        data : {delIdx:delIdx},
-    	        success : function(){
-    	            $('.deleteBucket').eq(listIdx).parent().parent().remove();
-    	        }
-    	    });
+    		if(chkMM == 'true') { // 나만의메뉴에 추가된 경우 - 버킷리스트에서만 숨기고 데이터는 지우지않음(나만의메뉴에서 써야함)
+    			$.ajax({
+        	    	url : "/hideFromBucketList.do",
+        	        type : 'get',
+        	        data : {delIdx:delIdx},
+        	        success : function(){
+        	            $('.deleteBucket').eq(listIdx).parent().parent().remove();
+        	        }
+        	    });
+        	} else { // 나만의 메뉴에 없는경우 - 해당 항목 삭제
+        		$.ajax({
+        	    	url : "/tempOrderDelete.do",
+        	        type : 'get',
+        	        data : {delIdx:delIdx},
+        	        success : function(){
+        	            $('.deleteBucket').eq(listIdx).parent().parent().remove();
+        	        }
+        	    });
+        	}
     	}
     });
     
@@ -421,7 +426,7 @@ $(document).ready(function(){
     	var delIdx = $('.hiddenBucIdx').eq(listIdx).val();
     	console.log(listIdx);
     	console.log(delIdx);
-    	var deleteMenu = confirm("선택하신 메뉴를 삭제하시겠습니까?");
+    	var deleteMenu = confirm("나만의 메뉴를 삭제하시겠습니까?");
     	if(deleteMenu) {
     		$.ajax({
     	    	url : "/myMenuDelete.do",
@@ -438,9 +443,7 @@ $(document).ready(function(){
     	
     	var createMenu = confirm("선택하신 메뉴를 나만의 메뉴로 만드시겠습니까?");
     	if(createMenu) {
-//    		serialize()
     		var form = $(".myMenu")[itemIndex];
-//    		console.log(queryString);
     		var data = new FormData(form);
     		console.log(data);
             $.ajax({
@@ -452,9 +455,6 @@ $(document).ready(function(){
                 contentType: false,
                 cache: false,
                 dataType : 'text',
-//                error: function(xhr, status, error){
-//                    alert("error");
-//                },
                 success : function(){
                     alert("나만의 메뉴 추가 완료되었습니다. '마이페이지 - 나만의 메뉴'에서 확인");
                     $('.insertMyMenu').eq(itemIndex).html('추가 완료');
