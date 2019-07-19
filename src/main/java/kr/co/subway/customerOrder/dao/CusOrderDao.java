@@ -117,6 +117,7 @@ public class CusOrderDao {
 		ArrayList<Bucket> resultList = new ArrayList<Bucket>();
 		for(MyMenu mm:menuList) {
 			Bucket b = sqlSession.selectOne("bucket.loadMyMenu",mm);
+			System.out.println(b.getBucIdx());
 			resultList.add(b);
 		}
 		return resultList;
@@ -132,6 +133,15 @@ public class CusOrderDao {
 
 	public List cusOrderItem(String no) {
 		return sqlSession.selectList("cusOrder.cusOrderItem",no);
+	}
+
+	public MyMenu selectOneMenu(int bucIdx) {
+
+		return sqlSession.selectOne("mymenu.selectOneMenu",bucIdx);
+	}
+
+	public int hideFromBList(int bucIdx) {
+		return sqlSession.update("bucket.hideFromBList",bucIdx);
 	}
 
 }
