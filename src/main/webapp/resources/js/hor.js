@@ -11,6 +11,7 @@ $(document).ready(function() {
 	var oneStatus = 0;
 	var breadCheck=0;
 	var typeIdx = 0;
+	
 	function delay(gap){ /* gap is in millisecs */ 
 	  var then,now; 
 	  then=new Date().getTime(); 
@@ -127,6 +128,8 @@ $(document).ready(function() {
 		if($(this).hasClass("selected")){
 			return;
 		}
+		var showCostStr = "<td class='show-order-context'>"+cost+" 원</td>";
+		$('.show-order').append(showCostStr);
 		clearAllfn(2);
 		typeIdx = $('.type').index(this)+1;
 		if(typeIdx==1){
@@ -172,7 +175,7 @@ $(document).ready(function() {
 			$(this).toggleClass("selected");
 			$('.bread').css("display","block");
 			if($('.show-order').find('.show-order-type').length==0){
-				var showOrderStr = "<button type='button' class='btn-style4 show-order-type'>샌드위치</button>";
+				var showOrderStr = "<td class='show-order-type'>샌드위치</button>";
 				$('.show-order').append(showOrderStr);
 			}else{
 				$('.show-order').find('.show-order-type').eq(0).text("샌드위치");
@@ -221,12 +224,14 @@ $(document).ready(function() {
 					});
 				}
 			}
+			
 			if($('.show-order').find('.show-order-type').length==0){
-				var showOrderStr = "<button type='button' class='btn-style4 show-order-type'>샐러드</button>";
+				var showOrderStr = "<td class='show-order-type'>샐러드</td>";
 				$('.show-order').append(showOrderStr);
 			}else{
 				$('.show-order').find('.show-order-type').eq(0).text("샐러드");
 			}
+			
 			$(this).toggleClass("selected");
 			$('input[name=bucIsSalad]').val("샐러드");
 			$('input[name=bucBread]').val("선택안함");
@@ -315,8 +320,10 @@ $(document).ready(function() {
 			breadCheck=2;
 			console.log("30짜리 찍엇어");
 		}
+		
+		
 		if($('.show-order').find('.show-order-bread').length==0){
-			var showOrderStr = "<button type='button' class='btn-style4 show-order-bread'>"+breadIdx+"/"+amountIdx+"cm</button>";
+			var showOrderStr = "<td class='show-order-bread'>"+breadIdx+"/"+amountIdx+"cm</td>";
 			$('.show-order').append(showOrderStr);
 		}else{
 			$('.show-order').find('.show-order-bread').eq(0).text(breadIdx+"/"+amountIdx+"cm");
@@ -385,7 +392,7 @@ $(document).ready(function() {
 		$('#recom-main').val(str);
 		$('input[name=bucMain]').val(str);
 		if($('.show-order').find('.show-order-main').length==0){
-			var showOrderStr = "<button type='button' class='btn-style4 show-order-main'>"+str+"</button>";
+			var showOrderStr = "<td class='show-order-main'>"+str+"</td>";
 			$('.show-order').append(showOrderStr);
 		}else{
 			$('.show-order').find('.show-order-main').eq(0).text(str);
@@ -443,15 +450,16 @@ $(document).ready(function() {
 		$('input[name=bucMain]').val(str);
 		
 		if($('.show-order').find('.show-order-main').length==0){
-			var showOrderStr = "<button type='button' class='btn-style4 show-order-main'>"+str+"</button>";
+			var showOrderStr = "<td class='btn-style4 show-order-main'>"+str+"</td>";
 			$('.show-order').append(showOrderStr);
 		}else{
 			$('.show-order').find('.show-order-main').eq(0).text(str);
 		}
 		
-		$('.show-cost').find('.show-cost-context').eq(0).remove();
-		var showCostStr = "<button type='button' class='btn-style4 show-cost-context'>"+cost+" 원</button>";
-		$('.show-cost').append(showCostStr);
+		$('.show-cost-context').text(cost+" 원");
+//		$('.show-order').find('.show-order-context').eq(0).remove();
+//		var showCostStr = "<td class='show-order-context'>"+cost+" 원</td>";
+//		$('.show-order').prepend(showCostStr);
 	});
 	
 	$('.cheese').click(function(){
