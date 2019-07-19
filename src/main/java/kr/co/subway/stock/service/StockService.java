@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.subway.common.CommonFunc;
 import kr.co.subway.common.SearchVO;
 import kr.co.subway.ingreManage.vo.IngreVo;
 import kr.co.subway.managerOrder.vo.StockVO;
@@ -80,7 +81,7 @@ public class StockService {
 		/* 리스트 */
 		ArrayList<stockViewVO> stockList = (ArrayList<stockViewVO>)(dao.selectList(search));
 
-		StockListVO list = new StockListVO(stockList, getPageNavi(total,reqPage,pageNum,10));//전체 row, 현재페이지, 한페이지 출력 개수, 출력할 페이지 개수
+		StockListVO list = new StockListVO(stockList, new CommonFunc().getPageNavi(total,reqPage,pageNum,10));//전체 row, 현재페이지, 한페이지 출력 개수, 출력할 페이지 개수
 		return list;
 	}
 

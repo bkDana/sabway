@@ -146,4 +146,8 @@ public class CusOrderDao {
 		return sqlSession.update("bucket.hideFromBList",bucIdx);
 	}
 
+	public CusOrder selectOneCusOrder(String cusoOrderNo) {
+		return sqlSession.selectOne("cusOrder.selectOneCusOrder",cusoOrderNo);
+	}
+
 }

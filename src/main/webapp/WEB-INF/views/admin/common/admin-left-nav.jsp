@@ -48,6 +48,13 @@
 			<%-- <li><a href="/salesStatics/goMenuSales.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("menuSales.jsp")){%>on<%}%>">메뉴별 매출 통계</a></li> --%>
 		</ul>
 	<%}%>
+
+		<!-- 회원 관리 -->
+	<%if(request.getRequestURL().toString().split("/")[5].equals("customer")){ %>
+		<ul>
+			<li><a href="allCustomerList.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("allCustomerList.jsp")){%>on<%}%>">회원 리스트</a></li>
+		</ul>
+	<%}%>
 	
 	
 	
