@@ -299,7 +299,7 @@ public class CusOrderController {
 	
 	@RequestMapping("/cusOrderInfo.do")
 	public String cusOrderInfo(String no, Model model) {
-		//System.out.println(no);
+		/* 지영지영 추가 */
 		CusOrder cusOrder = cusOrderService.cusOrderInfo(no);
 		model.addAttribute("cusOrder", cusOrder);
 		return "customerOrder/cusOrderInfo";
