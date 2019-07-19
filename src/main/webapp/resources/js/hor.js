@@ -822,29 +822,12 @@ $(document).ready(function() {
 			}
 		}
 	});
-	function getCookie(cname) {
-	    var name = cname + "=";
-	    var decodedCookie = decodeURIComponent(document.cookie);
-	    var ca = decodedCookie.split(';');
-	    for(var i = 0; i <ca.length; i++) {
-	        var c = ca[i];
-	        while (c.charAt(0) == ' ') {
-	            c = c.substring(1);
-	        }
-	        if (c.indexOf(name) == 0) {
-	            return c.substring(name.length, c.length);
-	        }
-	    }
-	    return "";
-	}
 
-	function delCookie(cookie_name) {
-	    set_cookie(cookie_name, "", 0 , 0);
-	}
-	var setCookiee = function setCookiee(data){
-		var cookieDate = new Date();
-		document.cookie = "cookieHtml="+data;
-	}
+	var getCookie = function(name) {
+		  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+		  return value? value[2] : null;			//현재 쿠키가 3개 생성되어 있음, [2]번째가 커스텀 쿠키
+	};
+
 	
 	$('.order-check').click(function(){
 		if(canAdd==1){
