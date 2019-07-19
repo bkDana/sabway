@@ -344,23 +344,6 @@ $(document).ready(function(){
 		</div>
 		
 		
-	
-
-
-
-		
-	
-	
-
-
-
-
-
-
-
-
-
-
 
 
 	

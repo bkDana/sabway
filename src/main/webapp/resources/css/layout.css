@@ -13,7 +13,6 @@ body, table, th, td, button, select, input, textarea, pre {
 	font-size:13px;
 	color:black;
 }
-
 body { background-color:#fff; }
 #wrap {overflow:hidden; width:100%; min-width:1200px; position:relative; } /* min-width 홈페이지 컨텐츠 가로값에 맞게 변경 */
 

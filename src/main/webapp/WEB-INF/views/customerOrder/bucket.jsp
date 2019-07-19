@@ -40,7 +40,7 @@
 				
 				<c:if test="${status.index eq 0 }">
 					<div class="hiddenOrder">
-						<form action="/insertItem.do" method="post">
+						<form action="/insertOrder.do" method="post">
 							<input type="hidden" name="cusoTotalCost" value="">
 							<input type="hidden" name="cusoPhone" value="">
 							<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
@@ -74,7 +74,7 @@
 						<span id="side"></span>
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
-				<td><span class="cost">${bucket.bucCost }</span>원</td>
+				<td><span class="cost">${bucket.bucCost * bucket.bucQuantity }</span>원</td>
 				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">나만의 메뉴 만들기</button></td>
 				<td><button type="button" class="deleteBucket" style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
 			</tr>
