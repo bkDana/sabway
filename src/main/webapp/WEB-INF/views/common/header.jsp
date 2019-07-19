@@ -96,7 +96,7 @@
 						</c:otherwise>
 					</c:choose>
 					
-					<li><a href="/loginAdmin.do" class="header-btn">관리자</a></li>
+					<li><a href="/admin.do" class="header-btn">관리자</a></li>
 					<li><a class="header-btn" id="bucket" onclick="loadBucket()"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
 				</ul>
 			</div>
