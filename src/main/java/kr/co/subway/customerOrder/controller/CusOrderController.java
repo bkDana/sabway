@@ -212,20 +212,11 @@ public class CusOrderController {
 		HttpSession session = request.getSession();
 		Customer c = (Customer)session.getAttribute("customer");
 		String customerNo = String.valueOf(c.getCustomerNo());
-		ArrayList<MyMenu> menuList = cusOrderService.selectMyMenuList(customerNo);
-//		for(MyMenu mm:menuList) {
-//			System.out.println(mm.getMmMenuLabel() + " / " + mm.getMmCustomerNo() + " / " + mm.getMmBucIdx());
-//		}
+		ArrayList<MyMenu> menuList = cusOrderService.selectMyMenuList(customerNo);//join용
 		ArrayList<Bucket> list = (ArrayList<Bucket>) cusOrderService.loadMenuList(menuList);
-		for(Bucket b:list) {
-			System.out.println(b.getBucIdx());
-		}
-		if(!list.isEmpty()) {
-			mav.addObject("list",list);
-			mav.setViewName("customerOrder/myMenuList");
-		}else {
-			mav.setViewName("common/error");
-		}
+
+		mav.addObject("list",list);
+		mav.setViewName("customerOrder/myMenuList");
 		return mav; 
 	}
 	

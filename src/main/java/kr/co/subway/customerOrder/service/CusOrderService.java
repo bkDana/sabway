@@ -12,7 +12,6 @@ import kr.co.subway.customerOrder.vo.Bucket;
 import kr.co.subway.customerOrder.vo.CusOrder;
 import kr.co.subway.customerOrder.vo.CusOrderPageBound;
 import kr.co.subway.customerOrder.vo.CusOrderPageData;
-import kr.co.subway.customerOrder.vo.Item;
 import kr.co.subway.customerOrder.vo.MyMenu;
 import kr.co.subway.customerOrder.vo.UpdateQuantity;
 import kr.co.subway.ingreManage.vo.IngreVo;
@@ -178,6 +177,7 @@ public class CusOrderService {
 		return (ArrayList<CusOrder>)cusOrderDao.loadOrderList(customerIdx);
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<Bucket> loadMenuList(ArrayList<MyMenu> menuList) {
 		return (ArrayList<Bucket>) cusOrderDao.loadMenuList(menuList);
 	}

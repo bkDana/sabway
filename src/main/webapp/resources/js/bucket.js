@@ -429,13 +429,15 @@ $(document).ready(function(){
     	var deleteMenu = confirm("나만의 메뉴를 삭제하시겠습니까?");
     	if(deleteMenu) {
     		$.ajax({
-    	    	url : "/myMenuDelete.do",
+    	    	url : "/tempOrderDelete.do",
     	        type : 'get',
     	        data : {delIdx:delIdx},
     	        success : function(){
+    	        	alert("나만의메뉴가 삭제되었습니다");
     	            $('.deleteMyMenu').eq(listIdx).parent().parent().remove();
     	        }
     	    });
+
     	}
     });
     $('.insertMyMenu').click(function(){
@@ -495,7 +497,7 @@ $(document).ready(function(){
 		    	$('input[name=cusoPhone]').val(sessionPhone);
 		    	var d = new Date();
 				var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-		    	$('input[name=cusoOrderNo]').val($('.hiddenInfo').eq(0).find('.hiddenMain').val()+date);
+		    	$('input[name=cusoOrderNo]').val(date);
 
 				$("#insertOrder").click();
 			} else {
