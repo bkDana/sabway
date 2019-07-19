@@ -312,9 +312,20 @@
 	      return true;
 	   }
 	}
-//빈값 검사
-	function isChk(){
-	   if(isEmpty($("#applyName").val())){
+	
+/* 약관동의,빈값 체크 */
+function check(){
+	if(!$("input:checkbox[name=agree1]").is(":checked")) {
+		alert("개인정보수집 및 이용에 동의가 필요합니다.");
+		$("input:checkbox[name=agree1]").focus();
+		return false;
+	}
+	if(!$("input:checkbox[name=agree2]").is(":checked")) {
+		alert("개인정보 위탁에 동의가 필요합니다.");
+		$("input:checkbox[name=agree2]").focus();
+		return false;
+	}
+	if(isEmpty($("#applyName").val())){
 	      alert("이름을 작성해주세요.")
 	      return false;
 	   }
@@ -346,33 +357,11 @@
 	      alert("내용을 작성해주세요.")
 	      return false;
 	   }
-	   return true;
-	}
-	
-/* 약관동의 체크 */
-function check(){
-	if(!$("input:checkbox[name=agree1]").is(":checked")) {
-		alert("개인정보수집 및 이용에 동의가 필요합니다.");
-		$("input:checkbox[name=agree1]").focus();
-		return false;
-	}
-	if(!$("input:checkbox[name=agree2]").is(":checked")) {
-		alert("개인정보 위탁에 동의가 필요합니다.");
-		$("input:checkbox[name=agree2]").focus();
-		return false;
-	}
-	if(!$("input:checkbox[name=agree3]").is(":checked")) {
+	  if(!$("input:checkbox[name=agree3]").is(":checked")) {
 		alert("신청·문의사항에 대한 답변은 메일 발송에 따른 동의가 필요합니다.");
 		$("input:checkbox[name=agree3]").focus();
-		return false;
-	}
-	if(isChk()){
-        $("#applyForm").submit();
-        
-	  }else{
-	     return false;
+			return false;
 	  }
-	
 }
 //첨부파일 표시
 function formFile(obj){// 첨부파일
