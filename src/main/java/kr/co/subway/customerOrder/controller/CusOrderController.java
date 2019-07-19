@@ -127,8 +127,10 @@ public class CusOrderController {
 	
 	//주문정보, 버킷에 주문번호 추가하는 메소드
 	@RequestMapping("/insertItem.do")
-	public String insertItem(HttpServletRequest request, String cusoOrderState, String cusoTotalCost,
+	public ModelAndView insertItem(HttpServletRequest request, String cusoOrderState, String cusoTotalCost,
 			String cusoPhone, String cusoMemberNo, String cusoCallBy, String cusoOrderNo, String cusoBranchName) {
+		ModelAndView mav = new ModelAndView();
+		
 		/* 회원 비회원 구분 */
 		String customerIdx = "-1";
 		HttpSession session = request.getSession(false);
@@ -162,10 +164,14 @@ public class CusOrderController {
 					System.out.println("버킷 업데이트 실패");
 				}
 			}
-			return "/customerOrder/orderSuccess";
+			CusOrder tempCuso = cusOrderService.selectOneCusOrder(cusoOrderNo);
+			mav.addObject("tempCuso", tempCuso);
+			mav.setViewName("/customerOrder/orderSuccess");
+			return mav;
 		}else{
 			System.out.println("주문정보 저장 실패");
-			return "/common/error";
+			mav.setViewName("/common/error");
+			return mav;
 		}
 		
 	}

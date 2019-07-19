@@ -12,11 +12,14 @@ $(document).ready(function(){
 			$('.insertMyMenu').eq(i).html('추가 완료');
 			$('.insertMyMenu').eq(i).css('color','grey').css('cursor','default').attr('disabled',true);
 		} 
-	}
-	if($('#sessionId').val() == "") {
-		console.log("비회원임");
-	}
+		if($('#sessionId').val() == "") {
+			console.log("비회원임");
+			$('.insertMyMenu').eq(i).html('회원만 선택가능합니다');
+			$('.insertMyMenu').eq(i).css('color','grey').css('cursor','default').attr('disabled',true);
+		}
 
+	}
+	
 	var totalCost = Number(0); // 결재할 때 쓰임
 	
 	for(var i = 0; i<$('.cost').length; i++){
