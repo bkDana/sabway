@@ -117,9 +117,9 @@
 $(document).ready(function(){
 	/* 엑셀 다운 버튼 클릭시  */
 	$(".del-btn.excel").click(function(){
-		$('#search').attr("action","/excelDown.do");
+		$('#search').attr("action","/ingreManage/excelDown.do");
 		$('#search').submit();
-		$('#search').attr("action","/ingreList.do");
+		$('#search').attr("action","/ingreManage/ingreList.do");
 		
 	});
 	
