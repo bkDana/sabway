@@ -23,7 +23,7 @@
 .inquiry_wrapper .pd_agree_wrapper .pd_agree{float:left; width:490px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree:first-child{margin-right:48px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree h3{color:#666666; font-size:18px; font-weight:300; letter-spacing:-0.05em; padding-bottom:19px;}
-.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper{border:2px solid #e5e5e5; height:150px; padding:13px 0 13px 17px; overflow:hidden; color:#bbbbbb; font-size:13px; line-height:21px; margin-bottom:14px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper{border:2px solid #e5e5e5; height:150px; padding:13px 0 13px 17px; overflow:auto; color:#bbbbbb; font-size:13px; line-height:21px; margin-bottom:14px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_inside>.mCSB_container{margin-right:17px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_scrollTools .mCSB_draggerRail{opacity:0 !important;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{width:5px !important; background-color:#dddddd !important;}
@@ -379,9 +379,9 @@ function check(){
 //첨부파일 표시
 function formFile(obj){// 첨부파일
 	var value = obj.value;
-	//var file = value.split('\');
-	//console.log(file[2]);
-	$(obj).next('input').val(value);
+	var file = value.split('\\');
+	console.log(file[2]);
+	$(obj).next('input').val(file[2]);
 }
 
 
