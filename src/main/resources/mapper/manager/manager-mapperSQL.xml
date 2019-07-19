@@ -20,24 +20,6 @@
 	      ,mgr_open_date as mgrOpenDate
 	      from manager
 	</select>
-	<!-- <select id="mpdList" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
-		select mgr_no as mgrNo
-	      ,mgr_id as mgrId
-	      ,mgr_pw as mgrPw
-	      ,mgr_name as mgrName
-	      ,mgr_tel as mgrTel
-	      ,mgr_post as mgrPost
-	      ,mgr_addr as mgrAddr
-	      ,mgr_level as mgrLevel
-	      ,mgr_status as mgrStatus
-	      ,mgr_enroll_date as mgrEnrollDate
-	      ,mgr_addr_code as mgrAddrCode
-	      ,mgr_boss_name as mgrBossName
-	      ,mgr_open_date as mgrOpenDate        
-	      from 
-	        (select rownum as rnum, m.* from (select * from manager order by mgr_no) m)
-	      where rnum between #{firstPage} and #{lastPage}
-	</select> -->
 	<select id="newStoreList" resultType="mgr">
 		select mgr_no as mgrNo
 		,mgr_id as mgrId
@@ -97,7 +79,7 @@
 		,mgr_boss_name as mgrBossName
 		,mgr_open_date as mgrOpenDate
 		from manager
-		where mgr_id = #{mgrId} and mgr_pw = #{mgrPw}
+		where mgr_id = #{mgrId} and mgr_pw = #{mgrPw} and mgr_status != 3
 	</select>
 	<update id="mgrUpdate" parameterType="mgr">
 		update manager set mgr_status = #{mgrStatus} where mgr_name = #{mgrName}
@@ -141,58 +123,6 @@
 	    (select rownum as rnum, m.* from (select * from manager where mgr_addr like '%'||#{text}||'%' order by mgr_no) m)
 	    where rnum between #{firstPage} and #{lastPage}
 	</select>	
-	<!-- <select id="selectStatus" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
-		select mgr_no as mgrNo
-		,mgr_id as mgrId
-		,mgr_pw as mgrPw
-		,mgr_name as mgrName
-		,mgr_tel as mgrTel
-		,mgr_post as mgrPost
-		,mgr_addr as mgrAddr
-		,mgr_level as mgrLevel
-		,mgr_status as mgrStatus
-		,mgr_enroll_date as mgrEnrollDate
-		,mgr_addr_code as mgrAddrCode
-		,mgr_boss_name as mgrBossName
-		,mgr_open_date as mgrOpenDate
-		from
-	     (select rownum as rnum, m.* from (select * from manager where mgr_status = #{status} order by mgr_no) m)
-	      where rnum between #{firstPage} and #{lastPage}
-	</select>
-	<select id="searchStatusAddr" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
-		select mgr_no as mgrNo
-		,mgr_id as mgrId
-		,mgr_pw as mgrPw
-		,mgr_name as mgrName
-		,mgr_tel as mgrTel
-		,mgr_post as mgrPost
-		,mgr_addr as mgrAddr
-		,mgr_level as mgrLevel
-		,mgr_status as mgrStatus
-		,mgr_enroll_date as mgrEnrollDate
-		,mgr_addr_code as mgrAddrCode
-		,mgr_boss_name as mgrBossName
-		,mgr_open_date as mgrOpenDate
-		from manager
-		where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status}
-	</select>
-	<select id="searchStatusName" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
-		select mgr_no as mgrNo
-		,mgr_id as mgrId
-		,mgr_pw as mgrPw
-		,mgr_name as mgrName
-		,mgr_tel as mgrTel
-		,mgr_post as mgrPost
-		,mgr_addr as mgrAddr
-		,mgr_level as mgrLevel
-		,mgr_status as mgrStatus
-		,mgr_enroll_date as mgrEnrollDate
-		,mgr_addr_code as mgrAddrCode
-		,mgr_boss_name as mgrBossName
-		,mgr_open_date as mgrOpenDate
-		from manager
-		where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status}
-	</select> -->
 	<select id="searchStore" parameterType="string" resultType="mgr">
 		select
 		,mgr_no as mgrNo
@@ -210,24 +140,6 @@
 		,mgr_open_date as mgrOpenDate
 		from manager where mgr_addr like '%'||#{keyword}||'%' or mgr_name like '%'||#{keyword}||'%'
 	</select>
-<!-- 	<select id="pageMore" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
-	   select mgr_no as mgrNo
-	      ,mgr_id as mgrId
-	      ,mgr_pw as mgrPw
-	      ,mgr_name as mgrName
-	      ,mgr_tel as mgrTel
-	      ,mgr_post as mgrPost
-	      ,mgr_addr as mgrAddr
-	      ,mgr_level as mgrLevel
-	      ,mgr_status as mgrStatus
-	      ,mgr_enroll_date as mgrEnrollDate
-	      ,mgr_addr_code as mgrAddrCode
-	      ,mgr_boss_name as mgrBossName
-	      ,mgr_open_date as mgrOpenDate        
-	      from 
-	        (select rownum as rnum, m.* from (select * from manager order by mgr_no) m)
-	      where rnum between #{firstPage} and #{lastPage}
-   </select> -->
    <select id="totalCount" resultType="_int">
    		select count(*) from manager
    </select>
@@ -237,118 +149,6 @@
 	       select count(*)      
 	      from manager where mgr_addr like #{keyword} or mgr_name like #{keyword}
    </select>
- <!--  
-   <select id="addrTotalCount" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="_int">
-   		select count(*)      
-	      from manager where mgr_addr = #{text}
-   </select>
-   <select id="nameTotalCount" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="_int">
-   		select count(*)      
-	      from manager where mgr_boss_name = #{text}
-   </select>
-   <select id="statusTotalCount" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="_int">
-   		select count(*)      
-	      from manager where mgr_status = #{status}
-   </select>
-   <select id="addrStatusTotalCount" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="_int">
-   		select count(*)      
-	      from manager where mgr_status = #{status} and mgr_addr = #{text}
-   </select>
-   <select id="nameStatusTotalCount" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="_int">
-   		select count(*)      
-	      from manager where mgr_status = #{status} and mgr_boss_name = #{text}
-   </select>
-
-	<select id="addrMore" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
-	  	 select mgr_no as mgrNo
-	      ,mgr_id as mgrId
-	      ,mgr_pw as mgrPw
-	      ,mgr_name as mgrName
-	      ,mgr_tel as mgrTel
-	      ,mgr_post as mgrPost
-	      ,mgr_addr as mgrAddr
-	      ,mgr_level as mgrLevel
-	      ,mgr_status as mgrStatus
-	      ,mgr_enroll_date as mgrEnrollDate
-	      ,mgr_addr_code as mgrAddrCode
-	      ,mgr_boss_name as mgrBossName
-	      ,mgr_open_date as mgrOpenDate        
-	      from 
-	        (select rownum as rnum, m.* from (select * from manager where mgr_addr = #{text} order by mgr_no) m)
-	      where rnum between #{firstPage} and #{lastPage}
-   </select>
-   	<select id="nameMore" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
-	  	 select mgr_no as mgrNo
-	      ,mgr_id as mgrId
-	      ,mgr_pw as mgrPw
-	      ,mgr_name as mgrName
-	      ,mgr_tel as mgrTel
-	      ,mgr_post as mgrPost
-	      ,mgr_addr as mgrAddr
-	      ,mgr_level as mgrLevel
-	      ,mgr_status as mgrStatus
-	      ,mgr_enroll_date as mgrEnrollDate
-	      ,mgr_addr_code as mgrAddrCode
-	      ,mgr_boss_name as mgrBossName
-	      ,mgr_open_date as mgrOpenDate        
-	      from 
-	        (select rownum as rnum, m.* from (select * from manager where mgr_boss_name = #{text} order by mgr_no) m)
-	      where rnum between #{firstPage} and #{lastPage}
-   </select>
-   	<select id="statusMore" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
-	  	 select mgr_no as mgrNo
-	      ,mgr_id as mgrId
-	      ,mgr_pw as mgrPw
-	      ,mgr_name as mgrName
-	      ,mgr_tel as mgrTel
-	      ,mgr_post as mgrPost
-	      ,mgr_addr as mgrAddr
-	      ,mgr_level as mgrLevel
-	      ,mgr_status as mgrStatus
-	      ,mgr_enroll_date as mgrEnrollDate
-	      ,mgr_addr_code as mgrAddrCode
-	      ,mgr_boss_name as mgrBossName
-	      ,mgr_open_date as mgrOpenDate        
-	      from 
-	        (select rownum as rnum, m.* from (select * from manager where mgr_status = #{status} order by mgr_no order by mgr_no) m)
-	      where rnum between #{firstPage} and #{lastPage}
-   </select>
-   	<select id="selectSearchStatusName" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
-	  	 select mgr_no as mgrNo
-	      ,mgr_id as mgrId
-	      ,mgr_pw as mgrPw
-	      ,mgr_name as mgrName
-	      ,mgr_tel as mgrTel
-	      ,mgr_post as mgrPost
-	      ,mgr_addr as mgrAddr
-	      ,mgr_level as mgrLevel
-	      ,mgr_status as mgrStatus
-	      ,mgr_enroll_date as mgrEnrollDate
-	      ,mgr_addr_code as mgrAddrCode
-	      ,mgr_boss_name as mgrBossName
-	      ,mgr_open_date as mgrOpenDate        
-	      from 
-	        (select rownum as rnum, m.* from (select * from manager where mgr_boss_name = #{text} and mgr_status = #{status} order by mgr_no) m)
-	      where rnum between #{firstPage} and #{lastPage}
-   </select>
-   	<select id="selectSearchStatusAddr" parameterType="kr.co.subway.manager.vo.MgrPageData" resultType="mgr">
-	  	 select mgr_no as mgrNo
-	      ,mgr_id as mgrId
-	      ,mgr_pw as mgrPw
-	      ,mgr_name as mgrName
-	      ,mgr_tel as mgrTel
-	      ,mgr_post as mgrPost
-	      ,mgr_addr as mgrAddr
-	      ,mgr_level as mgrLevel
-	      ,mgr_status as mgrStatus
-	      ,mgr_enroll_date as mgrEnrollDate
-	      ,mgr_addr_code as mgrAddrCode
-	      ,mgr_boss_name as mgrBossName
-	      ,mgr_open_date as mgrOpenDate        
-	      from 
-	        (select rownum as rnum, m.* from (select * from manager where mgr_addr = #{text} and mgr_status = #{status}) m)
-	      where rnum between #{firstPage} and #{lastPage}
-   </select> -->
    <select id="mgrPaging" parameterType="mpb" resultType="mgr">
    		select rnum
    		  ,mgr_no as mgrNo
@@ -414,7 +214,7 @@
 	      ,mgr_open_date as mgrOpenDate  
 	  	  from 
 	   	  (select rownum as rnum, m.* from (select * from manager 
-	   	<if test="status == '-1'">
+	   	<if test="status == '-1' and !text.equals('')">
    			<if test="keyword.equals('주소')">
 	   			where mgr_addr like '%'||#{text}||'%' and mgr_level = 0 
 	   		</if>
@@ -422,22 +222,18 @@
 	   			where mgr_boss_name like '%'||#{text}||'%' and mgr_level = 0 
 	   		</if>
    		</if>
-   		<if test="status != '-1'">
-	   		<choose>
-	   			<when test="text.equals('')">
-			   		where mgr_status = #{status} and mgr_level = 0 
-	   			</when>
-	   			<otherwise>
-			   		<if test="keyword.equals('주소')">
-			   			where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
-			   		</if>
-		   			<if test="keyword.equals('이름')">
-			   			where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
-			   		</if>
-	   			</otherwise>
-	   		</choose>
-   		</if>
-	   	 order by mgr_no) m)
+  		<if test="status != '-1' and !text.equals('')">
+	   		<if test="keyword.equals('주소')">
+	   			where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
+	   		</if>
+   			<if test="keyword.equals('이름')">
+	   			where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
+	   		</if>
+  		</if>
+  		<if test="text.equals('') and status != '-1'">
+	   		where mgr_status = #{status} and mgr_level = 0 
+  		</if>
+   	 	order by mgr_no) m)
 		<if test="start!=0">
 			where rnum between #{start} and #{end}
 		</if>
