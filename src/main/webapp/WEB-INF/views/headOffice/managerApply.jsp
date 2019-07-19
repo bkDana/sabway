@@ -7,6 +7,9 @@
 <title>가맹점 신청</title>
 </head>
 <style>
+	.comm-tbl th,.comm-tbl td{
+		text-align: center;
+	}
 	.pageNavi{
 		color:black;
 		text-align:center;
@@ -62,7 +65,7 @@
 			</c:if>
 			<c:if test="${pd.totalCount <= 0 }">
 				<tr>
-					<td colspan="6" style="text-align:center;font-size:15px;">신청 목록이 없습니다.</td>
+					<td colspan="6" style="font-size:15px;">신청 목록이 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>

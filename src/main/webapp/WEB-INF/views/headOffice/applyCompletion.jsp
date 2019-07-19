@@ -7,6 +7,9 @@
 <title>가맹점 신청</title>
 </head>
 <style>
+	.comm-tbl th,.comm-tbl td{
+		text-align: center;
+	}
 	.pageNavi{
 		color:black;
 		text-align:center;
