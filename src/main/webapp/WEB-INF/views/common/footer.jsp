@@ -34,20 +34,20 @@
 	        <!-- util menu -->
 	        <div class="util_menu">
 	            <ul>
-	                <li><a href="/agreement">이용약관</a></li>
-	                <li><a href="/privacy"><strong>개인정보취급방침</strong></a></li>
-	                <li><a href="https://store.subway.co.kr/" target="_blank">점주관리자</a></li><!-- 20180202 추가 -->
+	                <li><a href="#">이용약관</a></li>
+	                <li><a href="#"><strong>개인정보취급방침</strong></a></li>
+	                <li><a href="https://store.subway.co.kr/" target="_blank">점주관리자</a></li>
 	                <li><a class="eng" href="http://www.global.subway.com" target="_blank">Subway Listens</a></li>
 	            </ul>
 	        </div>
 	        <!--// util menu -->
 			<div class="area clearfix">
 		        <div style="float:left;">
-			        <span class="addr">서울시 서초구 강남대로 535 프린스빌딩 15층</span>
-			        <span class="rep">대표 : 콜린클락</span>
-			        <span class="tel">전화 : 02-797-5036</span>
-					<span class="rep">사업자등록번호 : 101-84-04143</span>
-			        <p class="copyright">SUBWAY® is a Registered Trademark of Subway IP Inc.© 2018 Subway IP Inc.All Rights Reserved.</p>
+			        <span class="addr">서울특별시 영등포구 양평동 이레빌딩 구관 19층 A Class</span>
+			        <span class="rep">대표 : 김정엄</span>
+			        <span class="tel">전화 : 010-5193-0177</span>
+					<span class="rep">팀원 : 배지영, 박보경, 장수용, 조성일, 김동민</span>
+			        <p class="copyright">SABWAY® is a Registered Trademark of Sabway IP Inc.© 2019 Sabway IP Inc.All Rights Reserved.</p>
 				</div>
 				<div style="float:right; padding-top:10px;">
 					<a class="sns_area instagram" href="https://www.instagram.com/subwaykorea" target="_blank">instagram</a>

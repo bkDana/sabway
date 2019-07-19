@@ -126,14 +126,12 @@
 							</div>
 							<div class="pd_agree">
 								<h3>개인정보 위탁동의</h3>
-											<!-- 20180131 -->
 								<div class="scroll_wrapper mCustomScrollbar _mCS_2"><div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0" style="max-height: none;"><div id="mCSB_2_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
 									개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.<br><br>
 									회사는 개인정보 취급방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.<br><br>
 									 ο 본 방침은 : 2018 년 1 월 31 일 부터 시행됩니다.<br><br>
 									써브웨이인터내셔날 비브이는 (이하 '회사'는) 고객님의 개인정보 를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.
 								</div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; display: block; height: 150px; max-height: 140px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
-								<!--// 20180131 -->
 								<!-- checkbox -->
 								<label class="form_checkbox">
 									<input name="agree2" type="checkbox">
@@ -278,8 +276,6 @@
 						<div class="btns_wrapper">
 							<button type="reset" class="btn bgc_white" style="width:126px;"><span>취소</span></button>
 							<button type="submit" onclick="return check();" class="btn bgc_point i_reg" style="width:170px;"><span>등록하기</span></button>
-							<!-- <a class="btn bgc_white" href="#" onclick="view.cancel();return false;" style="width:126px;"><span>취소</span></a>
-							<a class="btn bgc_point i_reg" href="#" onclick="view.save();return false;" style="width:170px;"><span>등록하기</span></a> -->
 						</div>
 					</form>
 				</div>
