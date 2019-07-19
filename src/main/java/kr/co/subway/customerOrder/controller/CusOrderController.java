@@ -108,6 +108,14 @@ public class CusOrderController {
 		}
 
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx);
+		//'나만의 메뉴'에 추가된 항목인지 검사
+		for(int i = 0; i<list.size(); i++) {
+			Bucket b = list.get(i);
+			int bucIdx = b.getBucIdx();
+			boolean isOnMM = cusOrderService.checkMM(bucIdx);
+			b.setBucChkMM(isOnMM);
+
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -307,6 +315,19 @@ public class CusOrderController {
 			System.out.println("나만의메뉴 삭제 성공");
 		}else{
 			System.out.println("나만의메뉴 삭제실패");
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/hideFromBucketList.do")
+	public void hideFromBucketList(HttpServletResponse response, @RequestParam String delIdx) {
+		int idx = Integer.parseInt(delIdx);
+		int result = cusOrderService.hideFromBucketList(idx);
+		
+		if(result>0) {
+			System.out.println("감추기 성공");
+		}else{
+			System.out.println("감추기 실패");
 		}
 	}
 }

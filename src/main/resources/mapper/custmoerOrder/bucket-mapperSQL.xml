@@ -52,7 +52,7 @@
  		join 
  			manager m
  		on
- 			b.buc_branch =m.mgr_no
+ 			b.buc_branch =m.mgr_name
  		where
  			b.buc_customer_idx = #{bucCustomerIdx}
  		and
@@ -114,4 +114,12 @@
  		where
  			m.mm_buc_idx = #{mmBucIdx}
 	</select>
+	<update id="hideFromBList" parameterType="_int">
+		update
+			bucket
+		set
+			buc_cuso_order_no = 1
+		where
+			buc_idx = #{bucIdx}		
+	</update>
 </mapper>

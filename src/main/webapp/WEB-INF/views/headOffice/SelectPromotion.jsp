@@ -25,33 +25,12 @@
 	    margin: 4px;
 	    cursor: pointer;
 	}
-	#searchOrder{
-		height:36px;
-		width:100px;
-		margin-left: 10.6%;
-	    text-align: center;
-	}
-	#searchBtn{
-		background-color: gray;
-		width:50px;
-	    border: none;
-	    color:#fff;
-	    padding: 5px 0;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 15px;
-	    margin: 4px;
-	    cursor: pointer;
-	    height: 35px;
-	}
-	#keyword {
-		-webkit-box-shadow: 0 0 0 1000px white inset;
-		outline-style: none;
-		width:250px;
-		height:30px;
-		font-size:20px;
-	}
+	/* form ::: search */
+   .form_searchM {border:2px solid #dddddd; height:41px;width:15%; display:block; vertical-align:middle; position:relative; padding-right:42px; }
+   .form_searchM input{border:0; height:41px; width:100%; text-indent:14px; color:#292929; font-size:16px;}
+   .form_searchM input::placeholder{color:#bbbbbb; font-size:16px;font-family:font_ns, sans-serif;}
+   .form_searchM .btn_searchM{background:url(http://subway.co.kr/images/common/icon_search.png) 50% 50% no-repeat; width:41px; height:41px; position:absolute; right:0; top:0;}
+   .form_searchM .btn_searchM:after{content:''; position:absolute; left:-2px; top:13px; width:2px; height:16px; background-color:#e5e5e5;}
 </style>
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
@@ -61,55 +40,64 @@
 			※ 메뉴관리 > 이벤트 / 할인<br>
 			<button type="button" id="mainLink">메인으로</button>
 		</div>
-		<div class="common-tbl-box">
-			<h1 class="comm-content-tit">프로모션</h1>
-			<select id="searchOrder">
+		<h1 class="comm-content-tit">프로모션</h1>
+		<div class="board-search-box">
+			<select name="statusGroup">
 				<option>상품명</option>
 			</select>
-			<input type="text" id="keyword" placeholder="">
-			<button type="button" id="searchBtn">검색</button>
-			<br><br>
-			<table class="comm-tbl" style="max-width: 1200px;">
+			<input type="text" maxlength="30" placeholder="상품 검색" value="${text }"style="height:34px; padding-left:5px;">
+			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button>
+		</div>
+		<table class="comm-tbl" style="max-width: 100%;">
+			<tr>
+				<td>No.</td>
+				<td>상품명</td>
+				<td>15cm</td>
+				<td>30cm</td>
+				<th>행사</th>
+				<td>할인 후 가격</td>
+			</tr>
+			<c:forEach items="${pd.list }" var="ingre" varStatus="i">
+				<input type="hidden" value="${ingre.ingreType }">
+				<input type="hidden" value="${ingre.ingreIdx }">
+				<c:if test="${ingre.ingreType == '메인재료'}">
+					<tr>
+						<td><span>${ingre.rnum }</span></td>
+						<td><span>${ingre.ingreLabel }</span></td>
+						<td><span>${ingre.ingreCost15 }</span></td>
+						<td><span>${ingre.ingreCost30 }</span></td>
+						<td>
+							<!-- 선택한 promotion으로 DB update -->
+							<select name="ingreDiscntRate"><!-- 상품 할인 유/무 & 할인율 선택 -->
+								<option selected="selected" disabled="disabled">
+									<c:choose>
+										<c:when test="${ingre.ingreDiscntRate != 0 }">${ingre.ingreDiscntRate }% 할인</c:when>
+										<c:otherwise>할인선택</c:otherwise>
+									</c:choose>
+								</option>
+								<option value=1.0>적용안함</option>
+								<option value=0.9>10% 할인</option>
+								<option value=0.8>20% 할인</option>
+								<option value=0.7>30% 할인</option>
+							</select>
+						</td>
+						<td>
+							<span></span>
+						</td>
+					</tr>
+				</c:if>
+			</c:forEach>
+			<c:if test="${pd.totalCount <= 0 }">
 				<tr>
-					<td>No.</td>
-					<td>상품명</td>
-					<td>15cm</td>
-					<td>30cm</td>
-					<th>행사</th>
-					<td>할인 후 가격</td>
+					<td colspan="9">검색 결과가 없습니다.</td>
 				</tr>
-				<c:forEach items="${pd.list }" var="ingre" varStatus="i">
-					<input type="hidden" value="${ingre.ingreType }">
-					<input type="hidden" value="${ingre.ingreIdx }">
-					<c:if test="${ingre.ingreType == '메인재료'}">
- 						<tr>
- 							<td><span>${ingre.rnum }</span></td>
-							<td><span>${ingre.ingreLabel }</span></td>
- 							<td><span>${ingre.ingreCost15 }</span></td>
- 							<td><span>${ingre.ingreCost30 }</span></td>
- 							<td>
-								<!-- 선택한 promotion으로 DB update -->
-								<select name="ingreDiscntRate"><!-- 상품 할인 유/무 & 할인율 선택 -->
-									<option selected="selected" disabled="disabled">
-										<c:choose>
-											<c:when test="${ingre.ingreDiscntRate != 0 }">${ingre.ingreDiscntRate }% 할인</c:when>
-											<c:otherwise>할인선택</c:otherwise>
-										</c:choose>
-									</option>
-									<option value=1.0>적용안함</option>
-									<option value=0.9>10% 할인</option>
-									<option value=0.8>20% 할인</option>
-									<option value=0.7>30% 할인</option>
-								</select>
-							</td>
- 							<td>
- 								<span></span>
- 							</td>
-						</tr>
-					</c:if>
-				</c:forEach>
-			</table>
-			<div class="pageNavi">${pd.pageNavi }</div>
+			</c:if>
+		</table>
+		<c:if test="${pd.totalCount <= 0 }">
+			<div class="pageNavi">1</div>
+		</c:if>
+		<div class="pageNavi">
+			${pd.pageNavi }
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -142,8 +130,8 @@
 		location.href="/admin.do";
 	});
 	//상품명 검색 리스트 가져오기
-	$("#searchBtn").click(function(){
-		var keyword = $("#keyword").val();
+	$("[name=searchBtn]").click(function(){
+		var keyword = $(this).prev().val();
 		location.href="/searchPromotion.do?currentPage=''"+"&keyword="+keyword;
 	});
 	</script>
