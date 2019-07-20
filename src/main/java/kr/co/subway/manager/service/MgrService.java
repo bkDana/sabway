@@ -40,7 +40,7 @@ public class MgrService {
 	public StorePageNaviData StoreSelectPaging(int currentPage){
 		String pageNavi = "";
 		int numPerPage = 10; // 출력될 개시판 개수
-		int pageNaviSize = 5; // 하단 페이징 노출 수
+		int pageNaviSize = 10; // 하단 페이징 노출 수
 		
 		int totalCount = mgrdao.storeTotalCount();
 		
@@ -56,19 +56,23 @@ public class MgrService {
 		
 		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage != 1) {
-			pageNavi += "<a href='/findStore.do?status=22"+"&currentPage="+(currentPage-1)+"'>이전</a>";
+			pageNavi += "<a href='/findStore.do?status=22"+"&currentPage="+(currentPage-1)+"'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
+		}else{//2019-07-21 디자인 통일하려고 변경 (지영)
+			pageNavi += "<a><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
 			if(currentPage == pageNo) {
-				pageNavi += "<span>"+pageNo+"</span>";
+				pageNavi += "<span class='cur'>"+pageNo+"</span>";//2019-07-21 디자인 통일하려고 변경 (지영)
 			}else {
 				pageNavi += "<a href='/findStore.do?status=22"+"&currentPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		if(currentPage < totalPage) {
-			pageNavi +="<a href='/findStore.do?status=22"+"&currentPage="+(currentPage+1)+"'>다음</a>";
+			pageNavi +="<a href='/findStore.do?status=22"+"&currentPage="+(currentPage+1)+"'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
+		}else{//2019-07-21 디자인 통일하려고 변경 (지영)
+			pageNavi +="<a><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		
 		return new StorePageNaviData(storeList,pageNavi);
@@ -79,7 +83,7 @@ public class MgrService {
 			System.out.println(keyword);
 			String pageNavi = "";
 			int numPerPage = 10; // 출력될 개시판 개수
-			int pageNaviSize = 5; // 하단 페이징 노출 수
+			int pageNaviSize = 10; // 하단 페이징 노출 수
 			
 			int totalCount = mgrdao.allStoreTotalCount(keyword);
 			System.out.println("갯수:"+totalCount);
@@ -93,20 +97,25 @@ public class MgrService {
 			ArrayList<Mgr> storeList = (ArrayList<Mgr>)mgrdao.storeSelectPaging(pb);
 			
 			int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
-			if(pageNo != 1) {
-				pageNavi += "<a onclick='applyArea(\""+area+"\",\""+(pageNo-1)+"\","+type+");'>이전</a>";
+			if(currentPage != 1) {
+				pageNavi += "<a href='javascript:applyArea(\""+area+"\",\""+(currentPage-1)+"\","+type+");'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
+			}else{//2019-07-21 디자인 통일하려고 변경 (지영)
+				pageNavi += "<a><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
 			}
+			
 			int i = 1;
 			while(!(i++>pageNaviSize || pageNo>totalPage)) {
 				if(currentPage == pageNo) {
-					pageNavi += "<span>"+pageNo+"</span>";
+					pageNavi += "<span class='cur'>"+pageNo+"</span>";//2019-07-21 디자인 통일하려고 변경 (지영)
 				}else {
 					pageNavi += "<a href='javascript:applyArea(\""+area+"\",\""+pageNo+"\","+type+");'>"+pageNo+"</a>";
 				}
 				pageNo++;
 			}
-			if(pageNo < totalPage) {
-				pageNavi +="<a onclick='applyArea("+area+","+(pageNo+1)+"\","+type+")'>다음</a>";
+			if(currentPage < totalPage) {
+				pageNavi +="<a href='javascript:applyArea(\""+area+"\",\""+(currentPage+1)+"\","+type+");'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
+			}else{//2019-07-21 디자인 통일하려고 변경 (지영)
+				pageNavi +="<a><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 			}
 			
 			return new StorePageNaviData(storeList,pageNavi);

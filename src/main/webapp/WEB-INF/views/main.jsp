@@ -103,7 +103,7 @@ $(document).ready(function(){
 <div class="main_wrapper" id="container">
 	<div class="main_tap_event_wrapper">
 		<div class="bx-wrapper" style="max-width:100%;">
-			<img src="/resources/img/main_event.jpg">
+			<a href="/noticeOne.do?noticeNo=41"><img src="/resources/img/main_event.jpg" height="440px" width="100%" style="min-width:1500px;"></a>
 		</div>
 		<!-- 매장찾기, 가맹신첨 문의 -->
 		<div class="quick_link">

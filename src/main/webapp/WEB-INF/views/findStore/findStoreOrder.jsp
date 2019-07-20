@@ -237,15 +237,15 @@
 </script>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
 
 <!-- Map -->
 
 <section id="content-wrapper" style="height: 100%; background-color:#fff;padding-top:50px;">
-<h1 class="board-tit">주문할 매장 찾기</h1>
    	<div class="store_search_wrapper" style="position:relative;">
    	
       <div class="store_search_layer" style="position:absolute; top:75px;">
-         <h2>매장찾기</h2>
+         <h2>주문할 매장찾기</h2>
           <!-- 검색 -->
          <div class="form_search">
 			<input id="keyword" name="keyword" maxlength="30" placeholder="지역 또는 매장명 입력" type="text" value=""  onkeypress="if(event.keyCode == 13){ searchBtnOrder(); return; }">
@@ -285,7 +285,7 @@
 	<div class="store_map" style="width:100%;height:700px;">
 		<jsp:include page="/WEB-INF/views/map/map2.jsp" />
 	</div>
-	</section>
+</section>
 
 <%-- Footer --%>
-<jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

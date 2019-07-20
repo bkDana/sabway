@@ -57,12 +57,12 @@
 	.new_store_content .new_store_slider_wrapper .store_list li .region{text-align:center; color:#292929; font-size:18px; padding-top:32px;}
 	.new_store_content .new_store_slider_wrapper .store_list li .region strong{font-weight:bold; color:#292929; font-size:22px; text-align:center; display:block; margin-top:12px;}
 	.new_store_content .new_store_slider_wrapper .store_list li .state{height:50px; position:absolute; left:0; width:100%; bottom:0; text-align:center; line-height:50px; font-weight:bold; font-size:18px;  font-family:font_sw;}
-	.new_store_content .new_store_slider_wrapper .store_list li .state:after{content:''; width:12px; height:7px; background:url(../images/subway/icon_store_arr.png) 0 0 no-repeat; position:absolute; left:50%; top:0; margin-left:-6px;}
+	.new_store_content .new_store_slider_wrapper .store_list li .state:after{content:''; width:12px; height:7px; position:absolute; left:50%; top:0; margin-left:-6px;}
 	.new_store_content .new_store_slider_wrapper .store_list li .state.coming{background-color:#ffce32; color:#009223;}
 	.new_store_content .new_store_slider_wrapper .store_list li .state.open{background-color:#009223; color:#ffce32;}
 	.new_store_content .new_store_slider_wrapper .store_list li .state.open strong{color:#fff;}
 	
-	.new_store_content .new_store_slider_wrapper .bx-wrapper .bx-controls-direction a{width:50px; height:50px; background:url(../images/news/icon_event_slider_arr.png) no-repeat; position:absolute; top:50%; margin-top:-25px; overflow:hidden; font-size:0; line-height:0px; text-indent:-9999px;}
+	.new_store_content .new_store_slider_wrapper .bx-wrapper .bx-controls-direction a{width:50px; height:50px; position:absolute; top:50%; margin-top:-25px; overflow:hidden; font-size:0; line-height:0px; text-indent:-9999px;}
 	.new_store_content .new_store_slider_wrapper .bx-wrapper .bx-controls-direction .bx-prev{background-position:0 0; left:-105px;}
 	.new_store_content .new_store_slider_wrapper .bx-wrapper .bx-controls-direction .bx-prev:hover{background-position:0 100%}
 	.new_store_content .new_store_slider_wrapper .bx-wrapper .bx-controls-direction .bx-next{background-position:100% 0; right:-105px}

@@ -58,16 +58,40 @@
 		</li>
 	</ul>
 </nav>
-<%}else{ %>
+<%}else if(pname[6].equals("franchise.jsp")||pname[6].equals("applyWrite.jsp")){ %>
+<nav id="sub" class="basic-sub">
+	<div id="subBg"></div>
+	<ul class="clearfix">
+		<li style="min-width: 150px;">
+			<a href="/franchise.do" class="<%if(pname[6].equals("franchise.jsp")){ %>on<%}%>">싸브웨이 프랜차이즈</a>
+		</li>
+		<li style="min-width: 150px;">
+			<a href="/applyPage.do" class="<%if(pname[6].equals("applyWrite.jsp")){ %>on<%}%>">가맹신청/문의 </a>
+		</li>
+	</ul>
+</nav>
+<%}else if(pname[6].equals("findStore.jsp")){ %>
 <nav id="sub" class="basic-sub">
 	<div id="subBg"></div>
 	<ul class="clearfix">
 		<li>
-			<a href="/franchise.do" class="<%if(pname[6].equals("franchise.jsp")){ %>on<%}%>">싸브웨이 프랜차이즈</a>
+			<a href="/findStore.do?status=22" class="<%if(pname[6].equals("findStore.jsp")){ %>on<%}%>">매장찾기</a>
 		</li>
+	</ul>
+</nav>
+<%}else if(pname[6].equals("findStoreOrder.jsp")||pname[6].equals("horizentalOrder.jsp")){ %>
+<nav id="sub" class="basic-sub">
+	<div id="subBg"></div>
+	<ul class="clearfix">
 		<li>
-			<a href="/applyPage.do?currentPage=" class="<%if(pname[6].equals("applyWrite.jsp")){ %>on<%}%>">가맹신청/문의 </a>
+			<a href="/findStore.do?status=11" class="<%if(pname[6].equals("findStoreOrder.jsp")||pname[6].equals("horizentalOrder.jsp")){ %>on<%}%>">온라인 주문</a>
 		</li>
+	</ul>
+</nav>
+<%}else{ %>
+<nav id="sub" class="extra-sub">
+	<div id="subBg"></div>
+	<ul class="clearfix">
 	</ul>
 </nav>
 <%} %>

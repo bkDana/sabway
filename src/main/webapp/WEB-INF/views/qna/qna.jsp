@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
-
-
 <jsp:include page="/WEB-INF/views/common/sub.jsp" />
+
+<script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
 
 <%-- Content --%>
 <section id="content-wrapper" style="background-color: #fff;">
