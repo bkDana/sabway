@@ -15,17 +15,17 @@
 		<!-- <div class="common-tbl-box"> -->
 			<table class="comm-tbl board">
 			<colgroup>
-				<col width="15%">
+				<col width="10%">
 				<col width="15%">
 				<col width="/">
 				<col width="15%">
 			</colgroup>
 			
 				<tr>
-					<th>번호</th>
-					<th>작성자</th>
-					<th>제목</th>
-					<th>작성일</th>
+					<td>번호</td>
+					<td>작성자</td>
+					<td>제목</td>
+					<td>작성일</td>
 				</tr>
 				
 			<c:forEach items="${reviewList}" var="review">
@@ -38,9 +38,12 @@
 			</c:forEach>
 			
 			</table>
-			<div class="common-tbl-btn-group">
-				<button class="btn-style2 insert-review">리뷰 작성하기</button>
-			</div>
+			
+			<c:if test="${not empty sessionScope.customer }">
+				<div class="common-tbl-btn-group">
+					<button class="btn-style2 insert-review">리뷰 작성하기</button>
+				</div>
+			</c:if>
 			<%-- <c:if test="${sessionScope.customer.customerId eq 'admin' }">
 				<div class="common-tbl-btn-group">
 					<button class="btn-style2 insert-notice">공지사항 작성하기</button>

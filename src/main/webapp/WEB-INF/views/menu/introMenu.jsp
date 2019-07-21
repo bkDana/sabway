@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- Header --%>
 
+<%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <jsp:include page="/WEB-INF/views/common/sub.jsp" />
-<%-- Content --%>
 
+<%-- Content --%>
 <img src="/resources/img/img_visual_sandwich.jpg" class="sub-img">
 <div class="sub-menu-title">
 	<c:if test='${param.no eq 1 }'>
@@ -36,11 +36,9 @@
 	</c:if>
 </div>
 
-
-
 <section id="content-wrapper" style="background-color:#f6f6f6;">
-	
 	<div class="area" >
+		<!-- '신선한 재료' 메뉴에서만 하위 메뉴 나옴 -->
 		<c:if test='${param.no >= 5 }'>
 			<div class="second-menu">
 				<ul class="clearfix">
@@ -61,17 +59,9 @@
 		</c:if>
 		
 		<ul class="menu-list clearfix">
-			<!-- <li>
-				<span class="new">NEW</span>
-				<span>
-					<img src="/resources/img/sandwich.png" width="150px" height="150px"><br>
-				</span>
-				<span class="label">쉬림프</span>
-				<span class="kcal">235kcal</span>
-			</li> -->
 			<c:forEach items="${list }" var="ingre">
 				<li>
-					<span class="new">NEW</span>
+					<span class="etc">NEW</span>
 					<span>
 						<c:if test="${empty ingre.ingreFilepath }">
 							<img src="/resources/img/sandwich.png" width="150px" height="150px"><br>

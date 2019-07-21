@@ -11,8 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/reset.css"> <!-- 태그 초기화 css(민주) -->
 <link rel="stylesheet" type="text/css" href="/resources/css/manager-layout.css"> <!-- 레이아웃 css(민주) -->
 <link rel="stylesheet" type="text/css" href="/resources/css/manager-content.css"> <!-- 컨텐츠 css(민주) -->
-
-<link href="/resources/css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 
 <!-- script -->
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
@@ -47,40 +46,18 @@
 					<ul class="clearfix">
 						<li class="gnb01">
 							<a href="/allCustomerList.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("allCustomerList.jsp")){%>on<%}%>">회원관리</a>
-							<div class="gnb-2dep">
-								<ul>
-									<li><a href="#">회원 리스트</a></li>
-								</ul>
-							</div>
 						</li>
 						<li class="gnb02">
 							<a href="/managerList.do?currentPage=''">매장관리</a>
-							<div class="gnb-2dep">
-								<ul>
-									<li><a href="/managerList.do?currentPage=''">가맹점 리스트</a></li>
-									<li><a href="/mgrEnroll.do">가맹점 회원 등록</a></li>
-									<li><a href="/managerApply.do?currentPage=''">가맹점 신청 리스트</a></li>
-								</ul>
-							</div>
 						</li>
 						<li class="gnb03">
 							<a href="/ingreManage/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")){%>on<%}%>">재료관리</a>
-							<div class="gnb-2dep">
-								<ul>
-									<li><a href="#">재료 리스트</a></li>
-								</ul>
-							</div>
 						</li>
 						<li class="gnb04">
-							<a href="/managerOrder/orderList.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){%>on<%}%>">재고관리</a>
+							<a href="/managerOrder/orderList.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){%>on<%}%>">재고관리</a>
 						</li>
 						<li class="gnb05">
 							<a href="/cusOrderList.do?currentPage=''">주문관리</a>
-							<div class="gnb-2dep">
-								<ul>
-									<li><a href="/cusOrderList.do?currentPage=''">주문 리스트</a></li>
-								</ul>
-							</div>
 						</li>
 						<li class="gnb06">
 							<a href="/board/boardList.do?type=notice" class="<%if(request.getRequestURL().toString().split("/")[6].equals("board")){%>on<%}%>">게시판관리</a>

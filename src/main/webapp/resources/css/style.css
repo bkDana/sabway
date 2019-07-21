@@ -84,6 +84,7 @@ input[type=checkbox]{width: 15px;height: 15px;}
 .menu-list > li{position:relative; float: left;margin:20px 20px; width:370px; height:330px; background-color: #fff;}
 .menu-list > li span{display: inline-block; width: 100%; text-align: center; margin:5px 0;}
 .menu-list > li span.new{background-color: #ffc300; width: 70px; height:33px; color: #fff; line-height: 30px; font-weight: bold;font-size: 13px; margin-left: 0;}
+.menu-list > li span.etc{width: 70px; height:33px; color: #fff; line-height: 30px; font-weight: bold;font-size: 13px; margin-left: 0;}
 .menu-list > li img{width: 270px; height: 189px;}
 .menu-list > li span.tit, .menu-list > li span.desc{position:relative; margin-top:30px; opacity:0; transition:margin-top 0.4s, opacity 0.4s;}
 .menu-list > li span.label, .menu-list > li span.tit{line-height: 20px;font-size: 22px; color: #292929; font-weight: bold;}
