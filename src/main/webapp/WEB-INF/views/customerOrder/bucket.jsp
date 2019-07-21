@@ -26,7 +26,7 @@
 				<input type="hidden" class="hiddenKcal" value="${bucket.bucKcal }">
 				<input type="hidden" class="hiddenQuantity" value="${bucket.bucQuantity }">
 				<input type="hidden" class="hiddenChkMM" value="${bucket.bucChkMM }">
-				<form action="/insertMyMenu.do" class="myMenu" method="post">
+				<form action="/insertMyMenu.do" class="myMenuInsert" method="post">
 					<input type="hidden" class="hiddenBucIdx" name="mmBucIdx" value="${bucket.bucIdx }">
 					<input type="hidden" class="hiddenBucCustomerIdx" name="mmCustomerNo" value="${bucket.bucCustomerIdx }">	 				
 					<input type="hidden" class="hiddenMain" name="mmMenuLabel" value="${bucket.bucMain } ${bucket.bucIsSalad }">

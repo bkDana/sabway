@@ -3,7 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+<jsp:include page="/WEB-INF/views/common/sub.jsp" /><!-- 서브메뉴 추가했습니다 -->
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
 	<div class="area">
@@ -53,7 +53,7 @@
 						<td>수령 완료</td>
 					</c:if>
 					<c:if test="${cusOrder.cusoOrderState == 0}">
-						<td>접수 전</td>
+						<td>접수 전<br><a href="/cancelOrder.do">취소하기</a></td>
 					</c:if>
 					<c:if test="${cusOrder.cusoOrderState == -1}">
 						<td>취소된 주문</td>

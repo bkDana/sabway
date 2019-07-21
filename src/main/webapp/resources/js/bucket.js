@@ -449,10 +449,11 @@ $(document).ready(function(){
     });
     $('.insertMyMenu').click(function(){
     	var itemIndex = $('.insertMyMenu').index(this);
-    	
+    	console.log(itemIndex);
+    	console.log($('.hiddenMain').eq(itemIndex).val()+$('.hiddenBucIdx').eq(itemIndex).val());
     	var createMenu = confirm("선택하신 메뉴를 나만의 메뉴로 만드시겠습니까?");
     	if(createMenu) {
-    		var form = $(".myMenu")[itemIndex];
+    		var form = $(".myMenuInsert")[itemIndex];
     		var data = new FormData(form);
     		console.log(data);
             $.ajax({
@@ -512,6 +513,42 @@ $(document).ready(function(){
 			}
 		});
 	});
+    
+
+    /* 나만의메뉴 팝업 */
+    function popup() {
+    	window.name="searchParent";
+		var url = "loadSearchStorePopup.do";
+		var name = "searchChild";
+		var option="width=300, height=500, top=200, left=350, location=no"
+		openWin = window.open(url, name, option);
+	}
+    
+    $('.orderMyMenu').click(function(){
+    	var i = $('.orderMyMenu').index(this);
+    	$('.cost').val($('.hiddenCost').eq(i).val());
+    	$('[name=cusoTotalCost]').val($('.hiddenCost').eq(i).val());
+    	$('.customerIdx').val($('.hiddenBucCustomerIdx').eq(i).val());
+    	$('.bread').val($('.hiddenBread').eq(i).val());
+    	$('.main').val($('.hiddenMain').eq(i).val());
+    	$('.vegi').val($('.hiddenVegi').eq(i).val());
+    	$('.cheese').val($('.hiddencheese').eq(i).val());
+    	$('.topping').val($('.hiddenTopping').eq(i).val());
+    	$('.source').val($('.hiddenSource').eq(i).val());
+    	$('.isSalad').val($('.hiddenIsSalad').eq(i).val());
+    	$('.isOvened').val($('.hiddenIsOvened').eq(i).val());
+    	$('.set').val($('.hiddenSet').eq(i).val());
+    	$('.side').val($('.hiddenSide').eq(i).val());
+    	$('.kcal').val($('.hiddenKcal').eq(i).val());
+    	$('.quantity').val($('.hiddenQuantity').eq(i).val());
+
+    	popup();
+    	var option="width=600, height=500, top=50, left=650, location=no"
+    	cldwin = window.open("loadSearchStorePopup.do","searchChild",option);	
+    	
+    	cldwin.focus();
+    });
+
 });
 
 

@@ -90,6 +90,7 @@
 	<!-- myMenu 조인연산해서 구체적정보 갖고옴 -->
 	<select id="loadMyMenu" parameterType="kr.co.subway.customerOrder.vo.MyMenu" resultType="bucket">
 		select
+			b.buc_customer_idx as bucCustomerIdx,
 			b.buc_idx as bucIdx,
 			b.buc_bread as bucBread,
  			b.buc_main as bucMain,
