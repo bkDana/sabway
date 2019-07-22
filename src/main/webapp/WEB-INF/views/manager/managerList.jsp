@@ -154,11 +154,7 @@
 	</div> 
 </section>
 <script type="text/javascript">
-	$(document).ready(function()
-		$('[name=selectKeyword]').change(function(){
-			$(this).attr("selected","selected");
-		});
-	
+	$(document).ready(function(){
 		//상태변경(오픈)
 		$(".onBtn").click(function(){
 			var mgrStatus = $(this).val();
