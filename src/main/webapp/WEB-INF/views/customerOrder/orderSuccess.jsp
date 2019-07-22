@@ -15,7 +15,7 @@
 		<c:if test="${sessionScope.customer eq null }">
 			<h1>주문번호는 ${tempCuso.cusoCallBy }입니다</h1>
 		</c:if>
-			<a href="/main.jsp">메인 페이지로 돌아가기</a>
+			<a href="/toMain.do">메인 페이지로 돌아가기</a>
 	</div>
 </section>
 
