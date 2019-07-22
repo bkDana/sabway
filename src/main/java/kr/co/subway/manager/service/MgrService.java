@@ -75,7 +75,7 @@ public class MgrService {
 			pageNavi +="<a><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		
-		return new StorePageNaviData(storeList,pageNavi);
+		return new StorePageNaviData(storeList,pageNavi, totalCount);
 	}
 	// 전체매장 select 필터 검색 페이징
 	@SuppressWarnings("unchecked")
@@ -118,7 +118,7 @@ public class MgrService {
 				pageNavi +="<a><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 			}
 			
-			return new StorePageNaviData(storeList,pageNavi);
+			return new StorePageNaviData(storeList,pageNavi, totalCount);
 		}
 	//신규가맹점 목록
 	public List<Mgr> newStoreList() {

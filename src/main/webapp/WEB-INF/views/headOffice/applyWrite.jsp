@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
+*:focus{outline:none;}
 #content-wrapper1{padding:100px 0; background-color:#fff;}
 .area1{ max-width:1900px; margin:0px auto; }
 /* 문의 ::: 가맹신청문의, 1:1문의 */
@@ -21,8 +22,8 @@
 .inquiry_wrapper .pd_agree_wrapper .pd_agree:first-child{margin-right:48px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree h3{color:#666666; font-size:18px; font-weight:300; letter-spacing:-0.05em; padding-bottom:19px;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper{border:2px solid #e5e5e5; height:150px; padding:13px 0 13px 17px; overflow:auto; color:#bbbbbb; font-size:13px; line-height:21px; margin-bottom:14px;}
-.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_inside>.mCSB_container{margin-right:17px;}
-.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_inside>.mCSB_container:focus{outline:none;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_inside > .mCSB_container{margin-right:17px;}
+.inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_inside > .mCSB_container:focus{outline:none !important;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_scrollTools .mCSB_draggerRail{opacity:0 !important;}
 .inquiry_wrapper .pd_agree_wrapper .pd_agree .scroll_wrapper .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{width:5px !important; background-color:#dddddd !important;}
 .inquiry_wrapper .form_select{margin-right:7px;}
@@ -100,7 +101,7 @@
 						<div class="pd_agree_wrapper">
 							<div class="pd_agree">
 								<h3>개인정보 수집 및 이용동의</h3>
-								<div class="scroll_wrapper mCustomScrollbar _mCS_1"><div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0"><div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+								<div class="scroll_wrapper mCustomScrollbar _mCS_1"><div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0"><div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0; left:0; outline:none;" dir="ltr">
 									'서브웨이인터내셔날 비브이' 의 광고를 담당하는 써브웨이 프랜차이즈 광고 기금 트러스트는 (이하 '회사') 는 문의 및 가맹신청 신청 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.<br><br>
 									ο 수집항목<br>
 									필수항목 : 이름, 이메일, 연락처<br>
@@ -153,7 +154,7 @@
 										<th scope="col"><label for="applyName">이름</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%;">
-												<input class="inputBox short" type="text" id="applyName" name="applyName" maxlength="16" placeholder="이름을 입력해주세요">
+												<input class="inputBox short" type="text" id="applyName" name="applyName" placeholder="이름을 입력해주세요">
 											</span>
 										</td>
 									</tr>
@@ -161,7 +162,7 @@
 										<th scope="col"><label for="applyPhone">연락처</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%;">
-												<input class="inputBox" type="text" id="applyPhone" name="applyPhone" maxlength="16" placeholder="연락 가능한 전화번호를 입력해주세요">
+												<input class="inputBox" type="text" id="applyPhone" name="applyPhone" placeholder="연락 가능한 전화번호를 입력해주세요">
 											</span>
 										</td>
 									</tr>
@@ -169,11 +170,11 @@
 										<th scope="col"><label for="email">E-Mail</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:200px;">
-												<input class="inputBox" type="text" id="applyEmail" name="applyEmail" maxlength="20" placeholder="이메일"><!--   style="width:50%" -->
+												<input class="inputBox" type="text" id="applyEmail" name="applyEmail" placeholder="이메일"><!--   style="width:50%" -->
 											</span>
 											<span class="em">@</span>
 											<span class="form_text" style="width:200px;">
-												<input type="text" id="applyEmail2" name="applyEmail2" maxlength="20">
+												<input type="text" id="applyEmail2" name="applyEmail2">
 											</span>
 											<div class="form_select" style="width:196px; margin-left:7px;">
 												<select name="emailEx" id="emailEx">
@@ -229,7 +230,7 @@
 										<th scope="col"><label for="applyTitle">제목</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input class="inputBox" type="text" id="applyTitle" name="applyTitle" maxlength="16" placeholder="제목을 입력해주세요">
+												<input class="inputBox" type="text" id="applyTitle" name="applyTitle" placeholder="제목을 입력해주세요">
 											</span>
 										</td>
 									</tr>
@@ -237,7 +238,7 @@
 										<th scope="col"><label for="applyContent">내용</label><span class="ess"></span></th>
 										<td>
 											<span class="form_textarea" style="width:100%">
-												<textarea class="inputBox" name="applyContent" id="applyContent" cols="5" maxlength="500" rows="10" style="height:230px;"></textarea>
+												<textarea class="inputBox" name="applyContent" id="applyContent" cols="5" rows="10" style="height:230px;"></textarea>
 											</span>
 										</td>
 									</tr>
@@ -254,16 +255,6 @@
 									</tr>
 								</tbody>
 							</table>
-
-							<div class="agree_info">
-								<p>신청·문의사항에 대한 답변은 메일로 발송됩니다.  동의하시겠습니까?</p>
-								<!-- checkbox -->
-								<label class="form_checkbox">
-									<input name="agree3" type="checkbox">
-									<span class="icon"></span>예, 동의합니다.
-								</label>
-								<!--// checkbox -->
-							</div>
 
 							<div class="inquiry_notice">
 								<ul>
@@ -352,11 +343,6 @@ function check(){
 	      alert("내용을 작성해주세요.")
 	      return false;
 	   }
-	  if(!$("input:checkbox[name=agree3]").is(":checked")) {
-		alert("신청·문의사항에 대한 답변은 메일 발송에 따른 동의가 필요합니다.");
-		$("input:checkbox[name=agree3]").focus();
-			return false;
-	  }
 }
 //첨부파일 표시
 function formFile(obj){// 첨부파일
