@@ -20,32 +20,37 @@
 			</if>
   	</select>
   	<select id="oneCusOrderList" parameterType="String" resultType="cuso">
-  		select 
-		    cusoIdx
-		    ,cusoOrderState
-		    ,cusoTotalCost
-		    ,cusoOrderNo
-		    ,cusoBranch
-		    ,cusoOrderDate
-		from    
-		    (
-		    select 
-		        rownum rnum,
-		        cuso_idx as cusoIdx
-		        ,cuso_order_state as cusoOrderState
-		        ,cuso_total_cost as cusoTotalCost
-		        ,cuso_order_no as cusoOrderNo
-		        ,cuso_branch as cusoBranch
-		        ,cuso_order_date as cusoOrderDate
-		    from 
-		        cusorder
-		    where
-		        cuso_member_no = #{cusoMemberNo}
-		    order by
-		    	rnum desc    
-		    )
-		where
-		    rnum between 1 and 10
+  	select * from
+	(
+    select 
+        rownum rnum
+        ,cusoIdx
+        ,cusoOrderState
+        ,cusoTotalCost
+        ,cusoOrderNo
+        ,cusoBranch
+        ,cusoOrderDate
+    from    
+        (
+        select 
+            rownum ,
+            cuso_idx as cusoIdx
+            ,cuso_order_state as cusoOrderState
+            ,cuso_total_cost as cusoTotalCost
+            ,cuso_order_no as cusoOrderNo
+            ,cuso_branch as cusoBranch
+            ,cuso_order_date as cusoOrderDate
+        from 
+            cusorder
+        where
+            cuso_member_no = #{cusoMemberNo}
+        order by
+            cusoidx desc
+        )
+ 	)       
+    where
+        rnum between 1 and 10
+  		
   	</select>
 	<insert id="insertCuso" parameterType="cuso">
   		insert into
