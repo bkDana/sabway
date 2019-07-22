@@ -34,7 +34,7 @@
 	var setCookie = function setCookie(){
 		var cookieDate = new Date();
 		var date = cookieDate.getFullYear()+''+(cookieDate.getMonth()+1)+''+cookieDate.getDate()+''+cookieDate.getHours()+''+cookieDate.getMinutes()+''+cookieDate.getSeconds();
-		document.cookie = "noneCustomer="+date;
+		document.cookie = "sabwayNoneCustomer="+date;
 	}
 	
 	
