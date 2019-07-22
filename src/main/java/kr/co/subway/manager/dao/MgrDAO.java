@@ -81,4 +81,8 @@ public class MgrDAO {
 	public List<Mgr> searchKeyword(MgrPageBound pb){
 		return session.selectList("mgr.searchKeyword",pb);
 	}
+	//id체크
+	public Mgr idChk(String mgrId) {
+		return session.selectOne("mgr.idChk", mgrId);
+	}
 }
