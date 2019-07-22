@@ -205,6 +205,7 @@
 </style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
 
 <!-- Map -->
 <section id="content-wrapper" style="height: 133%">
@@ -304,7 +305,7 @@
 <div class="area">
 	<div class="sub-menu" style="font-size: 30px">전체매장</div>
 	
-		<p class="search_total">총 <strong id="uiResultCount">${totalCnt}</strong>개 매장이 있습니다.</p>
+		<p class="search_total">총 <strong id="uiResultCount" style="color:#009223;">${totalCnt}</strong>개 매장이 있습니다.</p>
 		
 		<div class="cont_right">
 			<div class="form_select" style="width:196px;">
@@ -333,8 +334,8 @@
 			</div>
 		</div>
 		
-	<table border="1" name="subMenu" class="comm-tbl type2" id="searchViewTbl">
-		<tr style="height:60px" class="searchList">
+	<table border="1" name="subMenu" class="comm-tbl type3" id="searchViewTbl">
+		<tr style="height:60px;" class="searchList">
 			<th>NO</th>
 			<th>매장명</th>
 			<th>매장주소</th>
@@ -403,14 +404,15 @@
 				$(".searchTr").remove();
 				$(".searchList").next().text("");
 				
-					var index = data.storeList.length;
-					console.log(index);
-					if(index == 0){
-						$("#storeTr").remove();
-						$("#uiResultCount").text(index);
-						$("#searchViewTbl").append("<tr id='storeTr'><td colspan='5'>검색 결과가 없습니다.</td></tr>");
-						return;
-					}
+				var index = data.storeList.length;
+				console.log(index);
+				if(index == 0){
+					$("#storeTr").remove();
+					$("#uiResultCount").text(index);
+					$("#searchViewTbl").append("<tr id='storeTr'><td colspan='5'>검색 결과가 없습니다.</td></tr>");
+					return;
+				}
+				
 				for(var i=0; i<data.storeList.length; i++){
 					$("#searchViewTbl").append("<tr style='height:60px' class='searchTr'><td style='color:#ffc300;font-weight: bold;'id='search"+i+"'>"+data.storeList[i].rnum+"</td><td>"+data.storeList[i].mgrName+"</td><td>"+data.storeList[i].mgrAddr+"</td><td>"+data.storeList[i].mgrBossName+"</td><td style='color:#bbbbbb'>"+data.storeList[i].mgrTel+"</td></tr>");
 					$("#uiResultCount").text(index);
@@ -425,15 +427,15 @@
 	
 	$(document).ready(function(){
 		$("#applyArea").change(function(){
-// 			var area1 = $(this).val();
+
 			var area = $(this).val();
-// 			var area2 = $("#applyArea2").val();
-			applyArea(area,'1',1);
-// 			applyArea(area1,area2,'1',1);
+
+			applyArea(area,1,1);
+
 		})
 		
 		$("#applyArea2").change(function(){
-// 			var area1 = $("#applyArea").val();
+
 			var area = $(this).val();
 			applyArea(area,1,2);
 		})
@@ -820,7 +822,15 @@
 		 	}
 		
 		})
-	})
+	});
+	
+	/* 다음 페이지로 넘어갈 때 테이블로 포커스 고정 */
+	/* 2019-07-21  (지영) */
+	var curr = '${param.currentPage}';
+	if(curr!=''){
+		$('div.cont_right')[0].scrollIntoView();
+	}
 </script>
+
 <%-- Footer --%>
-<jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -6,10 +6,10 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
 <script type="text/javascript" src="/resources/js/bucket.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
 <%-- content --%>
 <section id="content-wrapper">
 	<div class="area">
-
 		<strong style="font-size:40px;">내 주문 </strong>
 		<br><br>
 		<c:forEach items="${list }" var="bucket" varStatus="status">
@@ -26,7 +26,7 @@
 				<input type="hidden" class="hiddenKcal" value="${bucket.bucKcal }">
 				<input type="hidden" class="hiddenQuantity" value="${bucket.bucQuantity }">
 				<input type="hidden" class="hiddenChkMM" value="${bucket.bucChkMM }">
-				<form action="/insertMyMenu.do" class="myMenu" method="post">
+				<form action="/insertMyMenu.do" class="myMenuInsert" method="post">
 					<input type="hidden" class="hiddenBucIdx" name="mmBucIdx" value="${bucket.bucIdx }">
 					<input type="hidden" class="hiddenBucCustomerIdx" name="mmCustomerNo" value="${bucket.bucCustomerIdx }">	 				
 					<input type="hidden" class="hiddenMain" name="mmMenuLabel" value="${bucket.bucMain } ${bucket.bucIsSalad }">
@@ -40,7 +40,7 @@
 				
 				<c:if test="${status.index eq 0 }">
 					<div class="hiddenOrder">
-						<form action="/insertItem.do" method="post">
+						<form action="/insertOrder.do" method="post">
 							<input type="hidden" name="cusoTotalCost" value="">
 							<input type="hidden" name="cusoPhone" value="">
 							<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
@@ -74,7 +74,7 @@
 						<span id="side"></span>
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
-				<td><span class="cost">${bucket.bucCost }</span>원</td>
+				<td><span class="cost">${bucket.bucCost * bucket.bucQuantity }</span>원</td>
 				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">나만의 메뉴 만들기</button></td>
 				<td><button type="button" class="deleteBucket" style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
 			</tr>

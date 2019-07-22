@@ -32,7 +32,7 @@
 			<c:forEach items="${noticeList}" var="notice">
 				<tr class="normal">
 					<%-- <td>${notice.noticeCategory }</td> --%>
-					<td> <!-- style="display:none;" -->${notice.noticeNo }</td>
+					<td><!-- style="display:none;" -->${notice.noticeNo }</td>
 					<td class="move-one-notice">${notice.noticeTitle }</td>
 					<td>${notice.noticeDate }</td>
 				</tr>
@@ -41,7 +41,7 @@
 			</table>
 			<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
 				<div class="common-tbl-btn-group">
-					<button class="btn-style2 insert-notice">공지사항 작성하기</button>
+					<button class="btn-style2 insert-notice">작성하기</button>
 				</div>
 			</c:if>
 			<div class="paging">${pageNavi }</div>

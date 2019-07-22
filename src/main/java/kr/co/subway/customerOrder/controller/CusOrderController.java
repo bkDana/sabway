@@ -71,6 +71,19 @@ public class CusOrderController {
 			System.out.println("임시저장 실패");
 		}
 	}
+	@RequestMapping("/insertBucFromMyMenu")
+	public String insertBucFromMM(String branchName, String cost, String cNo, String bread, String main, String vegi, String cheese, String topping, 
+			String source, String isSalad, String isOvened, String set, String side, String kcal, String quantity ) {
+		System.out.println("cost:"+cost+" / kcal:"+kcal+" / quantity:"+quantity );
+		Bucket b = new Bucket(0, cNo, "0", bread, main, vegi, cheese, source, topping, side, isSalad, isOvened, set, Integer.parseInt(cost), 0.0, Integer.parseInt(kcal), Integer.parseInt(quantity), null, branchName, true);
+		int result = cusOrderService.tempOrderInsert(b);
+		if(result>0) {
+			System.out.println("임시저장 성공");
+		}else{
+			System.out.println("임시저장 실패");
+		}
+		return "redirect:/loadBucket.do";
+	}
 	@ResponseBody
 	@RequestMapping("/tempOrderDelete.do")
 	public void tempOrderDelete(HttpServletResponse response, @RequestParam String delIdx){
@@ -126,7 +139,7 @@ public class CusOrderController {
 	}
 	
 	//주문정보, 버킷에 주문번호 추가하는 메소드
-	@RequestMapping("/insertItem.do")
+	@RequestMapping("/insertOrder.do")
 	public ModelAndView insertItem(HttpServletRequest request, String cusoOrderState, String cusoTotalCost,
 			String cusoPhone, String cusoMemberNo, String cusoCallBy, String cusoOrderNo, String cusoBranchName) {
 		ModelAndView mav = new ModelAndView();
@@ -187,12 +200,10 @@ public class CusOrderController {
 
 		ArrayList<CusOrder> orderList = cusOrderService.loadOrderList(customerIdx); // customerIdx = cusoMemberNo
 		
-		if(!orderList.isEmpty()) {
-			mav.addObject("list",orderList);
-			mav.setViewName("customerOrder/oneCusOrder");
-		}else {
-			mav.setViewName("/");
-		}
+
+		mav.addObject("list",orderList);
+		mav.setViewName("customerOrder/oneCusOrder");
+
 		return mav; 
 	}
 	
@@ -201,6 +212,7 @@ public class CusOrderController {
 	@RequestMapping("/insertMyMenu.do")
 	public void insertMyMenu(HttpServletResponse response, MyMenu mm) {
 		mm.setMmIdx(0);
+		System.out.println(mm.getMmCustomerNo());
 		System.out.println(mm.getMmMenuLabel());
 		System.out.println(mm.getMmBucIdx());
 		int result = cusOrderService.insertMyMenu(mm);
@@ -273,9 +285,12 @@ public class CusOrderController {
 			currentPage1 = 1;
 		}
 		CusOrderPageData pd = cusOrderService.checkedCusoOrderList(currentPage1,cusoMemberNo,mgr);
+		//view의 checkbox 순서 - 전체보기 : eq(0), 회원 : eq(1), 비회원 : eq(2)
+		//db상 비회원은 0으로 설정, 처음에 값이 없어서 0이기 때문에 db값은 그대로 보내고 view에 전달하는 값에 +2해서 계산
+		int checkBoxNo = 2+Integer.parseInt(cusoMemberNo);
 		ModelAndView mav = new ModelAndView();
 		try {
-			mav.addObject("cusoMemberNo",cusoMemberNo);
+			mav.addObject("cusoMemberNo",checkBoxNo);
 			mav.addObject("pd",pd);
 			mav.setViewName("customerOrder/cusOrderList");
 		}catch(Exception e) {
@@ -338,5 +353,10 @@ public class CusOrderController {
 		}else{
 			System.out.println("감추기 실패");
 		}
+	}
+	
+	@RequestMapping("/loadSearchStorePopup.do")
+	public String loadSearchStorePopup() {
+		return "/customerOrder/searchStorePopup";
 	}
 }

@@ -229,4 +229,10 @@ public class HeadOfficeController {
 	}
 
 	
+	//프랜차이즈 설명 페이지 - 보경
+	@RequestMapping(value="/franchise.do")
+	public String franchise() {
+		return "headOffice/franchise";
+	}
+	
 }

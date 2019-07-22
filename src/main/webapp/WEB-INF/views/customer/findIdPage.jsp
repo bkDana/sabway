@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
+
 <section id="content-wrapper">
 	<div class="area">
 		<form action="/findId.do" method="post">
@@ -44,4 +46,4 @@
 	</div>
 </section>
 <%-- Footer --%>
-<jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

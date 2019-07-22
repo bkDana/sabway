@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/formwizard.css?after" />
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
 <script src="/resources/js/formwizard.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
 
@@ -31,7 +32,7 @@ var myform=new formtowizard({
 <%-- content--%>
 <section id="content-wrapper" style="background-color: #fff;">
 	<div class="area">	
-	<h1 class="comm-content-tit-small">온라인 예약 주문</h1>
+	<h1 class="board-tit">온라인 예약 주문</h1>
 	<p class="sub-title">${mgr.mgrName }</p>
 		<form id="feedbackform" name="feedbackform" method="post">
 			<div class="common-tbl-box show-order-box">
