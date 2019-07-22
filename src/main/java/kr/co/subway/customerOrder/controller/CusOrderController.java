@@ -118,7 +118,7 @@ public class CusOrderController {
 		} else {
 			Cookie[]getCookie = request.getCookies();
 			for(int i = 0; i<getCookie.length; i++) {
-				System.out.println(getCookie[i].getValue());
+				System.out.println(getCookie[i].getName() +" "+  getCookie[i].getValue());
 				if(getCookie[i].getName().equals("sabwayNoneCustomer")) {
 					customerIdx = getCookie[i].getValue();
 				}
