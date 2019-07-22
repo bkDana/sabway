@@ -83,7 +83,7 @@
 				<td colspan="7">
 					<div class="common-tbl-btn-group">
 						<strong style="float:left;">* '나만의 메뉴'를 등록하시면 이후 옵션 선택없이 빠른 주문이 가능합니다</strong><br>
-						<strong style="float:left;">* '나만의 메뉴'와 같은 내용 및 옵션의 메뉴는 추가되지 않습니다</strong><br>
+						
 						<!-- <button type="submit" id="sbmTest" class="btn-style2">컨트롤러테스트</button> -->
 						<button type="submit" id="sbmOrder" class="btn-style2">주문하기</button>
 					</div>
