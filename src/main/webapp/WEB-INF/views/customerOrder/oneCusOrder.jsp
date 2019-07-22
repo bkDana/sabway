@@ -53,7 +53,7 @@
 						<td>수령 완료</td>
 					</c:if>
 					<c:if test="${cusOrder.cusoOrderState == 0}">
-						<td>접수 전<br><a href="/cancelOrder.do">취소하기</a></td>
+						<td>접수 전</td>
 					</c:if>
 					<c:if test="${cusOrder.cusoOrderState == -1}">
 						<td>취소된 주문</td>
