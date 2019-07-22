@@ -53,8 +53,17 @@
 				</c:if>
 			</div>
 		</c:forEach>
-			
+				
 		<table class="comm-tbl type2">
+			<colgroup>
+				<col width="5%">
+				<col width="15%">
+				<col width="30%">
+				<col width="5%">
+				<col width="8%">
+				<col width="10%">
+				<col width="8%">
+			</colgroup>
 			<tr>
 				<th>담은 날짜</th><th>지점명</th><th>메뉴</th><th>수량</th><th>가격</th><th>나만의 메뉴</th><th>상품삭제</th>
 			</tr>

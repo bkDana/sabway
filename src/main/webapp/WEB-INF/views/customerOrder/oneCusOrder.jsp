@@ -18,10 +18,10 @@
 				<col width="10%">
 				<col width="8%">
 				<col width="6%">
-				<col width="11%">
+				<col width="8%">
 			</colgroup>	
 			<tr>
-				<th>No.</th><th>금액</th><th>주문번호</th><th>지점명</th><th>주문 날짜</th><th>상태</th>
+				<th>No.</th><th>금액</th><th>주문번호</th><th>지점명</th><th>주문 날짜</th><th>상태 <span style="font-size:10px;">*'접수 전'에만 취소 가능합니다</span></th>
 			</tr>
 			<c:forEach items="${list }" var="cusOrder" varStatus="i">
 				<input type="hidden" name="cusoIdx" value="${cusOrder.cusoIdx }">
@@ -53,7 +53,7 @@
 						<td>수령 완료</td>
 					</c:if>
 					<c:if test="${cusOrder.cusoOrderState == 0}">
-						<td>접수 전</td>
+						<td>접수 전 &ensp;&ensp;&ensp;&ensp;<a href="/cancelOrder.do" style="color:red;">주문취소</a></td>
 					</c:if>
 					<c:if test="${cusOrder.cusoOrderState == -1}">
 						<td>취소된 주문</td>

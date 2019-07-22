@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-	//$(".step").eq(0).trigger("click");
+	$(".step").eq(0).trigger("click");
 //	var innerHtml = getCookie("cookieHtml");
 //	console.log(innerHtml);
 //	$('.show-order').eq(addStatus).html(innerHtml);
@@ -20,6 +20,7 @@ $(document).ready(function() {
 	var breadCheck=0;
 	var typeIdx = 0;
 	var canMoveBucket = 0;
+	var orderComplete = false;
 	
 	function delay(gap){ /* gap is in millisecs */ 
 	  var then,now; 
@@ -31,6 +32,10 @@ $(document).ready(function() {
 	} 
 	
 	$('.prev-btn').click(function(){
+		if(orderComplete){
+			alert("추가주문을 원하시면 추가주문버튼을 눌러주세요");
+			return;
+		}
 		var stepIdx = $('.prev-btn').index(this);
 		if((stepIdx)==1 && typeIdx==2){
 			$(".step").eq(0).trigger("click");
@@ -742,21 +747,40 @@ $(document).ready(function() {
 			}
 		}
 	});
-	
+	var recomIdx = 0;
 	$('.source-recom').click(function(){
 		var sauceStr = $('#recom-sauce').val();
 		var arrSauce = sauceStr.split(',');
 		console.log(arrSauce);
 		for(var i=0; i<$('.source').length;i++){
 			for(var k=0; k<arrSauce.length; k++){
-				if($('.source').eq(i).find('p').text()===arrSauce[k]){
+				if($('.source').eq(i).find('p').text()===arrSauce[k] && recomIdx==0){
 					console.log("k도냐"+k);
 					$('.source').eq(i).unbind("mouseleave");
 					$('.source').eq(i).find('img').css("display","none");
 					$('.source').eq(i).find('p').css("display","block");
 					$('.source').eq(i).find('button').css("display","block");
 					$('.source').eq(i).css("background-color","#009223");
-					$('.source').eq(i).toggleClass("selected");
+					$('.source').eq(i).addClass("selected");
+					if(k==arrSauce.length-1){
+						recomIdx = 1;
+					}
+					
+				}else if($('.source').eq(i).find('p').text()===arrSauce[k] && recomIdx==1){
+					$('.source').eq(i).removeClass("selected");
+					$('.source').eq(i).find('img').css("display","block");
+					$('.source').eq(i).find('p').css("display","none");
+					$('.source').eq(i).find('button').css("display","none");
+					$('.source').eq(i).css("background-color","#fff");
+					$('.source').eq(i).bind("mouseleave",function(){
+						$(this).find('img').css("display","block");
+						$(this).find('p').css("display","none");
+						$(this).find('button').css("display","none");
+						$(this).css("background-color","#fff");
+					});
+					if(k==arrSauce.length-1){
+						recomIdx = 0;
+					}
 				}
 			}
 		}
@@ -904,7 +928,7 @@ $(document).ready(function() {
 
 	$('.order-check').click(function(){
 		if(canAdd==1){
-			alert("추가주문을 원하시면 아래 버튼을 눌러주세요.")
+			alert("추가주문을 원하시면 추가주문버튼을 눌러주세요");
 			return;
 		}
 		
@@ -978,7 +1002,6 @@ $(document).ready(function() {
 //                alert("error");
 //            },
             success : function(data){
-                alert(data);
                 var orderCheckStr = "";
                 canMoveBucket = 1;
                 orderCheckStr += "<td><button class='quantityChange type1' type='button' onclick='quantityChange(0,this);'>-</button>&nbsp;&nbsp;&nbsp;<span>"
@@ -989,6 +1012,7 @@ $(document).ready(function() {
         		console.log(orderCheckStr);
         		$('.show-order').eq(addStatus).append(orderCheckStr);
         		canAdd=1;
+        		orderComplete = true;
         		totalCost += cost;
         		check = true;
         		$('.show-total-cost').eq(0).text("Total : "+totalCost+" 원");
@@ -1060,6 +1084,7 @@ $(document).ready(function() {
 		}
     	canAdd=0;
     	check = false;
+    	orderComplete = false;
     	clearAllfn(0,0);
     	for(var i=0; i<13; i++){
 			$('.orderInput').eq(i).val("");				

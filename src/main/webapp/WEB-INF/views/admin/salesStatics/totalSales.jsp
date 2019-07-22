@@ -83,11 +83,13 @@
         			if(cost[i].cusoBranch=='total'){
         				console.log(cost[i]);
         				console.log(cost[i].orderMonth);
-        				if(Number(cost[i].orderMonth)==i){
+        				//if(Number(cost[i].orderMonth)==i){
+        					console.log("i: "+i);
         					//console.log(cost[i].totalCost);
         					arr.push(cost[i].totalCost);
         					month.push(cost[i].orderMonth+"월");
-        				}
+        				//}
+        				console.log(month);
         			}
 				}
 				//console.log(arr);
@@ -304,8 +306,16 @@
 				console.log(cost);
 				var money=0;
 				var arr = new Array();
-				if(cost.length>0){
+				if(cost.length>5){
 					for(var i=1;i<6;i++){
+						money += cost[i].totalCost;
+						console.log(i+"위 메뉴 매출 금액 : "+money);
+						arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})
+					}
+					var etc = cost[0].totalCost - money;
+				}
+				if(cost.length<6){
+					for(var i=1;i<cost.length;i++){
 						money += cost[i].totalCost;
 						console.log(i+"위 메뉴 매출 금액 : "+money);
 						arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})

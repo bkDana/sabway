@@ -14,7 +14,7 @@ $(document).ready(function(){
 		} 
 		if($('#sessionId').val() == "") {
 			console.log("비회원임");
-			$('.insertMyMenu').eq(i).html('회원만 선택가능합니다');
+			$('.insertMyMenu').eq(i).html('회원만<br>선택가능합니다');
 			$('.insertMyMenu').eq(i).css('color','grey').css('cursor','default').attr('disabled',true);
 		}
 
