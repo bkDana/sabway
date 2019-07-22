@@ -1,6 +1,7 @@
 //첨부파일 추가
 var rowIndex = 0;
 $(document).ready(function(){
+	
 	$('#testContent').keyup(function(event) {
 		if ( event.keyCode === 8 || event.keyCode === 46) {
 	    	for(var i=1;i<rowIndex+1; i++){
@@ -9,8 +10,9 @@ $(document).ready(function(){
 	    		}
 	    	}
 		}
-
+		
 	});
+	
 	$('#hashtag').keydown(function(event){
 		if (event.keyCode === 32) {
 			var string = $(this).val();

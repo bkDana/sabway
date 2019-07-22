@@ -46,7 +46,7 @@ public class SalesStaticsController {
 		String orderMonth = month.substring(0,month.length()-1);
 		System.out.println(orderMonth);
 		ArrayList<SalesStaticsGrpVo> list = service.monthTotalSales(orderMonth);
-		System.out.println(list.get(2).getCusoBranch());
+		//System.out.println(list.get(2).getCusoBranch());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(list,response.getWriter());

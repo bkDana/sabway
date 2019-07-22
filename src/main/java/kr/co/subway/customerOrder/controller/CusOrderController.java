@@ -123,7 +123,6 @@ public class CusOrderController {
 					customerIdx = getCookie[i].getValue();
 				}
 			}
-			
 			System.out.println("비회원 임시번호 " + customerIdx);
 		}
 
