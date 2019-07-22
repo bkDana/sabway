@@ -24,7 +24,8 @@
 #footer .content .sns_area.fackbook:hover:after{opacity:1}
 #footer .content .sns_area.instagram{/*right:105px;*/margin-right:5px; background:url(/resources/img/main/icon_sns_instar.png) 0 0 no-repeat;}
 #footer .content .sns_area.instagram:after{background:url(/resources/img/main/icon_sns_instar.png) 100% 0 no-repeat;}
-#footer .area1{text-align:left;}
+#footer .area2{text-align:left;}
+.area2{ max-width:1200px; margin:0px auto; } /* width 홈페이지 컨텐츠 가로값에 맞게 변경 */
 </style>
 <footer id="footer">
 	<!-- <div class="footer-inner area">
@@ -42,7 +43,7 @@
 	            </ul>
 	        </div>
 	        <!--// util menu -->
-			<div class="area1 clearfix">
+			<div class="area2 clearfix">
 		        <div style="float:left;">
 			        <span class="addr">서울특별시 영등포구 양평동 이레빌딩 구관 19층 A Class</span>
 			        <span class="rep">대표 : 김정엄</span>

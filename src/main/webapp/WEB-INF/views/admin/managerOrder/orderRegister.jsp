@@ -27,7 +27,7 @@
 					<col width="80%">
 				</colgroup>
 				<tr>
-					<th>희망 배송일</th><td><input type="text" name="mOrderDelDate" class="regMorder" readonly></td>
+					<th>희망 배송일</th><td><input type="text" name="mOrderDelDate" class="regMorder" readonly ></td>
 				</tr>
 				<tr>
 					<th>재료 선택</th>
@@ -130,7 +130,7 @@ function add(){
 		var cnt = $('#item_tbl tbody').children('tr').length+1;
 		var add = '';
 		add += '<tr><td><input type="hidden" name="idx_'+cnt+'" value="'+item_idx+'"><input type="text" name="name_'+cnt+'" class="short" value="'+item_name+'"readonly></td>';
-		add += '<td><input type="text" name="amount_'+cnt+'" class="short num"></td>';
+		add += '<td><input type="text" name="amount_'+cnt+'" class="short num" autocomplete="off"></td>';
 		add += '<td><button type="button" class="del-btn" onclick="remove(this);">삭제</button></td></tr>';
 		$('#item_tbl tbody').append(add);
 	}
