@@ -7,20 +7,32 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/formwizard.css?after" />
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
 <script src="/resources/js/formwizard.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
 
 <script type="text/javascript">
+var check = false;
+$(document).on("click", ".step", function(){
+	check= false;
+	/*로직
+	check=true;
+	*/
+	
+	alert(check);
+});
+
 var myform=new formtowizard({
 	formid: 'feedbackform',
 	persistsection: true,
 	revealfx: ['slide', 300]
 });
+
 </script>
 <%-- content--%>
 <section id="content-wrapper" style="background-color: #fff;">
 	<div class="area">	
-	<h1 class="comm-content-tit-small">온라인 예약 주문</h1>
+	<h1 class="board-tit">온라인 예약 주문</h1>
 	<p class="sub-title">${mgr.mgrName }</p>
 		<form id="feedbackform" name="feedbackform" method="post">
 			<div class="common-tbl-box show-order-box">
@@ -384,6 +396,8 @@ var myform=new formtowizard({
 					<div class="sidemenu img-box select-none fix-img" style="background-color:white; clear:both;" >
 						<img src="/resources/img/cancelyellow.png">
 						<p class="label">선택안함</p>
+						<input type="hidden" value="0">
+						<input type="hidden" value="0">
 					</div>
 					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 						<c:if test="${ingre.ingreType eq '사이드메뉴' and ingre.ingreActive eq '1' }">

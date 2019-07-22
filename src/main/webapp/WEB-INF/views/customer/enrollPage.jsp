@@ -1,15 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-</head>
-<style>
-</style>
-<body>
+<%-- Header --%>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
+
 <style>
 	.doubleChk{
 		height: 30px;
@@ -28,9 +22,8 @@
 	    margin-left: 5px;
 	}
 </style>
-<%-- Header --%>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	
+
+
 <section id="content-wrapper">
 	<div class="area">
 	<h1 class="comm-content-tit">회원가입</h1>
@@ -112,9 +105,6 @@
 	</div>
 </section>
 
-<%-- Footer --%>
-<jsp:include page="/WEB-INF/views/admin/common/footer.jsp" />
-</body>
 <script>
 
 // 이메일 인증
@@ -388,4 +378,6 @@
 	      }
 	}
 </script>
-</html>
+
+<%-- Footer --%>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

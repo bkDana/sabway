@@ -65,7 +65,7 @@
 			<label for="chk0"><input type="checkbox" id="chk0" class="chk" value="-2">전체회원</label>
 			<label for="chk1"><input type="checkbox" id="chk1" class="chk" value="-1">회원</label>
 			<label for="chk2"><input type="checkbox" id="chk2" class="chk" value="0">비회원</label>
-			&nbsp;&nbsp;&nbsp;
+			<br>
 			<select name="statusGroup">
 				<option>주문번호</option>
 			</select>

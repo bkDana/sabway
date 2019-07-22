@@ -3,7 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+<jsp:include page="/WEB-INF/views/common/sub.jsp" /><!-- 서브메뉴 추가했습니다 -->
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
 	<div class="area">

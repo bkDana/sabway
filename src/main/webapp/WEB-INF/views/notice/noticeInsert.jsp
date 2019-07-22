@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
 
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
+		<h1 class="board-tit">공지사항/이벤트</h1>
 		<div class="common-tbl-box">
 		<form action="/noticeInsert.do" method="post" enctype="multipart/form-data">
 			<table class="comm-tbl">

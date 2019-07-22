@@ -22,13 +22,12 @@ input[type=checkbox]{width: 15px;height: 15px;}
 /* ****************** SUB MENU ********************** */
 .sub-img{width:100%; min-width:1300px; height:380px;}
 #subBg{display:none; width:100%; min-width:1300px; height:330px; background:#fff; z-index:99; }
-#sub{ width:100%; position:absolute; left:0; top:150px;z-index:95; border-bottom:1px solid rgba(255,255,255,0.1);}
-#sub > ul{text-align:center; }
+#sub{ width:100%; position:absolute; left:0; top:150px;z-index:95; }
+#sub > ul{text-align:center; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);}
 #sub > ul > li{position:relative; display:inline-block; min-width:120px; }
-#sub > ul > li > a{position:relative;  display:block; height:70px; line-height:70px; text-align:center; color:#fff; font-size:15px;z-index:100;}
+#sub > ul > li > a{position:relative;  display:block; height:60px; line-height:60px; text-align:center; color:#fff; font-size:15px;z-index:100;}
 #sub > ul > li > a:hover{color:#ffce32; border-bottom:4px solid #ffce32;}
 #sub > ul > li > a.on{color:#ffce32; border-bottom:4px solid #ffce32;}
-
 
 
 #sub.basic-sub > ul{text-align:center; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;}
@@ -36,6 +35,7 @@ input[type=checkbox]{width: 15px;height: 15px;}
 #sub.basic-sub > ul > li > a:hover{color:#009223; border-bottom:4px solid #009223;}
 #sub.basic-sub > ul > li > a.on{color:#009223; border-bottom:4px solid #009223;}
 
+#sub.extra-sub > ul{border-top: 1px solid #ccc;}
 
 .sub-menu-title{position:absolute;left:650px; top:270px; color:#fff; font-size:16px;  text-align: center; margin: 0 auto; min-width: 600px;}
 .sub-menu-title p:first-child{font-size:70px; font-weight:bolder;}
@@ -84,6 +84,7 @@ input[type=checkbox]{width: 15px;height: 15px;}
 .menu-list > li{position:relative; float: left;margin:20px 20px; width:370px; height:330px; background-color: #fff;}
 .menu-list > li span{display: inline-block; width: 100%; text-align: center; margin:5px 0;}
 .menu-list > li span.new{background-color: #ffc300; width: 70px; height:33px; color: #fff; line-height: 30px; font-weight: bold;font-size: 13px; margin-left: 0;}
+.menu-list > li span.etc{width: 70px; height:33px; color: #fff; line-height: 30px; font-weight: bold;font-size: 13px; margin-left: 0;}
 .menu-list > li img{width: 270px; height: 189px;}
 .menu-list > li span.tit, .menu-list > li span.desc{position:relative; margin-top:30px; opacity:0; transition:margin-top 0.4s, opacity 0.4s;}
 .menu-list > li span.label, .menu-list > li span.tit{line-height: 20px;font-size: 22px; color: #292929; font-weight: bold;}

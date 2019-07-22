@@ -73,15 +73,15 @@
 				<option id="close" value=3>폐업</option>
 			</select>&nbsp;
 			<select name="selectKeyword">
-				<option id="name">이름</option>
-				<option id="addr">주소</option>
+				<option id="name" value="이름">이름</option>
+				<option id="addr" value="주소">주소</option>
 			</select>&nbsp;
 			<input type="text" maxlength="30" placeholder="가맹점 검색" value="${text }"style="height:34px; padding-left:5px;">
 			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
 				<span id="slash">/</span>
-				<a href="/managerList.do?currentPage=''" id="allList">상품 전체보기</a>
+				<a href="/managerList.do?currentPage=''" id="allList">가맹점 전체보기</a>
 			</span>
 		</div>
 		<table class="comm-tbl" style="max-width:100%">
@@ -175,7 +175,7 @@
 		$("[name=searchBtn]").click(function(){
 			var keyword = $(this).prev().prev().val();
 			var text = $(this).prev().val();
-			var status1 = $(this).prev().prev().prev().val();			
+			var status1 = $(this).parent().children().eq(0).children().eq(0).val();
 			if(status1 == null){
 				var status1 = -1;
 			}

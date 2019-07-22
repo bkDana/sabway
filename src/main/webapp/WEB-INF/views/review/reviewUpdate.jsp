@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
+
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <script type="text/javascript" src="/resources/js/editor.js"></script>
@@ -11,6 +15,7 @@
 <%-- Content --%>
 <section id="content-wrapper">
 	<div class="area">
+		<h1 class="board-tit">리뷰</h1>
 		<div class="common-tbl-box">
 			<form action="/reviewUpdate.do" method="post" name="write" enctype="multipart/form-data">
 			    <table id="insertTable" class="comm-tbl editor-container-navi">

@@ -29,7 +29,7 @@ public class NoticeService {
 	}
 	
 	public PageNaviData noticeSelectPaging(int currentPage){
-		int numPerPage = 5;
+		int numPerPage = 10;
 		int totalCount = noticeDao.noticeTotalCount();
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (currentPage-1)*numPerPage+1;
@@ -37,10 +37,12 @@ public class NoticeService {
 		PageBound pb = new PageBound(start, end);
 		ArrayList<Notice> noticeList = (ArrayList<Notice>)noticeDao.noticeSelectPaging(pb);
 		String pageNavi = "";
-		int pageNaviSize = 5;
+		int pageNaviSize = 10;
 		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage != 1) {
 			pageNavi += "<a href='/notice.do?currentPage="+(currentPage-1)+"'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
+		}else{
+			pageNavi += "<a><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
@@ -53,6 +55,8 @@ public class NoticeService {
 		}
 		if(currentPage < totalPage) {
 			pageNavi +="<a href='/notice.do?currentPage="+(currentPage+1)+"'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
+		}else{
+			pageNavi +="<a><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		
 		return new PageNaviData(noticeList,null,null, pageNavi);
@@ -84,7 +88,7 @@ public class NoticeService {
 	}
 	
 	public PageNaviData qnaSelectPaging(int currentPage){
-		int numPerPage = 5;
+		int numPerPage = 10;
 		int totalCount = noticeDao.qnaTotalCount();
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (currentPage-1)*numPerPage+1;
@@ -92,10 +96,12 @@ public class NoticeService {
 		PageBound pb = new PageBound(start, end);
 		ArrayList<Qna> qnaList = (ArrayList<Qna>)noticeDao.qnaSelectPaging(pb);
 		String pageNavi = "";
-		int pageNaviSize = 5;
+		int pageNaviSize = 10;
 		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage != 1) {
 			pageNavi += "<a href='/qna.do?currentPage="+(currentPage-1)+"'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
+		}else{
+			pageNavi += "<a><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
@@ -108,6 +114,8 @@ public class NoticeService {
 		}
 		if(currentPage < totalPage) {
 			pageNavi +="<a href='/qna.do?currentPage="+(currentPage+1)+"'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
+		}else {
+			pageNavi +="<a><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		
 		return new PageNaviData(null,qnaList,null, pageNavi);
@@ -134,7 +142,7 @@ public class NoticeService {
 	}
 	
 	public PageNaviData reviewSelectPaging(int currentPage){
-		int numPerPage = 5;
+		int numPerPage = 10;
 		int totalCount = noticeDao.reviewTotalCount();
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (currentPage-1)*numPerPage+1;
@@ -142,10 +150,12 @@ public class NoticeService {
 		PageBound pb = new PageBound(start, end);
 		ArrayList<Review> reviewList = (ArrayList<Review>)noticeDao.reviewSelectPaging(pb);
 		String pageNavi = "";
-		int pageNaviSize = 5;
+		int pageNaviSize = 10;
 		int pageNo = ((currentPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage != 1) {
 			pageNavi += "<a href='/review.do?currentPage="+(currentPage-1)+"'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
+		}else{
+			pageNavi += "<a><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {
@@ -158,6 +168,8 @@ public class NoticeService {
 		}
 		if(currentPage < totalPage) {
 			pageNavi +="<a href='/review.do?currentPage="+(currentPage+1)+"'><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
+		}else{
+			pageNavi +="<a><img src='/resources/img/right_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		
 		return new PageNaviData(null,null,reviewList, pageNavi);

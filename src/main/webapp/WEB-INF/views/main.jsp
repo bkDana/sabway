@@ -103,7 +103,7 @@ $(document).ready(function(){
 <div class="main_wrapper" id="container">
 	<div class="main_tap_event_wrapper">
 		<div class="bx-wrapper" style="max-width:100%;">
-			<img src="/resources/img/main_event.jpg">
+			<a href="/noticeOne.do?noticeNo=41"><img src="/resources/img/main_event.jpg" height="440px" width="100%" style="min-width:1500px;"></a>
 		</div>
 		<!-- 매장찾기, 가맹신첨 문의 -->
 		<div class="quick_link">
@@ -137,152 +137,17 @@ $(document).ready(function(){
 			<div id="mainTopBox" class="area">
 				<div id="mainAdoptBox">
 						<div class="main-adopt-box">
-							<ul class="main-adopt-list"><!-- 입양 리스트 갯수가 최소 20개가 노출됩니다.(최신순) -->
-								<li>
-									<a href="/intro/menu.do?no=1">
-										<div class="img-thum">
-											<span style="background:url('/resources/img/sandwich/sandwich_cl01.jpg') no-repeat center center; background-size:contain;"></span>
-											<em class="best-prd-plus btn-effect01 effect"><img src="/resources/img/main/btn_more.png"></em>
-											<!-- <div class="img">
-												<img alt="이탈리안 비엠티" src="/resources/img/sandwich/sandwich_cl01.jpg" style="width:100%;">
+							<ul class="main-adopt-list"><!-- 메뉴가 최소 20개가 노출됩니다.(최신순) -->
+								<c:forEach items="${menu }" var="ingre">
+									<li>
+										<a href="/intro/menu.do?no=1">
+											<div class="img-thum">
+												<span style="background:url('/resources/upload/ingredients/${ingre.ingreFilepath }') no-repeat center center; background-size:contain;"></span>
+												<em class="best-prd-plus btn-effect01 effect"><img src="/resources/img/main/btn_more.png"></em>
 											</div>
-											<strong class="title">이탈리안 비엠티</strong>
-											<p>
-												설명<br>
-												설명<br>
-												설명<br>
-												설명
-											</p> -->
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/intro/menu.do?no=1">
-										<div class="img-thum">
-											<span style="background:url('/resources/img/sandwich/sandwich_cl01.jpg') no-repeat center center; background-size:contain;"></span>
-											<em class="best-prd-plus btn-effect01 effect"><img src="/resources/img/main/btn_more.png"></em>
-											<!-- <div class="img">
-												<img alt="이탈리안 비엠티" src="/resources/img/sandwich/sandwich_cl01.jpg" style="width:100%;">
-											</div>
-											<strong class="title">이탈리안 비엠티</strong>
-											<p>
-												설명<br>
-												설명<br>
-												설명<br>
-												설명
-											</p> -->
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/intro/menu.do?no=1">
-										<div class="img-thum">
-											<span style="background:url('/resources/img/sandwich/sandwich_cl01.jpg') no-repeat center center; background-size:contain;"></span>
-											<em class="best-prd-plus btn-effect01 effect"><img src="/resources/img/main/btn_more.png"></em>
-											<!-- <div class="img">
-												<img alt="이탈리안 비엠티" src="/resources/img/sandwich/sandwich_cl01.jpg" style="width:100%;">
-											</div>
-											<strong class="title">이탈리안 비엠티</strong>
-											<p>
-												설명<br>
-												설명<br>
-												설명<br>
-												설명
-											</p> -->
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/intro/menu.do?no=1">
-										<div class="img-thum">
-											<span style="background:url('/resources/img/sandwich/sandwich_cl01.jpg') no-repeat center center; background-size:contain;"></span>
-											<em class="best-prd-plus btn-effect01 effect"><img src="/resources/img/main/btn_more.png"></em>
-											<!-- <div class="img">
-												<img alt="이탈리안 비엠티" src="/resources/img/sandwich/sandwich_cl01.jpg" style="width:100%;">
-											</div>
-											<strong class="title">이탈리안 비엠티</strong>
-											<p>
-												설명<br>
-												설명<br>
-												설명<br>
-												설명
-											</p> -->
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/intro/menu.do?no=1">
-										<div class="img-thum">
-											<span style="background:url('/resources/img/sandwich/sandwich_cl01.jpg') no-repeat center center; background-size:contain;"></span>
-											<em class="best-prd-plus btn-effect01 effect"><img src="/resources/img/main/btn_more.png"></em>
-											<!-- <div class="img">
-												<img alt="이탈리안 비엠티" src="/resources/img/sandwich/sandwich_cl01.jpg" style="width:100%;">
-											</div>
-											<strong class="title">이탈리안 비엠티</strong>
-											<p>
-												설명<br>
-												설명<br>
-												설명<br>
-												설명
-											</p> -->
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/intro/menu.do?no=1">
-										<div class="img-thum">
-											<span style="background:url('/resources/img/sandwich/sandwich_cl01.jpg') no-repeat center center; background-size:contain;"></span>
-											<em class="best-prd-plus btn-effect01 effect"><img src="/resources/img/main/btn_more.png"></em>
-											<!-- <div class="img">
-												<img alt="이탈리안 비엠티" src="/resources/img/sandwich/sandwich_cl01.jpg" style="width:100%;">
-											</div>
-											<strong class="title">이탈리안 비엠티</strong>
-											<p>
-												설명<br>
-												설명<br>
-												설명<br>
-												설명
-											</p> -->
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/intro/menu.do?no=1">
-										<div class="img-thum">
-											<span style="background:url('/resources/img/sandwich/sandwich_cl01.jpg') no-repeat center center; background-size:contain;"></span>
-											<em class="best-prd-plus btn-effect01 effect"><img src="/resources/img/main/btn_more.png"></em>
-											<!-- <div class="img">
-												<img alt="이탈리안 비엠티" src="/resources/img/sandwich/sandwich_cl01.jpg" style="width:100%;">
-											</div>
-											<strong class="title">이탈리안 비엠티</strong>
-											<p>
-												설명<br>
-												설명<br>
-												설명<br>
-												설명
-											</p> -->
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="/intro/menu.do?no=1">
-										<div class="img-thum">
-											<span style="background:url('/resources/img/sandwich/sandwich_cl01.jpg') no-repeat center center; background-size:contain;"></span>
-											<em class="best-prd-plus btn-effect01 effect"><img src="/resources/img/main/btn_more.png"></em>
-											<!-- <div class="img">
-												<img alt="이탈리안 비엠티" src="/resources/img/sandwich/sandwich_cl01.jpg" style="width:100%;">
-											</div>
-											<strong class="title">이탈리안 비엠티</strong>
-											<p>
-												설명<br>
-												설명<br>
-												설명<br>
-												설명
-											</p> -->
-										</div>
-									</a>
-								</li>
-								
+										</a>
+									</li>
+								</c:forEach>
 							</ul>
 						</div>
 					</div>
@@ -295,7 +160,7 @@ $(document).ready(function(){
 			<div class="content_top">
 				<!-- 온라인 주문 -->
 				<div class="utilization">
-					<p>써브웨이를 <br>제대로 즐기는 방법!</p>
+					<p>사브웨이를 <br>제대로 즐기는 방법!</p>
 					<a class="btn" href="/findStore.do?status=11">
 						<span>온라인 주문</span>
 					</a>
@@ -303,7 +168,7 @@ $(document).ready(function(){
 				<!-- 서브웨이 약속 -->
 				<div class="history">
 					<p>SEARCH FOR BETTER<br>신선함을 위한 노력</p>
-					<a class="btn" href="#"><span>써브웨이 약속</span></a>
+					<a class="btn" href="/franchise.do"><span>써브웨이 약속</span></a>
 					<img src="/resources/img/main/img_subway_history.png">
 				</div>
 			</div>
@@ -312,29 +177,24 @@ $(document).ready(function(){
 				<div class="whats_new">
 					<div class="hd">
 						<h2>What's New</h2>
-						<p>써브웨이의 다양한 소식을 <br>빠르게 전달해드립니다.</p>
+						<p>사브웨이의 다양한 소식을 <br>빠르게 전달해드립니다.</p>
 					</div>
 					<div class="board_list">
 						<ul>
-							<li>
-								<a href="#" onclick="" data-idx="글번호">글주제</a>
-							</li>
-							<li>
-								<a href="#" onclick="" data-idx="글번호">글주제</a>
-							</li>
-							<li>
-								<a href="#" onclick="" data-idx="글번호">글주제</a>
-							</li>
+							<c:forEach items="${notice}" var="notice">
+								<li>
+									<a href="/noticeOne.do?noticeNo=${notice.noticeNo }">${notice.noticeTitle }</a>
+								</li>
+							</c:forEach>
 						</ul>
-						<a class="more" href="/공지사항으로">more</a>
+						<a class="more" href="/notice.do?currentPage=1">more</a>
 					</div>
 				</div>
 				<!-- What's new끝 -->
 				
 				<div class="banner_sponsor">
 					<div class="bx-wrapper" style="max-width:100%">
-					
-						<a href="#">
+						<a href="/noticeOne.do?noticeNo=29">
 							<img src="/resources/img/main/banner.jpg">
 						</a>
 					</div>
@@ -342,9 +202,6 @@ $(document).ready(function(){
 			</div>
 			<!-- content_bottom끝 -->
 		</div>
-		
-		
-
 
 	
 	</div>

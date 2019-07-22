@@ -1,14 +1,16 @@
 
 $(document).ready(function() {
-	$(".step").eq(0).trigger("click");
+	//$(".step").eq(0).trigger("click");
 //	var innerHtml = getCookie("cookieHtml");
 //	console.log(innerHtml);
 //	$('.show-order').eq(addStatus).html(innerHtml);
-	
+	var co = getCookie('noneCustomer');
+	console.log("두번째쿠키 : "+co);
 	var typeStatus = 0;
 });
 //// 정엄이가 쓴거
 //메인 재료 선택된 거에 따라서 추천 소스 보여주기
+	var toppingReChoice = 0;
 	var canAdd = 0;
 	var totalCost = 0;
 	var addStatus = 0;
@@ -131,6 +133,10 @@ $(document).ready(function() {
 				$('.img-box').eq(all).find("button").eq(2).addClass("select-vegi");
 				$('.img-box').eq(all).find("button").eq(2).css("color","#009223");
 				$('.img-box').eq(all).find("button").eq(3).removeClass("select-vegi");
+			}
+			if($('.img-box').eq(all).hasClass("bread")){
+				$('.img-box').eq(all).find("button").eq(0).removeClass("select-bread");
+				$('.img-box').eq(all).find("button").eq(1).removeClass("select-bread");
 			}
 		}
 	}
@@ -411,7 +417,7 @@ $(document).ready(function() {
 			$('.show-order').eq(addStatus).find('.show-order-main').eq(0).text(str);
 		}
 		
-		$('.show-order-context').eq(0).text(cost+" 원");
+		$('.show-order-context').eq(addStatus).text(cost+" 원");
 	});
 	
 	$('.salad').click(function(){
@@ -467,7 +473,7 @@ $(document).ready(function() {
 			$('.show-order').eq(addStatus).find('.show-order-main').eq(0).text(str);
 		}
 		
-		$('.show-order-context').eq(0).text(cost+" 원");
+		$('.show-order-context').eq(addStatus).text(cost+" 원");
 //		$('.show-order').eq(addStatus).find('.show-order-context').eq(0).remove();
 //		var showCostStr = "<td class='show-order-context'>"+cost+" 원</td>";
 //		$('.show-order').eq(addStatus).prepend(showCostStr);
@@ -525,23 +531,39 @@ $(document).ready(function() {
 		}
 		
 	});
-	
+	$('.topping').click(function(){
+		//해즈클래스 주고 이때마다 가격계산 코스트도 여기서 넣어줌. 그러면 수정할때도 가능. 
+		if($(this).hasClass("selected")){
+			if(breadCheck==1){
+				cost += Number($(this).find('input').eq(1).val())*1;
+				kcal += Number($(this).find('input').eq(0).val())*1;
+			}else if(breadCheck==2){
+				cost += Number($(this).find('input').eq(2).val())*1;
+				kcal += Number($(this).find('input').eq(0).val())*2;
+			}
+			$('.show-order-context').eq(addStatus).text(cost+" 원");
+		}else{
+			if(breadCheck==1){
+				cost -= Number($(this).find('input').eq(1).val())*1;
+				kcal -= Number($(this).find('input').eq(0).val())*1;
+			}else if(breadCheck==2){
+				cost -= Number($(this).find('input').eq(2).val())*1;
+				kcal -= Number($(this).find('input').eq(0).val())*2;
+			}
+			$('.show-order-context').eq(addStatus).text(cost+" 원");
+		}
+	});
 	$('.topping-check').click(function(){
 		var str = "";
 		var strKorea = "";
 		var noCount = 0;
+		
 		for(var i = 1; i<$('.topping').length;i++){
 			if($('.topping').eq(i).hasClass("selected")){
 				noCount++;
 				str += '1';
 				strKorea += $('.topping').eq(i).find('p').text()+",";
-				if(breadCheck==1){
-					cost += Number($('.topping').eq(i).find('input').eq(1).val())*1;
-					kcal += Number($('.topping').eq(i).find('input').eq(0).val())*1;
-				}else if(breadCheck==2){
-					cost += Number($('.topping').eq(i).find('input').eq(2).val())*1;
-					kcal += Number($('.topping').eq(i).find('input').eq(0).val())*2;
-				}
+					
 			}else{
 				str += '0'; 
 			}
@@ -552,8 +574,6 @@ $(document).ready(function() {
 		}else{
 			strKorea = strKorea.substr(0, strKorea.length -1);
 		}
-		console.log(cost);
-		console.log(kcal);
 		$('input[name=bucTopping]').val(str);
 		console.log($('input[name=bucTopping]').val());
 		
@@ -563,18 +583,21 @@ $(document).ready(function() {
 		}else{
 			$('.show-order').eq(addStatus).find('.show-order-topping').eq(0).text(strKorea);
 		}
-		$('.show-order-context').eq(0).text(cost+" 원");
+		
 		$(".step").eq(5).trigger("click");
 	});
 	$('.topping.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.topping').length;i++){
 			if($('.topping').eq(i).hasClass("selected")){
-				if(breadCheck==1){
-					cost -= Number($('.topping').eq(i).find('input').eq(1).val())*1;
-					kcal -= Number($('.topping').eq(i).find('input').eq(0).val())*1;
-				}else if(breadCheck==2){
-					cost -= Number($('.topping').eq(i).find('input').eq(2).val())*1;
-					kcal -= Number($('.topping').eq(i).find('input').eq(0).val())*2;
+				if($('.topping').eq(i).hasClass("selected")){
+					if(breadCheck==1){
+						cost -= Number($('.topping').eq(i).find('input').eq(1).val())*1;
+						kcal -= Number($('.topping').eq(i).find('input').eq(0).val())*1;
+					}else if(breadCheck==2){
+						cost -= Number($('.topping').eq(i).find('input').eq(2).val())*1;
+						kcal -= Number($('.topping').eq(i).find('input').eq(0).val())*2;
+					}
+					$('.show-order-context').eq(addStatus).text(cost+" 원");
 				}
 				$('.topping').eq(i).removeClass("selected");
 				$('.topping').eq(i).find('img').css("display","block");
@@ -715,6 +738,25 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('.source').click(function(){
+		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length+$('.topping').length+2+$('.vegi').length+$('.source').length;
+		clearAllfn(first);
+		//해즈클래스 주고 이때마다 가격계산 코스트도 여기서 넣어줌. 그러면 수정할때도 가능. 
+		if($(this).hasClass("selected")){
+			if(breadCheck==1){
+				kcal += Number($(this).find('input').eq(0).val())*1;
+			}else if(breadCheck==2){
+				kcal += Number($(this).find('input').eq(0).val())*2;
+			}
+		}else{
+			if(breadCheck==1){
+				kcal -= Number($(this).find('input').eq(0).val())*1;
+			}else if(breadCheck==2){
+				kcal -= Number($(this).find('input').eq(0).val())*2;
+			}
+		}
+	});
+	
 	$('.source-check').click(function(){
 		var str = "";
 		var strKorea = "";
@@ -724,11 +766,7 @@ $(document).ready(function() {
 				noCount++;
 				str += '1';
 				strKorea += $('.source').eq(i).find('p').text()+",";
-				if(breadCheck==1){
-					kcal += Number($('.source').eq(i).find('input').eq(0).val())*1;
-				}else if(breadCheck==2){
-					kcal += Number($('.source').eq(i).find('input').eq(0).val())*2;
-				}
+				
 			}else{
 				str += '0';
 			}
@@ -758,10 +796,14 @@ $(document).ready(function() {
 		}
 		var str = $(this).find('p').text();
 		var mainIdx = $('.set').index(this);
-		var first = 2+$('.set').length+$('.main').length+$('.salad').length+$('.cheese').length;
+		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length+$('.topping').length+2+$('.vegi').length+$('.source').length+$('.set').length;
 		clearAllfn(first);
 		for(var i=0; i<$('.set').length;i++){
 			if(i!=mainIdx && $('.set').eq(i).hasClass("selected")){
+				kcal -= Number($('.set').eq(i).find('input').eq(0).val());
+				cost -= Number($('.set').eq(i).find('input').eq(1).val());
+				console.log(kcal);
+				console.log(cost);
 				$('.set').eq(i).removeClass("selected");
 				$('.set').eq(i).find('img').css("display","block");
 				$('.set').eq(i).find('p').css("display","none");
@@ -778,13 +820,11 @@ $(document).ready(function() {
 						$(this).css("background-color","#fff");
 					}
 				});
-				kcal -= Number($('.set').eq(i).find('input').eq(0).val());
-				cost -= Number($('.set').eq(i).find('input').eq(1).val());
 			}
 		}
 		kcal += Number($(this).find('input').eq(0).val());
 		cost += Number($(this).find('input').eq(1).val());
-		console.log(kcal);
+		
 		$(this).unbind("mouseleave");
 		$(this).addClass("selected");
 		
@@ -794,16 +834,29 @@ $(document).ready(function() {
 		}else{
 			$('.show-order').eq(addStatus).find('.show-order-set').eq(0).text(str);
 		}
-		$('.show-order-context').eq(0).text(cost+" 원");
+		$('.show-order-context').eq(addStatus).text(cost+" 원");
 		
 		$('input[name=bucSet]').val(str);
 	});
 
+	$('.sidemenu').click(function(){
+		//해즈클래스 주고 이때마다 가격계산 코스트도 여기서 넣어줌. 그러면 수정할때도 가능. 
+		if($(this).hasClass("selected")){
+			cost += Number($(this).find('input').eq(1).val())*1;
+			kcal += Number($(this).find('input').eq(0).val())*1;
+			$('.show-order-context').eq(addStatus).text(cost+" 원");
+		}else{
+			cost -= Number($(this).find('input').eq(1).val())*1;
+			kcal -= Number($(this).find('input').eq(0).val())*1;
+			$('.show-order-context').eq(addStatus).text(cost+" 원");
+		}
+	});
 	$('.sidemenu.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selected")){
 				cost -= Number($('.sidemenu').eq(i).find('input').eq(1).val());
 				kcal -= Number($('.sidemenu').eq(i).find('input').eq(0).val());
+				$('.show-order-context').eq(addStatus).text(cost+" 원");
 				$('.sidemenu').eq(i).removeClass("selected");
 				$('.sidemenu').eq(i).find('img').css("display","block");
 				$('.sidemenu').eq(i).find('p').css("display","none");
@@ -825,14 +878,13 @@ $(document).ready(function() {
 
 	var getCookie = function(name) {
 		  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+		  console.log(value);
 		  return value? value[2] : null;			//현재 쿠키가 3개 생성되어 있음, [2]번째가 커스텀 쿠키
 	};
 
-	
 	$('.order-check').click(function(){
 		if(canAdd==1){
-			var plusIdx = $('.plusOption').length-1;
-			$(".plusOption").eq(plusIdx).trigger("click");
+			alter("추가주문을 원하시면 아래 버튼을 눌러주세요.")
 			return;
 		}
 		
@@ -841,14 +893,10 @@ $(document).ready(function() {
 		var noCount = 0;
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selected")){
-				console.log("해즈클래스");
 				noCount++;
 				str += "1";
 				strKorea += $('.sidemenu').eq(i).find('p').text()+",";
-				cost += Number($('.sidemenu').eq(i).find('input').eq(1).val());
-				kcal += Number($('.sidemenu').eq(i).find('input').eq(0).val());
 			}else{
-				console.log("논클래스");
 				str += '0';
 			}
 		}
@@ -867,7 +915,7 @@ $(document).ready(function() {
 		}else{
 			$('.show-order').eq(addStatus).find('.show-order-sidemenu').eq(0).text(strKorea);
 		}
-		$('.show-order-context').eq(0).text(cost+" 원");
+		$('.show-order-context').eq(addStatus).text(cost+" 원");
 		
 		$('input[name=bucSide]').val(str);
 		$('input[name=bucCost]').val(cost);
@@ -877,6 +925,11 @@ $(document).ready(function() {
 			if(!$('.orderInput').eq(i).val()){
 				alert("주문절차를 확인해주세요.");
 				clearAllfn(0);
+				var resetCostStr = $('.show-order').last().find('td').eq(0).text();
+				var resetCost = Number(resetCostStr.substr(0, resetCostStr.length-2));
+				totalCost -= resetCost;
+				cost = 0;
+				kcal = 0;
 				$('.show-order').last().remove();
 				var newTr = "<tr class='show-order'></tr>";
 		    	$('.order-view-tbl').append(newTr);
@@ -887,9 +940,7 @@ $(document).ready(function() {
 		var cookieVal = getCookie('noneCustomer');
 		$('#cookie').val(cookieVal);
 		console.log($('#cookie').val());
-//		serialize()
 		var form = $("form[name=feedbackform]")[0];
-//		console.log(queryString);
 		var data = new FormData(form);
 		console.log(data);
         $.ajax({
@@ -908,16 +959,6 @@ $(document).ready(function() {
                 alert(data);
                 var orderCheckStr = "";
                 canMoveBucket = 1;
-//        		for(var i=0; i<9; i++){
-//        			if(i<7){
-//        				orderCheckStr += "<td>"+$('.show-order').eq(addStatus).find('button').eq(i+1).text()+"</td>";        				
-//        			}else if(i==7){
-//        				orderCheckStr += "<td><button class='quantityChange type1' type='button' onclick='quantityChange(0,this);'>-</button>&nbsp;&nbsp;&nbsp;<span>"
-//        					+$('.orderInput').eq(8).val()+"</span>&nbsp;&nbsp;&nbsp;<button class='quantityChange type2' type='button' onclick='quantityChange(1,this);'>+</button></td>";
-//        			}else if(i==8){
-//        				orderCheckStr += "<td>"+$('.orderInput').eq(9).val()+"원</td>";      
-//        			}
-//        		}
                 orderCheckStr += "<td><button class='quantityChange type1' type='button' onclick='quantityChange(0,this);'>-</button>&nbsp;&nbsp;&nbsp;<span>"
                 				+$('.orderInput').eq(10).val()+"</span>&nbsp;&nbsp;&nbsp;<button class='quantityChange type2 plusOption' type='button' onclick='quantityChange(1,this);'>+</button></td>";
         		orderCheckStr += "<td><button type='button' style='font-size:18px;color:red;' onclick='deleteOrder(this)'>취소</button>";
@@ -930,12 +971,7 @@ $(document).ready(function() {
         		$('.show-total-cost').eq(0).text("Total : "+totalCost+" 원");
             },
         });
-//        var cookieHtml = $('.show-order').eq(addStatus).html();
-//		setCookiee(cookieHtml);
 	});
-	
-	
-	
 	function quantityChange(changeIdx,btn){
 		var value = Number($(btn).parent().find('span').text());
 		var idx = $(btn).parent().next().find('input').val();
@@ -962,8 +998,7 @@ $(document).ready(function() {
             },
         });
 		$('.show-total-cost').eq(0).text("Total : "+totalCost+" 원");
-//			var cookieHtml = $('.show-order').eq(addStatus).html();
-//    		setCookiee(cookieHtml);
+
 	}
 	
 	function deleteOrder(idx){
@@ -989,6 +1024,7 @@ $(document).ready(function() {
         $('html, body').animate({scrollTop : offset.top}, 400);
 		$('.step').eq(0).trigger("click");
 	}
+	
 	function addOrderfn(){
     	if(canMoveBucket==0){
 			return;
@@ -1007,7 +1043,6 @@ $(document).ready(function() {
         $('html, body').animate({scrollTop : offset.top}, 400);
     	$(".step").eq(0).trigger("click");
 	}
-	
 	$('.load-bucket').click(function() {
 		if(canMoveBucket==0){
 			alert("주문내역이 없습니다.");

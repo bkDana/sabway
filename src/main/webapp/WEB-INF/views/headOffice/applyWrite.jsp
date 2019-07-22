@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-#content-wrapper1{padding:100px 0; background-color:#f6f6f6;}
+#content-wrapper1{padding:100px 0; background-color:#fff;}
 .area1{ max-width:1900px; margin:0px auto; }
 /* 문의 ::: 가맹신청문의, 1:1문의 */
 .inquiry_wrapper{background-color:#fff; width:1028px; margin:0 auto; border:1px solid #e8e8e8; padding:0 70px 49px;}
@@ -88,6 +88,7 @@
 </style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/sub.jsp" />
 
 <section id="content-wrapper1">
 	<div class="area1">

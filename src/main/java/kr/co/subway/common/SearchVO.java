@@ -5,13 +5,13 @@ public class SearchVO {
 	private int state;
 	private int start;
 	private int end;
-	private String mgrId;
-	private String startDay;
-	private String endDay;
-	private String delDay;
-	private String searchType;
-	private String searchVal;
-	private String orderBy;
+	private String mgrId;//가맹점 회원 ID
+	private String startDay;//기간 검색(시작)
+	private String endDay;//기간 검색(끝)
+	private String delDay;//희망 배송일
+	private String searchType;//검색 타입
+	private String searchVal;//검색 값
+	private String orderBy;//정렬
 	private String type;//게시판 타입 나누기
 	
 	public SearchVO() {
@@ -25,7 +25,6 @@ public class SearchVO {
 		this.end = end;
 		this.mgrId = mgrId;
 	}
-	
 	public SearchVO(int reqPage, int state, int start, int end, String mgrId, String startDay, String endDay,
 			String delDay, String searchType, String searchVal) {
 		super();
@@ -113,10 +112,6 @@ public class SearchVO {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
-	
-
 	
 	
 	
