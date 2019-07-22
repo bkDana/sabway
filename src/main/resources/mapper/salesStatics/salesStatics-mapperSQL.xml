@@ -50,7 +50,7 @@
 				to_char(sysdate,'mm')
 			</otherwise>
 		</choose>
-		 and buc_branch='123' <!-- #{cusoBranch} ////////////////////////////////////////////////////////////////////// -->
+		 and buc_branch=#{cusoBranch} <!-- #{cusoBranch} ////////////////////////////////////////////////////////////////////// -->
 		 group by rollup(buc_main) order by totalcost desc) b)
 	</select>
 </mapper>
