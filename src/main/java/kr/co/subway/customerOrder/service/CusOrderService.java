@@ -88,7 +88,7 @@ public class CusOrderService {
 		int start = (currentPage1-1)*numPerPage+1;
 		int end = currentPage1*numPerPage;
 		CusOrderPageBound pb = new CusOrderPageBound(start,end,null,null);
-		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderDao.cusOrderList(pb);
+		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderDao.cusOrderList(pb,mgr);
 		int pageNo = ((currentPage1-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage1 != 1) {
 			pageNavi += "<a href='/cusOrderList.do?currentPage="+(currentPage1-1)+"'>이전</a>&nbsp;";
@@ -124,7 +124,7 @@ public class CusOrderService {
 		int start = (currentPage1-1)*numPerPage+1;
 		int end = currentPage1*numPerPage;
 		CusOrderPageBound pb = new CusOrderPageBound(start,end,cusoMemberNo,null);
-		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderDao.checkedCusoOrderList(pb);
+		ArrayList<CusOrder> list = (ArrayList<CusOrder>) cusOrderDao.checkedCusoOrderList(pb,mgr);
 		int pageNo = ((currentPage1-1)/pageNaviSize)*pageNaviSize+1;
 		if(currentPage1 != 1) {
 			pageNavi += "<a href='/checkedCusoOrderList.do?currentPage="+(currentPage1-1)+"&cusoMemberNo="+cusoMemberNo+"'>이전</a>&nbsp;";

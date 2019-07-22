@@ -257,7 +257,6 @@ public class CusOrderController {
 	@RequestMapping("/cusOrderList.do")
 	public ModelAndView cusOrderList(@RequestParam String currentPage,HttpSession session) {
 		Mgr mgr = (Mgr) session.getAttribute("mgr");
-		System.out.println("로그인 정보(이름) : "+mgr.getMgrBossName());
 		int currentPage1;
 		try {
 			currentPage1 = Integer.parseInt(currentPage);
@@ -288,7 +287,6 @@ public class CusOrderController {
 	@RequestMapping("/checkedCusoOrderList.do")
 	public ModelAndView checkedCusoOrderList(@RequestParam String currentPage,@RequestParam String cusoMemberNo,HttpSession session) {
 		Mgr mgr = (Mgr) session.getAttribute("mgr");
-		System.out.println("로그인 정보(이름) : "+mgr.getMgrBossName());
 		int currentPage1;
 		try {
 			currentPage1 = Integer.parseInt(currentPage);
