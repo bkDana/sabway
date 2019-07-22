@@ -1,78 +1,144 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <style>
-	 .doubleChk{
-			height: 30px;
-		    padding: 0 10px;
-		    border-radius: 5px;
-		    background-color: #747474;
-		    color: #fff;
-		    margin-left: 5px;
-		}
+	.doubleChk{
+		height: 30px;
+	    padding: 0 10px;
+	    border-radius: 5px;
+	    background-color: #747474;
+	    color: #fff;
+	    margin-left: 5px;
+	}
+	.inquiry_wrapper {
+	    background-color: #fff;
+	    width: 1028px;
+	    margin: 0 auto;
+	    border: 1px solid #e8e8e8;
+	    padding: 0 70px 49px;
+	}
+	.mypage_wrapper {
+    	position: relative;
+	}
+	.mypage_wrapper th {
+	    font-weight: 300;
+	    color: #666666;
+	    font-size: 16px;
+	    height: 21px;
+	    padding-top: 24px;
+	    border-bottom: 1px solid #e8e8e8;
+	    text-align: left;
+	    vertical-align: top;
+	}
+	.mypage_wrapper td {
+	    height: 45px;
+	    padding: 12px 0;
+	    border-bottom: 1px solid #e8e8e8;
+	}
+	.form_text {
+	    background-color: #f8f8f8;
+	    display: inline-block;
+	}
+	.form_text input {
+	    width: 100%;
+	    border: 0;
+	    background: transparent;
+	    height: 45px;
+	    color: #292929;
+	    font-size: 16px;
+	    text-indent: 15px;
+	}
+	.form_select1 {
+	    display: inline-block;
+	    vertical-align: middle;
+	    overflow: hidden;
+	    position: relative;
+	    border: 2px solid #dddddd;
+	}
  </style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <jsp:include page="/WEB-INF/views/common/sub.jsp" /><!-- 서브메뉴 추가했습니다 -->
 <section id="content-wrapper">
 	<div class="area">
+		<div class="inquiry_wrapper">
 	<h1 class="board-tit">회원정보</h1><!-- 이거 바꿈 -->
-		<form id="updateForm" action="/cusUpdate.do" method="post">
-			<div class="common-tbl-box">
-		    	<input type="hidden" id="isChk" value="0">
-			    <table class="comm-tbl type2">
-			         <tr>
-			            <td><label for="userId">아이디</label></td>
-			            <td><input class="inputBox" type="text" id="customerId" name="customerId"  maxlength="16" value="${customer.customerId }" readonly="readonly"></td>
-			         </tr>
-			         <tr>
-			            <td><label for="userPw">비밀번호</label></td>
-			            <td><input class="inputBox" type="password" id="customerPw" name="customerPw"  maxlength="16" ><br><span id="pwMsg"></span><p style="font-size: 12px; height: 20px;">※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p></td>
-			         </tr>
-			         <tr>
-			            <td><label for="userPwre">비밀번호 확인</label></td>
-			            <td><input class="inputBox" type="password" id="customerPwre" name="customerPwre"  maxlength="16"><br><span id="pwreMsg"></span></td>
-			         </tr>
-			         <tr>
-			            <td><label for="userName">이름</label></td>
-			            <td><input class="inputBox" type="text" id="customerName" name="customerName"  maxlength="16" value="${customer.customerName }" readonly="readonly"></td>
-			         </tr>
-			         <tr>
-			            <td><label for="userNick">닉네임</label></td>
-			            <td><input class="inputBox" type="text" id="customerNick" name="customerNick"  maxlength="16" value="${customer.customerNick }"><button type="button" id="nickChk" class="doubleChk" >중복확인</button><br><span id="nickMsg"></span></td>
-			         </tr>
-			         <tr>
-			            <td>
-			               <label for="email">E-Mail</label>
-			            </td>
-			            <td>
-			               	<input class="inputBox" type="text" id="email" name="email" style="width:50%" maxlength="20" value="${customer.email }" readonly="readonly">
-			              	<span class="joinErrorMsg" id="emailMsg"></span>
-							<span id="eTxt" style="color:blue"></span>
-			            </td>            
-			         </tr>
-			         <tr>
-			            <td><label for="phone">휴대폰</label></td>
-			            <td>
-			              
-			                 <span style="margin:0 5px 0 5px; color:black;" > </span><input type="text" id="phone" name="phone" style="width:10%" maxlength="4" value="${customer.phone1 }">
-			                 <span style="margin:0 5px 0 5px; color:black;" > - </span><input type="text" id="phone1" name="phone1" style="width:10%" maxlength="4" value="${customer.phone2 }">
-			                 <span style="margin:0 5px 0 5px; color:black;"> - </span><input type="text" id="phone2" name="phone2" style="width:10%" maxlength="4" value="${customer.phone3 }"><br> 
-			                 <span id="phoneMsg"></span>
-			              </td>
-			         </tr>
-			         <tr>
-			            <td><label for="year">생년월일</label></td>
-			            <td>
-			               <input type="text" name="birthday" id="birthday"  maxlength="6" placeholder="950810" value="${customer.birthday }" readonly="readonly"><br><span id="birthdayMsg"></span>
-			            </td>
-			         </tr>
-			      </table>
-				<div class="common-tbl-btn-group" style="padding-top:35px;text-align:center">
-					<button type="button" id="btnSubmit" class="btn-style1">변경하기</button>
-					<button type="button" class="btn-style3" onclick="location.href='/cusDelete.do?customerNo=${customer.customerNo }'">탈퇴하기</button>
+			<form id="updateForm" action="/cusUpdate.do" method="post">
+				<div class="mypage_wrapper">
+			    	<input type="hidden" id="isChk" value="0">
+				    <table style="width:1028px">
+					    <colgroup>
+					    	<col width= "130px">
+					    	<col width="/">
+					    	
+					    </colgroup>
+				         <tr>
+				            <th scope="col"><label for="userId">아이디</label><span class="ess"></span></th>
+				            <td><span class="form_text" style="width: 91%"><input class="inputBox" type="text" id="customerId" name="customerId"  maxlength="16" value="${customer.customerId }" readonly="readonly"></span></td>
+				         </tr>
+				         <tr>
+				            <th scope="col"><label for="userPw">비밀번호</label><span class="ess"></span></th>
+				            <td><span class="form_text" style="width: 91%"><input class="inputBox" type="password" id="customerPw" name="customerPw"  maxlength="16" ></span><br><span id="pwMsg"></span><p style="font-size: 12px; height: 20px;color: #999999;margin-left: 25px; margin-top: 15px;">※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p></td>
+				         </tr>
+				         <tr>
+				            <th scope="col"><label for="userPwre">비밀번호 확인</label><span class="ess"></span></th>
+				            <td><span class="form_text" style="width: 91%"><input class="inputBox" type="password" id="customerPwre" name="customerPwre"  maxlength="16"></span><br><span id="pwreMsg"></span></td>
+				         </tr>
+				         <tr>
+				            <th scope="col"><label for="userName">이름</label><span class="ess"></span></th>
+				            <td><span class="form_text" style="width: 91%"><input class="inputBox" type="text" id="customerName" name="customerName"  maxlength="16" value="${customer.customerName }" readonly="readonly"></span></td>
+				         </tr>
+				         <tr>
+				            <th scope="col"><label for="userNick">닉네임</label><span class="ess"></span></th>
+				            <td><span class="form_text" style="width: 91%"><input class="inputBox" type="text" id="customerNick" name="customerNick"  maxlength="16" value="${customer.customerNick }"></span><button type="button" id="nickChk" class="doubleChk" >중복확인</button><br><span id="nickMsg"></span></td>
+				         </tr>
+				         <tr>
+				            <th scope="col">
+				               <label for="email">E-Mail</label><span class="ess"></span>
+				            </th>
+				            <td>
+					            <span class="form_text" style="width: 91%">
+					               	<input class="inputBox" type="text" id="email" name="email" style="width:100%" maxlength="20" value="${customer.email }" readonly="readonly">
+					            </span>
+					            <span class="joinErrorMsg" id="emailMsg"></span>
+								<span id="eTxt" style="color:blue"></span>
+				            </td>            
+				         </tr>
+				         <tr>
+				            <th scope="col"><label for="phone">휴대폰</label><span class="ess"></span></th>
+				            <td>
+				              
+				                 <span style="margin:0 5px 0 5px; color:black;" > </span>
+				                 <div class="form_select1" style="width:196px; height: 35px;">
+				                 	<input type="text" id="phone" name="phone" style="width:100%;height: 100%;border: none;" maxlength="4" value="${customer.phone1 }">
+				                 </div>
+				                 <span style="margin:0 5px 0 5px; color:black;" > - </span>
+				                 <div class="form_select1" style="width:196px; height: 35px;">
+				                 	<input type="text" id="phone1" name="phone1" style="width:100%;height: 100%;border: none;" maxlength="4" value="${customer.phone2 }">
+				                 </div>
+				                 <span style="margin:0 5px 0 5px; color:black;"> - </span>
+				                 <div class="form_select1" style="width:196px; height: 35px;">
+				                 	<input type="text" id="phone2" name="phone2" style="width:100%;height: 100%;border: none;" maxlength="4" value="${customer.phone3 }"><br>
+				                 </div> 
+				                 <span id="phoneMsg"></span>
+				              </td>
+				         </tr>
+				         <tr>
+				            <th scope="col"><label for="year">생년월일</label><span class="ess"></span></th>
+				            <td>
+				            <span class="form_text" style="width: 91%">
+				               <input type="text" name="birthday" id="birthday"  maxlength="6" placeholder="950810" value="${customer.birthday }" readonly="readonly">
+				            </span>
+				               <br><span id="birthdayMsg"></span>
+				            </td>
+				         </tr>
+				      </table>
+					<div class="common-tbl-btn-group" style="padding-top:35px;text-align:center">
+						<button type="button" id="btnSubmit" class="btn-style1">변경하기</button>
+						<button type="button" class="btn-style3" onclick="location.href='/cusDelete.do?customerNo=${customer.customerNo }'">탈퇴하기</button>
+					</div>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </section>
 <script>
@@ -80,13 +146,11 @@
 
 //가입하기 버튼
 $("#btnSubmit").click(function(){
-// 	   if($('#eTxt').hasClass("checkSuccess")){
+
 		   
 		   if(isChk()){
 		         $("#updateForm").submit();
-// 		   }
-	   }else{
-		   alert("인증되지 않은 이메일입니다.");
+
 	   }
    
 });

@@ -29,19 +29,19 @@
 					</td>
 					<td>작성자</td>
 					<td>
-						<input type="text" name="qnaWriter"><%--원래는 value 세션으로 받아서 처리 --%>
+						<input type="text" name="qnaWriter" value="${sessionScope.customer.customerNick }"><%--원래는 value 세션으로 받아서 처리 --%>
 					</td>
 				</tr>
 				<tr>
 					<td>제목</td>
 					<td colspan="3">
-						<input type="text" name="qnaTitle">
+						<input type="text" name="qnaTitle" required="required">
 					</td>
 				</tr>
 				<tr>
 					<td>내용</td>
 					<td colspan="3">
-						<textarea rows="20" name="qnaContent"></textarea>
+						<textarea rows="20" name="qnaContent" required="required"></textarea>
 					</td>
 				</tr>
 				<tr>
