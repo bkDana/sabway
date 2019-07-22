@@ -6,7 +6,7 @@
 
 <style>
 #content-wrapper1{padding:100px 0; background-color:#f6f6f6;}
-.area1{ max-width:1900px; margin:0px auto; }
+.area1{ min-width:1280px; margin:0px auto; }
 
 .main_tap_event_wrapper{position:relative; height:490px; background-color:#fff;}
 .main_tap_event_wrapper .quick_link{overflow:hidden; position:absolute; left:50%; bottom:0; width:1170px; margin-left:-585px; text-align:right; z-index:5}
@@ -40,7 +40,7 @@
 .section_subway_menu .hd .tab ul li.active a{color:#009223; font-weight:bold;} */
 
 /* section_subway */
-.section_subway{text-align:center; padding:60px;background:url('/resources/img/main/bg_content.gif');}
+.section_subway{text-align:center; padding:80px 0;background:url('/resources/img/main/bg_content.gif');}
 .section_subway .content_top{overflow:hidden;display:inline-block;}
 .section_subway .content_top .utilization{background:url(/resources/img/main/bg_utilization.png) 0 0 no-repeat; width:400px; height:300px; position:relative; margin-left:55px; float:left;}
 .section_subway .content_top .utilization p{color:#fff; font-size:28px; font-weight:bold; line-height:40px; letter-spacing:-0.03em; position:absolute; left:39px; top:38px;}
