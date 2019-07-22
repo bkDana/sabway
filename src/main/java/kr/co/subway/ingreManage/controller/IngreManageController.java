@@ -266,7 +266,7 @@ public class IngreManageController {
 		
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("ingreList", list);
-		data.put("count", list.size());
+		data.put("size1", list.size());
 		data.put("date", sdf.format(new Date()));
 		
 		ExcelDown e = new ExcelDown();

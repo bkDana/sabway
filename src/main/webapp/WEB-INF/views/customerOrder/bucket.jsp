@@ -63,15 +63,15 @@
 				<td>${bucket.bucRegDate }</td>
 				<td>${bucket.bucBranch }</td>
 				<td class="bucketOption">
-						<span id="bread">빵 : ${bucket.bucBread }</span><br>
-						<span id="main">메인재료 : ${bucket.bucMain }&nbsp;${bucket.bucIsSalad }</span><br>
-						<span id="cheese">치즈 : ${bucket.bucCheese }</span><br>
-						<span id="topping"></span><br>
-						<span id="oven"></span><br>
-						<span id="vegi"></span><br>
-						<span id="source"></span><br>
-						<span id="set">세트종류 : ${bucket.bucSet }</span><br>
-						<span id="side"></span>
+						<span class="bread">빵 : ${bucket.bucBread }</span><br>
+						<span class="main">메인재료 : ${bucket.bucMain }&nbsp;${bucket.bucIsSalad }</span><br>
+						<span class="cheese">치즈 : ${bucket.bucCheese }</span><br>
+						<span class="topping"></span><br>
+						<span class="oven"></span><br>
+						<span class="vegi"></span><br>
+						<span class="source"></span><br>
+						<span class="set">세트종류 : ${bucket.bucSet }</span><br>
+						<span class="side"></span>
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
 				<td><span class="cost">${bucket.bucCost * bucket.bucQuantity }</span>원</td>

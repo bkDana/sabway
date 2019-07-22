@@ -13,13 +13,19 @@
 
 <script type="text/javascript">
 var check = false;
+var onload = true;
 $(document).on("click", ".step", function(){
-	check= false;
-	/*로직
-	check=true;
-	*/
+// 	if(onload){
+// 		$(".step").eq(0).trigger("click");
+// 		onload=false;
+// 	}
 	
-	alert(check);
+	check= false;
+	if(check){
+		alert("추가주문을 원하시면 하단 버튼을 눌러주세요.");
+	}
+
+	
 });
 
 var myform=new formtowizard({
