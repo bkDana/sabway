@@ -118,10 +118,10 @@
 			<if test="mgrName != null">
 			   	<if test="mgrLevel != 1">
 			   		<if test='cusoMemberNo.equals("-1")'>
-				   		where cuso_member_no &lt; 2000000000000 and cuso_branch = #{mgrName}
+				   		where cuso_member_no &lt; 2000000000 and cuso_branch = #{mgrName}
 			   		</if>
 			   		<if test='cusoMemberNo.equals("0")'><!-- 비회원 -->
-				   		where cuso_member_no &gt; 2000000000000 and cuso_branch = #{mgrName}
+				   		where cuso_member_no &gt; 2000000000 and cuso_branch = #{mgrName}
 			   		</if>
 			   		<if test='cusoMemberNo.equals("-2")'><!-- 전체 -->
 				   		where cuso_branch = #{mgrName}
@@ -129,10 +129,10 @@
 			   	</if>
 			   	<if test="mgrLevel == 1">
 			   		<if test='cusoMemberNo.equals("-1")'>
-				   		where cuso_member_no &lt; 2000000000000 
+				   		where cuso_member_no &lt; 2000000000
 			   		</if>
 			   		<if test='cusoMemberNo.equals("0")'>
-				   		where cuso_member_no &gt; 2000000000000
+				   		where cuso_member_no &gt; 2000000000
 			   		</if>
 			   		<if test='cusoMemberNo.equals("-2")'></if>
 			   	</if>
@@ -140,10 +140,10 @@
 		   	<if test="mgrName == null">
 			   	<if test="mgrLevel == 1">
 			   		<if test='cusoMemberNo.equals("-1")'>
-				   		where cuso_member_no &lt; 2000000000000  and cuso_branch = #{mgrName}
+				   		where cuso_member_no &lt; 2000000000 and cuso_branch = #{mgrName}
 			   		</if>
 			   		<if test='cusoMemberNo.equals("0")'>
-				   		where cuso_member_no &gt; 2000000000000 and cuso_branch = #{mgrName}
+				   		where cuso_member_no &gt; 2000000000 and cuso_branch = #{mgrName}
 			   		</if>
 			   		<if test='cusoMemberNo.equals("-2")'>
 				   		where cuso_branch = #{mgrName}
@@ -165,10 +165,10 @@
    		<if test="mgrName != null">
 		   	<if test="mgrLevel != 1">
 		   		<if test='cusoMemberNo.equals("-1")'>
-			   		select count(*) from cusorder where cuso_member_no != 0 and cuso_branch = #{mgrName}
+			   		select count(*) from cusorder where cuso_member_no &lt; 2000000000 and cuso_branch = #{mgrName}
 		   		</if>
 		   		<if test='cusoMemberNo.equals("0")'>
-			   		select count(*) from cusorder where cuso_member_no = 0 and cuso_branch = #{mgrName}
+			   		select count(*) from cusorder where cuso_member_no &gt; 2000000000 and cuso_branch = #{mgrName}
 		   		</if>
 		   		<if test='cusoMemberNo.equals("-2")'>
 			   		select count(*) from cusorder where cuso_branch = #{mgrName}
@@ -176,10 +176,10 @@
 		   	</if>
 		   	<if test="mgrLevel == 1">
 		   		<if test='cusoMemberNo.equals("-1")'>
-			   		select count(*) from cusorder where cuso_member_no != 0 
+			   		select count(*) from cusorder where cuso_member_no &lt; 2000000000 
 		   		</if>
 		   		<if test='cusoMemberNo.equals("0")'>
-			   		select count(*) from cusorder where cuso_member_no = 0
+			   		select count(*) from cusorder where cuso_member_no &gt; 2000000000
 		   		</if>
 		   		<if test='cusoMemberNo.equals("-2")'>
 			   		select count(*) from cusorder
@@ -189,10 +189,10 @@
 	   	<if test="mgrName == null">
 		   	<if test="mgrLevel == 1">
 		   		<if test='cusoMemberNo.equals("-1")'>
-			   		select count(*) from cusorder where cuso_member_no != 0 and cuso_branch = #{mgrName}
+			   		select count(*) from cusorder where cuso_member_no &lt; 2000000000 and cuso_branch = #{mgrName}
 		   		</if>
 		   		<if test='cusoMemberNo.equals("0")'>
-			   		select count(*) from cusorder where cuso_member_no = 0 and cuso_branch = #{mgrName}
+			   		select count(*) from cusorder where cuso_member_no &gt; 2000000000 and cuso_branch = #{mgrName}
 		   		</if>
 		   		<if test='cusoMemberNo.equals("-2")'>
 			   		select count(*) from cusorder where cuso_branch = #{mgrName}

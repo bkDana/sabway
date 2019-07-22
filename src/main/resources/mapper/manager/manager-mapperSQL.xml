@@ -177,7 +177,7 @@
    			<if test="keyword.equals('주소')">
 	   			select count(*) from manager where mgr_addr like '%'||#{text}||'%' and mgr_level = 0 
 	   		</if>
-   			<if test="keyword.equals('이름')">
+   			<if test="keyword.equals('가맹점주 이름')">
 	   			select count(*) from manager where mgr_boss_name like '%'||#{text}||'%' and mgr_level = 0 
 	   		</if>
    		</if>
@@ -190,7 +190,7 @@
 			   		<if test="keyword.equals('주소')">
 			   			select count(*) from manager where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
 			   		</if>
-		   			<if test="keyword.equals('이름')">
+		   			<if test="keyword.equals('가맹점주 이름')">
 			   			select count(*) from manager where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
 			   		</if>
 		   		</otherwise>
@@ -218,7 +218,7 @@
    			<if test="keyword.equals('주소')">
 	   			where mgr_addr like '%'||#{text}||'%' and mgr_level = 0 
 	   		</if>
-   			<if test="keyword.equals('이름')">
+   			<if test="keyword.equals('가맹점주 이름')">
 	   			where mgr_boss_name like '%'||#{text}||'%' and mgr_level = 0 
 	   		</if>
    		</if>
@@ -226,7 +226,7 @@
 	   		<if test="keyword.equals('주소')">
 	   			where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
 	   		</if>
-   			<if test="keyword.equals('이름')">
+   			<if test="keyword.equals('가맹점주 이름')">
 	   			where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
 	   		</if>
   		</if>
