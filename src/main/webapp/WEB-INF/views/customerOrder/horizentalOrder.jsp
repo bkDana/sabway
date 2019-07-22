@@ -304,7 +304,7 @@ var myform=new formtowizard({
 				<div class="content-outlin-box">
 					<div class="common-tbl-btn-group">
 						<button type="button" class="btn-style4 hidden-space-btn">숨기기</button><br>
-					</div>				
+					</div>
 					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 						<c:if test="${ingre.ingreType eq '채소' and ingre.ingreActive eq '1' }">
 							<div class="vegi img-box">
