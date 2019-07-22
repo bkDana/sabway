@@ -82,7 +82,7 @@ public class MgrService {
 			pageNavi +="<a href='/findStore.do?status=22"+"&currentPage="+(currentPage+1)+"'>다음</a>";
 		}
 		
-		return new StorePageNaviData(storeList,pageNavi);
+		return new StorePageNaviData(storeList,pageNavi, totalCount);
 	}
 	// 전체매장 select 필터 검색 페이징
 	@SuppressWarnings("unchecked")
@@ -120,7 +120,7 @@ public class MgrService {
 				pageNavi +="<a onclick='applyArea("+area+","+(pageNo+1)+"\","+type+")'>다음</a>";
 			}
 			
-			return new StorePageNaviData(storeList,pageNavi);
+			return new StorePageNaviData(storeList,pageNavi, totalCount);
 		}
 	//신규가맹점 목록
 	public List<Mgr> newStoreList() {

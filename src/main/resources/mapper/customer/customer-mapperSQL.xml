@@ -102,7 +102,7 @@
        select count(*) as cnt from customer 
        <trim prefix="where" prefixOverrides="AND|OR">
        <!-- 회원상태를 선택했을 경우 -->
-		<if test="customerState != '-1' and customerState != null">
+		<if test="customerState != null and customerState != '-1'">
 			customer_state=#{customerState}
 		</if>
 		<!-- 아이디로 찾는 경우 -->

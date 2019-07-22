@@ -67,20 +67,30 @@ public class CustomerServiceImpl implements CustomerService{
    //회원리스트
    @Override
    public CustPageNaviData allCustomerList(int reqPage, String customerState, String cusIdName, String keyword) {
-	   int numPerPage = 10;
+	    customerState = (customerState == null || "".equals(customerState))? "-1" : customerState;
+	    keyword = (keyword == null)? "" : keyword;
+	    
+        int numPerPage = 10;
+        
 		int totalCount = customerdao.custTotalCount(customerState, cusIdName, keyword);
 		System.out.println("totalCount: "+totalCount);
+		
 		int totalPage = (totalCount%numPerPage==0)?(totalCount/numPerPage):(totalCount/numPerPage)+1;
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
+		
 		PageBound pb = new PageBound(start, end);
 		ArrayList<Customer> custList = (ArrayList<Customer>)customerdao.allCustomerList(pb,customerState, cusIdName,keyword);
+		
+		
 		System.out.println("custList() service : "+ custList.size());
+		
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
 		if(pageNo != 1) {
-			pageNavi += "<a class='paging-arrow prev-arrow' href='/allCustomerList.do?reqPage="+(pageNo-1)+"&customerState="+customerState+"&cusIdName="+cusIdName+"&keyword="+keyword+"'"+pageNo+"'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
+			pageNavi += "<a class='paging-arrow prev-arrow' href='/allCustomerList.do?reqPage="+(pageNo-1)+"&customerState="+Integer.parseInt(customerState)+"&cusIdName="+cusIdName+"&keyword="+keyword+"'"+pageNo+"'><img src='/resources/img/left_arrow.png' style='width:30px;height:30px;'></a>";
 		}
 		int i = 1;
 		while(!(i++>pageNaviSize || pageNo>totalPage)) {

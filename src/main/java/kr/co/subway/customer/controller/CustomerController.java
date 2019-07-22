@@ -243,6 +243,8 @@ public class CustomerController {
 		  reqPage1=1;
 	  }
 	  CustPageNaviData cp = customerService.allCustomerList(reqPage1, customerState, cusIdName, keyword);
+	  
+	  
       ArrayList<Customer> list = cp.getCustList();
       String pageNavi = cp.getPageNavi();
 	  mav.addObject("reqPage",reqPage1);

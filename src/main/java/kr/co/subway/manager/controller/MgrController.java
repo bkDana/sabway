@@ -399,11 +399,11 @@ public class MgrController {
 		String keyword = area;
 		System.out.println(keyword);
 		System.out.println("type : " + type);
-		if(type.equals("1")) {
-			keyword = keyword+"%";
-		}else if(type.equals("2")) {
-			keyword ="% "+keyword+" %";
-		}
+//		if(type.equals("1")) {
+//			keyword = keyword+"%";
+//		}else if(type.equals("2")) {
+//			keyword ="% "+keyword+" %";
+//		}
 		//ArrayList<Mgr> allSearchKeyword = (ArrayList<Mgr>) mgrservice.searchStore(keyword);
 		int currentPage1;
 		try {

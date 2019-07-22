@@ -304,7 +304,7 @@
 <div class="area">
 	<div class="sub-menu" style="font-size: 30px">전체매장</div>
 	
-		<p class="search_total">총 <strong id="uiResultCount">${totalCnt}</strong>개 매장이 있습니다.</p>
+		<p class="search_total">총 <strong id="uiResultCount">${totalCnt }</strong>개 매장이 있습니다.</p>
 		
 		<div class="cont_right">
 			<div class="form_select" style="width:196px;">
@@ -394,6 +394,7 @@
 	
 	//전체매장 select 필터
 	function applyArea(area,currPage,type){
+		
 		$.ajax({
 			url : "/allSearchKeyword.do",
 			data : {area:area,currentPage:currPage,type:type},
@@ -403,39 +404,44 @@
 				$(".searchTr").remove();
 				$(".searchList").next().text("");
 				
-					var index = data.storeList.length;
-					console.log(index);
-					if(index == 0){
-						$("#storeTr").remove();
-						$("#uiResultCount").text(index);
-						$("#searchViewTbl").append("<tr id='storeTr'><td colspan='5'>검색 결과가 없습니다.</td></tr>");
-						return;
-					}
+				var index = data.storeList.length;
+				console.log(index);
+				if(index == 0){
+					$("#storeTr").remove();
+					$("#uiResultCount").text(index);
+					$("#searchViewTbl").append("<tr id='storeTr'><td colspan='5'>검색 결과가 없습니다.</td></tr>");
+					return;
+				}
+				$("#uiResultCount").text(data.totalCnt);
+					
 				for(var i=0; i<data.storeList.length; i++){
 					$("#searchViewTbl").append("<tr style='height:60px' class='searchTr'><td style='color:#ffc300;font-weight: bold;'id='search"+i+"'>"+data.storeList[i].rnum+"</td><td>"+data.storeList[i].mgrName+"</td><td>"+data.storeList[i].mgrAddr+"</td><td>"+data.storeList[i].mgrBossName+"</td><td style='color:#bbbbbb'>"+data.storeList[i].mgrTel+"</td></tr>");
-					$("#uiResultCount").text(index);
 				}
 				$(".paging").html(data.pageNavi);
 			}
 			
-		})
+		});
 	}
 	
 	
 	
 	$(document).ready(function(){
-		$("#applyArea").change(function(){
+	/* 	$("#applyArea").change(function(){
+			
+			
 
-			var area = $(this).val();
+			var area = $("#applyArea").val() + "%" +$("#applyArea2").val() + "%";
 
 			applyArea(area,1,1);
 
-		})
+		}) */
 		
 		$("#applyArea2").change(function(){
+			
+			var area = $("#applyArea").val() + "%" +$("#applyArea2").val() + "%";
 
-			var area = $(this).val();
-			applyArea(area,1,2);
+			/* var area = $(this).val();*/
+			applyArea(area,1,2); 
 		})
 		
 	})
@@ -818,6 +824,11 @@
 				$("#applyArea2").append("<option value='횡성군'>횡성군</option>");
 			
 		 	}
+		 	
+		 	
+		 	var area = $("#applyArea").val() + "%";
+
+			applyArea(area,1,1);
 		
 		})
 	})
