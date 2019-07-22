@@ -679,18 +679,18 @@ $(document).ready(function() {
 				for(var k=0; k<4; k++){
 					if($('.vegi').eq(i).find("button").eq(k).hasClass("select-vegi")){
 						if(k==0){
-							strKorea += $('.topping').eq(i).find('p').text()+":없음,";
+							strKorea += $('.vegi').eq(i).find('p').text()+":없음,";
 						}else if(k==1){
-							strKorea += $('.topping').eq(i).find('p').text()+":적게,";
+							strKorea += $('.vegi').eq(i).find('p').text()+":적게,";
 						}else if(k==2){
-							strKorea += $('.topping').eq(i).find('p').text()+":보통,";
+							strKorea += $('.vegi').eq(i).find('p').text()+":보통,";
 						}else if(k==3){
-							strKorea += $('.topping').eq(i).find('p').text()+":많이,";
+							strKorea += $('.vegi').eq(i).find('p').text()+":많이,";
 						}
 					}
 				}
 			}else{
-				strKorea += $('.topping').eq(i).find('p').text()+":보통,";
+				strKorea += $('.vegi').eq(i).find('p').text()+":보통,";
 			}
 		}
 		strKorea = strKorea.substr(0, strKorea.length -1);
@@ -918,6 +918,11 @@ $(document).ready(function() {
 		$('input[name=bucCost]').val(cost);
 		$('input[name=bucKcal]').val(kcal);
 		$('input[name=bucQuantity]').val('1');
+		
+		for(var i=0; i<$('.orderInput').length; i++){
+			console.log($('.orderInput').eq(i).val());
+		}
+		
 		for(var i=0; i<13; i++){
 			if(!$('.orderInput').eq(i).val()){
 				alert("주문절차를 확인해주세요.");
