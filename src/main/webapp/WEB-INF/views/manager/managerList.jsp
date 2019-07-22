@@ -182,9 +182,6 @@
 			var status1 = $(this).parent().children().eq(0).children().eq(0).val();
 			if(status1 == null){
 				var status1 = -1;
-			}else if(status1 == '상태분류'){
-				alert();
-				
 			}
 			location.href="/searchKeyword.do?keyword="+keyword+"&text="+text+"&status1="+status1+"&currentPage=''";
 		});
