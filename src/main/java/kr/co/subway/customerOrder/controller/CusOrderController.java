@@ -117,7 +117,8 @@ public class CusOrderController {
 			customerIdx = String.valueOf(c.getCustomerNo());
 		} else {
 			Cookie[]getCookie = request.getCookies();
-			customerIdx = getCookie[1].getValue();
+			customerIdx = getCookie[2].getValue();
+			System.out.println("비회원 임시번호 " + customerIdx);
 		}
 
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx);

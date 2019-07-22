@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert("회원정보가 없습니다.");
+		alert("아이디/비밀번호를 확인해주세요.");
 		location.href="/loginAdmin.do";
 	</script>
 </body>

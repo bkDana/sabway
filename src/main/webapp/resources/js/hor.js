@@ -4,7 +4,7 @@ $(document).ready(function() {
 //	var innerHtml = getCookie("cookieHtml");
 //	console.log(innerHtml);
 //	$('.show-order').eq(addStatus).html(innerHtml);
-	var co = getCookie('noneCustomer');
+	var co = getCookie('sabwayNoneCustomer');
 	console.log("두번째쿠키 : "+co);
 	var typeStatus = 0;
 });
@@ -38,6 +38,7 @@ $(document).ready(function() {
 			$(".step").eq(stepIdx).trigger("click");			
 		}
 	});
+	
 	$('.next-btn').click(function(){
 		var stepIdx = $('.next-btn').index(this)+1;
 		if(!$('.orderInput').eq(stepIdx-1).val() && !$(this).hasClass("many")){
@@ -106,7 +107,25 @@ $(document).ready(function() {
 	$('.vegi').find('button').mouseleave(function(){
 		$(this).css("color","#fff");
 	});
-	clearAllfn = function clearAllfn(current){
+	
+	clearAllfn = function clearAllfn(current,tdIdx,inputIdx){
+		console.log('td : ' +tdIdx);
+		console.log('input : ' +inputIdx);
+		if(inputIdx<2){
+			cost = 0;
+			$('.show-order').eq(addStatus).find('td').eq(0).text(cost+" 원");
+		}
+		var delTd = $('.show-order').eq(addStatus).find('td');
+		if(tdIdx>0){
+			for(var i=tdIdx+1;i<11;i++){
+				//console.log("i값 체크"+i);
+				delTd.eq(i).remove();
+				delTd.eq(i).remove();
+			}
+		}
+		for(var i=inputIdx+1;i<11;i++){
+			$('.orderInput').eq(i).val("");
+		}
 		for(var all=current;all<$('.img-box').length;all++){
 			if($('.img-box').eq(all).hasClass("selected")){
 				$('.img-box').eq(all).removeClass("selected");
@@ -149,7 +168,7 @@ $(document).ready(function() {
 			$('.show-order').eq(addStatus).append(showCostStr);
 		}
 		
-		clearAllfn(2);
+		clearAllfn(2,1,0);
 		typeIdx = $('.type').index(this)+1;
 		if(typeIdx==1){
 			for(var mv=0; mv<$('.main').length;mv++){
@@ -268,7 +287,7 @@ $(document).ready(function() {
 		var breadParent = $(this).parent().parent();
 		var pareIdx = $('.bread').index(breadParent);
 		var first = 2+$('.bread').length;
-		clearAllfn(first);
+		clearAllfn(first,2,1);
 		
 		for(var t=0; t<$('.bread-amount').length; t++){
 			if($('.bread-amount').eq(t).hasClass("select-bread")){
@@ -361,7 +380,7 @@ $(document).ready(function() {
 		var str = $(this).find('p').text();
 		var mainIdx = $('.main').index(this);
 		var first = 2+$('.bread').length+$('.main').length+$('.salad').length;
-		clearAllfn(first);
+		clearAllfn(first,3,2);
 		for(var i=0; i<$('.main').length;i++){
 			if(i!=mainIdx && $('.main').eq(i).hasClass("selected")){
 				$('.main').eq(i).removeClass("selected");
@@ -427,7 +446,7 @@ $(document).ready(function() {
 		var str = $(this).find('p').text();
 		var mainIdx = $('.salad').index(this);
 		var first = 2+$('.bread').length+$('.main').length+$('.salad').length;
-		clearAllfn(first);
+		clearAllfn(first,3,2);
 		for(var i=0; i<$('.salad').length;i++){
 			if(i!=mainIdx && $('.salad').eq(i).hasClass("selected")){
 				$('.salad').eq(i).removeClass("selected");
@@ -486,7 +505,7 @@ $(document).ready(function() {
 		var str = $(this).find('p').text();
 		var mainIdx = $('.cheese').index(this);
 		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length;
-		clearAllfn(first);
+		clearAllfn(first,4,3);
 		for(var i=0; i<$('.cheese').length;i++){
 			if(i!=mainIdx && $('.cheese').eq(i).hasClass("selected")){
 				$('.cheese').eq(i).removeClass("selected");
@@ -556,7 +575,8 @@ $(document).ready(function() {
 	$('.topping-check').click(function(){
 		var strKorea = "";
 		var noCount = 0;
-		
+		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length+$('.topping').length;
+		clearAllfn(first,5,4);
 		for(var i = 1; i<$('.topping').length;i++){
 			if($('.topping').eq(i).hasClass("selected")){
 				noCount++;
@@ -619,7 +639,7 @@ $(document).ready(function() {
 		var idx = $('.oven').index(this);
 		var mainIdx = $('.oven').index(this);
 		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length+$('.topping').length+2;
-		clearAllfn(first);
+		clearAllfn(first,0,5);
 		for(var i=0; i<2;i++){
 			if(i!=mainIdx && $('.oven').eq(i).hasClass("selected")){
 				$('.oven').eq(i).removeClass("selected");
@@ -653,7 +673,7 @@ $(document).ready(function() {
 		var vegiParent = $(this).parent().parent();
 		var pareIdx = $('.vegi').index(vegiParent);
 		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length+$('.topping').length+2+$('.vegi').length;
-		clearAllfn(first);
+		clearAllfn(first,0,6);
 		$('.vegi').eq(pareIdx).addClass("selected");	
 		$('.vegi').eq(pareIdx).unbind("mouseleave");
 		$(this).unbind("mouseleave");
@@ -679,18 +699,18 @@ $(document).ready(function() {
 				for(var k=0; k<4; k++){
 					if($('.vegi').eq(i).find("button").eq(k).hasClass("select-vegi")){
 						if(k==0){
-							strKorea += $('.topping').eq(i).find('p').text()+":없음,";
+							strKorea += $('.vegi').eq(i).find('p').text()+":없음,";
 						}else if(k==1){
-							strKorea += $('.topping').eq(i).find('p').text()+":적게,";
+							strKorea += $('.vegi').eq(i).find('p').text()+":적게,";
 						}else if(k==2){
-							strKorea += $('.topping').eq(i).find('p').text()+":보통,";
+							strKorea += $('.vegi').eq(i).find('p').text()+":보통,";
 						}else if(k==3){
-							strKorea += $('.topping').eq(i).find('p').text()+":많이,";
+							strKorea += $('.vegi').eq(i).find('p').text()+":많이,";
 						}
 					}
 				}
 			}else{
-				strKorea += $('.topping').eq(i).find('p').text()+":보통,";
+				strKorea += $('.vegi').eq(i).find('p').text()+":보통,";
 			}
 		}
 		strKorea = strKorea.substr(0, strKorea.length -1);
@@ -744,7 +764,7 @@ $(document).ready(function() {
 	
 	$('.source').click(function(){
 		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length+$('.topping').length+2+$('.vegi').length+$('.source').length;
-		clearAllfn(first);
+		clearAllfn(first,6,7);
 		//해즈클래스 주고 이때마다 가격계산 코스트도 여기서 넣어줌. 그러면 수정할때도 가능. 
 		if($(this).hasClass("selected")){
 			if(breadCheck==1){
@@ -797,7 +817,7 @@ $(document).ready(function() {
 		var str = $(this).find('p').text();
 		var mainIdx = $('.set').index(this);
 		var first = 2+$('.bread').length+$('.main').length+$('.salad').length+$('.cheese').length+$('.topping').length+2+$('.vegi').length+$('.source').length+$('.set').length;
-		clearAllfn(first);
+		clearAllfn(first,7,8);
 		for(var i=0; i<$('.set').length;i++){
 			if(i!=mainIdx && $('.set').eq(i).hasClass("selected")){
 				kcal -= Number($('.set').eq(i).find('input').eq(0).val());
@@ -884,7 +904,7 @@ $(document).ready(function() {
 
 	$('.order-check').click(function(){
 		if(canAdd==1){
-			alter("추가주문을 원하시면 아래 버튼을 눌러주세요.")
+			alert("추가주문을 원하시면 아래 버튼을 눌러주세요.")
 			return;
 		}
 		
@@ -918,10 +938,15 @@ $(document).ready(function() {
 		$('input[name=bucCost]').val(cost);
 		$('input[name=bucKcal]').val(kcal);
 		$('input[name=bucQuantity]').val('1');
+		
+		for(var i=0; i<$('.orderInput').length; i++){
+			console.log($('.orderInput').eq(i).val());
+		}
+		
 		for(var i=0; i<13; i++){
 			if(!$('.orderInput').eq(i).val()){
 				alert("주문절차를 확인해주세요.");
-				clearAllfn(0);
+				clearAllfn(0,8,9);
 				var resetCostStr = $('.show-order').last().find('td').eq(0).text();
 				var resetCost = Number(resetCostStr.substr(0, resetCostStr.length-2));
 				totalCost -= resetCost;
@@ -934,7 +959,7 @@ $(document).ready(function() {
 				return;
 			}				
     	}
-		var cookieVal = getCookie('noneCustomer');
+		var cookieVal = getCookie('sabwayNoneCustomer');
 		$('#cookie').val(cookieVal);
 		console.log($('#cookie').val());
 		var form = $("form[name=feedbackform]")[0];
@@ -965,6 +990,7 @@ $(document).ready(function() {
         		$('.show-order').eq(addStatus).append(orderCheckStr);
         		canAdd=1;
         		totalCost += cost;
+        		check = true;
         		$('.show-total-cost').eq(0).text("Total : "+totalCost+" 원");
             },
         });
@@ -999,10 +1025,13 @@ $(document).ready(function() {
 	}
 	
 	function deleteOrder(idx){
+		if($('.show-order').eq(addStatus).find('td').length<11 && $('.show-order').eq(addStatus).find('td').length>0){
+			return;
+		}
 		var delCostStr = $(idx).parent().parent().find('td').eq(0).text();
 		var delCost = Number(delCostStr.substr(0, delCostStr.length-2));
 		
-		clearAllfn(0);
+		clearAllfn(0,0);
 		var delIdx = $(idx).next().val();
 		$.ajax({
         	url : "/tempOrderDelete.do",
@@ -1016,6 +1045,8 @@ $(document).ready(function() {
 		var newTr = "<tr class='show-order'></tr>";
     	$('.order-view-tbl').append(newTr);
 		totalCost -= delCost;
+		cost=0;
+    	kcal=0;
 		$('.show-total-cost').eq(0).text("Total : "+totalCost+" 원");
 		var offset = $("strong").eq(0).offset();
         $('html, body').animate({scrollTop : offset.top}, 400);
@@ -1023,11 +1054,13 @@ $(document).ready(function() {
 	}
 	
 	function addOrderfn(){
+		
     	if(canMoveBucket==0){
 			return;
 		}
     	canAdd=0;
-    	clearAllfn(0);
+    	check = false;
+    	clearAllfn(0,0);
     	for(var i=0; i<13; i++){
 			$('.orderInput').eq(i).val("");				
     	}

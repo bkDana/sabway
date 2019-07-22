@@ -42,7 +42,7 @@
 		</li>
 	</ul>
 </nav>
-<%}else if(pname[6].equals("customerProfile.jsp")||pname[6].equals("myMenuList.jsp")){ %>
+<%}else if(pname[6].equals("customerProfile.jsp")||pname[6].equals("myMenuList.jsp")||pname[6].equals("oneCusOrder.jsp")){ %>
 <!-- 마이페이지 : 서브 -->
 <nav id="sub" class="basic-sub">
 	<div id="subBg"></div>
@@ -51,7 +51,7 @@
 			<a href="/customerProfile.do" class="<%if(pname[6].equals("customerProfile.jsp")){ %>on<%}%>">회원정보</a>
 		</li>
 		<li>
-			<a href="/loadOrderList.do" class="<%if(pname[5].equals("qna")){ %>on<%}%>">주문내역</a>
+			<a href="/loadOrderList.do" class="<%if(pname[6].equals("oneCusOrder.jsp")){ %>on<%}%>">주문내역</a>
 		</li>
 		<li>
 			<a href="/loadMyMenu.do" class="<%if(pname[6].equals("myMenuList.jsp")){ %>on<%}%>">나만의 메뉴</a>

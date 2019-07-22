@@ -3,7 +3,6 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- Header --%>
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> <!-- 아임포트 api 추가 -->
 <script type="text/javascript" src="/resources/js/bucket.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <jsp:include page="/WEB-INF/views/common/sub.jsp" /><!-- 서브메뉴 추가했습니다 -->
@@ -71,15 +70,15 @@
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<tr>
 				<td class="bucketOption">
-						<span id="bread">빵 : ${bucket.bucBread }</span><br>
-						<span id="main">메인재료 : ${bucket.bucMain }&nbsp;${bucket.bucIsSalad }</span><br>
-						<span id="cheese">치즈 : ${bucket.bucCheese }</span><br>
-						<span id="topping"></span><br>
-						<span id="oven"></span><br>
-						<span id="vegi"></span><br>
-						<span id="source"></span><br>
-						<span id="set">세트종류 : ${bucket.bucSet }</span><br>
-						<span id="side"></span>
+						<span class="bread">빵 : ${bucket.bucBread }</span><br>
+						<span class="main">메인재료 : ${bucket.bucMain }&nbsp;${bucket.bucIsSalad }</span><br>
+						<span class="cheese">치즈 : ${bucket.bucCheese }</span><br>
+						<span class="topping"></span><br>
+						<span class="oven"></span><br>
+						<span class="vegi"></span><br>
+						<span class="source"></span><br>
+						<span class="set">세트종류 : ${bucket.bucSet }</span><br>
+						<span class="side"></span>
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
 				<td><span class="menuCost">${bucket.bucCost }</span>원</td>
