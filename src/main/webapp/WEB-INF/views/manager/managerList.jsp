@@ -154,11 +154,7 @@
 	</div> 
 </section>
 <script type="text/javascript">
-	$(document).ready(function()
-		$('[name=selectKeyword]').change(function(){
-			$(this).attr("selected","selected");
-		});
-	
+	$(document).ready(function(){
 		//상태변경(오픈)
 		$(".onBtn").click(function(){
 			var mgrStatus = $(this).val();
@@ -182,9 +178,6 @@
 			var status1 = $(this).parent().children().eq(0).children().eq(0).val();
 			if(status1 == null){
 				var status1 = -1;
-			}else if(status1 == '상태분류'){
-				alert();
-				
 			}
 			location.href="/searchKeyword.do?keyword="+keyword+"&text="+text+"&status1="+status1+"&currentPage=''";
 		});
