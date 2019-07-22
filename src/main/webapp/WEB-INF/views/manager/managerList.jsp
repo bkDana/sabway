@@ -65,14 +65,19 @@
 						</c:choose>
 					</option>
 	 			</c:if>
-				<c:if test="${status != 1 && status != 2 && status != 3  }">
-					<option selected="selected" disabled="disabled">상태분류</option>
-				</c:if>
 				<option id="open" value=2>영업</option>
 				<option id="prepare" value=1>준비</option>
 				<option id="close" value=3>폐업</option>
 			</select>&nbsp;
 			<select name="selectKeyword">
+				<c:if test="${keyword eq '이름' || keyword eq '주소'}">
+					<option selected="selected" disabled="disabled">
+						<c:choose>
+							<c:when test="${keyword eq '이름' }"><span>이름</span></c:when>
+							<c:when test="${keyword eq '주소' }"><span>주소</span></c:when>
+						</c:choose>
+					</option>
+				</c:if>
 				<option id="name" value="이름">이름</option>
 				<option id="addr" value="주소">주소</option>
 			</select>&nbsp;
@@ -179,7 +184,10 @@
 			if(status1 == null){
 				var status1 = -1;
 			}
-			location.href="/searchKeyword.do?keyword="+keyword+"&text="+text+"&status1="+status1+"&currentPage=''";
+			else if(keyword == null){
+				var keyword = $(this).prev().prev().children().eq(0).val();
+			}
+			location.href="/searchKeyword2.do?keyword="+keyword+"&text="+text+"&status1="+status1+"&currentPage=''";
 		});
  		//상태별 분류
 		$("[name=statusGroup]").on("change",function(){
@@ -189,7 +197,10 @@
 			if(status1 == null){
 				var status1 = -1;
 			}
-			location.href="/searchKeyword.do?status1="+status1+"&keyword="+keyword+"&text="+text+"&currentPage=''";
+			else if(keyword == null){
+				var keyword = $(this).next().children().eq(0).val();
+			}
+			location.href="/searchKeyword2.do?status1="+status1+"&keyword="+keyword+"&text="+text+"&currentPage=''";
 		});
 	});
 </script>
