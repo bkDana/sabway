@@ -6,9 +6,22 @@
 
 <style>
 	.doubleChk{
+		margin-top: 10px;
 		height: 30px;
 	    padding: 0 10px;
 	    border-radius: 5px;
+	    float: right;
+	    background-color: #747474;
+	    color: #fff;
+	    margin-left: 5px;
+	}
+	.emailBtn1{
+		margin-top: 10px;
+		width: 67px;
+		height: 30px;
+	    padding: 0 10px;
+	    border-radius: 5px;
+	    float: right;
 	    background-color: #747474;
 	    color: #fff;
 	    margin-left: 5px;
@@ -21,87 +34,221 @@
 	    color: #fff;
 	    margin-left: 5px;
 	}
+	.area1 {
+	    max-width: 1900px;
+	    margin: 0px auto;
+	}
+	.inquiry_wrapper {
+	    background-color: #fff;
+	    width: 1028px;
+	    margin: 0 auto;
+	    border: 1px solid #e8e8e8;
+	    padding: 0 70px 49px;
+	}
+	.enroll_wrapper {
+    	position: relative;
+	}
+	.enroll_wrapper th {
+	    font-weight: 300;
+	    color: #666666;
+	    font-size: 16px;
+	    height: 21px;
+	    padding-top: 24px;
+	    border-bottom: 1px solid #e8e8e8;
+	    text-align: left;
+	    vertical-align: top;
+	}
+	label {
+    	cursor: pointer;
+	}
+	.enroll_wrapper th .ess {
+	    background: url(/resources/img/main/icon_ess.png) 0 0 no-repeat;
+	    width: 7px;
+	    height: 6px;
+	    display: inline-block;
+	    vertical-align: middle;
+	    position: relative;
+	    margin-left: 4px;
+	    top: -2px;
+	}
+	.enroll_wrapper td {
+	    height: 45px;
+	    padding: 12px 0;
+	    border-bottom: 1px solid #e8e8e8;
+	}
+	.form_text {
+	    background-color: #f8f8f8;
+	    display: inline-block;
+	}
+	.form_text input {
+	    width: 100%;
+	    border: 0;
+	    background: transparent;
+	    height: 45px;
+	    color: #292929;
+	    font-size: 16px;
+	    text-indent: 15px;
+	}
+	.form_select {
+	    display: inline-block;
+	    vertical-align: middle;
+	    overflow: hidden;
+	    position: relative;
+	    border: 2px solid #dddddd;
+	}
+	.form_select1 {
+	    display: inline-block;
+	    vertical-align: middle;
+	    overflow: hidden;
+	    position: relative;
+	    border: 2px solid #dddddd;
+	}
+	.form_select select {
+	    width: 100%;
+	    border: 0;
+	    height: 41px;
+	    line-height: 41px;
+	    font-size: 16px;
+	    color: #999999;
+	    position: relative;
+	    z-index: 1;
+	    text-indent: 9px;
+	    -webkit-appearance: none;
+	}
+	.form_select:before {
+	    content: '';
+	    position: absolute;
+	    right: 13px;
+	    top: 18px;
+	    width: 12px;
+	    height: 7px;
+	    background: url(/resources/img/main/icon_select_arr.png) 0 0 no-repeat;
+	    z-index: 3;
+	}
+	.join-btn {
+	    background-color: #009223;
+	    color: #fff;
+	    font-size: 18px;
+	    font-weight: bold;
+	    text-align: center;
+	    display: inline-block;
+	    vertical-align: middle;
+	    border-radius: 30px;
+	    transition-duration: 0.2s;
+	    margin-top: 2%;
+    	margin-bottom: -2%;
+	}
 </style>
 
 
 <section id="content-wrapper">
-	<div class="area">
-	<h1 class="comm-content-tit">회원가입</h1>
+	<div class="area1">
+		<div class="inquiry_wrapper">
+	<h1 class="comm-content-tit" style="margin-top: 50px;">회원가입</h1>
 		<form id="enrollForm" action="/enroll.do" method="post">
-			<div class="common-tbl-box">
+			<div class="enroll_wrapper">
 		    	<input type="hidden" id="isChk" value="0">
 	      
-			    <table class="comm-tbl type2">
+			    <table style="width:1028px">
+				    <colgroup>
+				    	<col width= "130px">
+				    	<col width="/">
+				    	
+				    </colgroup>
 			         <tr>
-			            <td><label for="userId">아이디</label></td>
-			            <td><input class="inputBox" type="text" id="customerId" name="customerId"  maxlength="16"><button type="button" id="idChk" class="doubleChk">중복확인</button><br><span id="idMsg"></span></td>
+			            <th scope="col"><label for="userId">아이디</label><span class="ess"></span></th>
+			            <td><span class="form_text" style="width: 91%"><input class="inputBox" type="text" id="customerId" name="customerId"  maxlength="16"></span><button type="button" id="idChk" class="doubleChk">중복확인</button><br><span id="idMsg"></span></td>
 			         </tr>
 			         <tr>
-			            <td><label for="userPw">비밀번호</label></td>
-			            <td><input class="inputBox" type="password" id="customerPw" name="customerPw"  maxlength="16"><br><span id="pwMsg"></span><p style="font-size: 12px; height: 20px;">※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-</p></td>
-			         </tr>
-			         <tr>
-			            <td><label for="userPwre">비밀번호 확인</label></td>
-			            <td><input class="inputBox" type="password" id="customerPwre" name="customerPwre"  maxlength="16"><br><span id="pwreMsg"></span></td>
-			         </tr>
-			         <tr>
-			            <td><label for="userName">이름</label></td>
-			            <td><input class="inputBox" type="text" id="customerName" name="customerName"  maxlength="16"><br><span id="nameMsg"></span></td>
-			         </tr>
-			         <tr>
-			            <td><label for="userNick">닉네임</label></td>
-			            <td><input class="inputBox" type="text" id="customerNick" name="customerNick"  maxlength="16"><button type="button" id="nickChk" class="doubleChk" >중복확인</button><br><span id="nickMsg"></span></td>
-			         </tr>
-			         <tr>
+			            <th scope="col"><label for="userPw">비밀번호</label><span class="ess"></span></th>
 			            <td>
-			               <label for="email">E-Mail</label>
+				            <span class="form_text" style="width: 100%"><input class="inputBox" type="password" id="customerPw" name="customerPw"  maxlength="16"></span><br><span id="pwMsg"></span>
+				            <p style="font-size: 13px; height: 20px;color: #999999;margin-left: 25px; margin-top: 15px;">
+				            ※ 영문+숫자+특수문자 조합하여 8~16자로 입력해 주세요. 사용 가능한 특수기호: ~!@$%^&*/?#+_-
+				            </p>
 			            </td>
+			         </tr>
+			         <tr>
+			            <th scope="col"><label for="userPwre">비밀번호 확인</label><span class="ess"></span></th>
+			            <td><span class="form_text" style="width: 100%"><input class="inputBox" type="password" id="customerPwre" name="customerPwre"  maxlength="16"></span><br><span id="pwreMsg"></span></td>
+			         </tr>
+			         <tr>
+			            <th scope="col"><label for="userName">이름</label><span class="ess"></span></th>
+			            <td><span class="form_text" style="width: 100%"><input class="inputBox" type="text" id="customerName" name="customerName"  maxlength="16"></span><br><span id="nameMsg"></span></td>
+			         </tr>
+			         <tr>
+			            <th scope="col"><label for="userNick">닉네임</label><span class="ess"></span></th>
+			            <td><span class="form_text" style="width: 91%"><input class="inputBox" type="text" id="customerNick" name="customerNick"  maxlength="16"></span><button type="button" id="nickChk" class="doubleChk" >중복확인</button><br><span id="nickMsg"></span></td>
+			         </tr>
+			         <tr>
+			            <th scope="col">
+			               <label for="email">E-Mail</label>
+			               <span class="ess"></span>
+			            </th>
 			            <td>
-			               	<input class="inputBox" type="text" id="email" name="email" style="width:50%" maxlength="20">
+			            	<span class="form_text" style="width: 91%">
+			               		<input class="inputBox" type="text" id="email" name="email" style="width:100%" maxlength="20">
+			               	</span>
 			               	<button type="button" class="emailBtn1" id="emailChkBtn" disabled="disabled">인증</button><br>
 			              	<span class="joinErrorMsg" id="emailMsg"></span>
 							<span id="eTxt" style="color:blue"></span>
 			            </td>            
 			         </tr>
 			         <tr>
-			            <td><label for="phone">휴대폰</label></td>
+			            <th scope="col"><label for="phone">휴대폰</label><span class="ess"></span></th>
 			            <td>
-			               <select name="phone" id="phone" style="width:10%; height:35px">
-			                    <option value="">선택</option>
-			                     <option value="010">010</option>
-			                     <option value="011">011</option>
-			                     <option value="016">016</option>
-			                     <option value="017">017</option>
-			                     <option value="019">019</option>
-			                 </select>
-			                 <span style="margin:0 5px 0 5px; color:black;" > - </span><input type="text" id="phone1" name="phone1" style="width:10%" maxlength="4">
-			                 <span style="margin:0 5px 0 5px; color:black;"> - </span><input type="text" id="phone2" name="phone2" style="width:10%" maxlength="4"><br> 
+			            	<div class="form_select" style="width:196px;">
+				               <select name="phone" id="phone" style="width:100%; height:35px">
+				                    <option value="">선택</option>
+				                     <option value="010">010</option>
+				                     <option value="011">011</option>
+				                     <option value="016">016</option>
+				                     <option value="017">017</option>
+				                     <option value="019">019</option>
+				                 </select>
+			                 </div>
+			                 <span style="margin:0 5px 0 5px; color:black;" > - </span>
+			                 <div class="form_select1" style="width:196px; height: 35px;">
+			                 	<input type="text" id="phone1" name="phone1" style="width:100%; height: 100%;border: none;" maxlength="4">
+			                 </div>
+			                 <span style="margin:0 5px 0 5px; color:black;"> - </span>
+			                 <div class="form_select1" style="width:196px; height: 35px;">
+			                 	<input type="text" id="phone2" name="phone2" style="width:100%; height: 100%;border: none;" maxlength="4">
+			                 </div>
+			                 	<br> 
 			                 <span id="phoneMsg"></span>
 			              </td>
 			         </tr>
 			         <tr>
-			            <td><label for="year">생년월일</label></td>
+			            <th scope="col"><label for="year">생년월일</label><span class="ess"></span></th>
 			            <td>
-			               <input type="text" name="birthday" id="birthday"  maxlength="6" placeholder="950810"><br><span id="birthdayMsg"></span>
+			           		<span class="form_text" style="width: 100%">
+			               		<input type="text" name="birthday" id="birthday"  maxlength="6" placeholder="950810">
+			               	</span>
+			               	<br><span id="birthdayMsg"></span>
+			            	
 			            </td>
 			         </tr>
 			         <tr>
-			            <td><label for="gender">성별</label></td>
+			            <th scope="col"><label for="gender">성별</label><span class="ess"></span></th>
 			            <td>
-			               <select id="gender" name="gender">
-			                    <option>성별</option>
-			                    <option value="M">남자</option>
-			                      <option value="F">여자</option>
-			                 </select>
+			            	<div class="form_select" style="width:196px; height: 35px;">
+				               <select id="gender" name="gender">
+				                    <option>성별</option>
+				                    <option value="M">남자</option>
+				                      <option value="F">여자</option>
+				                 </select>
+				            </div>
 			                  <span id="genderMsg"></span>
 			              </td>
 			         </tr>
 			         <tr>
-			            <td colspan="3" style="text-align: center;" ><button type="button" id="btnSubmit" class="join-btn">가입하기</button></td>
+			            <td colspan="3" style="text-align: center; border-bottom: none;" ><button type="button" id="btnSubmit" class="join-btn" style="width: 170px; height: 50px;">가입하기</button></td>
 			         </tr>
 			      </table>
 			</div>
 		</form>
+		</div>
 	</div>
 </section>
 

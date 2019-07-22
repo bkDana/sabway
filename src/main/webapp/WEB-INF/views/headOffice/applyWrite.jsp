@@ -229,7 +229,7 @@
 										<th scope="col"><label for="applyTitle">제목</label><span class="ess"></span></th>
 										<td>
 											<span class="form_text" style="width:100%">
-												<input class="inputBox" type="text" id="applyTitle" name="applyTitle" maxlength="16" placeholder="제목을 입력해주세요">
+												<input class="inputBox" type="text" id="applyTitle" name="applyTitle"  placeholder="제목을 입력해주세요">
 											</span>
 										</td>
 									</tr>
@@ -237,7 +237,7 @@
 										<th scope="col"><label for="applyContent">내용</label><span class="ess"></span></th>
 										<td>
 											<span class="form_textarea" style="width:100%">
-												<textarea class="inputBox" name="applyContent" id="applyContent" cols="5" maxlength="500" rows="10" style="height:230px;"></textarea>
+												<textarea class="inputBox" name="applyContent" id="applyContent" cols="5"  rows="10" style="height:230px;"></textarea>
 											</span>
 										</td>
 									</tr>
