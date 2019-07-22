@@ -11,11 +11,22 @@
 <script src="http://code.jquery.com/jquery-3.4.0.js"></script>
 
 <script type="text/javascript">
+var check = false;
+$(document).on("click", ".step", function(){
+	check= false;
+	/*로직
+	check=true;
+	*/
+	
+	alert(check);
+});
+
 var myform=new formtowizard({
 	formid: 'feedbackform',
 	persistsection: true,
 	revealfx: ['slide', 300]
 });
+
 </script>
 <%-- content--%>
 <section id="content-wrapper" style="background-color: #fff;">
@@ -384,6 +395,8 @@ var myform=new formtowizard({
 					<div class="sidemenu img-box select-none fix-img" style="background-color:white; clear:both;" >
 						<img src="/resources/img/cancelyellow.png">
 						<p class="label">선택안함</p>
+						<input type="hidden" value="0">
+						<input type="hidden" value="0">
 					</div>
 					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 						<c:if test="${ingre.ingreType eq '사이드메뉴' and ingre.ingreActive eq '1' }">

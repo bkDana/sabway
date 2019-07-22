@@ -237,5 +237,5 @@
 .outline-box{display: inline-block; width:150px;}
 .content-outlin-box{display: inline-block; margin:0 auto; width:890px;}
 .hidden-space-btn{display:none;}
-.formpaginate{display:none;}
+/* .formpaginate{display:none;} */
 .show-order-box{padding:5px; background-color: #fff;}
