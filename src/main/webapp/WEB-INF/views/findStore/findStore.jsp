@@ -336,7 +336,7 @@
 			</div>
 		</div>
 		
-	<table border="1" name="subMenu" class="comm-tbl type3" id="searchViewTbl">
+	<table border="1" name="subMenu" class="comm-tbl type2" id="searchViewTbl">
 		<tr style="height:60px;" class="searchList">
 			<th>NO</th>
 			<th>매장명</th>
