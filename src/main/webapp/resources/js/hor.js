@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-	//$(".step").eq(0).trigger("click");
+	$(".step").eq(0).trigger("click");
 //	var innerHtml = getCookie("cookieHtml");
 //	console.log(innerHtml);
 //	$('.show-order').eq(addStatus).html(innerHtml);
