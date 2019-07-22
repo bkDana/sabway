@@ -162,7 +162,12 @@ public class CusOrderController {
 			}
 		} else {
 			Cookie[]getCookie = request.getCookies();
-			customerIdx = getCookie[1].getValue();
+			for(int i = 0; i<getCookie.length; i++) {
+				System.out.println(getCookie[i].getName() +" "+  getCookie[i].getValue());
+				if(getCookie[i].getName().equals("sabwayNoneCustomer")) {
+					customerIdx = getCookie[i].getValue();
+				}
+			}
 		}
 		
 		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //버킷에 쓸 정보

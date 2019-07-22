@@ -15,10 +15,7 @@
 var check = false;
 var onload = true;
 $(document).on("click", ".step", function(){
-// 	if(onload){
-// 		$(".step").eq(0).trigger("click");
-// 		onload=false;
-// 	}
+
 	
 	check= false;
 	if(check){
