@@ -205,4 +205,9 @@ public class MgrService {
 		}
 		return new MgrPageData(list,pageNavi,totalCount);
 	}
+	// id 체크
+	public Mgr idChk(String mgrId) {
+		Mgr mgr = mgrdao.idChk(mgrId);
+		return mgr;
+	}
 }

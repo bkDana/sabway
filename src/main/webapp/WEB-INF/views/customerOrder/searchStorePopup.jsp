@@ -51,7 +51,7 @@
      <script type="text/javascript">
      var dataList;
      
-	// 지점 클릭
+	// 지점 클릭시 부모페이지에 지점명 추가
 	function detailMarket(num){
 		console.log($('strong').eq(num+1).html());
 		var bool = confirm($('strong').eq(num+1).html() + "에서 주문하시겠습니까?");
@@ -61,9 +61,7 @@
 			setTimeout(function(){
 				$(opener.document).find('#mmBuc').click();
 				window.close();
-			},1000);
-			
-			
+			},500);
 		}
 
 	}

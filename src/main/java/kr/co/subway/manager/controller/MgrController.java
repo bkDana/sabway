@@ -95,15 +95,24 @@ public class MgrController {
 	@RequestMapping("/adminLogin.do")
 	public String adminLogin(HttpServletRequest request, @RequestParam String mgrId, @RequestParam String mgrPw){
 		HttpSession session = request.getSession();
-		Mgr mgr = new Mgr();
-		mgr.setMgrId(mgrId);
-		mgr.setMgrPw(mgrPw);
-		mgr = mgrservice.login(mgr);
 		String view = "";
-		if(mgr != null) {
-			session.setAttribute("mgr", mgr);
-			view = "admin/index";
-		}else {
+		Mgr mgr2 = mgrservice.idChk(mgrId); //id 유무 체크
+		if(mgr2!=null) { // 아이디 있으면
+			Mgr mgr = new Mgr();
+			mgr.setMgrId(mgr2.getMgrId());
+			mgr.setMgrPw(mgrPw);
+			mgr = mgrservice.login(mgr);
+			if(mgr != null) { // 정상 로그인 
+				if(mgr.getMgrStatus()==3) { //폐업 계정일 때
+					view ="manager/shutDown";
+					return view;
+				}
+				session.setAttribute("mgr", mgr);
+				view = "admin/index";
+			}else { //비밀번호가 다를 때
+				view = "manager/passwordFail";
+			}
+		}else {	// id없으면
 			view = "manager/loginFailMsg";
 		}
 		return view;

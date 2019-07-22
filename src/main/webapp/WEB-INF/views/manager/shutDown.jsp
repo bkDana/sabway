@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert("회원정보가 없습니다.");
+		alert("폐업한 관리자 계정입니다.");
 		location.href="/loginAdmin.do";
 	</script>
 </body>

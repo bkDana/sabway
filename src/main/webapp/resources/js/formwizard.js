@@ -216,6 +216,6 @@ formtowizard.routines={
 	},
 
 	setCookie:function(name, value){
-		document.cookie = name+"=" + value + ";path=/"
+		document.cookie = name+"=0" + ";path=/"
 	}
 }
