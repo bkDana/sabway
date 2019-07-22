@@ -15,6 +15,7 @@ function formtowizard(options){
 	this.init(this.setting)
 }
 
+
 formtowizard.prototype={
 
 	createfieldsets:function($theform, arr){ //reserved function for future version (dynamically wraps form elements with a fieldset element)
@@ -28,6 +29,9 @@ formtowizard.prototype={
 	},
 
 	loadsection:function(rawi, bypasshooks){
+		if(check){
+			return false;
+		}
 		var thiswizard=this
   	//doload Boolean checks to see whether to load next section (true if bypasshooks param is true or onpagechangestart() event handler doesn't return false)
 		var doload=bypasshooks || this.setting.onpagechangestart(jQuery, this.currentsection, this.sections.$sections.eq(this.currentsection))
@@ -40,7 +44,9 @@ formtowizard.prototype={
 		var i=(rawi=="prev")? this.currentsection-1 : (rawi=="next")? this.currentsection+1 : parseInt(rawi) //get index of next section to show
 		i=(i<0)? this.sections.count-1 : (i>this.sections.count-1)? 0 : i //make sure i doesn't exceed min/max limit
 		if (this.currentsection!=i && i<this.sections.count && doload){ //if next section to show isn't the same as the current section shown
+			//step CSS 설정
 			this.$thesteps.eq(this.currentsection).addClass('disabledstep').end().eq(i).removeClass('disabledstep') //dull current "step" text then highlight next "step" text
+			/* 재료 이미지 출력 */
 			if (this.setting.revealfx[0]=="slide"){
 				this.sections.$sections.css("visibility", "visible")
 				this.sections.$outerwrapper.stop().animate({height: this.sections.$sections.eq(i).outerHeight()}, this.setting.revealfx[1]) //animate fieldset wrapper's height to accomodate next section's height
@@ -59,7 +65,7 @@ formtowizard.prototype={
 			}
 			else{
 				this.sections.$sections.eq(this.currentsection).hide().end().eq(i).show()
-			}
+			}			
 			this.paginatediv.$status.text("Page "+(i+1)+" of "+this.sections.count) //update current page status text
 			this.paginatediv.$navlinks.css('visibility', 'visible')
 			if (i==0) //hide "prev" link
@@ -139,6 +145,8 @@ formtowizard.prototype={
 			})
 			maxfieldsetwidth+=2 //add 2px to final width to reveal fieldset border (if not removed via CSS)
 			thiswizard.maxfieldsetwidth=maxfieldsetwidth
+			
+			/*최초 DIV 클래스 적용*/
 			$sections.each(function(i){ //loop through $sections again
 				var $section=$(this)
 				if (setting.revealfx[0]=="slide"){
@@ -146,7 +154,7 @@ formtowizard.prototype={
 				}
 				$section.data('elements', []) //empty array to contain elements within this section that should be validated for data (applicable only if validate option is defined)
 				//create each "step" DIV and add it to main Steps Container:
-				var $thestep=$('<div class="step disabledstep" />').data('section', i).html('Step '+(i+1)+'<div class="smalltext">'+$section.find('legend:eq(0)').text()+'</div>').appendTo($stepsguide)
+				var $thestep=$('<div class="step disabledstep"/>').data('section', i).html('Step '+(i+1)+'<div class="smalltext">'+$section.find('legend:eq(0)').text()+'</div>').appendTo($stepsguide);
 				$thestep.click(function(){ //assign behavior to each step div
 					thiswizard.loadsection($(this).data('section'))
 				})
@@ -155,11 +163,13 @@ formtowizard.prototype={
 				$sectionswrapper.width(maxfieldsetwidth) //set fieldset wrapper to width of widest fieldset
 				$sectionswrapper.append($sectionswrapper_inner) //add $sectionswrapper_inner as a child of $sectionswrapper
 			}
+			
 			$theform.prepend($stepsguide) //add $thesteps div to the beginning of the form
 			//$stepsguide.insertBefore($sectionswrapper) //add Steps Container before sectionswrapper container
+			
 			var $thesteps=$stepsguide.find('div.step')
 			//create pagination DIV and add it to end of form:
-			var $paginatediv=$('<div class="formpaginate" style="overflow:hidden;"><span class="prev" style="float:left">Back</span> <span class="status">Step 1 of </span> <span class="next" style="float:right">Next</span></div>')
+			var $paginatediv=$('<div class="formpaginate" style="overflow:hidden;"><span class="prev" style="float:left">Back</span> <span class="status">Step 1 of </span> <span class="next" style="float:right">Next</span></div>');
 			$theform.append($paginatediv)
 			thiswizard.$theform=$theform
 			if (setting.revealfx[0]=="slide"){
