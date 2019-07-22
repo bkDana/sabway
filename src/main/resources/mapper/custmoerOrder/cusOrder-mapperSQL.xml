@@ -21,16 +21,31 @@
   	</select>
   	<select id="oneCusOrderList" parameterType="String" resultType="cuso">
   		select 
-  			cuso_idx as cusoIdx<!-- 자동 -->
-			,cuso_order_state as cusoOrderState<!--  //주문상태 default 0 -->
-			,cuso_total_cost as cusoTotalCost
-			,cuso_order_no as cusoOrderNo<!-- //고객용 주문번호 -->
-			,cuso_branch as cusoBranch<!-- //지점 번호(Manager - mgrName으로 받아야함) -->
-			,cuso_order_date as cusoOrderDate
-		from 
-			cusorder
+		    cusoIdx
+		    ,cusoOrderState
+		    ,cusoTotalCost
+		    ,cusoOrderNo
+		    ,cusoBranch
+		    ,cusoOrderDate
+		from    
+		    (
+		    select 
+		        rownum rnum,
+		        cuso_idx as cusoIdx
+		        ,cuso_order_state as cusoOrderState
+		        ,cuso_total_cost as cusoTotalCost
+		        ,cuso_order_no as cusoOrderNo
+		        ,cuso_branch as cusoBranch
+		        ,cuso_order_date as cusoOrderDate
+		    from 
+		        cusorder
+		    where
+		        cuso_member_no = #{cusoMemberNo}
+		    order by
+		    	rnum desc    
+		    )
 		where
-			cuso_member_no = #{cusoMemberNo}
+		    rnum between 1 and 10
   	</select>
 	<insert id="insertCuso" parameterType="cuso">
   		insert into
