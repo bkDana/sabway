@@ -45,14 +45,9 @@ public class NoticeController {
 		ArrayList<Notice> noticeList = pd.getNoticeList();
 		String pageNavi = pd.getPageNavi();
 		ModelAndView mav = new ModelAndView();
-		if (!noticeList.isEmpty()) {
-			mav.addObject("noticeList", noticeList); // view에서 사용할 객체 추가
-			mav.addObject("pageNavi", pageNavi);
-			mav.setViewName("notice/notice");
-		} else {
-			mav.setViewName("common/error");
-		}
-
+		mav.addObject("noticeList", noticeList); // view에서 사용할 객체 추가
+		mav.addObject("pageNavi", pageNavi);
+		mav.setViewName("notice/notice");
 		return mav;
 	}
 
@@ -60,14 +55,9 @@ public class NoticeController {
 	public ModelAndView noticeSelectOne(@RequestParam int noticeNo) {
 		ArrayList<Notice> noticeList = noticeService.noticeSelectAll();
 		ModelAndView mav = new ModelAndView();
-		 if(!noticeList.isEmpty()) {
-		      mav.addObject("noticeNo",noticeNo);
-	          mav.addObject("noticeList",noticeList);   //view에서 사용할 객체 추가
-	          mav.setViewName("notice/noticeOne");
-	       }else {
-	          mav.setViewName("common/error");
-	       }
-		
+	    mav.addObject("noticeNo",noticeNo);
+	    mav.addObject("noticeList",noticeList);   //view에서 사용할 객체 추가
+	    mav.setViewName("notice/noticeOne");
 		return mav;
 	}
 	
@@ -203,14 +193,9 @@ public class NoticeController {
 		ArrayList<Qna> qnaList = pd.getQnaList();
 		String pageNavi = pd.getPageNavi();
 		ModelAndView mav = new ModelAndView();
-		if (!qnaList.isEmpty()) {
-			mav.addObject("qnaList", qnaList); // view에서 사용할 객체 추가
-			mav.addObject("pageNavi", pageNavi);
-			mav.setViewName("qna/qna");
-		} else {
-			mav.setViewName("common/error");
-		}
-
+		mav.addObject("qnaList", qnaList); // view에서 사용할 객체 추가
+		mav.addObject("pageNavi", pageNavi);
+		mav.setViewName("qna/qna");
 		return mav;
 	}
 
@@ -218,14 +203,9 @@ public class NoticeController {
 	public ModelAndView qnaSelectOne(@RequestParam int qnaNo) {
 		ArrayList<Qna> qnaList = noticeService.qnaSelectAll();
 		ModelAndView mav = new ModelAndView();
-		 if(!qnaList.isEmpty()) {
-		      mav.addObject("qnaNo",qnaNo);
-	          mav.addObject("qnaList",qnaList);   //view에서 사용할 객체 추가
-	          mav.setViewName("qna/qnaOne");
-	       }else {
-	          mav.setViewName("common/error");
-	       }
-		
+	    mav.addObject("qnaNo",qnaNo);
+	    mav.addObject("qnaList",qnaList);   //view에서 사용할 객체 추가
+	    mav.setViewName("qna/qnaOne");
 		return mav;
 	}
 	
@@ -443,14 +423,9 @@ public class NoticeController {
 		ArrayList<Review> reviewList = pd.getReviewList();
 		String pageNavi = pd.getPageNavi();
 		ModelAndView mav = new ModelAndView();
-		if (!reviewList.isEmpty()) {
-			mav.addObject("reviewList", reviewList); // view에서 사용할 객체 추가
-			mav.addObject("pageNavi", pageNavi);
-			mav.setViewName("review/review");
-		} else {
-			mav.setViewName("common/error");
-		}
-
+		mav.addObject("reviewList", reviewList); // view에서 사용할 객체 추가
+		mav.addObject("pageNavi", pageNavi);
+		mav.setViewName("review/review");
 		return mav;
 	}
 	
@@ -458,14 +433,9 @@ public class NoticeController {
 	public ModelAndView reviewSelectOne(@RequestParam int reviewNo) {
 		ArrayList<Review> reviewList = noticeService.reviewSelectAll();
 		ModelAndView mav = new ModelAndView();
-		 if(!reviewList.isEmpty()) {
-		      mav.addObject("reviewNo",reviewNo);
-	          mav.addObject("reviewList",reviewList);   //view에서 사용할 객체 추가
-	          mav.setViewName("review/reviewOne");
-	       }else {
-	          mav.setViewName("common/error");
-	       }
-		
+	    mav.addObject("reviewNo",reviewNo);
+	    mav.addObject("reviewList",reviewList);   //view에서 사용할 객체 추가
+	    mav.setViewName("review/reviewOne");
 		return mav;
 	}
 	

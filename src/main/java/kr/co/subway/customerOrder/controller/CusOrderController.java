@@ -359,4 +359,9 @@ public class CusOrderController {
 	public String loadSearchStorePopup() {
 		return "/customerOrder/searchStorePopup";
 	}
+	
+	@RequestMapping("/toMain.do")
+	public String toMain() {
+		return"/main";
+	}
 }
