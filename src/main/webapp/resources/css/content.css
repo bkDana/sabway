@@ -245,5 +245,8 @@
 .outline-box{display: inline-block; width:150px;}
 .content-outlin-box{display: inline-block; margin:0 auto; width:890px;}
 .hidden-space-btn{display:none;}
+.step{pointer-events:none;}
+.smalltext{pointer-events:none;}
+.stepsguide{pointer-events:none;}
 /* .formpaginate{display:none;} */
 .show-order-box{padding:5px; background-color: #fff;}

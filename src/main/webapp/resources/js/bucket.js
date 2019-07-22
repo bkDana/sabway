@@ -34,7 +34,7 @@ $(document).ready(function(){
     if($('#sessionId').val() == "") {
     	sessionId = "비회원";
     }
-    var cookieVal = getCookie('noneCustomer');	// 헤더에서 쓰임.
+    var cookieVal = getCookie('sabwayNoneCustomer');	// 헤더에서 쓰임.
     
     console.log(sessionPhone);
     console.log(cookieVal);

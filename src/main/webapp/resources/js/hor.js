@@ -4,7 +4,7 @@ $(document).ready(function() {
 //	var innerHtml = getCookie("cookieHtml");
 //	console.log(innerHtml);
 //	$('.show-order').eq(addStatus).html(innerHtml);
-	var co = getCookie('noneCustomer');
+	var co = getCookie('sabwayNoneCustomer');
 	console.log("두번째쿠키 : "+co);
 	var typeStatus = 0;
 });
@@ -38,6 +38,7 @@ $(document).ready(function() {
 			$(".step").eq(stepIdx).trigger("click");			
 		}
 	});
+	
 	$('.next-btn').click(function(){
 		var stepIdx = $('.next-btn').index(this)+1;
 		if(!$('.orderInput').eq(stepIdx-1).val() && !$(this).hasClass("many")){
@@ -958,7 +959,7 @@ $(document).ready(function() {
 				return;
 			}				
     	}
-		var cookieVal = getCookie('noneCustomer');
+		var cookieVal = getCookie('sabwayNoneCustomer');
 		$('#cookie').val(cookieVal);
 		console.log($('#cookie').val());
 		var form = $("form[name=feedbackform]")[0];
