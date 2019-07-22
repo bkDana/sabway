@@ -117,7 +117,13 @@ public class CusOrderController {
 			customerIdx = String.valueOf(c.getCustomerNo());
 		} else {
 			Cookie[]getCookie = request.getCookies();
-			customerIdx = getCookie[2].getValue();
+			for(int i = 0; i<getCookie.length; i++) {
+				System.out.println(getCookie[i].getValue());
+				if(getCookie[i].getName().equals("sabwayNoneCustomer")) {
+					customerIdx = getCookie[i].getValue();
+				}
+			}
+			
 			System.out.println("비회원 임시번호 " + customerIdx);
 		}
 
