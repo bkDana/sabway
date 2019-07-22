@@ -14,6 +14,7 @@ body, table, th, td, button, select, input, textarea, pre {
 	color:black;
 }
 body { background-color:#fff; }
+*:focus{outline:none;}
 #wrap {overflow:hidden; width:100%; min-width:1200px; position:relative; } /* min-width 홈페이지 컨텐츠 가로값에 맞게 변경 */
 
 /* ****************** 공통클래스 ********************** */

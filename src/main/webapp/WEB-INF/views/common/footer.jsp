@@ -6,10 +6,11 @@
 #footer:after{content:''; position:absolute; left:0; top:59px; width:100%; height:1px; background-color:#3b3b3b}
 #footer .content .util_menu{margin-bottom:25px;}
 #footer .content .util_menu ul{overflow:hidden;padding-left:370px;}
-#footer .content .util_menu ul li{float:left; margin-right:29px;}
-#footer .content .util_menu ul li a{color:#666666; display:block; font-size:14px; letter-spacing:-0.05em}
+#footer .content .util_menu ul li{float:left; margin-right:29px;color:#666666;font-size:14px;letter-spacing:-0.05em;}
+#footer .content .util_menu ul li a{color:#666666; display:block; font-size:14px; letter-spacing:-0.05em;}
 #footer .content .util_menu ul li a strong{color:#bbbbbb}
 #footer .content .util_menu ul li a.eng{letter-spacing:0.05em}
+
 #footer .content span{position:relative; display:inline-block; margin-top:19px; font-size:13px; padding-left:9px; margin-left:3px; letter-spacing:-0.01em}
 #footer .content span:after{content:''; position:absolute; left:0; top:5px; width:2px; height:10px; background-color:#666666}
 #footer .content span.addr{padding-left:0; margin-left:0}
@@ -34,9 +35,9 @@
 	        <!-- util menu -->
 	        <div class="util_menu">
 	            <ul>
-	                <li><a href="#">이용약관</a></li>
-	                <li><a href="#"><strong>개인정보취급방침</strong></a></li>
-	                <li><a href="/admin.do" target="_blank">점주관리자</a></li>
+	                <li>이용약관</li>
+	                <li>개인정보취급방침</li>
+	                <li><a href="/admin.do" target="_blank"><strong>점주관리자</strong></a></li>
 	                <li><a class="eng" href="http://www.global.subway.com" target="_blank">Subway Listens</a></li>
 	            </ul>
 	        </div>

@@ -49,8 +49,8 @@
 .section_subway .content_top .history{float:left; width:825px; position:relative}
 
 .section_subway .content_top .history p{color:#fff; font-size:28px; font-weight:bold; line-height:40px; letter-spacing:-0.03em; position:absolute; left:410px; top:38px;}
-.section_subway .content_top .history .btn{position:absolute; left:410px; bottom:42px; border:2px solid #fff; border-radius:20px; width:128px;}
-.section_subway .content_top .history .btn span{display:block; height:36px; line-height:36px; color:#fff; font-size:16px; font-weight:300;padding-left:8px;}
+.section_subway .content_top .history .btn{position:absolute; left:410px; bottom:42px; border:2px solid #fff; border-radius:20px; width:155px;}
+.section_subway .content_top .history .btn span{display:block; height:36px; line-height:36px; color:#fff; font-size:16px; font-weight:300;padding-left:3px;}
 
 
 .section_subway .content_bottom{margin:30px 0 0 0; overflow:hidden;display:inline-block;}
@@ -167,8 +167,8 @@ $(document).ready(function(){
 				</div>
 				<!-- 서브웨이 약속 -->
 				<div class="history">
-					<p>SEARCH FOR BETTER<br>신선함을 위한 노력</p>
-					<a class="btn" href="/franchise.do"><span>써브웨이 약속</span></a>
+					<p>50년 역사를 가진<br>NO.1 프랜차이즈</p>
+					<a class="btn" href="/franchise.do"><span>사브웨이 프랜차이즈</span></a>
 					<img src="/resources/img/main/img_subway_history.png">
 				</div>
 			</div>
@@ -179,7 +179,7 @@ $(document).ready(function(){
 						<h2>What's New</h2>
 						<p>사브웨이의 다양한 소식을 <br>빠르게 전달해드립니다.</p>
 					</div>
-					<div class="board_list">
+					<div class="board_list" style="text-align:left;">
 						<ul>
 							<c:forEach items="${notice}" var="notice">
 								<li>

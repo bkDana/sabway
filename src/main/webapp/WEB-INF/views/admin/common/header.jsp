@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,7 +31,7 @@
 			</c:if>
 			<div style="float:right;margin-right:60px;">
 				<c:if test="${not empty sessionScope.mgr.mgrId }">
-					<a href="/adminPage.do">${sessionScope.mgr.mgrName }</a>
+					<span style="color:white;">${sessionScope.mgr.mgrName }</span>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="/adminLogout.do">로그아웃</a>
 				</c:if>

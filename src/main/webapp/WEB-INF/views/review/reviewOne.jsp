@@ -70,9 +70,7 @@
 
 				<div class="common-tbl-btn-group">
 					<button class="btn-style2 small move-all-review">목록으로</button>
-					<button class="btn-style2 small move-delete-review">삭제하기</button>
-					<button class="btn-style2 small move-update-review">수정하기</button>
-					<c:if test="${sessionScope.member.memberId eq 'admin' }">
+					<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
 						<button class="btn-style2 small move-update-review">수정하기</button>
 						<button class="btn-style2 small move-delete-review">삭제하기</button>
 					</c:if>

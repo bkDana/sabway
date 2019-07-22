@@ -554,18 +554,13 @@ $(document).ready(function() {
 		}
 	});
 	$('.topping-check').click(function(){
-		var str = "";
 		var strKorea = "";
 		var noCount = 0;
 		
 		for(var i = 1; i<$('.topping').length;i++){
 			if($('.topping').eq(i).hasClass("selected")){
 				noCount++;
-				str += '1';
 				strKorea += $('.topping').eq(i).find('p').text()+",";
-					
-			}else{
-				str += '0'; 
 			}
 		}
 		
@@ -574,7 +569,7 @@ $(document).ready(function() {
 		}else{
 			strKorea = strKorea.substr(0, strKorea.length -1);
 		}
-		$('input[name=bucTopping]').val(str);
+		$('input[name=bucTopping]').val(strKorea);
 		console.log($('input[name=bucTopping]').val());
 		
 		if($('.show-order').eq(addStatus).find('.show-order-topping').length==0){
@@ -678,19 +673,28 @@ $(document).ready(function() {
 	
 	////야채 한글로 보여줘야되냐...
 	$('.vegi-check').click(function(){
-		var str = "";
+		var strKorea = "";
 		for(var i = 0; i<$('.vegi').length;i++){
 			if($('.vegi').eq(i).hasClass("selected")){
 				for(var k=0; k<4; k++){
 					if($('.vegi').eq(i).find("button").eq(k).hasClass("select-vegi")){
-						str += k;
+						if(k==0){
+							strKorea += $('.vegi').eq(i).find('p').text()+":없음,";
+						}else if(k==1){
+							strKorea += $('.vegi').eq(i).find('p').text()+":적게,";
+						}else if(k==2){
+							strKorea += $('.vegi').eq(i).find('p').text()+":보통,";
+						}else if(k==3){
+							strKorea += $('.vegi').eq(i).find('p').text()+":많이,";
+						}
 					}
 				}
 			}else{
-				str += '2';
+				strKorea += $('.vegi').eq(i).find('p').text()+":보통,";
 			}
 		}
-		$('input[name=bucVegi]').val(str);
+		strKorea = strKorea.substr(0, strKorea.length -1);
+		$('input[name=bucVegi]').val(strKorea);
 		console.log($('input[name=bucVegi]').val());
 		
 		$(".step").eq(7).trigger("click");
@@ -764,11 +768,7 @@ $(document).ready(function() {
 		for(var i = 1; i<$('.source').length;i++){
 			if($('.source').eq(i).hasClass("selected")){
 				noCount++;
-				str += '1';
 				strKorea += $('.source').eq(i).find('p').text()+",";
-				
-			}else{
-				str += '0';
 			}
 		}
 		if(noCount == 0){
@@ -777,7 +777,7 @@ $(document).ready(function() {
 			strKorea = strKorea.substr(0, strKorea.length -1);
 		}
 		console.log(kcal);
-		$('input[name=bucSource]').val(str);
+		$('input[name=bucSource]').val(strKorea);
 		console.log($('input[name=bucSource]').val());
 		
 		if($('.show-order').eq(addStatus).find('.show-order-source').length==0){
@@ -894,10 +894,7 @@ $(document).ready(function() {
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selected")){
 				noCount++;
-				str += "1";
 				strKorea += $('.sidemenu').eq(i).find('p').text()+",";
-			}else{
-				str += '0';
 			}
 		}
 		if(noCount == 0){
@@ -917,10 +914,15 @@ $(document).ready(function() {
 		}
 		$('.show-order-context').eq(addStatus).text(cost+" 원");
 		
-		$('input[name=bucSide]').val(str);
+		$('input[name=bucSide]').val(strKorea);
 		$('input[name=bucCost]').val(cost);
 		$('input[name=bucKcal]').val(kcal);
 		$('input[name=bucQuantity]').val('1');
+		
+		for(var i=0; i<$('.orderInput').length; i++){
+			console.log($('.orderInput').eq(i).val());
+		}
+		
 		for(var i=0; i<13; i++){
 			if(!$('.orderInput').eq(i).val()){
 				alert("주문절차를 확인해주세요.");
