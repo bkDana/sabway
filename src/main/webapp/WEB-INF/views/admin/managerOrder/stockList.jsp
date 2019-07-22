@@ -24,15 +24,15 @@
 			</form>
 		</div>
 		<br>
-		<label><input type="checkbox" class="allcbox"> 전체 선택</label> : 별 기능은 없다.... 그냥 만들어야될거같아서 넣음
+		<!-- <label><input type="checkbox" class="allcbox"> 전체 선택</label> : 별 기능은 없다.... 그냥 만들어야될거같아서 넣음 -->
 		<ul class="stock-list clearfix">
 			<c:if test="${empty list.stockList }">
 				<li>검색 결과가 없습니다</li>
 			</c:if>
 			<c:forEach items="${list.stockList }" var="stock">
 			<li>
-				<label>
-					<span><input type="checkbox" class="cbox"></span>
+				<!-- <label> -->
+					<!-- <span><input type="checkbox" class="cbox"></span> -->
 					<span>
 					<c:if test="${empty stock.ingreFilepath }">
 						<img src="/resources/img/sandwich.png" width="150px" height="100px"><br>
@@ -41,7 +41,7 @@
 						<img src="/resources/upload/ingredients/${stock.ingreFilepath }" width="150px" height="100px"><br>
 					</c:if>
 					</span>
-				</label>
+				<!-- </label> -->
 					<span>${stock.ingreLabel }</span>
 					<span>
 						<input type="text" class="short num" value="${stock.mStock }" data-idx="${stock.mStockIdx }" data-pre="${stock.mStock }" > ${stock.ingreUnit }<c:if test="${empty stock.ingreUnit }">개</c:if>
