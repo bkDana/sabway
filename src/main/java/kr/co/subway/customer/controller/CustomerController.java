@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.codec.multipart.SynchronossPartHttpMessageReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
@@ -535,8 +536,13 @@ public class CustomerController {
    public String customerProfile(HttpSession session) {
       Customer vo = (Customer) session.getAttribute("customer");
       Customer c = customerService.selectOneCustomerEnroll(vo);
+      vo.setPhone1(vo.getPhone().substring(0, 3));
+      vo.setPhone2(vo.getPhone().substring(4, 8));
+      vo.setPhone3(vo.getPhone().substring(9, 13));
+      System.out.println(vo.getPhone1());
+      
       Model model = new ExtendedModelMap();
-      model.addAttribute("customer", c);
+      model.addAttribute("customer", vo);
       return "customer/customerProfile";
 
    }

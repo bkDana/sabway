@@ -215,8 +215,16 @@
 				console.log(cost);
 				var money=0;
 				var arr = new Array();
-				if(cost.length>0){
+				if(cost.length>5){
 					for(var i=1;i<6;i++){
+						money += cost[i].totalCost;
+						console.log(i+"위 메뉴 매출 금액 : "+money);
+						arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})
+					}
+					var etc = cost[0].totalCost - money;
+				}
+				if(cost.length<6){
+					for(var i=1;i<cost.length;i++){
 						money += cost[i].totalCost;
 						console.log(i+"위 메뉴 매출 금액 : "+money);
 						arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})
@@ -275,8 +283,16 @@
 				console.log(cost);
 				var money=0;
 				var arr = new Array();
-				if(cost.length>0){
+				if(cost.length>5){
 					for(var i=1;i<6;i++){
+						money += cost[i].totalCost;
+						console.log(i+"위 메뉴 매출 금액 : "+money);
+						arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})
+					}
+					var etc = cost[0].totalCost - money;
+				}
+				if(cost.length<6){
+					for(var i=1;i<cost.length;i++){
 						money += cost[i].totalCost;
 						console.log(i+"위 메뉴 매출 금액 : "+money);
 						arr.push({name:i+'위 '+cost[i].ingredients, y:cost[i].totalCost})

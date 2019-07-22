@@ -29,13 +29,13 @@
 				        	제목
 				        </td>
 				        <td>
-				        	<input type="text" name="reviewTitle">
+				        	<input type="text" name="reviewTitle" required="required">
 				        </td>
 				        <td>
 				        	작성자
 				        </td>
 				        <td>
-				        	<input type="text" name="reviewWriter" value="테스트이름" readonly="readonly">
+				        	<input type="text" name="reviewWriter" value="${sessionScope.customer.customerNick }" readonly="readonly">
 				        	<input type="hidden" name="reviewGender" value="테스트성별">
 				        	<input type="hidden" name="reviewBirthday" value="테스트생일">
 				        </td>
@@ -45,7 +45,7 @@
 				        	리뷰상품
 				        </td>
 				        <td>
-				        	<input type="text" name="reviewItem">
+				        	<input type="text" name="reviewItem" required="required">
 				        </td>
 				        <td>
 				        	상품별점
@@ -88,7 +88,7 @@
 				        	지점
 				        </td>
 				        <td>
-				        	<input type="text" name="reviewBranch">
+				        	<input type="text" name="reviewBranch" required="required">
 				        </td>
 				        <td>
 				        	지점별점

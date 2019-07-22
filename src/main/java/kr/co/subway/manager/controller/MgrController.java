@@ -168,7 +168,7 @@ public class MgrController {
 		return mav;
 	}
 	//검색
-	@RequestMapping(value="/searchKeyword.do")
+	@RequestMapping(value="/searchKeyword2.do")
 	public ModelAndView searchKeyword(@RequestParam String currentPage,@RequestParam String keyword,@RequestParam String text,@RequestParam int status1) {
 		int status = 0;
 		if(status1 == -1) {
@@ -176,7 +176,8 @@ public class MgrController {
 		}else if(status1 != -1){
 			status = status1;
 		}
-		System.out.println("검색 : "+status);
+		System.out.println("상태 : "+status);
+		System.out.println("키워드 : "+keyword);
 		int currentPage1;
 		try {
 			currentPage1 = Integer.parseInt(currentPage);
