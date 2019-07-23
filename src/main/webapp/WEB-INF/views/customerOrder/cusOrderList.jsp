@@ -69,8 +69,8 @@
 			<select name="statusGroup">
 				<option>주문번호</option>
 			</select>
-			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${keyword }"style="height:34px; padding-left:5px;">
-			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button><br>
+			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${keyword }"style="height:34px; padding-left:5px;" id="textInput">
+			<button type="button" class="bbs-search-btn" onclick="searchBtn();"name="searchBtn">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
 			</span>
@@ -254,13 +254,25 @@
 			var cusoMemberNo = $(this).val();
 			location.href="/checkedCusoOrderList.do?cusoMemberNo="+cusoMemberNo+"&currentPage=''";
 		});
-		//검색어에 일치하는 리스트
-		$('[name=searchBtn]').click(function(){
+		//검색어에 일치하는 리스트	
+ 		$('[name=searchBtn]').click(function(){
 			var keyword = $(this).prev().val();
 			location.href="/orderSearchKeyword.do?keyword="+keyword+"&currentPage=''";
-		});
+		}); 
+	 	function searchBtn(text){
+			/* var keyword = $(this).prev().val(); */
+			location.href="/orderSearchKeyword.do?keyword="+text+"&currentPage=''";
+		};
 		//선택한 체크박스 유지되게
 		$('.chk').eq('${cusoMemberNo}').prop('checked',true);	
+		//엔터키로 검색되게
+		$('#textInput').keyup(function(event){
+			if(event.keyCode == 13){
+				var text = $(this).val();
+				searchBtn(text);
+				return;
+			}
+		});
 	});
 </script>
 <%-- Footer --%>

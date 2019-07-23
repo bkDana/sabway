@@ -45,14 +45,10 @@ public class MgrController {
 		//가맹점 승인하면 applyName과 applyArea를 매개변수로 받음
 		//applyArea : 지역 정보를 알아보기 위함
 		//applyName : 가맹점 등록에 사용할 목적
-		System.out.println(applyArea);
-		System.out.println(applyName);
-		System.out.println(applyNo);
 		String ranTel = randomtel.randomTel();
 		String addrType = addrtype.addrType(applyArea);
 		String mgrTel = addrcode.addrCode(ranTel,addrType);
 		String addrSubStr = substr.subStr(applyArea);
-		System.out.println(addrSubStr);
 		//가맹점 정보를 가져와서 이름 체크
 		ArrayList<Mgr> list = (ArrayList<Mgr>) mgrservice.mgrList();
 		for(int y=0;y<list.size();y++) {
@@ -176,8 +172,6 @@ public class MgrController {
 		}else if(status1 != -1){
 			status = status1;
 		}
-		System.out.println("상태 : "+status);
-		System.out.println("키워드 : "+keyword);
 		int currentPage1;
 		try {
 			currentPage1 = Integer.parseInt(currentPage);

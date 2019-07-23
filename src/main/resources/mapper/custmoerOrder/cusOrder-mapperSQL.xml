@@ -281,4 +281,7 @@
 		where
 			cuso_order_no = #{cusoOrderNo}	
 	</select>
+	<update id="cancelOrder" parameterType="string">
+		update cusorder set cuso_order_state = -1 where cuso_order_no = #{cusoOrderNo}
+	</update>
 </mapper>

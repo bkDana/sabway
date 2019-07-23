@@ -70,19 +70,19 @@
 				<option id="close" value=3>폐업</option>
 			</select>&nbsp;
 			<select name="selectKeyword">
-				<c:if test="${keyword eq '가맹점주 이름' || keyword eq '주소'}">
+				<c:if test="${keyword eq '가맹점주 이름' || keyword eq '가맹점 주소'}">
 					<option selected="selected" disabled="disabled">
 						<c:choose>
 							<c:when test="${keyword eq '가맹점주 이름' }"><span>가맹점주 이름</span></c:when>
-							<c:when test="${keyword eq '주소' }"><span>주소</span></c:when>
+							<c:when test="${keyword eq '가맹점 주소' }"><span>가맹점 주소</span></c:when>
 						</c:choose>
 					</option>
 				</c:if>
 				<option id="name" value="가맹점주 이름">가맹점주 이름</option>
-				<option id="addr" value="주소">주소</option>
+				<option id="addr" value="가맹점 주소">가맹점 주소</option>
 			</select>&nbsp;
-			<input type="text" maxlength="30" placeholder="가맹점 검색" value="${text }"style="height:34px; padding-left:5px;">
-			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button><br>
+			<input type="text" maxlength="30" placeholder="가맹점 검색" value="${text }"style="height:34px; padding-left:5px;" id="textKeyword">
+			<button type="button" class="bbs-search-btn" name="searchBtn" onclick="enterkey()">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
 				<span id="slash">/</span>
@@ -202,6 +202,25 @@
 			}
 			location.href="/searchKeyword2.do?status1="+status1+"&keyword="+keyword+"&text="+text+"&currentPage=''";
 		});
+ 		//엔터키로 검색되게
+		$('#textKeyword').keyup(function(e){
+			var text = $(this).val();
+			var keyword = $(this).prev().val();
+			var status1 = $(this).prev().prev().val();
+			if(e.keyCode==13){
+				enterkey(text,keyword,status1);
+				return;
+			}
+		});
+		function enterkey(text,keyword,status1){
+			if(status1 == null){
+				var status1 = -1;
+			}
+			else if(keyword == null){
+				var keyword = $(this).prev().prev().children().eq(0).val();
+			}
+			location.href="/searchKeyword2.do?keyword="+keyword+"&text="+text+"&status1="+status1+"&currentPage=''";
+		};
 	});
 </script>
 <%-- Footer --%>
