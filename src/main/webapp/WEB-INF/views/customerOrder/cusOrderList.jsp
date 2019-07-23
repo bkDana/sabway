@@ -9,6 +9,9 @@
 	.board-search-box{
 		position: static;
 	}
+	a {
+		color:black;
+	}
 	#link{
 		float:left;
 		position: static;
@@ -71,7 +74,7 @@
 			<select name="statusGroup">
 				<option>주문번호</option>
 			</select>
-			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${keyword }"style="height:34px; padding-left:5px;" id="textInput">
+			<input type="text" maxlength="30" placeholder="주문번호를 입력하세요." value="${keyword }"style="height:34px; padding-left:5px;" id="textInput">
 			<button type="button" class="bbs-search-btn" onclick="searchBtn();"name="searchBtn">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
@@ -84,7 +87,7 @@
 				<col width="3%">
 				<col width="6%">
 				<col width="9%">
-				<col width="7%">
+				<col width="9%">
 				<col width="11%">
 				<col width="15%">
 				<col width="8%">
@@ -262,10 +265,10 @@
 		//검색어에 일치하는 리스트	
  		$('[name=searchBtn]').on("click",function(){
 			var keyword = $(this).prev().val();
-			location.href="/orderSearchKeyword.do?keyword="+keyword+"&currentPage=''";
+			location.href="/orderSearchKeyword.do?keyword="+encodeURI(keyword)+"&currentPage=''";
 		}); 
 	 	function searchBtn(text){
-			location.href="/orderSearchKeyword.do?keyword="+text+"&currentPage=''";
+			location.href="/orderSearchKeyword.do?keyword="+encodeURI(text)+"&currentPage=''";
 		};
 		//선택한 체크박스 유지되게
 		$('.chk').eq('${cusoMemberNo}').prop('checked',true);	

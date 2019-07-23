@@ -81,7 +81,7 @@
 				<option id="name" value="가맹점주 이름">가맹점주 이름</option>
 				<option id="addr" value="가맹점 주소">가맹점 주소</option>
 			</select>&nbsp;
-			<input type="text" maxlength="30" placeholder="가맹점 검색" value="${text }"style="height:34px; padding-left:5px;" id="textKeyword">
+			<input type="text" maxlength="30" placeholder="검색어를 입력하세요." value="${text }"style="height:34px; padding-left:5px;" id="textKeyword">
 			<button type="button" class="bbs-search-btn" name="searchBtn" onclick="enterkey()">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
@@ -187,7 +187,7 @@
 			else if(keyword == null){
 				var keyword = $(this).prev().prev().children().eq(0).val();
 			}
-			location.href="/searchKeyword2.do?keyword="+keyword+"&text="+text+"&status1="+status1+"&currentPage=''";
+			location.href="/searchKeyword2.do?keyword="+keyword+"&text="+encodeURI(text)+"&status1="+status1+"&currentPage=''";
 		});
  		//상태별 분류
 		$("[name=statusGroup]").on("change",function(){
@@ -200,7 +200,7 @@
 			else if(keyword == null){
 				var keyword = $(this).next().children().eq(0).val();
 			}
-			location.href="/searchKeyword2.do?status1="+status1+"&keyword="+keyword+"&text="+text+"&currentPage=''";
+			location.href="/searchKeyword2.do?status1="+status1+"&keyword="+keyword+"&text="+encodeURI(text)+"&currentPage=''";
 		});
  		//엔터키로 검색되게
 		$('#textKeyword').keyup(function(e){
@@ -219,7 +219,7 @@
 			else if(keyword == null){
 				var keyword = $(this).prev().prev().children().eq(0).val();
 			}
-			location.href="/searchKeyword2.do?keyword="+keyword+"&text="+text+"&status1="+status1+"&currentPage=''";
+			location.href="/searchKeyword2.do?keyword="+keyword+"&text="+encodeURI(text)+"&status1="+status1+"&currentPage=''";
 		};
 	});
 </script>

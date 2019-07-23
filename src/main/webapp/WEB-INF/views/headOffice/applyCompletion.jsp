@@ -79,7 +79,7 @@
 			</c:if>
 			<c:if test="${cpd.totalCount <= 0 }">
 				<tr>
-					<td>신청 목록이 없습니다.</td>
+					<td colspan="6">신청 목록이 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
