@@ -13,7 +13,7 @@ $(document).ready(function(){
 			$('.insertMyMenu').eq(i).html('추가 완료');
 			$('.insertMyMenu').eq(i).css('color','grey').css('cursor','default').attr('disabled',true);
 		} 
-		if($('#sessionId').val() == "") {
+		if($('#sessionNick').val() == "") {
 			console.log("비회원임");
 			$('.insertMyMenu').eq(i).html('회원만<br>선택가능합니다');
 			$('.insertMyMenu').eq(i).css('color','grey').css('cursor','default').attr('disabled',true);
@@ -79,15 +79,15 @@ $(document).ready(function(){
     if(!$('#sessionPhone').val()) {
     	sessionPhone = "010-0000-0000";
     }
-    var sessionId = $('#sessionId').val();
-    if($('#sessionId').val() == "") {
-    	sessionId = "비회원";
+    var sessionNick = $('#sessionNick').val();
+    if($('#sessionNick').val() == "") {
+    	sessionNick = "비회원";
     }
     var cookieVal = getCookie('sabwayNoneCustomer');	// 헤더에서 쓰임.
     
     console.log(sessionPhone);
     console.log(cookieVal);
-    console.log(sessionId);
+    console.log(sessionNick);
 
 
     /* 주문 상품 갯수만큼 반복 */
@@ -204,53 +204,58 @@ $(document).ready(function(){
     
     $('#sbmOrder').click(function(){
     	console.log($('.checked'));
+    	var check = false;
     	for(var i = 0; i<$('.checked').length; i++) {
     		console.log($('.checked').eq(i).html());
-    		if($('.checked').eq(i).html() !== $('.checked').eq(0).html()) {
-    			alert("같은 지점만 주문 가능합니다");
+    		if($('.checked').eq(i).html() == $('.checked').eq(0).html()) {
+    			check = true;
     		} else {
-    			$('input[name=cusoBranchName]').val($('.checked').html());
-//    			//테스트용으로 임시 비활성화
-//    	    	console.log(totalCost);
-//    			var d = new Date();
-//    			var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-//    			IMP.init('imp25889583');
-//    			IMP.request_pay({
-//    				pay_method : 'card',
-//    				merchant_uid : date,				//거래ID - 유니크 주려고 날짜까지 넣음
-//    				name : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+" 외",						//결재명
-//    				buyer_name : sessionId,
-//    				buyer_email : '',
-//    				amount : totalCost,									//결재 금액
-//    				buyer_tel : sessionPhone
-//    				
-//    			},function(response){
-//    				if(response.success){
-//    					var msg = "결재가 완료되었습니다.";
-//    					var info1 = "고유 ID : "+response.imp_uid;
-//    					var info2 = "결재 금액 : "+response.paid_amount;
-//    					var info3 = "카드 승인 번호 : "+response.apply_num;
-//    					console.log(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
-//    					$('input[name=cusoBranchName]').val($('.checked').html());
-//    					$('input[name=cusoCallBy').val(sessionId);
-//    					$('input[name=cusoTotalCost]').val(totalCost);
-//    			    	$('input[name=cusoPhone]').val(sessionPhone);		    	
-//    			    	$('input[name=cusoOrderNo]').val(date);
-//    					$("#insertOrder").click();
-//    				} else {
-//    					alert('결재가 취소되었습니다');
-//    				}
-//    			});
-    			var d = new Date();
-    			var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-    			$('input[name=cusoCallBy]').val(sessionId);
-    			$('input[name=cusoTotalCost]').val(totalCost);
-    	    	$('input[name=cusoPhone]').val(sessionPhone);		    	
-    	    	$('input[name=cusoOrderNo]').val(date);
-    			$("#insertOrder").click();
+    			alert("같은 지점만 주문 가능합니다");
+    			check = false;
     		}
     	}
-    	
+    	if(check) {
+    		$('input[name=cusoBranchName]').val($('.checked').html());
+//    		//테스트용으로 임시 비활성화
+//        	console.log(totalCost);
+//    		var d = new Date();
+//    		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+//    		IMP.init('imp25889583');
+//    		IMP.request_pay({
+//    			pay_method : 'card',
+//    			merchant_uid : date,				//거래ID - 유니크 주려고 날짜까지 넣음
+//    			name : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+" 외",						//결재명
+//    			buyer_name : sessionNick,
+//    			buyer_email : '',
+//    			amount : totalCost,									//결재 금액
+//    			buyer_tel : sessionPhone
+//    			
+//    		},function(response){
+//    			if(response.success){
+//    				var msg = "결재가 완료되었습니다.";
+//    				var info1 = "고유 ID : "+response.imp_uid;
+//    				var info2 = "결재 금액 : "+response.paid_amount;
+//    				var info3 = "카드 승인 번호 : "+response.apply_num;
+//    				console.log(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
+//    				$('input[name=cusoBranchName]').val($('.checked').html());
+//    				$('input[name=cusoCallBy').val(sessionNick);
+//    				$('input[name=cusoTotalCost]').val(totalCost);
+//    		    	$('input[name=cusoPhone]').val(sessionPhone);		    	
+//    		    	$('input[name=cusoOrderNo]').val(date);
+//    				$("#insertOrder").click();
+//    			} else {
+//    				alert('결재가 취소되었습니다');
+//    			}
+//    		});
+    		var d = new Date();
+    		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+    		$('input[name=cusoCallBy]').val(sessionNick);
+    		$('input[name=cusoTotalCost]').val(totalCost);
+        	$('input[name=cusoPhone]').val(sessionPhone);		    	
+        	$('input[name=cusoOrderNo]').val(date);
+    		$("#insertOrder").submit();
+    	}
+
 	});
     
     
