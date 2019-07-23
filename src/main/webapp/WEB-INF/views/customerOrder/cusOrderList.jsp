@@ -92,10 +92,11 @@
 				<col width="15%">
 				<col width="8%">
 				<col width="6%">
-				<col width="11%">
+				<c:if test="${sessionScope.mgr.mgrLevel == 0 }"><col width="11%"></c:if>
 			</colgroup>	
 			<tr>
-				<th>No.</th><th>총 금액</th><th>연락처</th><th>회원번호</th><th>주문번호</th><th>지점번호</th><th>주문 날짜</th><th>상태</th><th>상태변경</th>
+				<th>No.</th><th>총 금액</th><th>연락처</th><th>회원번호</th><th>주문번호</th><th>지점번호</th><th>주문 날짜</th><th>상태</th>
+				<c:if test="${sessionScope.mgr.mgrLevel == 0 }"><th>상태변경</th></c:if>
 			</tr>
 			<c:forEach items="${pd.list }" var="cusOrder">
 				<input type="hidden" name="cusoIdx" value="${cusOrder.cusoIdx }">
@@ -134,27 +135,35 @@
 							<!-- 주문 상태 (접수전: 0, 접수완료: 1, 수령완료:2, 취소: -1(취소는 접수 전에만 가능) ) -->
 							<c:if test="${cusOrder.cusoOrderState == 1}">
 								<td>접수 완료</td>
-								<td>
-									<button type="button" name="take">수령 완료</button>
-								</td>
+								<c:if test="${sessionScope.mgr.mgrLevel == 0 }">
+									<td>
+										<button type="button" name="take">수령 완료</button>
+									</td>
+								</c:if>
 							</c:if>
 							<c:if test="${cusOrder.cusoOrderState == 2}">
 								<td>수령 완료</td>
-								<td></td>
+								<c:if test="${sessionScope.mgr.mgrLevel == 0 }">
+									<td></td>
+								</c:if>
 							</c:if>
 							<c:if test="${cusOrder.cusoOrderState == 0}">
 								<td>접수 전</td>
-								<td>
-									<button type="button" name="accept">접수 완료</button>
-									<c:if test="${sessionScope.mgr.mgrLevel == 0 }">
-										&nbsp;
-										<button type="button" name="cancle">취소</button>
-									</c:if>
-								</td>
+								<c:if test="${sessionScope.mgr.mgrLevel == 0 }">
+									<td>
+										<button type="button" name="accept">접수 완료</button>
+										<c:if test="${sessionScope.mgr.mgrLevel == 0 }">
+											&nbsp;
+											<button type="button" name="cancle">취소</button>
+										</c:if>
+									</td>
+								</c:if>
 							</c:if>
 							<c:if test="${cusOrder.cusoOrderState < 0}">
 								<td>취소</td>
-								<td></td>
+								<c:if test="${sessionScope.mgr.mgrLevel == 0 }">
+									<td></td>
+								</c:if>
 							</c:if>
 						</tr>
 					</c:when>

@@ -44,29 +44,34 @@
 				<nav id="gnb" class="total-menu">
 					<div id="gnbBg"></div>
 					<ul class="clearfix">
-						<c:if test="${sessionScope.mgr.mgrId eq 'admin' }">
+						<li class="gnb06">
+							<a href="/salesStatics/goTotalSales.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("salesStatics")){%>on<%}%>">매출통계</a>
+						</li>
+						<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
 							<li class="gnb01">
 								<a href="/allCustomerList.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("allCustomerList.jsp")){%>on<%}%>">회원관리</a>
 							</li>
 						</c:if>
+						
 						<li class="gnb01">
 							<a href="/managerProfile.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerProfile.jsp")||request.getRequestURL().toString().split("/")[6].equals("managerList.jsp")||request.getRequestURL().toString().split("/")[6].equals("managerApply.jsp")){%>on<%}%>">매장 관리</a>
 						</li>
-						<li class="gnb02">
-							<a href="/ingreManage/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")||request.getRequestURL().toString().split("/")[6].equals("SelectPromotion.jsp")){%>on<%}%>">재료관리</a>
-						</li>
+						<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
+							<li class="gnb02">
+								<a href="/ingreManage/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")||request.getRequestURL().toString().split("/")[6].equals("SelectPromotion.jsp")){%>on<%}%>">재료관리</a>
+							</li>
+						</c:if>
 						<li class="gnb03">
 							<a href="/managerOrder/orderList.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){%>on<%}%>">재고관리</a>
 						</li>
 						<li class="gnb04">
 							<a href="/cusOrderList.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("cusOrderList.jsp")){%>on<%}%>">주문관리</a>
 						</li>
-						<li class="gnb05">
-							<a href="/board/boardList.do?type=notice" class="<%if(request.getRequestURL().toString().split("/")[6].equals("board")){%>on<%}%>">게시판관리</a>
-						</li>
-						<li class="gnb06">
-							<a href="/salesStatics/goTotalSales.do">매출통계</a>
-						</li>
+						<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
+							<li class="gnb05">
+								<a href="/board/boardList.do?type=notice" class="<%if(request.getRequestURL().toString().split("/")[6].equals("board")){%>on<%}%>">게시판관리</a>
+							</li>
+						</c:if>
 					</ul>
 				</nav>
 			</div>

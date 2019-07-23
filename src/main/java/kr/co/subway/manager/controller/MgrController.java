@@ -106,7 +106,7 @@ public class MgrController {
 					return view;
 				}
 				session.setAttribute("mgr", mgr);
-				view = "admin/index";
+				view = "redirect:/salesStatics/goTotalSales.do";//메인 페이지 대신 매출통계 페이지로 가도록!!
 			}else { //비밀번호가 다를 때
 				view = "manager/passwordFail";
 			}

@@ -32,7 +32,7 @@ public class PageController {
 			return "redirect:/loginAdmin.do";
 		}else {
 			//return "admin/index";
-			return "redirect:/allCustomerList.do";
+			return "redirect:/salesStatics/goTotalSales.do";
 		}
 	}
 	
