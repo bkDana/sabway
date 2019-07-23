@@ -5,7 +5,7 @@
 <style>
 #content-wrapper11{position:relative;min_height:100%;}
 .sub-visual{width:100%; height:200px; background:url(/resources/img/main/Fruits-and-vegetables-1920.jpg) center center no-repeat; background-size:cover;}
-.area11{width:768px;margin:0 auto;min-height:475px;}
+.area11{width:768px;margin:0 auto;min-height:515px;}
 #content11{width:460px;margin:0 auto;padding-bottom:30px;padding-left: 10%;}
 .cont_login{position: relative;float: left;width: 350px;min-height: 250px; margin-top: 50px;padding: 21px 19px 74px;border: 1px solid #ddd;border-radius:10px;}
 h3{display: block;font-size: 18px;margin-block-start: 1em;margin-block-end: 1em; margin-inline-start: 0px;margin-inline-end: 0px;font-weight: bold;text-align:center;}
