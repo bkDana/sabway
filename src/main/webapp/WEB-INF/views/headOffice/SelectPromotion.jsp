@@ -43,7 +43,7 @@
 			<select name="statusGroup">
 				<option>상품명</option>
 			</select>
-			<input type="text" maxlength="30" placeholder="상품 검색" value="${keyword }"style="height:34px; padding-left:5px;" id="textKeyword">
+			<input type="text" maxlength="30" placeholder="상품 이름을 입력하세요." value="${keyword }"style="height:34px; padding-left:5px;" id="textKeyword">
 			<button type="button" class="bbs-search-btn" name="searchBtn" onclick="enterkey();">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
@@ -139,7 +139,7 @@
 	//상품명 검색 리스트 가져오기
 	$("[name=searchBtn]").click(function(){
 		var keyword = $(this).prev().val();
-		location.href="/searchPromotion.do?currentPage=''"+"&keyword="+keyword;
+		location.href="/searchPromotion.do?currentPage=''"+"&keyword="+encodeURI(keyword);
 	});
 	//엔터키로 검색되게
 	$('#textKeyword').keyup(function(e){
@@ -150,7 +150,7 @@
 		}
 	});
 	function enterkey(text){
-		location.href="/searchPromotion.do?currentPage=''"+"&keyword="+text;
+		location.href="/searchPromotion.do?currentPage=''"+"&keyword="+encodeURI(text);
 	};
 	</script>
 </section>
