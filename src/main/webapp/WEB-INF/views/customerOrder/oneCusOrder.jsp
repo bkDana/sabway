@@ -85,7 +85,7 @@ $(function(){
 			data : {"cusoOrderNo" :cusoOrderNo},
 			success : function(){
 				$('.cancelorder').eq(i).empty();
-				$('.cancelorder').eq(i).parent().html("취소요청 완료");
+				$('.cancelorder').eq(i).parent().html("취소된 주문");
 			}
 		});
 	});
