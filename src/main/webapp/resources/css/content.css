@@ -248,5 +248,5 @@
 .step{pointer-events:none;}
 .smalltext{pointer-events:none;}
 .stepsguide{pointer-events:none;}
-/* .formpaginate{display:none;} */
+.formpaginate{display:none;}
 .show-order-box{padding:5px; background-color: #fff;}

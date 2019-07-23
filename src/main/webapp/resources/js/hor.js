@@ -134,7 +134,6 @@ $(document).ready(function() {
 			for(var i=tdIdx+1;i<11;i++){
 				//console.log("i값 체크"+i);
 					delTd.eq(i).remove();
-					delTd.eq(i).remove();
 			}
 		}
 		for(var i=inputIdx+1;i<11;i++){
@@ -213,7 +212,6 @@ $(document).ready(function() {
 						$(this).find('button').css("display","none");
 						$(this).css("background-color","#fff");
 					}
-					
 				});
 			}else{
 				$(this).unbind("mouseleave");
