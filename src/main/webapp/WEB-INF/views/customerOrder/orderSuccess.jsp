@@ -8,7 +8,7 @@
 
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
-	<div class="area">
+	<div class="area" style="min-height:485px;">
 		<div class="common-tbl-btn-group">
 			<h1 class="comm-content-tit">주문이 접수되었습니다</h1>
 			<c:if test="${sessionScope.customer ne null }">

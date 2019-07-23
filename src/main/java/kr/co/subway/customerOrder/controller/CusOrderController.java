@@ -128,18 +128,33 @@ public class CusOrderController {
 		Bucket bVo = new Bucket();
 		bVo.setBucCustomerIdx(customerIdx);
 		ArrayList<Bucket> list = cusOrderService.loadAllBucketList(bVo);
+
+		IngreVo iv = new IngreVo();		
+		ArrayList<Integer> mainCostList = new ArrayList<Integer>();
 		//'나만의 메뉴'에 추가된 항목인지 검사
 		for(int i = 0; i<list.size(); i++) {
 			Bucket b = list.get(i);
 			int bucIdx = b.getBucIdx();
 			boolean isOnMM = cusOrderService.checkMM(bucIdx);
+			if(b.getBucBread().contains("15")) {
+				iv.setIngreType("메인재료");
+				iv.setIngreLabel(b.getBucMain());
+				int mainCost = cusOrderService.loadMain15Cost(iv);
+				mainCostList.add(mainCost);
+			} else {
+				iv.setIngreType("메인재료");
+				iv.setIngreLabel(b.getBucMain());
+				int mainCost = cusOrderService.loadMain30Cost(iv);
+				mainCostList.add(mainCost);
+			}
 			b.setBucChkMM(isOnMM);
-
-		}
+			
+		}//for ends
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("list",list);
+		mav.addObject("mainCostList",mainCostList);
 		mav.setViewName("/customerOrder/bucket");	
 
 		return mav;
@@ -247,8 +262,25 @@ public class CusOrderController {
 		String customerNo = String.valueOf(c.getCustomerNo());
 		ArrayList<MyMenu> menuList = cusOrderService.selectMyMenuList(customerNo);//join용
 		ArrayList<Bucket> list = (ArrayList<Bucket>) cusOrderService.loadMenuList(menuList);
-
+		IngreVo iv = new IngreVo();		
+		ArrayList<Integer> mainCostList = new ArrayList<Integer>();
+		for(int i = 0; i<list.size(); i++) {
+			Bucket b = list.get(i);
+			
+			if(b.getBucBread().contains("15")) {
+				iv.setIngreType("메인재료");
+				iv.setIngreLabel(b.getBucMain());
+				int mainCost = cusOrderService.loadMain15Cost(iv);
+				mainCostList.add(mainCost);
+			} else {
+				iv.setIngreType("메인재료");
+				iv.setIngreLabel(b.getBucMain());
+				int mainCost = cusOrderService.loadMain30Cost(iv);
+				mainCostList.add(mainCost);
+			}
+		}//for ends
 		mav.addObject("list",list);
+		mav.addObject("mainCostList",mainCostList);
 		mav.setViewName("customerOrder/myMenuList");
 		return mav; 
 	}

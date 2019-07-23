@@ -160,6 +160,7 @@ var myform=new formtowizard({
 									<c:set var="cost30str" value="${ingre.ingreCost30*(100-discnt)/10000}"/>
 									<c:set var="parseCost30" value="${fn:substringBefore(cost30str,'.') }"/>
 									<c:set var="cost30" value="${parseCost30 }"/>
+									
 									<pre class="label half">15cm : <fmt:formatNumber value="${cost15*100 }" type="number"/>원</pre>
 									<pre class="label full">30cm : <fmt:formatNumber value="${cost30*100 }" type="number"/>원</pre>
 									<input type="hidden" value="${cost15*100 }">

@@ -11,10 +11,15 @@
 <%-- content --%>
 <section id="content-wrapper">
 	<div class="area" style="min-height:485px;">
-		<strong style="font-size:40px;">내 주문 </strong>
+		<h1 class="board-tit">장바구니</h1>
 		<br><br>
+		<c:forEach items="${mainCostList }" var="mainCost">
+			<input type="hidden" class="originalMainCost" value="${mainCost }">
+		</c:forEach>
 		<c:forEach items="${list }" var="bucket" varStatus="status">
-			<div class="hiddenInfo">			
+			<div class="hiddenInfo">
+				<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
+				<input type="hidden" class="hiddenDiscntRate" value="${bucket.bucDiscntRate }">
 				<input type="hidden" class="hiddenVegi" value="${bucket.bucVegi }">
 				<input type="hidden" class="hiddenBread" value="${bucket.bucBread }">
 				<input type="hidden" class="hiddenCheese" value="${bucket.bucCheese }">
@@ -87,7 +92,7 @@
 						<span class="side"></span>
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
-				<td><span class="cost">${bucket.bucCost * bucket.bucQuantity }</span>원</td>
+				<td><span class="cost"><%-- ${(bucket.bucCost - mainCost*bucket.bucDiscntRate*0.01) * bucket.bucQuantity } --%></span>원</td>
 				<td><button type="button" class="insertMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;'">나만의 메뉴 만들기</button></td>
 				<td><button type="button" class="deleteBucket" style="font-size:15px; font-weight:bolder; color:red;">삭제하기</button></td>
 			</tr>

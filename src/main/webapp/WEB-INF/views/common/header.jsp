@@ -17,6 +17,10 @@
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <!--<script type="text/javascript" src="/resources/js/nav.js"></script> nav.js 메뉴가 허전해서 뺐어요...-->
+
+<!-- Datapicker 달력 -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="/resources/js/common.js"></script>
 
 <script>
@@ -44,7 +48,7 @@
 	
 </script>
 
-<title>진짜 메인</title>
+<title>사브웨이</title>
 </head>
 <body>
 <%

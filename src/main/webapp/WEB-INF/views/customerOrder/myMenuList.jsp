@@ -12,8 +12,12 @@
 		<!-- <strong style="font-size:40px;">나만의 메뉴 </strong> -->
 		<h1 class="board-tit">나만의 메뉴</h1><!-- 이거 바꿈 -->
 		<br><br>
+		<c:forEach items="${mainCostList }" var="mainCost">
+			<input type="hidden" class="originalMainCost" value="${mainCost }">
+		</c:forEach>
 		<c:forEach items="${list }" var="bucket" varStatus="status">
 			<div class="hiddenInfo"><!-- 정보 로드 -->
+				<input type="hidden" class="hiddenDiscntRate" value="${bucket.bucDiscntRate }">
 				<input type="hidden" class="hiddenBucIdx" value="${bucket.bucIdx }">
 				<input type="hidden" class="hiddenCost" value="${bucket.bucCost }">
 				<input type="hidden" class="hiddenBucCustomerIdx" name="mmCustomerNo" value="${bucket.bucCustomerIdx }">
@@ -33,7 +37,7 @@
 		</c:forEach>
 		<div class="beforeInsertOrder">
 			<form action="/insertBucFromMyMenu.do" class="myMenu" method="post">
-				<input type="hidden" class="cost" name="cost" value="">
+				<input type="hidden" class="sCost" name="cost" value="">
 				<input type="hidden" class="branchName" name="branchName" value="">
 				<input type="hidden" class="customerIdx" name="cNo" value="">
  				<input type="hidden" class="bread" name="bread" value="">
@@ -65,7 +69,7 @@
 		<strong style="font-size:20px; float:left;">* '나만의 메뉴'는 '온라인 주문'에서 만드실 수 있습니다</strong><br><br>
 		<table class="comm-tbl type2">
 			<tr>
-				<th>메뉴</th><th>수량</th><th>가격</th><th>주문하기</th><th>메뉴삭제</th>
+				<th>메뉴</th><th>수량</th><th>원가</th><th>주문하기</th><th>메뉴삭제</th>
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<tr>
@@ -81,7 +85,7 @@
 						<span class="side"></span>
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
-				<td><span class="menuCost">${bucket.bucCost }</span>원</td>
+				<td><span class="mmCost">${bucket.bucCost }</span>원</td>
 				<td><button type="button" class="orderMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;">카트에 담기</button></td>
 				<td><button type="button" class="deleteMyMenu"  style="font-size:15px; font-weight:bolder; color:red;">나만의메뉴 삭제하기</button></td>
 			</tr>

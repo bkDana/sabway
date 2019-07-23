@@ -21,12 +21,22 @@ $(document).ready(function(){
 
 	}
 	
-	/* 가격 초기화 */
+	
+	/* 가격 초기화 - 버킷 */
 	var totalCost = Number(0); // 결재할 때 쓰임
-	for(var i = 0; i<$('.cost').length; i++){
+	console.log($('.cost').eq(0));
+	for(var i = 0; i<$('.hiddenInfo').length; i++) {
+		var bucCost = Number($('.hiddenCost').eq(i).val());
+		var mainCost = Number($('.originalMainCost').eq(i).val());
+		var discntRate = Number($('.hiddenDiscntRate').eq(i).val());
+		var quantity = Number($('.hiddenQuantity').eq(i).val());
+		var viewCost = Math.floor((bucCost - mainCost*discntRate*0.01)*0.01)*100;
+		console.log(bucCost + " / " + mainCost + " / " + discntRate + " / " + quantity);
+		console.log("viewCost : " + viewCost);
+		$('.cost').eq(i).html(viewCost);
 		totalCost += Number($('.cost').eq(i).html());
 		console.log(i+"번째상품 가격" + $('.cost').eq(i).html());
-	};
+	}
 	
 	/* 전체주문체크박스 */
 	//초기화
@@ -172,8 +182,6 @@ $(document).ready(function(){
     });
     $('.insertMyMenu').click(function(){
     	var itemIndex = $('.insertMyMenu').index(this);
-    	console.log(itemIndex);
-    	console.log($('.hiddenMain').eq(itemIndex).val()+$('.hiddenBucIdx').eq(itemIndex).val());
     	var createMenu = confirm("선택하신 메뉴를 나만의 메뉴로 만드시겠습니까?");
     	if(createMenu) {
     		var form = $(".myMenuInsert")[itemIndex];
@@ -261,7 +269,7 @@ $(document).ready(function(){
     
     $('.orderMyMenu').click(function(){
     	var i = $('.orderMyMenu').index(this);
-    	$('.cost').val($('.hiddenCost').eq(i).val());
+    	$('.sCost').val($('.hiddenCost').eq(i).val());
     	$('[name=cusoTotalCost]').val($('.hiddenCost').eq(i).val());
     	$('.customerIdx').val($('.hiddenBucCustomerIdx').eq(i).val());
     	$('.bread').val($('.hiddenBread').eq(i).val());
