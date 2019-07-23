@@ -34,8 +34,8 @@ public class CusOrderService {
 		
 	}
 
-	public ArrayList<Bucket> loadBucketList(String customerIdx) {
-		List<Bucket> list = cusOrderDao.loadBucketList(customerIdx);
+	public ArrayList<Bucket> loadBucketList(Bucket bVO) {
+		List<Bucket> list = cusOrderDao.loadBucketList(bVO);
 		return (ArrayList<Bucket>)list;
 	}
 
@@ -216,6 +216,11 @@ public class CusOrderService {
 
 	public int cancelOrder(String cusOrderNo) {
 		return cusOrderDao.cancelOrder(cusOrderNo);
+	}
+
+	public ArrayList<Bucket> loadAllBucketList(Bucket bVo) {
+		List<Bucket> list = cusOrderDao.loadAllBucketList(bVo);
+		return (ArrayList<Bucket>)list;
 	}
 
 }
