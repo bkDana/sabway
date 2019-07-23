@@ -71,7 +71,7 @@
 			</select>&nbsp;
 			<select name="selectKeyword">
 				<c:if test="${keyword eq '가맹점주 이름' || keyword eq '가맹점 주소'}">
-					<option selected="selected" disabled="disabled">
+					<option selected="selected" disabled="disabled" value="${keyword }">
 						<c:choose>
 							<c:when test="${keyword eq '가맹점주 이름' }"><span>가맹점주 이름</span></c:when>
 							<c:when test="${keyword eq '가맹점 주소' }"><span>가맹점 주소</span></c:when>
@@ -216,8 +216,8 @@
 			if(status1 == null){
 				var status1 = -1;
 			}
-			else if(keyword == null){
-				var keyword = $(this).prev().prev().children().eq(0).val();
+			if(keyword == null){
+				var keyword = $('[name=selectKeyword]').children().eq(0).val();
 			}
 			location.href="/searchKeyword2.do?keyword="+keyword+"&text="+encodeURI(text)+"&status1="+status1+"&currentPage=''";
 		};
