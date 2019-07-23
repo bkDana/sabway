@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mgr">
 	<insert id="enrollMgr" parameterType="mgr">
-		insert into manager values(seq_mgr_no.nextval,#{mgrId}, #{mgrPw}, #{mgrName}, #{mgrTel}, #{mgrPost}, #{mgrAddr}, #{mgrLevel}, #{mgrStatus}, sysdate, #{mgrAddrCode}, #{mgrBossName}, sysdate,0)
+		insert into manager values(seq_mgr_no.nextval,#{mgrId}, #{mgrPw}, #{mgrName}, #{mgrTel}, #{mgrPost}, #{mgrAddr}, #{mgrLevel}, #{mgrStatus}, sysdate, #{mgrAddrCode}, #{mgrBossName}, sysdate)
 	</insert>
 	<select id="mgrList" resultType="mgr">
 		select mgr_no as mgrNo
@@ -18,7 +18,7 @@
 	      ,mgr_addr_code as mgrAddrCode
 	      ,mgr_boss_name as mgrBossName
 	      ,mgr_open_date as mgrOpenDate
-	      from manager
+	      from manager 
 	</select>
 	<select id="newStoreList" resultType="mgr">
 		select mgr_no as mgrNo
@@ -34,10 +34,10 @@
 		,mgr_addr_code as mgrAddrCode
 		,mgr_boss_name as mgrBossName
 		,mgr_open_date as mgrOpenDate
-		from manager 
+		from manager where mgr_status != 3
 	</select>
 	<select id="storeTotalCount" resultType="_int">
-		select count(*) cnt from manager	
+		select count(*) cnt from manager where mgr_status != 3	
 	</select>
 	<select id="storeSelectPaging" parameterType="pb" resultType="mgr">
 		select
@@ -55,9 +55,9 @@
 		,mgr_addr_code as mgrAddrCode
 		,mgr_boss_name as mgrBossName
 		,mgr_open_date as mgrOpenDate
-		from (select rownum as rnum, m.* from (select * from manager 
+		from (select rownum as rnum, m.* from (select * from manager where mgr_status != 3	
 		<if test="keyword != null and keyword != '' and keyword != 'null'">
-			where (mgr_addr like #{keyword} or mgr_name like #{keyword}) and mgr_status != 3
+			and (mgr_addr like #{keyword} or mgr_name like #{keyword})
 		</if>
 		order by mgr_enroll_date desc) m)
 		<if test="start != 0">
@@ -167,7 +167,7 @@
 	  	  from 
 	   	  (select rownum as rnum, m.* from (select * from manager 
 	   	  where mgr_level = 0
-	  	  order by mgr_no) m)
+	  	  order by mgr_enroll_date desc) m)
 		<if test="start!=0">
 			where rnum between #{start} and #{end}
 		</if>
