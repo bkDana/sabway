@@ -22,6 +22,7 @@ $(document).ready(function() {
 	var totalCost = 0;
 	var addStatus = 0;
 	var cost = Number(0);
+	var costForView = Number(0);
 	var kcal = Number(0);
 	var oneStatus = 0;
 	var breadCheck=0;
@@ -123,10 +124,11 @@ $(document).ready(function() {
 	clearAllfn = function clearAllfn(current,tdIdx,inputIdx){
 		console.log('td : ' +tdIdx);
 		console.log('input : ' +inputIdx);
-		if(inputIdx<2){
-			cost = 0;
-			$('.show-order').eq(addStatus).find('td').eq(0).text(cost+" 원");
-		}
+//		if(inputIdx<2){
+//			cost = 0;
+//			costForView = 0;
+//			$('.show-order').eq(addStatus).find('td').eq(0).text(costForView+" 원");
+//		}
 		var delTd = $('.show-order').eq(addStatus).find('td');
 		if(tdIdx>0){
 			for(var i=tdIdx+1;i<11;i++){
@@ -157,6 +159,18 @@ $(document).ready(function() {
 						$(this).css("background-color","#fff");
 					}
 				});
+				if($('.img-box').eq(all).hasClass("cost")){
+					if(breadCheck==1){
+						costForView -= Number($('.img-box').eq(all).find('input').eq(1).val())*1;
+						cost -= Number($('.img-box').eq(all).find('input').eq(1).val())*1;
+						kcal -= Number($('.img-box').eq(all).find('input').eq(0).val())*1;
+					}else if(breadCheck==2){
+						costForView -= Number($('.img-box').eq(all).find('input').eq(2).val())*1;
+						cost -= Number($('.img-box').eq(all).find('input').eq(2).val())*1;
+						kcal -= Number($('.img-box').eq(all).find('input').eq(0).val())*2;
+					}
+					$('.show-order-context').eq(addStatus).text(costForView+" 원");
+				}
 			}
 			if($('.img-box').eq(all).hasClass("vegi")){
 				$('.img-box').eq(all).find("button").eq(0).removeClass("select-vegi");
@@ -176,7 +190,7 @@ $(document).ready(function() {
 			return;
 		}
 		if($('.show-order').eq(addStatus).find('.show-order-context').length==0){
-			var showCostStr = "<td class='show-order-context'>"+cost+" 원</td>";
+			var showCostStr = "<td class='show-order-context'>"+costForView+" 원</td>";
 			$('.show-order').eq(addStatus).append(showCostStr);
 		}
 		
@@ -419,10 +433,12 @@ $(document).ready(function() {
 				});
 			
 				if(breadCheck==1){
-					cost -=  Number($('.main').eq(i).find('input').eq(1).val())*1;
+					costForView -= Number($('.main').eq(i).find('input').eq(1).val())*1;
+					cost -=  Number($('.main').eq(i).find('input').eq(3).val())*1;
 					kcal -=  Number($('.main').eq(i).find('input').eq(0).val())*1;
 				}else if(breadCheck==2){
-					cost -=  Number($('.main').eq(i).find('input').eq(2).val())*1;
+					costForView -= Number($('.main').eq(i).find('input').eq(2).val())*1;
+					cost -=  Number($('.main').eq(i).find('input').eq(4).val())*1;
 					kcal -=  Number($('.main').eq(i).find('input').eq(0).val())*2;
 				}
 			}
@@ -431,17 +447,19 @@ $(document).ready(function() {
 		
 		
 		if(breadCheck==1){
-			cost +=  Number($(this).find('input').eq(1).val())*1;
+			costForView += Number($(this).find('input').eq(1).val())*1;
+			cost +=  Number($(this).find('input').eq(3).val())*1;
 			kcal +=  Number($(this).find('input').eq(0).val())*1;
 		}else if(breadCheck==2){
-			cost +=  Number($(this).find('input').eq(2).val())*1;
+			costForView += Number($(this).find('input').eq(2).val())*1;
+			cost +=  Number($(this).find('input').eq(4).val())*1;
 			kcal +=  Number($(this).find('input').eq(0).val())*2;
 		}
 		console.log(cost);
 		console.log(kcal);
 		$(this).unbind("mouseleave");
 		$(this).addClass("selected");
-		$('#recom-sauce').val($(this).find('input').eq(3).val());
+		$('#recom-sauce').val($(this).find('input').eq(5).val());
 		$('#recom-main').val(str);
 		$('input[name=bucMain]').val(str);
 		if($('.show-order').eq(addStatus).find('.show-order-main').length==0){
@@ -451,7 +469,7 @@ $(document).ready(function() {
 			$('.show-order').eq(addStatus).find('.show-order-main').eq(0).text(str);
 		}
 		
-		$('.show-order-context').eq(addStatus).text(cost+" 원");
+		$('.show-order-context').eq(addStatus).text(costForView+" 원");
 	});
 	
 	$('.salad').click(function(){
@@ -481,15 +499,15 @@ $(document).ready(function() {
 					}
 					
 				});
-			
-				cost -=  Number($('.salad').eq(i).find('input').eq(1).val())*1;
+				costForView -= Number($('.salad').eq(i).find('input').eq(1).val())*1;
+				cost -=  Number($('.salad').eq(i).find('input').eq(3).val())*1;
 				kcal -=  Number($('.salad').eq(i).find('input').eq(0).val())*1;
 				
 			}
 		}
 		
-		
-		cost +=  Number($(this).find('input').eq(1).val())*1;
+		costForView += Number($(this).find('input').eq(1).val())*1;
+		cost +=  Number($(this).find('input').eq(3).val())*1;
 		kcal +=  Number($(this).find('input').eq(0).val())*1;
 	
 		console.log(cost);
@@ -507,7 +525,7 @@ $(document).ready(function() {
 			$('.show-order').eq(addStatus).find('.show-order-main').eq(0).text(str);
 		}
 		
-		$('.show-order-context').eq(addStatus).text(cost+" 원");
+		$('.show-order-context').eq(addStatus).text(costForView+" 원");
 //		$('.show-order').eq(addStatus).find('.show-order-context').eq(0).remove();
 //		var showCostStr = "<td class='show-order-context'>"+cost+" 원</td>";
 //		$('.show-order').eq(addStatus).prepend(showCostStr);
@@ -565,26 +583,31 @@ $(document).ready(function() {
 		}
 		
 	});
+	
 	$('.topping').click(function(){
 		//해즈클래스 주고 이때마다 가격계산 코스트도 여기서 넣어줌. 그러면 수정할때도 가능. 
 		if($(this).hasClass("selected")){
 			if(breadCheck==1){
+				costForView += Number($(this).find('input').eq(1).val())*1;
 				cost += Number($(this).find('input').eq(1).val())*1;
 				kcal += Number($(this).find('input').eq(0).val())*1;
 			}else if(breadCheck==2){
+				costForView += Number($(this).find('input').eq(2).val())*1;
 				cost += Number($(this).find('input').eq(2).val())*1;
 				kcal += Number($(this).find('input').eq(0).val())*2;
 			}
-			$('.show-order-context').eq(addStatus).text(cost+" 원");
+			$('.show-order-context').eq(addStatus).text(costForView+" 원");
 		}else{
 			if(breadCheck==1){
+				costForView -= Number($(this).find('input').eq(1).val())*1;
 				cost -= Number($(this).find('input').eq(1).val())*1;
 				kcal -= Number($(this).find('input').eq(0).val())*1;
 			}else if(breadCheck==2){
+				costForView -= Number($(this).find('input').eq(2).val())*1;
 				cost -= Number($(this).find('input').eq(2).val())*1;
 				kcal -= Number($(this).find('input').eq(0).val())*2;
 			}
-			$('.show-order-context').eq(addStatus).text(cost+" 원");
+			$('.show-order-context').eq(addStatus).text(costForView+" 원");
 		}
 	});
 	$('.topping-check').click(function(){
@@ -621,13 +644,15 @@ $(document).ready(function() {
 			if($('.topping').eq(i).hasClass("selected")){
 				if($('.topping').eq(i).hasClass("selected")){
 					if(breadCheck==1){
+						costForView += Number($('.topping').eq(i).find('input').eq(1).val())*1;
 						cost -= Number($('.topping').eq(i).find('input').eq(1).val())*1;
 						kcal -= Number($('.topping').eq(i).find('input').eq(0).val())*1;
 					}else if(breadCheck==2){
+						costForView += Number($('.topping').eq(i).find('input').eq(2).val())*1;
 						cost -= Number($('.topping').eq(i).find('input').eq(2).val())*1;
 						kcal -= Number($('.topping').eq(i).find('input').eq(0).val())*2;
 					}
-					$('.show-order-context').eq(addStatus).text(cost+" 원");
+					$('.show-order-context').eq(addStatus).text(costForView+" 원");
 				}
 				$('.topping').eq(i).removeClass("selected");
 				$('.topping').eq(i).find('img').css("display","block");
@@ -855,6 +880,7 @@ $(document).ready(function() {
 		for(var i=0; i<$('.set').length;i++){
 			if(i!=mainIdx && $('.set').eq(i).hasClass("selected")){
 				kcal -= Number($('.set').eq(i).find('input').eq(0).val());
+				costForView -= Number($('.set').eq(i).find('input').eq(1).val())*1;
 				cost -= Number($('.set').eq(i).find('input').eq(1).val());
 				console.log(kcal);
 				console.log(cost);
@@ -878,7 +904,7 @@ $(document).ready(function() {
 		}
 		kcal += Number($(this).find('input').eq(0).val());
 		cost += Number($(this).find('input').eq(1).val());
-		
+		costForView += Number($(this).find('input').eq(1).val())*1;
 		$(this).unbind("mouseleave");
 		$(this).addClass("selected");
 		
@@ -888,7 +914,7 @@ $(document).ready(function() {
 		}else{
 			$('.show-order').eq(addStatus).find('.show-order-set').eq(0).text(str);
 		}
-		$('.show-order-context').eq(addStatus).text(cost+" 원");
+		$('.show-order-context').eq(addStatus).text(costForView+" 원");
 		
 		$('input[name=bucSet]').val(str);
 	});
@@ -897,20 +923,23 @@ $(document).ready(function() {
 		//해즈클래스 주고 이때마다 가격계산 코스트도 여기서 넣어줌. 그러면 수정할때도 가능. 
 		if($(this).hasClass("selected")){
 			cost += Number($(this).find('input').eq(1).val())*1;
+			costForView += Number($(this).find('input').eq(1).val())*1;
 			kcal += Number($(this).find('input').eq(0).val())*1;
-			$('.show-order-context').eq(addStatus).text(cost+" 원");
+			$('.show-order-context').eq(addStatus).text(costForView+" 원");
 		}else{
+			costForView -= Number($(this).find('input').eq(1).val())*1;
 			cost -= Number($(this).find('input').eq(1).val())*1;
 			kcal -= Number($(this).find('input').eq(0).val())*1;
-			$('.show-order-context').eq(addStatus).text(cost+" 원");
+			$('.show-order-context').eq(addStatus).text(costForView+" 원");
 		}
 	});
 	$('.sidemenu.img-box.select-none').click(function(){
 		for(var i = 1; i<$('.sidemenu').length;i++){
 			if($('.sidemenu').eq(i).hasClass("selected")){
+				costForView -= Number($('.sidemenu').eq(i).find('input').eq(1).val())*1;
 				cost -= Number($('.sidemenu').eq(i).find('input').eq(1).val());
 				kcal -= Number($('.sidemenu').eq(i).find('input').eq(0).val());
-				$('.show-order-context').eq(addStatus).text(cost+" 원");
+				$('.show-order-context').eq(addStatus).text(costForView+" 원");
 				$('.sidemenu').eq(i).removeClass("selected");
 				$('.sidemenu').eq(i).find('img').css("display","block");
 				$('.sidemenu').eq(i).find('p').css("display","none");
@@ -966,7 +995,7 @@ $(document).ready(function() {
 		}else{
 			$('.show-order').eq(addStatus).find('.show-order-sidemenu').eq(0).text(strKorea);
 		}
-		$('.show-order-context').eq(addStatus).text(cost+" 원");
+		$('.show-order-context').eq(addStatus).text(costForView+" 원");
 		
 		$('input[name=bucSide]').val(strKorea);
 		$('input[name=bucCost]').val(cost);
@@ -985,6 +1014,7 @@ $(document).ready(function() {
 				var resetCost = Number(resetCostStr.substr(0, resetCostStr.length-2));
 				totalCost -= resetCost;
 				cost = 0;
+				costForView = 0;
 				kcal = 0;
 				$('.show-order').last().remove();
 				var newTr = "<tr class='show-order'></tr>";
@@ -1023,7 +1053,7 @@ $(document).ready(function() {
         		$('.show-order').eq(addStatus).append(orderCheckStr);
         		canAdd=1;
         		orderComplete = true;
-        		totalCost += cost;
+        		totalCost += costForView;
         		check = true;
         		$('.show-total-cost').eq(0).text("Total : "+totalCost+" 원");
             },
@@ -1080,6 +1110,7 @@ $(document).ready(function() {
     	$('.order-view-tbl').append(newTr);
 		totalCost -= delCost;
 		cost=0;
+		costForView = 0;
     	kcal=0;
 		$('.show-total-cost').eq(0).text("Total : "+totalCost+" 원");
 		var offset = $("strong").eq(0).offset();
@@ -1103,6 +1134,7 @@ $(document).ready(function() {
     	$('.order-view-tbl').append(newTr);
     	addStatus++;
     	cost=0;
+    	costForView = 0;
     	kcal=0;
     	var offset = $("strong").eq(0).offset();
         $('html, body').animate({scrollTop : offset.top}, 400);

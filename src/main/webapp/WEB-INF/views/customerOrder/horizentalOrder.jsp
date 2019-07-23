@@ -146,7 +146,7 @@ var myform=new formtowizard({
 						<c:if test="${ingre.ingreType eq '메인재료' and ingre.ingreActive eq '1' }">
 	<%-- 						<label for="${ingre.ingreLabel }"><img src="/resources/upload/ingredients/${ingre.ingreFilepath }"></label>  --%>
 	<%-- 						<input type="radio" class="hide" id="${ingre.ingreLabel }" name="isMain${status.conunt }" value="1"> --%>
-							<div class="main img-box select-one">
+							<div class="main img-box select-one cost">
 								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 								<p class="label">${ingre.ingreLabel }</p>
 								<input type="hidden" value="${ingre.ingreKcal }">
@@ -171,6 +171,8 @@ var myform=new formtowizard({
 									<input type="hidden" value="${ingre.ingreCost15 }">
 									<input type="hidden" value="${ingre.ingreCost30 }">
 								</c:if>
+								<input type="hidden" value="${ingre.ingreCost15 }">
+								<input type="hidden" value="${ingre.ingreCost30 }">
 								<input type="hidden" value="${ingre.ingreRecomSauce }">
 							</div>
 						</c:if>
@@ -179,7 +181,7 @@ var myform=new formtowizard({
 						<c:if test="${ingre.ingreType eq '샐러드' and ingre.ingreActive eq '1' }">
 	<%-- 						<label for="${ingre.ingreLabel }"><img src="/resources/upload/ingredients/${ingre.ingreFilepath }"></label>  --%>
 	<%-- 						<input type="radio" class="hide" id="${ingre.ingreLabel }" name="isMain${status.conunt }" value="1"> --%>
-							<div class="salad img-box select-one">
+							<div class="salad img-box select-one cost">
 								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 								<p class="label">${ingre.ingreLabel }</p>
 								<input type="hidden" value="${ingre.ingreKcal }">
@@ -201,7 +203,8 @@ var myform=new formtowizard({
 									<input type="hidden" value="${ingre.ingreCost15 }">
 									<input type="hidden" value="${ingre.ingreCost15 }">
 								</c:if>
-								
+								<input type="hidden" value="${ingre.ingreCost15 }">
+								<input type="hidden" value="${ingre.ingreCost15 }">
 								<input type="hidden" value="${ingre.ingreRecomSauce }">
 							</div>
 						</c:if>
@@ -257,7 +260,7 @@ var myform=new formtowizard({
 					</div>
 					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 						<c:if test="${ingre.ingreType eq '추가토핑' and ingre.ingreActive eq '1' }">
-							<div class="topping img-box select-many">
+							<div class="topping img-box select-many cost">
 								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 								<p class="label">${ingre.ingreLabel }</p>
 								<input type="hidden" value="${ingre.ingreKcal }">
@@ -372,10 +375,11 @@ var myform=new formtowizard({
 					</div>
 					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 						<c:if test="${ingre.ingreType eq '세트메뉴' and ingre.ingreActive eq '1' }">
-							<div class="set img-box select-one" style="background-color:white;">
+							<div class="set img-box select-one cost" style="background-color:white;">
 								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 								<p class="label">${ingre.ingreLabel }</p>
 								<input type="hidden" value="${ingre.ingreKcal }">
+								<input type="hidden" value="${ingre.ingreCost15 }">
 								<input type="hidden" value="${ingre.ingreCost15 }">
 								<pre class="label half">${ingre.ingreCost15 }원</pre>
 								<pre class="label full">${ingre.ingreCost15 }원</pre>
@@ -404,10 +408,11 @@ var myform=new formtowizard({
 					</div>
 					<c:forEach items="${ingreList }" var="ingre" varStatus="status">
 						<c:if test="${ingre.ingreType eq '사이드메뉴' and ingre.ingreActive eq '1' }">
-							<div class="sidemenu img-box select-many">
+							<div class="sidemenu img-box select-many cost">
 								<img width="100%" height="100%" src="/resources/upload/ingredients/${ingre.ingreFilepath }">
 								<p class="label">${ingre.ingreLabel }</p>
 								<input type="hidden" value="${ingre.ingreKcal }">
+								<input type="hidden" value="${ingre.ingreCost15 }">
 								<input type="hidden" value="${ingre.ingreCost15 }">
 								<pre class="label half">${ingre.ingreCost15 }원</pre>
 								<pre class="label full">${ingre.ingreCost15 }원</pre>
