@@ -136,15 +136,29 @@ public class CusOrderController {
 			Bucket b = list.get(i);
 			int bucIdx = b.getBucIdx();
 			boolean isOnMM = cusOrderService.checkMM(bucIdx);
-			if(b.getBucBread().contains("15")) {
+			if(b.getBucBread().contains("30")) {
+				System.out.println("bread : 30");
+				System.out.println(b.getBucBread());
+				System.out.println(b.getBucMain());
+				iv.setIngreType("메인재료");
+				iv.setIngreLabel(b.getBucMain());
+				int mainCost = cusOrderService.loadMain30Cost(iv);
+				mainCostList.add(mainCost);
+			} else if(b.getBucBread().contains("15")) {
+				System.out.println("bread : 15");
+				System.out.println(b.getBucBread());
+				System.out.println(b.getBucMain());
 				iv.setIngreType("메인재료");
 				iv.setIngreLabel(b.getBucMain());
 				int mainCost = cusOrderService.loadMain15Cost(iv);
 				mainCostList.add(mainCost);
 			} else {
-				iv.setIngreType("메인재료");
+				System.out.println("salad");
+				System.out.println(b.getBucBread());
+				System.out.println(b.getBucMain());
+				iv.setIngreType("샐러드");
 				iv.setIngreLabel(b.getBucMain());
-				int mainCost = cusOrderService.loadMain30Cost(iv);
+				int mainCost = cusOrderService.loadMain15Cost(iv);
 				mainCostList.add(mainCost);
 			}
 			b.setBucChkMM(isOnMM);
@@ -267,15 +281,29 @@ public class CusOrderController {
 		for(int i = 0; i<list.size(); i++) {
 			Bucket b = list.get(i);
 			
-			if(b.getBucBread().contains("15")) {
+			if(b.getBucBread().contains("30")) {
+				System.out.println("bread : 30");
+				System.out.println(b.getBucBread());
+				System.out.println(b.getBucMain());
+				iv.setIngreType("메인재료");
+				iv.setIngreLabel(b.getBucMain());
+				int mainCost = cusOrderService.loadMain30Cost(iv);
+				mainCostList.add(mainCost);
+			} else if(b.getBucBread().contains("15")) {
+				System.out.println("bread : 15");
+				System.out.println(b.getBucBread());
+				System.out.println(b.getBucMain());
 				iv.setIngreType("메인재료");
 				iv.setIngreLabel(b.getBucMain());
 				int mainCost = cusOrderService.loadMain15Cost(iv);
 				mainCostList.add(mainCost);
 			} else {
-				iv.setIngreType("메인재료");
+				System.out.println("salad");
+				System.out.println(b.getBucBread());
+				System.out.println(b.getBucMain());
+				iv.setIngreType("샐러드");
 				iv.setIngreLabel(b.getBucMain());
-				int mainCost = cusOrderService.loadMain30Cost(iv);
+				int mainCost = cusOrderService.loadMain15Cost(iv);
 				mainCostList.add(mainCost);
 			}
 		}//for ends
