@@ -317,8 +317,9 @@ public class CusOrderController {
 	}
 	//검색어와 일치하는 리스트 가져오기
 	@RequestMapping("/orderSearchKeyword.do")
-	public ModelAndView searchKeyword(@RequestParam String currentPage,@RequestParam String keyword,HttpSession session) {
+	public ModelAndView searchKeyword(@RequestParam String currentPage,@RequestParam String keyword,HttpSession session) throws IOException {
 		ModelAndView mav = new ModelAndView();
+		String cusoMemberNo ="";
 		Mgr mgr = (Mgr) session.getAttribute("mgr");
 		try {
 			int currentPage1;
@@ -329,13 +330,17 @@ public class CusOrderController {
 			}
 			CusOrderPageData pd = cusOrderService.orderSearchKeyword(currentPage1,keyword,mgr);
 			//검색한 주문자 정보(회원/비회원)랑 동일하게 체크박스 체크되도록
-			String cusoMemberNo;
-			if(Long.parseLong(pd.getList().get(0).getCusoMemberNo()) > 2000000000) { //비회원
-				cusoMemberNo = "2";
-			}else if(Integer.parseInt(pd.getList().get(0).getCusoMemberNo()) < 2000000000){ //회원
-				cusoMemberNo = "1";
-			}else { //전체회원
-				cusoMemberNo = "0";
+			try {
+				if(Long.parseLong(pd.getList().get(0).getCusoMemberNo()) > 2000000000) { //비회원
+					cusoMemberNo = "2";
+				}else if(Integer.parseInt(pd.getList().get(0).getCusoMemberNo()) < 2000000000){ //회원
+					cusoMemberNo = "1";
+				}else { //전체회원
+					cusoMemberNo = "0";
+				}
+			}catch(IndexOutOfBoundsException ioe) {
+				//return주면 에러페이지 이동, 결과 없음으로 처리하기 위해서 return 추가X
+//				mav.setViewName("customerOrder/cusOrderError");
 			}
 			try {
 				mav.addObject("cusoMemberNo",cusoMemberNo);

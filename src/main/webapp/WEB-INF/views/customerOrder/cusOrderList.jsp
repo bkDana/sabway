@@ -9,6 +9,9 @@
 	.board-search-box{
 		position: static;
 	}
+	#cusOrderView {
+		color:black;
+	}
 	#link{
 		float:left;
 		position: static;
@@ -31,7 +34,7 @@
 	    font-size: 15px;
 	    margin: 4px;
 	    cursor: pointer;
-	    height: 20px;
+	    height: 35px;
 	}
 	[name=cancle]{
 		background-color: #f8585b;
@@ -71,7 +74,7 @@
 			<select name="statusGroup">
 				<option>주문번호</option>
 			</select>
-			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${keyword }"style="height:34px; padding-left:5px;" id="textInput">
+			<input type="text" maxlength="30" placeholder="주문번호를 입력하세요." value="${keyword }"style="height:34px; padding-left:5px;" id="textInput">
 			<button type="button" class="bbs-search-btn" onclick="searchBtn();"name="searchBtn">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
@@ -84,7 +87,7 @@
 				<col width="3%">
 				<col width="6%">
 				<col width="9%">
-				<col width="7%">
+				<col width="9%">
 				<col width="11%">
 				<col width="15%">
 				<col width="8%">
@@ -118,7 +121,7 @@
 							</td>
 							<td>
 								<input type="hidden" name="cusoOrderNo" value="${cusOrder.cusoOrderNo }">
-								<a href="/cusOrderInfo.do?no=${cusOrder.cusoOrderNo }">${cusOrder.cusoOrderNo }</a>
+								<a href="/cusOrderInfo.do?no=${cusOrder.cusoOrderNo }" id="cusOrderView">${cusOrder.cusoOrderNo }</a>
 							</td>
 							<td>
 								<input type="hidden" name="cusoBranch" value="${cusOrder.cusoBranch }">
@@ -132,7 +135,7 @@
 							<c:if test="${cusOrder.cusoOrderState == 1}">
 								<td>접수 완료</td>
 								<td>
-									<a href="#" name="take">수령 완료</a>
+									<button type="button" name="take">수령 완료</button>
 								</td>
 							</c:if>
 							<c:if test="${cusOrder.cusoOrderState == 2}">
@@ -142,10 +145,10 @@
 							<c:if test="${cusOrder.cusoOrderState == 0}">
 								<td>접수 전</td>
 								<td>
-									<a href="#" name="accept">접수 완료</a>
+									<button type="button" name="accept">접수 완료</button>
 									<c:if test="${sessionScope.mgr.mgrLevel == 0 }">
 										&nbsp;
-										<a href="#" name="cancle">취소</a>
+										<button type="button" name="cancle">취소</button>
 									</c:if>
 								</td>
 							</c:if>
@@ -262,10 +265,10 @@
 		//검색어에 일치하는 리스트	
  		$('[name=searchBtn]').on("click",function(){
 			var keyword = $(this).prev().val();
-			location.href="/orderSearchKeyword.do?keyword="+keyword+"&currentPage=''";
+			location.href="/orderSearchKeyword.do?keyword="+encodeURI(keyword)+"&currentPage=''";
 		}); 
 	 	function searchBtn(text){
-			location.href="/orderSearchKeyword.do?keyword="+text+"&currentPage=''";
+			location.href="/orderSearchKeyword.do?keyword="+encodeURI(text)+"&currentPage=''";
 		};
 		//선택한 체크박스 유지되게
 		$('.chk').eq('${cusoMemberNo}').prop('checked',true);	

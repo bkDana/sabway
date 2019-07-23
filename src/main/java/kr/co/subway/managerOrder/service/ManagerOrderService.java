@@ -94,4 +94,14 @@ public class ManagerOrderService {
 		*/
 		return result;
 	}
+	
+	/**/
+	@Transactional
+	public int updateBucket(String bucketCookie, String customerId) {
+		int result = dao.updateBucket(bucketCookie, customerId);
+		return result;
+	}
+	
+	
+	
 }

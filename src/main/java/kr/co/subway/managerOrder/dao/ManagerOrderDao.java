@@ -1,7 +1,9 @@
 package kr.co.subway.managerOrder.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +83,13 @@ public class ManagerOrderDao {
 	
 	public int updateStock(StockVO stock) {
 		return sqlSession.update("managerOrder.updateStock",stock);
+	}
+
+	public int updateBucket(String bucketCookie, String customerId) {
+		Map<String, String> val = new HashMap<String, String>();
+		val.put("bucketCookie", bucketCookie);
+		val.put("customerId", customerId);
+		return sqlSession.update("managerOrder.updateBucket",val);
 	}
 
 	
