@@ -27,7 +27,8 @@
  			#{bucCusoOrderNo}
  			)	
  	</insert>
- 	<select id="loadBucketList" parameterType="String" resultType="bucket">
+ 	<!-- 지점 상관없이 로드 -->
+ 	<select id="loadAllBucketList" parameterType="bucket" resultType="bucket">
  		select
  			b.buc_idx as bucIdx,
  			b.buc_bread as bucBread,
@@ -55,6 +56,40 @@
  			b.buc_branch =m.mgr_name
  		where
  			b.buc_customer_idx = #{bucCustomerIdx}
+ 		and
+ 			b.buc_cuso_order_no = 0	
+    </select>
+    <!-- 같은 지점 버킷만 주문하게 -->
+ 	<select id="loadBucketList" parameterType="bucket" resultType="bucket">
+ 		select
+ 			b.buc_idx as bucIdx,
+ 			b.buc_bread as bucBread,
+ 			b.buc_main as bucMain,
+ 			b.buc_vegi as bucVegi,
+ 			b.buc_cheese as bucCheese,
+ 			b.buc_source as bucSource,
+ 			b.buc_topping as bucTopping,
+ 			b.buc_side as bucSide,
+ 			b.buc_is_salad as bucIsSalad,
+ 			b.buc_is_ovened as bucIsOvened,
+ 			b.buc_set as bucSet,
+ 			b.buc_cost as bucCost,
+ 			b.buc_discnt_rate as bucDiscntRate,
+ 			b.buc_kcal as bucKcal,
+ 			b.buc_quantity as bucQuantity,
+ 			b.buc_reg_date as bucRegDate,
+ 			b.buc_customer_idx as bucCustomerIdx,
+ 			m.mgr_name as bucBranch
+ 		from 
+ 			bucket b
+ 		join 
+ 			manager m
+ 		on
+ 			b.buc_branch =m.mgr_name
+ 		where
+ 			b.buc_customer_idx = #{bucCustomerIdx}
+ 		and
+ 			b.buc_branch = #{bucBranch}	
  		and
  			b.buc_cuso_order_no = 0	
     </select>

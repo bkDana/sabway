@@ -125,8 +125,9 @@ public class CusOrderController {
 			}
 			System.out.println("비회원 임시번호 " + customerIdx);
 		}
-
-		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx);
+		Bucket bVo = new Bucket();
+		bVo.setBucCustomerIdx(customerIdx);
+		ArrayList<Bucket> list = cusOrderService.loadAllBucketList(bVo);
 		//'나만의 메뉴'에 추가된 항목인지 검사
 		for(int i = 0; i<list.size(); i++) {
 			Bucket b = list.get(i);
@@ -156,10 +157,7 @@ public class CusOrderController {
 		Customer c = (Customer)session.getAttribute("customer");
 		if(c != null) {
 			customerIdx = String.valueOf(c.getCustomerNo());
-			String customerId = c.getCustomerId();
-			if(!customerId.equals(cusoCallBy)) {
-	
-			}
+
 		} else {
 			Cookie[]getCookie = request.getCookies();
 			for(int i = 0; i<getCookie.length; i++) {
@@ -169,8 +167,10 @@ public class CusOrderController {
 				}
 			}
 		}
-		
-		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //버킷에 쓸 정보
+		Bucket bVO = new Bucket();
+		bVO.setBucCustomerIdx(customerIdx);
+		bVO.setBucBranch(cusoBranchName);
+		ArrayList<Bucket> list = cusOrderService.loadBucketList(bVO); //버킷에 쓸 정보
 		int cusoTCost = Integer.parseInt(cusoTotalCost);
 		CusOrder cuso = new CusOrder(0,0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoCallBy, cusoBranchName, null,null);
 		int result = cusOrderService.insertCusOrder(cuso); // cusorder에 데이터 추가하기
@@ -256,20 +256,24 @@ public class CusOrderController {
 	//회원 주문 목록 가져오기(관리자용)
 	@RequestMapping("/cusOrderList.do")
 	public ModelAndView cusOrderList(@RequestParam String currentPage,HttpSession session) {
-		Mgr mgr = (Mgr) session.getAttribute("mgr");
-		int currentPage1;
-		try {
-			currentPage1 = Integer.parseInt(currentPage);
-		}catch(Exception e) {
-			currentPage1 = 1;
-		}
-		CusOrderPageData pd = cusOrderService.cusOrderList(currentPage1,mgr);
 		ModelAndView mav = new ModelAndView();
+		Mgr mgr = (Mgr) session.getAttribute("mgr");
 		try {
-			mav.addObject("pd",pd);
-			mav.setViewName("customerOrder/cusOrderList");
-		}catch(Exception e) {
-			mav.setViewName("redirect:/");
+			int currentPage1;
+			try {
+				currentPage1 = Integer.parseInt(currentPage);
+			}catch(Exception e) {
+				currentPage1 = 1;
+			}
+			CusOrderPageData pd = cusOrderService.cusOrderList(currentPage1,mgr);
+			try {
+				mav.addObject("pd",pd);
+				mav.setViewName("customerOrder/cusOrderList");
+			}catch(Exception e) {
+				mav.setViewName("redirect:/");
+			}
+		}catch(NullPointerException n) {//로그인 중 세션 만료시 에러페이지로 전달
+			mav.setViewName("customerOrder/sessionError");
 		}
 		return mav; 
 	}
@@ -286,46 +290,53 @@ public class CusOrderController {
 	//체크박스의 값에 맞는 리스트 가져오기
 	@RequestMapping("/checkedCusoOrderList.do")
 	public ModelAndView checkedCusoOrderList(@RequestParam String currentPage,@RequestParam String cusoMemberNo,HttpSession session) {
-		Mgr mgr = (Mgr) session.getAttribute("mgr");
-		int currentPage1;
-		try {
-			currentPage1 = Integer.parseInt(currentPage);
-		}catch(Exception e) {
-			currentPage1 = 1;
-		}
-		CusOrderPageData pd = cusOrderService.checkedCusoOrderList(currentPage1,cusoMemberNo,mgr);
-		//view의 checkbox 순서 - 전체보기 : eq(0), 회원 : eq(1), 비회원 : eq(2)
-		//db상 비회원은 0으로 설정, 처음에 값이 없어서 0이기 때문에 db값은 그대로 보내고 view에 전달하는 값에 +2해서 계산
-		int checkBoxNo = 2+Integer.parseInt(cusoMemberNo);
 		ModelAndView mav = new ModelAndView();
+		Mgr mgr = (Mgr) session.getAttribute("mgr");
 		try {
-			mav.addObject("cusoMemberNo",checkBoxNo);
-			mav.addObject("pd",pd);
-			mav.setViewName("customerOrder/cusOrderList");
-		}catch(Exception e) {
-			mav.setViewName("redirect:/");
+			int currentPage1;
+			try {
+				currentPage1 = Integer.parseInt(currentPage);
+			}catch(Exception e) {
+				currentPage1 = 1;
+			}
+			CusOrderPageData pd = cusOrderService.checkedCusoOrderList(currentPage1,cusoMemberNo,mgr);
+			//view의 checkbox 순서 - 전체보기 : eq(0), 회원 : eq(1), 비회원 : eq(2)
+			//db상 비회원은 0으로 설정, 처음에 값이 없어서 0이기 때문에 db값은 그대로 보내고 view에 전달하는 값에 +2해서 계산
+			int checkBoxNo = 2+Integer.parseInt(cusoMemberNo);
+			try {
+				mav.addObject("cusoMemberNo",checkBoxNo);
+				mav.addObject("pd",pd);
+				mav.setViewName("customerOrder/cusOrderList");
+			}catch(Exception e) {
+				mav.setViewName("redirect:/");
+			}
+		}catch(NullPointerException n) {
+			mav.setViewName("customerOrder/sessionError");
 		}
 		return mav; 
 	}
 	//검색어와 일치하는 리스트 가져오기
 	@RequestMapping("/orderSearchKeyword.do")
 	public ModelAndView searchKeyword(@RequestParam String currentPage,@RequestParam String keyword,HttpSession session) {
-		Mgr mgr = (Mgr) session.getAttribute("mgr");
-		System.out.println("로그인 정보(이름) : "+mgr.getMgrBossName());
-		int currentPage1;
-		try {
-			currentPage1 = Integer.parseInt(currentPage);
-		}catch(Exception e) {
-			currentPage1 = 1;
-		}
-		CusOrderPageData pd = cusOrderService.orderSearchKeyword(currentPage1,keyword,mgr);
 		ModelAndView mav = new ModelAndView();
+		Mgr mgr = (Mgr) session.getAttribute("mgr");
 		try {
-			mav.addObject("keyword",keyword);
-			mav.addObject("pd",pd);
-			mav.setViewName("customerOrder/cusOrderList");
-		}catch(Exception e) {
-			mav.setViewName("redirect:/");
+			int currentPage1;
+			try {
+				currentPage1 = Integer.parseInt(currentPage);
+			}catch(Exception e) {
+				currentPage1 = 1;
+			}
+			CusOrderPageData pd = cusOrderService.orderSearchKeyword(currentPage1,keyword,mgr);
+			try {
+				mav.addObject("keyword",keyword);
+				mav.addObject("pd",pd);
+				mav.setViewName("customerOrder/cusOrderList");
+			}catch(Exception e) {
+				mav.setViewName("redirect:/");
+			}
+		}catch(NullPointerException n) {
+			mav.setViewName("customerOrder/sessionError");
 		}
 		return mav; 
 	}
@@ -376,9 +387,10 @@ public class CusOrderController {
 	
 	@ResponseBody
 	@RequestMapping("/cancelOrder.do")
-	public void cancelOrder(HttpServletResponse response, @RequestParam String cusOrderNo) {
+	public void cancelOrder(HttpServletResponse response, String cusoOrderNo) {
+		System.out.println("cancelOrder : "+cusoOrderNo);
 		//cusorder업데이트해야한다
-		int result = cusOrderService.cancelOrder(cusOrderNo);
+		int result = cusOrderService.cancelOrder(cusoOrderNo);
 		if(result>0) {
 			System.out.println("취소 성공");
 		}else{

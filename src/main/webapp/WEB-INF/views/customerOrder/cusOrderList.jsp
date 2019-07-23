@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 <style>
@@ -69,8 +71,8 @@
 			<select name="statusGroup">
 				<option>주문번호</option>
 			</select>
-			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${keyword }"style="height:34px; padding-left:5px;">
-			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button><br>
+			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${keyword }"style="height:34px; padding-left:5px;" id="textInput">
+			<button type="button" class="bbs-search-btn" onclick="searchBtn();"name="searchBtn">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
 			</span>
@@ -101,7 +103,8 @@
 							</td>
 							<td>
 								<input type="hidden" name="cusoTotalCost" value="${cusOrder.cusoTotalCost }">
-								${cusOrder.cusoTotalCost }원
+								<%-- ${cusOrder.cusoTotalCost } --%>
+								<fmt:formatNumber value="${cusOrder.cusoTotalCost}" pattern="#,###.##"/>원<!-- 금액 형식으로 출력 -->
 							</td>
 							<td>
 								<input type="hidden" name="cusocusoPhone" value="${cusOrder.cusoPhone }">
@@ -254,13 +257,25 @@
 			var cusoMemberNo = $(this).val();
 			location.href="/checkedCusoOrderList.do?cusoMemberNo="+cusoMemberNo+"&currentPage=''";
 		});
-		//검색어에 일치하는 리스트
-		$('[name=searchBtn]').click(function(){
+		//검색어에 일치하는 리스트	
+ 		$('[name=searchBtn]').click(function(){
 			var keyword = $(this).prev().val();
 			location.href="/orderSearchKeyword.do?keyword="+keyword+"&currentPage=''";
-		});
+		}); 
+	 	function searchBtn(text){
+			/* var keyword = $(this).prev().val(); */
+			location.href="/orderSearchKeyword.do?keyword="+text+"&currentPage=''";
+		};
 		//선택한 체크박스 유지되게
 		$('.chk').eq('${cusoMemberNo}').prop('checked',true);	
+		//엔터키로 검색되게
+		$('#textInput').keyup(function(event){
+			if(event.keyCode == 13){
+				var text = $(this).val();
+				searchBtn(text);
+				return;
+			}
+		});
 	});
 </script>
 <%-- Footer --%>

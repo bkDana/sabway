@@ -17,10 +17,6 @@
 			<c:if test="${not empty sessionScope.mgr }">
 			<input type="hidden" name="mOrderManagerId" value="${sessionScope.mgr.mgrId }">
 			</c:if>
-			<c:if test="${empty sessionScope.mgr }">
-			(가맹점 아이디 입력하면 됨)테스트용 추후 삭제 요망->
-			<input type="text" name="mOrderManagerId" value="jy">
-			</c:if>
 			<table class="comm-tbl">
 				<colgroup>
 					<col width="20%">
@@ -32,9 +28,10 @@
 				<tr>
 					<th>재료 선택</th>
 					<td>
-						<select class="middle" id="itemType"><option>-- 1차분류 --</option></select>&nbsp;
-						<select class="middle" id="item"><option value="">-- 재료 --</option></select>
-						<button type="button" class="add-btn" onclick="add();">추가</button>
+						<select class="middle" id="itemType" style="max-width: 150px;"><option>-- 카테고리 --</option></select>&nbsp;
+						<select class="middle" id="item"  style="max-width: 180px;"><option value="">-- 재료 --</option></select>
+						<button type="button" class="add-btn" onclick="add();">재료 추가</button>
+						<button type="button" class="add-btn" onclick="addAll();">카테고리 전체추가</button>
 					</td>
 				</tr>
 			</table>
@@ -47,13 +44,23 @@
 				</colgroup>
 				<thead>
 					<tr>
+						<td colspan="3">
+							<button type="button" class="add-btn" onclick="setAmount(10);">10</button>
+							<button type="button" class="del-btn" onclick="setAmount(20);">20</button>
+							<button type="button" class="add-btn" onclick="setAmount(30);">30</button>
+							<button type="button" class="del-btn" onclick="setAmount(40);">40</button>
+							<button type="button" class="add-btn" onclick="setAmount(50);">50</button>
+							※추가된 재료들의 수량을 한번에 적용할 수 있습니다.
+						</td>
+					</tr>
+					<tr>
 						<th>재료명</th><th>단위별 수량</th><th>기능</th>
 					</tr>
 				</thead>
 				<tbody>
 				</tbody>
-				
 			</table>
+			
 			<div class="common-tbl-btn-group">
 				<button type="button" class="btn-style4" onclick="javascript:history.back();">취소</button>
 				<button type="submit" class="btn-style2">등록하기</button>
@@ -64,7 +71,7 @@
 
 <script>
 
-/* 1차분류 세팅*/
+/* 카테고리 세팅*/
 $.ajax({
 	url : '/ingreManage/ingreType.do',
 	success : function(data){
@@ -88,7 +95,7 @@ $('#itemType').change(function(){
 		url : '/getIngre.do',
 		data : {type:type},
 		success : function(data){
-			//console.log(data);
+
 			$('#item').empty();
 			$('#item').append('<option value="">-- 재료 --</option>');
 			for(var i=0;i<data.length;i++){
@@ -106,10 +113,9 @@ $('#itemType').change(function(){
 	
 });
 
-/* 재료 추가하기 */
-function add(){
 
-	var item_idx = $('#item option:selected').val();
+/* 재료 추가하기 */
+function commonAdd(item_idx){
 	if(item_idx == ''){
 		alert('추가할 재료를 선택하세요');
 		$('#item').focus();
@@ -126,7 +132,8 @@ function add(){
 	});
 	
 	if(chk_num==0){
-		var item_name = $('#item option:selected').text();
+		//var item_name = $('#item option:selected').text();
+		var item_name = $('#item option[value='+item_idx+']').text();
 		var cnt = $('#item_tbl tbody').children('tr').length+1;
 		var add = '';
 		add += '<tr><td><input type="hidden" name="idx_'+cnt+'" value="'+item_idx+'"><input type="text" name="name_'+cnt+'" class="short" value="'+item_name+'"readonly></td>';
@@ -143,7 +150,27 @@ function add(){
 			$(this).val('');
 		}
 	});
+}
 
+/* 재료 추가하기(개별) */
+function add(){
+	var item_idx = $('#item option:selected').val();
+	commonAdd(item_idx);
+}
+
+
+/* 재료 추가하기 (카테고리별) */
+function addAll(){
+	var item_idx = $('#item option');
+
+	if(item_idx.length==1){
+		alert('카테고리를 선택하세요');
+		return;
+	}
+	
+	for(var i=1;i<item_idx.length;i++){
+		commonAdd(item_idx.eq(i).val());
+	}
 }
 
 /* 추가한 item 삭제하기 */
@@ -183,6 +210,18 @@ function submit_chk(){
 	
 	
 	return true;
+}
+
+/* 수량 한번에 적용 */
+function setAmount(cnt){
+
+	if($('input[name^=amount]').length==0){
+		alert('추가된 재료가 없습니다.');
+		return;
+	}
+	$('input[name^=amount]').each(function(){
+		$(this).val(cnt);
+	});
 }
 
 </script>

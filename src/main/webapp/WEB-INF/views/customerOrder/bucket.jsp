@@ -45,7 +45,7 @@
 							<input type="hidden" name="cusoPhone" value="">
 							<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
 							<input type="hidden" name="cusoOrderNo" value="">
-							<input type="hidden" name="cusoBranchName" value="${bucket.bucBranch }">
+							<input type="hidden" name="cusoBranchName" value="">
 							<input type="hidden" name="cusoCallBy" value="">
 							<input type="submit" id="insertOrder" style="display:none;">
 						</form>
@@ -56,8 +56,9 @@
 				
 		<table class="comm-tbl type2">
 			<colgroup>
-				<col width="5%">
-				<col width="15%">
+				<col width="3%">
+				<col width="7%">
+				<col width="12%">
 				<col width="30%">
 				<col width="5%">
 				<col width="8%">
@@ -65,12 +66,14 @@
 				<col width="8%">
 			</colgroup>
 			<tr>
+				<th><input type="checkbox" class="addAll"></th>
 				<th>담은 날짜</th><th>지점명</th><th>메뉴</th><th>수량</th><th>가격</th><th>나만의 메뉴</th><th>상품삭제</th>
 			</tr>
 			<c:forEach items="${list }" var="bucket" varStatus="status">
 			<tr>
+				<td><input type="checkbox" class="addOrder"></td>
 				<td>${bucket.bucRegDate }</td>
-				<td>${bucket.bucBranch }</td>
+				<td class="branch">${bucket.bucBranch }</td>
 				<td class="bucketOption">
 						<span class="bread">빵 : ${bucket.bucBread }</span><br>
 						<span class="main">메인재료 : ${bucket.bucMain }&nbsp;${bucket.bucIsSalad }</span><br>
@@ -89,7 +92,7 @@
 			</tr>
 			</c:forEach>
 			<tr>
-				<td colspan="7">
+				<td colspan="8">
 					<div class="common-tbl-btn-group">
 						<strong style="float:left;">* '나만의 메뉴'를 등록하시면 이후 옵션 선택없이 빠른 주문이 가능합니다</strong><br>
 						
