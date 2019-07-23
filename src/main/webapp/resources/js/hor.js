@@ -5,6 +5,13 @@ $(document).ready(function() {
 //	console.log(innerHtml);
 //	$('.show-order').eq(addStatus).html(innerHtml);
 	var co = getCookie('sabwayNoneCustomer');
+	
+	/* 배지배지
+	 * getCookie('sabwayNoneCustomer');
+	 * Cookies.get('sabwayNoneCustomer');
+	 * 위 두개 다 같은 함수인 것 같음...?비슷한...
+	 * sabwayNoneCustomer 값을 가져옴
+	 * */
 	console.log("두번째쿠키 : "+co);
 	var typeStatus = 0;
 });
