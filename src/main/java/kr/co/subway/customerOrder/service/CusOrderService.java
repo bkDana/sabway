@@ -214,4 +214,8 @@ public class CusOrderService {
 		return cusOrderDao.selectOneCusOrder(cusoOrderNo);
 	}
 
+	public int cancelOrder(String cusOrderNo) {
+		return cusOrderDao.cancelOrder(cusOrderNo);
+	}
+
 }
