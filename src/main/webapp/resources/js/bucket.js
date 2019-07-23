@@ -247,5 +247,3 @@ $(document).ready(function(){
 });
 
 
-
-
