@@ -3,14 +3,14 @@
 <mapper namespace="sales">
 	<!-- 월별 지점별 매출액 -->
 	<select id="getOrder" resultType="graph">
-		select nvl(cuso_branch,'total') as cusoBranch, nvl(substr(cuso_order_date,4,2),'total') as orderMonth, sum(cuso_total_cost) as totalCost  from cusorder 
+		select nvl(cuso_branch,'total') as cusoBranch, nvl(substr(cuso_order_date,4,2),'total') as orderMonth, sum(cuso_total_cost)*10 as totalCost  from cusorder 
 		where cuso_order_state=2 and substr(cuso_order_date,1,2)=to_char(sysdate,'yy') 
 		group by cube (cuso_branch, substr(cuso_order_date,4,2))
 	</select>
 	
 	<!-- 전체 매출페이지에서 선택한 월의 지점별 매출 -->
 	<select id="monthTotalSales" parameterType="string" resultType="graph">
-		select cuso_branch as cusoBranch, sum(cuso_total_cost) as totalCost  from cusorder 
+		select cuso_branch as cusoBranch, sum(cuso_total_cost)*10 as totalCost  from cusorder 
 		where cuso_order_state=2 and substr(cuso_order_date,1,2)=to_char(sysdate,'yy') and substr(cuso_order_date,4,2)=#{orderMonth} group by cuso_branch
 		 order by totalCost desc, cusoBranch
 	</select>
@@ -22,7 +22,7 @@
 	
 	<!-- 지점별 매출 현황 가져오기 -->
 	<select id="getBranchSales" parameterType="string" resultType="graph">
-		select nvl(substr(cuso_order_date,4,2),'total') as orderMonth, sum(cuso_total_cost) as totalCost  from cusorder 
+		select nvl(substr(cuso_order_date,4,2),'total') as orderMonth, sum(cuso_total_cost)*10 as totalCost  from cusorder 
 		where cuso_order_state=2 and substr(cuso_order_date,1,2)=to_char(sysdate,'yy') and cuso_branch=#{branchName} 
 		group by rollup (cuso_branch,substr(cuso_order_date,4,2))
 	</select>
@@ -30,7 +30,7 @@
 	
 	<!-- 해당 년도 메뉴 매출 and 해당 월 메뉴 매출 -->
 	<select id="getTotalMenu" parameterType="graph" resultType="graph">
-		select * from (select rownum as rnum, b.* from (select nvl(buc_main,'total') as ingredients, sum(buc_cost*buc_quantity) as totalCost from bucket
+		select * from (select rownum as rnum, b.* from (select nvl(buc_main,'total') as ingredients, sum(buc_cost*buc_quantity)*10 as totalCost from bucket
 		 where substr(buc_reg_date,1,2)=to_char(sysdate,'yy') 
 		 <if test="orderMonth != null and orderMonth !=''">
 		 	 and substr(buc_reg_date,4,2)=#{orderMonth}
@@ -40,7 +40,7 @@
 	
 	<!-- 해당 지점 당월 메뉴 판매 -->
 	<select id="getBranchMenuSales" parameterType="graph" resultType="graph">
-		select * from (select rownum as rnum, b.* from (select nvl(buc_main,'total') as ingredients, sum(buc_cost*buc_quantity) as totalCost 
+		select * from (select rownum as rnum, b.* from (select nvl(buc_main,'total') as ingredients, sum(buc_cost*buc_quantity)*10 as totalCost 
 		from bucket where substr(buc_reg_date,1,2)=to_char(sysdate,'yy') and substr(buc_reg_date,4,2)=
 		<choose>
 			<when test="orderMonth != null and orderMonth !=''">
@@ -50,7 +50,7 @@
 				to_char(sysdate,'mm')
 			</otherwise>
 		</choose>
-		 and buc_branch=#{cusoBranch} <!-- #{cusoBranch} ////////////////////////////////////////////////////////////////////// -->
+		 and buc_branch=#{cusoBranch}
 		 group by rollup(buc_main) order by totalcost desc) b)
 	</select>
 </mapper>
