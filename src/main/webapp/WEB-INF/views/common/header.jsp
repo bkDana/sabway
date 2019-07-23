@@ -48,7 +48,7 @@
 	
 </script>
 
-<title>진짜 메인</title>
+<title>사브웨이</title>
 </head>
 <body>
 <%
