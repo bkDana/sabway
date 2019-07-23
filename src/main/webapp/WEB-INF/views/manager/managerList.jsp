@@ -70,15 +70,15 @@
 				<option id="close" value=3>폐업</option>
 			</select>&nbsp;
 			<select name="selectKeyword">
-				<c:if test="${keyword eq '이름' || keyword eq '주소'}">
+				<c:if test="${keyword eq '가맹점주 이름' || keyword eq '주소'}">
 					<option selected="selected" disabled="disabled">
 						<c:choose>
-							<c:when test="${keyword eq '이름' }"><span>이름</span></c:when>
+							<c:when test="${keyword eq '가맹점주 이름' }"><span>가맹점주 이름</span></c:when>
 							<c:when test="${keyword eq '주소' }"><span>주소</span></c:when>
 						</c:choose>
 					</option>
 				</c:if>
-				<option id="name" value="이름">이름</option>
+				<option id="name" value="가맹점주 이름">가맹점주 이름</option>
 				<option id="addr" value="주소">주소</option>
 			</select>&nbsp;
 			<input type="text" maxlength="30" placeholder="가맹점 검색" value="${text }"style="height:34px; padding-left:5px;">
