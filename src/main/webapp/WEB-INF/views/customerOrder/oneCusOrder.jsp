@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/sub.jsp" /><!-- 서브메뉴 추가했습니다 -->
 <%-- Content --%>
 <section id="content-wrapper">
-	<div class="area" style="min-height:481px;">
+	<div class="area" style="min-height:485px;">
 		<h1 class="comm-content-tit">내 주문내역</h1>
 		<table class="comm-tbl" style="max-width:1200px">
 			<colgroup>

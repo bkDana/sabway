@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/sub.jsp" />
 <%-- content --%>
 <section id="content-wrapper">
-	<div class="area" style="min-height:481px;">
+	<div class="area" style="min-height:485px;">
 		<strong style="font-size:40px;">내 주문 </strong>
 		<br><br>
 		<c:forEach items="${list }" var="bucket" varStatus="status">
