@@ -80,7 +80,7 @@ input{
        $("#saveId").attr("checked", true);
    }
    
-   /* 아이디 저장을 선택했을 때 쿠키에 저장ㄴ */
+   /* 아이디 저장을 선택했을 때 쿠키에 저장 */
    $("#saveId").change(function(){
       if($("#saveId").is(":checked")){
           Cookies.set('key', $("input[name=mgrId]").val(), { expires: 7 });

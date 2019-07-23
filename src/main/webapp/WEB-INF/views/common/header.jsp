@@ -15,13 +15,14 @@
 
 <!-- script -->
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <!--<script type="text/javascript" src="/resources/js/nav.js"></script> nav.js 메뉴가 허전해서 뺐어요...-->
 
 <script>
 	$(document).ready(function(){
-		if(!document.cookie){
+		if(!Cookies.get('sabwayNoneCustomer')){
 			setCookie();
-			console.log("쿠키생성");
+			//console.log("쿠키생성");
 		}else{
 			console.log("쿠키있음");			
 		}
@@ -34,7 +35,9 @@
 	var setCookie = function setCookie(){
 		var cookieDate = new Date();
 		var date = cookieDate.getFullYear()+''+(cookieDate.getMonth()+1)+''+cookieDate.getDate()+''+cookieDate.getHours()+''+cookieDate.getMinutes()+''+cookieDate.getSeconds();
-		document.cookie = "sabwayNoneCustomer="+date;
+		//document.cookie = "sabwayNoneCustomer="+date;
+		Cookies.set('sabwayNoneCustomer', date);
+		console.log("쿠키 생성 완료. 자 이게 장바구니 쿠키값이에요:"+Cookies.get('sabwayNoneCustomer'));
 	}
 	
 	
