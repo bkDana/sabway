@@ -241,6 +241,7 @@
 			,cuso_order_no as cusoOrderNo<!-- //고객용 주문번호 -->
 			,cuso_branch as cusoBranch<!-- //지점 번호(Manager - mgrName으로 받아야함) -->
 			,cuso_order_date as cusoOrderDate
+			,cuso_call_by as cusoCallBy
 		from
 			cusorder 
 		where 

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.headOffice.dao.ApplyDAO;
 import kr.co.subway.manager.dao.MgrDAO;
 import kr.co.subway.manager.vo.Mgr;
@@ -210,4 +211,11 @@ public class MgrService {
 		Mgr mgr = mgrdao.idChk(mgrId);
 		return mgr;
 	}
+	public Mgr selectOneManager(Mgr vo) {
+	      return mgrdao.selectOneManager(vo);
+	}
+	//회원정보수정
+	   public int mgrProfileUpdate(Mgr vo) {
+	      return mgrdao.mgrProfileUpdate(vo);
+	   }
 }

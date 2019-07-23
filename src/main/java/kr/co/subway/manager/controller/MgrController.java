@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
+import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.manager.service.AddrCode;
 import kr.co.subway.manager.service.AddrType;
 import kr.co.subway.manager.service.MgrService;
@@ -318,4 +320,29 @@ public class MgrController {
 		}
 		return mav;
 	}
+	
+	// 매장정보 페이지 이동
+	   @RequestMapping(value = "/managerProfile.do")
+	   public String managerProfile(HttpSession session) {
+	      Mgr vo = (Mgr) session.getAttribute("mgr");
+	      Mgr c = mgrservice.selectOneManager(vo);
+
+	      
+	      Model model = new ExtendedModelMap();
+	      model.addAttribute("mgr", vo);
+	      return "manager/managerProfile";
+
+	   }
+	   
+	// 매장정보수정
+	   @RequestMapping(value = "/mgrProfileUpdate.do")
+	   public String mgrProfileUpdate(Mgr vo, HttpSession session) {
+	      int result = mgrservice.mgrProfileUpdate(vo);
+	      if (result > 0) {
+	         session.setAttribute("mgr", vo);
+	         return "customer/updateSuccess";
+	      } else {
+	         return "customer/updateFailed";
+	      }
+	   }
 }

@@ -125,8 +125,9 @@ public class CusOrderController {
 			}
 			System.out.println("비회원 임시번호 " + customerIdx);
 		}
-
-		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx);
+		Bucket bVo = new Bucket();
+		bVo.setBucCustomerIdx(customerIdx);
+		ArrayList<Bucket> list = cusOrderService.loadAllBucketList(bVo);
 		//'나만의 메뉴'에 추가된 항목인지 검사
 		for(int i = 0; i<list.size(); i++) {
 			Bucket b = list.get(i);
@@ -156,10 +157,7 @@ public class CusOrderController {
 		Customer c = (Customer)session.getAttribute("customer");
 		if(c != null) {
 			customerIdx = String.valueOf(c.getCustomerNo());
-			String customerId = c.getCustomerId();
-			if(!customerId.equals(cusoCallBy)) {
-	
-			}
+
 		} else {
 			Cookie[]getCookie = request.getCookies();
 			for(int i = 0; i<getCookie.length; i++) {
@@ -169,8 +167,10 @@ public class CusOrderController {
 				}
 			}
 		}
-		
-		ArrayList<Bucket> list = cusOrderService.loadBucketList(customerIdx); //버킷에 쓸 정보
+		Bucket bVO = new Bucket();
+		bVO.setBucCustomerIdx(customerIdx);
+		bVO.setBucBranch(cusoBranchName);
+		ArrayList<Bucket> list = cusOrderService.loadBucketList(bVO); //버킷에 쓸 정보
 		int cusoTCost = Integer.parseInt(cusoTotalCost);
 		CusOrder cuso = new CusOrder(0,0, 0, cusoTCost, cusoPhone, cusoMemberNo, cusoOrderNo, cusoCallBy, cusoBranchName, null,null);
 		int result = cusOrderService.insertCusOrder(cuso); // cusorder에 데이터 추가하기

@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.manager.vo.Mgr;
 import kr.co.subway.manager.vo.MgrPageBound;
 import kr.co.subway.manager.vo.MgrPageData;
@@ -85,4 +86,12 @@ public class MgrDAO {
 	public Mgr idChk(String mgrId) {
 		return session.selectOne("mgr.idChk", mgrId);
 	}
+	//매장정보 페이지
+	public Mgr selectOneManager(Mgr vo) {
+	      return session.selectOne("mgr.selectOneManager",vo);
+	 //매장정보 업데이트
+	 }
+	public int mgrProfileUpdate(Mgr vo) {
+	      return session.update("mgr.mgrProfileUpdate",vo);
+	 }
 }

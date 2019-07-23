@@ -255,4 +255,26 @@
 		from manager
 		where mgr_id = #{mgrId}
 	</select>
+	<select id="selectOneManager" parameterType="mgr" resultType="mgr">
+       select mgr_no as mgrNo
+		,mgr_id as mgrId
+		,mgr_pw as mgrPw
+		,mgr_name as mgrName
+		,mgr_tel as mgrTel
+		,mgr_post as mgrPost
+		,mgr_addr as mgrAddr
+		,mgr_level as mgrLevel
+		,mgr_status as mgrStatus
+		,mgr_enroll_date as mgrEnrollDate
+		,mgr_addr_code as mgrAddrCode
+		,mgr_boss_name as mgrBossName
+		,mgr_open_date as mgrOpenDate
+		from manager where mgr_id=#{mgrId} and mgr_pw=#{mgrPw}
+    </select>
+    <!-- 매장정보수정 -->
+    <update id="mgrProfileUpdate" parameterType="mgr">
+       update manager
+          set mgr_pw = #{mgrPw}
+          where mgr_id = #{mgrId}
+    </update>
 </mapper>

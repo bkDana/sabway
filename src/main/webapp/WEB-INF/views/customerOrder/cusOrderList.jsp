@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 <style>
@@ -103,7 +105,8 @@
 							</td>
 							<td>
 								<input type="hidden" name="cusoTotalCost" value="${cusOrder.cusoTotalCost }">
-								${cusOrder.cusoTotalCost }원
+								<%-- ${cusOrder.cusoTotalCost } --%>
+								<fmt:formatNumber value="${cusOrder.cusoTotalCost}" pattern="#,###.##"/>원<!-- 금액 형식으로 출력 -->
 							</td>
 							<td>
 								<input type="hidden" name="cusocusoPhone" value="${cusOrder.cusoPhone }">

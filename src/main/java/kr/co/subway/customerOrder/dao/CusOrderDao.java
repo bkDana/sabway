@@ -29,8 +29,8 @@ public class CusOrderDao {
 		return sqlSession.selectList("bucket.ingreSelectAll");
 	}
 
-	public List<Bucket> loadBucketList(String bucCustomerIdx) {
-		return sqlSession.selectList("bucket.loadBucketList", bucCustomerIdx);
+	public List<Bucket> loadBucketList(Bucket bVO) {
+		return sqlSession.selectList("bucket.loadBucketList", bVO);
 	}
 
 	public IngreVo selectCostMain(IngreVo ingre) {
@@ -163,6 +163,10 @@ public class CusOrderDao {
 
 	public int cancelOrder(String cusOrderNo) {
 		return sqlSession.update("cusOrder.cancelOrder",cusOrderNo);
+	}
+
+	public List<Bucket> loadAllBucketList(Bucket bVo) {
+		return sqlSession.selectList("bucket.loadAllBucketList", bVo);
 	}
 
 }
