@@ -38,7 +38,7 @@
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
 		<div class="sub-menu">※ 메뉴관리 > 이벤트 / 할인</div>
-		<h1 class="comm-content-tit">프로모션</h1>
+		<h1 class="comm-content-tit">이벤트 / 할인</h1>
 		<div class="board-search-box">
 			<select name="statusGroup">
 				<option>상품명</option>

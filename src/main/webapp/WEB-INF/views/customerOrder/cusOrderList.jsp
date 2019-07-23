@@ -63,8 +63,8 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area" style="min-height:485px;">
-		<div class="sub-menu">※ 주문관리 > 주문 목록</div>
-		<h1 class="comm-content-tit">주문 목록</h1>
+		<div class="sub-menu">※ 주문관리 > 주문 리스트</div>
+		<h1 class="comm-content-tit">주문 리스트</h1>
 		<div class="board-search-box">
 			<!-- 비회원="0" , 회원="-1" , 전체="-2" -->
 			<label for="chk0"><input type="checkbox" id="chk0" class="chk" value="-2">전체회원</label>

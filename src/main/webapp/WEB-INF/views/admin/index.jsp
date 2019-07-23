@@ -10,9 +10,6 @@
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
 	<br/><br/>
- 	<c:if test="${sessionScope.mgr.mgrLevel == 1 }">
-		<a href="/managerApply.do?currentPage=''">가맹신청리스트</a><br/><br/>
-	</c:if>
 	어드민 인덱스 페이지 입니다...
 	</div>
 </section>

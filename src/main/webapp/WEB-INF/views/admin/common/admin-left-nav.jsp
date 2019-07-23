@@ -2,14 +2,26 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="left-menu">
-	
 	<!-- 메뉴관리 -->
-	<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")){ %>
+	
+<%
+String[] pname = request.getRequestURL().toString().split("/");
+String p6 = "";
+String p7 = "";
+if(pname.length==7){
+	p6 = pname[6];
+}
+
+if(pname.length==8){
+	p7 = pname[7];
+}
+
+%>
+	<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")||(request.getRequestURL().toString().split("/")[5].equals("headOffice")&& p6.equals("SelectPromotion.jsp"))){ %>
 		<ul>
-			<li><a href="/ingreManage/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[7].equals("ingreRegisterForm.jsp")){%>on<%}%>">메뉴 등록</a></li>
-			<li><a href="/ingreManage/ingreList.do?reqPage=1" class="<%if(request.getRequestURL().toString().split("/")[7].equals("ingreList.jsp") || request.getRequestURL().toString().split("/")[7].equals("ingreUpdate.jsp")){%>on<%}%>">메뉴 관리</a></li>
-			<%-- <li><a href="#" class="<%if(request.getRequestURL().toString().split("/")[7].equals("#")){%>on<%}%>">이벤트 / 할인</a></li> --%>
-			<li><a href="/promotionSelect.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[7].equals("SelectPromotion.jsp")){%>on<%}%>">이벤트 / 할인</a></li>
+			<li><a href="/ingreManage/goIngreReg.do" class="<%if(p7.equals("ingreRegisterForm.jsp")){%>on<%}%>">메뉴 등록</a></li>
+			<li><a href="/ingreManage/ingreList.do?reqPage=1" class="<%if(p7.equals("ingreList.jsp") || p7.equals("ingreUpdate.jsp")){%>on<%}%>">메뉴 관리</a></li>
+			<li><a href="/promotionSelect.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("SelectPromotion.jsp")){%>on<%}%>">이벤트 / 할인</a></li>
 		</ul>
 	<%}%>
 	
@@ -57,9 +69,20 @@
 	<%}%>
 	
 	<!-- 매장 정보 -->
-	<%if(request.getRequestURL().toString().split("/")[5].equals("manager")){ %>
+	<%if(request.getRequestURL().toString().split("/")[5].equals("manager")||(request.getRequestURL().toString().split("/")[5].equals("headOffice")&& !p6.equals("SelectPromotion.jsp"))){ %>
 		<ul>
-			<li><a href="managerProfile.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerProfile.jsp")){%>on<%}%>">매장정보</a></li>
+			<li><a href="/managerProfile.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerProfile.jsp")){%>on<%}%>">매장 정보변경</a></li>
+			<c:if test="${sessionScope.mgr.mgrId eq 'admin'}">
+				<li><a href="/managerList.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerList.jsp")){%>on<%}%>">매장 리스트</a></li>
+				<li><a href="/managerApply.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerApply.jsp")){%>on<%}%>">신청 리스트</a></li>
+			</c:if>
+		</ul>
+	<%}%>
+	
+	<!-- 주문 관리 -->
+	<%if(request.getRequestURL().toString().split("/")[5].equals("customerOrder")){ %>
+		<ul>
+			<li><a href="/cusOrderList.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("cusOrderList.jsp")){%>on<%}%>">주문 리스트</a></li>
 		</ul>
 	<%}%>
 	
