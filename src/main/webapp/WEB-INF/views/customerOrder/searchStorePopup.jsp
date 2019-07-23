@@ -14,9 +14,10 @@
 </head>
 <body>
 	<input type="hidden" id="idx" value="">
-	<h2>매장찾기</h2>
+	<br>
+	<h2 style="margin-left:10px;">매장찾기</h2>
           <!-- 검색 -->
-         <div class="form_search">
+         <div style="margin-top:10px; margin-left:10px;" class="form_search">
 			<input id="keyword" name="keyword" maxlength="30" placeholder="지역 또는 매장명 입력" type="text" value=""  onkeypress="if(event.keyCode == 13){ searchBtn(); return; }">
 			<button class="btn_search" onclick="searchBtn();">검색</button>
          </div>
@@ -25,7 +26,7 @@
          <!-- 검색결과 -->
          <div class="board_list_wrapper">
          	<div class="content">
-	            <p class="board_total">검색 결과 <strong id="pageCount">0</strong>건</p>
+	            <p style="margin-left:10px;" class="board_total">검색 결과 <strong id="pageCount">0</strong>건</p>
 	            <div class="store_list_scroll mCustomScrollbar _mCS_1 mCS_no_scrollbar">
 		            <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: 421px; overflow:auto; overflow-x:hidden" tabindex="0">
 			            <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">

@@ -44,8 +44,13 @@
 				<nav id="gnb" class="total-menu">
 					<div id="gnbBg"></div>
 					<ul class="clearfix">
+						<c:if test="${sessionScope.mgr.mgrId eq 'admin' }">
+							<li class="gnb01">
+								<a href="/allCustomerList.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("allCustomerList.jsp")){%>on<%}%>">회원관리</a>
+							</li>
+						</c:if>
 						<li class="gnb01">
-							<a href="/allCustomerList.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("allCustomerList.jsp")){%>on<%}%>">회원관리</a>
+							<a href="/managerProfile.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerProfile.jsp")){%>on<%}%>">매장정보</a>
 						</li>
 						<li class="gnb02">
 							<a href="/managerList.do?currentPage=''">매장관리</a>

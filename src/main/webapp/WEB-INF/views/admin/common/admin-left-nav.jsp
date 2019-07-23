@@ -56,6 +56,13 @@
 		</ul>
 	<%}%>
 	
+	<!-- 매장 정보 -->
+	<%if(request.getRequestURL().toString().split("/")[5].equals("manager")){ %>
+		<ul>
+			<li><a href="managerProfile.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerProfile.jsp")){%>on<%}%>">매장정보</a></li>
+		</ul>
+	<%}%>
+	
 	
 	
 	

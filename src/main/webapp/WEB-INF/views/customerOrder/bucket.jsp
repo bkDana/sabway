@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/sub.jsp" />
 <%-- content --%>
 <section id="content-wrapper">
-	<div class="area">
+	<div class="area" style="min-height:485px;">
 		<strong style="font-size:40px;">내 주문 </strong>
 		<br><br>
 		<c:forEach items="${list }" var="bucket" varStatus="status">
@@ -41,14 +41,14 @@
 				
 				<c:if test="${status.index eq 0 }">
 					<div class="hiddenOrder">
-						<form action="/insertOrder.do" method="post">
+						<form id="insertOrder" action="/insertOrder.do" method="post">
 							<input type="hidden" name="cusoTotalCost" value="">
 							<input type="hidden" name="cusoPhone" value="">
 							<input type="hidden" name="cusoMemberNo" value="${bucket.bucCustomerIdx }">
 							<input type="hidden" name="cusoOrderNo" value="">
 							<input type="hidden" name="cusoBranchName" value="">
 							<input type="hidden" name="cusoCallBy" value="">
-							<input type="submit" id="insertOrder" style="display:none;">
+							<!-- <input type="submit" id="insertOrder" style="display:none;"> -->
 						</form>
 		 			</div> 
 				</c:if>
@@ -98,13 +98,13 @@
 						<strong style="float:left;">* '나만의 메뉴'를 등록하시면 이후 옵션 선택없이 빠른 주문이 가능합니다</strong><br>
 						
 						<!-- <button type="submit" id="sbmTest" class="btn-style2">컨트롤러테스트</button> -->
-						<button type="submit" id="sbmOrder" class="btn-style2">주문하기</button>
+						<button type="button" id="sbmOrder" class="btn-style2">주문하기</button>
 					</div>
 				</td>
 			</tr>
 		</table>
 		<input type="hidden" id="sessionPhone" value="${sessionScope.customer.phone }">
-		<input type="hidden" id="sessionId" value="${sessionScope.customer.customerId }">
+		<input type="hidden" id="sessionNick" value="${sessionScope.customer.customerNick }">
 	</div>
 </section>
 

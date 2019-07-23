@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/sub.jsp" /><!-- 서브메뉴 추가했습니다 -->
 <%-- content --%>
 <section id="content-wrapper">
-	<div class="area">
+	<div class="area" style="min-height:485px;">
 		<!-- <strong style="font-size:40px;">나만의 메뉴 </strong> -->
 		<h1 class="board-tit">나만의 메뉴</h1><!-- 이거 바꿈 -->
 		<br><br>

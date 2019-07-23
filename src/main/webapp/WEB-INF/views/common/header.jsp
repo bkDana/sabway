@@ -91,7 +91,7 @@
 						<c:when test="${not empty sessionScope.customer }">
 							
 							<li><a href="/logout.do" class="header-btn">로그아웃</a></li>
-							<li><a href="/customerProfile.do" class="header-btn" <%if(p6.equals("customerProfile.jsp")||p6.equals("myMenuList.jsp")){ %>style="background-color:#009223;color:#fff;"<%}%> >마이페이지</a></li>
+							<li><a href="/customerProfile.do" class="header-btn" <%if(p6.equals("customerProfile.jsp")||p6.equals("oneCusOrder.jsp")||p6.equals("myMenuList.jsp")){ %>style="background-color:#009223;color:#fff;"<%}%> >마이페이지</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="/index.do" class="header-btn">로그인</a></li>
