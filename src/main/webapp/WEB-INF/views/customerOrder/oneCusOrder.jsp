@@ -26,7 +26,7 @@
 				<th>No.</th><th>금액</th><th>주문번호</th><th>지점명</th><th>주문 날짜</th><th>상태 <span style="font-size:10px;">*'접수 전'에만 취소 가능합니다</span></th>
 			</tr>
 			<c:forEach items="${list }" var="cusOrder" varStatus="i">
-				<input type="hidden"value="${cusOrder.cusoIdx }">
+				<input type="hidden" class="idx" value="${cusOrder.cusoIdx }">
 				<tr>
 					<td>
 						${i.count }
@@ -55,7 +55,7 @@
 						<td class="status">수령 완료</td>
 					</c:if>
 					<c:if test="${cusOrder.cusoOrderState == 0}">
-						<td class="status">접수 전 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<button class="cancelOrder" style="color:red;">주문취소</button></td>
+						<td class="status">접수 전 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<button type="button" class="cancelorder" style="color:red;">주문취소</button></td>
 					</c:if>
 					<c:if test="${cusOrder.cusoOrderState == -1}">
 						<td class="status">취소된 주문</td>
@@ -71,6 +71,27 @@
 		</div> -->
 	</div>
 </section>
+<script>
+$(function(){
+	$(".cancelorder").click(function() {
+		var i = $('.cancelorder').index(this);
+		console.log(i);
+		var cusoOrderNo = $('.cusoOrderNo').eq(i).val();
+		console.log(cusoOrderNo);
+		
+		$.ajax({
+			url : "/cancelOrder.do",
+			type : "post",
+			data : {"cusoOrderNo" :cusoOrderNo},
+			success : function(){
+				$('.cancelorder').eq(i).empty();
+				$('.cancelorder').eq(i).parent().html("취소요청 완료");
+			}
+		});
+	});
+});
+
+</script>
 
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

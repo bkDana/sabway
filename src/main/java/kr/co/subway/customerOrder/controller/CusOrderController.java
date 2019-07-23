@@ -376,9 +376,10 @@ public class CusOrderController {
 	
 	@ResponseBody
 	@RequestMapping("/cancelOrder.do")
-	public void cancelOrder(HttpServletResponse response, @RequestParam String cusOrderNo) {
+	public void cancelOrder(HttpServletResponse response, String cusoOrderNo) {
+		System.out.println("cancelOrder : "+cusoOrderNo);
 		//cusorder업데이트해야한다
-		int result = cusOrderService.cancelOrder(cusOrderNo);
+		int result = cusOrderService.cancelOrder(cusoOrderNo);
 		if(result>0) {
 			System.out.println("취소 성공");
 		}else{
