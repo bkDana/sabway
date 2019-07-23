@@ -223,4 +223,12 @@ public class CusOrderService {
 		return (ArrayList<Bucket>)list;
 	}
 
+	public int loadMain15Cost(IngreVo iv) {
+		return cusOrderDao.loadMain15Cost(iv);
+	}
+
+	public int loadMain30Cost(IngreVo iv) {
+		return cusOrderDao.loadMain30Cost(iv);
+	}
+
 }

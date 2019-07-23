@@ -216,4 +216,25 @@
 			where rnum between #{start} and #{end}
 		</if>
   </select>
+  <!-- 메인재료 가격 불러오기 -->
+  <select id="loadMain15Cost" parameterType="ingre" resultType="_int">
+  	select
+  		ingre_cost15 as ingreCost15
+  	from
+  		ingredients
+  	where
+  		ingre_type = #{ingreType}		
+  	and
+  		ingre_label = #{ingreLabel}	
+  </select>
+  <select id="loadMain30Cost" parameterType="ingre" resultType="_int">
+  	select
+  		ingre_cost30 as ingreCost30
+  	from
+  		ingredients
+  	where
+  		ingre_type = #{ingreType}		
+  	and
+  		ingre_label = #{ingreLabel}	
+  </select>
 </mapper>

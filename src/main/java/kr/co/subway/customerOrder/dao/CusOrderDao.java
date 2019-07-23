@@ -169,4 +169,12 @@ public class CusOrderDao {
 		return sqlSession.selectList("bucket.loadAllBucketList", bVo);
 	}
 
+	public int loadMain15Cost(IngreVo iv) {
+		return sqlSession.selectOne("ingre.loadMain15Cost",iv);
+	}
+
+	public int loadMain30Cost(IngreVo iv) {
+		return sqlSession.selectOne("ingre.loadMain30Cost",iv);
+	}
+
 }
