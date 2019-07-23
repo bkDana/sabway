@@ -11,7 +11,7 @@
 <%-- content --%>
 <section id="content-wrapper">
 	<div class="area" style="min-height:485px;">
-		<strong style="font-size:40px;">내 주문 </strong>
+		<h1 class="board-tit">장바구니</h1>
 		<br><br>
 		<c:forEach items="${mainCostList }" var="mainCost">
 			<input type="hidden" class="originalMainCost" value="${mainCost }">

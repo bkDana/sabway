@@ -21,8 +21,6 @@ $(document).ready(function(){
 
 	}
 	
-	/* 가격초기화 - 나만의메뉴 */
-	
 	
 	/* 가격 초기화 - 버킷 */
 	var totalCost = Number(0); // 결재할 때 쓰임
