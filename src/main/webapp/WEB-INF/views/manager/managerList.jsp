@@ -218,7 +218,6 @@
 			}
 			if(keyword == null){
 				var keyword = $('[name=selectKeyword]').children().eq(0).val();
-				alert(keyword);
 			}
 			location.href="/searchKeyword2.do?keyword="+keyword+"&text="+encodeURI(text)+"&status1="+status1+"&currentPage=''";
 		};
