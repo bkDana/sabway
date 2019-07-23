@@ -4,7 +4,11 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<style>
+	#mainLink {
+		color:white;
+	}
+</style>
 <script type="text/javascript" src="/resources/js/notice.js"></script><!-- notice.js -->
 <c:set var="addr" value="${mgrAddr }"/>
 <c:set var="subStr" value="${fn:substringAfter(addr, ' ')}"/>
@@ -98,12 +102,11 @@
 				</table>
 				<div class="common-tbl-btn-group">
 					<button class="btn-style2" type="submit">가맹점 등록</button>
-					<button class="btn-style2" type="button"><a href="/admin.do">메인으로</a></button>
+					<button class="btn-style2" type="button"><a href="/admin.do" id="mainLink">메인으로</a></button>
 				</div>
 			</form>
 		</div>
 	</div>
 </section>
-
 <%-- Footer --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -17,6 +17,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -39,12 +40,19 @@ import kr.co.subway.customer.service.CustomerService;
 import kr.co.subway.customer.vo.CustPageNaviData;
 import kr.co.subway.customer.vo.Customer;
 import kr.co.subway.manager.vo.Mgr;
+import kr.co.subway.managerOrder.service.ManagerOrderService;
 
 @Controller
 public class CustomerController {
    @Autowired
    @Qualifier(value = "customerService")
    private CustomerService customerService;
+   
+   
+   /*배지배지*/
+   /* 비회원 -> 회원 장바구니 옮기는거 때문에 추가함*/
+   @Autowired
+	private ManagerOrderService service;
 
 
    // private MailSendService mailsender;
@@ -120,6 +128,16 @@ public class CustomerController {
             }
 
             customerService.updateLastLog(selectCustomerVo); // 마지막로깅용 메소드 호출
+            
+            /* 비회원 상태에서 장바구니에 담은 상품을 로그인 한 회원의 장바구니로 옮긴다 !!@! 배지배지*/
+            Cookie[] Cookie = request.getCookies();
+			for(int i = 0; i<Cookie.length; i++) {
+				if(Cookie[i].getName().equals("sabwayNoneCustomer")) {
+					String bucketCookie = Cookie[i].getValue();
+					service.updateBucket(bucketCookie, customerId);
+				}
+			}
+			
             session.setAttribute("customer", selectCustomerVo);
             return "customer/loginSuccess";
 
@@ -420,7 +438,7 @@ public class CustomerController {
       System.out.println("dd");
       String view = "common/msg";
       if (customer == null) {
-         request.setAttribute("msg", "아이디와 이름을 확인해주세요");
+         request.setAttribute("msg", "아이디와 이메일을 확인해주세요");
          request.setAttribute("loc", "/findPwPage.do");
          return view;
       } else {

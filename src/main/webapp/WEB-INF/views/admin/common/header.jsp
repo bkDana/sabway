@@ -50,24 +50,21 @@
 							</li>
 						</c:if>
 						<li class="gnb01">
-							<a href="/managerProfile.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerProfile.jsp")){%>on<%}%>">매장정보</a>
+							<a href="/managerProfile.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerProfile.jsp")||request.getRequestURL().toString().split("/")[6].equals("managerList.jsp")||request.getRequestURL().toString().split("/")[6].equals("managerApply.jsp")){%>on<%}%>">매장 관리</a>
 						</li>
 						<li class="gnb02">
-							<a href="/managerList.do?currentPage=''">매장관리</a>
+							<a href="/ingreManage/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")||request.getRequestURL().toString().split("/")[6].equals("SelectPromotion.jsp")){%>on<%}%>">재료관리</a>
 						</li>
 						<li class="gnb03">
-							<a href="/ingreManage/goIngreReg.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")){%>on<%}%>">재료관리</a>
-						</li>
-						<li class="gnb04">
 							<a href="/managerOrder/orderList.do" class="<%if(request.getRequestURL().toString().split("/")[6].equals("managerOrder")){%>on<%}%>">재고관리</a>
 						</li>
-						<li class="gnb05">
-							<a href="/cusOrderList.do?currentPage=''">주문관리</a>
+						<li class="gnb04">
+							<a href="/cusOrderList.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("cusOrderList.jsp")){%>on<%}%>">주문관리</a>
 						</li>
-						<li class="gnb06">
+						<li class="gnb05">
 							<a href="/board/boardList.do?type=notice" class="<%if(request.getRequestURL().toString().split("/")[6].equals("board")){%>on<%}%>">게시판관리</a>
 						</li>
-						<li class="gnb07">
+						<li class="gnb06">
 							<a href="/salesStatics/goTotalSales.do">매출통계</a>
 						</li>
 					</ul>
