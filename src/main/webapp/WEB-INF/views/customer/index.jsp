@@ -4,16 +4,17 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <style>
 #content-wrapper11{position:relative;min_height:100%;}
-.area11{width:768px;margin:0 auto;padding-bottom:50px;min-height:630px;}
+.sub-visual{width:100%; height:200px; background:url(/resources/img/main/Fruits-and-vegetables-1920.jpg) center center no-repeat; background-size:cover;}
+.area11{width:768px;margin:0 auto;min-height:475px;}
 #content11{width:460px;margin:0 auto;padding-bottom:30px;padding-left: 10%;}
-.cont_login{position: relative;float: left;width: 350px;min-height: 350px; margin-top: 70px;padding: 21px 19px 74px;border: 1px solid #ddd;}
+.cont_login{position: relative;float: left;width: 350px;min-height: 250px; margin-top: 50px;padding: 21px 19px 74px;border: 1px solid #ddd;border-radius:10px;}
 h3{display: block;font-size: 18px;margin-block-start: 1em;margin-block-end: 1em; margin-inline-start: 0px;margin-inline-end: 0px;font-weight: bold;text-align:center;}
 .tit_login{margin_bottom:23px;}
 fieldset{border:0 none;}
-.cont_login .login_inp{position: relative;height: 38px;margin: 0 2px 8px 0;border: 1px solid #ddd;z-index: 1;}
+.cont_login .login_inp{position: relative;height: 38px;margin: 0 2px 8px 0;border: 1px solid #ddd;z-index: 1;border-radius:5px;}
 .screen_out{overflow:hidden;position:absolute;width:0;heigh:0;line_heigh:0;text-indente:-9999px;}
 .login_inp .login_email{padding:0 40px 0 10px;}
-.login_inp .inp_login{display:block;min-width:268px;width:100%;height:100%;border:1px solid transparent;border-radius:0;line-height:25px;box-sizing:border-box;padding-left:5px;}
+.login_inp .inp_login{display:block;min-width:268px;width:100%;height:100%;border:1px solid transparent;border-radius:5px;line-height:25px;box-sizing:border-box;padding-left:5px;}
 /* 로그인상태유지 */
 .cont_login .set_login{position:relative;margin-top:10px;line-heigth:20px;}
 .set_login .inp_check{position:absolute;top:4px;left:0;width:12px;height:12px;opacity:0;}
@@ -44,6 +45,7 @@ fieldset{border:0 none;}
 <jsp:include page="/WEB-INF/views/common/sub.jsp" />
 
 <section id="content-wrapper11">
+	<div class="sub-visual"></div>
 	<div class="area11">
 	
 		<div id="content11">
