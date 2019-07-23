@@ -9,7 +9,7 @@
 	.board-search-box{
 		position: static;
 	}
-	a {
+	#cusOrderView {
 		color:black;
 	}
 	#link{
@@ -34,7 +34,7 @@
 	    font-size: 15px;
 	    margin: 4px;
 	    cursor: pointer;
-	    height: 20px;
+	    height: 35px;
 	}
 	[name=cancle]{
 		background-color: #f8585b;
@@ -121,7 +121,7 @@
 							</td>
 							<td>
 								<input type="hidden" name="cusoOrderNo" value="${cusOrder.cusoOrderNo }">
-								<a href="/cusOrderInfo.do?no=${cusOrder.cusoOrderNo }">${cusOrder.cusoOrderNo }</a>
+								<a href="/cusOrderInfo.do?no=${cusOrder.cusoOrderNo }" id="cusOrderView">${cusOrder.cusoOrderNo }</a>
 							</td>
 							<td>
 								<input type="hidden" name="cusoBranch" value="${cusOrder.cusoBranch }">
@@ -135,7 +135,7 @@
 							<c:if test="${cusOrder.cusoOrderState == 1}">
 								<td>접수 완료</td>
 								<td>
-									<a href="#" name="take">수령 완료</a>
+									<button type="button" name="take">수령 완료</button>
 								</td>
 							</c:if>
 							<c:if test="${cusOrder.cusoOrderState == 2}">
@@ -145,10 +145,10 @@
 							<c:if test="${cusOrder.cusoOrderState == 0}">
 								<td>접수 전</td>
 								<td>
-									<a href="#" name="accept">접수 완료</a>
+									<button type="button" name="accept">접수 완료</button>
 									<c:if test="${sessionScope.mgr.mgrLevel == 0 }">
 										&nbsp;
-										<a href="#" name="cancle">취소</a>
+										<button type="button" name="cancle">취소</button>
 									</c:if>
 								</td>
 							</c:if>
