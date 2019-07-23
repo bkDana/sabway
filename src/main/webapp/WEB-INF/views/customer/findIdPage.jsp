@@ -7,7 +7,7 @@
 	}
 	.inquiry_wrapper {
 	    background-color: #fff;
-	    width: 1028px;
+	    width: 600px;
 	    margin: 0 auto;
 	    border: 1px solid #e8e8e8;
 	    padding: 0 70px 49px;
@@ -18,6 +18,7 @@
 	    font-size: 16px;
 	    height: 21px;
 	    padding-top: 24px;
+	    padding-left: 7px;
 	    border-bottom: 1px solid #e8e8e8;
 	    text-align: left;
 	    vertical-align: top;
@@ -86,12 +87,14 @@
 	    content: '';
 	    position: absolute;
 	    right: 13px;
-	    top: 18px;
+	    top: 14px;
 	    width: 12px;
 	    height: 7px;
 	    background: url(/resources/img/main/icon_select_arr.png) 0 0 no-repeat;
 	    z-index: 3;
 	}
+.comm-content-tit1{position:relative; font-size:26px; color:#2b2b2b; text-align:center;  font-weight:bold; padding:20px 0; margin-bottom:50px;}
+.comm-content-tit1:after{display:block; content:""; width:50px; height:4px; position:absolute; bottom:0; left:50%; margin-left:-30px;}
 </style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -100,38 +103,38 @@
 <section id="content-wrapper">
 	<div class="area1">
 		<div class="inquiry_wrapper">
-			<h1 class="comm-content-tit" style="margin-top: 50px;">아이디 찾기</h1>
+			<h1 class="comm-content-tit1" style="margin-top: 50px;">아이디 찾기</h1>
 			<form action="/findId.do" method="post">
 				<div class="findId_wrapper">
-					<table style="width:1028px">
+					<table style="width:100%;">
 					    <colgroup>
-					    	<col width= "130px">
+					    	<col width= "100px">
 					    	<col width="/">
 					    </colgroup>
 						<tr>
 							<th scope="col">이름</th>
-							<td><span class="form_text" style="width: 91%"><input type="text" name="customerName"></span></td>
+							<td><span class="form_text" style="width: 94%"><input type="text" name="customerName"></span></td>
 						</tr>
 						<tr>
 				            <th scope="col"><label for="phone">휴대폰</label></th>
 				            <td>
-				            <div class="form_select" style="width:196px;">
-				               <select name="phone" id="phone" style="width:100%; height:35px">
-				                    <option value="">선택</option>
-				                     <option value="010">010</option>
-				                     <option value="011">011</option>
-				                     <option value="016">016</option>
-				                     <option value="017">017</option>
-				                     <option value="019">019</option>
+				            <div class="form_select" style="width:28%;">
+				               <select name="phone" id="phone" style="width:100%; height:35px;line-height:35px;">
+				                    <option value=""> 선택</option>
+				                     <option value="010"> 010</option>
+				                     <option value="011"> 011</option>
+				                     <option value="016"> 016</option>
+				                     <option value="017"> 017</option>
+				                     <option value="019"> 019</option>
 				                 </select>
 							</div>
 				                 <span style="margin:0 5px 0 5px; color:black;" > - </span>
-				                 <div class="form_select1" style="width:196px; height: 35px;">
-				                 	<input type="text" id="phone1" name="phone1" style="width:100%; height: 100%;border: none;" maxlength="4">
+				                 <div class="form_select1" style="width:28%; height: 35px;">
+				                 	<input type="text" id="phone1" name="phone1" style="width:100%; height: 100%;border: none;padding-left:5px;" maxlength="4" class="num">
 				                 </div>
 				                 <span style="margin:0 5px 0 5px; color:black;"> - </span>
-				                 <div class="form_select1" style="width:196px; height: 35px;">
-				                 	<input type="text" id="phone2" name="phone2" style="width:100%; height: 100%;border: none;" maxlength="4">
+				                 <div class="form_select1" style="width:28%; height: 35px;">
+				                 	<input type="text" id="phone2" name="phone2" style="width:100%; height: 100%;border: none;padding-left:5px;" maxlength="4" class="num">>
 				                 </div>
 				                 <br> 
 				                 <span id="phoneMsg"></span>
@@ -140,8 +143,8 @@
 						<tr>
 							<th scope="col">생년월일</th>
 							<td>
-								<span class="form_text" style="width: 100%">
-									<input type="text" name="birthday" placeholder='등록된 생년월일을 입력해주세요.'>
+								<span class="form_text" style="width: 94%">
+									<input type="text" name="birthday" placeholder='등록된 생년월일을 입력해주세요. ex) 950101'>
 								</span>
 							</td>
 						</tr>

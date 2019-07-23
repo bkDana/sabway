@@ -438,7 +438,7 @@ public class CustomerController {
       System.out.println("dd");
       String view = "common/msg";
       if (customer == null) {
-         request.setAttribute("msg", "아이디와 이름을 확인해주세요");
+         request.setAttribute("msg", "아이디와 이메일을 확인해주세요");
          request.setAttribute("loc", "/findPwPage.do");
          return view;
       } else {

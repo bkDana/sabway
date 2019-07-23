@@ -4,10 +4,11 @@
 	.area1 {
 	    max-width: 1900px;
 	    margin: 0px auto;
+	    min-height:485px;
 	}
 	.inquiry_wrapper {
 	    background-color: #fff;
-	    width: 1028px;
+	    width: 600px;
 	    margin: 0 auto;
 	    border: 1px solid #e8e8e8;
 	    padding: 0 70px 49px;
@@ -18,6 +19,7 @@
 	    font-size: 16px;
 	    height: 21px;
 	    padding-top: 24px;
+	    padding-left: 7px;
 	    border-bottom: 1px solid #e8e8e8;
 	    text-align: left;
 	    vertical-align: top;
@@ -92,6 +94,8 @@
 	    background: url(/resources/img/main/icon_select_arr.png) 0 0 no-repeat;
 	    z-index: 3;
 	}
+.comm-content-tit1{position:relative; font-size:26px; color:#2b2b2b; text-align:center;  font-weight:bold; padding:20px 0; margin-bottom:50px;}
+.comm-content-tit1:after{display:block; content:""; width:50px; height:4px; position:absolute; bottom:0; left:50%; margin-left:-30px;}
 </style>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -100,21 +104,21 @@
 <section id="content-wrapper">
 	<div class="area1">
 		<div class="inquiry_wrapper">
-			<h1 class="comm-content-tit" style="margin-top: 50px;">비번 찾기</h1>
+			<h1 class="comm-content-tit1" style="margin-top: 50px;">비밀번호 찾기</h1>
 			<form action="/findPw.do" method="post">
 				<div class="findPw_wrapper">
-					<table style="width:1028px">
+					<table style="width:100%">
 					    <colgroup>
-					    	<col width= "130px">
+					    	<col width= "100px">
 					    	<col width="/">
 					    </colgroup>
 						<tr>
 							<th scope="col">아이디</th>
-							<td><span class="form_text" style="width: 91%"><input type="text" name="customerId"></span></td>
+							<td><span class="form_text" style="width: 94%"><input type="text" name="customerId"></span></td>
 						</tr>
 						<tr>
 							<th scope="col">이메일</th>
-							<td><span class="form_text" style="width: 91%"><input type="text" name="email" placeholder='등록된 이메일을 입력해주세요.'></span></td>
+							<td><span class="form_text" style="width: 94%"><input type="text" name="email" placeholder='등록된 이메일을 입력해주세요.'></span></td>
 						</tr>
 					</table>
 				</div>

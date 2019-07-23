@@ -17,6 +17,7 @@
 <script src="http://code.jquery.com/jquery-3.4.0.min.js"></script><!-- jQuery 선언 -->
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <!--<script type="text/javascript" src="/resources/js/nav.js"></script> nav.js 메뉴가 허전해서 뺐어요...-->
+<script type="text/javascript" src="/resources/js/common.js"></script>
 
 <script>
 	$(document).ready(function(){
@@ -99,7 +100,7 @@
 					</c:choose>
 					
 					<!-- <li><a href="/admin.do" class="header-btn">관리자</a></li> footer의 '점주관리자'에 연결해놓았음. -->
-					<li><a class="header-btn" id="bucket" onclick="loadBucket()"><img src="/resources/img/shopping-cart.png" width="20px"></a></li><!-- 장바구니 개수 넣어주세요 -->
+					<li><a class="header-btn" id="bucket" onclick="loadBucket()"><img src="/resources/img/shopping-cart.png" width="20px" style="padding-top:4px;"></a></li><!-- 장바구니 개수 넣어주세요 -->
 				</ul>
 			</div>
 			<!-- 헤더 상단 -->

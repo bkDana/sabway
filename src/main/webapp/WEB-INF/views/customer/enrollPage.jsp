@@ -119,7 +119,7 @@
 	    content: '';
 	    position: absolute;
 	    right: 13px;
-	    top: 18px;
+	    top: 14px;
 	    width: 12px;
 	    height: 7px;
 	    background: url(/resources/img/main/icon_select_arr.png) 0 0 no-repeat;
@@ -138,13 +138,15 @@
 	    margin-top: 2%;
     	margin-bottom: -2%;
 	}
+.comm-content-tit1{position:relative; font-size:26px; color:#2b2b2b; text-align:center;  font-weight:bold; padding:20px 0; margin-bottom:50px;}
+.comm-content-tit1:after{display:block; content:""; width:50px; height:4px; position:absolute; bottom:0; left:50%; margin-left:-30px;}
 </style>
 
 
 <section id="content-wrapper">
 	<div class="area1">
 		<div class="inquiry_wrapper">
-			<h1 class="comm-content-tit" style="margin-top: 50px;">회원가입</h1>
+			<h1 class="comm-content-tit1" style="margin-top: 50px;">회원가입</h1>
 			<form id="enrollForm" action="/enroll.do" method="post">
 				<div class="enroll_wrapper">
 			    	<input type="hidden" id="isChk" value="0">
