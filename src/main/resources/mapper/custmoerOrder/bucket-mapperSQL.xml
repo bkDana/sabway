@@ -18,7 +18,7 @@
  			#{bucIsOvened},
  			#{bucSet},
  			#{bucCost},
- 			#{bucDiscntRate},
+ 			(select ingre_discnt_rate from ingredients where ingre_label = #{bucMain} and ingre_type = '메인재료'),
  			#{bucKcal},
  			#{bucQuantity},
  			default,
