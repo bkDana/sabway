@@ -85,7 +85,7 @@
 						<span class="side"></span>
 				</td>
 				<td>수량 : ${bucket.bucQuantity }</td>
-				<td><span class="cost"></span>원</td>
+				<td><span class="mmCost">${bucket.bucCost }</span>원</td>
 				<td><button type="button" class="orderMyMenu" style="font-size:15px; font-weight:bolder; color:#009233;">카트에 담기</button></td>
 				<td><button type="button" class="deleteMyMenu"  style="font-size:15px; font-weight:bolder; color:red;">나만의메뉴 삭제하기</button></td>
 			</tr>
