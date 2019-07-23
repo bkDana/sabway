@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script>
-		alert("가맹점 신청 실패!");
+		alert("로그인 세션이 만료되었습니다.");
 		location.href="/";
 	</script>
 </body>
