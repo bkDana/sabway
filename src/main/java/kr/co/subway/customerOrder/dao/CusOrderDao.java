@@ -63,8 +63,13 @@ public class CusOrderDao {
 		return sqlSession.update("bucket.updateOrderNo", b);
 	}
 	//주문 목록 가져오기
-	public List<CusOrder> cusOrderList(CusOrderPageBound pb){
-		return sqlSession.selectList("cusOrder.cusOrderList",pb);
+	public List<CusOrder> cusOrderList(CusOrderPageBound pb,Mgr mgr){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", pb.getStart());	
+		map.put("end", pb.getEnd());	
+		map.put("mgrName", mgr.getMgrName());
+		map.put("mgrLevel", mgr.getMgrLevel());
+		return sqlSession.selectList("cusOrder.cusOrderList",map);
 	}
 	public int insertCusOrder(CusOrder cuso) {
 		return sqlSession.insert("cusOrder.insertCuso",cuso);
@@ -83,14 +88,20 @@ public class CusOrderDao {
 		return sqlSession.selectOne("cusOrder.totalCount",mgr);
 	}
 	//체크박스의 값에 맞는 리스트 가져오기
-	public List<CusOrder> checkedCusoOrderList(CusOrderPageBound pb){
-		return sqlSession.selectList("cusOrder.checkedCusoOrderList",pb);
+	public List<CusOrder> checkedCusoOrderList(CusOrderPageBound pb,Mgr mgr){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", pb.getStart());
+		map.put("end", pb.getEnd());
+		map.put("cusoMemberNo", pb.getCusoMemberNo());
+		map.put("mgrName", mgr.getMgrName());
+		map.put("mgrLevel", mgr.getMgrLevel());
+		return sqlSession.selectList("cusOrder.checkedCusoOrderList",map);
 	}
 	//선택한 체크박스의 list 개수 가져오기
 	public int checkedTotalCount(String cusoMemberNo,Mgr mgr) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("cusoMemberNo", cusoMemberNo);	
-		map.put("mgrName", mgr.getMgrBossName());
+		map.put("mgrName", mgr.getMgrName());
 		map.put("mgrLevel", mgr.getMgrLevel());
 		return sqlSession.selectOne("cusOrder.checkedTotalCount",map);
 	}
@@ -102,7 +113,7 @@ public class CusOrderDao {
 	public int searchKeywordTotalCount(String keyword,Mgr mgr) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword", keyword);
-		map.put("mgrName", mgr.getMgrBossName());
+		map.put("mgrName", mgr.getMgrName());
 		map.put("mgrLevel", mgr.getMgrLevel());
 		return sqlSession.selectOne("cusOrder.searchKeywordTotalCount",map);
 	}
@@ -148,6 +159,10 @@ public class CusOrderDao {
 
 	public CusOrder selectOneCusOrder(String cusoOrderNo) {
 		return sqlSession.selectOne("cusOrder.selectOneCusOrder",cusoOrderNo);
+	}
+
+	public int cancelOrder(String cusOrderNo) {
+		return sqlSession.update("cusOrder.cancelOrder",cusOrderNo);
 	}
 
 }

@@ -174,10 +174,10 @@
    </select>
    <select id="searchTotalCount" parameterType="sk" resultType="_int">
    		<if test="status == '-1'">
-   			<if test="keyword.equals('주소')">
+   			<if test="keyword.equals('가맹점 주소')">
 	   			select count(*) from manager where mgr_addr like '%'||#{text}||'%' and mgr_level = 0 
 	   		</if>
-   			<if test="keyword.equals('이름')">
+   			<if test="keyword.equals('가맹점주 이름')">
 	   			select count(*) from manager where mgr_boss_name like '%'||#{text}||'%' and mgr_level = 0 
 	   		</if>
    		</if>
@@ -187,10 +187,10 @@
 			   		select count(*) from manager where mgr_status = #{status} and mgr_level = 0 
 		   		</when>
 		   		<otherwise>
-			   		<if test="keyword.equals('주소')">
+			   		<if test="keyword.equals('가맹점 주소')">
 			   			select count(*) from manager where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
 			   		</if>
-		   			<if test="keyword.equals('이름')">
+		   			<if test="keyword.equals('가맹점주 이름')">
 			   			select count(*) from manager where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
 			   		</if>
 		   		</otherwise>
@@ -215,18 +215,18 @@
 	  	  from 
 	   	  (select rownum as rnum, m.* from (select * from manager 
 	   	<if test="status == '-1' and !text.equals('')">
-   			<if test="keyword.equals('주소')">
+   			<if test="keyword.equals('가맹점 주소')">
 	   			where mgr_addr like '%'||#{text}||'%' and mgr_level = 0 
 	   		</if>
-   			<if test="keyword.equals('이름')">
+   			<if test="keyword.equals('가맹점주 이름')">
 	   			where mgr_boss_name like '%'||#{text}||'%' and mgr_level = 0 
 	   		</if>
    		</if>
   		<if test="status != '-1' and !text.equals('')">
-	   		<if test="keyword.equals('주소')">
+	   		<if test="keyword.equals('가맹점 주소')">
 	   			where mgr_addr like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
 	   		</if>
-   			<if test="keyword.equals('이름')">
+   			<if test="keyword.equals('가맹점주 이름')">
 	   			where mgr_boss_name like '%'||#{text}||'%' and mgr_status = #{status} and mgr_level = 0 
 	   		</if>
   		</if>

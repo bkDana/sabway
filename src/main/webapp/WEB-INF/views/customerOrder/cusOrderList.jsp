@@ -69,8 +69,8 @@
 			<select name="statusGroup">
 				<option>주문번호</option>
 			</select>
-			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${keyword }"style="height:34px; padding-left:5px;">
-			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button><br>
+			<input type="text" maxlength="30" placeholder="주문 목록 검색" value="${keyword }"style="height:34px; padding-left:5px;" id="textInput">
+			<button type="button" class="bbs-search-btn" onclick="searchBtn();"name="searchBtn">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
 			</span>
@@ -138,8 +138,10 @@
 								<td>접수 전</td>
 								<td>
 									<a href="#" name="accept">접수 완료</a>
-									&nbsp;
-									<a href="#" name="cancle">취소</a>
+									<c:if test="${sessionScope.mgr.mgrLevel == 0 }">
+										&nbsp;
+										<a href="#" name="cancle">취소</a>
+									</c:if>
 								</td>
 							</c:if>
 							<c:if test="${cusOrder.cusoOrderState < 0}">
@@ -148,7 +150,7 @@
 							</c:if>
 						</tr>
 					</c:when>
-					<c:when test="${not empty sessionScope.mgr.mgrName && sessionScope.mgr.mgrLevel == 1}">
+					<c:when test="${empty sessionScope.mgr.mgrName && sessionScope.mgr.mgrLevel == 1}">
 						<tr>
 							<td>
 								${cusOrder.rnum }
@@ -192,8 +194,10 @@
 								<td>접수 전</td>
 								<td>
 									<a href="#" name="accept">접수 완료</a>
-									/
-									<a href="#" name="cancle">취소</a>
+									<c:if test="${sessionScope.mgr.mgrLevel == 0 }">
+										&nbsp;
+										<a href="#" name="cancle">취소</a>
+									</c:if>
 								</td>
 							</c:if>
 							<c:if test="${cusOrder.cusoOrderState < 0}">
@@ -224,20 +228,20 @@
 		//접수 완료 상태로 변경
 		$('[name=accept]').click(function(){
 			var cusoOrderState = 1;
-			var cusoIdx = $(this).parent().parent().prev().val();
+			var cusoIdx = $(this).parent().parent().prev().prev().val();
 			console.log(cusoIdx);
 			location.href="/orderStateUpdate.do?cusoOrderState="+cusoOrderState+"&cusoIdx="+cusoIdx;
 		});
 		//취소로 상태변경
 		$('[name=cancle]').click(function(){
 			var cusoOrderState = -1;
-			var cusoIdx = $(this).parent().parent().prev().val();
+			var cusoIdx = $(this).parent().parent().prev().prev().val();
 			location.href="/orderStateUpdate.do?cusoOrderState="+cusoOrderState+"&cusoIdx="+cusoIdx;
 		});
 		//수령 완료 상태로 변경
 		$('[name=take]').click(function(){
 			var cusoOrderState = 2;
-			var cusoIdx = $(this).parent().parent().prev().val();
+			var cusoIdx = $(this).parent().parent().prev().prev().val();
 			location.href="/orderStateUpdate.do?cusoOrderState="+cusoOrderState+"&cusoIdx="+cusoIdx;
 		});
 		//목록으로 이동
@@ -250,17 +254,25 @@
 			var cusoMemberNo = $(this).val();
 			location.href="/checkedCusoOrderList.do?cusoMemberNo="+cusoMemberNo+"&currentPage=''";
 		});
-		//검색어에 일치하는 리스트
-		$('[name=searchBtn]').click(function(){
+		//검색어에 일치하는 리스트	
+ 		$('[name=searchBtn]').click(function(){
 			var keyword = $(this).prev().val();
 			location.href="/orderSearchKeyword.do?keyword="+keyword+"&currentPage=''";
-		});
+		}); 
+	 	function searchBtn(text){
+			/* var keyword = $(this).prev().val(); */
+			location.href="/orderSearchKeyword.do?keyword="+text+"&currentPage=''";
+		};
 		//선택한 체크박스 유지되게
-		/* alert (${cusoMemberNo}); */
-		
 		$('.chk').eq('${cusoMemberNo}').prop('checked',true);	
-		
-		
+		//엔터키로 검색되게
+		$('#textInput').keyup(function(event){
+			if(event.keyCode == 13){
+				var text = $(this).val();
+				searchBtn(text);
+				return;
+			}
+		});
 	});
 </script>
 <%-- Footer --%>

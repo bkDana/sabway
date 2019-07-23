@@ -4,9 +4,9 @@
 
 <style>
 #content-wrapper1{padding:100px 0; background-color:#f6f6f6;}
-.area1{ max-width:1900px; margin:0px auto; }
+.area3{ max-width:1900px; margin:0px auto; }
 
-#wrap{min-width:1280px;}
+/* #wrap{min-width:1280px;} */
 .content{max-width:1170px; margin:0 auto; position:relative;}
 
 #content{padding-top:0; position:relative; z-index:3;}
@@ -114,7 +114,7 @@
 <jsp:include page="/WEB-INF/views/common/sub.jsp" />
 <!-- Content -->
 <section id="content-wrapper1" style="padding:0;background-color:#fff;">
-	<div class="area1">
+	<div class="area3">
 			<!-- sub content s -->
 			<div id="content">
 				<h2 class="subTitle">싸브웨이 프랜차이즈</h2>

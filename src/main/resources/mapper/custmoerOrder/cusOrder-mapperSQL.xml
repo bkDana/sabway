@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cusOrder">
-  	<select id="cusOrderList" parameterType="cpb" resultType="cuso">
+  	<select id="cusOrderList" parameterType="map" resultType="cuso">
   		select rnum
   			,cuso_idx as cusoIdx<!-- 자동 -->
 			,cuso_order_state as cusoOrderState<!--  //주문상태 default 0 -->
@@ -12,8 +12,17 @@
 			,cuso_branch as cusoBranch<!-- //지점 번호(Manager - mgrName으로 받아야함) -->
 			,cuso_order_date as cusoOrderDate
 			from
-			(select rownum as rnum, c.* from 
-				(select * from cusorder
+			(select rownum as rnum, c.* from
+				(select * from cusorder 
+			<if test="mgrName != null">
+			   	<if test="mgrLevel != 1">
+			 		where cuso_branch = #{mgrName}
+			   	</if>
+			   	<if test="mgrLevel == 1"></if>
+		   	</if>
+		   	<if test="mgrName == null">
+			   	<if test="mgrLevel == 1"></if>
+		   	</if> 
 				order by cuso_order_date desc) c)
 			<if test="start!=0">
 				where rnum between #{start} and #{end}
@@ -90,12 +99,10 @@
 		   	</if>
 	   	</if>
 	   	<if test="mgrName == null">
-		   	<if test="mgrLevel == 1">
-	 			select count(*) from cusorder
-	 		</if>
+ 			select count(*) from cusorder
 	   	</if>
    </select>
-  <select id="checkedCusoOrderList" parameterType="cpb" resultType="cuso">
+  <select id="checkedCusoOrderList" parameterType="map" resultType="cuso">
 		select rnum
 		,cuso_idx as cusoIdx<!-- 자동 -->
 		,cuso_order_state as cusoOrderState<!--  //주문상태 default 0 -->
@@ -108,12 +115,47 @@
 		from
 		(select rownum as rnum, c.* from 
 			(select * from cusorder
-			<if test="cusoMemberNo == 0">
+			<if test="mgrName != null">
+			   	<if test="mgrLevel != 1">
+			   		<if test='cusoMemberNo.equals("-1")'>
+				   		where cuso_member_no &lt; 2000000000 and cuso_branch = #{mgrName}
+			   		</if>
+			   		<if test='cusoMemberNo.equals("0")'><!-- 비회원 -->
+				   		where cuso_member_no &gt; 2000000000 and cuso_branch = #{mgrName}
+			   		</if>
+			   		<if test='cusoMemberNo.equals("-2")'><!-- 전체 -->
+				   		where cuso_branch = #{mgrName}
+			   		</if>
+			   	</if>
+			   	<if test="mgrLevel == 1">
+			   		<if test='cusoMemberNo.equals("-1")'>
+				   		where cuso_member_no &lt; 2000000000
+			   		</if>
+			   		<if test='cusoMemberNo.equals("0")'>
+				   		where cuso_member_no &gt; 2000000000
+			   		</if>
+			   		<if test='cusoMemberNo.equals("-2")'></if>
+			   	</if>
+		   	</if>
+		   	<if test="mgrName == null">
+			   	<if test="mgrLevel == 1">
+			   		<if test='cusoMemberNo.equals("-1")'>
+				   		where cuso_member_no &lt; 2000000000 and cuso_branch = #{mgrName}
+			   		</if>
+			   		<if test='cusoMemberNo.equals("0")'>
+				   		where cuso_member_no &gt; 2000000000 and cuso_branch = #{mgrName}
+			   		</if>
+			   		<if test='cusoMemberNo.equals("-2")'>
+				   		where cuso_branch = #{mgrName}
+			   		</if>
+		   		</if>
+		   	</if>
+<!-- 			<if test="cusoMemberNo == 0">
 				where cuso_member_no = 0 
 			</if>
 			<if test="cusoMemberNo == -1">
 				where cuso_member_no != 0
-			</if>
+			</if> -->
 			order by cuso_order_date desc) c)
 		<if test="start!=0">
 			where rnum between #{start} and #{end}
@@ -123,10 +165,10 @@
    		<if test="mgrName != null">
 		   	<if test="mgrLevel != 1">
 		   		<if test='cusoMemberNo.equals("-1")'>
-			   		select count(*) from cusorder where cuso_member_no != 0 and cuso_branch = #{mgrName}
+			   		select count(*) from cusorder where cuso_member_no &lt; 2000000000 and cuso_branch = #{mgrName}
 		   		</if>
 		   		<if test='cusoMemberNo.equals("0")'>
-			   		select count(*) from cusorder where cuso_member_no = 0 and cuso_branch = #{mgrName}
+			   		select count(*) from cusorder where cuso_member_no &gt; 2000000000 and cuso_branch = #{mgrName}
 		   		</if>
 		   		<if test='cusoMemberNo.equals("-2")'>
 			   		select count(*) from cusorder where cuso_branch = #{mgrName}
@@ -134,10 +176,10 @@
 		   	</if>
 		   	<if test="mgrLevel == 1">
 		   		<if test='cusoMemberNo.equals("-1")'>
-			   		select count(*) from cusorder where cuso_member_no != 0 
+			   		select count(*) from cusorder where cuso_member_no &lt; 2000000000 
 		   		</if>
 		   		<if test='cusoMemberNo.equals("0")'>
-			   		select count(*) from cusorder where cuso_member_no = 0
+			   		select count(*) from cusorder where cuso_member_no &gt; 2000000000
 		   		</if>
 		   		<if test='cusoMemberNo.equals("-2")'>
 			   		select count(*) from cusorder
@@ -147,10 +189,10 @@
 	   	<if test="mgrName == null">
 		   	<if test="mgrLevel == 1">
 		   		<if test='cusoMemberNo.equals("-1")'>
-			   		select count(*) from cusorder where cuso_member_no != 0 and cuso_branch = #{mgrName}
+			   		select count(*) from cusorder where cuso_member_no &lt; 2000000000 and cuso_branch = #{mgrName}
 		   		</if>
 		   		<if test='cusoMemberNo.equals("0")'>
-			   		select count(*) from cusorder where cuso_member_no = 0 and cuso_branch = #{mgrName}
+			   		select count(*) from cusorder where cuso_member_no &gt; 2000000000 and cuso_branch = #{mgrName}
 		   		</if>
 		   		<if test='cusoMemberNo.equals("-2")'>
 			   		select count(*) from cusorder where cuso_branch = #{mgrName}
@@ -239,4 +281,7 @@
 		where
 			cuso_order_no = #{cusoOrderNo}	
 	</select>
+	<update id="cancelOrder" parameterType="string">
+		update cusorder set cuso_order_state = -1 where cuso_order_no = #{cusoOrderNo}
+	</update>
 </mapper>
