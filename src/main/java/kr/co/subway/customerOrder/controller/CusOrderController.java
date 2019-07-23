@@ -328,7 +328,17 @@ public class CusOrderController {
 				currentPage1 = 1;
 			}
 			CusOrderPageData pd = cusOrderService.orderSearchKeyword(currentPage1,keyword,mgr);
+			//검색한 주문자 정보(회원/비회원)랑 동일하게 체크박스 체크되도록
+			String cusoMemberNo;
+			if(Long.parseLong(pd.getList().get(0).getCusoMemberNo()) > 2000000000) { //비회원
+				cusoMemberNo = "2";
+			}else if(Integer.parseInt(pd.getList().get(0).getCusoMemberNo()) < 2000000000){ //회원
+				cusoMemberNo = "1";
+			}else { //전체회원
+				cusoMemberNo = "0";
+			}
 			try {
+				mav.addObject("cusoMemberNo",cusoMemberNo);
 				mav.addObject("keyword",keyword);
 				mav.addObject("pd",pd);
 				mav.setViewName("customerOrder/cusOrderList");

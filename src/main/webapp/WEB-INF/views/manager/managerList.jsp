@@ -86,7 +86,7 @@
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
 				<span id="slash">/</span>
-				<a href="/managerList.do?currentPage=''" id="allList">가맹점 전체보기</a>
+				<a href="/managerList.do?currentPage=''" id="allList">전체보기</a>
 			</span>
 		</div>
 		<table class="comm-tbl" style="max-width:100%">

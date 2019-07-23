@@ -11,7 +11,7 @@
 		float:left;
 		position: static;
 	}
-	#mainLink{
+	#allList,#mainLink,#slash{
 		font-size:20px;
 		color:black;
 	}
@@ -73,6 +73,8 @@
 			<button type="button" class="bbs-search-btn" onclick="searchBtn();"name="searchBtn">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
+				<span id="slash">/</span>
+				<a href="/cusOrderList.do?currentPage=''" id="allList">전체보기</a>
 			</span>
 		</div>
 		<table class="comm-tbl" style="max-width:100%;">
@@ -255,12 +257,11 @@
 			location.href="/checkedCusoOrderList.do?cusoMemberNo="+cusoMemberNo+"&currentPage=''";
 		});
 		//검색어에 일치하는 리스트	
- 		$('[name=searchBtn]').click(function(){
+ 		$('[name=searchBtn]').on("click",function(){
 			var keyword = $(this).prev().val();
 			location.href="/orderSearchKeyword.do?keyword="+keyword+"&currentPage=''";
 		}); 
 	 	function searchBtn(text){
-			/* var keyword = $(this).prev().val(); */
 			location.href="/orderSearchKeyword.do?keyword="+text+"&currentPage=''";
 		};
 		//선택한 체크박스 유지되게
