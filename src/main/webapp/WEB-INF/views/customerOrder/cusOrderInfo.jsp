@@ -10,13 +10,17 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 주문관리 > 주문 목록(회원)</div>
+		<div class="sub-menu">※ 주문관리 > 주문 목록</div>
 		
 		<table class="comm-tbl" style="margin: 0;">
 			<colgroup>
 				<col width="30%">
 				<col width="70%">
 			</colgroup>	
+			<tr>
+				<th>주문자</th>
+				<td>${cusOrder.cusoCallBy }</td>
+			</tr>
 			<tr>
 				<th>주문 상태</th>
 				<td>
