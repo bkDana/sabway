@@ -216,4 +216,12 @@
   			m_order_del_date <![CDATA[ < ]]>= #{delDay}
   			and m_order_state = 2
   	</update>
+  	<update id="updateBucket" parameterType="map">
+  		update
+  			bucket
+  		set
+  			buc_customer_idx = (select customer_no from customer where customer_id = #{customerId})
+  		where 
+  			buc_customer_idx = #{bucketCookie}
+  	</update>
 </mapper>
