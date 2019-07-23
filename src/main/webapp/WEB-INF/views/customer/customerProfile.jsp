@@ -144,7 +144,7 @@
 <script>
 
 
-//가입하기 버튼
+//병경하기 버튼
 $("#btnSubmit").click(function(){
 
 		   
