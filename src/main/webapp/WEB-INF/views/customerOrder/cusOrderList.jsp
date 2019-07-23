@@ -59,7 +59,7 @@
 <%-- Content --%>
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
-	<div class="area">
+	<div class="area" style="min-height:481px;">
 		<div class="sub-menu">※ 주문관리 > 주문 목록</div>
 		<h1 class="comm-content-tit">주문 목록</h1>
 		<div class="board-search-box">
