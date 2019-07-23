@@ -43,8 +43,8 @@
 			<select name="statusGroup">
 				<option>상품명</option>
 			</select>
-			<input type="text" maxlength="30" placeholder="상품 검색" value="${keyword }"style="height:34px; padding-left:5px;">
-			<button type="button" class="bbs-search-btn" name="searchBtn">검색</button><br>
+			<input type="text" maxlength="30" placeholder="상품 검색" value="${keyword }"style="height:34px; padding-left:5px;" id="textKeyword">
+			<button type="button" class="bbs-search-btn" name="searchBtn" onclick="enterkey();">검색</button><br>
 			<span id="link">
 				<a href="/admin.do" id="mainLink">메인으로</a>
 				<span id="slash">/</span>
@@ -141,6 +141,17 @@
 		var keyword = $(this).prev().val();
 		location.href="/searchPromotion.do?currentPage=''"+"&keyword="+keyword;
 	});
+	//엔터키로 검색되게
+	$('#textKeyword').keyup(function(e){
+		if(e.keyCode==13){
+			var text = $(this).val();
+			enterkey(text);
+			return;
+		}
+	});
+	function enterkey(text){
+		location.href="/searchPromotion.do?currentPage=''"+"&keyword="+text;
+	};
 	</script>
 </section>
 

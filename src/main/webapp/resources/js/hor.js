@@ -124,8 +124,8 @@ $(document).ready(function() {
 		if(tdIdx>0){
 			for(var i=tdIdx+1;i<11;i++){
 				//console.log("i값 체크"+i);
-				delTd.eq(i).remove();
-				delTd.eq(i).remove();
+					delTd.eq(i).remove();
+					delTd.eq(i).remove();
 			}
 		}
 		for(var i=inputIdx+1;i<11;i++){
@@ -273,6 +273,9 @@ $(document).ready(function() {
 				$('.show-order').eq(addStatus).append(showOrderStr);
 			}else{
 				$('.show-order').eq(addStatus).find('.show-order-type').eq(0).text("샐러드");
+				if($('.show-order').eq(addStatus).find('.show-order-bread').length==0)
+				var showOrderStr = "<td class='show-order-bread'>선택안함</td>";
+				$('.show-order').eq(addStatus).append(showOrderStr);
 			}
 			
 			$(this).toggleClass("selected");
