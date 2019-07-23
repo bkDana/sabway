@@ -164,14 +164,14 @@ $(document).ready(function(){
     /* 아임포트 */
     
     $('#sbmOrder').click(function(){
-    	//테스트용으로 임시 비활성화
+//    	//테스트용으로 임시 비활성화
 //    	console.log(totalCost);
 //		var d = new Date();
 //		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
 //		IMP.init('imp25889583');
 //		IMP.request_pay({
 //			pay_method : 'card',
-//			merchant_uid : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+$('.hiddenInfo').eq(0).find('.hiddenIsSalad').val()+date,				//거래ID - 유니크 주려고 날짜까지 넣음
+//			merchant_uid : date,				//거래ID - 유니크 주려고 날짜까지 넣음
 //			name : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+" 외",						//결재명
 //			buyer_name : sessionId,
 //			buyer_email : '',
@@ -187,23 +187,19 @@ $(document).ready(function(){
 //				console.log(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
 //				$('input[name=cusoCallBy').val(sessionId);
 //				$('input[name=cusoTotalCost]').val(totalCost);
-//		    	$('input[name=cusoPhone]').val(sessionPhone);
-//		    	var d = new Date();
-//				var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+//		    	$('input[name=cusoPhone]').val(sessionPhone);		    	
 //		    	$('input[name=cusoOrderNo]').val(date);
-//
 //				$("#insertOrder").click();
 //			} else {
 //				alert('결재가 취소되었습니다');
 //			}
 //		});
+		var d = new Date();
+		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
 		$('input[name=cusoCallBy').val(sessionId);
 		$('input[name=cusoTotalCost]').val(totalCost);
-    	$('input[name=cusoPhone]').val(sessionPhone);
-    	var d = new Date();
-		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+    	$('input[name=cusoPhone]').val(sessionPhone);		    	
     	$('input[name=cusoOrderNo]').val(date);
-
 		$("#insertOrder").click();
 	});
     
@@ -243,6 +239,7 @@ $(document).ready(function(){
     	
     	cldwin.focus();
     });
+    
 
 });
 

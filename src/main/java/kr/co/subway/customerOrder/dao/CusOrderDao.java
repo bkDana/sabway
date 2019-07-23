@@ -161,4 +161,8 @@ public class CusOrderDao {
 		return sqlSession.selectOne("cusOrder.selectOneCusOrder",cusoOrderNo);
 	}
 
+	public int cancelOrder(String cusOrderNo) {
+		return sqlSession.update("cusOrder.cancelOrder",cusOrderNo);
+	}
+
 }
