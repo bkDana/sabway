@@ -183,6 +183,7 @@ public class MgrController {
 		MgrPageData pd = mgrservice.searchKeyword(currentPage1,keyword,text,status);
 		ModelAndView mav = new ModelAndView();
 		try {
+			System.out.println(keyword);
 			mav.addObject("text",text);
 			mav.addObject("keyword",keyword);
 			mav.addObject("status",status);
