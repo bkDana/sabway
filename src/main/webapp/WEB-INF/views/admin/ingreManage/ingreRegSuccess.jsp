@@ -9,7 +9,7 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 메뉴관리 > 메뉴등록완료</div>
+		<div class="sub-menu">※ 재료 관리 > 재료 등록 완료</div>
 
 		<h2 class="comm-content-tit">재료 등록 완료</h2>
 			<div class="common-tbl-box">
