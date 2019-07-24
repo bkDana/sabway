@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 
@@ -59,8 +60,18 @@
 					<tr>
 						<th>판매가격</th>
 						<td>
-							15cm : <input type="text" name="ingreCost15" id="ingreCost15" class="short" value="${iv.ingreCost15 }" style="text-align:right;" value="0" required> 원 &nbsp;&nbsp;
-							30cm : <input type="text" name="ingreCost30" id="ingreCost30" class="short" value="${iv.ingreCost30 }" style="text-align:right;" value="0" required> 원
+							<c:if test="${iv.ingreDiscntRate > 0 }">
+								<c:set var="costt15" value="${iv.ingreCost15 * ((1-(iv.ingreDiscntRate/100))/100)}"/>
+								<c:set var="costt30" value="${iv.ingreCost30 * ((1-(iv.ingreDiscntRate/100))/100)}"/>
+								<fmt:parseNumber var="cost15" value="${costt15}" integerOnly="true"/>
+								<fmt:parseNumber var="cost30" value="${costt30}" integerOnly="true"/>
+									15cm : <input type="text" name="ingreCost15" id="ingreCost15" class="short" value="${cost15*100}" style="text-align:right;" required> 원 &nbsp;&nbsp;
+									30cm : <input type="text" name="ingreCost30" id="ingreCost30" class="short" value="${cost30*100}" style="text-align:right;" required> 원
+							</c:if>
+							<c:if test="${iv.ingreDiscntRate == 0 }">
+								15cm : <input type="text" name="ingreCost15" id="ingreCost15" class="short" value="${iv.ingreCost15 }" style="text-align:right;" required> 원 &nbsp;&nbsp;
+								30cm : <input type="text" name="ingreCost30" id="ingreCost30" class="short" value="${iv.ingreCost30 }" style="text-align:right;" required> 원
+							</c:if>
 						</td>
 					</tr>
 					<tr>

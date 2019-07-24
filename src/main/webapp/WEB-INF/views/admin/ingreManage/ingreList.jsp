@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%-- Header --%>
 <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 
@@ -74,8 +76,18 @@
 									0원
 								</c:when>
 								<c:otherwise>
-									15cm : ${list.ingreCost15 }원<br>
-									30cm : ${list.ingreCost30 }원
+									<c:if test="${list.ingreDiscntRate > 0 }">
+										<c:set var="costt15" value="${list.ingreCost15 * ((1-(list.ingreDiscntRate/100))/100)}"/>
+										<c:set var="costt30" value="${list.ingreCost30 * ((1-(list.ingreDiscntRate/100))/100)}"/>
+										<fmt:parseNumber var="cost15" value="${costt15}" integerOnly="true"/>
+										<fmt:parseNumber var="cost30" value="${costt30}" integerOnly="true"/>
+											15cm : ${cost15*100}원<br>
+											30cm : ${cost30*100}원
+									</c:if>
+									<c:if test="${list.ingreDiscntRate == 0 }">
+										15cm : ${list.ingreCost15 }원<br>
+										30cm : ${list.ingreCost30 }원
+									</c:if>
 								</c:otherwise>
 							</c:choose>
 						</td>
