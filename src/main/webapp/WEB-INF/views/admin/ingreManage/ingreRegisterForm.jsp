@@ -12,7 +12,7 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 메뉴관리 > 메뉴등록</div>
+		<div class="sub-menu">※ 재료 관리 > 재료 등록</div>
 		
 			<form action="/ingreManage/ingreRegister.do" method="post" enctype="multipart/form-data">
 				<table class="comm-tbl">

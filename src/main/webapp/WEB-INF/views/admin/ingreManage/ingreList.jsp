@@ -9,7 +9,7 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 메뉴관리 > 메뉴 리스트</div>
+		<div class="sub-menu">※ 재료 관리 > 재료 리스트</div>
 		
 		<div class="board-search-box">
 			<!-- 검색박스 -->

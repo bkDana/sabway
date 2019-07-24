@@ -6,6 +6,7 @@ var getCookie = function(name) {
 	};
 
 $(document).ready(function(){
+	
 	/* 나만의메뉴 추가된거 표시 */
 	for(var i = 0; i<$('.hiddenChkMM').length; i++) {
 		var bool = $('.hiddenChkMM').eq(i).val();
@@ -22,7 +23,7 @@ $(document).ready(function(){
 	}
 	
 	
-	/* 가격 초기화 - 버킷 */
+	/* 가격 초기화 - 버킷 및 나만의 메뉴 */
 	var totalCost = Number(0); // 결재할 때 쓰임
 	console.log($('.cost').eq(0));
 	for(var i = 0; i<$('.hiddenInfo').length; i++) {
@@ -30,7 +31,7 @@ $(document).ready(function(){
 		var mainCost = Number($('.originalMainCost').eq(i).val());
 		var discntRate = Number($('.hiddenDiscntRate').eq(i).val());
 		var quantity = Number($('.hiddenQuantity').eq(i).val());
-		var viewCost = Math.floor((bucCost - mainCost*discntRate*0.01)*0.01)*100;
+		var viewCost = Math.floor((bucCost - mainCost*discntRate*0.01)*0.01)*100*quantity;
 		console.log(bucCost + " / " + mainCost + " / " + discntRate + " / " + quantity);
 		console.log("viewCost : " + viewCost);
 		$('.cost').eq(i).html(viewCost);
@@ -218,50 +219,49 @@ $(document).ready(function(){
     		if($('.checked').eq(i).html() == $('.checked').eq(0).html()) {
     			check = true;
     		} else {
-    			alert("같은 지점만 주문 가능합니다");
+    			alert("같은 지점에서만 주문 가능합니다");
     			check = false;
     		}
     	}
     	if(check) {
     		$('input[name=cusoBranchName]').val($('.checked').html());
-//    		//테스트용으로 임시 비활성화
-//        	console.log(totalCost);
-//    		var d = new Date();
-//    		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-//    		IMP.init('imp25889583');
-//    		IMP.request_pay({
-//    			pay_method : 'card',
-//    			merchant_uid : date,				//거래ID - 유니크 주려고 날짜까지 넣음
-//    			name : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+" 외",						//결재명
-//    			buyer_name : sessionNick,
-//    			buyer_email : '',
-//    			amount : totalCost,									//결재 금액
-//    			buyer_tel : sessionPhone
-//    			
-//    		},function(response){
-//    			if(response.success){
-//    				var msg = "결재가 완료되었습니다.";
-//    				var info1 = "고유 ID : "+response.imp_uid;
-//    				var info2 = "결재 금액 : "+response.paid_amount;
-//    				var info3 = "카드 승인 번호 : "+response.apply_num;
-//    				console.log(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
-//    				$('input[name=cusoBranchName]').val($('.checked').html());
-//    				$('input[name=cusoCallBy').val(sessionNick);
-//    				$('input[name=cusoTotalCost]').val(totalCost);
-//    		    	$('input[name=cusoPhone]').val(sessionPhone);		    	
-//    		    	$('input[name=cusoOrderNo]').val(date);
-//    				$("#insertOrder").click();
-//    			} else {
-//    				alert('결재가 취소되었습니다');
-//    			}
-//    		});
+
+
     		var d = new Date();
     		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-    		$('input[name=cusoCallBy]').val(sessionNick);
-    		$('input[name=cusoTotalCost]').val(totalCost);
-        	$('input[name=cusoPhone]').val(sessionPhone);		    	
-        	$('input[name=cusoOrderNo]').val(date);
-    		$("#insertOrder").submit();
+    		IMP.init('imp25889583');
+    		IMP.request_pay({
+    			pay_method : 'card',
+    			merchant_uid : date,				//거래ID - 유니크 주려고 날짜까지 넣음
+    			name : $('.hiddenInfo').eq(0).find('.hiddenMain').val()+" 외",						//결재명
+    			buyer_name : sessionNick,
+    			buyer_email : '',
+    			amount : totalCost,									//결재 금액
+    			buyer_tel : sessionPhone
+    			
+    		},function(response){
+    			if(response.success){
+    				var msg = "결재가 완료되었습니다.";
+    				var info1 = "고유 ID : "+response.imp_uid;
+    				var info2 = "결재 금액 : "+response.paid_amount;
+    				var info3 = "카드 승인 번호 : "+response.apply_num;
+    				console.log(msg+"<br>"+info1+"<br>"+info2+"<br>"+info3);
+    	    		$('input[name=cusoCallBy]').val(sessionNick);
+    	    		$('input[name=cusoTotalCost]').val(totalCost);
+    	        	$('input[name=cusoPhone]').val(sessionPhone);		    	
+    	        	$('input[name=cusoOrderNo]').val(date);
+    	    		$("#insertOrder").submit();
+    			} else {
+    				alert('결재가 취소되었습니다');
+    			}
+    		});
+//    		var d = new Date();
+//    		var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+//    		$('input[name=cusoCallBy]').val(sessionNick);
+//    		$('input[name=cusoTotalCost]').val(totalCost);
+//        	$('input[name=cusoPhone]').val(sessionPhone);		    	
+//        	$('input[name=cusoOrderNo]').val(date);
+//    		$("#insertOrder").submit();
     	}
 
 	});

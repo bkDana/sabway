@@ -12,7 +12,7 @@
 <section id="content-wrapper" class="clearfix">
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
-		<div class="sub-menu">※ 메뉴관리 > 메뉴수정</div>
+		<div class="sub-menu">※ 재료 관리 > 재료 수정</div>
 		
 		<form action="/ingreManage/ingreUpdate.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="ingreIdx" value="${iv.ingreIdx}">

@@ -19,8 +19,8 @@ if(pname.length==8){
 %>
 	<%if(request.getRequestURL().toString().split("/")[6].equals("ingreManage")||(request.getRequestURL().toString().split("/")[5].equals("headOffice")&& p6.equals("SelectPromotion.jsp"))){ %>
 		<ul>
-			<li><a href="/ingreManage/goIngreReg.do" class="<%if(p7.equals("ingreRegisterForm.jsp")){%>on<%}%>">메뉴 등록</a></li>
-			<li><a href="/ingreManage/ingreList.do?reqPage=1" class="<%if(p7.equals("ingreList.jsp") || p7.equals("ingreUpdate.jsp")){%>on<%}%>">메뉴 관리</a></li>
+			<li><a href="/ingreManage/goIngreReg.do" class="<%if(p7.equals("ingreRegisterForm.jsp")){%>on<%}%>">재료 등록</a></li>
+			<li><a href="/ingreManage/ingreList.do?reqPage=1" class="<%if(p7.equals("ingreList.jsp") || p7.equals("ingreUpdate.jsp")){%>on<%}%>">재료 관리</a></li>
 			<c:if test="${sessionScope.mgr.mgrId eq 'admin'}">
 				<li><a href="/promotionSelect.do?currentPage=''" class="<%if(request.getRequestURL().toString().split("/")[6].equals("SelectPromotion.jsp")){%>on<%}%>">이벤트 / 할인</a></li>
 			</c:if>
