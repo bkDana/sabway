@@ -207,8 +207,8 @@ $(document).ready(function(){
 			var $select = $("#searchVal");
 			$select.find("option").remove();
 			$select.append("<option value=''>-- 할인 여부 --</option>");
-			$select.append("<option value='1'>할인중인 메인재료</option>");
-			$select.append("<option value='0'>할인 안하는 메인재료....뭐라하지...</option>");
+			$select.append("<option value='1'>할인 적용</option>");
+			$select.append("<option value='0'>할인 미적용</option>");
 		}else if($("#searchType").val()=='ingreActive'){
 			var $select = $("#searchVal");
 			$select.find("option").remove();
