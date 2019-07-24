@@ -328,10 +328,41 @@ $(document).ready(function(){
 			var keyword = newContent[0];
 			content = content.replace(keyword,"changeIMG");
 		}
+		
 		$('#reviewContent').val(content);
 		$('#reviewFilename').val(filenameText);
 		$('#reviewStarpoint1').val($('#starpoint1').text());
 		$('#reviewStarpoint2').val($('#starpoint2').text());
+		
+		if($('input[name=reviewTitle]').val()==''){
+			alert('제목을 입력해주세요');
+			return;
+		}
+		if($('input[name=reviewItem]').val()==''){
+			alert('리뷰상품을 입력해주세요');
+			return;
+		}
+		if($('input[name=reviewBranch]').val()==''){
+			alert('지점을 입력해주세요');
+			return;
+		}
+		if($('input[name=reviewStarItem]').val()==''){
+			alert('별점을 입력해주세요');
+			return;
+		}
+		if($('input[name=reviewStarBranch]').val()==''){
+			alert('별점을 입력해주세요');
+			return;
+		}
+		if($('input[name="reviewHashtag"]').val()==''){
+			alert('태그를 입력해주세요');
+			return;
+		}
+		if($('#reviewContent').val()==''){
+			alert('내용을 입력해주세요');
+			return;
+		}
+		
 		var form = document.write;
 		form.submit();
 	}

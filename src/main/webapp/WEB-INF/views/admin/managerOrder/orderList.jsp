@@ -11,10 +11,7 @@
 	<jsp:include page="/WEB-INF/views/admin/common/admin-left-nav.jsp" />
 	<div class="area">
 		<div class="sub-menu">※ 재고관리 > 발주 리스트</div>
-		<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
-			※ 희망배송일 오전 8시에 출고완료 상태인 발주건은 도착으로 자동 상태변경됩니다. 
-			수동으로 변경하기-> <a href="/managerOrder/test.do">수동으로 재고 추가</a>
-		</c:if>
+		
 		<div class="board-search-box order-search">
 			<form action="/managerOrder/orderList.do" method="post" name="search">
 				<input type="hidden" name="reqPage" value="1">
@@ -54,7 +51,13 @@
 				<option value="del">희망배송일순</option>
 				<c:if test="${sessionScope.mgr.mgrLevel eq 1 }"><option value="store">매장별</option></c:if>
 			</select>
+			
 		</p>
+		<p class="order-list-comment">
+				<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
+					※ 희망배송일 오전 8시에 출고완료 상태인 발주건은 도착으로 자동 상태변경됩니다. 
+				</c:if>
+			</p>
 		<table class="comm-tbl type2">
 			<colgroup>
 				<col width="3%">
@@ -98,6 +101,7 @@
 			</c:if>
 			<c:if test="${sessionScope.mgr.mgrLevel eq 1 }">
 				<button class="btn-style3" onclick="allUpdate(2);">출고</button>
+				<button class="btn-style2" onclick="location.href='/managerOrder/test.do'">수동 입고</button>
 			</c:if>
 		</div>
 		

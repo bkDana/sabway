@@ -135,6 +135,7 @@
   			ingredients
   		where 
   			ingre_type = #{type}
+  			and ingre_active = 1
   		order by 1
   	</select>
   	<update id="updateState" parameterType="mOrder">
